@@ -442,11 +442,12 @@
     font-size: 12px;
     color: var(--text-secondary);
     line-height: 1.8;
+    text-align: center;
   }
   .footer-sources { margin-bottom: 8px; }
   .footer-sources strong { color: var(--text-primary); }
   .disclaimer {
-    color: var(--accent-yellow);
+    color: var(--accent-blue);
     font-size: 11px;
     margin-top: 8px;
   }
@@ -601,6 +602,13 @@
         <input type="number" id="tg" min="20" max="3000" placeholder="三酸甘油酯">
       </div>
       <div class="form-group">
+        <label>是否用 TG 血脂藥 <i class="info-icon" data-tip="使用降 TG 藥物（如 fibrate、魚油）即符合代謝症候群 TG 偏高條件">!</i></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="tgmed" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="tgmed" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
         <label>non-HDL-C <span class="unit">mg/dL</span> <span class="optional">自動計算</span></label>
         <div class="computed-field" id="nonhdl">—</div>
       </div>
@@ -612,6 +620,10 @@
       <div class="form-group">
         <label>收縮壓 <span class="unit">mmHg</span></label>
         <input type="number" id="sbp" min="60" max="260" placeholder="SBP">
+      </div>
+      <div class="form-group">
+        <label>舒張壓 <span class="unit">mmHg</span> <i class="info-icon" data-tip="代謝症候群判斷：舒張壓 ≥85 mmHg 或使用降壓藥即符合">!</i></label>
+        <input type="number" id="dbp" min="40" max="160" placeholder="DBP">
       </div>
       <div class="form-group">
         <label>是否用降壓藥</label>
@@ -663,6 +675,21 @@
         <label>eGFR <span class="unit">mL/min/1.73m²</span></label>
         <input type="number" id="egfr" min="1" max="150" placeholder="估算腎絲球過濾率">
       </div>
+      <div class="form-group">
+        <label>UACR <span class="unit">mg/g</span> <span class="optional">選填</span> <i class="info-icon" data-tip="尿液白蛋白肌酸酐比值 ≥30 mg/g 符合慢性腎臟病定義，可影響台灣指引風險分級">!</i></label>
+        <input type="number" id="uacr" min="0" max="10000" placeholder="尿白蛋白/肌酸酐">
+      </div>
+
+      <!-- 代謝症候群 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label" style="display:flex;align-items:center;gap:6px;">
+        代謝症候群 <i class="info-icon" data-tip="符合以下 ≥3 項即為代謝症候群（台灣 2025 低/中風險危險因子之一）：腹部肥胖、血壓偏高/用藥、血糖偏高/用藥、TG 偏高/用藥、HDL-C 偏低。系統將自動根據您填入的數值判斷。">!</i>
+      </div>
+
+      <div class="form-group">
+        <label>腰圍 <span class="unit">cm</span> <i class="info-icon" data-tip="代謝症候群腹部肥胖切點：男性 ≥90 cm、女性 ≥80 cm">!</i></label>
+        <input type="number" id="waist" min="40" max="200" placeholder="腰圍">
+      </div>
 
       <!-- 危險因子 -->
       <div class="form-section-sep"></div>
@@ -711,10 +738,15 @@
         <label>ASCVD 類型（可複選）</label>
         <div class="tag-select" id="ascvd-types">
           <span class="tag-option" data-val="ACS" onclick="toggleTag(this)">急性冠心症 ACS</span>
+          <span class="tag-option" data-val="MI_1yr" onclick="toggleTag(this)">一年內心肌梗塞</span>
+          <span class="tag-option" data-val="MI_multi" onclick="toggleTag(this)">≥2次心肌梗塞</span>
           <span class="tag-option" data-val="PCI" onclick="toggleTag(this)">PCI 介入</span>
           <span class="tag-option" data-val="CABG" onclick="toggleTag(this)">CABG 繞道</span>
-          <span class="tag-option" data-val="stroke" onclick="toggleTag(this)">缺血性中風</span>
+          <span class="tag-option" data-val="multivessel" onclick="toggleTag(this)">多支冠狀動脈阻塞</span>
+          <span class="tag-option" data-val="stroke" onclick="toggleTag(this)">缺血性中風/TIA</span>
           <span class="tag-option" data-val="PAD" onclick="toggleTag(this)">周邊動脈病 PAD</span>
+          <span class="tag-option" data-val="carotid" onclick="toggleTag(this)">頸動脈狹窄</span>
+          <span class="tag-option" data-val="ACS_DM" onclick="toggleTag(this)">ACS 合併糖尿病</span>
         </div>
       </div>
       <div class="form-group wide" id="ascvd-multi-group" style="display:none">
@@ -725,15 +757,29 @@
         </div>
       </div>
 
+      <!-- 影像學 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label" style="display:flex;align-items:center;gap:6px;">
+        影像學檢查 <span class="optional">選填</span>
+        <i class="info-icon" data-tip="影像確認有顯著斑塊負擔（≥50% 直徑狹窄）即達非常高風險，包含：冠狀動脈攝影、CTA、頸動脈或周邊血管超音波">!</i>
+      </div>
+      <div class="form-group wide">
+        <label>影像確認 ≥50% 冠狀動脈/頸動脈/周邊血管狹窄</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="imaging_stenosis" value="0" checked> 無/未做</label>
+          <label class="radio-label"><input type="radio" name="imaging_stenosis" value="1"> 是，有 ≥50% 狹窄</label>
+        </div>
+      </div>
+
       <!-- 可選 -->
       <div class="form-section-sep"></div>
       <div class="form-section-label" style="display:flex;align-items:center;gap:6px;">
         選填進階指標
-        <i class="info-icon" data-tip="填入後可啟用進階風險修飾：CAC ≥100 分、Lp(a) ≥50 mg/dL、或 hsCRP ≥2 mg/L 任一陽性，台灣 2025 指引將自動將風險等級上移一級，協助決定是否提前啟用降脂治療。">!</i>
+        <i class="info-icon" data-tip="CAC ≥400 分（台灣 2025 高風險條件之一）；CAC ≥100 或 Lp(a) ≥50 mg/dL 或 hsCRP ≥2 mg/L 任一陽性，可將低/中風險上調一級。">!</i>
       </div>
 
       <div class="form-group">
-        <label>CAC 分數 <span class="optional">選填</span></label>
+        <label>CAC 分數 <span class="optional">選填</span> <i class="info-icon" data-tip="≥400 分：台灣 2025 直接列為高風險條件；≥100 分：低/中風險者上移一級">!</i></label>
         <input type="number" id="cac" min="0" placeholder="Agatston 分">
       </div>
       <div class="form-group">
@@ -844,8 +890,8 @@
     <strong>資料來源：</strong>
     台灣脂質暨動脈硬化學會 2025 血脂異常臨床治療指引 ｜
     ESC Guidelines on Cardiovascular Disease Prevention 2024 ｜
-    AHA PREVENT Score 2023 ｜
-    全民健康保險藥品給付規定 第 2.6 節（高血脂藥物）
+    AHA 2026 ACC/AHA PREVENT Equations ｜
+    <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank" style="color:var(--accent-blue);text-decoration:none;">全民健康保險藥品給付規定 第 2.6 節</a>
   </div>
   <div class="disclaimer">
     ⚠️ 本工具僅供醫護人員臨床參考，不取代個別病人評估與醫師判斷。風險公式依文獻簡化實作，實際數值可能與原始計算機略有差異。
@@ -887,10 +933,12 @@ function resetForm() {
   document.querySelectorAll('input[type="number"]').forEach(e => e.value = '');
   document.querySelector('input[name="sex"][value="M"]').checked = true;
   document.querySelector('input[name="bpmed"][value="0"]').checked = true;
+  document.querySelector('input[name="tgmed"][value="0"]').checked = true;
   document.querySelector('input[name="dmmed"][value="0"]').checked = true;
   document.querySelector('input[name="dm"][value="0"]').checked = true;
   document.querySelector('input[name="ascvd"][value="0"]').checked = true;
   document.querySelector('input[name="ascvd_multi"][value="0"]').checked = true;
+  document.querySelector('input[name="imaging_stenosis"][value="0"]').checked = true;
   document.querySelector('input[name="smoking"][value="0"]').checked = true;
   document.querySelector('input[name="htn"][value="0"]').checked = true;
   document.querySelector('input[name="fh"][value="0"]').checked = true;
@@ -1020,73 +1068,137 @@ function reasoningBox(text) {
 //  Taiwan 2025
 // ─────────────────────────────────────────────────────────────
 function calcTaiwan(p) {
-  const { ldl, tc, hdl, tg, ascvd, ascvd_multi, ascvdTypes, dm, fh, htn, smoking, fhcad, egfr, lpa, cac, hscrp } = p;
+  const { age, sex, ldl, tc, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist,
+          smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis,
+          ascvdTypes, cac, lpa, hscrp } = p;
   let level, ldlTarget, nonhdlTarget, reasons = [];
 
   const nonhdl = tc && hdl ? tc - hdl : null;
+  const isMale = sex === 'M';
 
-  // 極高風險：ASCVD + 多次事件 or FH + ASCVD or ASCVD + DM
-  if (ascvd && ascvd_multi) {
-    level = 'extreme'; ldlTarget = 55; nonhdlTarget = 85;
-    reasons.push('多次/多部位 ASCVD 事件 → 極高風險');
-  } else if (ascvd && fh) {
-    level = 'extreme'; ldlTarget = 55; nonhdlTarget = 85;
-    reasons.push('臨床 ASCVD 合併家族性高膽固醇血症 (FH) → 極高風險');
+  // ── 代謝症候群（≥3 項符合）──
+  const metSyn = (() => {
+    let count = 0; const items = [];
+    if (waist && ((isMale && waist >= 90) || (!isMale && waist >= 80)))
+      { count++; items.push(`腹部肥胖（腰圍${waist}cm）`); }
+    if (bpMed || (sbp && sbp >= 130) || (dbp && dbp >= 85))
+      { count++; items.push(bpMed ? '血壓用藥' : `血壓偏高（${sbp||'?'}/${dbp||'?'}mmHg）`); }
+    if (p.dmMed || (p.fpg && p.fpg >= 100))
+      { count++; items.push(p.dmMed ? '血糖用藥' : `空腹血糖偏高（${p.fpg}mg/dL）`); }
+    if (tgmed || (tg && tg >= 150))
+      { count++; items.push(tgmed ? 'TG血脂用藥' : `TG偏高（${tg}mg/dL）`); }
+    if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50)))
+      { count++; items.push(`HDL-C偏低（${hdl}mg/dL）`); }
+    return { count, items, positive: count >= 3 };
+  })();
+
+  // ── CKD（eGFR<60 OR UACR≥30）──
+  const hasCKD = (egfr && egfr < 60) || (uacr && uacr >= 30);
+  const ckdDesc = [];
+  if (egfr && egfr < 60) ckdDesc.push(`eGFR ${egfr}`);
+  if (uacr && uacr >= 30) ckdDesc.push(`UACR ${uacr}mg/g`);
+
+  // ── 年齡危險因子（男≥45、女≥55）──
+  const ageRF = age && ((isMale && age >= 45) || (!isMale && age >= 55));
+
+  // ── CAC 切點 ──
+  const cac400 = cac !== null && cac >= 400;
+  const cac100 = cac !== null && cac >= 100;
+
+  function buildAbnormalList() {
+    const ab = [];
+    if (smoking) ab.push('抽菸');
+    if (htn) ab.push('高血壓');
+    if (dm) ab.push('糖尿病');
+    if (fh) ab.push('FH');
+    if (fhcad) ab.push('早發冠心病家族史');
+    if (ageRF) ab.push(`年齡${age}歲`);
+    if (ldl && ldl >= 130) ab.push(`LDL-C ${ldl}mg/dL`);
+    if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50))) ab.push(`HDL-C偏低${hdl}mg/dL`);
+    if (tg && tg >= 150) ab.push(`TG ${tg}mg/dL`);
+    if (hasCKD) ab.push(`CKD（${ckdDesc.join('、')}）`);
+    if (metSyn.positive) ab.push(`代謝症候群（${metSyn.count}項）`);
+    if (cac100) ab.push(`CAC ${cac}`);
+    if (lpa !== null && lpa >= 50) ab.push(`Lp(a) ${lpa}mg/dL`);
+    if (hscrp !== null && hscrp >= 2) ab.push(`hsCRP ${hscrp}mg/L`);
+    return ab;
   }
-  // 非常高風險：有臨床 ASCVD (單次)
-  else if (ascvd) {
+
+  // ══ 極高風險 ══
+  const extremeTypes = ['MI_1yr','MI_multi','multivessel','ACS_DM','carotid'];
+  const hasExtremeType = ascvdTypes.some(t => extremeTypes.includes(t));
+
+  if (ascvd && (ascvd_multi || hasExtremeType || fh)) {
+    level = 'extreme'; ldlTarget = 55; nonhdlTarget = 85;
+    const why = [];
+    if (ascvd_multi) why.push('多次/多部位事件');
+    if (ascvdTypes.includes('MI_1yr')) why.push('一年內心肌梗塞');
+    if (ascvdTypes.includes('MI_multi')) why.push('≥2次心肌梗塞');
+    if (ascvdTypes.includes('multivessel')) why.push('多支冠狀動脈阻塞');
+    if (ascvdTypes.includes('ACS_DM')) why.push('ACS合併糖尿病');
+    if (ascvdTypes.includes('carotid')) why.push('頸動脈狹窄');
+    if (fh) why.push('合併FH');
+    reasons.push(`極高風險：臨床 ASCVD + ${why.join('、')}`);
+    const ab = buildAbnormalList(); if (ab.length) reasons.push('病人異常項目：' + ab.join('、'));
+  }
+  // ══ 非常高風險 ══
+  else if (ascvd || imaging_stenosis) {
     level = 'veryhigh'; ldlTarget = 70; nonhdlTarget = 100;
-    reasons.push('臨床 ASCVD 病史（' + (ascvdTypes.length ? ascvdTypes.join('、') : '已記錄') + '）→ 非常高風險');
-    if (ascvdTypes.includes('ACS')) reasons.push('ACS 類型，建議考慮目標 LDL <55 mg/dL');
+    if (ascvd) {
+      reasons.push('臨床 ASCVD（' + (ascvdTypes.length ? ascvdTypes.join('、') : '已記錄') + '）→ 非常高風險');
+      if (ascvdTypes.includes('ACS')) reasons.push('ACS 類型，建議考慮目標 LDL <55 mg/dL');
+    }
+    if (imaging_stenosis) reasons.push('影像確認 ≥50% 血管狹窄 → 非常高風險');
+    const ab = buildAbnormalList(); if (ab.length) reasons.push('病人異常項目：' + ab.join('、'));
   }
-  // 非常高風險：DM + 靶器官損傷 or eGFR<30
   else if (dm && egfr && egfr < 30) {
     level = 'veryhigh'; ldlTarget = 70; nonhdlTarget = 100;
-    reasons.push(`糖尿病合併嚴重腎病 eGFR ${egfr} mL/min/1.73m² < 30 → 非常高風險`);
+    reasons.push(`糖尿病合併嚴重腎病 eGFR ${egfr} < 30 → 非常高風險`);
+    const ab = buildAbnormalList(); if (ab.length) reasons.push('病人異常項目：' + ab.join('、'));
   }
-  // 高風險
-  else if (fh || (dm && (htn || smoking || fhcad))) {
+  // ══ 高風險 ══
+  else if (fh || (ldl && ldl >= 190) || cac400 ||
+           (dm && (htn || smoking || fhcad || ageRF || hasCKD)) || hasCKD) {
     level = 'high'; ldlTarget = 100; nonhdlTarget = 130;
-    if (fh) reasons.push('家族性高膽固醇血症 (FH) → 高風險');
+    if (fh) reasons.push('FH → 高風險');
+    if (ldl && ldl >= 190) reasons.push(`LDL-C ${ldl} ≥190 mg/dL → 高風險`);
+    if (cac400) reasons.push(`CAC ${cac} ≥400 → 高風險`);
+    if (hasCKD) reasons.push(`慢性腎臟病（${ckdDesc.join('、')}）→ 高風險`);
     if (dm) {
-      const dmWith = [htn && '高血壓', smoking && '抽菸', fhcad && '早發冠心病家族史'].filter(Boolean);
-      reasons.push(`糖尿病合併 ${dmWith.join('、')} → 高風險`);
+      const dmWith = [htn&&'高血壓', smoking&&'抽菸', fhcad&&'早發冠心病家族史',
+                      ageRF&&`年齡${age}歲`, hasCKD&&'CKD'].filter(Boolean);
+      reasons.push(`糖尿病${dmWith.length ? '合併 '+dmWith.join('、') : ''} → 高風險`);
     }
+    const ab = buildAbnormalList(); if (ab.length) reasons.push('病人異常項目：' + ab.join('、'));
   }
-  // 中/低風險：依危險因子數
+  // ══ 低/中風險 ══
   else {
-    let rfCount = 0;
-    const rfList = [];
-    if (smoking) { rfCount++; rfList.push('抽菸'); }
-    if (htn) { rfCount++; rfList.push('高血壓'); }
-    if (dm) { rfCount++; rfList.push('糖尿病'); }
-    if (fhcad) { rfCount++; rfList.push('早發冠心病家族史'); }
-    if (egfr && egfr < 60) { rfCount++; rfList.push(`CKD（eGFR ${egfr}）`); }
-    if (ldl && ldl >= 190) { rfCount++; rfList.push(`LDL-C ${ldl} ≥190 mg/dL`); }
+    let rfCount = 0; const rfList = [];
+    if (smoking)  { rfCount++; rfList.push('抽菸'); }
+    if (ageRF)    { rfCount++; rfList.push(`年齡（${age}歲，${isMale?'男≥45':'女≥55'}歲）`); }
+    if (fhcad)    { rfCount++; rfList.push('早發冠心病家族史'); }
+    if (htn)      { rfCount++; rfList.push('高血壓'); }
+    if (hasCKD)   { rfCount++; rfList.push(`CKD（${ckdDesc.join('、')}）`); }
+    if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50)))
+                  { rfCount++; rfList.push(`HDL-C偏低（${hdl}mg/dL，切點：男<40/女<50）`); }
+    if (metSyn.positive) { rfCount++; rfList.push(`代謝症候群（${metSyn.count}項：${metSyn.items.join('、')}）`); }
 
-    // CAC、Lp(a)、hsCRP 修飾
-    const cacModifier = cac !== null && cac >= 100;
-    const lpaModifier = lpa !== null && lpa >= 50;
-    const hsCRPModifier = hscrp !== null && hscrp >= 2;
     const advList = [];
-    if (cacModifier) advList.push(`CAC ${cac} ≥100`);
-    if (lpaModifier) advList.push(`Lp(a) ${lpa} ≥50 mg/dL`);
-    if (hsCRPModifier) advList.push(`hsCRP ${hscrp} ≥2 mg/L`);
-    if (advList.length) {
-      rfCount++;
-      rfList.push(`進階指標陽性（${advList.join('、')}）`);
-    }
+    if (cac100 && !cac400) advList.push(`CAC ${cac}（100-399）`);
+    if (lpa !== null && lpa >= 50) advList.push(`Lp(a) ${lpa}mg/dL`);
+    if (hscrp !== null && hscrp >= 2) advList.push(`hsCRP ${hscrp}mg/L`);
+    const hasAdv = advList.length > 0;
 
-    if (rfList.length) {
-      reasons.push(`危險因子（${rfCount} 項）：${rfList.join('、')}`);
-    }
+    if (rfList.length) reasons.push(`危險因子（${rfCount}項）：${rfList.join('、')}`);
+    if (hasAdv) reasons.push(`進階指標陽性（${advList.join('、')}）→ 風險上移一級`);
 
-    if (rfCount >= 3) {
+    const eff = rfCount + (hasAdv ? 1 : 0);
+    if (eff >= 2) {
       level = 'high'; ldlTarget = 100; nonhdlTarget = 130;
-      reasons.push(`合計 ${rfCount} 項危險因子 ≥3 → 高風險`);
-    } else if (rfCount >= 1) {
+      reasons.push(`合計 ${eff} 項 → 高風險`);
+    } else if (eff === 1) {
       level = 'moderate'; ldlTarget = 115; nonhdlTarget = 145;
-      reasons.push(`合計 ${rfCount} 項危險因子 → 中度風險`);
+      reasons.push(`合計 ${eff} 項危險因子 → 中度風險`);
     } else {
       level = 'low'; ldlTarget = 130; nonhdlTarget = 160;
       reasons.push('無主要危險因子 → 低風險');
@@ -1094,7 +1206,10 @@ function calcTaiwan(p) {
   }
 
   const labels = { low:'低度風險', moderate:'中度風險', high:'高度風險', veryhigh:'非常高風險', extreme:'極高風險' };
-  const ldlOK = ldl ? (ldl < ldlTarget ? '✓ 已達標' : `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）`) : '—';
+  const ldlOK = ldl ? (ldl < ldlTarget ? '✓ 已達標' : `✗ 未達標（差 ${(ldl-ldlTarget).toFixed(0)} mg/dL）`) : '—';
+  const metSynRow = metSyn.count > 0
+    ? metricRow(`代謝症候群（${metSyn.count}/5項）`, metSyn.positive ? '✓ 符合' : '未符合（需≥3項）')
+    : '';
 
   let html = riskBadge(level, labels[level]);
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
@@ -1102,85 +1217,184 @@ function calcTaiwan(p) {
   if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL`);
   html += metricRow('達標狀況', ldlOK);
   if (nonhdl) html += metricRow('目前 non-HDL-C', `${nonhdl} mg/dL`);
+  html += metSynRow;
   html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
   return html;
 }
 
+
 // ─────────────────────────────────────────────────────────────
-//  ESC 2024
+//  ESC/EAS 2024 Guidelines for Dyslipidaemias
+//  Risk categories per Table 3 (ESC 2025)
 // ─────────────────────────────────────────────────────────────
 function calcESC(p) {
-  const { age, sex, sbp, tc, hdl, ldl, smoking, ascvd, ascvd_multi, ascvdTypes, dm, fh, htn, egfr } = p;
-  let level, ldlTarget, nonhdlTarget, score2 = null, score2label = '—';
+  const { age, sex, sbp, dbp, tc, hdl, ldl, smoking, ascvd, ascvd_multi,
+          ascvdTypes, dm, fh, egfr, statin, statinDose, imaging_stenosis } = p;
+  let level, ldlTarget, nonhdlTarget, score2 = null;
   let reasons = [];
 
-  const nonhdl = tc && hdl ? tc - hdl : null;
+  const tc_mmol  = tc  ? tc  / 38.67 : null;
+  const ldl_mmol = ldl ? ldl / 38.67 : null;
+  const hdl_mmol = hdl ? hdl / 38.67 : null;
 
-  // ESC: 極高風險
-  if (ascvd && ascvd_multi) {
-    level = 'extreme'; ldlTarget = 40; nonhdlTarget = 55;
-    reasons.push('多次/多部位 ASCVD 事件 → 極高風險（ESC 目標 LDL <40 mg/dL）');
-  } else if (fh && ascvd) {
-    level = 'extreme'; ldlTarget = 40; nonhdlTarget = 55;
-    reasons.push('FH 合併臨床 ASCVD → 極高風險');
-  } else if (ascvd || (dm && (egfr && egfr < 30 || fh))) {
-    level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
-    if (ascvd) reasons.push('臨床 ASCVD（' + (ascvdTypes.length ? ascvdTypes.join('、') : '已記錄') + '）→ 非常高風險');
-    if (dm && egfr && egfr < 30) reasons.push(`糖尿病 + eGFR ${egfr} mL/min < 30 → 非常高風險`);
-    if (dm && fh) reasons.push('糖尿病 + FH → 非常高風險');
-  } else if (fh || (dm && (htn || smoking)) || (egfr && egfr < 30)) {
-    level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
-    if (fh) reasons.push('家族性高膽固醇血症 (FH) → 高風險');
-    if (dm && htn) reasons.push('糖尿病 + 高血壓 → 高風險');
-    if (dm && smoking) reasons.push('糖尿病 + 抽菸 → 高風險');
-    if (egfr && egfr < 30) reasons.push(`嚴重 CKD（eGFR ${egfr}）→ 高風險`);
-  } else {
-    // SCORE2 calculation
-    if (age && sbp && tc && hdl) {
-      const tc_mmol = tc / 38.67;
-      const hdl_mmol = hdl / 38.67;
-      score2 = calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking);
-      score2label = score2.toFixed(1) + '%';
+  const hasSevereCKD = egfr && egfr < 30;
+  const hasModCKD    = egfr && egfr >= 30 && egfr < 60;
 
-      // ESC 2024 thresholds (age-based)
-      let lowCut, highCut, vhighCut;
-      if (age < 50) {
-        lowCut = 2.5; highCut = 7.5; vhighCut = 10;
-      } else if (age < 70) {
-        lowCut = 5; highCut = 10; vhighCut = 15;
-      } else {
-        lowCut = 7.5; highCut = 15; vhighCut = 20;
-      }
+  // DM target organ damage 判斷：eGFR<45、UACR>300、已知視網膜病變/神經病變
+  // 簡化：CKD(eGFR<60)、UACR≥300 視為靶器官損傷
+  const dmTargetOrgan = dm && (hasSevereCKD || (egfr && egfr < 45) || (p.uacr && p.uacr >= 300));
 
-      if (score2 < lowCut) {
-        level = 'low'; ldlTarget = 116; nonhdlTarget = 145;
-        reasons.push(`SCORE2 ${score2.toFixed(1)}% < ${lowCut}% → 低風險`);
-      } else if (score2 < highCut) {
-        level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-        reasons.push(`SCORE2 ${score2.toFixed(1)}% 介於 ${lowCut}–${highCut}% → 中度風險`);
-      } else if (score2 < vhighCut) {
-        level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
-        reasons.push(`SCORE2 ${score2.toFixed(1)}% 介於 ${highCut}–${vhighCut}% → 高風險`);
-      } else {
-        level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
-        reasons.push(`SCORE2 ${score2.toFixed(1)}% ≥ ${vhighCut}% → 非常高風險`);
-      }
-      // 列出對分數有貢獻的高風險項目
-      const scoreDrivers = [];
-      if (smoking) scoreDrivers.push('抽菸（SCORE2 主要權重項）');
-      if (sbp && sbp >= 140) scoreDrivers.push(`收縮壓偏高 SBP ${sbp} mmHg`);
-      if (tc && (tc/38.67) >= 6) scoreDrivers.push(`TC 偏高 ${tc} mg/dL（≥6 mmol/L）`);
-      if (hdl && (hdl/38.67) < 1.0) scoreDrivers.push(`HDL-C 偏低 ${hdl} mg/dL（<1.0 mmol/L）`);
-      if (age && age >= 60) scoreDrivers.push(`年齡 ${age} 歲（≥60，基礎風險高）`);
-      if (scoreDrivers.length) reasons.push('主要貢獻因子：' + scoreDrivers.join('、'));
-    } else {
-      level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-      reasons.push('資料不足以計算 SCORE2，預設中度風險');
-    }
+  // DM ≥3 major RF（高血壓、抽菸、LDL高、CKD）
+  const dmMajorRFcount = [p.htn, smoking, (ldl_mmol && ldl_mmol > 2.6), hasModCKD].filter(Boolean).length;
+
+  // Polyvascular: 冠狀動脈 + 周邊動脈同時
+  const hasPolyvasc = ascvd &&
+    (ascvdTypes.includes('PAD') || ascvdTypes.includes('carotid')) &&
+    (ascvdTypes.some(t => ['ACS','MI_1yr','PCI','CABG','MI_multi','multivessel'].includes(t)));
+
+  // Recurrent event on max statin
+  const onMaxStatin = statin && statinDose === 'high';
+  const hasRecurrentOnStatin = ascvd && ascvd_multi && onMaxStatin;
+
+  // ══════════════════════════════════════════
+  //  計算 SCORE2（先算，後面多處會用到）
+  // ══════════════════════════════════════════
+  if (age && sbp && tc_mmol && hdl_mmol) {
+    score2 = calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking);
   }
 
-  const labels = { low:'低度風險', moderate:'中度風險', high:'高度風險', veryhigh:'非常高風險', extreme:'極高風險' };
-  const ldlOK = ldl ? (ldl < ldlTarget ? '✓ 已達標' : `✗ 未達標 (差 ${(ldl-ldlTarget).toFixed(0)})`) : '—';
+  // ══════════════════════════════════════════
+  //  Extreme risk
+  //  - ASCVD 患者在最大耐受 statin 下仍復發
+  //  - Polyvascular disease
+  // ══════════════════════════════════════════
+  if (hasRecurrentOnStatin || hasPolyvasc) {
+    level = 'extreme'; ldlTarget = 40; nonhdlTarget = 55;
+    if (hasRecurrentOnStatin)
+      reasons.push('ASCVD 患者在最大耐受 statin 治療下仍發生復發性血管事件 → Extreme risk（LDL 目標 <40 mg/dL）');
+    if (hasPolyvasc)
+      reasons.push('Polyvascular disease（冠狀動脈 + 周邊/頸動脈同時受累）→ Extreme risk');
+  }
+
+  // ══════════════════════════════════════════
+  //  Very high risk（符合任一即是）
+  //  1. Documented ASCVD（臨床或影像）
+  //  2. DM + 靶器官損傷 or ≥3 主要危險因子 or T1DM長期(>20yr)
+  //  3. Severe CKD（eGFR <30）
+  //  4. SCORE2 ≥20%
+  //  5. FH + ASCVD 或另一主要危險因子
+  // ══════════════════════════════════════════
+  else if (
+    ascvd ||
+    imaging_stenosis ||
+    dmTargetOrgan ||
+    (dm && dmMajorRFcount >= 3) ||
+    hasSevereCKD ||
+    (score2 !== null && score2 >= 20) ||
+    (fh && (ascvd || p.htn || smoking || hasModCKD || (ldl_mmol && ldl_mmol > 4.9)))
+  ) {
+    level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
+
+    if (ascvd)
+      reasons.push('Documented ASCVD（' + (ascvdTypes.length ? ascvdTypes.join('、') : '臨床已記錄') + '）→ Very high risk');
+    if (imaging_stenosis)
+      reasons.push('影像確認顯著斑塊（≥50% 狹窄）→ Very high risk');
+    if (dmTargetOrgan)
+      reasons.push(`DM + 靶器官損傷（${[hasSevereCKD&&`eGFR ${egfr}`, (p.uacr&&p.uacr>=300)&&`UACR ${p.uacr}`].filter(Boolean).join('、')}）→ Very high risk`);
+    if (dm && dmMajorRFcount >= 3)
+      reasons.push(`DM + ≥3 主要危險因子（${[p.htn&&'高血壓', smoking&&'抽菸', (ldl_mmol&&ldl_mmol>2.6)&&`LDL ${ldl}mg/dL`, hasModCKD&&`CKD(eGFR${egfr})`].filter(Boolean).join('、')}）→ Very high risk`);
+    if (hasSevereCKD)
+      reasons.push(`Severe CKD（eGFR ${egfr} <30 mL/min/1.73m²）→ Very high risk`);
+    if (score2 !== null && score2 >= 20)
+      reasons.push(`SCORE2 ${score2.toFixed(1)}% ≥20% → Very high risk`);
+    if (fh && !ascvd)
+      reasons.push('FH + 另一主要危險因子 → Very high risk');
+  }
+
+  // ══════════════════════════════════════════
+  //  High risk（符合任一即是）
+  //  1. TC >8 mmol/L (>310 mg/dL) 或 LDL-C >4.9 mmol/L (>190 mg/dL) 或 BP ≥180/110
+  //  2. FH 無其他主要危險因子
+  //  3. DM 無靶器官損傷，病程 ≥10yr 或有另一額外危險因子
+  //  4. Moderate CKD（eGFR 30–59）
+  //  5. SCORE2 ≥10% and <20%
+  // ══════════════════════════════════════════
+  else if (
+    (tc_mmol && tc_mmol > 8) ||
+    (ldl_mmol && ldl_mmol > 4.9) ||
+    (sbp && sbp >= 180) || (dbp && dbp >= 110) ||
+    (fh && !ascvd) ||
+    (dm && !dmTargetOrgan && (p.dmDuration >= 10 || dmMajorRFcount >= 1)) ||
+    hasModCKD ||
+    (score2 !== null && score2 >= 10 && score2 < 20)
+  ) {
+    level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+
+    if (tc_mmol && tc_mmol > 8)
+      reasons.push(`TC ${tc} mg/dL（>${(8*38.67).toFixed(0)} mg/dL, >8 mmol/L）→ High risk`);
+    if (ldl_mmol && ldl_mmol > 4.9)
+      reasons.push(`LDL-C ${ldl} mg/dL（>190 mg/dL, >4.9 mmol/L）→ High risk`);
+    if ((sbp && sbp >= 180) || (dbp && dbp >= 110))
+      reasons.push(`BP ${sbp||'?'}/${dbp||'?'} mmHg ≥180/110 → High risk`);
+    if (fh && !ascvd)
+      reasons.push('FH 無其他主要危險因子 → High risk');
+    if (dm && !dmTargetOrgan)
+      reasons.push(`DM 無靶器官損傷${dmMajorRFcount >= 1 ? '，有額外危險因子' : '，病程可能≥10年'} → High risk`);
+    if (hasModCKD)
+      reasons.push(`Moderate CKD（eGFR ${egfr} 30–59 mL/min/1.73m²）→ High risk`);
+    if (score2 !== null && score2 >= 10 && score2 < 20)
+      reasons.push(`SCORE2 ${score2.toFixed(1)}% ≥10% and <20% → High risk`);
+  }
+
+  // ══════════════════════════════════════════
+  //  Moderate risk：SCORE2 ≥2% and <10%
+  //  （含 Young DM：T1DM<35歲 或 T2DM<50歲，病程<10yr，無其他危險因子）
+  // ══════════════════════════════════════════
+  else if (score2 !== null && score2 >= 2 && score2 < 10) {
+    level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+    reasons.push(`SCORE2 ${score2.toFixed(1)}% ≥2% and <10% → Moderate risk`);
+
+    // Young DM exception
+    const youngDM = dm && ((age < 35) || (age < 50));
+    if (youngDM && dmMajorRFcount === 0)
+      reasons.push('Young DM（T2DM <50歲，病程<10年，無其他危險因子）→ Moderate risk');
+  }
+
+  // ══════════════════════════════════════════
+  //  Low risk：SCORE2 <2%
+  // ══════════════════════════════════════════
+  else if (score2 !== null && score2 < 2) {
+    level = 'low'; ldlTarget = 116; nonhdlTarget = 145;
+    reasons.push(`SCORE2 ${score2.toFixed(1)}% <2% → Low risk`);
+  }
+
+  // 資料不足
+  else {
+    level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+    reasons.push('資料不足以計算 SCORE2（需年齡、SBP、TC、HDL-C），預設 Moderate risk');
+  }
+
+  // SCORE2 驅動因子說明
+  if (score2 !== null) {
+    const drivers = [];
+    if (smoking) drivers.push('抽菸');
+    if (sbp && sbp >= 140) drivers.push(`SBP ${sbp} mmHg`);
+    if (tc_mmol && tc_mmol >= 6) drivers.push(`TC ${tc} mg/dL（≥6 mmol/L）`);
+    if (hdl_mmol && hdl_mmol < 1.0) drivers.push(`HDL-C 偏低 ${hdl} mg/dL（<1.0 mmol/L）`);
+    if (age >= 60) drivers.push(`年齡 ${age} 歲`);
+    if (drivers.length) reasons.push('SCORE2 主要貢獻因子：' + drivers.join('、'));
+  }
+
+  const labels = {
+    low:      'Low risk（低度）',
+    moderate: 'Moderate risk（中度）',
+    high:     'High risk（高度）',
+    veryhigh: 'Very high risk（非常高）',
+    extreme:  'Extreme risk（極高）'
+  };
+  const ldlOK = ldl
+    ? (ldl < ldlTarget ? '✓ 已達標' : `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）`)
+    : '—';
 
   let html = riskBadge(level, labels[level]);
   if (score2 !== null) {
@@ -1398,12 +1612,16 @@ function calculate() {
   const ldl = getNum('ldl');
   const hdl = getNum('hdl');
   const tg = getNum('tg');
+  const tgmed = getRadio('tgmed');
   const sbp = getNum('sbp');
+  const dbp = getNum('dbp');
   const bpMed = getRadio('bpmed');
   const fpg = getNum('fpg');
   const hba1c = getNum('hba1c');
   const dmMed = getRadio('dmmed');
   const egfr = getNum('egfr');
+  const uacr = getNum('uacr');
+  const waist = getNum('waist');
   const smoking = getRadio('smoking');
   const htn = getRadio('htn');
   const fh = getRadio('fh');
@@ -1411,6 +1629,7 @@ function calculate() {
   const dm = getRadio('dm') || (fpg && fpg >= 126) || (hba1c && hba1c >= 6.5) ? 1 : 0;
   const ascvd = getRadio('ascvd');
   const ascvd_multi = getRadio('ascvd_multi');
+  const imaging_stenosis = getRadio('imaging_stenosis');
   const ascvdTypes = getAscvdTypes();
   const cac = getNum('cac');
   const lpa = getNum('lpa');
@@ -1425,7 +1644,7 @@ function calculate() {
     return;
   }
 
-  const p = { age, sex, tc, ldl, hdl, tg, sbp, bpMed, egfr, smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, ascvdTypes, cac, lpa, hscrp, statin, statinDose, eze, fpg, hba1c, dmMed };
+  const p = { age, sex, tc, ldl, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist, smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis, ascvdTypes, cac, lpa, hscrp, statin, statinDose, eze, fpg, hba1c, dmMed };
 
   document.getElementById('body-tw').innerHTML = calcTaiwan(p);
   document.getElementById('body-esc').innerHTML = calcESC(p);
