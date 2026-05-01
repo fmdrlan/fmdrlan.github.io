@@ -1612,119 +1612,337 @@ function calcAHA(p) {
 }
 
 function calcNHI(p) {
-  const { ldl, tc, hdl, ascvd, ascvd_multi, ascvdTypes, dm, fh, htn, smoking, fhcad, statin, statinDose, eze, egfr } = p;
+  const { ldl, tc, hdl, tg, tgmed, ascvd, ascvdTypes, dm, htn, smoking,
+          fhcad, statin, statinDose, eze, egfr, age, sex, sbp, dbp, bpMed } = p;
   let html = '';
 
-  // ── Statin ──
-  html += `<div class="nhi-section"><div class="nhi-section-title">Statin</div>`;
+  const isMale = sex === 'M';
 
-  const hasRF2 = [htn, dm, smoking, fhcad, (egfr && egfr < 60)].filter(Boolean).length >= 2;
-  const hasRF1 = [htn, dm, smoking, fhcad, (egfr && egfr < 60)].filter(Boolean).length >= 1;
-  const ldlGE190 = ldl && ldl >= 190;
-  const ldlGE130 = ldl && ldl >= 130;
-  const ldlGE160 = ldl && ldl >= 160;
+  // ── 心血管疾病判斷（健保定義）──
+  // 冠狀動脈粥狀硬化（心導管/缺氧心電圖/負荷試驗）、TIA、有症狀頸動脈狹窄、腦梗塞
+  const hasCV = ascvd;
 
-  let statinCovered = false, statinReason = '';
+  // 急性冠心症/PCI/CABG（第一類）
+  const hasAcuteOrRevascularization = ascvd && ascvdTypes.some(t =>
+    ['ACS', 'MI_1yr', 'MI_multi', 'PCI', 'CABG'].includes(t));
 
-  if (ascvd) {
-    statinCovered = true;
-    statinReason = '有臨床 ASCVD → 直接給付（二級預防）';
-  } else if (dm) {
-    statinCovered = true;
-    statinReason = '糖尿病 → 符合給付';
-  } else if (fh) {
-    statinCovered = true;
-    statinReason = '家族性高膽固醇血症 → 符合給付';
-  } else if (ldlGE190) {
-    statinCovered = true;
-    statinReason = 'LDL-C ≥190 mg/dL → 符合給付';
-  } else if (hasRF2 && ldlGE130) {
-    statinCovered = true;
-    statinReason = '≥2 主要危險因子 + LDL ≥130 → 符合給付';
-  } else if (hasRF1 && ldlGE160) {
-    statinCovered = true;
-    statinReason = '≥1 危險因子 + LDL ≥160 → 符合給付';
-  } else if (!hasRF1 && ldl && ldl >= 190) {
-    statinCovered = true;
-    statinReason = '無危險因子但 LDL ≥190 → 符合給付';
+  // 危險因子（健保定義，共5項）
+  const rfItems = [];
+  if (htn) rfItems.push('高血壓');
+  if (age && ((isMale && age >= 45) || (!isMale && age >= 55))) rfItems.push(`年齡（${age}歲）`);
+  if (p.fhcad) rfItems.push('早發冠心病家族史');
+  if (smoking) rfItems.push('吸菸');
+  if (hdl && hdl < 40) rfItems.push(`HDL-C ${hdl} mg/dL <40`);
+  const rfCount = rfItems.length;
+
+  // ════════════════════════════════════
+  //  一、降膽固醇藥物（Statin）給付
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">降膽固醇藥物（Statin）</div>`;
+
+  let statinCovered = false;
+  let statinCategory = '';
+  let statinLDLTarget = null;
+  let statinTCTarget = null;
+  const statinReasons = [];
+
+  if (hasAcuteOrRevascularization) {
+    // 第一類：急性冠心症/PCI/CABG
+    statinCategory = '第一類（急性冠心症/PCI/CABG）';
+    statinLDLTarget = 70;
+    if (ldl && ldl >= 70) {
+      statinCovered = true;
+      statinReasons.push(`LDL-C ${ldl} mg/dL ≥70 → 符合給付`);
+    } else if (ldl) {
+      statinReasons.push(`LDL-C ${ldl} mg/dL <70，目前已達目標值，暫不符合起始給付條件`);
+    } else {
+      statinCovered = true;
+      statinReasons.push('急性冠心症/PCI/CABG 病史，建議檢測 LDL-C 確認');
+    }
+    statinReasons.push('目標：LDL-C <70 mg/dL');
+    statinReasons.push('追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月');
+
+  } else if (hasCV || dm) {
+    // 第二類：心血管疾病或糖尿病
+    statinCategory = '第二類（心血管疾病或糖尿病）';
+    statinLDLTarget = 100; statinTCTarget = 160;
+    const ldlOK = ldl && ldl >= 100;
+    const tcOK  = tc  && tc  >= 160;
+    if (ldlOK || tcOK) {
+      statinCovered = true;
+      const triggers = [];
+      if (tcOK)  triggers.push(`TC ${tc} mg/dL ≥160`);
+      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥100`);
+      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`);
+    } else {
+      const vals = [];
+      if (tc)  vals.push(`TC ${tc} mg/dL <160`);
+      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <100`);
+      statinReasons.push(`${vals.join('、')}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：TC <160 mg/dL 或 LDL-C <100 mg/dL');
+    statinReasons.push('可與藥物治療並行（不需非藥物治療期）');
+
+  } else if (rfCount >= 2) {
+    // 第三類：≥2 個危險因子
+    statinCategory = `第三類（≥2個危險因子：${rfItems.join('、')}）`;
+    statinLDLTarget = 130; statinTCTarget = 200;
+    const ldlOK = ldl && ldl >= 130;
+    const tcOK  = tc  && tc  >= 200;
+    if (ldlOK || tcOK) {
+      statinCovered = true;
+      const triggers = [];
+      if (tcOK)  triggers.push(`TC ${tc} mg/dL ≥200`);
+      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥130`);
+      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`);
+    } else {
+      const vals = [];
+      if (tc)  vals.push(`TC ${tc} mg/dL <200`);
+      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <130`);
+      statinReasons.push(`${vals.join('、')}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：TC <200 mg/dL 或 LDL-C <130 mg/dL');
+    statinReasons.push('需先有 3–6 個月非藥物治療');
+
+  } else if (rfCount === 1) {
+    // 第四類：1 個危險因子
+    statinCategory = `第四類（1個危險因子：${rfItems.join('、')}）`;
+    statinLDLTarget = 160; statinTCTarget = 240;
+    const ldlOK = ldl && ldl >= 160;
+    const tcOK  = tc  && tc  >= 240;
+    if (ldlOK || tcOK) {
+      statinCovered = true;
+      const triggers = [];
+      if (tcOK)  triggers.push(`TC ${tc} mg/dL ≥240`);
+      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥160`);
+      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`);
+    } else {
+      const vals = [];
+      if (tc)  vals.push(`TC ${tc} mg/dL <240`);
+      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <160`);
+      statinReasons.push(`${vals.join('、')}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：TC <240 mg/dL 或 LDL-C <160 mg/dL');
+    statinReasons.push('需先有 3–6 個月非藥物治療');
+
   } else {
-    statinReason = '目前 LDL 及危險因子不符合健保 statin 給付條件';
+    // 第五類：0 個危險因子
+    statinCategory = '第五類（0個危險因子）';
+    statinLDLTarget = 190;
+    if (ldl && ldl >= 190) {
+      statinCovered = true;
+      statinReasons.push(`LDL-C ${ldl} mg/dL ≥190 → 符合給付`);
+    } else {
+      statinReasons.push(`LDL-C ${ldl ? ldl + ' mg/dL <190' : '未填'}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：LDL-C <190 mg/dL');
+    statinReasons.push('需先有 3–6 個月非藥物治療');
   }
+
+  // 危險因子列表
+  if (rfCount > 0) statinReasons.push(`健保危險因子（${rfCount}/5）：${rfItems.join('、')}`);
 
   html += `<div class="coverage-item ${statinCovered ? 'covered' : 'not-covered'}">
     <span class="coverage-icon">${statinCovered ? '✅' : '❌'}</span>
-    <span class="coverage-text"><strong>Statin</strong>：${statinReason}</span>
+    <span class="coverage-text">
+      <strong>Statin｜${statinCategory}</strong><br>
+      ${statinReasons.map(r => `• ${r}`).join('<br>')}
+    </span>
   </div>`;
   html += `</div>`;
 
-  // ── Ezetimibe ──
-  html += `<div class="nhi-section"><div class="nhi-section-title">Ezetimibe</div>`;
-  let ezeCovered = false, ezeReason = '';
+  // ════════════════════════════════════
+  //  二、降 TG 藥物給付
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">降 TG 藥物（Fibrate / 魚油等）</div>`;
 
-  if (!statinCovered) {
-    ezeReason = 'Statin 本身不符合給付，Ezetimibe 亦不予給付';
-  } else {
-    // Statin 不耐受 (若 statin_drug 空白視為不耐受) or 用 statin 3個月 LDL 未達標
-    const onStatin = statin !== '';
-    const statinIntolerant = !onStatin;
+  let tgCovered = false;
+  const tgReasons = [];
+  const tcHdlRatio = (tc && hdl && hdl > 0) ? (tc / hdl) : null;
+  const hdlLow = hdl && hdl < 40;
 
-    if (statinIntolerant) {
-      ezeCovered = true;
-      ezeReason = 'Statin 不耐受 → 可申請 Ezetimibe 單獨給付';
+  if (hasCV || dm) {
+    // 心血管疾病或糖尿病：TG ≥200 且（TC/HDL >5 或 HDL <40）
+    if (tg && tg >= 500) {
+      tgCovered = true;
+      tgReasons.push(`TG ${tg} mg/dL ≥500 → 符合給付（可與藥物治療並行）`);
+      tgReasons.push('目標：TG <500 mg/dL');
+    } else if (tg && tg >= 200 && (tcHdlRatio && tcHdlRatio > 5 || hdlLow)) {
+      tgCovered = true;
+      const cond = [];
+      if (tcHdlRatio && tcHdlRatio > 5) cond.push(`TC/HDL-C ${tcHdlRatio.toFixed(1)} >5`);
+      if (hdlLow) cond.push(`HDL-C ${hdl} mg/dL <40`);
+      tgReasons.push(`TG ${tg} mg/dL ≥200 且（${cond.join(' 或 ')}）→ 符合給付`);
+      tgReasons.push('目標：TG <200 mg/dL');
+      tgReasons.push('可與藥物治療並行（不需非藥物治療期）');
     } else {
-      // 有用 statin，看是否未達標 (台灣指引 LDL 目標)
-      const ldlTarget = ascvd ? (ascvd_multi ? 55 : 70) : (fh ? 100 : (dm ? 100 : 100));
-      if (ldl && ldl >= ldlTarget) {
-        ezeCovered = true;
-        ezeReason = `使用 Statin ≥3 個月後 LDL ${ldl} mg/dL 仍 ≥ 目標值 ${ldlTarget} mg/dL → 可申請 Ezetimibe 併用`;
+      if (tg) {
+        const missing = [];
+        if (tg < 200) missing.push(`TG ${tg} mg/dL <200`);
+        else {
+          const condMissing = [];
+          if (!tcHdlRatio || tcHdlRatio <= 5) condMissing.push(`TC/HDL-C ${tcHdlRatio ? tcHdlRatio.toFixed(1) : '未知'} ≤5`);
+          if (!hdlLow) condMissing.push(`HDL-C ${hdl || '未填'} mg/dL ≥40`);
+          missing.push(`不符合附加條件（${condMissing.join(' 且 ')}）`);
+        }
+        tgReasons.push(`未達給付條件：${missing.join('、')}`);
       } else {
-        ezeReason = `使用 Statin 後 LDL 已達標 (< ${ldlTarget} mg/dL) → 暫不符合 Ezetimibe 給付`;
+        tgReasons.push('未填 TG 值，無法判斷');
       }
     }
+  } else {
+    // 無心血管疾病
+    if (tg && tg >= 500) {
+      tgCovered = true;
+      tgReasons.push(`TG ${tg} mg/dL ≥500 → 符合給付（可與藥物治療並行）`);
+      tgReasons.push('目標：TG <500 mg/dL');
+    } else if (tg && tg >= 200 && (tcHdlRatio && tcHdlRatio > 5 || hdlLow)) {
+      tgCovered = true;
+      const cond = [];
+      if (tcHdlRatio && tcHdlRatio > 5) cond.push(`TC/HDL-C ${tcHdlRatio.toFixed(1)} >5`);
+      if (hdlLow) cond.push(`HDL-C ${hdl} mg/dL <40`);
+      tgReasons.push(`TG ${tg} mg/dL ≥200 且（${cond.join(' 或 ')}）→ 符合給付`);
+      tgReasons.push('目標：TG <200 mg/dL');
+      tgReasons.push('需先有 3–6 個月非藥物治療');
+    } else {
+      if (tg) {
+        const missing = [];
+        if (tg < 200) missing.push(`TG ${tg} mg/dL <200`);
+        else {
+          const condMissing = [];
+          if (!tcHdlRatio || tcHdlRatio <= 5) condMissing.push(`TC/HDL-C ≤5`);
+          if (!hdlLow) condMissing.push(`HDL-C ≥40 mg/dL`);
+          missing.push(`不符合附加條件（${condMissing.join(' 且 ')}）`);
+        }
+        tgReasons.push(`未達給付條件：${missing.join('、')}`);
+      } else {
+        tgReasons.push('未填 TG 值，無法判斷');
+      }
+    }
+  }
+  tgReasons.push('追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月');
+
+  html += `<div class="coverage-item ${tgCovered ? 'covered' : 'not-covered'}">
+    <span class="coverage-icon">${tgCovered ? '✅' : '❌'}</span>
+    <span class="coverage-text">
+      <strong>降 TG 藥物</strong><br>
+      ${tgReasons.map(r => `• ${r}`).join('<br>')}
+    </span>
+  </div>`;
+  html += `</div>`;
+
+  // ════════════════════════════════════
+  //  三、Ezetimibe 給付
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">Ezetimibe（如 Ezetrol）</div>`;
+  let ezeCovered = false;
+  const ezeReasons = [];
+
+  if (!statinCovered) {
+    ezeReasons.push('Statin 本身不符合給付條件，Ezetimibe 亦不予給付');
+  } else {
+    const onStatin = statin !== '';
+    if (!onStatin) {
+      ezeCovered = true;
+      ezeReasons.push('未使用 Statin（Statin 不耐受）→ 可單獨申請 Ezetimibe 給付');
+      ezeReasons.push('條件：Severe myalgia 或 Myositis');
+    } else {
+      // 已用 statin，看是否未達標
+      if (statinLDLTarget && ldl && ldl >= statinLDLTarget) {
+        ezeCovered = true;
+        ezeReasons.push(`使用 Statin ≥3 個月後 LDL-C ${ldl} mg/dL 仍 ≥ 目標值 ${statinLDLTarget} mg/dL → 可合併 Ezetimibe`);
+      } else if (statinTCTarget && tc && tc >= statinTCTarget) {
+        ezeCovered = true;
+        ezeReasons.push(`使用 Statin ≥3 個月後 TC ${tc} mg/dL 仍 ≥ 目標值 ${statinTCTarget} mg/dL → 可合併 Ezetimibe`);
+      } else {
+        ezeReasons.push(`使用 Statin 後血脂已達目標（LDL-C <${statinLDLTarget}${statinTCTarget ? ' 且 TC <'+statinTCTarget : ''} mg/dL）→ 暫不符合 Ezetimibe 給付`);
+      }
+    }
+    ezeReasons.push('適用診斷：原發性高膽固醇血症、HoFH、植物脂醇血症');
   }
 
   html += `<div class="coverage-item ${ezeCovered ? 'covered' : (statinCovered ? 'conditional' : 'not-covered')}">
     <span class="coverage-icon">${ezeCovered ? '✅' : (statinCovered ? '⚠️' : '❌')}</span>
-    <span class="coverage-text"><strong>Ezetimibe</strong>：${ezeReason}</span>
+    <span class="coverage-text">
+      <strong>Ezetimibe</strong><br>
+      ${ezeReasons.map(r => `• ${r}`).join('<br>')}
+    </span>
   </div>`;
   html += `</div>`;
 
-  // ── PCSK9 ──
-  html += `<div class="nhi-section"><div class="nhi-section-title">PCSK9 抑制劑<br><small style="color:var(--text-muted);font-weight:400">evolocumab / alirocumab</small></div>`;
-  let pcsk9Covered = false, pcsk9Reason = '';
+  // ════════════════════════════════════
+  //  四、PCSK9 抑制劑
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">PCSK9 抑制劑<br><small style="color:var(--text-muted);font-weight:400">Evolocumab（Repatha）/ Alirocumab（Praluent）</small></div>`;
+  let pcsk9Covered = false;
+  let pcsk9Class = 'not-covered';
+  const pcsk9Reasons = [];
 
-  // 健保：重大心血管事件後一年內，最大耐受 statin + ezetimibe 後 LDL 仍 >100 mg/dL
-  const hasMajorEvent = ascvd && (ascvdTypes.includes('ACS') || ascvdTypes.includes('PCI') || ascvdTypes.includes('CABG'));
-  const onMaxTherapy = (statin !== '' && statinDose === 'high' && eze);
-  const ldlGT100 = ldl && ldl > 100;
+  // 重大心血管事件定義
+  const majorEventTypes = ['ACS', 'MI_1yr', 'MI_multi', 'PCI', 'CABG', 'stroke'];
+  const hasMajorEvent = ascvd && ascvdTypes.some(t => majorEventTypes.includes(t));
+
+  // 最大耐受 statin 判斷
+  const onHighStatin = statin !== '' && statinDose === 'high';
+  // 高強度 statin = rosuvastatin 20mg 或 atorvastatin ≥40mg（以 high 代表）
+  const onMaxStatinPlusEze = onHighStatin && eze;
+  // Statin 不耐受且用 ezetimibe
+  const statinIntolerантWithEze = statin === '' && eze;
 
   if (!ascvd) {
-    pcsk9Reason = '無臨床 ASCVD → 不符合 PCSK9 抑制劑給付';
+    pcsk9Reasons.push('無臨床 ASCVD → 不符合 PCSK9 抑制劑給付（重大心血管事件後一年內才符合）');
   } else if (!hasMajorEvent) {
-    pcsk9Reason = '非 ACS/PCI/CABG 類型事件（需重大心血管事件後一年內）';
-  } else if (!onMaxTherapy) {
-    pcsk9Reason = '需先使用最大耐受劑量 Statin + Ezetimibe 後評估';
-    pcsk9Covered = false;
-  } else if (!ldlGT100) {
-    pcsk9Reason = 'LDL-C ≤100 mg/dL → 已達 PCSK9 給付門檻，不符合';
+    pcsk9Reasons.push(`ASCVD 類型（${ascvdTypes.join('、')}）不屬於重大心血管事件（需為心肌梗塞、冠狀動脈/其他動脈血管再通術、或動脈硬化相關缺血性腦中風）`);
   } else {
-    pcsk9Covered = true;
-    pcsk9Reason = `重大心血管事件 (${ascvdTypes.filter(t => ['ACS','PCI','CABG'].includes(t)).join('/')}) + 最大耐受 Statin+Ezetimibe + LDL ${ldl} > 100 mg/dL → 符合 PCSK9 抑制劑給付`;
+    pcsk9Reasons.push(`重大心血管事件：${ascvdTypes.filter(t => majorEventTypes.includes(t)).join('、')} ✓`);
+
+    if (onMaxStatinPlusEze) {
+      // 情境 A：高強度 statin ≥3個月 + ezetimibe ≥3個月
+      if (ldl && ldl > 100) {
+        pcsk9Covered = true; pcsk9Class = 'covered';
+        pcsk9Reasons.push(`情境 A：高強度 Statin + Ezetimibe 10mg 各 ≥3 個月後，LDL-C ${ldl} mg/dL 仍 >100 mg/dL → 符合給付`);
+      } else {
+        pcsk9Reasons.push(`情境 A：使用高強度 Statin + Ezetimibe，但 LDL-C ${ldl || '未填'} mg/dL ≤100 → 不符合`);
+      }
+    } else if (statinIntolerантWithEze) {
+      // 情境 B：statin 不耐受，用 ezetimibe
+      if (ldl && ldl > 100) {
+        pcsk9Covered = true; pcsk9Class = 'covered';
+        pcsk9Reasons.push(`情境 B：Statin 禁忌/不耐受，使用含 Ezetimibe 10mg 的降脂藥 ≥3 個月，LDL-C ${ldl} mg/dL 仍 >100 mg/dL → 符合給付`);
+      } else {
+        pcsk9Reasons.push(`情境 B：Statin 不耐受 + Ezetimibe，但 LDL-C ${ldl || '未填'} mg/dL ≤100 → 不符合`);
+      }
+    } else {
+      pcsk9Class = 'conditional';
+      const missing = [];
+      if (!onHighStatin && statin !== '') missing.push('Statin 劑量需升至高強度（rosuvastatin 20mg 或 atorvastatin ≥40mg）');
+      if (!eze) missing.push('尚未加上 Ezetimibe 10mg');
+      if (onHighStatin && !eze) missing.push('需再加 Ezetimibe 10mg ≥3 個月後評估');
+      pcsk9Reasons.push(`尚未完成最大耐受療程：${missing.join('；')}`);
+    }
+
+    if (!pcsk9Covered) {
+      pcsk9Reasons.push('需事前審查，每次核准 12 個月');
+      pcsk9Reasons.push('LDL-C 下降未達 30% → 不再給付');
+    } else {
+      pcsk9Reasons.push('需事前審查（附表二-D），每次核准 12 個月');
+      pcsk9Reasons.push('最高劑量：每兩週 1 支；LDL-C 下降未達 30% → 不再給付');
+      pcsk9Reasons.push('不可同時使用其他 PCSK9 抑制劑');
+    }
   }
 
-  const pcsk9Class = pcsk9Covered ? 'covered' : (!ascvd || !hasMajorEvent ? 'not-covered' : 'conditional');
   html += `<div class="coverage-item ${pcsk9Class}">
     <span class="coverage-icon">${pcsk9Covered ? '✅' : (pcsk9Class === 'conditional' ? '⚠️' : '❌')}</span>
-    <span class="coverage-text"><strong>PCSK9 抑制劑</strong>：${pcsk9Reason}</span>
+    <span class="coverage-text">
+      <strong>PCSK9 抑制劑</strong><br>
+      ${pcsk9Reasons.map(r => `• ${r}`).join('<br>')}
+    </span>
   </div>`;
   html += `</div>`;
 
   return html;
 }
 
-// ─────────────────────────────────────────────────────────────
-//  Main calculate
-// ─────────────────────────────────────────────────────────────
 function calculate() {
   const age = getNum('age');
   const sex = getRadio('sex');
