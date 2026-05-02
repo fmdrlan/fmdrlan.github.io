@@ -474,14 +474,21 @@ function renderCard(drug) {
 
 function renderBlocks(drug) {
   if (drug.is_appendix) {
-    return '<div class="appendix-notice">📋 本項含複雜附表，請至 <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank" style="color:var(--accent)">健保署官方網站</a>查閱完整規定。</div>';
+    return '<div class="appendix-notice">📋 本項含複雜附表，請至 <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank" style="color:var(--accent)">健保署官方網站</a>查閱完整規定。請注意本條目正文說明仍具參考價值。</div>';
   }
   if (!drug.blocks || drug.blocks.length === 0) {
     return '<div class="content-text">' + hlText(esc(drug.content || '')) + '</div>';
   }
   return drug.blocks.map(function(b) {
     var indent = b.level * 16;
-    return '<div class="content-block block-l' + b.level + '" style="padding-left:' + indent + 'px">' + hlText(esc(b.text)) + '</div>';
+    // Split sub-items within a block for better readability
+    // Break on patterns like (1) (2) I. II. that appear mid-text
+    var text = b.text;
+    var html = hlText(esc(text));
+    // Insert line breaks before sub-item markers within a block
+    html = html.replace(/([。）])\s*(\([０-９0-90-9]+\)|[（(]\d+[）)])/g, '$1<br>$2');
+    html = html.replace(/([。）])\s*([IⅠ][IⅠ]?[IⅠ]?[\.\s])/g, '$1<br>$2');
+    return '<div class="content-block block-l' + b.level + '" style="padding-left:' + indent + 'px">' + html + '</div>';
   }).join('');
 }
 
@@ -490,18 +497,24 @@ function render26Table(drug) {
   if (sec === '2.6.1') {
     return [
       '<div class="nhi-table-wrap">',
-      '<div class="nhi-table-title">全民健康保險降膽固醇藥物給付規定表</div>',
+      '<div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px">全民健康保險降膽固醇藥物給付規定表</div>',
       '<table class="nhi-table"><thead><tr>',
-      '<th>病人族群</th><th>非藥物治療</th><th>起始條件</th><th>目標值</th>',
+      '<th></th><th>非藥物治療</th><th>起始藥物治療血脂值</th><th>血脂目標值</th><th>處方規定</th>',
       '</tr></thead><tbody>',
-      '<tr class="tr-highlight"><td>急性冠心症病史 / 曾接受 PCI 或 CABG 之冠狀動脈粥狀硬化患者</td><td>與藥物治療可並行</td><td>LDL-C ≥70 mg/dL</td><td>LDL-C &lt;70 mg/dL</td></tr>',
-      '<tr><td>心血管疾病或糖尿病患者</td><td>與藥物治療可並行</td><td>TC ≥160 mg/dL 或 LDL-C ≥100 mg/dL</td><td>TC &lt;160 mg/dL 或 LDL-C &lt;100 mg/dL</td></tr>',
-      '<tr><td>≥2 個危險因子</td><td>給藥前 3–6 個月非藥物治療</td><td>TC ≥200 mg/dL 或 LDL-C ≥130 mg/dL</td><td>TC &lt;200 mg/dL 或 LDL-C &lt;130 mg/dL</td></tr>',
-      '<tr><td>1 個危險因子</td><td>給藥前 3–6 個月非藥物治療</td><td>TC ≥240 mg/dL 或 LDL-C ≥160 mg/dL</td><td>TC &lt;240 mg/dL 或 LDL-C &lt;160 mg/dL</td></tr>',
-      '<tr><td>0 個危險因子</td><td>給藥前 3–6 個月非藥物治療</td><td>LDL-C ≥190 mg/dL</td><td>LDL-C &lt;190 mg/dL</td></tr>',
+      '<tr class="tr-highlight"><td>1. 有急性冠狀動脈症候群病史<br>2. 曾接受心導管介入治療或外科冠動脈搭橋手術之冠狀動脈粥狀硬化患者</td><td>與藥物治療可並行</td><td>LDL-C ≥70 mg/dL</td><td>LDL-C &lt;70 mg/dL</td><td>第一年應每 3–6 個月抽血檢查一次，第二年以後應至少每 6–12 個月抽血檢查一次，同時請注意副作用之產生如肝功能異常，橫紋肌溶解症。</td></tr>',
+      '<tr><td>心血管疾病或糖尿病患者</td><td>與藥物治療可並行</td><td>TC ≥160 mg/dL 或 LDL-C ≥100 mg/dL</td><td>TC &lt;160 mg/dL 或 LDL-C &lt;100 mg/dL</td><td></td></tr>',
+      '<tr><td>2 個危險因子或以上</td><td>給藥前應有 3–6 個月非藥物治療</td><td>TC ≥200 mg/dL 或 LDL-C ≥130 mg/dL</td><td>TC &lt;200 mg/dL 或 LDL-C &lt;130 mg/dL</td><td></td></tr>',
+      '<tr><td>1 個危險因子</td><td>給藥前應有 3–6 個月非藥物治療</td><td>TC ≥240 mg/dL 或 LDL-C ≥160 mg/dL</td><td>TC &lt;240 mg/dL 或 LDL-C &lt;160 mg/dL</td><td></td></tr>',
+      '<tr><td>0 個危險因子</td><td>給藥前應有 3–6 個月非藥物治療</td><td>LDL-C ≥190 mg/dL</td><td>LDL-C &lt;190 mg/dL</td><td></td></tr>',
       '</tbody></table>',
-      '<div class="nhi-table-note"><strong>危險因子（共5項）：</strong>高血壓、男性≥45歲/女性≥55歲或停經、早發冠心病家族史（男≤55歲/女≤65歲）、吸菸（未戒菸者應自費）、HDL-C &lt;40 mg/dL</div>',
-      '<div class="nhi-table-title" style="margin-top:16px">全民健康保險降三酸甘油酯藥物給付規定表</div>',
+      '<div class="nhi-table-note">',
+      '<strong>心血管疾病定義：</strong>',
+      '（一）冠狀動脈粥狀硬化患者包含：心絞痛病人，有心導管證實或缺氧性心電圖變化或負荷性試驗陽性反應者（附檢查報告）',
+      '（二）缺血型腦血管疾病病人包含：腦梗塞、暫時性腦缺血患者（TIA，診斷須由神經科醫師確立）、有症狀之頸動脈狹窄（診斷須由神經科醫師確立）',
+      '<br><strong>危險因子定義（共5項）：</strong>',
+      '1. 高血壓 &nbsp; 2. 男性≥45歲，女性≥55歲或停經者 &nbsp; 3. 有早發性冠心病家族史（男性≤55歲，女性≤65歲）&nbsp; 4. HDL-C &lt;40 mg/dL &nbsp; 5. 吸菸（因吸菸而符合起步治療準則之個案，若未戒菸而要求藥物治療，應以自費治療）',
+      '</div>',
+      '<div style="font-size:14px;font-weight:700;color:var(--text);margin-top:16px;margin-bottom:8px">全民健康保險降三酸甘油酯藥物給付規定表</div>',
       '<table class="nhi-table"><thead><tr>',
       '<th>病人族群</th><th>非藥物治療</th><th>起始條件</th><th>目標值</th>',
       '</tr></thead><tbody>',
