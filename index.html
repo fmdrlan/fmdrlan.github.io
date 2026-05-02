@@ -188,9 +188,9 @@
   .nhi-table-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
   .nhi-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .nhi-table th { background: var(--surface2); color: var(--text); font-weight: 600; padding: 8px 10px; border: 1px solid var(--border); text-align: center; }
-  .nhi-table td { padding: 7px 10px; border: 1px solid var(--border); color: var(--text); vertical-align: top; line-height: 1.5; }
+  .nhi-table td { padding: 7px 10px; border: 1px solid var(--border); color: #e2e8f4; vertical-align: top; line-height: 1.5; }
   .nhi-table .tr-highlight td { background: rgba(74,158,255,0.07); }
-  .nhi-table-note { font-size: 12px; color: var(--text-muted); margin-top: 6px; padding: 6px 10px; background: var(--surface2); border-radius: 6px; }
+  .nhi-table-note { font-size: 12px; color: #e2e8f4; margin-top: 6px; padding: 6px 10px; background: var(--surface2); border-radius: 6px; }
 
   /* Appendix notice */
   .appendix-notice { background: rgba(74,158,255,0.08); border: 1px solid rgba(74,158,255,0.2); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--text-muted); margin: 8px 0; }
@@ -485,9 +485,15 @@ function renderBlocks(drug) {
     // Break on patterns like (1) (2) I. II. that appear mid-text
     var text = b.text;
     var html = hlText(esc(text));
-    // Insert line breaks before sub-item markers within a block
-    html = html.replace(/([。）])\s*(\([０-９0-90-9]+\)|[（(]\d+[）)])/g, '$1<br>$2');
-    html = html.replace(/([。）])\s*([IⅠ][IⅠ]?[IⅠ]?[\.\s])/g, '$1<br>$2');
+    // Insert line breaks before numbered sub-items within a block
+    // After 。or ） before (1) (2) etc
+    html = html.replace(/([。）])\s*([（(]\d+[）)])/g, '$1<br>$2');
+    // After 。or ） before 1. 2. 3. etc (digit followed by period and space/Chinese)
+    html = html.replace(/([。）])\s*(\d+\.[　 ])/g, '$1<br>$2');
+    // After 。or ） before I. II. III. Roman numerals
+    html = html.replace(/([。）])\s*([IⅠVX]+\.[　 ])/g, '$1<br>$2');
+    // After 。 before i. ii. lowercase roman
+    html = html.replace(/([。）])\s*([ivx]+\.[　 ])/g, '$1<br>$2');
     return '<div class="content-block block-l' + b.level + '" style="padding-left:' + indent + 'px">' + html + '</div>';
   }).join('');
 }

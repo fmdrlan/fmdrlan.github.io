@@ -132,6 +132,14 @@ def parse_drug_sections(pdf_path: str) -> list[dict]:
                        'text': '本項涉及複雜附表，請至健保署官方網站查閱完整規定。'}]
             content_text = body[:100]
         else:
+            # Truncate at appendix bleed-through point
+            bleed = re.search(
+                r'附表[一二三四五六七八九十百\d]+-?[A-Z]?\s*全民|'
+                r'附表[一二三四五六七八九十百\d]+之[一二三四五六七八九十百\d]\s',
+                body
+            )
+            if bleed and bleed.start() > 50:
+                body = body[:bleed.start()].rstrip()
             blocks = parse_content_to_blocks(body[:4000])
             content_text = body[:4000]
 
