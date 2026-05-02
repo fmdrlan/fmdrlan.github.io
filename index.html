@@ -175,6 +175,26 @@
   .copy-btn:hover { background: var(--accent-dim); color: var(--accent); border-color: rgba(74,158,255,0.4); }
   .copy-btn.copied { background: var(--green-bg); color: var(--green); border-color: rgba(74,222,128,0.3); }
 
+  /* Content blocks with indentation levels */
+  .content-block { font-size: 14px; line-height: 1.75; color: var(--text); padding-top: 3px; padding-bottom: 3px; }
+  .block-l0 { font-size: 14px; }
+  .block-l1 { font-size: 13px; color: var(--text); }
+  .block-l2 { font-size: 13px; color: var(--text-muted); }
+  .block-l3 { font-size: 12px; color: var(--text-muted); }
+  .content-block mark { background: var(--highlight); border-bottom: 2px solid var(--highlight-border); border-radius: 2px; color: #ffd23c; padding: 0 1px; }
+
+  /* NHI table */
+  .nhi-table-wrap { overflow-x: auto; margin: 8px 0 12px; }
+  .nhi-table-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .nhi-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .nhi-table th { background: var(--surface2); color: var(--text); font-weight: 600; padding: 8px 10px; border: 1px solid var(--border); text-align: center; }
+  .nhi-table td { padding: 7px 10px; border: 1px solid var(--border); color: var(--text); vertical-align: top; line-height: 1.5; }
+  .nhi-table .tr-highlight td { background: rgba(74,158,255,0.07); }
+  .nhi-table-note { font-size: 12px; color: var(--text-muted); margin-top: 6px; padding: 6px 10px; background: var(--surface2); border-radius: 6px; }
+
+  /* Appendix notice */
+  .appendix-notice { background: rgba(74,158,255,0.08); border: 1px solid rgba(74,158,255,0.2); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--text-muted); margin: 8px 0; }
+
   .state-msg { text-align: center; padding: 60px 20px; color: var(--text-muted); }
   .state-msg .icon { font-size: 44px; margin-bottom: 16px; }
   .state-msg h3 { font-size: 16px; margin-bottom: 8px; color: var(--text); }
@@ -274,6 +294,43 @@ const ALIAS_MAP = {
   '生物製劑':        ['adalimumab','infliximab','etanercept','tocilizumab','biologics'],
   'tnf':            ['adalimumab','infliximab','etanercept','certolizumab'],
   '類風濕':          ['methotrexate','adalimumab','infliximab','etanercept','tocilizumab'],
+  // 降血脂
+  'statin':          ['降血脂','降膽固醇','rosuvastatin','atorvastatin','simvastatin','pitavastatin','pravastatin','fluvastatin','lovastatin','可定','立普妥','冠脂妥'],
+  '降血脂':          ['statin','降膽固醇','rosuvastatin','atorvastatin','ezetimibe','fibrate','pcsk9','2.6'],
+  '降膽固醇':        ['statin','降血脂','ezetimibe','pcsk9'],
+  'rosuvastatin':    ['statin','降血脂','可定','crestor'],
+  'atorvastatin':    ['statin','降血脂','立普妥','lipitor'],
+  'simvastatin':     ['statin','降血脂'],
+  'ezetimibe':       ['降血脂','ezetrol','vytorin','atozet','statin'],
+  'pcsk9':           ['降血脂','evolocumab','alirocumab','repatha','praluent'],
+  'evolocumab':      ['pcsk9','repatha','降血脂'],
+  'alirocumab':      ['pcsk9','praluent','降血脂'],
+  'fibrate':         ['降血脂','降三酸甘油脂','fenofibrate','gemfibrozil'],
+  '三酸甘油':        ['降血脂','fibrate','fenofibrate'],
+  // 降血壓
+  'ace inhibitor':   ['acei','降血壓','enalapril','ramipril','perindopril','lisinopril'],
+  'acei':            ['ace inhibitor','降血壓','enalapril','ramipril'],
+  'arb':             ['降血壓','losartan','valsartan','irbesartan','olmesartan','telmisartan'],
+  'ccb':             ['calcium channel blocker','降血壓','amlodipine','nifedipine','diltiazem'],
+  '降血壓':          ['acei','arb','beta blocker','ccb','利尿劑'],
+  'beta blocker':    ['降血壓','metoprolol','carvedilol','bisoprolol','atenolol','乙型阻斷劑'],
+  '乙型阻斷劑':      ['beta blocker','beta blocking','降血壓'],
+  // 抗凝血
+  'noac':            ['doac','抗凝血','dabigatran','rivaroxaban','apixaban','edoxaban'],
+  'doac':            ['noac','抗凝血'],
+  'warfarin':        ['抗凝血','抗凝'],
+  '抗凝血':          ['noac','doac','warfarin','heparin'],
+  // 糖尿病（補充）
+  'glp-1':           ['exenatide','liraglutide','dulaglutide','semaglutide','glp1','糖尿病'],
+  '糖尿病':          ['metformin','insulin','胰島素','sglt2','glp-1','dpp4','糖尿病用藥'],
+  'metformin':       ['糖尿病','降血糖','glucophage'],
+  // 骨質疏鬆
+  '骨質疏鬆':        ['bisphosphonate','alendronate','zoledronic','denosumab','teriparatide'],
+  'bisphosphonate':  ['骨質疏鬆','alendronate','zoledronic'],
+  // 鴉片/疼痛
+  'opioid':          ['鴉片','嗎啡','morphine','tramadol','fentanyl','oxycodone','疼痛'],
+  '鴉片':            ['opioid','嗎啡','morphine','tramadol','fentanyl'],
+  '慢性疼痛':        ['opioid','pregabalin','tramadol'],
 };
 
 const TIPS = [
@@ -393,22 +450,131 @@ function doSearch(q) {
 
 function renderCard(drug) {
   const sec = drug.title.match(/^[\d.]+/)?.[0]?.replace(/\.$/, '') || '';
-  const preview = drug.content.slice(0, 130).replace(/\n/g,' ') + '…';
-  return `
+  const preview = (drug.content || '').slice(0, 130).replace(/\n/g,' ') + '…';
+
+  // Render structured blocks
+  function renderBlocks(drug) {
+    if (drug.is_appendix) {
+      return `<div class="appendix-notice">
+        📋 本項含複雜附表，請至
+        <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank"
+           style="color:var(--accent)">健保署官方網站</a>查閱完整規定。
+      </div>`;
+    }
+    if (!drug.blocks || drug.blocks.length === 0) {
+      return `<div class="content-text">${hlText(esc(drug.content || ''))}</div>`;
+    }
+    return drug.blocks.map(b => {
+      const indent = b.level * 16;
+      const cls = b.level === 0 ? 'block-l0' : b.level === 1 ? 'block-l1' : b.level === 2 ? 'block-l2' : 'block-l3';
+      return `<div class="content-block ${cls}" style="padding-left:${indent}px">${hlText(esc(b.text))}</div>`;
+    }).join('');
+  }
+
+  // Section 2.6 special table
+  const is26 = sec && sec.startsWith('2.6');
+
+  return \`
   <div class="drug-card">
     <div class="card-header">
-      ${sec ? `<span class="section-badge">${esc(sec)}</span>` : ''}
+      \${sec ? \`<span class="section-badge">\${esc(sec)}</span>\` : ''}
       <div class="card-title-wrap">
-        <div class="card-title">${hlText(esc(drug.title))}</div>
-        <div class="card-preview">${esc(preview)}</div>
+        <div class="card-title">\${hlText(esc(drug.title))}</div>
+        <div class="card-preview">\${esc(preview)}</div>
       </div>
       <span class="expand-icon">▼</span>
     </div>
     <div class="card-body">
-      <div class="content-text">${hlText(esc(drug.content))}</div>
-      <button class="copy-btn" data-id="${drug.id}">📋 複製條文</button>
+      \${is26 ? render26Table(drug) : renderBlocks(drug)}
+      <button class="copy-btn" data-id="\${drug.id}">📋 複製條文</button>
     </div>
-  </div>`;
+  </div>\`;
+}
+
+// 2.6 節降血脂硬編碼表格
+function render26Table(drug) {
+  const sec = drug.title.match(/^[\d.]+/)?.[0]?.replace(/\.$/, '') || '';
+  if (sec === '2.6.1') {
+    return \`
+    <div class="nhi-table-wrap">
+      <div class="nhi-table-title">全民健康保險降膽固醇藥物給付規定表</div>
+      <table class="nhi-table">
+        <thead><tr>
+          <th>病人族群</th><th>非藥物治療</th><th>起始條件</th><th>目標值</th>
+        </tr></thead>
+        <tbody>
+          <tr class="tr-highlight">
+            <td>急性冠心症病史 / 曾接受 PCI 或 CABG 之冠狀動脈粥狀硬化患者</td>
+            <td>與藥物治療可並行</td>
+            <td>LDL-C ≥70 mg/dL</td>
+            <td>LDL-C &lt;70 mg/dL</td>
+          </tr>
+          <tr>
+            <td>心血管疾病或糖尿病患者</td>
+            <td>與藥物治療可並行</td>
+            <td>TC ≥160 mg/dL 或 LDL-C ≥100 mg/dL</td>
+            <td>TC &lt;160 mg/dL 或 LDL-C &lt;100 mg/dL</td>
+          </tr>
+          <tr>
+            <td>≥2 個危險因子</td>
+            <td>給藥前 3–6 個月非藥物治療</td>
+            <td>TC ≥200 mg/dL 或 LDL-C ≥130 mg/dL</td>
+            <td>TC &lt;200 mg/dL 或 LDL-C &lt;130 mg/dL</td>
+          </tr>
+          <tr>
+            <td>1 個危險因子</td>
+            <td>給藥前 3–6 個月非藥物治療</td>
+            <td>TC ≥240 mg/dL 或 LDL-C ≥160 mg/dL</td>
+            <td>TC &lt;240 mg/dL 或 LDL-C &lt;160 mg/dL</td>
+          </tr>
+          <tr>
+            <td>0 個危險因子</td>
+            <td>給藥前 3–6 個月非藥物治療</td>
+            <td>LDL-C ≥190 mg/dL</td>
+            <td>LDL-C &lt;190 mg/dL</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="nhi-table-note">
+        <strong>危險因子（共5項）：</strong>高血壓、男性≥45歲/女性≥55歲或停經、早發冠心病家族史（男≤55歲/女≤65歲）、吸菸（未戒菸者應自費）、HDL-C &lt;40 mg/dL
+      </div>
+      <div class="nhi-table-title" style="margin-top:16px">全民健康保險降三酸甘油酯藥物給付規定表</div>
+      <table class="nhi-table">
+        <thead><tr>
+          <th>病人族群</th><th>非藥物治療</th><th>起始條件</th><th>目標值</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td>心血管疾病或糖尿病病人</td>
+            <td>與藥物治療可並行</td>
+            <td>TG ≥200 mg/dL 且（TC/HDL-C >5 或 HDL-C &lt;40 mg/dL）</td>
+            <td>TG &lt;200 mg/dL</td>
+          </tr>
+          <tr>
+            <td>無心血管疾病病人</td>
+            <td>給藥前 3–6 個月非藥物治療</td>
+            <td>TG ≥200 mg/dL 且（TC/HDL-C >5 或 HDL-C &lt;40 mg/dL）</td>
+            <td>TG &lt;200 mg/dL</td>
+          </tr>
+          <tr class="tr-highlight">
+            <td>無心血管疾病病人（嚴重高三酸甘油酯）</td>
+            <td>與藥物治療可並行</td>
+            <td>TG ≥500 mg/dL</td>
+            <td>TG &lt;500 mg/dL</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="nhi-table-note">追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月抽血一次</div>
+    </div>\`;
+  }
+  // 其他 2.6 子節：正常渲染 blocks
+  if (!drug.blocks || drug.blocks.length === 0) {
+    return \`<div class="content-text">\${hlText(esc(drug.content || ''))}</div>\`;
+  }
+  return drug.blocks.map(b => {
+    const indent = b.level * 16;
+    return \`<div class="content-block block-l\${b.level}" style="padding-left:\${indent}px">\${hlText(esc(b.text))}</div>\`;
+  }).join('');
 }
 
 function hlText(html) {

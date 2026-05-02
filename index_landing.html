@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DR. YANG 的工具箱</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b27;
+    --border: #2d3a52;
+    --text: #e2e8f4;
+    --text-muted: #8fa3c0;
+    --accent: #4a9eff;
+    --accent-dim: rgba(74,158,255,0.1);
+    --yellow: #f0c040;
+    --red: #f85149;
+    --green: #3fb950;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .wrapper {
+    max-width: 680px;
+    width: 100%;
+  }
+
+  /* Warning banner */
+  .warning-banner {
+    background: rgba(240,192,64,0.08);
+    border: 1px solid rgba(240,192,64,0.3);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .warning-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .warning-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--yellow);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .warning-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+  .warning-text strong { color: var(--text); }
+
+  /* Header */
+  .site-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .site-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .site-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Tool cards */
+  .tools-grid {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .tool-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .tool-card:hover {
+    border-color: var(--accent);
+    background: rgba(74,158,255,0.05);
+  }
+  .tool-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--accent-dim);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tool-info { flex: 1; }
+  .tool-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .tool-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .tool-arrow {
+    color: var(--text-muted);
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .tool-card:hover .tool-arrow { color: var(--accent); }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-new { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .site-title { font-size: 22px; }
+    .tool-card { padding: 14px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Warning -->
+  <div class="warning-banner">
+    <span class="warning-icon">⚠️</span>
+    <div>
+      <div class="warning-title">Warning — DR. YANG 的領地</div>
+      <div class="warning-text">
+        這裡的工具由家醫科醫師個人維護，<strong>資訊僅供參考，不保證完全正確</strong>。
+        醫療決策請保有自己的專業判斷，並以最新健保署公告及指引原文為準。
+        發現錯誤歡迎告知，感謝你的包容。
+      </div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="site-header">
+    <div class="site-title">DR. YANG's Toolbox</div>
+    <div class="site-sub">給忙碌的家醫科醫師用的小工具</div>
+  </div>
+
+  <!-- Tools -->
+  <div class="tools-grid">
+    <a class="tool-card" href="index.html">
+      <div class="tool-icon">🔍</div>
+      <div class="tool-info">
+        <div class="tool-name">健保藥品給付規定查詢</div>
+        <div class="tool-desc">全文搜尋健保給付條件，支援藥名、成分、適應症、藥物類別</div>
+      </div>
+      <span class="tool-arrow">›</span>
+    </a>
+
+    <a class="tool-card" href="lipid.html">
+      <div class="tool-icon">📊</div>
+      <div class="tool-info">
+        <div class="tool-name">高血脂風險評估<span class="badge badge-new">NEW</span></div>
+        <div class="tool-desc">台灣 2025 / ESC 2024 / AHA 2026 三大指引風險分級，並判斷健保給付資格</div>
+      </div>
+      <span class="tool-arrow">›</span>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    工具由 DR. YANG 個人維護 · 資料來源：
+    <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank">衛生福利部中央健康保險署</a>
+    <br>本站不隸屬於任何醫療機構或政府機關
+  </div>
+
+</div>
+</body>
+</html>
