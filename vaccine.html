@@ -295,7 +295,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   </div>
 
   <!-- ─── Pediatric ─── -->
-  <div id="peds-section">
+  <div id="peds-section" style="display:none">
     <div class="dob-row">
       <span class="dob-label">出生日期</span>
       <input type="date" id="dobInput" class="dob-input" onchange="renderTimeline()">
@@ -477,12 +477,7 @@ const PED_VACCINES = [
     doses: [{ months: 54, label: '第2', tip: '滿4–6歲自費接種第2劑' }]
   },
 
-  {
-    name: 'HPV 9價', en: 'HPV (9-valent)', type: 'priv',
-    doses: [
-      { months: 108, label: '第1', tip: '9歲以上；9–14歲共2劑，15歲以上共3劑' },
-    ]
-  },
+
 ];
 
 // Adult vaccines
@@ -543,6 +538,7 @@ const ADULT_VACCINES = [
     schedule: '未曾接種者可直接接種PCV20（1劑）',
     target: '65歲以上；19–64歲高危險群（慢性病、免疫不全等）',
     notes: ['PCV20（20價結合型）：涵蓋最廣，建議優先選擇', 'PPV23：可與PCV序列接種，詳詢醫師', '曾接種PPV23者：間隔至少1年再接種PCV20'],
+    public_note: '【公費對象】65歲以上長者可接種1劑公費肺炎鏈球菌疫苗（PCV20或PPV23，依各縣市提供）。詳見：<a href="https://www.cdc.gov.tw/Category/MPage/zK8mS8V4oEfjRy8Dlv0yJw" target="_blank" style="color:var(--accent)">CDC 肺炎鏈球菌疫苗專區</a>',
     contraindication: '對疫苗成分嚴重過敏',
     price: null,
   },
@@ -610,6 +606,16 @@ const ADULT_VACCINES = [
     price: null,
   },
   {
+    id: 'flu', icon: '🤧', name: '流感疫苗（成人）', en: 'Influenza Vaccine',
+    doses: '每年 1 劑（初次接種者2劑）',
+    schedule: '每年施打，建議 10 月前完成',
+    target: '所有成人建議接種，尤其是高風險族群',
+    notes: ['初次接種者須接種2劑，間隔4週', '每年病毒株不同，需年年接種', '孕婦、6個月以上幼兒、65歲以上長者優先'],
+    public_note: '【公費對象（114年）】醫事人員、65歲以上長者、55歲以上原住民、孕婦、6個月至入學前幼兒、高風險慢性病人（BMI≥30、罕病、重大傷病）、幼兒園托育人員、國小至五專三年級學生等；第二階段（11/1起）50-64歲無慢性病成人。<br>詳見：<a href="https://www.cdc.gov.tw/Category/QAPage/T93ZfoLyyuCaZvKf7v9eww" target="_blank" style="color:var(--accent)">CDC 公費流感疫苗接種計畫</a>',
+    contraindication: '對疫苗成分（含雞蛋蛋白）嚴重過敏；發燒中',
+    price: null,
+  },
+  {
     id: 'yellowfever', icon: '🌡️', name: '黃熱病疫苗', en: 'Yellow Fever Vaccine',
     doses: '1劑（終身有效）',
     schedule: '出發前至少10天完成接種',
@@ -630,6 +636,7 @@ function setMode(mode) {
   document.getElementById('peds-section').style.display = mode === 'peds' ? '' : 'none';
   document.getElementById('adult-section').style.display = mode === 'adult' ? '' : 'none';
   if (mode === 'adult') renderAdultList();
+  if (mode === 'peds') renderTimeline();
 }
 
 // ══════════════════════════════════════════════════════
@@ -816,6 +823,11 @@ function showAdultDetail(id) {
       <div class="detail-note">⚠️ ${v.contraindication}</div>
     </div>
 
+    ${v.public_note ? `<div class="detail-section">
+      <div class="detail-section-title" style="color:var(--green)">📋 公費資訊</div>
+      <div class="detail-note" style="border-color:var(--green)">${v.public_note}</div>
+    </div>` : ''}
+
     <div class="detail-section">
       <div class="detail-section-title">自費價格</div>
       ${priceHtml}
@@ -826,8 +838,8 @@ function showAdultDetail(id) {
 // ══════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════
-renderTimeline();
-// Adult list rendered on demand when mode switches
+setMode("peds");
+// setMode calls renderTimeline() and handles visibility
 </script>
 </body>
 </html>
