@@ -486,14 +486,17 @@ function renderBlocks(drug) {
     var text = b.text;
     var html = hlText(esc(text));
     // Insert line breaks before numbered sub-items within a block
-    // After 。or ） before (1) (2) etc
-    html = html.replace(/([。）])\s*([（(]\d+[）)])/g, '$1<br>$2');
-    // After 。or ） before 1. 2. 3. etc (digit followed by period and space/Chinese)
-    html = html.replace(/([。）])\s*(\d+\.[　 ])/g, '$1<br>$2');
-    // After 。or ） before I. II. III. Roman numerals
-    html = html.replace(/([。）])\s*([IⅠVX]+\.[　 ])/g, '$1<br>$2');
-    // After 。 before i. ii. lowercase roman
-    html = html.replace(/([。）])\s*([ivx]+\.[　 ])/g, '$1<br>$2');
+    // After sentence endings (。：者。者：者，) before list markers
+    // Before (1) (2) etc
+    html = html.replace(/([。：）])\s*([（(]\d+[）)])/g, '$1<br>$2');
+    // Before 1. 2. etc
+    html = html.replace(/([。：）者])\s*(\d+\.[　 ])/g, '$1<br>$2');
+    // Also break when "。 2." appears without space issues
+    html = html.replace(/([。])\s*(\d+\.)/g, '$1<br>$2');
+    // Before I. II. Roman numerals
+    html = html.replace(/([。：）])\s*([IⅠ][IⅠ]?[IⅠ]?\.[　 ])/g, '$1<br>$2');
+    // Before i. ii. lowercase
+    html = html.replace(/([。：）])\s*([ivx]+\.[　 ])/g, '$1<br>$2');
     return '<div class="content-block block-l' + b.level + '" style="padding-left:' + indent + 'px">' + html + '</div>';
   }).join('');
 }
