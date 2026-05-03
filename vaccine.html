@@ -290,12 +290,12 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   <div class="page-title">疫苗查詢</div>
 
   <div class="mode-tabs">
-    <button class="mode-btn active" onclick="setMode('peds')">👶 小兒（0–18歲）</button>
-    <button class="mode-btn" onclick="setMode('adult')">🧑 成人（18歲以上）</button>
+    <button class="mode-btn" id="btn-peds" onclick="setMode('peds')">👶 小兒（0–18歲）</button>
+    <button class="mode-btn" id="btn-adult" onclick="setMode('adult')">🧑 成人（18歲以上）</button>
   </div>
 
   <!-- ─── Pediatric ─── -->
-  <div id="peds-section" style="display:none" data-mode="peds">
+  <div id="peds-section" style="display:none">
     <div class="dob-row">
       <span class="dob-label">出生日期</span>
       <input type="date" id="dobInput" class="dob-input" onchange="renderTimeline()">
@@ -326,6 +326,9 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <!-- ─── Adult ─── -->
   <div id="adult-section">
+    <div class="adult-search-row" style="margin-bottom:12px">
+      <input type="text" id="adultSearch" class="dob-input" placeholder="🔍 搜尋疫苗名稱..." oninput="renderAdultList(this.value)" style="width:100%;max-width:400px">
+    </div>
     <div class="adult-layout">
       <div class="vaccine-list-panel">
         <div class="vlist-header">自費疫苗清單</div>
@@ -630,22 +633,12 @@ const ADULT_VACCINES = [
 //  MODE SWITCH
 // ══════════════════════════════════════════════════════
 function setMode(mode) {
-  // Update button states
-  const btns = document.querySelectorAll('.mode-btn');
-  btns[0].classList.toggle('active', mode === 'peds');
-  btns[1].classList.toggle('active', mode === 'adult');
-  // Show/hide sections
-  const pedsEl = document.getElementById('peds-section');
-  const adultEl = document.getElementById('adult-section');
-  if (mode === 'peds') {
-    pedsEl.style.display = 'block';
-    adultEl.style.display = 'none';
-    renderTimeline();
-  } else {
-    pedsEl.style.display = 'none';
-    adultEl.style.display = 'block';
-    renderAdultList();
-  }
+  document.getElementById('btn-peds').className = 'mode-btn' + (mode === 'peds' ? ' active' : '');
+  document.getElementById('btn-adult').className = 'mode-btn' + (mode === 'adult' ? ' active' : '');
+  document.getElementById('peds-section').style.cssText = mode === 'peds' ? 'display:block' : 'display:none';
+  document.getElementById('adult-section').style.cssText = mode === 'adult' ? 'display:block' : 'display:none';
+  if (mode === 'adult') renderAdultList();
+  if (mode === 'peds') renderTimeline();
 }
 
 // ══════════════════════════════════════════════════════
@@ -782,14 +775,19 @@ function renderTimelineNoAge(thead, tbody) {
 // ══════════════════════════════════════════════════════
 let selectedAdult = null;
 
-function renderAdultList() {
+function renderAdultList(query) {
   const container = document.getElementById('adultList');
-  container.innerHTML = ADULT_VACCINES.map(v =>
-    `<div class="vlist-item${selectedAdult === v.id ? ' selected' : ''}" onclick="showAdultDetail('${v.id}')">
-      <span class="vl-icon">${v.icon}</span>
-      <span>${v.name}</span>
-    </div>`
-  ).join('');
+  const q = (query || '').toLowerCase().trim();
+  const filtered = q
+    ? ADULT_VACCINES.filter(v => v.name.toLowerCase().includes(q) || v.en.toLowerCase().includes(q))
+    : ADULT_VACCINES;
+  container.innerHTML = filtered.length
+    ? filtered.map(v =>
+        `<div class="vlist-item${selectedAdult === v.id ? ' selected' : ''}" onclick="showAdultDetail('${v.id}')">
+          <span>${v.name}</span>
+        </div>`
+      ).join('')
+    : '<div style="padding:16px;color:var(--text-light);font-size:13px">找不到相關疫苗</div>';
 }
 
 function showAdultDetail(id) {
@@ -804,7 +802,7 @@ function showAdultDetail(id) {
     : `<div style="color:var(--text-light);font-size:13px;margin-top:4px">待補充（請洽診所）</div>`;
 
   document.getElementById('adultDetail').innerHTML = `
-    <div class="detail-title">${v.icon} ${v.name}</div>
+    <div class="detail-title">${v.name}</div>
     <div class="detail-en">${v.en}</div>
 
     <div class="detail-grid">
@@ -847,8 +845,7 @@ function showAdultDetail(id) {
 // ══════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════
-setMode("peds");
-// setMode calls renderTimeline() and handles visibility
+// No auto-init: user must click a button to reveal content
 </script>
 </body>
 </html>
