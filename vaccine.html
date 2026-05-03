@@ -288,7 +288,6 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
 <div class="page-wrap">
   <div class="page-title">疫苗查詢</div>
-  <div class="page-sub">資料來源：衛生福利部疾病管制署（CDC）· 公費時程以 114 年版為準</div>
 
   <div class="mode-tabs">
     <button class="mode-btn active" onclick="setMode('peds')">👶 小兒（0–18歲）</button>
@@ -319,8 +318,8 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     </div>
 
     <div style="margin-top:16px; font-size:12px; color:var(--text-light); line-height:1.8;">
-      ※ A型肝炎公費限特定對象（原住民、高危險群）；其他幼兒為自費<br>
-      ※ 流感疫苗公費時程依每年政策公告，通常 10 月起開打，此處未列入<br>
+      ※ A型肝炎公費自107年起提供106年1月1日以後出生之幼兒常規接種<br>
+      ※ 流感疫苗公費時程依每年政策公告，通常 10 月起開打，此處未列入；初次接種兩劑，第二劑間隔 4 週<br>
       ※ 接種時程以 CDC 公告及醫師評估為準，本工具僅供參考
     </div>
   </div>
@@ -429,7 +428,7 @@ const PED_VACCINES = [
   {
     name: 'A型肝炎\n(特定對象)', en: 'Hepatitis A', type: 'pub',
     doses: [
-      { months: 18, label: '第1', tip: '出生滿18個月（原住民/高危族群公費）' },
+      { months: 18, label: '第1', tip: '出生滿18個月（公費，107年後出生幼兒）' },
       { months: 27, label: '第2', tip: '出生滿27個月' },
     ]
   },
@@ -477,13 +476,7 @@ const PED_VACCINES = [
     name: '水痘\n(第2劑)', en: 'Varicella ×2', type: 'priv',
     doses: [{ months: 54, label: '第2', tip: '滿4–6歲自費接種第2劑' }]
   },
-  {
-    name: 'A型肝炎\n(一般幼兒自費)', en: 'Hepatitis A', type: 'priv',
-    doses: [
-      { months: 12, label: '第1', tip: '出生滿12個月可接種（一般幼兒自費）' },
-      { months: 18, label: '第2', tip: '間隔至少6個月' },
-    ]
-  },
+
   {
     name: 'HPV 9價', en: 'HPV (9-valent)', type: 'priv',
     doses: [
@@ -834,6 +827,7 @@ function showAdultDetail(id) {
 //  INIT
 // ══════════════════════════════════════════════════════
 renderTimeline();
+// Adult list rendered on demand when mode switches
 </script>
 </body>
 </html>
