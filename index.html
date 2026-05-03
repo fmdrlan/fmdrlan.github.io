@@ -343,15 +343,17 @@ async function loadData() {
     const res = await fetch('data/drugs.json');
     allDrugs = await res.json();
 
-    fuse = new Fuse(allDrugs, {
+    // Build fuse index on non-appendix entries only
+    const searchableForFuse = allDrugs.filter(d => !d.is_appendix);
+    fuse = new Fuse(searchableForFuse, {
       keys: [
-        { name: 'title',      weight: 0.45 },
-        { name: 'drug_names', weight: 0.35 },
-        { name: 'content',    weight: 0.2  }
+        { name: 'title',      weight: 0.5  },
+        { name: 'drug_names', weight: 0.4  },
+        { name: 'content',    weight: 0.1  }
       ],
-      threshold: 0.38,
+      threshold: 0.25,
       includeScore: true,
-      minMatchCharLength: 2,
+      minMatchCharLength: 3,
       ignoreLocation: true
     });
 
@@ -394,7 +396,11 @@ function getSearchTerms(q) {
   const lower = q.toLowerCase().trim();
   const terms = new Set([lower]);
   for (const [key, aliases] of Object.entries(ALIAS_MAP)) {
-    if (lower.includes(key) || key.includes(lower)) {
+    // Only expand if: exact match, or query contains key as whole word, or key === query prefix (≥4 chars)
+    const exactMatch = lower === key;
+    const queryContainsKey = lower.includes(key) && key.length >= 4;
+    const keyStartsWithQuery = key.startsWith(lower) && lower.length >= 4;
+    if (exactMatch || queryContainsKey || keyStartsWithQuery) {
       aliases.forEach(a => terms.add(a.toLowerCase()));
     }
   }
@@ -410,15 +416,18 @@ function doSearch(q) {
   const terms = getSearchTerms(currentQuery);
   const exactIds = new Set();
   allDrugs.forEach(d => {
+    if (d.is_appendix) return; // skip appendix entries - title-only, not searchable by content
     const hay = (d.title + ' ' + d.content + ' ' + (d.drug_names||[]).join(' ')).toLowerCase();
     if (terms.some(t => hay.includes(t))) exactIds.add(d.id);
   });
 
+  // Fuzzy search on non-appendix only
+  const searchable = allDrugs.filter(d => !d.is_appendix);
   const fuzzy = fuse.search(currentQuery);
   const seen = new Set();
   const merged = [];
   allDrugs.forEach(d => { if (exactIds.has(d.id)) { merged.push(d); seen.add(d.id); } });
-  fuzzy.forEach(r => { if (!seen.has(r.item.id)) { merged.push(r.item); seen.add(r.item.id); } });
+  fuzzy.forEach(r => { if (!seen.has(r.item.id) && !r.item.is_appendix) { merged.push(r.item); seen.add(r.item.id); } });
 
   document.getElementById('resultCount').innerHTML =
     `搜尋「<strong>${esc(currentQuery)}</strong>」，找到 <strong>${merged.length}</strong> 筆`;
