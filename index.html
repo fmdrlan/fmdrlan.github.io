@@ -176,11 +176,11 @@
   .copy-btn.copied { background: var(--green-bg); color: var(--green); border-color: rgba(74,222,128,0.3); }
 
   /* Content blocks with indentation levels */
-  .content-block { font-size: 14px; line-height: 1.75; color: var(--text); padding-top: 3px; padding-bottom: 3px; }
-  .block-l0 { font-size: 14px; }
-  .block-l1 { font-size: 13px; color: var(--text); }
-  .block-l2 { font-size: 13px; color: var(--text-muted); }
-  .block-l3 { font-size: 12px; color: var(--text-muted); }
+  .content-block { font-size: 14px; line-height: 1.75; color: #e2e8f4; padding-top: 3px; padding-bottom: 3px; }
+  .block-l0 { font-size: 14px; color: #e2e8f4; }
+  .block-l1 { font-size: 14px; color: #e2e8f4; }
+  .block-l2 { font-size: 13px; color: #e2e8f4; }
+  .block-l3 { font-size: 13px; color: #e2e8f4; }
   .content-block mark { background: var(--highlight); border-bottom: 2px solid var(--highlight-border); border-radius: 2px; color: #ffd23c; padding: 0 1px; }
 
   /* NHI table */
@@ -295,18 +295,18 @@ const ALIAS_MAP = {
   'tnf':            ['adalimumab','infliximab','etanercept','certolizumab'],
   '類風濕':          ['methotrexate','adalimumab','infliximab','etanercept','tocilizumab'],
   // 降血脂
-  'statin':          ['降血脂','降膽固醇','rosuvastatin','atorvastatin','simvastatin','pitavastatin','pravastatin','fluvastatin','lovastatin','可定','立普妥','冠脂妥'],
-  '降血脂':          ['statin','降膽固醇','rosuvastatin','atorvastatin','ezetimibe','fibrate','pcsk9','2.6'],
-  '降膽固醇':        ['statin','降血脂','ezetimibe','pcsk9'],
-  'rosuvastatin':    ['statin','降血脂','可定','crestor'],
-  'atorvastatin':    ['statin','降血脂','立普妥','lipitor'],
-  'simvastatin':     ['statin','降血脂'],
-  'ezetimibe':       ['降血脂','ezetrol','vytorin','atozet','statin'],
-  'pcsk9':           ['降血脂','evolocumab','alirocumab','repatha','praluent'],
-  'evolocumab':      ['pcsk9','repatha','降血脂'],
-  'alirocumab':      ['pcsk9','praluent','降血脂'],
-  'fibrate':         ['降血脂','降三酸甘油脂','fenofibrate','gemfibrozil'],
-  '三酸甘油':        ['降血脂','fibrate','fenofibrate'],
+  'statin':          ['降膽固醇','rosuvastatin','atorvastatin','simvastatin','pitavastatin','pravastatin','fluvastatin','lovastatin','可定','立普妥','冠脂妥'],
+  '降血脂':          ['statin','降膽固醇','ezetimibe','fibrate','pcsk9'],
+  '降膽固醇':        ['statin','ezetimibe'],
+  'rosuvastatin':    ['statin','可定','crestor'],
+  'atorvastatin':    ['statin','立普妥','lipitor'],
+  'simvastatin':     ['statin'],
+  'ezetimibe':       ['ezetrol','vytorin','atozet','statin'],
+  'pcsk9':           ['evolocumab','alirocumab','repatha','praluent'],
+  'evolocumab':      ['pcsk9','repatha'],
+  'alirocumab':      ['pcsk9','praluent'],
+  'fibrate':         ['降三酸甘油脂','fenofibrate','gemfibrozil'],
+  '三酸甘油':        ['fibrate','fenofibrate'],
   // 降血壓
   'ace inhibitor':   ['acei','降血壓','enalapril','ramipril','perindopril','lisinopril'],
   'acei':            ['ace inhibitor','降血壓','enalapril','ramipril'],
