@@ -295,7 +295,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   </div>
 
   <!-- ─── Pediatric ─── -->
-  <div id="peds-section" style="display:none">
+  <div id="peds-section" style="display:none" data-mode="peds">
     <div class="dob-row">
       <span class="dob-label">出生日期</span>
       <input type="date" id="dobInput" class="dob-input" onchange="renderTimeline()">
@@ -630,13 +630,22 @@ const ADULT_VACCINES = [
 //  MODE SWITCH
 // ══════════════════════════════════════════════════════
 function setMode(mode) {
-  document.querySelectorAll('.mode-btn').forEach((b, i) => {
-    b.classList.toggle('active', (i === 0) === (mode === 'peds'));
-  });
-  document.getElementById('peds-section').style.display = mode === 'peds' ? '' : 'none';
-  document.getElementById('adult-section').style.display = mode === 'adult' ? '' : 'none';
-  if (mode === 'adult') renderAdultList();
-  if (mode === 'peds') renderTimeline();
+  // Update button states
+  const btns = document.querySelectorAll('.mode-btn');
+  btns[0].classList.toggle('active', mode === 'peds');
+  btns[1].classList.toggle('active', mode === 'adult');
+  // Show/hide sections
+  const pedsEl = document.getElementById('peds-section');
+  const adultEl = document.getElementById('adult-section');
+  if (mode === 'peds') {
+    pedsEl.style.display = 'block';
+    adultEl.style.display = 'none';
+    renderTimeline();
+  } else {
+    pedsEl.style.display = 'none';
+    adultEl.style.display = 'block';
+    renderAdultList();
+  }
 }
 
 // ══════════════════════════════════════════════════════
