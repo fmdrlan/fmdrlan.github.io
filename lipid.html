@@ -903,7 +903,7 @@
     <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank" style="color:var(--accent-blue);text-decoration:none;">全民健康保險藥品給付規定 第 2.6 節</a>
   </div>
   <div class="disclaimer">
-    ⚠️ 本工具僅供醫護人員臨床參考，不取代個別病人評估與醫師判斷。風險公式依文獻簡化實作，實際數值可能與原始計算機略有差異。
+    ⚠️ 本工具僅供醫護人員臨床參考，不取代個別病人評估與醫師判斷。PREVENT 風險公式採用 Khan 2024 Circulation 官方係數實作，與 AHA PREVENT 計算機結果一致。
   </div>
 </footer>
 
@@ -1006,47 +1006,74 @@ function calcScore2(age, sex, sbp, tchol_mmol, hdl_mmol, smoking) {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  AHA PREVENT (2023) 10-yr CVD risk
-//  Khan SS et al., JAMA 2023
-//  Uses sex-specific equations with eGFR and diabetes
+//  AHA PREVENT 10-yr ASCVD risk (base equation)
+//
+//  Source: Khan SS et al., Circulation. 2024;149(6):430–449.
+//          DOI: 10.1161/CIRCULATIONAHA.123.067626
+//  Coefficients: 與 preventr R package (sysdata.rda) 完全一致，
+//                該 package 由 Khan 原論文 PI 認可、MIT license。
+//
+//  驗證 (Khan 2024 supplemental Table S25 sample case):
+//    女性 50 歲, SBP 160, on bp_tx, TC 200, HDL 45, DM, eGFR 90, BMI 35
+//    → 10-yr ASCVD 0.092 (此實作 0.0920) ✓
+//
+//  本工具僅實作 base 模型 (不含 UACR / HbA1c / SDI 延伸)，
+//  此即 AHA 對一般臨床推薦使用的版本。
+//  ASCVD outcome 的 BMI 係數為 0，因此未收集 BMI 不影響結果。
 // ─────────────────────────────────────────────────────────────
+
+// Base 10-yr ASCVD coefficients (from preventr::sysdata.rda)
+const PREVENT_ASCVD_10YR = {
+  female: {age10:0.719883, nonHdl:0.1176967, hdl:-0.151185, sbpLt:-0.0835358, sbpGe:0.3592852, dm:0.8348585, smk:0.4831078, bmiLt:0.0, bmiGe:0.0, egfrLt:0.4864619, egfrGe:0.0397779, bpTx:0.2265309, statin:-0.0592374, txSbp:-0.0395762, txNonHdl:0.0844423, ageNonHdl:-0.0567839, ageHdl:0.0325692, ageSbpGe:-0.1035985, ageDm:-0.2417542, ageSmk:-0.0791142, ageBmiGe:0.0, ageEgfrLt:-0.1671492, k0:-3.819975},
+  male:   {age10:0.7099847, nonHdl:0.1658663, hdl:-0.1144285, sbpLt:-0.2837212, sbpGe:0.3239977, dm:0.7189597, smk:0.3956973, bmiLt:0.0, bmiGe:0.0, egfrLt:0.3690075, egfrGe:0.0203619, bpTx:0.2036522, statin:-0.0865581, txSbp:-0.0322916, txNonHdl:0.114563, ageNonHdl:-0.0300005, ageHdl:0.0232747, ageSbpGe:-0.0927024, ageDm:-0.2018525, ageSmk:-0.0970527, ageBmiGe:0.0, ageEgfrLt:-0.1217081, k0:-3.500655},
+};
+
 function calcPrevent(age, sex, sbp, tc_mgdl, hdl_mgdl, dm, smoking, bpMed, dmMed, egfr) {
-  const isMale = sex === 'M';
-  const tc_mmol = tc_mgdl / 38.67;
-  const hdl_mmol = hdl_mgdl / 38.67;
-  const nonHDL_mmol = tc_mmol - hdl_mmol;
+  // 對應舊 signature；statin 沒收，預設 false。BMI 沒收，預設 25 (centering)。
+  // ASCVD 模型對 BMI 係數為 0，預設值不影響結果。
+  const sexKey = sex === 'M' ? 'male' : 'female';
+  const statinFlag = 0;
+  const bmi  = 25;
+  const eGFR = egfr || 90;  // 90 = centering; 缺值時不貢獻 logit
 
-  // Log-transformed and scaled inputs
-  const lAge = Math.log(age);
-  const lSBP = Math.log(sbp);
-  const lNonHDL = Math.log(nonHDL_mmol);
-  const lHDL = Math.log(hdl_mmol);
-  const lEGFR = egfr ? Math.log(egfr) : Math.log(75); // default if missing
+  const MGDL_PER_MMOL = 38.67;
+  const nonHdlMmol = (tc_mgdl - hdl_mgdl) / MGDL_PER_MMOL;
+  const hdlMmol    = hdl_mgdl / MGDL_PER_MMOL;
 
-  let lp;
-  if (isMale) {
-    // Male PREVENT coefficients
-    lp =  3.0970 * lAge
-        - 0.7152 * lHDL
-        + 0.9440 * lNonHDL
-        + 0.7640 * lSBP
-        - 0.3580 * (bpMed ? 1 : 0)
-        + 0.5880 * (smoking ? 1 : 0)
-        + 0.4240 * (dm ? 1 : 0)
-        - 0.5060 * lEGFR
-        - 12.823; // male intercept
-  } else {
-    // Female PREVENT coefficients
-    lp =  2.4690 * lAge
-        - 0.6810 * lHDL
-        + 0.7400 * lNonHDL
-        + 1.0900 * lSBP
-        - 0.3640 * (bpMed ? 1 : 0)
-        + 0.7890 * (smoking ? 1 : 0)
-        + 0.5590 * (dm ? 1 : 0)
-        - 0.5490 * lEGFR
-        - 10.796; // female intercept
-  }
+  const age10  = (age - 55) / 10;
+  const dmF    = dm ? 1 : 0;
+  const smkF   = smoking ? 1 : 0;
+  const bpTxF  = bpMed ? 1 : 0;
+
+  const nonHdl = nonHdlMmol - 3.5;
+  const hdl    = (hdlMmol - 1.3) / 0.3;
+
+  // Piece-wise splines
+  const sbpLt = (Math.min(sbp, 110) - 110) / 20;
+  const sbpGe = (Math.max(sbp, 110) - 130) / 20;
+  const bmiLt = (Math.min(bmi, 30) - 25) / 5;
+  const bmiGe = (Math.max(bmi, 30) - 30) / 5;
+  const egfrLt = (Math.min(eGFR, 60) - 60) / -15;
+  const egfrGe = (Math.max(eGFR, 60) - 90) / -15;
+
+  const t = {
+    age10, nonHdl, hdl, sbpLt, sbpGe,
+    dm: dmF, smk: smkF, bmiLt, bmiGe, egfrLt, egfrGe,
+    bpTx: bpTxF, statin: statinFlag,
+    txSbp:    bpTxF * sbpGe,
+    txNonHdl: statinFlag * nonHdl,
+    ageNonHdl: age10 * nonHdl,
+    ageHdl:    age10 * hdl,
+    ageSbpGe:  age10 * sbpGe,
+    ageDm:     age10 * dmF,
+    ageSmk:    age10 * smkF,
+    ageBmiGe:  age10 * bmiGe,
+    ageEgfrLt: age10 * egfrLt,
+  };
+
+  const b = PREVENT_ASCVD_10YR[sexKey];
+  let lp = b.k0;
+  for (const k in t) lp += (b[k] || 0) * t[k];
 
   const risk = 100 / (1 + Math.exp(-lp));
   return Math.max(0, Math.min(99, risk));

@@ -326,15 +326,12 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <!-- ─── Adult ─── -->
   <div id="adult-section">
+    <div class="adult-search-row" style="margin-bottom:12px">
+      <input type="text" id="adultSearch" class="dob-input" placeholder="🔍 搜尋疫苗名稱..." oninput="renderAdultList(this.value)" style="width:100%;max-width:400px">
+    </div>
     <div class="adult-layout">
       <div class="vaccine-list-panel">
-        <div class="vlist-header" style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-        <span>自費疫苗清單</span>
-        <input type="text" id="adultSearch" placeholder="搜尋..." oninput="renderAdultList(this.value)"
-          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);
-                 font-size:12px;padding:4px 8px;width:90px;outline:none;font-family:inherit;"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
-      </div>
+        <div class="vlist-header">自費疫苗清單</div>
         <div id="adultList"></div>
       </div>
       <div class="vaccine-detail-panel" id="adultDetail">
