@@ -352,6 +352,60 @@
   .risk-high   { background: rgba(240,136,62,0.12); color: var(--risk-high); border-color: var(--risk-border-high); }
   .risk-veryhigh { background: rgba(248,81,73,0.12); color: var(--risk-veryhigh); border-color: var(--risk-border-veryhigh); }
   .risk-extreme  { background: rgba(188,140,255,0.12); color: var(--risk-extreme); border-color: var(--risk-border-extreme); }
+  .risk-incomplete {
+    background: rgba(143,163,192,0.10);
+    color: var(--text-muted, #8fa3c0);
+    border-color: var(--border-strong, #3d4f6e);
+  }
+
+  /* main risk drivers - chips below the risk score */
+  .drivers-block {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-subtle);
+  }
+  .drivers-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .drivers-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .driver-chip {
+    display: inline-block;
+    padding: 3px 9px;
+    background: rgba(255,210,60,0.10);
+    color: var(--risk-moderate, #d29922);
+    border: 1px solid rgba(255,210,60,0.25);
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  /* "data insufficient" notice */
+  .insufficient-notice {
+    padding: 14px 12px;
+    background: var(--bg-base);
+    border: 1px dashed var(--border-strong, #3d4f6e);
+    border-radius: var(--radius);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .insufficient-notice .ins-title {
+    font-size: 14px;
+    color: var(--text-primary, var(--text));
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
 
   .result-metric {
     display: flex;
@@ -903,7 +957,7 @@
     <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank" style="color:var(--accent-blue);text-decoration:none;">全民健康保險藥品給付規定 第 2.6 節</a>
   </div>
   <div class="disclaimer">
-    ⚠️ 本工具僅供醫護人員臨床參考，不取代個別病人評估與醫師判斷。PREVENT 風險公式採用 Khan 2024 Circulation 官方係數實作，與 AHA PREVENT 計算機結果一致。
+    ⚠️ 本工具僅供醫護人員臨床參考，不取代個別病人評估與醫師判斷。
   </div>
 </footer>
 
@@ -962,47 +1016,79 @@ function resetForm() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  SCORE2 (ESC 2021, European High-Risk Region)
-//  Simplified from ESC SCORE2 algorithm paper (Eur Heart J 2021)
-//  Returns 10-yr CVD risk %
+//  SCORE2 (ESC 2021) — 10-yr fatal + non-fatal CVD risk
+//
+//  Source: SCORE2 working group, Eur Heart J 2021;42(25):2439-2454
+//          DOI: 10.1093/eurheartj/ehab309
+//  Formula: SCORE2 supplementary material p.9，與 R package
+//          'RiskScorescvd' (CRAN) 的 11_SCORE2_func.R 完全一致
+//
+//  原本只實作「未校正」的 SHR 線性預測,缺 region calibration,
+//  數值會偏低很多倍。本版加上四 region (Low/Moderate/High/Very high)
+//  × 性別的 scale1/scale2 校正,並修正 age 縮放 (/5 不是 /10)、
+//  HDL 縮放 (/0.5 不是 /1)、納入 diabetes 主項與全部 age 互動項。
+//
+//  驗證 (paper Methods 描述的範例):
+//    50 歲男性 smoker, SBP 140, TC 5.5, HDL 1.3 mmol/L
+//    → low-risk region 5.9%, very high-risk region 14.0%
+//    女性同條件 → low 4.2%, very high 13.7%
+//
+//  本工具預設使用 high risk region (台灣人群心血管死亡率較接近 high)。
+//  如果未來想開放 region 切換，只需把 region 從 'high' 改成參數即可。
 // ─────────────────────────────────────────────────────────────
-function calcScore2(age, sex, sbp, tchol_mmol, hdl_mmol, smoking) {
-  // Coefficients for high-risk European region (Eastern Europe)
-  // Source: ESC SCORE2 tables (high-risk region)
-  const isMale = sex === 'M';
+const SCORE2_SCALES = {
+  // [scale1, scale2] for ages 40-69 by region+sex
+  Low:      { male: [-0.5699, 0.7476], female: [-0.7380, 0.7019] },
+  Moderate: { male: [-0.1565, 0.8009], female: [-0.3143, 0.7701] },
+  High:     { male: [ 0.3207, 0.9360], female: [ 0.5710, 0.9369] },
+  VeryHigh: { male: [ 0.5836, 0.8294], female: [ 0.9412, 0.8329] },
+};
 
-  // Step 1: linear predictor
-  // Centered values (from paper appendix)
-  const ageCentered = age - 60;
-  const sbpCentered = sbp - 120;
-  const tcCentered = tchol_mmol - 6.0;
-  const hdlCentered = hdl_mmol - 1.3;
+function calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking, region = 'High') {
+  const isMale = sex === 'M';
+  const ageC = (age - 60) / 5;
+  const sbpC = (sbp - 120) / 20;
+  const tcC  = tc_mmol - 6;
+  const hdlC = (hdl_mmol - 1.3) / 0.5;
+  const smk  = smoking ? 1 : 0;
+  const dm   = 0;  // SCORE2 不適用於糖尿病患者，此項保留 0
 
   let lp;
   if (isMale) {
-    lp = 0.3742 * ageCentered
-       + 0.6012 * (smoking ? 1 : 0)
-       + 0.2777 * sbpCentered / 20
-       + 0.1458 * tcCentered
-       - 0.2698 * hdlCentered
-       + 0.0755 * ageCentered * (smoking ? 1 : 0)
-       - 0.0255 * ageCentered * sbpCentered / 20;
+    lp = 0.3742 * ageC
+       + 0.6012 * smk
+       + 0.2777 * sbpC
+       + 0.6457 * dm
+       + 0.1458 * tcC
+       - 0.2698 * hdlC
+       - 0.0755 * ageC * smk
+       - 0.0255 * ageC * sbpC
+       - 0.0281 * ageC * tcC
+       + 0.0426 * ageC * hdlC
+       - 0.0983 * ageC * dm;
   } else {
-    lp = 0.4648 * ageCentered
-       + 0.7744 * (smoking ? 1 : 0)
-       + 0.3131 * sbpCentered / 20
-       + 0.1002 * tcCentered
-       - 0.2606 * hdlCentered
-       + 0.0713 * ageCentered * (smoking ? 1 : 0)
-       - 0.0277 * ageCentered * sbpCentered / 20;
+    lp = 0.4648 * ageC
+       + 0.7744 * smk
+       + 0.3131 * sbpC
+       + 0.8096 * dm
+       + 0.1002 * tcC
+       - 0.2606 * hdlC
+       - 0.1088 * ageC * smk
+       - 0.0277 * ageC * sbpC
+       - 0.0226 * ageC * tcC
+       + 0.0613 * ageC * hdlC
+       - 0.1272 * ageC * dm;
   }
 
-  // Step 2: baseline survival (high-risk region, 10-yr)
-  const S0 = isMale ? 0.8799 : 0.9260;
-  const meanLP = isMale ? 0.0 : 0.0;
+  // Step 2: untransformed (uncalibrated) 10-yr risk using sex-specific S0
+  const S0 = isMale ? 0.9605 : 0.9776;
+  const uncal = 1 - Math.pow(S0, Math.exp(lp));
 
-  const risk = 1 - Math.pow(S0, Math.exp(lp));
-  return Math.max(0, Math.min(1, risk)) * 100;
+  // Step 3: region-specific calibration
+  const [s1, s2] = SCORE2_SCALES[region][isMale ? 'male' : 'female'];
+  const calibrated = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));
+
+  return Math.max(0, Math.min(1, calibrated)) * 100;
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -1422,19 +1508,18 @@ function calcESC(p) {
 
   // 資料不足
   else {
-    level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-    reasons.push('資料不足以計算 SCORE2（需年齡、SBP、TC、HDL-C），預設 Moderate risk');
+    level = null;
+    reasons.push('需年齡、SBP、TC、HDL-C 才能計算 SCORE2');
   }
 
-  // SCORE2 驅動因子說明
+  // SCORE2 主要貢獻因子（獨立 chips 區塊，不再塞在 reasons 裡）
+  let drivers = [];
   if (score2 !== null) {
-    const drivers = [];
     if (smoking) drivers.push('抽菸');
     if (sbp && sbp >= 140) drivers.push(`SBP ${sbp} mmHg`);
-    if (tc_mmol && tc_mmol >= 6) drivers.push(`TC ${tc} mg/dL（≥6 mmol/L）`);
-    if (hdl_mmol && hdl_mmol < 1.0) drivers.push(`HDL-C 偏低 ${hdl} mg/dL（<1.0 mmol/L）`);
+    if (tc_mmol && tc_mmol >= 6) drivers.push(`TC ${tc} mg/dL`);
+    if (hdl_mmol && hdl_mmol < 1.0) drivers.push(`HDL ${hdl} mg/dL 偏低`);
     if (age >= 60) drivers.push(`年齡 ${age} 歲`);
-    if (drivers.length) reasons.push('SCORE2 主要貢獻因子：' + drivers.join('、'));
   }
 
   const labels = {
@@ -1445,15 +1530,33 @@ function calcESC(p) {
     extreme:  'Extreme risk（極高）'
   };
   const ldlOK = ldl
-    ? (ldl < ldlTarget ? '✓ 已達標' : `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）`)
+    ? (ldlTarget && ldl < ldlTarget ? '✓ 已達標' : (ldlTarget ? `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）` : '—'))
     : '—';
 
-  let html = riskBadge(level, labels[level]);
+  // ── 渲染 ──
+  let html = '';
+  if (level === null) {
+    // 資料不足，不顯示 risk badge / 不亂設目標
+    html += `<div class="insufficient-notice">
+      <div class="ins-title">資料不足</div>
+      需年齡、SBP、總膽固醇、HDL-C 才能依 ESC 2024 指引分類風險
+    </div>`;
+    html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+    return html;
+  }
+
+  html += riskBadge(level, labels[level]);
   if (score2 !== null) {
     html += `<div class="score-display">
       <div class="score-big score">${score2.toFixed(1)}<small style="font-size:14px">%</small></div>
-      <div class="score-label">SCORE2 10年 CVD 風險</div>
-    </div>`;
+      <div class="score-label">SCORE2 10年 CVD 風險</div>`;
+    if (drivers.length) {
+      html += `<div class="drivers-block">
+        <div class="drivers-label">主要貢獻因子</div>
+        <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
+      </div>`;
+    }
+    html += `</div>`;
   }
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
   html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
@@ -1593,8 +1696,6 @@ function calcAHA(p) {
       if (ldl && ldl >= 160) {
         ldlTarget = 100; nonhdlTarget = 130;
         reasons.push(`LDL-C ${ldl} mg/dL 160–189，10年風險低但 LDL 偏高`);
-      } else {
-        reasons.push('LDL-C <160 → 生活型態介入為主，無需藥物');
       }
     } else if (prevent < 5) {
       level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
@@ -1610,18 +1711,20 @@ function calcAHA(p) {
 
     }
 
-    // PREVENT 驅動因子
-    const drivers = [];
+  } else {
+    level = null;
+    reasons.push('需年齡、SBP、TC、HDL-C 才能計算 PREVENT');
+  }
+
+  // PREVENT 主要貢獻因子（獨立 chips 區塊）
+  let drivers = [];
+  if (prevent !== null) {
     if (smoking) drivers.push('抽菸');
     if (dm) drivers.push('糖尿病');
     if (sbp && sbp >= 130) drivers.push(`SBP ${sbp} mmHg`);
-    if (egfr && egfr < 60) drivers.push(`eGFR ${egfr}（CKD，納入 PREVENT 計算）`);
-    if (hdl && hdl < 40) drivers.push(`HDL-C 偏低 ${hdl} mg/dL`);
-    if (drivers.length) reasons.push('PREVENT 主要貢獻因子：' + drivers.join('、'));
-
-  } else {
-    level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-    reasons.push('資料不足以計算 PREVENT（需年齡、SBP、TC、HDL-C），預設 Intermediate risk');
+    if (egfr && egfr < 60) drivers.push(`eGFR ${egfr}（CKD）`);
+    if (hdl && hdl < 40) drivers.push(`HDL ${hdl} mg/dL 偏低`);
+    if (age >= 60) drivers.push(`年齡 ${age} 歲`);
   }
 
   const labels = {
@@ -1632,15 +1735,32 @@ function calcAHA(p) {
     extreme:  'Extreme risk（極高）'
   };
   const ldlOK = ldl
-    ? (ldl < ldlTarget ? '✓ 已達標' : `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）`)
+    ? (ldlTarget && ldl < ldlTarget ? '✓ 已達標' : (ldlTarget ? `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）` : '—'))
     : '—';
 
-  let html = riskBadge(level, labels[level]);
+  // ── 渲染 ──
+  let html = '';
+  if (level === null) {
+    html += `<div class="insufficient-notice">
+      <div class="ins-title">資料不足</div>
+      需年齡、SBP、總膽固醇、HDL-C 才能依 AHA 2026 指引分類風險
+    </div>`;
+    html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+    return html;
+  }
+
+  html += riskBadge(level, labels[level]);
   if (prevent !== null) {
     html += `<div class="score-display">
       <div class="score-big score">${prevent.toFixed(1)}<small style="font-size:14px">%</small></div>
-      <div class="score-label">PREVENT-ASCVD 10年風險</div>
-    </div>`;
+      <div class="score-label">PREVENT-ASCVD 10年風險</div>`;
+    if (drivers.length) {
+      html += `<div class="drivers-block">
+        <div class="drivers-label">主要貢獻因子</div>
+        <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
+      </div>`;
+    }
+    html += `</div>`;
   }
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
   html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
