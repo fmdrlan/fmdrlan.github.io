@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>藥物類別比較 · DR. YANG's Toolbox</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="同類藥物比較工具：仿單適應症、里程碑試驗、指引建議分層呈現，每筆資料標註來源。先支援 SGLT2 抑制劑。">
+<meta name="keywords" content="SGLT2,empagliflozin,dapagliflozin,canagliflozin,藥物比較,EMPA-REG,DAPA-HF,EMPA-KIDNEY,DAPA-CKD,KDIGO,ADA">
+<meta name="author" content="DR. YANG">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://garrulous-cat.github.io/mindy/compare.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="藥物類別比較 · DR. YANG's Toolbox">
+<meta property="og:description" content="同類藥物比較工具，每筆資料標註來源。">
+<meta property="og:url" content="https://garrulous-cat.github.io/mindy/compare.html">
+<meta property="og:locale" content="zh_TW">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230d1117'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='monospace' font-size='13' font-weight='700' fill='%234a9eff'%3EY%3C/text%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="assets/shared.css">
+<script src="assets/icons.js"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b27;
+    --surface: #1c2333;
+    --surface2: #222c3d;
+    --border: #2d3a52;
+    --border-strong: #3d4f6e;
+    --text: #e2e8f4;
+    --text-muted: #8fa3c0;
+    --text-light: #566880;
+    --text-dim: #4a5568;
+    --accent: #4a9eff;
+    --accent-dim: #1e3a5f;
+    --accent-glow: rgba(74,158,255,0.15);
+    --green: #3fb950;
+    --green-bg: rgba(63,185,80,0.1);
+    --yellow: #d29922;
+    --yellow-bg: rgba(210,153,34,0.1);
+    --red: #f85149;
+    --red-bg: rgba(248,81,73,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 24px 0;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  /* Class selector (預留多類別) */
+  .class-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .class-btn {
+    padding: 7px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .class-btn.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: rgba(74,158,255,0.4);
+  }
+  .class-btn:hover:not(.disabled) { border-color: var(--border-strong); }
+  .class-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* ── Disclaimer banner ── */
+  .disclaimer {
+    background: rgba(210,153,34,0.06);
+    border: 1px solid rgba(210,153,34,0.25);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #d8c08a;
+    line-height: 1.7;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .disclaimer .dc-icon {
+    color: var(--yellow);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .disclaimer .dc-icon svg { width: 18px; height: 18px; stroke-width: 1.8; }
+  .disclaimer strong { color: #e8d8a8; }
+
+  /* ── Toggle bar ── */
+  .toggle-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .toggle-label {
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .toggle-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggle-switch input { display: none; }
+  .toggle-track {
+    width: 32px;
+    height: 18px;
+    background: var(--border);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.15s;
+  }
+  .toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    transition: all 0.15s;
+  }
+  .toggle-switch input:checked + .toggle-track {
+    background: var(--accent-dim);
+  }
+  .toggle-switch input:checked + .toggle-track::after {
+    left: 16px;
+    background: var(--accent);
+  }
+  .toggle-text { color: var(--text); }
+
+  /* ── Layer headers (三層) ── */
+  .layer-section { margin-bottom: 36px; }
+  .layer-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .layer-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .layer-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .layer-desc {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-left: auto;
+  }
+
+  /* ── 比較表格容器 ── */
+  .compare-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+  .compare-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 900px;
+  }
+  .compare-table th, .compare-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table th:last-child, .compare-table td:last-child { border-right: none; }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+
+  /* 第一欄：欄位名稱 */
+  .compare-table th.row-label {
+    background: var(--bg2);
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 12px;
+    width: 150px;
+    min-width: 150px;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+  .compare-table th.row-label-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 400;
+    margin-top: 3px;
+    display: block;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* 第一列：藥名 */
+  .drug-col-header {
+    background: var(--bg2);
+    color: var(--text);
+    text-align: left;
+    padding: 16px 14px !important;
+    min-width: 220px;
+  }
+  .drug-col-header.dimmed {
+    opacity: 0.5;
+  }
+  .drug-name-line1 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .drug-name-line2 {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .drug-name-line3 {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* Formulary tag */
+  .form-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .form-tag.in {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid rgba(63,185,80,0.3);
+  }
+  .form-tag.out {
+    background: var(--red-bg);
+    color: var(--red);
+    border: 1px solid rgba(248,81,73,0.3);
+  }
+
+  /* 淡色：成大沒有的藥物欄位 */
+  .compare-table td.dimmed {
+    opacity: 0.45;
+    background: rgba(255,255,255,0.01);
+  }
+  .compare-table td.dimmed:hover { opacity: 0.85; }
+
+  /* 內容樣式 */
+  .cell-list { list-style: none; padding: 0; }
+  .cell-list li {
+    padding: 2px 0 2px 14px;
+    position: relative;
+  }
+  .cell-list li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Source 標籤（每個 cell 右下角） */
+  .src {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--border);
+    font-size: 11px;
+    color: var(--text-light);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.5;
+  }
+  .src .src-label {
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    margin-right: 4px;
+  }
+
+  /* Trial card */
+  .trial-card {
+    background: var(--bg2);
+    border-left: 2px solid var(--accent);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+  }
+  .trial-card:last-child { margin-bottom: 0; }
+  .trial-name {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 13px;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .trial-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+  .trial-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+  .trial-meta .trial-meta-label {
+    color: var(--text-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .trial-result {
+    font-size: 12.5px;
+    color: var(--text);
+    margin-top: 4px;
+    padding: 4px 8px;
+    background: rgba(74,158,255,0.06);
+    border-radius: 3px;
+  }
+  .trial-note {
+    font-size: 11.5px;
+    color: var(--yellow);
+    margin-top: 4px;
+    padding-left: 8px;
+    border-left: 2px solid rgba(210,153,34,0.4);
+    font-style: italic;
+  }
+  .trial-ref {
+    font-size: 11px;
+    color: var(--text-light);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 4px;
+  }
+  .trial-ref a { color: var(--accent); text-decoration: none; }
+  .trial-ref a:hover { text-decoration: underline; }
+
+  /* Guideline card */
+  .gl-card {
+    background: var(--bg2);
+    border-left: 2px solid var(--green);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+  }
+  .gl-card:last-child { margin-bottom: 0; }
+  .gl-name {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 12.5px;
+    margin-bottom: 3px;
+  }
+  .gl-stmt {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+  .gl-section {
+    font-size: 11px;
+    color: var(--text-light);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 4px;
+  }
+
+  /* NHI cross-ref link */
+  .nhi-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 12px;
+    margin-top: 4px;
+    padding: 3px 8px;
+    background: var(--accent-dim);
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .nhi-link:hover { background: rgba(74,158,255,0.18); }
+  .nhi-link svg { width: 11px; height: 11px; stroke-width: 1.8; }
+
+  .empty-cell {
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  /* Hide column when toggle off */
+  .col-hidden { display: none !important; }
+
+  @media (max-width: 700px) {
+    .compare-table th.row-label { width: 120px; min-width: 120px; }
+    .drug-col-header { min-width: 180px; }
+    .layer-desc { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
+  <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
+  <a class="tab-link active" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-title">藥物類別比較</h1>
+  <p class="page-sub">同類藥之仿單適應症、里程碑試驗、指引建議分層呈現。每筆資料標註來源，便於核對。</p>
+
+  <div class="class-selector">
+    <button class="class-btn active" data-class="sglt2">SGLT2</button>
+    <button class="class-btn disabled" disabled title="待加入">GLP-1 RA</button>
+    <button class="class-btn disabled" disabled title="待加入">Statin</button>
+    <button class="class-btn disabled" disabled title="待加入">DOAC</button>
+  </div>
+</div>
+
+<div class="compare-wrap">
+
+  <div class="disclaimer">
+    <span class="dc-icon" id="discIcon"></span>
+    <div>
+      <strong>使用提醒：</strong>本表整理自 TFDA 仿單、原始試驗論文（NEJM/Lancet 等）、ADA / KDIGO / ESC 指引。
+      <strong>同類藥之間如無註明 head-to-head 試驗，不應推論優劣。</strong>不同試驗之人群、follow-up、終點定義均不同，
+      跨試驗之 HR 數值不可直接比較。臨床決策請以最新仿單與指引為準。
+    </div>
+  </div>
+
+  <div class="toggle-bar">
+    <span class="toggle-label">顯示設定</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="showOutOfFormulary" checked>
+      <span class="toggle-track"></span>
+      <span class="toggle-text">顯示成大醫院非常備藥物（淡色標示）</span>
+    </label>
+  </div>
+
+  <div id="compareContent"></div>
+
+  <div style="margin-top:32px; font-size:12px; color:var(--text-light); text-align:center; line-height:1.8;">
+    資料整理：DR. YANG · 最後更新：<span id="lastUpdated">—</span><br>
+    本工具僅供醫護人員臨床參考，不取代個別病人評估與最新指引。
+  </div>
+</div>
+
+<script>
+let DATA = null;
+let showOOF = true; // show out-of-formulary
+
+async function loadData() {
+  const res = await fetch('data/sglt2.json');
+  DATA = await res.json();
+  document.getElementById('lastUpdated').textContent = DATA._meta.last_updated;
+  render();
+}
+
+function esc(s) {
+  return (s||'').toString()
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// 統一渲染 source tag
+function srcTag(src, lastVerified) {
+  if (!src) return '';
+  let txt = esc(src);
+  if (lastVerified) txt += ` · 驗證 ${esc(lastVerified)}`;
+  return `<div class="src"><span class="src-label">SRC</span>${txt}</div>`;
+}
+
+// 渲染欄位 cell（可能含淡色狀態）
+function rowCell(content, drug) {
+  const dim = drug.in_formulary ? '' : 'dimmed';
+  return `<td class="${dim}">${content}</td>`;
+}
+
+function render() {
+  const drugs = DATA.drugs.filter(d => showOOF || d.in_formulary);
+  const c = document.getElementById('compareContent');
+
+  // ── Header column for drugs ──
+  const headers = drugs.map(d => {
+    const dim = d.in_formulary ? '' : 'dimmed';
+    const tag = d.in_formulary
+      ? '<span class="form-tag in">處方集 ✓</span>'
+      : '<span class="form-tag out">非常備</span>';
+    const note = !d.in_formulary && d.in_formulary_note
+      ? `<div class="drug-name-line3">${esc(d.in_formulary_note)}</div>`
+      : '';
+    return `<th class="drug-col-header ${dim}">
+      <div class="drug-name-line1">${esc(d.generic)}</div>
+      <div class="drug-name-line2">${esc(d.brand_tw)} · ${esc(d.brand_zh)}</div>
+      ${tag}
+      ${note}
+    </th>`;
+  }).join('');
+
+  // ── Layer 1：基本與仿單 ──
+  const layer1Rows = [
+    {
+      label: '常用劑量',
+      sub: 'Doses available',
+      get: d => `${esc(d.basic.doses_available.value)}${srcTag(d.basic.doses_available.source)}`
+    },
+    {
+      label: '腎功能調整',
+      sub: 'Renal adjustment',
+      get: d => `${esc(d.basic.renal_adjustment.value)}${srcTag(d.basic.renal_adjustment.source)}`
+    },
+    {
+      label: '肝功能調整',
+      sub: 'Hepatic adjustment',
+      get: d => `${esc(d.basic.hepatic_adjustment.value)}${srcTag(d.basic.hepatic_adjustment.source)}`
+    },
+    {
+      label: 'TFDA 仿單適應症',
+      sub: 'Indications (TFDA label)',
+      get: d => {
+        const items = d.indications_tfda.value.map(v => `<li>${esc(v)}</li>`).join('');
+        const note = d.indications_tfda.note ? `<div style="margin-top:6px;font-size:12px;color:var(--yellow)">⚠ ${esc(d.indications_tfda.note)}</div>` : '';
+        return `<ul class="cell-list">${items}</ul>${note}${srcTag(d.indications_tfda.source, d.indications_tfda.last_verified)}`;
+      }
+    },
+    {
+      label: '健保給付',
+      sub: 'NHI coverage',
+      get: d => {
+        const ref = d.nhi_coverage.cross_ref_section
+          ? `<a class="nhi-link" href="index.html" onclick="sessionStorage.setItem('initial_query','${esc(d.nhi_coverage.cross_ref_section)}')">${ICON.search}查 ${esc(d.nhi_coverage.cross_ref_section)}</a>`
+          : '';
+        return `${esc(d.nhi_coverage.value)}<br>${ref}${srcTag(d.nhi_coverage.source)}`;
+      }
+    },
+    {
+      label: '常見不良反應',
+      sub: 'Common AE',
+      get: d => `<ul class="cell-list">${d.common_ae.map(a => `<li>${esc(a)}</li>`).join('')}</ul>`
+    }
+  ];
+
+  // ── Layer 2：里程碑試驗 ──
+  const layer2Cell = d => {
+    if (!d.key_trials || d.key_trials.length === 0) {
+      return '<span class="empty-cell">無收錄主要試驗</span>';
+    }
+    return d.key_trials.map(t => `
+      <div class="trial-card">
+        <div class="trial-name">
+          ${esc(t.name)}
+          <span class="trial-year">${t.year}</span>
+        </div>
+        <div class="trial-meta"><span class="trial-meta-label">人群</span>${esc(t.population)}</div>
+        <div class="trial-meta"><span class="trial-meta-label">介入</span>${esc(t.intervention)}</div>
+        <div class="trial-result"><span class="trial-meta-label" style="color:var(--accent)">結果</span>${esc(t.primary_outcome)}</div>
+        ${t.secondary ? `<div class="trial-meta" style="margin-top:4px"><span class="trial-meta-label">次要</span>${esc(t.secondary)}</div>` : ''}
+        ${t.note ? `<div class="trial-note">${esc(t.note)}</div>` : ''}
+        <div class="trial-ref">
+          ${esc(t.ref)}
+          ${t.pmid ? ` · <a href="https://pubmed.ncbi.nlm.nih.gov/${esc(t.pmid)}/" target="_blank" rel="noopener">PMID ${esc(t.pmid)}</a>` : ''}
+        </div>
+      </div>
+    `).join('');
+  };
+
+  // ── Layer 3：指引建議 ──
+  const layer3Cell = d => {
+    if (!d.guideline_position || d.guideline_position.length === 0) {
+      return '<span class="empty-cell">無收錄指引立場</span>';
+    }
+    return d.guideline_position.map(g => `
+      <div class="gl-card">
+        <div class="gl-name">${esc(g.guideline)}</div>
+        <div class="gl-stmt">${esc(g.statement)}</div>
+        ${g.section ? `<div class="gl-section">${esc(g.section)}</div>` : ''}
+      </div>
+    `).join('');
+  };
+
+  // ── 組裝 HTML ──
+  const layer1Html = `
+    <div class="layer-section">
+      <div class="layer-header">
+        <span class="layer-num">L1</span>
+        <span class="layer-title">仿單事實層</span>
+        <span class="layer-desc">高可信 · 來源為 TFDA 仿單與健保署</span>
+      </div>
+      <div class="compare-scroll">
+        <table class="compare-table">
+          <thead><tr><th class="row-label"></th>${headers}</tr></thead>
+          <tbody>
+            ${layer1Rows.map(row => `
+              <tr>
+                <th class="row-label">${esc(row.label)}<span class="row-label-sub">${esc(row.sub)}</span></th>
+                ${drugs.map(d => rowCell(row.get(d), d)).join('')}
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+
+  const layer2Html = `
+    <div class="layer-section">
+      <div class="layer-header">
+        <span class="layer-num">L2</span>
+        <span class="layer-title">里程碑試驗層</span>
+        <span class="layer-desc">中高可信 · 各藥之主要 RCT，跨藥不直接比較</span>
+      </div>
+      <div class="compare-scroll">
+        <table class="compare-table">
+          <thead><tr><th class="row-label"></th>${headers}</tr></thead>
+          <tbody>
+            <tr>
+              <th class="row-label">關鍵試驗<span class="row-label-sub">Key trials</span></th>
+              ${drugs.map(d => rowCell(layer2Cell(d), d)).join('')}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+
+  const layer3Html = `
+    <div class="layer-section">
+      <div class="layer-header">
+        <span class="layer-num">L3</span>
+        <span class="layer-title">指引建議層</span>
+        <span class="layer-desc">引用主要國際與台灣指引立場（不改寫）</span>
+      </div>
+      <div class="compare-scroll">
+        <table class="compare-table">
+          <thead><tr><th class="row-label"></th>${headers}</tr></thead>
+          <tbody>
+            <tr>
+              <th class="row-label">指引立場<span class="row-label-sub">Guideline position</span></th>
+              ${drugs.map(d => rowCell(layer3Cell(d), d)).join('')}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+
+  c.innerHTML = layer1Html + layer2Html + layer3Html;
+}
+
+// Toggle 開關
+document.getElementById('showOutOfFormulary').addEventListener('change', e => {
+  showOOF = e.target.checked;
+  render();
+});
+
+// Inject icons
+document.querySelectorAll('.ti[data-icon]').forEach(el => {
+  const k = el.dataset.icon;
+  if (window.ICON && window.ICON[k]) el.innerHTML = window.ICON[k];
+});
+document.getElementById('discIcon').innerHTML = ICON.alert;
+
+loadData();
+</script>
+</body>
+</html>

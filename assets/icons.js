@@ -53,7 +53,13 @@
     close:        svg('<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'),
 
     // 工具卡片右側箭頭
-    arrowRight:   svg('<path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>')
+    arrowRight:   svg('<path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>'),
+
+    // 比較工具：天平
+    scale:     svg('<path d="M16 16.01V16"/><path d="M8 16.01V16"/>' +
+                   '<path d="m2 16 3-9 3 9"/><path d="m14 16 3-9 3 9"/>' +
+                   '<path d="M5 16h6"/><path d="M17 16h6"/>' +
+                   '<path d="M12 3v18"/><path d="M5 21h14"/>')
   };
 
   global.ICON = ICON;
