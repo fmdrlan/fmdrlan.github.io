@@ -3,7 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DR. YANG's Toolbox</title>
+<title>DR. YANG's Toolbox · 個人臨床工具箱</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="家醫科醫師寫給自己用的查詢工具箱：健保藥品給付規定全文搜尋、高血脂風險評估、疫苗時程查詢。資料每週自動更新。">
+<meta name="keywords" content="健保給付規定,藥品查詢,高血脂,疫苗,家醫科,臨床工具,健保署,NHI,statin,SGLT2,PPI">
+<meta name="author" content="DR. YANG">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://garrulous-cat.github.io/mindy/">
+
+<!-- ── Open Graph ── -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="DR. YANG's Toolbox · 個人臨床工具箱">
+<meta property="og:description" content="家醫科醫師寫給自己用的查詢工具箱：健保藥品給付、高血脂風險、疫苗時程，每週自動更新。">
+<meta property="og:url" content="https://garrulous-cat.github.io/mindy/">
+<meta property="og:locale" content="zh_TW">
+
+<!-- ── Twitter Card ── -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DR. YANG's Toolbox">
+<meta name="twitter:description" content="家醫科醫師寫給自己用的臨床查詢工具箱。">
+
+<!-- ── Favicon (inline SVG) ── -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230d1117'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='monospace' font-size='13' font-weight='700' fill='%234a9eff'%3EY%3C/text%3E%3C/svg%3E">
+
+<!-- ── Structured data ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "DR. YANG's Toolbox",
+  "description": "家醫科醫師個人臨床查詢工具箱",
+  "url": "https://garrulous-cat.github.io/mindy/",
+  "inLanguage": "zh-TW"
+}
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -49,11 +84,19 @@
   .site-sub {
     font-size: 14px;
     color: var(--text-muted);
-    margin-bottom: 40px;
+    margin-bottom: 6px;
     text-align: center;
   }
+  .site-byline {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.03em;
+  }
 
-  /* Warning - plain text, no box */
+  /* Warning */
   .warning {
     margin-bottom: 40px;
     padding-bottom: 32px;
@@ -66,6 +109,14 @@
     color: var(--yellow);
     text-transform: uppercase;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .warning-tag svg {
+    width: 13px;
+    height: 13px;
+    stroke-width: 2;
   }
   .warning-body {
     font-size: 14px;
@@ -87,14 +138,18 @@
     border-radius: 10px;
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color 0.15s, background 0.15s, transform 0.15s;
   }
   .tool-link:hover {
     border-color: rgba(74,158,255,0.5);
     background: rgba(74,158,255,0.04);
   }
+  .tool-link.disabled {
+    opacity: 0.55;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
   .tool-icon {
-    font-size: 22px;
     width: 44px;
     height: 44px;
     background: rgba(74,158,255,0.08);
@@ -103,11 +158,39 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    color: var(--accent);
   }
-  .tool-text { flex: 1; }
-  .tool-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-  .tool-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-  .tool-arrow { color: var(--text-dim); font-size: 16px; flex-shrink: 0; }
+  .tool-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.8;
+  }
+  .tool-text { flex: 1; min-width: 0; }
+  .tool-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .tool-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .tool-arrow {
+    color: var(--text-dim);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+  .tool-arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 1.8;
+  }
   .tool-link:hover .tool-arrow { color: var(--accent); }
 
   .badge {
@@ -119,9 +202,13 @@
     background: rgba(63,185,80,0.12);
     color: var(--green);
     border: 1px solid rgba(63,185,80,0.25);
-    vertical-align: middle;
     margin-left: 6px;
     letter-spacing: 0.05em;
+  }
+  .badge-wip {
+    background: rgba(240,136,62,0.12);
+    color: #f0883e;
+    border-color: rgba(240,136,62,0.35);
   }
 
   /* Footer */
@@ -141,49 +228,62 @@
 <body>
 <div class="wrapper">
 
-  <div class="site-title">DR. YANG</div>
+  <h1 class="site-title">DR. YANG</h1>
   <div class="site-sub">個人臨床工具箱</div>
+  <div class="site-byline">— 家醫科醫師寫給自己用的查詢工具 —</div>
 
   <div class="warning">
-    <div class="warning-tag">⚠ Warning</div>
+    <div class="warning-tag" id="warningTag"><span id="warningIcon"></span>Warning</div>
     <div class="warning-body">
-      這裡的工具由 <strong>DR. YANG</strong> 個人維護，<strong>資訊僅供參考，不保證完全正確</strong>。醫療決策請保有自己的專業判斷，並以最新健保署公告及指引原文為準。發現錯誤歡迎告知。
+      本站使用對象為 <strong>DR. YANG 本人</strong>，僅作個人臨床工作備忘之用。<strong>任何路人請自負風險</strong>，醫療決策請以最新健保署公告及指引原文為準。
     </div>
   </div>
 
-  <div class="tools">
+  <nav class="tools" aria-label="工具列表">
     <a class="tool-link" href="index.html">
-      <div class="tool-icon">🔍</div>
+      <div class="tool-icon" id="iconSearch"></div>
       <div class="tool-text">
         <div class="tool-name">健保藥品給付規定查詢</div>
         <div class="tool-desc">全文搜尋健保給付條件，支援藥名、成分、適應症、藥物類別</div>
       </div>
-      <span class="tool-arrow">›</span>
+      <span class="tool-arrow" id="arrow1"></span>
     </a>
 
     <a class="tool-link" href="lipid.html">
-      <div class="tool-icon">📊</div>
+      <div class="tool-icon" id="iconChart"></div>
       <div class="tool-text">
         <div class="tool-name">高血脂風險評估</div>
         <div class="tool-desc">台灣 2025 / ESC 2024 / AHA 2026 三大指引風險分級與健保給付判斷</div>
       </div>
-      <span class="tool-arrow">›</span>
+      <span class="tool-arrow" id="arrow2"></span>
     </a>
 
     <a class="tool-link" href="vaccine.html">
-      <div class="tool-icon">💉</div>
+      <div class="tool-icon" id="iconSyringe"></div>
       <div class="tool-text">
-        <div class="tool-name">疫苗查詢<span class="badge" style="background:rgba(240,136,62,0.12);color:#f0883e;border-color:rgba(240,136,62,0.35)">建造中</span></div>
+        <div class="tool-name">疫苗查詢<span class="badge badge-wip">建造中</span></div>
         <div class="tool-desc">小兒公費/自費疫苗時程表 · 成人自費疫苗劑數與注意事項</div>
       </div>
-      <span class="tool-arrow">›</span>
+      <span class="tool-arrow" id="arrow3"></span>
     </a>
-  </div>
+  </nav>
 
   <div class="footer">
     工具由 DR. YANG 個人維護 · 本站不隸屬於任何醫療機構或政府機關
   </div>
 
 </div>
+
+<script src="assets/icons.js"></script>
+<script>
+  // 注入 SVG icon
+  document.getElementById('warningIcon').innerHTML = ICON.alert;
+  document.getElementById('iconSearch').innerHTML = ICON.search;
+  document.getElementById('iconChart').innerHTML = ICON.chart;
+  document.getElementById('iconSyringe').innerHTML = ICON.syringe;
+  document.getElementById('arrow1').innerHTML = ICON.chevronRight;
+  document.getElementById('arrow2').innerHTML = ICON.chevronRight;
+  document.getElementById('arrow3').innerHTML = ICON.chevronRight;
+</script>
 </body>
 </html>

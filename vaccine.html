@@ -3,9 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>疫苗查詢 · DR. YANG</title>
+<title>疫苗查詢 · DR. YANG's Toolbox</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="小兒公費/自費疫苗時程表、成人自費疫苗劑數與注意事項查詢工具（建造中）。">
+<meta name="keywords" content="疫苗,公費疫苗,自費疫苗,小兒疫苗,成人疫苗,疫苗時程,HPV,帶狀疱疹,流感">
+<meta name="author" content="DR. YANG">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://garrulous-cat.github.io/mindy/vaccine.html">
+
+<!-- ── Open Graph ── -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="疫苗查詢 · DR. YANG's Toolbox">
+<meta property="og:description" content="小兒公費/自費疫苗時程表、成人自費疫苗劑數與注意事項查詢工具。">
+<meta property="og:url" content="https://garrulous-cat.github.io/mindy/vaccine.html">
+<meta property="og:locale" content="zh_TW">
+
+<!-- ── Favicon ── -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230d1117'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='monospace' font-size='13' font-weight='700' fill='%234a9eff'%3EY%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/shared.css">
+<script src="assets/icons.js"></script>
 <style>
 :root {
   --bg: #0f1117;
@@ -33,20 +53,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; }
 
-/* Tab bar */
-.tabs-bar {
-  background: var(--bg2); border-bottom: 1px solid var(--border);
-  display: flex; align-items: stretch; overflow-x: auto;
-  position: sticky; top: 0; z-index: 100;
-}
-.tabs-bar::-webkit-scrollbar { display: none; }
-.tab-link {
-  padding: 14px 20px; white-space: nowrap; text-decoration: none;
-  color: var(--text-muted); font-size: 14px; font-weight: 500;
-  border-bottom: 2px solid transparent; transition: color 0.15s;
-}
-.tab-link:hover { color: var(--text); }
-.tab-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+/* tabs-bar 樣式由 assets/shared.css 提供 */
 
 /* Layout */
 .page-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
@@ -280,10 +287,10 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 </head>
 <body>
 
-<nav class="tabs-bar">
-  <a class="tab-link" href="index.html">🔍 藥品給付查詢</a>
-  <a class="tab-link" href="lipid.html">📊 高血脂風險評估</a>
-  <a class="tab-link active" href="vaccine.html">💉 疫苗查詢</a>
+<nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
+  <a class="tab-link active" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
 </nav>
 
 <div class="page-wrap">
@@ -846,6 +853,12 @@ function showAdultDetail(id) {
 //  INIT
 // ══════════════════════════════════════════════════════
 // No auto-init: user must click a button to reveal content
+
+// ── Inject tab SVG icons ──
+document.querySelectorAll('.ti[data-icon]').forEach(el => {
+  const k = el.dataset.icon;
+  if (window.ICON && window.ICON[k]) el.innerHTML = window.ICON[k];
+});
 </script>
 </body>
 </html>

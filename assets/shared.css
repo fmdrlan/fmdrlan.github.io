@@ -1,0 +1,235 @@
+/* ============================================================
+ * DR. YANG's Toolbox — Shared CSS
+ * 三頁共用元件：tabs bar、warning box、page meta、footer
+ * 各頁自己的 :root 變數仍各自定義（lipid 用 --bg-base，
+ * 其他頁用 --bg），這支 CSS 只用具體色碼以避免衝突。
+ * ============================================================ */
+
+/* ── Reset ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Sticky Tab Bar（三頁通用，固定在最頂端）── */
+.tabs-bar {
+  background: #161b27;
+  border-bottom: 1px solid #2d3a52;
+  display: flex;
+  padding: 0 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.tabs-bar::-webkit-scrollbar { display: none; }
+
+.tab-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-bottom: 2px solid transparent;
+  color: #8fa3c0;
+  font-family: 'Noto Sans TC', 'IBM Plex Sans TC', sans-serif;
+  font-size: 14px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.tab-link:hover { color: #e2e8f4; }
+.tab-link.active {
+  color: #4a9eff;
+  border-bottom-color: #4a9eff;
+}
+.tab-link svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+
+/* ── Footer（藥品搜尋頁用）── */
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  color: #566880;
+  border-top: 1px solid #2d3a52;
+  background: #161b27;
+}
+.app-footer a { color: #4a9eff; text-decoration: none; }
+.app-footer a:hover { text-decoration: underline; }
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #8fa3c0;
+}
+.footer-meta .meta-mono {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+}
+.footer-meta .meta-label { color: #566880; }
+
+/* ── Changelog banner（藥品搜尋頁用）── */
+.changelog-banner {
+  background: rgba(74,158,255,0.06);
+  border: 1px solid rgba(74,158,255,0.22);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  color: #c5d3e8;
+  line-height: 1.6;
+}
+.changelog-banner .cl-icon {
+  flex-shrink: 0;
+  color: #4a9eff;
+  margin-top: 1px;
+}
+.changelog-banner .cl-icon svg { width: 18px; height: 18px; stroke-width: 1.8; }
+.changelog-banner .cl-body { flex: 1; }
+.changelog-banner .cl-title {
+  font-weight: 600;
+  color: #e2e8f4;
+  margin-bottom: 2px;
+}
+.changelog-banner .cl-stat {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin: 0 2px;
+}
+.changelog-banner .cl-add { background: rgba(63,185,80,0.15); color: #3fb950; }
+.changelog-banner .cl-mod { background: rgba(210,153,34,0.18); color: #d29922; }
+.changelog-banner .cl-del { background: rgba(248,81,73,0.15); color: #f85149; }
+.changelog-banner .cl-toggle {
+  margin-left: auto;
+  background: none;
+  border: 1px solid #2d3a52;
+  color: #8fa3c0;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.changelog-banner .cl-toggle:hover {
+  border-color: #4a9eff;
+  color: #4a9eff;
+}
+.changelog-banner .cl-detail {
+  display: none;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(74,158,255,0.18);
+  font-size: 13px;
+  color: #c5d3e8;
+}
+.changelog-banner.open .cl-detail { display: block; }
+.changelog-banner.open .cl-toggle::after { content: " ▴"; }
+.changelog-banner:not(.open) .cl-toggle::after { content: " ▾"; }
+.cl-detail .cl-group { margin-bottom: 10px; }
+.cl-detail .cl-group:last-child { margin-bottom: 0; }
+.cl-detail .cl-group-title {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.cl-detail ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cl-detail li {
+  padding: 3px 0;
+  font-size: 12.5px;
+  color: #b0bac6;
+  border-left: 2px solid #2d3a52;
+  padding-left: 10px;
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+
+/* ── Related drugs（相關條目）── */
+.related-section {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed #2d3a52;
+}
+.related-title {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #8fa3c0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.related-title svg { width: 13px; height: 13px; stroke-width: 1.8; }
+.related-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.related-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: #1c2333;
+  border: 1px solid #2d3a52;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #c5d3e8;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.related-item:hover {
+  background: rgba(74,158,255,0.07);
+  border-color: rgba(74,158,255,0.4);
+  color: #e2e8f4;
+}
+.related-item .related-badge {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(74,158,255,0.12);
+  color: #4a9eff;
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+}
+.related-item .related-title-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .changelog-banner {
+    flex-wrap: wrap;
+  }
+  .changelog-banner .cl-toggle {
+    margin-left: 0;
+    margin-top: 8px;
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -5,6 +5,7 @@
 - 偵測並保留編號層次結構（羅馬數字/阿拉伯數字/括號）
 - 偵測附表條目，只保留標題
 - 每個條目的 content 拆成 blocks，標記 level 供前端縮排渲染
+- 解析完後跟舊 drugs.json diff，產生 data/changelog.json
 """
 
 import sys
@@ -156,6 +157,93 @@ def parse_drug_sections(pdf_path: str) -> list[dict]:
     return entries
 
 
+# ── 標題標準化：用來做 diff 的 key ─────────────────
+def normalize_title_key(title: str) -> str:
+    """把標題的章節號 + 主名稱抽出來當 diff 用的 key
+    例：'1.1.1.非類固醇抗發炎劑外用製劑：(88/9/1、92/2/1)' → '1.1.1.非類固醇抗發炎劑外用製劑'
+    """
+    # 移除括號內的日期版本標記（含中英括號、含中英逗號分隔的多日期）
+    t = re.sub(r'[（(][\d、,/.\s]+[）)]\s*$', '', title).strip()
+    # 移除尾端冒號
+    t = t.rstrip('：:').strip()
+    return t
+
+
+def normalize_content(text: str) -> str:
+    """正規化內容文字以便比對：合併空白、去掉版本標記"""
+    if not text:
+        return ''
+    t = re.sub(r'[（(]\d{2,3}[\.、/]\d{1,2}[\.、/]\d{1,2}[）)]', '', text)
+    t = re.sub(r'\s+', ' ', t)
+    return t.strip()
+
+
+def diff_drugs(old: list[dict], new: list[dict]) -> dict:
+    """比對新舊 drugs.json，回傳 changelog dict"""
+    old_map = {normalize_title_key(d['title']): d for d in old}
+    new_map = {normalize_title_key(d['title']): d for d in new}
+
+    added = []
+    removed = []
+    modified = []
+
+    for k, d in new_map.items():
+        if k not in old_map:
+            added.append(d['title'])
+        else:
+            # 內容有實質改變才算 modified（忽略空白與版本日期差異）
+            old_norm = normalize_content(old_map[k].get('content', ''))
+            new_norm = normalize_content(d.get('content', ''))
+            if old_norm != new_norm:
+                modified.append(d['title'])
+
+    for k, d in old_map.items():
+        if k not in new_map:
+            removed.append(d['title'])
+
+    return {
+        'added': added,
+        'modified': modified,
+        'removed': removed,
+    }
+
+
+def write_changelog(new_entries: list[dict], from_version: str = None, to_version: str = None):
+    """讀取舊 drugs.json、跟新的 diff、寫入 data/changelog.json"""
+    old_path = Path('data/drugs.json')
+    if not old_path.exists():
+        print("ℹ️  找不到舊 drugs.json，跳過 changelog 產生（首次解析）")
+        # 首次解析也寫一個空 changelog，避免前端 fetch 失敗
+        empty = {
+            'added': [], 'modified': [], 'removed': [],
+            'from_version': from_version, 'to_version': to_version,
+            'note': '首次建置，無歷史資料可比對'
+        }
+        out = Path('data/changelog.json')
+        out.parent.mkdir(exist_ok=True)
+        with open(out, 'w', encoding='utf-8') as f:
+            json.dump(empty, f, ensure_ascii=False, indent=2)
+        return
+
+    try:
+        with open(old_path, encoding='utf-8') as f:
+            old_entries = json.load(f)
+    except Exception as e:
+        print(f"⚠️  讀取舊 drugs.json 失敗：{e}，跳過 changelog 產生")
+        return
+
+    diff = diff_drugs(old_entries, new_entries)
+    diff['from_version'] = from_version
+    diff['to_version'] = to_version
+
+    out = Path('data/changelog.json')
+    with open(out, 'w', encoding='utf-8') as f:
+        json.dump(diff, f, ensure_ascii=False, indent=2)
+
+    print(f"📊 Changelog：新增 {len(diff['added'])} / 修改 {len(diff['modified'])} / 刪除 {len(diff['removed'])}")
+    print(f"💾 已儲存：{out}")
+
+
 def main():
     if len(sys.argv) > 1:
         pdf_path = sys.argv[1]
@@ -167,8 +255,23 @@ def main():
         pdf_path = str(pdfs[-1])
         print(f"自動選擇：{pdf_path}")
 
+    # 從檔名抽出新版本日期（如 完整給付規定1150323.pdf → 1150323）
+    new_version = None
+    m = re.search(r'(\d{7})', Path(pdf_path).name)
+    if m:
+        new_version = m.group(1)
+
+    # 從 last_version.txt 讀舊版本
+    from_version = None
+    ver_file = Path('data/last_version.txt')
+    if ver_file.exists():
+        from_version = ver_file.read_text(encoding='utf-8').strip() or None
+
     entries = parse_drug_sections(pdf_path)
     print(f"✅ 解析完成，共 {len(entries)} 個條目")
+
+    # ── 在覆蓋 drugs.json 之前，先 diff 出 changelog ──
+    write_changelog(entries, from_version=from_version, to_version=new_version)
 
     out = Path('data/drugs.json')
     out.parent.mkdir(exist_ok=True)
