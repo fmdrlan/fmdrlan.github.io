@@ -1016,42 +1016,40 @@ function resetForm() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  SCORE2 (ESC 2021) — 10-yr fatal + non-fatal CVD risk
+//  SCORE2 / SCORE2-OP — 10-yr fatal + non-fatal CVD risk
 //
-//  Source: SCORE2 working group, Eur Heart J 2021;42(25):2439-2454
-//          DOI: 10.1093/eurheartj/ehab309
-//  Formula: SCORE2 supplementary material p.9，與 R package
-//          'RiskScorescvd' (CRAN) 的 11_SCORE2_func.R 完全一致
+//  Sources:
+//   • SCORE2 (40–69 歲)：SCORE2 working group, Eur Heart J 2021;42:2439-54
+//     DOI: 10.1093/eurheartj/ehab309
+//   • SCORE2-OP (70+ 歲)：SCORE2-OP working group, Eur Heart J 2021;42:2455-67
+//     DOI: 10.1093/eurheartj/ehab312
 //
-//  原本只實作「未校正」的 SHR 線性預測,缺 region calibration,
-//  數值會偏低很多倍。本版加上四 region (Low/Moderate/High/Very high)
-//  × 性別的 scale1/scale2 校正,並修正 age 縮放 (/5 不是 /10)、
-//  HDL 縮放 (/0.5 不是 /1)、納入 diabetes 主項與全部 age 互動項。
+//  Coefficients 取自 R package 'RiskScorescvd' (CRAN, MIT license)
+//  的 11_SCORE2_func.R，與兩篇 supplementary material 一致。
 //
-//  驗證 (paper Methods 描述的範例):
-//    50 歲男性 smoker, SBP 140, TC 5.5, HDL 1.3 mmol/L
-//    → low-risk region 5.9%, very high-risk region 14.0%
-//    女性同條件 → low 4.2%, very high 13.7%
+//  注意：原始 SCORE2 為歐洲族群設計，並依四個 risk region
+//  (Low / Moderate / High / Very-high) 校正絕對風險。台灣不在
+//  原始 region 分類中，因此本工具刻意不套用 region calibration，
+//  直接回報「未校正」的 baseline 10-yr 風險(即 step 2 結束時的數值)。
+//  此值反映的是相對風險強度，絕對數字應以官方 SCORE2 Asia-Pacific
+//  或本地 cohort 校正後的工具為準。
 //
-//  本工具預設使用 high risk region (台灣人群心血管死亡率較接近 high)。
-//  如果未來想開放 region 切換，只需把 region 從 'high' 改成參數即可。
+//  驗證(uncalibrated 模型，即移除 step 3):
+//    SCORE2 50 歲男性 smoker, SBP 140, TC 5.5, HDL 1.3 mmol/L
+//    → 對應 R package 中 xx_male2 的中間值 (約 5.5%)
+//    SCORE2-OP 73 歲 baseline (無危險因子)
+//    → 對應 R package 中 xx_male2_op / xx_female2_op
 // ─────────────────────────────────────────────────────────────
-const SCORE2_SCALES = {
-  // [scale1, scale2] for ages 40-69 by region+sex
-  Low:      { male: [-0.5699, 0.7476], female: [-0.7380, 0.7019] },
-  Moderate: { male: [-0.1565, 0.8009], female: [-0.3143, 0.7701] },
-  High:     { male: [ 0.3207, 0.9360], female: [ 0.5710, 0.9369] },
-  VeryHigh: { male: [ 0.5836, 0.8294], female: [ 0.9412, 0.8329] },
-};
 
-function calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking, region = 'High') {
+// SCORE2 (40–69 歲)
+function _score2Base(age, sex, sbp, tc_mmol, hdl_mmol, smoking) {
   const isMale = sex === 'M';
   const ageC = (age - 60) / 5;
   const sbpC = (sbp - 120) / 20;
   const tcC  = tc_mmol - 6;
   const hdlC = (hdl_mmol - 1.3) / 0.5;
   const smk  = smoking ? 1 : 0;
-  const dm   = 0;  // SCORE2 不適用於糖尿病患者，此項保留 0
+  const dm   = 0;  // SCORE2 不適用於糖尿病患者，此項固定 0
 
   let lp;
   if (isMale) {
@@ -1080,15 +1078,83 @@ function calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking, region = 'High') 
        - 0.1272 * ageC * dm;
   }
 
-  // Step 2: untransformed (uncalibrated) 10-yr risk using sex-specific S0
   const S0 = isMale ? 0.9605 : 0.9776;
-  const uncal = 1 - Math.pow(S0, Math.exp(lp));
+  return 1 - Math.pow(S0, Math.exp(lp));
+}
 
-  // Step 3: region-specific calibration
-  const [s1, s2] = SCORE2_SCALES[region][isMale ? 'male' : 'female'];
-  const calibrated = 1 - Math.exp(-Math.exp(s1 + s2 * Math.log(-Math.log(1 - uncal))));
+// SCORE2-OP (70+ 歲)。OP 模型有自己的 mean linear predictor，需要減掉。
+function _score2OPBase(age, sex, sbp, tc_mmol, hdl_mmol, smoking) {
+  const isMale = sex === 'M';
+  const ageC = age - 73;
+  const sbpC = sbp - 150;
+  const tcC  = tc_mmol - 6;
+  const hdlC = hdl_mmol - 1.4;
+  const smk  = smoking ? 1 : 0;
+  const dm   = 0;
 
-  return Math.max(0, Math.min(1, calibrated)) * 100;
+  let lp, meanLP, S0;
+  if (isMale) {
+    lp = 0.0634 * ageC
+       + 0.4245 * dm
+       + 0.3524 * smk
+       + 0.0094 * sbpC
+       + 0.0850 * tcC
+       - 0.3564 * hdlC
+       - 0.0174 * ageC * dm
+       - 0.0247 * ageC * smk
+       - 0.0005 * ageC * sbpC
+       + 0.0073 * ageC * tcC
+       + 0.0091 * ageC * hdlC;
+    meanLP = 0.0929;
+    S0 = 0.7576;
+  } else {
+    lp = 0.0789 * ageC
+       + 0.6010 * dm
+       + 0.4921 * smk
+       + 0.0102 * sbpC
+       + 0.0605 * tcC
+       - 0.3040 * hdlC
+       - 0.0107 * ageC * dm
+       - 0.0255 * ageC * smk
+       - 0.0004 * ageC * sbpC
+       - 0.0009 * ageC * tcC
+       + 0.0154 * ageC * hdlC;
+    meanLP = 0.229;
+    S0 = 0.8082;
+  }
+
+  return 1 - Math.pow(S0, Math.exp(lp - meanLP));
+}
+
+// 對外統一介面：依年齡自動切換 SCORE2 / SCORE2-OP，回傳百分比
+function calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking) {
+  if (age == null || sbp == null || tc_mmol == null || hdl_mmol == null) return null;
+  const risk = age >= 70
+    ? _score2OPBase(age, sex, sbp, tc_mmol, hdl_mmol, smoking)
+    : _score2Base(age, sex, sbp, tc_mmol, hdl_mmol, smoking);
+  return Math.max(0, Math.min(1, risk)) * 100;
+}
+
+// ESC 2025 Focused Update on Dyslipidaemias — SCORE2/SCORE2-OP 風險分層
+//
+// 來源:Mach F et al., 2025 Focused Update of the 2019 ESC/EAS
+//      Guidelines for the management of dyslipidaemias.
+//      Eur Heart J 2025;46:4359-4378 (Table 3 / Figure 1)
+//
+// SCORE2 / SCORE2-OP 採固定閾值(不分年齡):
+//   Very high : ≥20%
+//   High      : ≥10% 且 <20%
+//   Moderate  : ≥2%  且 <10%
+//   Low       : <2%
+//
+// 回傳:
+//   { band: 'veryhigh'|'high'|'moderate'|'low'|null, label }
+function score2RiskBand(score2) {
+  if (score2 === null || score2 === undefined) return { band: null, label: null };
+  if (score2 >= 20) return { band: 'veryhigh', label: '≥20%' };
+  if (score2 >= 10) return { band: 'high',     label: '≥10% 且 <20%' };
+  if (score2 >= 2)  return { band: 'moderate', label: '≥2% 且 <10%' };
+                    return { band: 'low',      label: '<2%' };
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -1400,6 +1466,7 @@ function calcESC(p) {
   if (age && sbp && tc_mmol && hdl_mmol) {
     score2 = calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking);
   }
+  const score2Band = score2RiskBand(score2);  // {band, label}
 
   // ══════════════════════════════════════════
   //  Extreme risk
@@ -1428,7 +1495,7 @@ function calcESC(p) {
     dmTargetOrgan ||
     (dm && dmMajorRFcount >= 3) ||
     hasSevereCKD ||
-    (score2 !== null && score2 >= 20) ||
+    (score2Band.band === 'veryhigh') ||
     (fh && (ascvd || p.htn || smoking || hasModCKD || (ldl_mmol && ldl_mmol > 4.9)))
   ) {
     level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
@@ -1443,8 +1510,8 @@ function calcESC(p) {
       reasons.push(`DM + ≥3 主要危險因子（${[p.htn&&'高血壓', smoking&&'抽菸', (ldl_mmol&&ldl_mmol>2.6)&&`LDL ${ldl}mg/dL`, hasModCKD&&`CKD(eGFR${egfr})`].filter(Boolean).join('、')}）→ Very high risk`);
     if (hasSevereCKD)
       reasons.push(`Severe CKD（eGFR ${egfr} <30 mL/min/1.73m²）→ Very high risk`);
-    if (score2 !== null && score2 >= 20)
-      reasons.push(`SCORE2 ${score2.toFixed(1)}% ≥20% → Very high risk`);
+    if (score2Band.band === 'veryhigh')
+      reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → Very high risk`);
     if (fh && !ascvd)
       reasons.push('FH + 另一主要危險因子 → Very high risk');
   }
@@ -1464,7 +1531,7 @@ function calcESC(p) {
     (fh && !ascvd) ||
     (dm && !dmTargetOrgan && dmMajorRFcount >= 1) ||
     hasModCKD ||
-    (score2 !== null && score2 >= 10 && score2 < 20)
+    (score2Band.band === 'high')
   ) {
     level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
 
@@ -1480,30 +1547,36 @@ function calcESC(p) {
       reasons.push(`DM 無靶器官損傷${dmMajorRFcount >= 1 ? '，有額外危險因子' : '，病程可能≥10年'} → High risk`);
     if (hasModCKD)
       reasons.push(`Moderate CKD（eGFR ${egfr} 30–59 mL/min/1.73m²）→ High risk`);
-    if (score2 !== null && score2 >= 10 && score2 < 20)
-      reasons.push(`SCORE2 ${score2.toFixed(1)}% ≥10% and <20% → High risk`);
+    if (score2Band.band === 'high')
+      reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → High risk`);
   }
 
   // ══════════════════════════════════════════
-  //  Moderate risk：SCORE2 ≥2% and <10%
-  //  （含 Young DM：T1DM<35歲 或 T2DM<50歲，病程<10yr，無其他危險因子）
+  //  Moderate risk（ESC 2025 Focused Update Table 3）：
+  //    1. SCORE2 ≥2% 且 <10%
+  //    2. Young DM（T1DM<35y / T2DM<50y）病程<10y 且無其他危險因子
   // ══════════════════════════════════════════
-  else if (score2 !== null && score2 >= 2 && score2 < 10) {
+  else if (
+    (score2Band.band === 'moderate') ||
+    (dm && age < 50 && dmMajorRFcount === 0)
+  ) {
     level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-    reasons.push(`SCORE2 ${score2.toFixed(1)}% ≥2% and <10% → Moderate risk`);
-
-    // Young DM exception
-    const youngDM = dm && age < 50; // T1DM<35y or T2DM<50y（病程<10年條件需臨床確認）
-    if (youngDM && dmMajorRFcount === 0)
-      reasons.push('Young DM（T2DM <50歲，病程<10年，無其他危險因子）→ Moderate risk');
+    if (score2Band.band === 'moderate')
+      reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → Moderate risk`);
+    if (dm && age < 50 && dmMajorRFcount === 0)
+      reasons.push('Young DM（T2DM <50歲，病程<10年且無其他危險因子）→ Moderate risk');
   }
 
   // ══════════════════════════════════════════
   //  Low risk：SCORE2 <2%
+  //  注意:ESC 2025 Recommendation Table 1 對 Low risk + LDL 3.0–4.9 mmol/L
+  //       (116–<190 mg/dL) 的個案,「藥物治療 should be considered」(Class IIa, A)
   // ══════════════════════════════════════════
-  else if (score2 !== null && score2 < 2) {
+  else if (score2Band.band === 'low') {
     level = 'low'; ldlTarget = 116; nonhdlTarget = 145;
-    reasons.push(`SCORE2 ${score2.toFixed(1)}% <2% → Low risk`);
+    reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → Low risk`);
+    if (ldl_mmol && ldl_mmol >= 3.0 && ldl_mmol < 4.9)
+      reasons.push(`LDL-C ${ldl} mg/dL 偏高（3.0–<4.9 mmol/L）→ ESC 2025 建議考慮藥物治療（Class IIa, A）`);
   }
 
   // 資料不足
@@ -1547,22 +1620,24 @@ function calcESC(p) {
 
   html += riskBadge(level, labels[level]);
   if (score2 !== null) {
+    const modelLabel = age >= 70 ? 'SCORE2-OP' : 'SCORE2';
     html += `<div class="score-display">
       <div class="score-big score">${score2.toFixed(1)}<small style="font-size:14px">%</small></div>
-      <div class="score-label">SCORE2 10年 CVD 風險</div>`;
-    if (drivers.length) {
-      html += `<div class="drivers-block">
-        <div class="drivers-label">主要貢獻因子</div>
-        <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
-      </div>`;
-    }
-    html += `</div>`;
+      <div class="score-label">${modelLabel} 10年 CVD 風險</div>
+    </div>`;
   }
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
   html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
   if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL`);
   html += metricRow('達標狀況', ldlOK);
   html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+  if (score2 !== null && drivers.length) {
+    const modelLabel = age >= 70 ? 'SCORE2-OP' : 'SCORE2';
+    html += `<div class="drivers-block">
+      <div class="drivers-label">${modelLabel} 主要貢獻因子</div>
+      <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
+    </div>`;
+  }
   return html;
 }
 
@@ -1582,20 +1657,50 @@ function calcAHA(p) {
   //  二級預防（有臨床 ASCVD）
   // ══════════════════════════════════════
   if (ascvd) {
-    // Very high risk：臨床 ASCVD（含 CKD 合併 ASCVD）
-    // Not very high risk：少數例外（文件指出大多數 ASCVD 都是 very high risk）
-    // 簡化：有 ASCVD → Very high risk，LDL <55, non-HDL <85
-    level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
-    reasons.push('臨床 ASCVD → 二級預防 Very high risk');
-    reasons.push(`ASCVD 類型：${ascvdTypes.length ? ascvdTypes.join('、') : '已記錄'}`);
-    reasons.push('目標：LDL-C <55 mg/dL，non-HDL-C <85 mg/dL');
+    // ── AHA 2026 二級預防 Very high-risk vs Not very high-risk ──
+    // Figure 11 / Figure 12 + 內文:Very high-risk ASCVD 包含
+    //   • ASCVD 合併 CKD (Figure 11 標題明確列出)
+    //   • 在最大耐受 statin 治療下仍復發 vascular event
+    //   • Polyvascular disease (冠狀動脈 + 周邊/頸動脈)
+    //   • Multivessel coronary disease
+    //   • Severe CKD (eGFR <30)
+    //   • DM 合併 ASCVD
+    //   • 近期 ACS / MI within 1 yr
+    const hasCAD = ascvdTypes.some(t =>
+      ['ACS','MI_1yr','MI_multi','PCI','CABG','multivessel'].includes(t));
+    const hasPAD = ascvdTypes.includes('PAD');
+    const hasCarotid = ascvdTypes.includes('carotid');
+    const hasPolyvasc = (hasPAD || hasCarotid) && hasCAD;
+    const onMaxStatin = p.statin && p.statinDose === 'high';
+    const recurrentOnStatin = ascvd_multi && onMaxStatin;
+    const hasCKD = egfr && egfr < 60;
+    const recentACS = ascvdTypes.some(t => ['ACS','MI_1yr'].includes(t));
+    const multivessel = ascvdTypes.includes('multivessel') || ascvdTypes.includes('MI_multi');
 
-    // 列出影響風險的因子
-    const riskItems = [];
-    if (egfr && egfr < 60) riskItems.push(`CKD（eGFR ${egfr}）`);
-    if (fh) riskItems.push('FH');
-    if (dm) riskItems.push('糖尿病');
-    if (riskItems.length) reasons.push(`合併高風險條件：${riskItems.join('、')}`);
+    const veryHighFlags = [];
+    if (hasCKD)            veryHighFlags.push(`CKD（eGFR ${egfr}）合併 ASCVD`);
+    if (recurrentOnStatin) veryHighFlags.push('在最大耐受 statin 下復發 vascular event');
+    if (hasPolyvasc)       veryHighFlags.push('Polyvascular disease（冠狀動脈 + 周邊/頸動脈）');
+    if (multivessel)       veryHighFlags.push('多支冠狀動脈或多次 MI');
+    if (recentACS)         veryHighFlags.push('近期 ACS 或 1 年內 MI');
+    if (dm)                veryHighFlags.push('糖尿病合併 ASCVD');
+
+    if (veryHighFlags.length > 0) {
+      level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
+      reasons.push('臨床 ASCVD → 二級預防（AHA 2026 Figure 11: Very high-risk）');
+      reasons.push(`ASCVD 類型：${ascvdTypes.length ? ascvdTypes.join('、') : '已記錄'}`);
+      reasons.push(`Very high-risk 條件：${veryHighFlags.join('、')}`);
+      reasons.push('目標：LDL-C <55 mg/dL（且降幅 ≥50%），non-HDL-C <85 mg/dL（COR 1）');
+      if (fh) reasons.push('合併 FH（建議 apoB <55 mg/dL）');
+    } else {
+      // Not very high-risk ASCVD：穩定 ASCVD、無上述 enhancer
+      level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+      reasons.push('臨床 ASCVD → 二級預防（AHA 2026 Figure 12: Not very high-risk）');
+      reasons.push(`ASCVD 類型：${ascvdTypes.length ? ascvdTypes.join('、') : '已記錄'}`);
+      reasons.push('目標：LDL-C <70 mg/dL（降幅 ≥50%），non-HDL-C <100 mg/dL（COR 1）');
+      reasons.push('Optional goal：LDL-C <55 mg/dL、non-HDL-C <85 mg/dL（COR 2a）');
+      if (fh) reasons.push('合併 FH');
+    }
   }
 
   // ══════════════════════════════════════
@@ -1657,11 +1762,11 @@ function calcAHA(p) {
 
       if (highRisk || (prevent !== null && prevent >= 10)) {
         level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
-        reasons.push(`DM 40–75歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}% ≥10%` : '，多重危險因子'} → High risk`);
+        reasons.push(`DM 40–75歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}%，≥10%` : '，多重危險因子'} → High risk`);
         reasons.push('目標：LDL-C <70 mg/dL，non-HDL-C <100 mg/dL');
       } else {
         level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-        reasons.push(`DM 40–75歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}% <10%` : ''} → Moderate risk`);
+        reasons.push(`DM 40–75歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}%，<10%` : ''} → Moderate risk`);
         reasons.push('目標：LDL-C <100 mg/dL，non-HDL-C <130 mg/dL');
       }
     } else if (age && age > 75) {
@@ -1675,10 +1780,10 @@ function calcAHA(p) {
       }
       if (prevent !== null && prevent >= 3) {
         level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-        reasons.push(`DM 20–39歲，PREVENT ${prevent.toFixed(1)}% ≥3% → 考慮 moderate statin`);
+        reasons.push(`DM 20–39歲，PREVENT ${prevent.toFixed(1)}%，≥3% → 考慮 moderate statin`);
       } else {
         level = 'low'; ldlTarget = 130; nonhdlTarget = 160;
-        reasons.push(`DM 20–39歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}% <3%` : ''} → 評估 DM 特定風險增強因子`);
+        reasons.push(`DM 20–39歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}%，<3%` : ''} → 評估 DM 特定風險增強因子`);
       }
     }
   }
@@ -1692,23 +1797,24 @@ function calcAHA(p) {
 
     if (prevent < 3) {
       level = 'low'; ldlTarget = 160; nonhdlTarget = 190;
-      reasons.push(`PREVENT ${prevent.toFixed(1)}% <3% → Low risk`);
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，<3% → Low risk`);
       if (ldl && ldl >= 160) {
         ldlTarget = 100; nonhdlTarget = 130;
         reasons.push(`LDL-C ${ldl} mg/dL 160–189，10年風險低但 LDL 偏高`);
       }
     } else if (prevent < 5) {
       level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-      reasons.push(`PREVENT ${prevent.toFixed(1)}% 3–<5% → Borderline risk`);
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，3% 至 <5% → Borderline risk`);
 
     } else if (prevent < 10) {
       level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
-      reasons.push(`PREVENT ${prevent.toFixed(1)}% 5–<10% → Intermediate risk`);
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，5% 至 <10% → Intermediate risk`);
 
     } else {
       level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
-      reasons.push(`PREVENT ${prevent.toFixed(1)}% ≥10% → High risk`);
-
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，≥10% → High risk`);
+      reasons.push('AHA 2026 Recommendation 8（COR 2a, B-R）：高風險一級預防 LDL-C <70 mg/dL，non-HDL-C <100 mg/dL');
+      reasons.push('AHA 2026 Recommendation 7（COR 1, A）：建議 high-intensity statin、LDL-C 降幅 ≥50%');
     }
 
   } else {
@@ -1753,20 +1859,20 @@ function calcAHA(p) {
   if (prevent !== null) {
     html += `<div class="score-display">
       <div class="score-big score">${prevent.toFixed(1)}<small style="font-size:14px">%</small></div>
-      <div class="score-label">PREVENT-ASCVD 10年風險</div>`;
-    if (drivers.length) {
-      html += `<div class="drivers-block">
-        <div class="drivers-label">主要貢獻因子</div>
-        <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
-      </div>`;
-    }
-    html += `</div>`;
+      <div class="score-label">PREVENT-ASCVD 10年風險</div>
+    </div>`;
   }
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
   html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
   if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL`);
   html += metricRow('達標狀況', ldlOK);
   html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+  if (prevent !== null && drivers.length) {
+    html += `<div class="drivers-block">
+      <div class="drivers-label">PREVENT 主要貢獻因子</div>
+      <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
+    </div>`;
+  }
   return html;
 }
 
@@ -2046,7 +2152,7 @@ function calcNHI(p) {
   // 高強度 statin = rosuvastatin 20mg 或 atorvastatin ≥40mg（以 high 代表）
   const onMaxStatinPlusEze = onHighStatin && eze;
   // Statin 不耐受且用 ezetimibe
-  const statinIntolerантWithEze = statin === '' && eze;
+  const statinIntolerantWithEze = statin === '' && eze;
 
   if (!ascvd) {
     pcsk9Reasons.push('無臨床 ASCVD → 不符合 PCSK9 抑制劑給付（重大心血管事件後一年內才符合）');
@@ -2063,7 +2169,7 @@ function calcNHI(p) {
       } else {
         pcsk9Reasons.push(`情境 A：使用高強度 Statin + Ezetimibe，但 LDL-C ${ldl || '未填'} mg/dL ≤100 → 不符合`);
       }
-    } else if (statinIntolerантWithEze) {
+    } else if (statinIntolerantWithEze) {
       // 情境 B：statin 不耐受，用 ezetimibe
       if (ldl && ldl > 100) {
         pcsk9Covered = true; pcsk9Class = 'covered';
