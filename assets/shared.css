@@ -238,24 +238,28 @@
 .feedback-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  color: #8fa3c0;
-  text-decoration: none;
+  gap: 6px;
+  color: #ffffff !important;
+  text-decoration: none !important;
   font-size: 12px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border: 1px solid #2d3a52;
   border-radius: 5px;
   transition: all 0.15s;
   background: transparent;
+  line-height: 1.4;
+  vertical-align: middle;
 }
 .feedback-link:hover {
-  color: #4a9eff;
-  border-color: rgba(74,158,255,0.4);
-  background: rgba(74,158,255,0.05);
+  color: #ffffff !important;
+  border-color: #4a5568;
+  background: rgba(255,255,255,0.05);
 }
 .feedback-link svg {
-  width: 12px;
-  height: 12px;
+  width: 13px !important;
+  height: 13px !important;
   stroke-width: 1.8;
   flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }

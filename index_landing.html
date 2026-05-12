@@ -218,6 +218,34 @@
     line-height: 1.7;
     text-align: center;
   }
+  .feedback-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    transition: all 0.15s;
+    background: transparent;
+    line-height: 1.4;
+    vertical-align: middle;
+  }
+  .feedback-link:hover {
+    color: #ffffff;
+    border-color: #4a5568;
+    background: rgba(255,255,255,0.05);
+  }
+  .feedback-link svg {
+    width: 13px;
+    height: 13px;
+    stroke-width: 1.8;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
 
   @media (max-width: 480px) {
     .site-title { font-size: 36px; }
