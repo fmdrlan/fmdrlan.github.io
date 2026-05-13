@@ -100,22 +100,238 @@
     padding: 20px;
     margin-bottom: 24px;
   }
+  .panel-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
   .panel-title {
     font-size: 14px;
     font-weight: 600;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 16px;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .panel-title::after {
-    content: '';
+
+  /* ── LIS 貼上按鈕 ── */
+  .lis-paste-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--bg-secondary);
+    color: var(--accent-blue);
+    border: 1px solid rgba(88,166,255,0.35);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+  .lis-paste-btn:hover {
+    background: rgba(88,166,255,0.08);
+    border-color: var(--accent-blue);
+  }
+  .lis-paste-btn svg {
+    width: 13px; height: 13px; stroke-width: 1.8;
+  }
+
+  /* ── LIS 貼上 Modal ── */
+  .lis-modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(13,17,23,0.78);
+    backdrop-filter: blur(3px);
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px 20px;
+    overflow-y: auto;
+  }
+  .lis-modal-backdrop.open { display: flex; }
+  .lis-modal {
+    background: var(--bg-elevated, #1c2333);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 640px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 80px);
+  }
+  .lis-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+  .lis-modal-title {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+  }
+  .lis-modal-title svg {
+    width: 15px; height: 15px;
+    color: var(--accent-blue);
+    stroke-width: 1.8;
+  }
+  .lis-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    border-radius: 4px;
+  }
+  .lis-modal-close:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+  .lis-modal-close svg { width: 16px; height: 16px; stroke-width: 2; }
+
+  .lis-modal-body {
+    padding: 16px 18px;
+    overflow-y: auto;
     flex: 1;
-    height: 1px;
-    background: var(--border);
+  }
+  .lis-modal-hint {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.7;
+  }
+  .lis-modal-hint b { color: var(--text-primary); }
+  .lis-privacy-banner {
+    background: rgba(63,185,80,0.07);
+    border: 1px solid rgba(63,185,80,0.25);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: #b3d8b8;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .lis-textarea {
+    width: 100%;
+    min-height: 180px;
+    padding: 10px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .lis-textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+  }
+  .lis-preview {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .lis-preview-title {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .lis-preview-empty {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 12.5px;
+  }
+  .lis-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+  }
+  .lis-preview-row .sym { width: 16px; text-align: center; flex-shrink: 0; }
+  .lis-preview-row .ok-sym { color: var(--accent-green); }
+  .lis-preview-row .miss-sym { color: var(--text-secondary); }
+  .lis-preview-row .over-sym { color: var(--accent-yellow); }
+  .lis-preview-row .field { color: var(--text-secondary); width: 90px; flex-shrink: 0; }
+  .lis-preview-row .val { color: var(--text-primary); font-weight: 500; }
+  .lis-preview-row .over-note {
+    color: var(--accent-yellow);
+    font-size: 11px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .lis-warn-line {
+    margin-top: 10px;
+    padding: 7px 12px;
+    background: rgba(210,153,34,0.06);
+    border: 1px solid rgba(210,153,34,0.25);
+    border-radius: 5px;
+    font-size: 11.5px;
+    color: #d8c08a;
+    line-height: 1.6;
+  }
+
+  .lis-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+  .lis-btn {
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .lis-btn:hover { border-color: var(--text-secondary); }
+  .lis-btn.primary {
+    background: var(--accent-blue);
+    color: #fff;
+    border-color: var(--accent-blue);
+  }
+  .lis-btn.primary:hover {
+    background: #7ab9ff;
+    border-color: #7ab9ff;
+  }
+  .lis-btn.primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-color: var(--border);
   }
 
   .form-grid {
@@ -620,7 +836,12 @@
 
   <!-- Input Panel -->
   <div class="input-panel">
-    <div class="panel-title">病人資料輸入</div>
+    <div class="panel-title-row">
+      <div class="panel-title">病人資料輸入</div>
+      <button type="button" class="lis-paste-btn" id="lisPasteBtn" title="從 LIS 系統貼上檢驗報告自動填入欄位">
+        <span id="lisPasteIcon"></span>從 LIS 貼上自動填入
+      </button>
+    </div>
     <div class="form-grid">
 
       <!-- 基本 -->
@@ -965,6 +1186,42 @@
     </a>
   </div>
 </footer>
+
+<!-- ── LIS 貼上 Modal ── -->
+<div class="lis-modal-backdrop" id="lisBackdrop" role="dialog" aria-modal="true" aria-labelledby="lisTitle">
+  <div class="lis-modal" onclick="event.stopPropagation()">
+    <div class="lis-modal-header">
+      <div class="lis-modal-title" id="lisTitle">
+        <span id="lisTitleIcon"></span>從 LIS 貼上自動填入
+      </div>
+      <button class="lis-modal-close" id="lisClose" aria-label="關閉">
+        <span id="lisCloseIcon"></span>
+      </button>
+    </div>
+    <div class="lis-modal-body">
+      <div class="lis-privacy-banner">
+        🔒 貼上的內容僅在本機瀏覽器處理，<b>不會上傳到任何伺服器</b>。按完「填入」後 textarea 會自動清空。
+      </div>
+      <div class="lis-modal-hint">
+        從成大醫院 LIS（檢驗報告查詢）<b>Ctrl + A 全選 → Ctrl + C 複製</b>，然後在下方貼上：
+      </div>
+      <textarea class="lis-textarea" id="lisInput"
+        placeholder="在這裡 Ctrl + V 貼上 LIS 全選複製的內容..."
+        spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+        data-do-not-share="true"></textarea>
+
+      <div class="lis-preview" id="lisPreview">
+        <div class="lis-preview-title">偵測結果</div>
+        <div class="lis-preview-empty">貼上 LIS 內容後，自動顯示能填入的欄位</div>
+      </div>
+      <div class="lis-warn-line" style="display:none;" id="lisWarnLine"></div>
+    </div>
+    <div class="lis-modal-footer">
+      <button class="lis-btn" id="lisCancel">取消</button>
+      <button class="lis-btn primary" id="lisApply" disabled>填入欄位</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // ─────────────────────────────────────────────────────────────
@@ -2390,6 +2647,303 @@ document.querySelectorAll('.ti[data-icon]').forEach(el => {
 // Feedback icon
 const fbIcon = document.getElementById('feedbackIcon');
 if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
+
+// ═══════════════════════════════════════════════════════════════
+//  LIS 貼上自動填入
+//  從成大醫院 LIS 全選複製的純文字中，用 regex 抓出檢驗值
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const PASTE_BTN_ICON = window.ICON && window.ICON.copy;
+  const CLOSE_ICON = window.ICON && window.ICON.close;
+  document.getElementById('lisPasteIcon').innerHTML = PASTE_BTN_ICON || '📋';
+  document.getElementById('lisTitleIcon').innerHTML = PASTE_BTN_ICON || '📋';
+  document.getElementById('lisCloseIcon').innerHTML = CLOSE_ICON || '×';
+
+  const btn       = document.getElementById('lisPasteBtn');
+  const backdrop  = document.getElementById('lisBackdrop');
+  const closeBtn  = document.getElementById('lisClose');
+  const cancelBtn = document.getElementById('lisCancel');
+  const applyBtn  = document.getElementById('lisApply');
+  const textarea  = document.getElementById('lisInput');
+  const preview   = document.getElementById('lisPreview');
+  const warnLine  = document.getElementById('lisWarnLine');
+
+  // 解析結果暫存（按下「填入」時使用）
+  let parsedResult = null;
+
+  function openModal() {
+    backdrop.classList.add('open');
+    textarea.value = '';
+    parsedResult = null;
+    renderPreview(null);
+    setTimeout(() => textarea.focus(), 50);
+  }
+  function closeModal() {
+    backdrop.classList.remove('open');
+    // 安全：關閉時自動清空，避免遺留病人資料
+    textarea.value = '';
+    parsedResult = null;
+  }
+  btn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+
+  // ── 解析器 ───────────────────────────────────────────────────
+  // 從 LIS 貼上文字中抓取結構化資料
+  //
+  // 觀察 NCKU LIS 格式：
+  //  • 「生日(年齡) 1995-06-12(30歲)」 → 年齡可從 (NN歲) 取
+  //  • 「姓名(性別) XXX(女)」 → 性別 (男)/(女)
+  //  • 檢驗值格式： "CREA(mg/dL)\t\t0.62" 或 "CHOL(mg/dL)\t\t176"
+  //    通常欄位名 + 單位 + tab + (空格或值) + tab + (值或空格)
+  //  • 特殊值如 "≧90"、"<10" → 解析為界限值
+  //  • 同一份報告可能重複出現（LIS 複製的特性），只取第一個有效值
+
+  function parsePastedText(raw) {
+    if (!raw || !raw.trim()) return null;
+
+    const text = raw.replace(/\r/g, '');
+    const result = {
+      fields: {},      // { fieldId: { value, label, unit } }
+      raw: text,
+      warnings: []
+    };
+
+    // ── 1. 年齡 ──
+    // pattern: (30歲) 或 30 歲
+    const ageMatch = text.match(/\((\d{1,3})歲\)/) || text.match(/年齡[^\d]{0,10}(\d{1,3})\s*歲/);
+    if (ageMatch) {
+      const age = parseInt(ageMatch[1]);
+      if (age >= 1 && age <= 120) {
+        result.fields.age = { value: age, label: '年齡', unit: '歲' };
+      }
+    }
+
+    // ── 2. 性別 ──
+    // pattern: (男) 或 (女) 在姓名後
+    if (/姓名[\s\S]{0,40}\(男\)/.test(text)) {
+      result.fields.sex = { value: 'M', label: '性別', unit: '', display: '男' };
+    } else if (/姓名[\s\S]{0,40}\(女\)/.test(text)) {
+      result.fields.sex = { value: 'F', label: '性別', unit: '', display: '女' };
+    }
+
+    // ── 3. 檢驗值（核心解析）──
+    // 設計策略：對每個目標欄位寫一個 (label patterns + value extractor)
+    // 因為 LIS 同一欄位可能重複出現多次，加上同列可能有空白與值兩格，
+    // 用「label 之後找最近的數字」策略最穩健。
+
+    /**
+     * 從給定文字中、給定 label patterns，抓出第一個合理的數值
+     * @param patterns 字串 array 例 ['CHOL', 'CHOLESTEROL', '總膽固醇']
+     * @param minVal/maxVal 合理範圍（避免亂抓）
+     * @param specialHandler 處理 ≧/≦/< / > 等界限值，傳入 string 回傳 number 或 null
+     */
+    function extractValue(patterns, minVal, maxVal, specialHandler) {
+      for (const pat of patterns) {
+        // 建立 regex: label 後可能有 (unit) 然後是空白或 tab 然後數值
+        // 例： "CHOL(mg/dL)\t\t176"  或  "HDL-C(mg/dL)\t\t84"
+        // 注意：value 可能在前一格（空白）或後一格，我們抓出附近的數字
+        const escapedPat = pat.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // 抓 label 後出現的「第一個非空字串」，看看是不是數字
+        // 同時兼容 "≧90" 這種界限值
+        const re = new RegExp(
+          escapedPat + '[\\s\\S]{0,30}?[\\t ]([\\d.≧≦<>＜＞]+(?:\\.\\d+)?)',
+          'i'
+        );
+        const m = text.match(re);
+        if (m) {
+          let valStr = m[1];
+          // 處理特殊值
+          let val;
+          if (specialHandler) {
+            val = specialHandler(valStr);
+            if (val === null) continue;
+          } else if (/^[≧≦<>＜＞]/.test(valStr)) {
+            // 界限值如 ≧90、<10：取數字部分
+            const numPart = valStr.replace(/[≧≦<>＜＞]/g, '');
+            val = parseFloat(numPart);
+            if (isNaN(val)) continue;
+          } else {
+            val = parseFloat(valStr);
+          }
+          if (isNaN(val)) continue;
+          if (minVal !== undefined && val < minVal) continue;
+          if (maxVal !== undefined && val > maxVal) continue;
+          return { value: val, rawText: valStr };
+        }
+      }
+      return null;
+    }
+
+    // 各欄位定義
+    const targets = [
+      { id: 'tc',  patterns: ['CHOL(mg/dL)', 'CHOL', '總膽固醇', 'Cholesterol'],
+        min: 50, max: 600, unit: 'mg/dL', label: 'TC' },
+      { id: 'hdl', patterns: ['HDL-C(mg/dL)', 'HDL-C', 'HDL(mg/dL)', 'HDL', 'High Density'],
+        min: 10, max: 150, unit: 'mg/dL', label: 'HDL-C' },
+      { id: 'ldl', patterns: ['LDL-C(mg/dL)', 'LDL-C', 'LDL(mg/dL)', 'LDL', 'Low Density'],
+        min: 10, max: 500, unit: 'mg/dL', label: 'LDL-C' },
+      { id: 'tg',  patterns: ['TG(mg/dL)', 'TG', '三酸甘油酯', 'Triglyceride'],
+        min: 20, max: 3000, unit: 'mg/dL', label: 'TG' },
+      { id: 'fpg', patterns: ['GLU, AC(mg/dL)', 'GLU,AC', 'GLU AC', 'GLU(mg/dL)', 'Glucose AC', '空腹血糖'],
+        min: 40, max: 600, unit: 'mg/dL', label: '空腹血糖' },
+      { id: 'hba1c', patterns: ['HbA1c(%)', 'HbA1C(%)', 'HbA1c', 'HbA1C', '糖化血色素'],
+        min: 3, max: 20, unit: '%', label: 'HbA1c' },
+      { id: 'egfr', patterns: ['eGFR(CKD-EPI)', 'eGFR(MDRD)', 'eGFR'],
+        min: 1, max: 200, unit: '', label: 'eGFR',
+        // eGFR 特殊處理：≧90 → 90（保守取下限）
+        special: (s) => {
+          if (/^≧/.test(s) || /^>=/.test(s)) {
+            const n = parseFloat(s.replace(/[≧≦<>＜＞=]/g, ''));
+            return isNaN(n) ? null : n;
+          }
+          if (/^<|^≦|^＜/.test(s)) {
+            // <10 → 10（保守取上限的話 GFR 會看起來好；取數字本身比較中性）
+            const n = parseFloat(s.replace(/[≧≦<>＜＞=]/g, ''));
+            return isNaN(n) ? null : n;
+          }
+          const n = parseFloat(s);
+          return isNaN(n) ? null : n;
+        }
+      },
+      { id: 'uacr', patterns: ['UACR', 'Albumin/Creatinine', '蛋白尿'],
+        min: 0, max: 10000, unit: 'mg/g', label: 'UACR' },
+    ];
+
+    targets.forEach(t => {
+      const found = extractValue(t.patterns, t.min, t.max, t.special);
+      if (found) {
+        result.fields[t.id] = {
+          value: found.value,
+          label: t.label,
+          unit: t.unit,
+          rawText: found.rawText
+        };
+      }
+    });
+
+    // eGFR：CKD-EPI 比 raw eGFR 更準，若兩個都有，CKD-EPI 已被優先匹配，OK
+
+    // ── 4. 給 user 友善的補充訊息 ──
+    if (result.fields.tc && result.fields.hdl && !result.fields.ldl) {
+      result.warnings.push('LIS 未報告 LDL-C — 但有 TC + HDL，若再有 TG，欄位將用 Friedewald 公式推算 LDL。');
+    }
+
+    return result;
+  }
+
+  // ── 預覽渲染 ────────────────────────────────────────────────
+  function renderPreview(result) {
+    warnLine.style.display = 'none';
+    warnLine.textContent = '';
+
+    if (!result || Object.keys(result.fields).length === 0) {
+      preview.innerHTML = `
+        <div class="lis-preview-title">偵測結果</div>
+        <div class="lis-preview-empty">${
+          result === null ? '貼上 LIS 內容後，自動顯示能填入的欄位' : '未在貼上內容中找到任何已知欄位'
+        }</div>`;
+      applyBtn.disabled = true;
+      return;
+    }
+
+    const rows = [];
+    Object.keys(result.fields).forEach(id => {
+      const f = result.fields[id];
+      const displayVal = f.display !== undefined ? f.display : f.value;
+      const valStr = `${displayVal}${f.unit ? ' ' + f.unit : ''}`;
+
+      // 檢查是否會覆寫現有資料
+      let willOverwrite = false;
+      let existing = null;
+      if (id === 'sex') {
+        existing = document.querySelector('input[name="sex"]:checked')?.value;
+        willOverwrite = existing && existing !== f.value;
+      } else {
+        const el = document.getElementById(id);
+        existing = el && el.value ? el.value : null;
+        // 數字比較容忍小數誤差
+        willOverwrite = existing !== null && parseFloat(existing) !== f.value;
+      }
+
+      const symClass = willOverwrite ? 'over-sym' : 'ok-sym';
+      const symChar  = willOverwrite ? '⚠' : '✓';
+      const overNote = willOverwrite ? ` <span class="over-note">將覆寫原值 ${existing}</span>` : '';
+      rows.push(`<div class="lis-preview-row">
+        <span class="sym ${symClass}">${symChar}</span>
+        <span class="field">${f.label}</span>
+        <span class="val">${valStr}</span>${overNote}
+      </div>`);
+    });
+
+    // 列出常見但 LIS 不會有的欄位（提醒醫師手動補）
+    const haveLdl = !!result.fields.ldl;
+    const haveTcHdl = !!(result.fields.tc && result.fields.hdl);
+    const missing = [];
+    if (!haveLdl && haveTcHdl) missing.push('LDL-C（將自動推算）');
+    if (!haveLdl && !haveTcHdl) missing.push('LDL-C');
+    missing.push('SBP / DBP（血壓）');
+
+    if (missing.length) {
+      rows.push(`<div class="lis-preview-row" style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px;">
+        <span class="sym miss-sym">·</span>
+        <span class="field" style="width:auto;">未提供：</span>
+        <span style="color:var(--text-secondary);font-size:11.5px;font-family:'Noto Sans TC',sans-serif;">${missing.join('、')}</span>
+      </div>`);
+    }
+
+    preview.innerHTML = `<div class="lis-preview-title">偵測結果（${Object.keys(result.fields).length} 個欄位）</div>${rows.join('')}`;
+    applyBtn.disabled = false;
+
+    if (result.warnings && result.warnings.length) {
+      warnLine.textContent = result.warnings.join(' / ');
+      warnLine.style.display = '';
+    }
+  }
+
+  // ── 解析 textarea 內容 ──────────────────────────────────────
+  function tryParse() {
+    const raw = textarea.value;
+    if (!raw.trim()) {
+      parsedResult = null;
+      renderPreview(null);
+      return;
+    }
+    parsedResult = parsePastedText(raw);
+    renderPreview(parsedResult);
+  }
+  textarea.addEventListener('input', tryParse);
+  textarea.addEventListener('paste', () => setTimeout(tryParse, 30));
+
+  // ── 套用到表單 ─────────────────────────────────────────────
+  applyBtn.addEventListener('click', () => {
+    if (!parsedResult || Object.keys(parsedResult.fields).length === 0) return;
+
+    Object.keys(parsedResult.fields).forEach(id => {
+      const f = parsedResult.fields[id];
+      if (id === 'sex') {
+        const radio = document.querySelector(`input[name="sex"][value="${f.value}"]`);
+        if (radio) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      } else {
+        const el = document.getElementById(id);
+        if (el) {
+          el.value = f.value;
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    });
+    // 重新計算 non-HDL 與 calc LDL
+    if (typeof calcNonHDL === 'function') calcNonHDL();
+    closeModal();
+  });
+})();
 </script>
 </body>
 </html>
