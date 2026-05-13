@@ -48,6 +48,21 @@
   flex-shrink: 0;
 }
 
+/* 回首頁 tab — 視覺上跟工具 tab 區隔 */
+.tab-link.tab-home {
+  color: #566880;
+  border-right: 1px solid #2d3a52;
+  padding-right: 18px;
+  margin-right: 4px;
+}
+.tab-link.tab-home:hover {
+  color: #4a9eff;
+}
+.tab-link.tab-home svg {
+  width: 14px;
+  height: 14px;
+}
+
 /* ── Footer（藥品搜尋頁用）── */
 .app-footer {
   text-align: center;

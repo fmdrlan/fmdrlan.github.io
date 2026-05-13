@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>肥胖門診問診工具 · DR. YANG's Toolbox</title>
+<title>門診問診工具 · DR. YANG's Toolbox</title>
 
 <!-- ── SEO ── -->
-<meta name="description" content="肥胖門診結構化問診工具：依台灣成人肥胖臨床實證指引（2026）整合病史、共病、飲食、生活型態、理學檢查與肌少肥胖評估；自動生成病歷文字與症狀導向檢驗 order。">
-<meta name="keywords" content="肥胖,減重,門診工具,問診,GLP-1,肌少肥胖,中心性肥胖,結構化病歷,SOAP,DR. YANG">
+<meta name="description" content="門診結構化問診工具：目前支援肥胖議題，依台灣成人肥胖臨床實證指引（2026）整合病史、共病、飲食、生活型態、理學檢查與肌少肥胖評估；自動生成英文病歷文字與症狀導向檢驗 order。">
+<meta name="keywords" content="門診問診,結構化病歷,肥胖,減重,GLP-1,肌少肥胖,中心性肥胖,SOAP,DR. YANG">
 <meta name="author" content="DR. YANG">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://garrulous-cat.github.io/mindy/obesity.html">
 
 <!-- ── Open Graph ── -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="肥胖門診問診工具 · DR. YANG's Toolbox">
-<meta property="og:description" content="結構化問診 + 自動病歷文字 + 症狀導向 order 提示，依台灣 2026 肥胖指引。">
+<meta property="og:title" content="門診問診工具 · DR. YANG's Toolbox">
+<meta property="og:description" content="結構化問診 + 自動英文病歷文字 + 症狀導向 order 提示。目前支援肥胖議題。">
 <meta property="og:url" content="https://garrulous-cat.github.io/mindy/obesity.html">
 <meta property="og:locale" content="zh_TW">
 
@@ -78,6 +78,44 @@
     font-size: 13px;
     color: var(--text-muted);
     margin-bottom: 18px;
+  }
+
+  /* ── Topic selector（議題切換，未來擴充用） ── */
+  .topic-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .topic-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 4px;
+  }
+  .topic-btn {
+    padding: 6px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .topic-btn.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: rgba(74,158,255,0.4);
+  }
+  .topic-btn:hover:not(.disabled):not(.active) { border-color: var(--border-strong); color: var(--text); }
+  .topic-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
   /* ── Mode tabs（初診 / 回診） ── */
@@ -402,22 +440,32 @@
 <body>
 
 <nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. YANG</a>
   <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
   <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
   <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
   <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
-  <a class="tab-link active" href="obesity.html"><span class="ti" data-icon="weight"></span>肥胖門診問診</a>
+  <a class="tab-link active" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
 </nav>
 
 <div class="page-header">
-  <h1 class="page-title">肥胖門診結構化問診工具</h1>
-  <p class="page-sub">依台灣成人肥胖臨床實證指引（2026）第八章設計。看診時邊問邊勾選，自動生成可貼進病歷的結構化文字 + 症狀導向 order 提示。</p>
+  <h1 class="page-title">門診結構化問診工具</h1>
+  <p class="page-sub">看診時邊問邊勾選，自動生成可貼進病歷的英文結構化文字 + 症狀導向 order 提示。</p>
+
+  <div class="topic-selector" aria-label="問診議題">
+    <span class="topic-label">議題</span>
+    <button class="topic-btn active" data-topic="obesity">肥胖</button>
+    <button class="topic-btn disabled" disabled title="待加入">DM 控制</button>
+    <button class="topic-btn disabled" disabled title="待加入">高血壓</button>
+    <button class="topic-btn disabled" disabled title="待加入">戒菸諮詢</button>
+  </div>
 
   <div class="disclaimer-banner">
     <span id="discIcon"></span>
     <div>
       <strong>使用提醒：</strong>本工具為醫師端輔助記錄使用。產出之病歷文字與檢驗建議僅供臨床參考，
       <strong>不取代個別病人之完整評估與醫師判斷</strong>。請依各院 SOP 與最新指引調整。
+      肥胖問診內容依據台灣成人肥胖臨床實證指引（2026）第八章。
     </div>
   </div>
 
@@ -757,10 +805,10 @@
 
   <div class="sec">
     <h3>
-      <span id="ic-note"></span>病歷文字
+      <span id="ic-note"></span>病歷文字（自動生成英文）
       <span class="copy-feedback" id="copy-fb-note">已複製</span>
     </h3>
-    <div class="output" id="note-output">（填寫上方欄位後此處會自動產生病歷文字）</div>
+    <div class="output" id="note-output">（填寫上方欄位後此處會自動產生英文病歷文字）</div>
     <div class="btnbar">
       <button class="act-btn btn-primary" id="copy-note"><span id="ic-copy1"></span>複製病歷</button>
       <button class="act-btn" id="reset-intake"><span id="ic-reset1"></span>清空初診</button>
@@ -907,10 +955,10 @@
 
   <div class="sec">
     <h3>
-      <span id="ic-note2"></span>回診病歷文字
+      <span id="ic-note2"></span>回診病歷文字（自動生成英文）
       <span class="copy-feedback" id="copy-fb-fu">已複製</span>
     </h3>
-    <div class="output" id="fu-output">（填寫上方欄位後此處會自動產生回診病歷文字）</div>
+    <div class="output" id="fu-output">（填寫上方欄位後此處會自動產生英文回診病歷文字）</div>
     <div class="btnbar">
       <button class="act-btn btn-primary" id="copy-fu"><span id="ic-copy3"></span>複製病歷</button>
       <button class="act-btn" id="reset-fu"><span id="ic-reset2"></span>清空回診</button>
@@ -919,7 +967,7 @@
 </div>
 
   <div class="obesity-footer">
-    依據：台灣成人肥胖臨床實證指引（2026）第八章「肥胖患者的全面性評估」<br>
+    肥胖議題依據：台灣成人肥胖臨床實證指引（2026）第八章「肥胖患者的全面性評估」<br>
     本工具僅供醫護人員臨床參考，不取代個別病人評估與最新指引。
     <div style="margin-top: 12px;">
       <a class="feedback-link" id="feedbackLink"
@@ -997,72 +1045,79 @@
   function getFlag(flag) { return document.querySelector(`[data-flag="${flag}"]`)?.checked; }
   function val(id) { return document.getElementById(id)?.value.trim() ?? ''; }
   function radio(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value; }
-  function joinChecked(items) {
+  function joinChecked(items, sep) {
+    sep = sep || '、';
     const arr = items.filter(x => x.cond).map(x => x.label);
-    return arr.length ? arr.join('、') : null;
+    return arr.length ? arr.join(sep) : null;
   }
   function appendNote(s, noteId) {
     const n = val(noteId);
-    if (n) return s ? `${s}；${n}` : n;
+    if (n) return s ? `${s}; ${n}` : n;
     return s;
   }
 
-  // ── Initial note ──
+  // ── Initial note（output in English） ──
   function renderNote() {
     const lines = [];
 
+    // [Goal]
     const goalParts = [];
-    if (val('motivation')) goalParts.push(`動機：${val('motivation')}`);
+    if (val('motivation')) goalParts.push(`motivation: ${val('motivation')}`);
     if (val('goal-wt')) {
-      let s = `目標 ${val('goal-wt')} kg`;
-      if (val('goal-time')) s += `（${val('goal-time')}內）`;
+      let s = `target ${val('goal-wt')} kg`;
+      if (val('goal-time')) s += ` (within ${val('goal-time')})`;
       goalParts.push(s);
     }
-    let goalLine = goalParts.join('；');
+    let goalLine = goalParts.join('; ');
     goalLine = appendNote(goalLine, 'goal-note');
-    if (goalLine) lines.push(`【目標】${goalLine}`);
+    if (goalLine) lines.push(`[Goal] ${goalLine}`);
 
+    // [Weight history]
     const wtHist = [];
-    if (val('max-wt')) wtHist.push(`最高 ${val('max-wt')} kg${val('max-wt-when') ? '（' + val('max-wt-when') + '）' : ''}`);
-    if (val('min-wt')) wtHist.push(`最低 ${val('min-wt')} kg`);
-    if (val('onset')) wtHist.push(`起始增重：${val('onset')}`);
+    if (val('max-wt')) wtHist.push(`max ${val('max-wt')} kg${val('max-wt-when') ? ' (' + val('max-wt-when') + ')' : ''}`);
+    if (val('min-wt')) wtHist.push(`min ${val('min-wt')} kg`);
+    if (val('onset')) wtHist.push(`weight gain onset: ${val('onset')}`);
     if (document.getElementById('weight-cycling').checked) {
-      let s = '反覆減重';
-      if (val('cycling-times')) s += `（${val('cycling-times')}）`;
+      let s = 'weight cycling';
+      if (val('cycling-times')) s += ` (${val('cycling-times')})`;
       wtHist.push(s);
     }
-    if (val('prev-method')) wtHist.push(`過去減重：${val('prev-method')}`);
-    if (wtHist.length) lines.push(`【體重變化】${wtHist.join('；')}`);
+    if (val('prev-method')) wtHist.push(`prior weight-loss methods: ${val('prev-method')}`);
+    if (wtHist.length) lines.push(`[Weight Hx] ${wtHist.join('; ')}`);
 
+    // [Life events]
     let events = joinChecked([
-      { cond: getFlag('quit-smoke'), label: '曾戒菸' },
-      { cond: getFlag('preg-gain'), label: '懷孕期增重過多' },
-      { cond: getFlag('menstrual'), label: '月經不規則' },
-      { cond: getFlag('post-meno'), label: '停經後增重' },
-    ]);
+      { cond: getFlag('quit-smoke'), label: 's/p smoking cessation' },
+      { cond: getFlag('preg-gain'), label: 'excessive pregnancy weight gain' },
+      { cond: getFlag('menstrual'), label: 'irregular menses' },
+      { cond: getFlag('post-meno'), label: 'post-menopausal weight gain' },
+    ], ', ');
     events = appendNote(events, 'event-note');
-    if (events) lines.push(`【生活事件】${events}`);
+    if (events) lines.push(`[Life events] ${events}`);
 
+    // [Obesogenic meds]
     let meds = joinChecked([
-      { cond: getFlag('med-dm'), label: '降血糖藥' },
-      { cond: getFlag('med-antipsych'), label: '抗精神病藥' },
-      { cond: getFlag('med-antidep'), label: '抗憂鬱劑' },
-      { cond: getFlag('med-antiep'), label: '抗癲癇藥' },
-      { cond: getFlag('med-steroid'), label: '類固醇' },
-      { cond: getFlag('med-bb'), label: 'β-blocker' },
-    ]);
+      { cond: getFlag('med-dm'), label: 'antidiabetic agents (SU/TZD/insulin)' },
+      { cond: getFlag('med-antipsych'), label: 'antipsychotics' },
+      { cond: getFlag('med-antidep'), label: 'antidepressants' },
+      { cond: getFlag('med-antiep'), label: 'antiepileptics' },
+      { cond: getFlag('med-steroid'), label: 'corticosteroids' },
+      { cond: getFlag('med-bb'), label: 'β-blockers' },
+    ], ', ');
     meds = appendNote(meds, 'med-detail');
-    if (meds) lines.push(`【致胖藥物】${meds}`);
+    if (meds) lines.push(`[Obesogenic meds] ${meds}`);
 
+    // [Endocrine symptoms]
     let endo = joinChecked([
-      { cond: getFlag('sx-thyroid'), label: '甲低症狀（疲倦/便秘/怕冷）' },
-      { cond: getFlag('sx-cushing'), label: '庫欣症狀（圓臉/水牛肩/皮膚變薄）' },
-      { cond: getFlag('sx-pcos'), label: 'PCOS 症狀（多毛/月經失調/痤瘡）' },
-      { cond: getFlag('sx-hypogonad'), label: '低睪固酮症狀（性慾↓/疲倦/肌力↓）' },
-    ]);
+      { cond: getFlag('sx-thyroid'), label: 'fatigue/constipation/cold intolerance (r/o hypothyroidism)' },
+      { cond: getFlag('sx-cushing'), label: 'moon face/buffalo hump/thin skin (r/o Cushing\'s)' },
+      { cond: getFlag('sx-pcos'), label: 'hirsutism/menstrual irregularity/acne (r/o PCOS)' },
+      { cond: getFlag('sx-hypogonad'), label: 'decreased libido/fatigue/loss of muscle strength (r/o hypogonadism)' },
+    ], '; ');
     endo = appendNote(endo, 'endo-note');
-    if (endo) lines.push(`【內分泌症狀】${endo}`);
+    if (endo) lines.push(`[Endocrine sx] ${endo}`);
 
+    // [Comorbidities]
     let cm = joinChecked([
       { cond: getFlag('cm-htn'), label: 'HTN' },
       { cond: getFlag('cm-dm'), label: 'DM' },
@@ -1072,146 +1127,158 @@
       { cond: getFlag('cm-knee'), label: 'knee OA' },
       { cond: getFlag('cm-hfpef'), label: 'HFpEF' },
       { cond: getFlag('cm-gout'), label: 'gout' },
-      { cond: getFlag('cm-psy'), label: '精神科疾病' },
-    ]);
+      { cond: getFlag('cm-psy'), label: 'psychiatric disorder' },
+    ], ', ');
     cm = appendNote(cm, 'cm-note');
-    if (cm) lines.push(`【共病】${cm}`);
+    if (cm) lines.push(`[Comorbidities] ${cm}`);
 
+    // [Weight-related symptoms]
     let symp = joinChecked([
-      { cond: getFlag('sym-dyspnea'), label: '爬梯喘' },
-      { cond: getFlag('sym-knee'), label: '膝痠痛' },
-      { cond: getFlag('sym-fatigue'), label: '易疲倦' },
-      { cond: getFlag('sym-snore'), label: '打鼾' },
-      { cond: getFlag('sym-sleepy'), label: '日間嗜睡' },
-      { cond: getFlag('sym-apnea'), label: '目擊呼吸暫停' },
-    ]);
+      { cond: getFlag('sym-dyspnea'), label: 'DOE on climbing stairs' },
+      { cond: getFlag('sym-knee'), label: 'knee pain' },
+      { cond: getFlag('sym-fatigue'), label: 'easy fatigability' },
+      { cond: getFlag('sym-snore'), label: 'snoring' },
+      { cond: getFlag('sym-sleepy'), label: 'daytime sleepiness' },
+      { cond: getFlag('sym-apnea'), label: 'witnessed apnea' },
+    ], ', ');
     symp = appendNote(symp, 'sym-note');
-    if (symp) lines.push(`【相關症狀】${symp}`);
+    if (symp) lines.push(`[Weight-related sx] ${symp}`);
 
+    // [Family Hx]
     let fh = joinChecked([
-      { cond: getFlag('fh-obesity'), label: '肥胖' },
+      { cond: getFlag('fh-obesity'), label: 'obesity' },
       { cond: getFlag('fh-dm'), label: 'DM' },
       { cond: getFlag('fh-htn'), label: 'HTN' },
-      { cond: getFlag('fh-dl'), label: '高血脂' },
-      { cond: getFlag('fh-cv'), label: '心血管疾病' },
-    ]);
+      { cond: getFlag('fh-dl'), label: 'dyslipidemia' },
+      { cond: getFlag('fh-cv'), label: 'CV disease' },
+    ], ', ');
     fh = appendNote(fh, 'fh-note');
-    if (fh) lines.push(`【家族史】${fh}`);
+    if (fh) lines.push(`[Family Hx] ${fh}`);
 
+    // [Diet]
     const dietPattern = joinChecked([
-      { cond: getFlag('diet-skip-bf'), label: '略過早餐' },
-      { cond: getFlag('diet-late-dinner'), label: '晚餐晚' },
-      { cond: getFlag('diet-night-eat'), label: '吃宵夜' },
-      { cond: getFlag('diet-snack'), label: '兩餐間點心' },
-      { cond: getFlag('diet-fast-eat'), label: '進食速度快' },
-      { cond: getFlag('diet-distract'), label: '分心進食' },
-    ]);
+      { cond: getFlag('diet-skip-bf'), label: 'skipping breakfast' },
+      { cond: getFlag('diet-late-dinner'), label: 'late dinner' },
+      { cond: getFlag('diet-night-eat'), label: 'late-night eating' },
+      { cond: getFlag('diet-snack'), label: 'between-meal snacking' },
+      { cond: getFlag('diet-fast-eat'), label: 'fast eating' },
+      { cond: getFlag('diet-distract'), label: 'distracted eating' },
+    ], ', ');
     const dietContent = joinChecked([
-      { cond: getFlag('diet-sugary'), label: '含糖飲' },
-      { cond: getFlag('diet-fried'), label: '油炸' },
-      { cond: getFlag('diet-redmeat'), label: '紅肉/加工肉' },
-      { cond: getFlag('diet-upf'), label: '超加工食品' },
-      { cond: getFlag('diet-alcohol'), label: '飲酒' },
-      { cond: getFlag('diet-highsalt'), label: '高鹽' },
-    ]);
+      { cond: getFlag('diet-sugary'), label: 'sugary beverages' },
+      { cond: getFlag('diet-fried'), label: 'fried food' },
+      { cond: getFlag('diet-redmeat'), label: 'red/processed meat' },
+      { cond: getFlag('diet-upf'), label: 'ultra-processed food' },
+      { cond: getFlag('diet-alcohol'), label: 'alcohol' },
+      { cond: getFlag('diet-highsalt'), label: 'high-salt diet' },
+    ], ', ');
     const dietBeh = joinChecked([
-      { cond: getFlag('diet-emo'), label: '情緒性進食' },
-      { cond: getFlag('diet-stress'), label: '壓力性進食' },
-      { cond: getFlag('diet-binge'), label: '暴食傾向' },
-      { cond: getFlag('diet-night-syn'), label: '夜食症候群' },
-    ]);
+      { cond: getFlag('diet-emo'), label: 'emotional eating' },
+      { cond: getFlag('diet-stress'), label: 'stress-related eating' },
+      { cond: getFlag('diet-binge'), label: 'binge eating tendency' },
+      { cond: getFlag('diet-night-syn'), label: 'night eating syndrome' },
+    ], ', ');
+
+    const eatOutMap = { '低（<30%）': 'low (<30%)', '中（30–70%）': 'moderate (30-70%)', '高（>70%）': 'high (>70%)' };
     const dietParts = [];
     let patternLine = dietPattern;
-    if (radio('eat-out')) patternLine = (patternLine ? patternLine + '、' : '') + `外食 ${radio('eat-out')}`;
-    if (val('cook-person')) patternLine = (patternLine ? patternLine + '、' : '') + `備餐：${val('cook-person')}`;
+    if (radio('eat-out')) patternLine = (patternLine ? patternLine + ', ' : '') + `eats out ${eatOutMap[radio('eat-out')] || radio('eat-out')}`;
+    if (val('cook-person')) patternLine = (patternLine ? patternLine + ', ' : '') + `meal prep: ${val('cook-person')}`;
     patternLine = appendNote(patternLine, 'pattern-note');
-    if (patternLine) dietParts.push(`用餐型態：${patternLine}`);
+    if (patternLine) dietParts.push(`pattern: ${patternLine}`);
 
     let contentLine = dietContent;
     const subs = [];
-    if (val('sugary-freq')) subs.push(`含糖飲 ${val('sugary-freq')}`);
-    if (val('alc-amount')) subs.push(`酒 ${val('alc-amount')}`);
-    if (subs.length) contentLine = (contentLine ? contentLine + '（' + subs.join('、') + '）' : subs.join('、'));
+    if (val('sugary-freq')) subs.push(`sugary bev ${val('sugary-freq')}`);
+    if (val('alc-amount')) subs.push(`alcohol ${val('alc-amount')}`);
+    if (subs.length) contentLine = (contentLine ? contentLine + ' (' + subs.join(', ') + ')' : subs.join(', '));
     contentLine = appendNote(contentLine, 'content-note');
-    if (contentLine) dietParts.push(`飲食內容：${contentLine}`);
+    if (contentLine) dietParts.push(`content: ${contentLine}`);
 
     let behLine = appendNote(dietBeh, 'beh-note');
-    if (behLine) dietParts.push(`飲食行為：${behLine}`);
+    if (behLine) dietParts.push(`behavior: ${behLine}`);
 
-    if (dietParts.length) lines.push(`【飲食】${dietParts.join('；')}`);
+    if (dietParts.length) lines.push(`[Diet] ${dietParts.join('; ')}`);
 
+    // [Physical activity]
+    const intensityMap = { '低': 'low', '中': 'moderate', '高': 'high' };
     const actParts = [];
     if (val('exercise-type')) actParts.push(val('exercise-type'));
     const af = [];
     if (val('exercise-freq')) af.push(val('exercise-freq'));
     if (val('exercise-dur')) af.push(val('exercise-dur'));
-    if (radio('intensity')) af.push(`${radio('intensity')}強度`);
-    if (af.length) actParts.push(af.join('，'));
-    if (getFlag('ls-sedentary')) actParts.push('久坐>8h/d');
+    if (radio('intensity')) af.push(`${intensityMap[radio('intensity')] || radio('intensity')} intensity`);
+    if (af.length) actParts.push(af.join(', '));
+    if (getFlag('ls-sedentary')) actParts.push('sedentary >8h/d');
     if (getFlag('ls-act-limit')) {
-      let s = '活動受限';
-      if (val('act-limit-detail')) s += `（${val('act-limit-detail')}）`;
+      let s = 'activity-limiting factors';
+      if (val('act-limit-detail')) s += ` (${val('act-limit-detail')})`;
       actParts.push(s);
     }
-    if (actParts.length) lines.push(`【身體活動】${actParts.join('；')}`);
+    if (actParts.length) lines.push(`[Physical activity] ${actParts.join('; ')}`);
 
+    // [Sleep]
+    const sleepQMap = { '好': 'good', '普通': 'fair', '差': 'poor' };
     const slpParts = [];
-    if (val('sleep-hr')) slpParts.push(`${val('sleep-hr')} h/天`);
-    if (radio('sleep-q')) slpParts.push(`品質${radio('sleep-q')}`);
-    if (getFlag('ls-shift')) slpParts.push('夜班/輪班');
-    if (getFlag('ls-irreg')) slpParts.push('作息不規律');
-    let slpLine = slpParts.join('，');
+    if (val('sleep-hr')) slpParts.push(`${val('sleep-hr')} h/night`);
+    if (radio('sleep-q')) slpParts.push(`quality ${sleepQMap[radio('sleep-q')] || radio('sleep-q')}`);
+    if (getFlag('ls-shift')) slpParts.push('shift work');
+    if (getFlag('ls-irreg')) slpParts.push('irregular schedule');
+    let slpLine = slpParts.join(', ');
     slpLine = appendNote(slpLine, 'sleep-note');
-    if (slpLine) lines.push(`【睡眠】${slpLine}`);
+    if (slpLine) lines.push(`[Sleep] ${slpLine}`);
 
+    // [Psychosocial]
     let psy = joinChecked([
-      { cond: getFlag('psy-depress'), label: '憂鬱' },
-      { cond: getFlag('psy-anxiety'), label: '焦慮' },
-      { cond: getFlag('psy-stigma'), label: '體重自我污名' },
-      { cond: getFlag('psy-stress'), label: '高壓' },
-    ]);
+      { cond: getFlag('psy-depress'), label: 'depressive mood' },
+      { cond: getFlag('psy-anxiety'), label: 'anxiety' },
+      { cond: getFlag('psy-stigma'), label: 'weight-related self-stigma' },
+      { cond: getFlag('psy-stress'), label: 'high stress' },
+    ], ', ');
+    const supportMap = { '好': 'good', '普通': 'fair', '差': 'poor' };
     const socParts = [];
-    if (psy) socParts.push(`心理：${psy}`);
-    if (radio('support')) socParts.push(`家庭支持${radio('support')}`);
-    if (val('work-type')) socParts.push(`工作:${val('work-type')}`);
-    let socLine = socParts.join('；');
+    if (psy) socParts.push(`psych: ${psy}`);
+    if (radio('support')) socParts.push(`family support ${supportMap[radio('support')] || radio('support')}`);
+    if (val('work-type')) socParts.push(`occupation: ${val('work-type')}`);
+    let socLine = socParts.join('; ');
     socLine = appendNote(socLine, 'psy-note');
-    if (socLine) lines.push(`【心理社會】${socLine}`);
+    if (socLine) lines.push(`[Psychosocial] ${socLine}`);
 
+    // [PE]
     const peParts = [];
     if (val('waist')) peParts.push(`WC ${val('waist')} cm`);
     if (val('neck')) peParts.push(`NC ${val('neck')} cm`);
     const skin = joinChecked([
-      { cond: getFlag('pe-acanth'), label: '黑色棘皮症' },
-      { cond: getFlag('pe-stria'), label: '肥胖紋' },
-      { cond: getFlag('pe-intertrigo'), label: '對磨皮疹' },
-      { cond: getFlag('pe-acne'), label: '痤瘡' },
-      { cond: getFlag('pe-hirsut'), label: '多毛' },
-      { cond: getFlag('pe-xanth'), label: '黃色瘤' },
-    ]);
+      { cond: getFlag('pe-acanth'), label: 'acanthosis nigricans' },
+      { cond: getFlag('pe-stria'), label: 'striae' },
+      { cond: getFlag('pe-intertrigo'), label: 'intertrigo' },
+      { cond: getFlag('pe-acne'), label: 'acne' },
+      { cond: getFlag('pe-hirsut'), label: 'hirsutism' },
+      { cond: getFlag('pe-xanth'), label: 'xanthoma' },
+    ], ', ');
     const peOther = joinChecked([
-      { cond: getFlag('pe-thyroid'), label: '甲狀腺腫' },
-      { cond: getFlag('pe-mooning'), label: '圓臉/水牛肩' },
-      { cond: getFlag('pe-heart'), label: '心音異常' },
-      { cond: getFlag('pe-lung'), label: '肺音異常' },
-      { cond: getFlag('pe-edema'), label: '下肢水腫' },
-    ]);
-    if (skin) peParts.push(`皮膚:${skin}`);
+      { cond: getFlag('pe-thyroid'), label: 'thyroid enlargement' },
+      { cond: getFlag('pe-mooning'), label: 'moon face / buffalo hump' },
+      { cond: getFlag('pe-heart'), label: 'abnormal heart sounds' },
+      { cond: getFlag('pe-lung'), label: 'abnormal breath sounds' },
+      { cond: getFlag('pe-edema'), label: 'lower limb edema' },
+    ], ', ');
+    if (skin) peParts.push(`skin: ${skin}`);
     if (peOther) peParts.push(peOther);
     if (val('calf') || val('grip') || val('sts') || val('walk')) {
       const sarc = [];
-      if (val('calf')) sarc.push(`小腿圍 ${val('calf')} cm`);
-      if (val('grip')) sarc.push(`握力 ${val('grip')} kg`);
-      if (val('sts')) sarc.push(`5次坐站 ${val('sts')} s`);
-      if (val('walk')) sarc.push(`6m步行 ${val('walk')} s`);
-      peParts.push(`肌少評估：${sarc.join('、')}`);
+      if (val('calf')) sarc.push(`calf circumference ${val('calf')} cm`);
+      if (val('grip')) sarc.push(`grip ${val('grip')} kg`);
+      if (val('sts')) sarc.push(`5x sit-to-stand ${val('sts')} s`);
+      if (val('walk')) sarc.push(`6m walk ${val('walk')} s`);
+      peParts.push(`sarcopenic obesity workup: ${sarc.join(', ')}`);
     }
-    let peLine = peParts.join('；');
+    let peLine = peParts.join('; ');
     peLine = appendNote(peLine, 'pe-note');
-    if (peLine) lines.push(`【PE】${peLine}`);
+    if (peLine) lines.push(`[PE] ${peLine}`);
 
     const out = document.getElementById('note-output');
-    out.textContent = lines.length ? lines.join('\n') : '（填寫上方欄位後此處會自動產生病歷文字）';
+    out.textContent = lines.length ? lines.join('\n') : '（填寫上方欄位後此處會自動產生英文病歷文字）';
   }
 
   // ── Orders ──
@@ -1264,19 +1331,20 @@
     }
   }
 
-  // ── Follow-up note ──
+  // ── Follow-up note（output in English） ──
   function renderFu() {
     const lines = [];
 
+    // [Weight]
     const wtParts = [];
-    if (val('fu-wt')) wtParts.push(`本次 ${val('fu-wt')} kg`);
+    if (val('fu-wt')) wtParts.push(`current ${val('fu-wt')} kg`);
     const cur = parseFloat(val('fu-wt')), prev = parseFloat(val('fu-wt-prev')), start = parseFloat(val('fu-wt-start'));
     const deltaEl = document.getElementById('fu-wt-delta');
     const totalEl = document.getElementById('fu-wt-total');
     if (!isNaN(cur) && !isNaN(prev)) {
       const d = (cur - prev).toFixed(1);
       const sign = d > 0 ? '+' : '';
-      wtParts.push(`較上次 ${sign}${d} kg`);
+      wtParts.push(`Δ vs last visit ${sign}${d} kg`);
       deltaEl.textContent = `Δ ${sign}${d} kg`;
       deltaEl.style.color = d <= 0 ? 'var(--green)' : 'var(--yellow)';
     } else { deltaEl.textContent = ''; }
@@ -1284,11 +1352,12 @@
       const d = (cur - start).toFixed(1);
       const pct = ((cur - start) / start * 100).toFixed(1);
       const sign = d > 0 ? '+' : '';
-      wtParts.push(`較起始 ${sign}${d} kg（${sign}${pct}%）`);
+      wtParts.push(`Δ vs baseline ${sign}${d} kg (${sign}${pct}%)`);
       totalEl.textContent = `Δ ${sign}${d} kg (${sign}${pct}%)`;
       totalEl.style.color = d <= 0 ? 'var(--green)' : 'var(--yellow)';
     } else { totalEl.textContent = ''; }
-    if (radio('fu-trend')) wtParts.push(`趨勢：${radio('fu-trend')}`);
+    const trendMap = { '持續下降': 'sustained decrease', '平台期': 'plateau', '反彈': 'rebound', '持平': 'unchanged' };
+    if (radio('fu-trend')) wtParts.push(`trend: ${trendMap[radio('fu-trend')] || radio('fu-trend')}`);
 
     const waistParts = [];
     if (val('fu-waist')) waistParts.push(`WC ${val('fu-waist')} cm`);
@@ -1297,68 +1366,74 @@
     if (!isNaN(wc) && !isNaN(wcp)) {
       const d = (wc - wcp).toFixed(1);
       const sign = d > 0 ? '+' : '';
-      waistParts.push(`較上次 ${sign}${d} cm`);
+      waistParts.push(`Δ WC vs last ${sign}${d} cm`);
       wdEl.textContent = `Δ ${sign}${d} cm`;
       wdEl.style.color = d <= 0 ? 'var(--green)' : 'var(--yellow)';
     } else { wdEl.textContent = ''; }
 
     const allWt = [...wtParts, ...waistParts];
-    if (allWt.length) lines.push(`【體重】${allWt.join('；')}`);
+    if (allWt.length) lines.push(`[Weight] ${allWt.join('; ')}`);
 
+    // [Medications]
     const meds = joinChecked([
       { cond: getFlag('fu-med-glp1'), label: 'GLP-1 RA' },
       { cond: getFlag('fu-med-orlistat'), label: 'Orlistat' },
       { cond: getFlag('fu-med-pb'), label: 'Phen/Bup' },
-      { cond: getFlag('fu-med-none'), label: '未使用' },
-    ]);
+      { cond: getFlag('fu-med-none'), label: 'none' },
+    ], ', ');
+    const adhMap = { '佳': 'good', '尚可': 'fair', '差': 'poor' };
     const medParts = [];
     if (meds) medParts.push(meds);
     if (val('fu-med-detail')) medParts.push(val('fu-med-detail'));
-    if (radio('fu-adh')) medParts.push(`依從性${radio('fu-adh')}`);
-    if (getFlag('fu-self-pay')) medParts.push('自費');
-    let medLine = medParts.join('；');
+    if (radio('fu-adh')) medParts.push(`adherence ${adhMap[radio('fu-adh')] || radio('fu-adh')}`);
+    if (getFlag('fu-self-pay')) medParts.push('self-paid');
+    let medLine = medParts.join('; ');
     medLine = appendNote(medLine, 'fu-med-note');
-    if (medLine) lines.push(`【藥物】${medLine}`);
+    if (medLine) lines.push(`[Meds] ${medLine}`);
 
+    // [Adverse effects]
     let ae = joinChecked([
-      { cond: getFlag('fu-ae-nausea'), label: '噁心' },
-      { cond: getFlag('fu-ae-vomit'), label: '嘔吐' },
-      { cond: getFlag('fu-ae-diarrhea'), label: '腹瀉' },
-      { cond: getFlag('fu-ae-constip'), label: '便秘' },
-      { cond: getFlag('fu-ae-bloat'), label: '腹脹' },
+      { cond: getFlag('fu-ae-nausea'), label: 'nausea' },
+      { cond: getFlag('fu-ae-vomit'), label: 'vomiting' },
+      { cond: getFlag('fu-ae-diarrhea'), label: 'diarrhea' },
+      { cond: getFlag('fu-ae-constip'), label: 'constipation' },
+      { cond: getFlag('fu-ae-bloat'), label: 'bloating' },
       { cond: getFlag('fu-ae-reflux'), label: 'GERD' },
-      { cond: getFlag('fu-ae-fatigue'), label: '疲倦' },
-      { cond: getFlag('fu-ae-inject'), label: '注射處反應' },
-    ]);
+      { cond: getFlag('fu-ae-fatigue'), label: 'fatigue' },
+      { cond: getFlag('fu-ae-inject'), label: 'injection-site reaction' },
+    ], ', ');
     ae = appendNote(ae, 'fu-ae-note');
-    if (ae) lines.push(`【副作用】${ae}`);
+    if (ae) lines.push(`[Adverse effects] ${ae}`);
 
+    // [Lifestyle adherence]
     const lsParts = [];
-    if (radio('fu-diet')) lsParts.push(`飲食${radio('fu-diet')}`);
-    if (radio('fu-exer')) lsParts.push(`運動${radio('fu-exer')}`);
-    let lsLine = lsParts.join('，');
+    if (radio('fu-diet')) lsParts.push(`diet ${adhMap[radio('fu-diet')] || radio('fu-diet')}`);
+    if (radio('fu-exer')) lsParts.push(`exercise ${adhMap[radio('fu-exer')] || radio('fu-exer')}`);
+    let lsLine = lsParts.join(', ');
     lsLine = appendNote(lsLine, 'fu-ls-note');
-    if (lsLine) lines.push(`【生活型態】${lsLine}`);
+    if (lsLine) lines.push(`[Lifestyle] ${lsLine}`);
 
+    // [Labs]
     const labParts = [];
-    if (getFlag('fu-lab-followup')) labParts.push('待追蹤');
+    if (getFlag('fu-lab-followup')) labParts.push('f/u labs pending');
     if (val('fu-lab-note')) labParts.push(val('fu-lab-note'));
-    if (labParts.length) lines.push(`【檢驗】${labParts.join('；')}`);
+    if (labParts.length) lines.push(`[Labs] ${labParts.join('; ')}`);
 
+    // [Plan]
     let plan = joinChecked([
-      { cond: getFlag('fu-plan-continue'), label: '繼續原方案' },
-      { cond: getFlag('fu-plan-titrate'), label: '調整劑量' },
-      { cond: getFlag('fu-plan-switch'), label: '換藥' },
-      { cond: getFlag('fu-plan-add'), label: '加藥' },
-      { cond: getFlag('fu-plan-stop'), label: '停藥' },
-      { cond: getFlag('fu-plan-refer'), label: '轉介' },
-      { cond: getFlag('fu-plan-lab'), label: '排檢驗' },
-    ]);
+      { cond: getFlag('fu-plan-continue'), label: 'continue current regimen' },
+      { cond: getFlag('fu-plan-titrate'), label: 'titrate dose' },
+      { cond: getFlag('fu-plan-switch'), label: 'switch agent' },
+      { cond: getFlag('fu-plan-add'), label: 'add-on agent' },
+      { cond: getFlag('fu-plan-stop'), label: 'discontinue' },
+      { cond: getFlag('fu-plan-refer'), label: 'referral' },
+      { cond: getFlag('fu-plan-lab'), label: 'arrange labs' },
+    ], ', ');
     plan = appendNote(plan, 'fu-plan-note');
-    if (plan) lines.push(`【計畫】${plan}`);
+    if (plan) lines.push(`[Plan] ${plan}`);
 
     const out = document.getElementById('fu-output');
-    out.textContent = lines.length ? lines.join('\n') : '（填寫上方欄位後此處會自動產生回診病歷文字）';
+    out.textContent = lines.length ? lines.join('\n') : '（填寫上方欄位後此處會自動產生英文回診病歷文字）';
   }
 
   // ── Copy ──

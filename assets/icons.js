@@ -61,6 +61,10 @@
                    '<path d="M5 16h6"/><path d="M17 16h6"/>' +
                    '<path d="M12 3v18"/><path d="M5 21h14"/>'),
 
+    // 首頁
+    home:      svg('<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>' +
+                   '<polyline points="9 22 9 12 15 12 15 22"/>'),
+
     // 意見回饋：對話框
     message:   svg('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'),
 
