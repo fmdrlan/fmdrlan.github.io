@@ -644,11 +644,11 @@
 
       <div class="form-group">
         <label>TC <span class="unit">mg/dL</span></label>
-        <input type="number" id="tc" min="50" max="600" placeholder="總膽固醇">
+        <input type="number" id="tc" min="50" max="600" placeholder="總膽固醇" oninput="calcNonHDL()">
       </div>
       <div class="form-group">
         <label>LDL-C <span class="unit">mg/dL</span></label>
-        <input type="number" id="ldl" min="10" max="500" placeholder="壞膽固醇">
+        <input type="number" id="ldl" min="10" max="500" placeholder="壞膽固醇（未測可不填）" oninput="calcNonHDL()">
       </div>
       <div class="form-group">
         <label>HDL-C <span class="unit">mg/dL</span></label>
@@ -656,7 +656,7 @@
       </div>
       <div class="form-group">
         <label>TG <span class="unit">mg/dL</span></label>
-        <input type="number" id="tg" min="20" max="3000" placeholder="三酸甘油酯">
+        <input type="number" id="tg" min="20" max="3000" placeholder="三酸甘油酯" oninput="calcNonHDL()">
       </div>
       <div class="form-group">
         <label>是否用 TG 血脂藥 <i class="info-icon" data-tip="使用降 TG 藥物（如 fibrate、魚油）即符合代謝症候群 TG 偏高條件">!</i></label>
@@ -668,6 +668,10 @@
       <div class="form-group">
         <label>non-HDL-C <span class="unit">mg/dL</span> <span class="optional">自動計算</span></label>
         <div class="computed-field" id="nonhdl">—</div>
+      </div>
+      <div class="form-group" id="calcLdlGroup" style="display:none;">
+        <label>Calculated LDL <span class="unit">mg/dL</span> <span class="optional">Friedewald</span> <i class="info-icon" data-tip="未實測 LDL 時，由 TC、HDL、TG 推算：LDL = TC − HDL − TG/5。TG ≥ 400 mg/dL 時公式不適用。">!</i></label>
+        <div class="computed-field" id="calcLdl">—</div>
       </div>
 
       <!-- 血壓 -->
@@ -974,9 +978,56 @@ const getRadio = name => {
 const hasAscvd = () => getRadio('ascvd') === 1;
 
 function calcNonHDL() {
-  const tc = getNum('tc'), hdl = getNum('hdl');
-  const el = document.getElementById('nonhdl');
-  el.textContent = (tc && hdl) ? (tc - hdl).toFixed(0) + ' mg/dL' : '—';
+  const tc = getNum('tc'), hdl = getNum('hdl'), tg = getNum('tg'), ldl = getNum('ldl');
+  const elNH = document.getElementById('nonhdl');
+  elNH.textContent = (tc && hdl) ? (tc - hdl).toFixed(0) + ' mg/dL' : '—';
+
+  // ── Calculated LDL（Friedewald）: 只在使用者「沒有」實測 LDL 時顯示
+  const grp = document.getElementById('calcLdlGroup');
+  const elCL = document.getElementById('calcLdl');
+  if (ldl) {
+    // 使用者已輸入實測 LDL → 隱藏計算欄位
+    grp.style.display = 'none';
+    elCL.textContent = '—';
+    elCL.style.color = '';
+    return;
+  }
+  // 沒輸入 LDL → 嘗試用 TC/HDL/TG 算
+  if (tc && hdl && tg) {
+    grp.style.display = '';
+    if (tg >= 400) {
+      // Friedewald 公式不適用
+      elCL.textContent = 'TG ≥ 400，公式不適用';
+      elCL.style.color = 'var(--accent-yellow, #d4a843)';
+    } else {
+      const calc = tc - hdl - tg / 5;
+      if (calc < 0) {
+        elCL.textContent = '計算值異常（< 0），請覆核數值';
+        elCL.style.color = 'var(--accent-yellow, #d4a843)';
+      } else {
+        elCL.textContent = calc.toFixed(0) + ' mg/dL（推算值）';
+        elCL.style.color = '';
+      }
+    }
+  } else {
+    // TC/HDL/TG 缺一不可
+    grp.style.display = 'none';
+    elCL.textContent = '—';
+    elCL.style.color = '';
+  }
+}
+
+// ── Helper：取「實際可用的 LDL」（實測優先，否則 Friedewald）──
+// 回傳 { value: number|null, source: 'measured'|'calculated'|null }
+function getEffectiveLDL() {
+  const ldl = getNum('ldl');
+  if (ldl) return { value: ldl, source: 'measured' };
+  const tc = getNum('tc'), hdl = getNum('hdl'), tg = getNum('tg');
+  if (tc && hdl && tg && tg < 400) {
+    const calc = tc - hdl - tg / 5;
+    if (calc > 0) return { value: Math.round(calc), source: 'calculated' };
+  }
+  return { value: null, source: null };
 }
 
 function toggleAscvd() {
@@ -1012,6 +1063,8 @@ function resetForm() {
   document.getElementById('statin_dose').value = '';
   document.querySelectorAll('.tag-option').forEach(e => e.classList.remove('selected'));
   document.getElementById('nonhdl').textContent = '—';
+  document.getElementById('calcLdlGroup').style.display = 'none';
+  document.getElementById('calcLdl').textContent = '—';
   toggleAscvd();
   document.getElementById('results').classList.remove('visible');
 }
@@ -1257,7 +1310,7 @@ function reasoningBox(text) {
 //  Taiwan 2025
 // ─────────────────────────────────────────────────────────────
 function calcTaiwan(p) {
-  const { age, sex, ldl, tc, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist,
+  const { age, sex, ldl, ldlSource, tc, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist,
           smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis,
           ascvdTypes, cac, lpa, hscrp } = p;
   let level, ldlTarget, nonhdlTarget, reasons = [];
@@ -1424,7 +1477,7 @@ function calcTaiwan(p) {
   let html = riskBadge(level, labels[level]);
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
   html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
-  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL`);
+  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL${ldlSource === 'calculated' ? ' <span style="color:var(--text-muted);font-size:12px;">(Friedewald 推算)</span>' : ''}`);
   html += metricRow('達標狀況', ldlOK);
   if (nonhdl) html += metricRow('目前 non-HDL-C', `${nonhdl} mg/dL`);
   html += metSynRow;
@@ -1433,7 +1486,7 @@ function calcTaiwan(p) {
 }
 
 function calcESC(p) {
-  const { age, sex, sbp, dbp, tc, hdl, ldl, smoking, ascvd, ascvd_multi,
+  const { age, sex, sbp, dbp, tc, hdl, ldl, ldlSource, smoking, ascvd, ascvd_multi,
           ascvdTypes, dm, fh, egfr, statin, statinDose, imaging_stenosis } = p;
   let level, ldlTarget, nonhdlTarget, score2 = null;
   let reasons = [];
@@ -1629,7 +1682,7 @@ function calcESC(p) {
   }
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
   html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
-  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL`);
+  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL${ldlSource === 'calculated' ? ' <span style="color:var(--text-muted);font-size:12px;">(Friedewald 推算)</span>' : ''}`);
   html += metricRow('達標狀況', ldlOK);
   html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
   if (score2 !== null && drivers.length) {
@@ -1865,7 +1918,7 @@ function calcAHA(p) {
   }
   html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
   html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
-  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL`);
+  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL${ldlSource === 'calculated' ? ' <span style="color:var(--text-muted);font-size:12px;">(Friedewald 推算)</span>' : ''}`);
   html += metricRow('達標狀況', ldlOK);
   html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
   if (prevent !== null && drivers.length) {
@@ -1878,7 +1931,7 @@ function calcAHA(p) {
 }
 
 function calcNHI(p) {
-  const { ldl, tc, hdl, tg, tgmed, ascvd, ascvdTypes, dm, htn, smoking,
+  const { ldl, ldlSource, tc, hdl, tg, tgmed, ascvd, ascvdTypes, dm, htn, smoking,
           fhcad, statin, statinDose, eze, egfr, age, sex, sbp, dbp, bpMed } = p;
   let html = '';
 
@@ -2213,7 +2266,10 @@ function calculate() {
   const age = getNum('age');
   const sex = getRadio('sex');
   const tc = getNum('tc');
-  const ldl = getNum('ldl');
+  // ── LDL：實測優先，否則用 Friedewald 推算
+  const effLDL = getEffectiveLDL();
+  const ldl = effLDL.value;
+  const ldlSource = effLDL.source;   // 'measured' | 'calculated' | null
   const hdl = getNum('hdl');
   const tg = getNum('tg');
   const tgmed = getRadio('tgmed');
@@ -2248,7 +2304,7 @@ function calculate() {
     return;
   }
 
-  const p = { age, sex, tc, ldl, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist, smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis, ascvdTypes, cac, lpa, hscrp, statin, statinDose, eze, fpg, hba1c, dmMed };
+  const p = { age, sex, tc, ldl, ldlSource, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist, smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis, ascvdTypes, cac, lpa, hscrp, statin, statinDose, eze, fpg, hba1c, dmMed };
 
   document.getElementById('body-tw').innerHTML = calcTaiwan(p);
   document.getElementById('body-esc').innerHTML = calcESC(p);

@@ -118,6 +118,203 @@
     cursor: not-allowed;
   }
 
+  /* ── BMI 對照浮動工具 ── */
+  .bmi-fab {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(74,158,255,0.35), 0 0 0 1px rgba(255,255,255,0.06);
+    z-index: 50;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .bmi-fab:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(74,158,255,0.45);
+  }
+  .bmi-fab svg { width: 14px; height: 14px; stroke-width: 2; }
+
+  .bmi-modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(13,17,23,0.7);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px 20px;
+    overflow-y: auto;
+  }
+  .bmi-modal-backdrop.open { display: flex; }
+  .bmi-modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+  .bmi-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .bmi-modal-title {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .bmi-modal-title svg { width: 16px; height: 16px; color: var(--accent); stroke-width: 1.8; }
+  .bmi-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    border-radius: 4px;
+    transition: all 0.12s;
+  }
+  .bmi-close-btn:hover { background: var(--bg2); color: var(--text); }
+  .bmi-close-btn svg { width: 16px; height: 16px; stroke-width: 2; }
+
+  .bmi-modal-body {
+    padding: 18px 20px;
+  }
+  .bmi-input-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .bmi-input-row .field {
+    flex: 1;
+    min-width: 140px;
+  }
+  .bmi-input-row label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .bmi-input-row input {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg2);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+  }
+  .bmi-input-row input:focus { outline: none; border-color: var(--accent); }
+
+  .bmi-current-bmi {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  .bmi-current-bmi.empty { color: var(--text-dim); justify-content: center; }
+  .bmi-current-bmi .bmi-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .bmi-current-bmi .bmi-cat {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: var(--surface2);
+  }
+
+  .bmi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .bmi-table th, .bmi-table td {
+    padding: 7px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .bmi-table th {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--bg2);
+  }
+  .bmi-table td {
+    color: var(--text);
+  }
+  .bmi-table td.cat {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .bmi-table td.bmi-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+  .bmi-table td.wt-num {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .bmi-table tr.current-cat td {
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+  .bmi-table tr.current-cat td.cat {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .bmi-diff-row {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(63,185,80,0.06);
+    border: 1px solid rgba(63,185,80,0.25);
+    border-radius: 6px;
+    font-size: 13px;
+    color: #b3d8b8;
+    display: none;
+  }
+  .bmi-diff-row.show { display: block; }
+  .bmi-diff-row strong { color: var(--green); font-family: 'JetBrains Mono', monospace; }
+
+  .bmi-modal-foot {
+    padding: 10px 20px 14px;
+    font-size: 11px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    line-height: 1.6;
+  }
+
   /* ── Mode tabs（初診 / 回診） ── */
   .mode-bar {
     display: flex;
@@ -980,6 +1177,59 @@
 
 </div>
 
+<!-- ── BMI 對照浮動工具 ── -->
+<button class="bmi-fab" id="bmiFab" aria-label="開啟 BMI 對照工具">
+  <span id="bmiFabIcon"></span>
+  BMI 對照
+</button>
+
+<div class="bmi-modal-backdrop" id="bmiBackdrop" role="dialog" aria-modal="true" aria-labelledby="bmiTitle">
+  <div class="bmi-modal" onclick="event.stopPropagation()">
+    <div class="bmi-modal-header">
+      <div class="bmi-modal-title" id="bmiTitle">
+        <span id="bmiTitleIcon"></span>BMI 對照（台灣標準）
+      </div>
+      <button class="bmi-close-btn" id="bmiClose" aria-label="關閉">
+        <span id="bmiCloseIcon"></span>
+      </button>
+    </div>
+    <div class="bmi-modal-body">
+      <div class="bmi-input-row">
+        <div class="field">
+          <label for="bmiHeight">身高 (cm)</label>
+          <input type="number" id="bmiHeight" step="0.5" min="100" max="220" placeholder="例：165">
+        </div>
+        <div class="field">
+          <label for="bmiCurrentWt">目前體重 (kg)<span style="color:var(--text-dim);font-weight:normal;">（選填）</span></label>
+          <input type="number" id="bmiCurrentWt" step="0.1" min="20" max="300" placeholder="例：80">
+        </div>
+      </div>
+
+      <div class="bmi-current-bmi empty" id="bmiCurrent">
+        輸入身高與目前體重，自動計算 BMI
+      </div>
+
+      <table class="bmi-table" id="bmiTable">
+        <thead>
+          <tr>
+            <th>分級</th>
+            <th>BMI</th>
+            <th>對應體重</th>
+          </tr>
+        </thead>
+        <tbody id="bmiTableBody">
+          <tr><td colspan="3" style="text-align:center;color:var(--text-dim);padding:18px;">先輸入身高</td></tr>
+        </tbody>
+      </table>
+
+      <div class="bmi-diff-row" id="bmiDiff"></div>
+    </div>
+    <div class="bmi-modal-foot">
+      台灣標準（衛福部）：過重 24–27 · 輕度肥胖 27–30 · 中度肥胖 30–35 · 重度肥胖 ≥ 35
+    </div>
+  </div>
+</div>
+
 <script>
 (function() {
   // ── Mode tab switching ──
@@ -1533,6 +1783,124 @@
   inject('ic-reset2', 'refresh');
   inject('ic-check', 'check');
   inject('ic-target2', 'target');
+
+  // ── BMI 對照浮動工具 ──
+  inject('bmiFabIcon', 'ruler');
+  inject('bmiTitleIcon', 'ruler');
+  inject('bmiCloseIcon', 'close');
+
+  // 台灣 BMI 分級（衛福部標準）
+  // [BMI 下限, BMI 上限 (不含), 分級名稱]
+  // 上限 null 表示無上限
+  const BMI_BANDS = [
+    { min: 0,    max: 18.5, label: '過輕' },
+    { min: 18.5, max: 24.0, label: '正常' },
+    { min: 24.0, max: 27.0, label: '過重' },
+    { min: 27.0, max: 30.0, label: '輕度肥胖' },
+    { min: 30.0, max: 35.0, label: '中度肥胖' },
+    { min: 35.0, max: null, label: '重度肥胖' },
+  ];
+
+  function classifyBMI(bmi) {
+    for (const b of BMI_BANDS) {
+      if (bmi >= b.min && (b.max === null || bmi < b.max)) return b.label;
+    }
+    return '—';
+  }
+
+  const fab = document.getElementById('bmiFab');
+  const backdrop = document.getElementById('bmiBackdrop');
+  const closeBtn = document.getElementById('bmiClose');
+  const heightIn = document.getElementById('bmiHeight');
+  const wtIn = document.getElementById('bmiCurrentWt');
+  const currentEl = document.getElementById('bmiCurrent');
+  const tbody = document.getElementById('bmiTableBody');
+  const diffEl = document.getElementById('bmiDiff');
+
+  function openBmi() {
+    backdrop.classList.add('open');
+    setTimeout(() => heightIn.focus(), 50);
+  }
+  function closeBmi() { backdrop.classList.remove('open'); }
+  fab.addEventListener('click', openBmi);
+  closeBtn.addEventListener('click', closeBmi);
+  backdrop.addEventListener('click', closeBmi);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeBmi();
+  });
+
+  function renderBmi() {
+    const h = parseFloat(heightIn.value);
+    const w = parseFloat(wtIn.value);
+
+    // 目前 BMI 顯示
+    if (h > 0 && w > 0) {
+      const m = h / 100;
+      const bmi = w / (m * m);
+      const cat = classifyBMI(bmi);
+      currentEl.classList.remove('empty');
+      currentEl.innerHTML =
+        `<span>目前 BMI</span><span class="bmi-val">${bmi.toFixed(1)}</span><span class="bmi-cat">${cat}</span>`;
+    } else {
+      currentEl.classList.add('empty');
+      currentEl.textContent = h > 0 ? '輸入目前體重以計算 BMI' : '輸入身高與目前體重，自動計算 BMI';
+    }
+
+    // 對照表
+    if (!(h > 0)) {
+      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--text-dim);padding:18px;">先輸入身高</td></tr>';
+      diffEl.classList.remove('show');
+      return;
+    }
+    const m = h / 100;
+    const currentBmi = w > 0 ? w / (m * m) : null;
+    const currentCat = currentBmi !== null ? classifyBMI(currentBmi) : null;
+
+    // 一個 row 對應一個分級 range，顯示 BMI range + 對應體重 range
+    const rows = BMI_BANDS.map(b => {
+      const wtMin = (b.min * m * m).toFixed(1);
+      const wtMax = b.max !== null ? (b.max * m * m).toFixed(1) : null;
+      let bmiStr, wtStr;
+      if (b.min === 0) {
+        bmiStr = `< ${b.max.toFixed(1)}`;
+        wtStr = `< ${wtMax} kg`;
+      } else if (b.max === null) {
+        bmiStr = `≥ ${b.min.toFixed(1)}`;
+        wtStr = `≥ ${wtMin} kg`;
+      } else {
+        bmiStr = `${b.min.toFixed(1)} – ${b.max.toFixed(1)}`;
+        wtStr = `${wtMin} – ${wtMax} kg`;
+      }
+      const highlight = (currentCat === b.label) ? 'current-cat' : '';
+      return `<tr class="${highlight}">
+        <td class="cat">${b.label}</td>
+        <td class="bmi-num">${bmiStr}</td>
+        <td class="wt-num">${wtStr}</td>
+      </tr>`;
+    }).join('');
+    tbody.innerHTML = rows;
+
+    // 差距訊息（若有目前體重 + 不在「正常」範圍）
+    if (w > 0 && currentBmi !== null) {
+      const target = 24.0; // BMI 24 為「正常」上限
+      const targetKg = target * m * m;
+      const diffKg = w - targetKg;
+      if (diffKg > 0.5) {
+        diffEl.innerHTML = `若要達 BMI < 24（正常範圍），需減 <strong>${diffKg.toFixed(1)} kg</strong>（目標體重 < ${targetKg.toFixed(1)} kg）`;
+        diffEl.classList.add('show');
+      } else if (currentBmi < 18.5) {
+        const lowKg = 18.5 * m * m;
+        diffEl.innerHTML = `目前 BMI 過輕，達 BMI ≥ 18.5 需增加 <strong>${(lowKg - w).toFixed(1)} kg</strong>（目標體重 ≥ ${lowKg.toFixed(1)} kg）`;
+        diffEl.classList.add('show');
+      } else {
+        diffEl.classList.remove('show');
+      }
+    } else {
+      diffEl.classList.remove('show');
+    }
+  }
+  heightIn.addEventListener('input', renderBmi);
+  wtIn.addEventListener('input', renderBmi);
 
   renderNote();
   renderOrders();
