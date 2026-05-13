@@ -1106,7 +1106,8 @@
 
       <div class="form-section-sep"></div>
       <div class="form-actions full" style="grid-column:1/-1">
-        <button class="btn-calc" onclick="calculate()">▶ 計算風險分級與給付判斷</button>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;text-align:center;">輸入欄位後自動計算（停止輸入約 0.3 秒後更新）</div>
+        <button class="btn-calc" onclick="calculate()">↓ 跳至結果</button>
         <button class="btn-reset" onclick="resetForm()">↺ 重設</button>
       </div>
 
@@ -2130,13 +2131,7 @@ function calcAHA(p) {
 
   } else {
     level = null;
-    const got = [];
-    if (age) got.push(`年齡 ${age}`); else got.push('年齡 ✗');
-    if (sbp) got.push(`SBP ${sbp}`); else got.push('SBP ✗');
-    if (tc) got.push(`TC ${tc}`); else got.push('TC ✗');
-    if (hdl) got.push(`HDL ${hdl}`); else got.push('HDL ✗');
     reasons.push('需年齡、SBP、TC、HDL-C 才能計算 PREVENT');
-    reasons.push(`目前讀到：${got.join('、')}`);
   }
 
   // PREVENT 主要貢獻因子（獨立 chips 區塊）
@@ -2525,14 +2520,17 @@ function calcNHI(p) {
   return html;
 }
 
-function calculate() {
+// 內部計算函式 — 不顯示 alert、不 scroll、僅在資料足夠時更新結果
+function calculateAuto() {
   const age = getNum('age');
   const sex = getRadio('sex');
+  // 至少需要 age + sex 才開始計算，否則靜默
+  if (!age || !sex) return false;
+
   const tc = getNum('tc');
-  // ── LDL：實測優先，否則用 Friedewald 推算
   const effLDL = getEffectiveLDL();
   const ldl = effLDL.value;
-  const ldlSource = effLDL.source;   // 'measured' | 'calculated' | null
+  const ldlSource = effLDL.source;
   const hdl = getNum('hdl');
   const tg = getNum('tg');
   const tgmed = getRadio('tgmed');
@@ -2561,12 +2559,6 @@ function calculate() {
   const statinDose = document.getElementById('statin_dose').value;
   const eze = getRadio('eze');
 
-  // Validation
-  if (!age || !sex) {
-    alert('請至少輸入年齡與性別');
-    return;
-  }
-
   const p = { age, sex, tc, ldl, ldlSource, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist, smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis, ascvdTypes, cac, lpa, hscrp, statin, statinDose, eze, fpg, hba1c, dmMed };
 
   document.getElementById('body-tw').innerHTML = calcTaiwan(p);
@@ -2575,8 +2567,34 @@ function calculate() {
   document.getElementById('body-nhi').innerHTML = calcNHI(p);
 
   document.getElementById('results').classList.add('visible');
+  return true;
+}
+
+// 按鈕觸發的計算 — 會 alert + scroll
+function calculate() {
+  const age = getNum('age');
+  const sex = getRadio('sex');
+  if (!age || !sex) {
+    alert('請至少輸入年齡與性別');
+    return;
+  }
+  calculateAuto();
   document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+// ── 自動計算：監聽所有 form 變動，debounce 350ms ──
+(function setupAutoCalc() {
+  let debounceTimer = null;
+  function trigger() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => { calculateAuto(); }, 350);
+  }
+  const panel = document.querySelector('.input-panel');
+  if (panel) {
+    panel.addEventListener('input', trigger);
+    panel.addEventListener('change', trigger);
+  }
+})();
 // ── Smart tooltip positioning ──
 // Uses mousemove to place the ::after pseudo via a CSS var trick isn't possible,
 // so we use a real floating div instead.
@@ -2744,12 +2762,7 @@ if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
      */
     function extractValue(patterns, minVal, maxVal, specialHandler) {
       for (const pat of patterns) {
-        // 建立 regex: label 後可能有 (unit) 然後是空白或 tab 然後數值
-        // 例： "CHOL(mg/dL)\t\t176"  或  "HDL-C(mg/dL)\t\t84"
-        // 注意：value 可能在前一格（空白）或後一格，我們抓出附近的數字
         const escapedPat = pat.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        // 抓 label 後出現的「第一個非空字串」，看看是不是數字
-        // 同時兼容 "≧90" 這種界限值
         const re = new RegExp(
           escapedPat + '[\\s\\S]{0,30}?[\\t ]([\\d.≧≦<>＜＞]+(?:\\.\\d+)?)',
           'i'
@@ -2757,13 +2770,21 @@ if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
         const m = text.match(re);
         if (m) {
           let valStr = m[1];
+
+          // ── 防線：拒絕來自日期字串的片段 ──
+          // 例如「2026-03-04」會被切成 2026 / 03 / 04，匹配位置周圍若是日期 pattern 就拒絕
+          const matchPos = m.index + m[0].lastIndexOf(valStr);
+          const surround = text.substring(Math.max(0, matchPos - 6), matchPos + valStr.length + 6);
+          if (/\d{2,4}[-/]\d{1,2}[-/]\d{1,2}/.test(surround)) continue;
+          // 拒絕來自時間字串（如 10:30）
+          if (/\d{1,2}:\d{2}/.test(surround)) continue;
+
           // 處理特殊值
           let val;
           if (specialHandler) {
             val = specialHandler(valStr);
             if (val === null) continue;
           } else if (/^[≧≦<>＜＞]/.test(valStr)) {
-            // 界限值如 ≧90、<10：取數字部分
             const numPart = valStr.replace(/[≧≦<>＜＞]/g, '');
             val = parseFloat(numPart);
             if (isNaN(val)) continue;
@@ -2789,7 +2810,7 @@ if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
         min: 10, max: 500, unit: 'mg/dL', label: 'LDL-C' },
       { id: 'tg',  patterns: ['TG(mg/dL)', 'TG', '三酸甘油酯', 'Triglyceride'],
         min: 20, max: 3000, unit: 'mg/dL', label: 'TG' },
-      { id: 'fpg', patterns: ['GLU, AC(mg/dL)', 'GLU,AC', 'GLU AC', 'GLU(mg/dL)', 'Glucose AC', '空腹血糖'],
+      { id: 'fpg', patterns: ['GLU, AC(mg/dL)', 'GLU, AC', 'GLU,AC', 'GLU AC', 'GLU(mg/dL)', 'Glucose AC', '空腹血糖'],
         min: 40, max: 600, unit: 'mg/dL', label: '空腹血糖' },
       { id: 'hba1c', patterns: ['HbA1c(%)', 'HbA1C(%)', 'HbA1c', 'HbA1C', '糖化血色素'],
         min: 3, max: 20, unit: '%', label: 'HbA1c' },
@@ -2810,7 +2831,7 @@ if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
           return isNaN(n) ? null : n;
         }
       },
-      { id: 'uacr', patterns: ['UACR', 'Albumin/Creatinine', '蛋白尿'],
+      { id: 'uacr', patterns: ['UACR', 'U-ACR', 'Albumin/Creatinine'],
         min: 0, max: 10000, unit: 'mg/g', label: 'UACR' },
     ];
 
@@ -2829,8 +2850,13 @@ if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
     // eGFR：CKD-EPI 比 raw eGFR 更準，若兩個都有，CKD-EPI 已被優先匹配，OK
 
     // ── 4. 給 user 友善的補充訊息 ──
-    if (result.fields.tc && result.fields.hdl && !result.fields.ldl) {
-      result.warnings.push('LIS 未報告 LDL-C — 但有 TC + HDL，若再有 TG，欄位將用 Friedewald 公式推算 LDL。');
+    const hasTcHdl = result.fields.tc && result.fields.hdl;
+    const hasTg = result.fields.tg;
+    const noLdl = !result.fields.ldl;
+    if (hasTcHdl && hasTg && noLdl) {
+      result.warnings.push('LIS 未報告 LDL-C — 欄位填入後將用 Friedewald 公式自動推算 LDL。');
+    } else if (hasTcHdl && !hasTg && noLdl) {
+      result.warnings.push('LIS 未報告 LDL-C — 已有 TC + HDL，若再補 TG 即可用 Friedewald 公式推算 LDL。');
     }
 
     return result;
