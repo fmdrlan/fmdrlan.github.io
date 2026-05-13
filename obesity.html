@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肥胖門診問診工具 · DR. YANG's Toolbox</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="肥胖門診結構化問診工具：依台灣成人肥胖臨床實證指引（2026）整合病史、共病、飲食、生活型態、理學檢查與肌少肥胖評估；自動生成病歷文字與症狀導向檢驗 order。">
+<meta name="keywords" content="肥胖,減重,門診工具,問診,GLP-1,肌少肥胖,中心性肥胖,結構化病歷,SOAP,DR. YANG">
+<meta name="author" content="DR. YANG">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://garrulous-cat.github.io/mindy/obesity.html">
+
+<!-- ── Open Graph ── -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="肥胖門診問診工具 · DR. YANG's Toolbox">
+<meta property="og:description" content="結構化問診 + 自動病歷文字 + 症狀導向 order 提示，依台灣 2026 肥胖指引。">
+<meta property="og:url" content="https://garrulous-cat.github.io/mindy/obesity.html">
+<meta property="og:locale" content="zh_TW">
+
+<!-- ── Favicon ── -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230d1117'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='monospace' font-size='13' font-weight='700' fill='%234a9eff'%3EY%3C/text%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="assets/shared.css">
+<script src="assets/icons.js"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b27;
+    --surface: #1c2333;
+    --surface2: #222c3d;
+    --border: #2d3a52;
+    --border-strong: #3d4f6e;
+    --text: #e2e8f4;
+    --text-muted: #8fa3c0;
+    --text-light: #566880;
+    --text-dim: #4a5568;
+    --accent: #4a9eff;
+    --accent-dim: #1e3a5f;
+    --accent-glow: rgba(74,158,255,0.15);
+    --green: #3fb950;
+    --green-bg: rgba(63,185,80,0.1);
+    --yellow: #d29922;
+    --yellow-bg: rgba(210,153,34,0.1);
+    --red: #f85149;
+    --red-bg: rgba(248,81,73,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* tabs-bar 樣式由 assets/shared.css 提供 */
+
+  /* ── Page header ── */
+  .page-header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 24px 0;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+
+  /* ── Mode tabs（初診 / 回診） ── */
+  .mode-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .mode-tab {
+    padding: 10px 18px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: color 0.15s;
+  }
+  .mode-tab svg { width: 14px; height: 14px; stroke-width: 1.8; }
+  .mode-tab:hover { color: var(--text); }
+  .mode-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 500;
+  }
+  .mode-pane { display: none; }
+  .mode-pane.active { display: block; }
+
+  /* ── Container ── */
+  .form-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+  }
+
+  /* ── Section card ── */
+  .sec {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .sec h3 {
+    margin: 0 0 14px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+  }
+  .sec h3 svg { width: 16px; height: 16px; stroke-width: 1.8; color: var(--accent); }
+  .sec h3 .copy-feedback { margin-left: auto; }
+
+  /* ── Form rows ── */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  .row:last-child { margin-bottom: 0; }
+  .field-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    min-width: 88px;
+  }
+
+  /* ── Checkbox / radio pills ── */
+  .chk {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    cursor: pointer;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    user-select: none;
+    background: var(--bg2);
+    color: var(--text);
+    transition: all 0.12s;
+  }
+  .chk input { margin: 0; cursor: pointer; accent-color: var(--accent); }
+  .chk:hover { border-color: var(--border-strong); }
+  .chk.active {
+    background: var(--accent-dim);
+    border-color: rgba(74,158,255,0.5);
+    color: var(--accent);
+  }
+
+  /* ── Grid for checkbox groups ── */
+  .subgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+  }
+
+  /* ── Inputs ── */
+  input[type="text"], input[type="number"] {
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    background: var(--bg2);
+    color: var(--text);
+    transition: border-color 0.12s;
+  }
+  input[type="text"]::placeholder, input[type="number"]::placeholder {
+    color: var(--text-dim);
+  }
+  input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .numin { width: 80px; }
+  .smallin { width: 130px; }
+  .txtin { width: 100%; }
+  .note-input-row { margin-top: 10px; }
+  .note-input-row input { width: 100%; }
+  .subheader {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 14px 0 6px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .subheader:first-child { margin-top: 0; }
+
+  /* ── Hint text ── */
+  .note-hint {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  .note-hint.warn { color: var(--yellow); }
+
+  /* ── Criteria reference box ── */
+  .criteria-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.7;
+  }
+  .criteria-box strong {
+    color: var(--text);
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── Output box（病歷文字） ── */
+  .output {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', 'Noto Sans TC', monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    line-height: 1.75;
+    min-height: 120px;
+    max-height: 450px;
+    overflow-y: auto;
+    color: var(--text);
+  }
+
+  /* ── Order card ── */
+  .order-card {
+    background: rgba(74,158,255,0.05);
+    border: 1px solid rgba(74,158,255,0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+  .order-card .order-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .order-card .order-title svg { width: 13px; height: 13px; stroke-width: 2; }
+  .order-list { font-size: 13px; color: var(--text); line-height: 1.8; }
+  .order-list .pill {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid rgba(74,158,255,0.3);
+    border-radius: 4px;
+    padding: 2px 9px;
+    margin: 2px 4px 2px 0;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text);
+  }
+  .order-reason {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-left: 4px;
+  }
+
+  /* ── Buttons ── */
+  .btnbar {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  button.act-btn {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.12s;
+  }
+  button.act-btn:hover {
+    border-color: var(--border-strong);
+    background: var(--surface2);
+  }
+  button.act-btn.btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  button.act-btn.btn-primary:hover {
+    background: #5fa8ff;
+    border-color: #5fa8ff;
+  }
+  button.act-btn svg { width: 13px; height: 13px; stroke-width: 1.8; }
+
+  .copy-feedback {
+    font-size: 11px;
+    color: var(--green);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .copy-feedback.show { opacity: 1; }
+
+  /* ── Disclaimer ── */
+  .disclaimer-banner {
+    background: rgba(210,153,34,0.06);
+    border: 1px solid rgba(210,153,34,0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    font-size: 12.5px;
+    color: #d8c08a;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.7;
+  }
+  .disclaimer-banner svg {
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+    color: var(--yellow);
+    margin-top: 2px;
+    stroke-width: 1.8;
+  }
+  .disclaimer-banner strong { color: #e8d8a8; }
+
+  /* ── Footer ── */
+  .obesity-footer {
+    margin-top: 32px;
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* sr-only for accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 600px) {
+    .page-header, .form-wrap { padding-left: 16px; padding-right: 16px; }
+    .subgrid { grid-template-columns: 1fr 1fr; }
+    .field-label { min-width: 70px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
+  <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
+  <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
+  <a class="tab-link active" href="obesity.html"><span class="ti" data-icon="weight"></span>肥胖門診問診</a>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-title">肥胖門診結構化問診工具</h1>
+  <p class="page-sub">依台灣成人肥胖臨床實證指引（2026）第八章設計。看診時邊問邊勾選，自動生成可貼進病歷的結構化文字 + 症狀導向 order 提示。</p>
+
+  <div class="disclaimer-banner">
+    <span id="discIcon"></span>
+    <div>
+      <strong>使用提醒：</strong>本工具為醫師端輔助記錄使用。產出之病歷文字與檢驗建議僅供臨床參考，
+      <strong>不取代個別病人之完整評估與醫師判斷</strong>。請依各院 SOP 與最新指引調整。
+    </div>
+  </div>
+
+  <div class="mode-bar" role="tablist">
+    <button class="mode-tab active" data-mode="intake" role="tab"><span id="iconIntake"></span>初診評估</button>
+    <button class="mode-tab" data-mode="followup" role="tab"><span id="iconFu"></span>回診追蹤</button>
+  </div>
+</div>
+
+<div class="form-wrap">
+
+<!-- ============= 初診 ============= -->
+<div class="mode-pane active" data-mode="intake">
+
+  <div class="sec">
+    <h3><span id="ic-sex"></span>性別</h3>
+    <div class="row">
+      <label class="chk"><input type="radio" name="sex" value="男"> 男</label>
+      <label class="chk"><input type="radio" name="sex" value="女"> 女</label>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-goal"></span>減重動機與目標</h3>
+    <div class="row">
+      <label class="field-label">就診動機</label>
+      <input type="text" class="txtin" id="motivation" placeholder="健康/外觀/共病改善/其他" style="flex:1;">
+    </div>
+    <div class="row">
+      <label class="field-label">目標體重</label>
+      <input type="number" class="numin" id="goal-wt" step="0.1"> kg
+      <label class="field-label" style="margin-left: 12px;">期望時程</label>
+      <input type="text" class="smallin" id="goal-time" placeholder="例：6個月">
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="goal-note" placeholder="其他備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-history"></span>體重變化史</h3>
+    <div class="row">
+      <label class="field-label">最高體重</label>
+      <input type="number" class="numin" id="max-wt" step="0.1"> kg
+      <label class="field-label" style="margin-left: 12px;">何時</label>
+      <input type="text" class="smallin" id="max-wt-when" placeholder="例：去年">
+    </div>
+    <div class="row">
+      <label class="field-label">最低體重</label>
+      <input type="number" class="numin" id="min-wt" step="0.1"> kg
+      <label class="field-label" style="margin-left: 12px;">起始增重</label>
+      <input type="text" class="smallin" id="onset" placeholder="例：30歲後">
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="weight-cycling"> 反覆減重 (weight cycling)</label>
+      <label class="field-label" style="margin-left: 4px;">次數/方式</label>
+      <input type="text" class="smallin" id="cycling-times" placeholder="">
+    </div>
+    <div class="row">
+      <label class="field-label">過去減重方式</label>
+      <input type="text" class="txtin" id="prev-method" placeholder="飲食/運動/藥物/手術，成效，失敗原因" style="flex:1; min-width: 240px;">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-events"></span>生活事件</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="quit-smoke"> 曾經戒菸</label>
+      <label class="chk female-only"><input type="checkbox" data-flag="preg-gain"> 懷孕期間增重過多</label>
+      <label class="chk female-only"><input type="checkbox" data-flag="menstrual"> 月經不規則</label>
+      <label class="chk female-only"><input type="checkbox" data-flag="post-meno"> 停經後體重增加</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="event-note" placeholder="其他生活事件備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-meds"></span>致胖藥物史</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="med-dm"> 降血糖藥（SU、TZD、insulin）</label>
+      <label class="chk"><input type="checkbox" data-flag="med-antipsych"> 抗精神病藥</label>
+      <label class="chk"><input type="checkbox" data-flag="med-antidep"> 抗憂鬱劑</label>
+      <label class="chk"><input type="checkbox" data-flag="med-antiep"> 抗癲癇藥</label>
+      <label class="chk"><input type="checkbox" data-flag="med-steroid"> 類固醇</label>
+      <label class="chk"><input type="checkbox" data-flag="med-bb"> β-blocker</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="med-detail" placeholder="藥物名稱/劑量/其他">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-endo"></span>內分泌症狀（症狀導向）</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="sx-thyroid"> 疲倦/便秘/怕冷（甲低？）</label>
+      <label class="chk"><input type="checkbox" data-flag="sx-cushing"> 圓臉/水牛肩/皮膚變薄（庫欣？）</label>
+      <label class="chk female-only"><input type="checkbox" data-flag="sx-pcos"> 多毛/月經失調/痤瘡（PCOS？）</label>
+      <label class="chk male-only"><input type="checkbox" data-flag="sx-hypogonad"> 性慾下降/疲倦/肌力減弱（低睪固酮？）</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="endo-note" placeholder="其他內分泌症狀備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-cm"></span>共病評估</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="cm-htn"> 高血壓</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-dm"> 糖尿病</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-dl"> 血脂異常</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-osa"> 睡眠呼吸中止症</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-masld"> 脂肪肝 (MASLD)</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-knee"> 退化性膝關節炎</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-hfpef"> HFpEF</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-gout"> 痛風</label>
+      <label class="chk"><input type="checkbox" data-flag="cm-psy"> 精神科疾病</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="cm-note" placeholder="其他共病/補充">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-sym"></span>體重相關症狀</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="sym-dyspnea"> 爬樓梯會喘</label>
+      <label class="chk"><input type="checkbox" data-flag="sym-knee"> 膝蓋痠痛</label>
+      <label class="chk"><input type="checkbox" data-flag="sym-fatigue"> 容易疲倦</label>
+      <label class="chk"><input type="checkbox" data-flag="sym-snore"> 打鼾</label>
+      <label class="chk"><input type="checkbox" data-flag="sym-sleepy"> 白天嗜睡</label>
+      <label class="chk"><input type="checkbox" data-flag="sym-apnea"> 目擊呼吸暫停</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="sym-note" placeholder="其他症狀備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-fh"></span>家族史</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="fh-obesity"> 肥胖</label>
+      <label class="chk"><input type="checkbox" data-flag="fh-dm"> 糖尿病</label>
+      <label class="chk"><input type="checkbox" data-flag="fh-htn"> 高血壓</label>
+      <label class="chk"><input type="checkbox" data-flag="fh-dl"> 高血脂</label>
+      <label class="chk"><input type="checkbox" data-flag="fh-cv"> 心血管疾病</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="fh-note" placeholder="哪位親屬/其他細節（例：母親 DM、父親 50歲心肌梗塞）">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-pattern"></span>用餐型態</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="diet-skip-bf"> 常略過早餐</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-late-dinner"> 晚餐進食時間晚</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-night-eat"> 吃宵夜</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-snack"> 兩餐之間吃點心</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-fast-eat"> 用餐速度快</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-distract"> 邊看手機/電視吃</label>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <label class="field-label">外食比例</label>
+      <label class="chk"><input type="radio" name="eat-out" value="低（<30%）"> 低</label>
+      <label class="chk"><input type="radio" name="eat-out" value="中（30–70%）"> 中</label>
+      <label class="chk"><input type="radio" name="eat-out" value="高（>70%）"> 高</label>
+    </div>
+    <div class="row">
+      <label class="field-label">備餐者</label>
+      <input type="text" class="smallin" id="cook-person" placeholder="自己/家人/外食">
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="pattern-note" placeholder="其他用餐型態備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-content"></span>飲食內容</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="diet-sugary"> 含糖飲料</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-fried"> 油炸食物</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-redmeat"> 紅肉/加工肉</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-upf"> 超加工食品/零食</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-alcohol"> 飲酒</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-highsalt"> 高鹽飲食</label>
+    </div>
+    <div class="row" style="margin-top:8px;">
+      <label class="field-label">含糖飲頻率</label>
+      <input type="text" class="smallin" id="sugary-freq" placeholder="例：每天1杯">
+      <label class="field-label" style="margin-left: 12px;">酒精</label>
+      <input type="text" class="smallin" id="alc-amount" placeholder="種類/量/週">
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="content-note" placeholder="其他飲食內容備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-beh"></span>飲食行為（心理面）</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="diet-emo"> 情緒性進食</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-stress"> 壓力性進食</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-binge"> 暴食傾向</label>
+      <label class="chk"><input type="checkbox" data-flag="diet-night-syn"> 夜食症候群</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="beh-note" placeholder="其他飲食行為備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-act"></span>身體活動</h3>
+    <div class="row">
+      <label class="field-label">運動類型</label>
+      <input type="text" class="txtin" id="exercise-type" placeholder="例：快走、重訓" style="flex:1;">
+    </div>
+    <div class="row">
+      <label class="field-label">頻率/時間</label>
+      <input type="text" class="smallin" id="exercise-freq" placeholder="例：3次/週">
+      <input type="text" class="smallin" id="exercise-dur" placeholder="例：30分/次" style="margin-left: 8px;">
+      <label class="field-label" style="margin-left: 12px;">強度</label>
+      <label class="chk"><input type="radio" name="intensity" value="低"> 低</label>
+      <label class="chk"><input type="radio" name="intensity" value="中"> 中</label>
+      <label class="chk"><input type="radio" name="intensity" value="高"> 高</label>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" data-flag="ls-sedentary"> 久坐 &gt; 8 小時/天</label>
+      <label class="chk"><input type="checkbox" data-flag="ls-act-limit"> 有活動受限因子</label>
+    </div>
+    <div class="row">
+      <label class="field-label">活動限制</label>
+      <input type="text" class="txtin" id="act-limit-detail" placeholder="例：膝痛、心肺功能" style="flex:1;">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-sleep"></span>睡眠</h3>
+    <div class="row">
+      <label class="field-label">睡眠時數</label>
+      <input type="number" class="numin" id="sleep-hr" step="0.5"> 小時
+      <label class="field-label" style="margin-left: 12px;">品質</label>
+      <label class="chk"><input type="radio" name="sleep-q" value="好"> 好</label>
+      <label class="chk"><input type="radio" name="sleep-q" value="普通"> 普通</label>
+      <label class="chk"><input type="radio" name="sleep-q" value="差"> 差</label>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" data-flag="ls-shift"> 夜班/輪班工作</label>
+      <label class="chk"><input type="checkbox" data-flag="ls-irreg"> 作息不規律</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="sleep-note" placeholder="入睡困難、易醒、其他睡眠細節">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-psy"></span>心理與社會</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="psy-depress"> 憂鬱情緒</label>
+      <label class="chk"><input type="checkbox" data-flag="psy-anxiety"> 焦慮情緒</label>
+      <label class="chk"><input type="checkbox" data-flag="psy-stigma"> 體重相關自我污名</label>
+      <label class="chk"><input type="checkbox" data-flag="psy-stress"> 高壓生活</label>
+    </div>
+    <div class="row" style="margin-top: 8px;">
+      <label class="field-label">家庭支持</label>
+      <label class="chk"><input type="radio" name="support" value="好"> 好</label>
+      <label class="chk"><input type="radio" name="support" value="普通"> 普通</label>
+      <label class="chk"><input type="radio" name="support" value="差"> 差</label>
+      <label class="field-label" style="margin-left: 16px;">工作型態</label>
+      <input type="text" class="smallin" id="work-type" placeholder="例：辦公室">
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="psy-note" placeholder="其他心理社會備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-pe"></span>系統性理學檢查</h3>
+    <div class="row">
+      <label class="field-label">腰圍 (cm)</label>
+      <input type="number" class="numin" id="waist" step="0.1">
+      <span class="note-hint" id="waist-note" style="margin-left: 8px;"></span>
+    </div>
+    <div class="row">
+      <label class="field-label">頸圍 (cm)</label>
+      <input type="number" class="numin" id="neck" step="0.1">
+      <span class="note-hint" style="margin-left: 8px;">男 ≥ 43、女 ≥ 38 提示 OSA 風險</span>
+    </div>
+
+    <div class="subheader">皮膚徵象（代謝異常）</div>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="pe-acanth"> 黑色棘皮症</label>
+      <label class="chk"><input type="checkbox" data-flag="pe-stria"> 肥胖紋</label>
+      <label class="chk"><input type="checkbox" data-flag="pe-intertrigo"> 對磨皮疹</label>
+      <label class="chk"><input type="checkbox" data-flag="pe-acne"> 痤瘡</label>
+      <label class="chk female-only"><input type="checkbox" data-flag="pe-hirsut"> 多毛</label>
+      <label class="chk"><input type="checkbox" data-flag="pe-xanth"> 黃色瘤</label>
+    </div>
+    <div class="subheader">頭頸部</div>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="pe-thyroid"> 甲狀腺腫大</label>
+      <label class="chk"><input type="checkbox" data-flag="pe-mooning"> 圓臉/水牛肩（庫欣？）</label>
+    </div>
+    <div class="subheader">心肺與下肢</div>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="pe-heart"> 心音異常</label>
+      <label class="chk"><input type="checkbox" data-flag="pe-lung"> 肺音異常</label>
+      <label class="chk"><input type="checkbox" data-flag="pe-edema"> 下肢水腫</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="pe-note" placeholder="其他理學檢查發現">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-sarc"></span>肌少肥胖症評估（懷疑時加做）</h3>
+    <div class="criteria-box">
+      <strong>異常切點 · AWGS 2019 / 指引建議</strong>
+      ・小腿圍：男 &lt; 34 cm、女 &lt; 33 cm<br>
+      ・握力：男 &lt; 28 kg、女 &lt; 18 kg<br>
+      ・5 次坐站：≥ 12 秒<br>
+      ・6 公尺步行速度：&lt; 1.0 m/s（≈ 6 公尺 &gt; 6 秒）
+    </div>
+    <div class="row">
+      <label class="field-label">小腿圍 (cm)</label>
+      <input type="number" class="numin" id="calf" step="0.1">
+      <label class="field-label" style="margin-left: 12px;">握力 (kg)</label>
+      <input type="number" class="numin" id="grip" step="0.1">
+    </div>
+    <div class="row">
+      <label class="field-label">5次坐站 (秒)</label>
+      <input type="number" class="numin" id="sts" step="0.1">
+      <label class="field-label" style="margin-left: 12px;">6m步行 (秒)</label>
+      <input type="number" class="numin" id="walk" step="0.1">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>
+      <span id="ic-note"></span>病歷文字
+      <span class="copy-feedback" id="copy-fb-note">已複製</span>
+    </h3>
+    <div class="output" id="note-output">（填寫上方欄位後此處會自動產生病歷文字）</div>
+    <div class="btnbar">
+      <button class="act-btn btn-primary" id="copy-note"><span id="ic-copy1"></span>複製病歷</button>
+      <button class="act-btn" id="reset-intake"><span id="ic-reset1"></span>清空初診</button>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>
+      <span id="ic-order"></span>建議檢驗 order
+      <span class="copy-feedback" id="copy-fb-order">已複製</span>
+    </h3>
+    <div class="order-card">
+      <div class="order-title"><span id="ic-check"></span>Routine（所有肥胖病人）</div>
+      <div class="order-list" id="order-routine"></div>
+    </div>
+    <div class="order-card" id="order-conditional-wrap" style="display:none;">
+      <div class="order-title"><span id="ic-target2"></span>Symptom-directed（症狀導向加做）</div>
+      <div class="order-list" id="order-conditional"></div>
+    </div>
+    <div class="btnbar">
+      <button class="act-btn" id="copy-order"><span id="ic-copy2"></span>複製 order 清單</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============= 回診 ============= -->
+<div class="mode-pane" data-mode="followup">
+
+  <div class="sec">
+    <h3><span id="ic-scale"></span>體重變化</h3>
+    <div class="row">
+      <label class="field-label">本次體重</label>
+      <input type="number" class="numin" id="fu-wt" step="0.1"> kg
+      <label class="field-label" style="margin-left: 12px;">上次體重</label>
+      <input type="number" class="numin" id="fu-wt-prev" step="0.1"> kg
+      <span class="note-hint" id="fu-wt-delta" style="margin-left: 8px;"></span>
+    </div>
+    <div class="row">
+      <label class="field-label">起始體重</label>
+      <input type="number" class="numin" id="fu-wt-start" step="0.1"> kg
+      <span class="note-hint" id="fu-wt-total" style="margin-left: 8px;"></span>
+    </div>
+    <div class="row">
+      <label class="field-label">腰圍 (cm)</label>
+      <input type="number" class="numin" id="fu-waist" step="0.1">
+      <label class="field-label" style="margin-left: 12px;">上次腰圍</label>
+      <input type="number" class="numin" id="fu-waist-prev" step="0.1">
+      <span class="note-hint" id="fu-waist-delta" style="margin-left: 8px;"></span>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="radio" name="fu-trend" value="持續下降"> 持續下降</label>
+      <label class="chk"><input type="radio" name="fu-trend" value="平台期"> 平台期</label>
+      <label class="chk"><input type="radio" name="fu-trend" value="反彈"> 反彈</label>
+      <label class="chk"><input type="radio" name="fu-trend" value="持平"> 持平</label>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-rxmed"></span>減重藥物</h3>
+    <div class="row">
+      <label class="field-label">使用藥物</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-med-glp1"> GLP-1 RA</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-med-orlistat"> Orlistat</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-med-pb"> Phentermine/Bupropion</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-med-none"> 未使用</label>
+    </div>
+    <div class="row">
+      <label class="field-label">藥名/劑量</label>
+      <input type="text" class="txtin" id="fu-med-detail" placeholder="例：Semaglutide 1.0 mg QW" style="flex:1;">
+    </div>
+    <div class="row">
+      <label class="field-label">依從性</label>
+      <label class="chk"><input type="radio" name="fu-adh" value="佳"> 佳</label>
+      <label class="chk"><input type="radio" name="fu-adh" value="尚可"> 尚可</label>
+      <label class="chk"><input type="radio" name="fu-adh" value="差"> 差</label>
+      <label class="chk" style="margin-left: 12px;"><input type="checkbox" data-flag="fu-self-pay"> 自費</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="fu-med-note" placeholder="調整原因/其他備註">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-ae"></span>藥物副作用 (GLP-1 相關)</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-nausea"> 噁心</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-vomit"> 嘔吐</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-diarrhea"> 腹瀉</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-constip"> 便秘</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-bloat"> 腹脹</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-reflux"> 胃食道逆流</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-fatigue"> 疲倦</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-ae-inject"> 注射處反應</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="fu-ae-note" placeholder="其他副作用/嚴重度">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-checks"></span>生活型態執行</h3>
+    <div class="row">
+      <label class="field-label">飲食控制</label>
+      <label class="chk"><input type="radio" name="fu-diet" value="佳"> 佳</label>
+      <label class="chk"><input type="radio" name="fu-diet" value="尚可"> 尚可</label>
+      <label class="chk"><input type="radio" name="fu-diet" value="差"> 差</label>
+    </div>
+    <div class="row">
+      <label class="field-label">運動執行</label>
+      <label class="chk"><input type="radio" name="fu-exer" value="佳"> 佳</label>
+      <label class="chk"><input type="radio" name="fu-exer" value="尚可"> 尚可</label>
+      <label class="chk"><input type="radio" name="fu-exer" value="差"> 差</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="fu-ls-note" placeholder="主要遇到的困難/其他">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-flask"></span>檢驗追蹤</h3>
+    <div class="row">
+      <label class="chk"><input type="checkbox" data-flag="fu-lab-followup"> 本次需追蹤檢驗</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="fu-lab-note" placeholder="例：HbA1c、肝腎、血脂；或上次結果摘要">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3><span id="ic-plan"></span>本次處置與計畫</h3>
+    <div class="subgrid">
+      <label class="chk"><input type="checkbox" data-flag="fu-plan-continue"> 繼續原方案</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-plan-titrate"> 藥物調整劑量</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-plan-switch"> 換藥</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-plan-add"> 加藥</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-plan-stop"> 停藥</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-plan-refer"> 轉介(營養/心理/手術)</label>
+      <label class="chk"><input type="checkbox" data-flag="fu-plan-lab"> 排檢驗</label>
+    </div>
+    <div class="note-input-row">
+      <input type="text" id="fu-plan-note" placeholder="計畫細節、下次回診時間">
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>
+      <span id="ic-note2"></span>回診病歷文字
+      <span class="copy-feedback" id="copy-fb-fu">已複製</span>
+    </h3>
+    <div class="output" id="fu-output">（填寫上方欄位後此處會自動產生回診病歷文字）</div>
+    <div class="btnbar">
+      <button class="act-btn btn-primary" id="copy-fu"><span id="ic-copy3"></span>複製病歷</button>
+      <button class="act-btn" id="reset-fu"><span id="ic-reset2"></span>清空回診</button>
+    </div>
+  </div>
+</div>
+
+  <div class="obesity-footer">
+    依據：台灣成人肥胖臨床實證指引（2026）第八章「肥胖患者的全面性評估」<br>
+    本工具僅供醫護人員臨床參考，不取代個別病人評估與最新指引。
+    <div style="margin-top: 12px;">
+      <a class="feedback-link" id="feedbackLink"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"
+         target="_blank" rel="noopener">
+        <span id="feedbackIcon"></span>回報錯誤 / 提建議
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // ── Mode tab switching ──
+  const modeTabs = document.querySelectorAll('.mode-tab');
+  const modePanes = document.querySelectorAll('.mode-pane');
+  modeTabs.forEach(t => t.addEventListener('click', () => {
+    modeTabs.forEach(x => x.classList.remove('active'));
+    modePanes.forEach(p => p.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelector(`.mode-pane[data-mode="${t.dataset.mode}"]`).classList.add('active');
+  }));
+
+  // ── Sex-based field visibility ──
+  function updateSexFields() {
+    const sex = document.querySelector('input[name="sex"]:checked')?.value;
+    document.querySelectorAll('.female-only').forEach(el => {
+      el.style.display = sex === '女' ? '' : 'none';
+    });
+    document.querySelectorAll('.male-only').forEach(el => {
+      el.style.display = sex === '男' ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('input[name="sex"]').forEach(r => r.addEventListener('change', updateSexFields));
+  updateSexFields();
+
+  // ── Waist note ──
+  function updateWaistNote() {
+    const sex = document.querySelector('input[name="sex"]:checked')?.value;
+    const w = parseFloat(document.getElementById('waist').value);
+    const note = document.getElementById('waist-note');
+    if (!sex) { note.textContent = '請先選性別'; note.classList.remove('warn'); return; }
+    if (isNaN(w)) {
+      note.textContent = `${sex} ≥ ${sex === '男' ? 90 : 80} cm 為中心性肥胖`;
+      note.classList.remove('warn');
+      return;
+    }
+    const cutoff = sex === '男' ? 90 : 80;
+    if (w >= cutoff) {
+      note.textContent = `⚠ 達中心性肥胖（${sex} ≥ ${cutoff} cm）`;
+      note.classList.add('warn');
+    } else {
+      note.textContent = `未達中心性肥胖（${sex} ≥ ${cutoff} cm）`;
+      note.classList.remove('warn');
+    }
+  }
+  document.getElementById('waist').addEventListener('input', updateWaistNote);
+  document.querySelectorAll('input[name="sex"]').forEach(r => r.addEventListener('change', updateWaistNote));
+
+  // ── Chk active state ──
+  document.querySelectorAll('.chk input').forEach(inp => {
+    inp.addEventListener('change', () => {
+      if (inp.type === 'checkbox') {
+        inp.closest('.chk').classList.toggle('active', inp.checked);
+      } else if (inp.type === 'radio') {
+        document.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => {
+          r.closest('.chk').classList.toggle('active', r.checked);
+        });
+      }
+    });
+  });
+
+  // ── Helpers ──
+  function getFlag(flag) { return document.querySelector(`[data-flag="${flag}"]`)?.checked; }
+  function val(id) { return document.getElementById(id)?.value.trim() ?? ''; }
+  function radio(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value; }
+  function joinChecked(items) {
+    const arr = items.filter(x => x.cond).map(x => x.label);
+    return arr.length ? arr.join('、') : null;
+  }
+  function appendNote(s, noteId) {
+    const n = val(noteId);
+    if (n) return s ? `${s}；${n}` : n;
+    return s;
+  }
+
+  // ── Initial note ──
+  function renderNote() {
+    const lines = [];
+
+    const goalParts = [];
+    if (val('motivation')) goalParts.push(`動機：${val('motivation')}`);
+    if (val('goal-wt')) {
+      let s = `目標 ${val('goal-wt')} kg`;
+      if (val('goal-time')) s += `（${val('goal-time')}內）`;
+      goalParts.push(s);
+    }
+    let goalLine = goalParts.join('；');
+    goalLine = appendNote(goalLine, 'goal-note');
+    if (goalLine) lines.push(`【目標】${goalLine}`);
+
+    const wtHist = [];
+    if (val('max-wt')) wtHist.push(`最高 ${val('max-wt')} kg${val('max-wt-when') ? '（' + val('max-wt-when') + '）' : ''}`);
+    if (val('min-wt')) wtHist.push(`最低 ${val('min-wt')} kg`);
+    if (val('onset')) wtHist.push(`起始增重：${val('onset')}`);
+    if (document.getElementById('weight-cycling').checked) {
+      let s = '反覆減重';
+      if (val('cycling-times')) s += `（${val('cycling-times')}）`;
+      wtHist.push(s);
+    }
+    if (val('prev-method')) wtHist.push(`過去減重：${val('prev-method')}`);
+    if (wtHist.length) lines.push(`【體重變化】${wtHist.join('；')}`);
+
+    let events = joinChecked([
+      { cond: getFlag('quit-smoke'), label: '曾戒菸' },
+      { cond: getFlag('preg-gain'), label: '懷孕期增重過多' },
+      { cond: getFlag('menstrual'), label: '月經不規則' },
+      { cond: getFlag('post-meno'), label: '停經後增重' },
+    ]);
+    events = appendNote(events, 'event-note');
+    if (events) lines.push(`【生活事件】${events}`);
+
+    let meds = joinChecked([
+      { cond: getFlag('med-dm'), label: '降血糖藥' },
+      { cond: getFlag('med-antipsych'), label: '抗精神病藥' },
+      { cond: getFlag('med-antidep'), label: '抗憂鬱劑' },
+      { cond: getFlag('med-antiep'), label: '抗癲癇藥' },
+      { cond: getFlag('med-steroid'), label: '類固醇' },
+      { cond: getFlag('med-bb'), label: 'β-blocker' },
+    ]);
+    meds = appendNote(meds, 'med-detail');
+    if (meds) lines.push(`【致胖藥物】${meds}`);
+
+    let endo = joinChecked([
+      { cond: getFlag('sx-thyroid'), label: '甲低症狀（疲倦/便秘/怕冷）' },
+      { cond: getFlag('sx-cushing'), label: '庫欣症狀（圓臉/水牛肩/皮膚變薄）' },
+      { cond: getFlag('sx-pcos'), label: 'PCOS 症狀（多毛/月經失調/痤瘡）' },
+      { cond: getFlag('sx-hypogonad'), label: '低睪固酮症狀（性慾↓/疲倦/肌力↓）' },
+    ]);
+    endo = appendNote(endo, 'endo-note');
+    if (endo) lines.push(`【內分泌症狀】${endo}`);
+
+    let cm = joinChecked([
+      { cond: getFlag('cm-htn'), label: 'HTN' },
+      { cond: getFlag('cm-dm'), label: 'DM' },
+      { cond: getFlag('cm-dl'), label: 'dyslipidemia' },
+      { cond: getFlag('cm-osa'), label: 'OSA' },
+      { cond: getFlag('cm-masld'), label: 'MASLD' },
+      { cond: getFlag('cm-knee'), label: 'knee OA' },
+      { cond: getFlag('cm-hfpef'), label: 'HFpEF' },
+      { cond: getFlag('cm-gout'), label: 'gout' },
+      { cond: getFlag('cm-psy'), label: '精神科疾病' },
+    ]);
+    cm = appendNote(cm, 'cm-note');
+    if (cm) lines.push(`【共病】${cm}`);
+
+    let symp = joinChecked([
+      { cond: getFlag('sym-dyspnea'), label: '爬梯喘' },
+      { cond: getFlag('sym-knee'), label: '膝痠痛' },
+      { cond: getFlag('sym-fatigue'), label: '易疲倦' },
+      { cond: getFlag('sym-snore'), label: '打鼾' },
+      { cond: getFlag('sym-sleepy'), label: '日間嗜睡' },
+      { cond: getFlag('sym-apnea'), label: '目擊呼吸暫停' },
+    ]);
+    symp = appendNote(symp, 'sym-note');
+    if (symp) lines.push(`【相關症狀】${symp}`);
+
+    let fh = joinChecked([
+      { cond: getFlag('fh-obesity'), label: '肥胖' },
+      { cond: getFlag('fh-dm'), label: 'DM' },
+      { cond: getFlag('fh-htn'), label: 'HTN' },
+      { cond: getFlag('fh-dl'), label: '高血脂' },
+      { cond: getFlag('fh-cv'), label: '心血管疾病' },
+    ]);
+    fh = appendNote(fh, 'fh-note');
+    if (fh) lines.push(`【家族史】${fh}`);
+
+    const dietPattern = joinChecked([
+      { cond: getFlag('diet-skip-bf'), label: '略過早餐' },
+      { cond: getFlag('diet-late-dinner'), label: '晚餐晚' },
+      { cond: getFlag('diet-night-eat'), label: '吃宵夜' },
+      { cond: getFlag('diet-snack'), label: '兩餐間點心' },
+      { cond: getFlag('diet-fast-eat'), label: '進食速度快' },
+      { cond: getFlag('diet-distract'), label: '分心進食' },
+    ]);
+    const dietContent = joinChecked([
+      { cond: getFlag('diet-sugary'), label: '含糖飲' },
+      { cond: getFlag('diet-fried'), label: '油炸' },
+      { cond: getFlag('diet-redmeat'), label: '紅肉/加工肉' },
+      { cond: getFlag('diet-upf'), label: '超加工食品' },
+      { cond: getFlag('diet-alcohol'), label: '飲酒' },
+      { cond: getFlag('diet-highsalt'), label: '高鹽' },
+    ]);
+    const dietBeh = joinChecked([
+      { cond: getFlag('diet-emo'), label: '情緒性進食' },
+      { cond: getFlag('diet-stress'), label: '壓力性進食' },
+      { cond: getFlag('diet-binge'), label: '暴食傾向' },
+      { cond: getFlag('diet-night-syn'), label: '夜食症候群' },
+    ]);
+    const dietParts = [];
+    let patternLine = dietPattern;
+    if (radio('eat-out')) patternLine = (patternLine ? patternLine + '、' : '') + `外食 ${radio('eat-out')}`;
+    if (val('cook-person')) patternLine = (patternLine ? patternLine + '、' : '') + `備餐：${val('cook-person')}`;
+    patternLine = appendNote(patternLine, 'pattern-note');
+    if (patternLine) dietParts.push(`用餐型態：${patternLine}`);
+
+    let contentLine = dietContent;
+    const subs = [];
+    if (val('sugary-freq')) subs.push(`含糖飲 ${val('sugary-freq')}`);
+    if (val('alc-amount')) subs.push(`酒 ${val('alc-amount')}`);
+    if (subs.length) contentLine = (contentLine ? contentLine + '（' + subs.join('、') + '）' : subs.join('、'));
+    contentLine = appendNote(contentLine, 'content-note');
+    if (contentLine) dietParts.push(`飲食內容：${contentLine}`);
+
+    let behLine = appendNote(dietBeh, 'beh-note');
+    if (behLine) dietParts.push(`飲食行為：${behLine}`);
+
+    if (dietParts.length) lines.push(`【飲食】${dietParts.join('；')}`);
+
+    const actParts = [];
+    if (val('exercise-type')) actParts.push(val('exercise-type'));
+    const af = [];
+    if (val('exercise-freq')) af.push(val('exercise-freq'));
+    if (val('exercise-dur')) af.push(val('exercise-dur'));
+    if (radio('intensity')) af.push(`${radio('intensity')}強度`);
+    if (af.length) actParts.push(af.join('，'));
+    if (getFlag('ls-sedentary')) actParts.push('久坐>8h/d');
+    if (getFlag('ls-act-limit')) {
+      let s = '活動受限';
+      if (val('act-limit-detail')) s += `（${val('act-limit-detail')}）`;
+      actParts.push(s);
+    }
+    if (actParts.length) lines.push(`【身體活動】${actParts.join('；')}`);
+
+    const slpParts = [];
+    if (val('sleep-hr')) slpParts.push(`${val('sleep-hr')} h/天`);
+    if (radio('sleep-q')) slpParts.push(`品質${radio('sleep-q')}`);
+    if (getFlag('ls-shift')) slpParts.push('夜班/輪班');
+    if (getFlag('ls-irreg')) slpParts.push('作息不規律');
+    let slpLine = slpParts.join('，');
+    slpLine = appendNote(slpLine, 'sleep-note');
+    if (slpLine) lines.push(`【睡眠】${slpLine}`);
+
+    let psy = joinChecked([
+      { cond: getFlag('psy-depress'), label: '憂鬱' },
+      { cond: getFlag('psy-anxiety'), label: '焦慮' },
+      { cond: getFlag('psy-stigma'), label: '體重自我污名' },
+      { cond: getFlag('psy-stress'), label: '高壓' },
+    ]);
+    const socParts = [];
+    if (psy) socParts.push(`心理：${psy}`);
+    if (radio('support')) socParts.push(`家庭支持${radio('support')}`);
+    if (val('work-type')) socParts.push(`工作:${val('work-type')}`);
+    let socLine = socParts.join('；');
+    socLine = appendNote(socLine, 'psy-note');
+    if (socLine) lines.push(`【心理社會】${socLine}`);
+
+    const peParts = [];
+    if (val('waist')) peParts.push(`WC ${val('waist')} cm`);
+    if (val('neck')) peParts.push(`NC ${val('neck')} cm`);
+    const skin = joinChecked([
+      { cond: getFlag('pe-acanth'), label: '黑色棘皮症' },
+      { cond: getFlag('pe-stria'), label: '肥胖紋' },
+      { cond: getFlag('pe-intertrigo'), label: '對磨皮疹' },
+      { cond: getFlag('pe-acne'), label: '痤瘡' },
+      { cond: getFlag('pe-hirsut'), label: '多毛' },
+      { cond: getFlag('pe-xanth'), label: '黃色瘤' },
+    ]);
+    const peOther = joinChecked([
+      { cond: getFlag('pe-thyroid'), label: '甲狀腺腫' },
+      { cond: getFlag('pe-mooning'), label: '圓臉/水牛肩' },
+      { cond: getFlag('pe-heart'), label: '心音異常' },
+      { cond: getFlag('pe-lung'), label: '肺音異常' },
+      { cond: getFlag('pe-edema'), label: '下肢水腫' },
+    ]);
+    if (skin) peParts.push(`皮膚:${skin}`);
+    if (peOther) peParts.push(peOther);
+    if (val('calf') || val('grip') || val('sts') || val('walk')) {
+      const sarc = [];
+      if (val('calf')) sarc.push(`小腿圍 ${val('calf')} cm`);
+      if (val('grip')) sarc.push(`握力 ${val('grip')} kg`);
+      if (val('sts')) sarc.push(`5次坐站 ${val('sts')} s`);
+      if (val('walk')) sarc.push(`6m步行 ${val('walk')} s`);
+      peParts.push(`肌少評估：${sarc.join('、')}`);
+    }
+    let peLine = peParts.join('；');
+    peLine = appendNote(peLine, 'pe-note');
+    if (peLine) lines.push(`【PE】${peLine}`);
+
+    const out = document.getElementById('note-output');
+    out.textContent = lines.length ? lines.join('\n') : '（填寫上方欄位後此處會自動產生病歷文字）';
+  }
+
+  // ── Orders ──
+  function renderOrders() {
+    const routine = ['FPG', 'Lipid profile (TC, TG, HDL-C, LDL-C)', 'AST, ALT', 'BUN, Cr'];
+    const cond = [];
+
+    if (getFlag('cm-dm') || getFlag('fh-dm') || getFlag('med-dm') || getFlag('pe-acanth')) {
+      cond.push({ test: 'HbA1c', reason: 'DM/DM risk' });
+    }
+    if (getFlag('cm-gout') || getFlag('sym-knee') || getFlag('cm-masld')) {
+      cond.push({ test: 'Uric acid', reason: 'gout/metabolic risk' });
+    }
+    if (getFlag('cm-htn') || getFlag('cm-dm')) {
+      cond.push({ test: 'U/A + microalbuminuria', reason: 'HTN/DM renal screen' });
+    }
+    if (getFlag('cm-masld')) {
+      cond.push({ test: 'Abd sonography', reason: 'MASLD eval' });
+    }
+    if (getFlag('sx-thyroid') || getFlag('pe-thyroid')) {
+      cond.push({ test: 'TSH (± free T4)', reason: 'suspect hypothyroidism' });
+    }
+    if (getFlag('sx-pcos')) {
+      cond.push({ test: 'Total testosterone', reason: 'suspect PCOS' });
+    }
+    if (getFlag('sx-cushing') || getFlag('pe-mooning')) {
+      cond.push({ test: '1 mg dexamethasone suppression test', reason: "suspect Cushing's" });
+    }
+    if (getFlag('sx-hypogonad')) {
+      cond.push({ test: 'Total testosterone', reason: 'suspect male hypogonadism' });
+    }
+    const osaRisk = ['sym-snore','sym-sleepy','sym-apnea'].some(f => getFlag(f));
+    if (osaRisk || getFlag('cm-osa')) {
+      cond.push({ test: 'STOP-BANG / PSG', reason: 'suspect OSA' });
+    }
+    if (getFlag('sym-dyspnea') || getFlag('cm-hfpef')) {
+      cond.push({ test: 'ECG (± echo)', reason: 'suspect HFpEF/CV' });
+    }
+
+    const routineEl = document.getElementById('order-routine');
+    routineEl.innerHTML = routine.map(t => `<span class="pill">${t}</span>`).join('');
+
+    const wrap = document.getElementById('order-conditional-wrap');
+    const condEl = document.getElementById('order-conditional');
+    if (cond.length) {
+      wrap.style.display = '';
+      condEl.innerHTML = cond.map(c => `<div style="margin: 4px 0;"><span class="pill">${c.test}</span><span class="order-reason">— ${c.reason}</span></div>`).join('');
+    } else {
+      wrap.style.display = 'none';
+    }
+  }
+
+  // ── Follow-up note ──
+  function renderFu() {
+    const lines = [];
+
+    const wtParts = [];
+    if (val('fu-wt')) wtParts.push(`本次 ${val('fu-wt')} kg`);
+    const cur = parseFloat(val('fu-wt')), prev = parseFloat(val('fu-wt-prev')), start = parseFloat(val('fu-wt-start'));
+    const deltaEl = document.getElementById('fu-wt-delta');
+    const totalEl = document.getElementById('fu-wt-total');
+    if (!isNaN(cur) && !isNaN(prev)) {
+      const d = (cur - prev).toFixed(1);
+      const sign = d > 0 ? '+' : '';
+      wtParts.push(`較上次 ${sign}${d} kg`);
+      deltaEl.textContent = `Δ ${sign}${d} kg`;
+      deltaEl.style.color = d <= 0 ? 'var(--green)' : 'var(--yellow)';
+    } else { deltaEl.textContent = ''; }
+    if (!isNaN(cur) && !isNaN(start)) {
+      const d = (cur - start).toFixed(1);
+      const pct = ((cur - start) / start * 100).toFixed(1);
+      const sign = d > 0 ? '+' : '';
+      wtParts.push(`較起始 ${sign}${d} kg（${sign}${pct}%）`);
+      totalEl.textContent = `Δ ${sign}${d} kg (${sign}${pct}%)`;
+      totalEl.style.color = d <= 0 ? 'var(--green)' : 'var(--yellow)';
+    } else { totalEl.textContent = ''; }
+    if (radio('fu-trend')) wtParts.push(`趨勢：${radio('fu-trend')}`);
+
+    const waistParts = [];
+    if (val('fu-waist')) waistParts.push(`WC ${val('fu-waist')} cm`);
+    const wc = parseFloat(val('fu-waist')), wcp = parseFloat(val('fu-waist-prev'));
+    const wdEl = document.getElementById('fu-waist-delta');
+    if (!isNaN(wc) && !isNaN(wcp)) {
+      const d = (wc - wcp).toFixed(1);
+      const sign = d > 0 ? '+' : '';
+      waistParts.push(`較上次 ${sign}${d} cm`);
+      wdEl.textContent = `Δ ${sign}${d} cm`;
+      wdEl.style.color = d <= 0 ? 'var(--green)' : 'var(--yellow)';
+    } else { wdEl.textContent = ''; }
+
+    const allWt = [...wtParts, ...waistParts];
+    if (allWt.length) lines.push(`【體重】${allWt.join('；')}`);
+
+    const meds = joinChecked([
+      { cond: getFlag('fu-med-glp1'), label: 'GLP-1 RA' },
+      { cond: getFlag('fu-med-orlistat'), label: 'Orlistat' },
+      { cond: getFlag('fu-med-pb'), label: 'Phen/Bup' },
+      { cond: getFlag('fu-med-none'), label: '未使用' },
+    ]);
+    const medParts = [];
+    if (meds) medParts.push(meds);
+    if (val('fu-med-detail')) medParts.push(val('fu-med-detail'));
+    if (radio('fu-adh')) medParts.push(`依從性${radio('fu-adh')}`);
+    if (getFlag('fu-self-pay')) medParts.push('自費');
+    let medLine = medParts.join('；');
+    medLine = appendNote(medLine, 'fu-med-note');
+    if (medLine) lines.push(`【藥物】${medLine}`);
+
+    let ae = joinChecked([
+      { cond: getFlag('fu-ae-nausea'), label: '噁心' },
+      { cond: getFlag('fu-ae-vomit'), label: '嘔吐' },
+      { cond: getFlag('fu-ae-diarrhea'), label: '腹瀉' },
+      { cond: getFlag('fu-ae-constip'), label: '便秘' },
+      { cond: getFlag('fu-ae-bloat'), label: '腹脹' },
+      { cond: getFlag('fu-ae-reflux'), label: 'GERD' },
+      { cond: getFlag('fu-ae-fatigue'), label: '疲倦' },
+      { cond: getFlag('fu-ae-inject'), label: '注射處反應' },
+    ]);
+    ae = appendNote(ae, 'fu-ae-note');
+    if (ae) lines.push(`【副作用】${ae}`);
+
+    const lsParts = [];
+    if (radio('fu-diet')) lsParts.push(`飲食${radio('fu-diet')}`);
+    if (radio('fu-exer')) lsParts.push(`運動${radio('fu-exer')}`);
+    let lsLine = lsParts.join('，');
+    lsLine = appendNote(lsLine, 'fu-ls-note');
+    if (lsLine) lines.push(`【生活型態】${lsLine}`);
+
+    const labParts = [];
+    if (getFlag('fu-lab-followup')) labParts.push('待追蹤');
+    if (val('fu-lab-note')) labParts.push(val('fu-lab-note'));
+    if (labParts.length) lines.push(`【檢驗】${labParts.join('；')}`);
+
+    let plan = joinChecked([
+      { cond: getFlag('fu-plan-continue'), label: '繼續原方案' },
+      { cond: getFlag('fu-plan-titrate'), label: '調整劑量' },
+      { cond: getFlag('fu-plan-switch'), label: '換藥' },
+      { cond: getFlag('fu-plan-add'), label: '加藥' },
+      { cond: getFlag('fu-plan-stop'), label: '停藥' },
+      { cond: getFlag('fu-plan-refer'), label: '轉介' },
+      { cond: getFlag('fu-plan-lab'), label: '排檢驗' },
+    ]);
+    plan = appendNote(plan, 'fu-plan-note');
+    if (plan) lines.push(`【計畫】${plan}`);
+
+    const out = document.getElementById('fu-output');
+    out.textContent = lines.length ? lines.join('\n') : '（填寫上方欄位後此處會自動產生回診病歷文字）';
+  }
+
+  // ── Copy ──
+  function copyText(text, fbId) {
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = document.getElementById(fbId);
+      fb.classList.add('show');
+      setTimeout(() => fb.classList.remove('show'), 1500);
+    });
+  }
+  document.getElementById('copy-note').addEventListener('click', () => {
+    renderNote(); copyText(document.getElementById('note-output').textContent, 'copy-fb-note');
+  });
+  document.getElementById('copy-order').addEventListener('click', () => {
+    renderOrders();
+    const routine = Array.from(document.querySelectorAll('#order-routine .pill')).map(p => p.textContent);
+    const cond = Array.from(document.querySelectorAll('#order-conditional .pill')).map(p => p.textContent);
+    let text = '[Routine] ' + routine.join(', ');
+    if (cond.length) text += '\n[Symptom-directed] ' + cond.join(', ');
+    copyText(text, 'copy-fb-order');
+  });
+  document.getElementById('copy-fu').addEventListener('click', () => {
+    renderFu(); copyText(document.getElementById('fu-output').textContent, 'copy-fb-fu');
+  });
+
+  document.querySelector('.mode-pane[data-mode="intake"]').addEventListener('input', () => { renderNote(); renderOrders(); });
+  document.querySelector('.mode-pane[data-mode="intake"]').addEventListener('change', () => { renderNote(); renderOrders(); });
+  document.querySelector('.mode-pane[data-mode="followup"]').addEventListener('input', renderFu);
+  document.querySelector('.mode-pane[data-mode="followup"]').addEventListener('change', renderFu);
+
+  function resetPane(modeName) {
+    const pane = document.querySelector(`.mode-pane[data-mode="${modeName}"]`);
+    pane.querySelectorAll('input[type="text"], input[type="number"]').forEach(i => i.value = '');
+    pane.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(i => { i.checked = false; i.closest('.chk')?.classList.remove('active'); });
+    if (modeName === 'intake') {
+      document.getElementById('waist-note').textContent = '';
+      document.getElementById('waist-note').classList.remove('warn');
+      renderNote(); renderOrders(); updateSexFields();
+    } else {
+      document.getElementById('fu-wt-delta').textContent = '';
+      document.getElementById('fu-wt-total').textContent = '';
+      document.getElementById('fu-waist-delta').textContent = '';
+      renderFu();
+    }
+  }
+  document.getElementById('reset-intake').addEventListener('click', () => {
+    if (confirm('確定要清空初診所有欄位？')) resetPane('intake');
+  });
+  document.getElementById('reset-fu').addEventListener('click', () => {
+    if (confirm('確定要清空回診所有欄位？')) resetPane('followup');
+  });
+
+  // ── Inject SVG icons ──
+  function inject(id, key) {
+    const el = document.getElementById(id);
+    if (el && window.ICON && window.ICON[key]) el.innerHTML = window.ICON[key];
+  }
+  document.querySelectorAll('.ti[data-icon]').forEach(el => {
+    const k = el.dataset.icon;
+    if (window.ICON && window.ICON[k]) el.innerHTML = window.ICON[k];
+  });
+  inject('discIcon', 'alert');
+  inject('feedbackIcon', 'message');
+  inject('iconIntake', 'clipboard');
+  inject('iconFu', 'calendar');
+  // Section icons (h3)
+  inject('ic-sex', 'user');
+  inject('ic-goal', 'target');
+  inject('ic-history', 'clock');
+  inject('ic-events', 'flame');
+  inject('ic-meds', 'pill');
+  inject('ic-endo', 'search');
+  inject('ic-cm', 'heart');
+  inject('ic-sym', 'activity');
+  inject('ic-fh', 'users');
+  inject('ic-pattern', 'clock');
+  inject('ic-content', 'bowl');
+  inject('ic-beh', 'brain');
+  inject('ic-act', 'run');
+  inject('ic-sleep', 'moon');
+  inject('ic-psy', 'smile');
+  inject('ic-pe', 'stethoscope');
+  inject('ic-sarc', 'dumbbell');
+  inject('ic-note', 'fileText');
+  inject('ic-order', 'flask');
+  inject('ic-scale', 'scale');
+  inject('ic-rxmed', 'pill');
+  inject('ic-ae', 'alert');
+  inject('ic-checks', 'check');
+  inject('ic-flask', 'flask');
+  inject('ic-plan', 'arrowRight');
+  inject('ic-note2', 'fileText');
+  inject('ic-copy1', 'copy');
+  inject('ic-copy2', 'copy');
+  inject('ic-copy3', 'copy');
+  inject('ic-reset1', 'refresh');
+  inject('ic-reset2', 'refresh');
+  inject('ic-check', 'check');
+  inject('ic-target2', 'target');
+
+  renderNote();
+  renderOrders();
+  renderFu();
+})();
+</script>
+</body>
+</html>
