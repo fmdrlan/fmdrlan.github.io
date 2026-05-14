@@ -92,6 +92,31 @@
   .page-intro h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
   .page-intro p { font-size: 14px; color: var(--text-secondary); }
 
+  /* ── 完整版 / 簡化版 切換鈕 ── */
+  .mode-switch-row {
+    display: inline-flex;
+    gap: 0;
+    margin-bottom: 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3px;
+  }
+  .mode-switch-row a {
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.15s;
+  }
+  .mode-switch-row a:hover { color: var(--text-primary); }
+  .mode-switch-row a.active {
+    background: var(--accent-blue);
+    color: #fff;
+    font-weight: 500;
+  }
+
   /* ── Input form ── */
   .input-panel {
     background: var(--bg-surface);
@@ -832,6 +857,11 @@
       <h2>高血脂風險評估工具</h2>
       <p>輸入病人基本資料及檢驗值，自動依台灣 2025、ESC 2025、AHA 2026 PREVENT 三大指引分類風險等級、計算 LDL 目標，並判斷健保給付資格。</p>
     </div>
+  </div>
+
+  <div class="mode-switch-row">
+    <a href="lipid.html" class="active">完整版（3 大指引 + 健保）</a>
+    <a href="lipid_nhi.html">簡化版（只看健保 statin）</a>
   </div>
 
   <!-- Input Panel -->

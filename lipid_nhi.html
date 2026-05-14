@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高血脂｜健保 statin 給付判斷（簡化版）· DR. YANG's Toolbox</title>
+
+<meta name="description" content="健保 2.6.1 降血脂藥物給付規定簡化判斷工具：輸入血脂與危險因子，自動依健保 5 項危險因子規則判斷是否符合 statin 給付條件。">
+<meta name="keywords" content="健保,2.6.1,降血脂,statin,給付,高血脂,LDL,DR. YANG">
+<meta name="author" content="DR. YANG">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://garrulous-cat.github.io/mindy/lipid_nhi.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="高血脂｜健保 statin 給付判斷（簡化版）">
+<meta property="og:description" content="輸入血脂與 5 項健保危險因子，自動判斷 statin 給付資格。">
+<meta property="og:locale" content="zh_TW">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230d1117'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='monospace' font-size='13' font-weight='700' fill='%234a9eff'%3EY%3C/text%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="assets/shared.css">
+<script src="assets/icons.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-elevated: #1c2333;
+  --bg-input: #0d1117;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-dim: #6e7681;
+  --border: #30363d;
+  --border-subtle: #21262d;
+  --accent-blue: #58a6ff;
+  --accent-green: #3fb950;
+  --accent-yellow: #d29922;
+  --accent-orange: #f0883e;
+  --accent-red: #f85149;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ── Page header ── */
+.page-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 24px 40px;
+}
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.page-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+/* ── Mode switch（完整版 / 簡化版） ── */
+.mode-switch {
+  display: inline-flex;
+  gap: 0;
+  margin-bottom: 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+.mode-switch a {
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.15s;
+}
+.mode-switch a:hover { color: var(--text-primary); }
+.mode-switch a.active {
+  background: var(--accent-blue);
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ── Input panel ── */
+.input-panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+.panel-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lis-paste-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-secondary);
+  color: var(--accent-blue);
+  border: 1px solid rgba(88,166,255,0.35);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+.lis-paste-btn:hover {
+  background: rgba(88,166,255,0.08);
+  border-color: var(--accent-blue);
+}
+.lis-paste-btn svg { width: 13px; height: 13px; stroke-width: 1.8; }
+
+.form-section-label {
+  grid-column: 1/-1;
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 14px;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+}
+.form-section-label:first-of-type { margin-top: 0; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px 16px;
+}
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1/-1; }
+.form-group label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.form-group label .unit {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+.form-group label .optional {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  font-weight: normal;
+}
+.form-group input[type="number"] {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  width: 100%;
+}
+.form-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+.form-group input[type="number"]::placeholder { color: var(--text-dim); }
+.computed-field {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--accent-blue);
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.radio-group { display: flex; gap: 6px; flex-wrap: wrap; }
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
+  flex: 1;
+  justify-content: center;
+  min-width: 50px;
+  transition: all 0.12s;
+}
+.radio-label input { margin: 0; accent-color: var(--accent-blue); }
+.radio-label:has(input:checked) {
+  background: rgba(88,166,255,0.12);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+/* ── 結果卡 ── */
+.result-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px;
+  display: none;
+}
+.result-card.visible { display: block; }
+.result-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.result-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.result-icon.covered { background: rgba(63,185,80,0.15); color: var(--accent-green); }
+.result-icon.notcov { background: rgba(248,81,73,0.12); color: var(--accent-red); }
+.result-icon.targetmet { background: rgba(88,166,255,0.12); color: var(--accent-blue); }
+.result-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.result-cat {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.result-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.metric {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+.metric-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.metric-val {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+.metric-val.green { color: var(--accent-green); }
+.metric-val.yellow { color: var(--accent-yellow); }
+.metric-val.red { color: var(--accent-red); }
+.metric-val.blue { color: var(--accent-blue); }
+
+.result-reasons {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--text-primary);
+}
+.result-reasons strong {
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 6px;
+}
+.reason-item { margin-left: 6px; }
+.reason-item + .reason-item { margin-top: 4px; }
+
+.empty-state {
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 32px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+}
+
+/* ── Footer ── */
+.page-footer {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.85;
+}
+.page-footer strong { color: var(--text-secondary); }
+.page-footer a { color: var(--accent-blue); text-decoration: none; }
+
+/* ── LIS Modal（沿用完整版樣式） ── */
+.lis-modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(13,17,23,0.78);
+  backdrop-filter: blur(3px);
+  z-index: 200;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px 20px;
+  overflow-y: auto;
+}
+.lis-modal-backdrop.open { display: flex; }
+.lis-modal {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 640px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 80px);
+}
+.lis-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+.lis-modal-title {
+  font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--text-primary);
+}
+.lis-modal-title svg { width: 15px; height: 15px; color: var(--accent-blue); stroke-width: 1.8; }
+.lis-modal-close {
+  background: transparent; border: none;
+  color: var(--text-secondary); cursor: pointer;
+  padding: 4px; display: flex; border-radius: 4px;
+}
+.lis-modal-close:hover { background: var(--bg-secondary); color: var(--text-primary); }
+.lis-modal-close svg { width: 16px; height: 16px; stroke-width: 2; }
+.lis-modal-body { padding: 16px 18px; overflow-y: auto; flex: 1; }
+.lis-modal-hint { font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.7; }
+.lis-modal-hint b { color: var(--text-primary); }
+.lis-privacy-banner {
+  background: rgba(63,185,80,0.07);
+  border: 1px solid rgba(63,185,80,0.25);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  color: #b3d8b8;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lis-textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.lis-textarea:focus { outline: none; border-color: var(--accent-blue); }
+.lis-preview {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.85;
+}
+.lis-preview-title {
+  font-size: 11px; color: var(--text-secondary); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+}
+.lis-preview-empty { color: var(--text-secondary); font-style: italic; font-size: 12.5px; }
+.lis-preview-row {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+}
+.lis-preview-row .sym { width: 16px; text-align: center; flex-shrink: 0; }
+.lis-preview-row .ok-sym { color: var(--accent-green); }
+.lis-preview-row .miss-sym { color: var(--text-secondary); }
+.lis-preview-row .over-sym { color: var(--accent-yellow); }
+.lis-preview-row .field { color: var(--text-secondary); width: 90px; flex-shrink: 0; }
+.lis-preview-row .val { color: var(--text-primary); font-weight: 500; }
+.lis-preview-row .over-note {
+  color: var(--accent-yellow); font-size: 11px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.lis-warn-line {
+  margin-top: 10px;
+  padding: 7px 12px;
+  background: rgba(210,153,34,0.06);
+  border: 1px solid rgba(210,153,34,0.25);
+  border-radius: 5px;
+  font-size: 11.5px;
+  color: #d8c08a;
+  line-height: 1.6;
+}
+.lis-modal-footer {
+  display: flex; justify-content: flex-end; gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+.lis-btn {
+  padding: 7px 16px;
+  font-family: inherit; font-size: 13px; font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer; transition: all 0.12s;
+}
+.lis-btn:hover { border-color: var(--text-secondary); }
+.lis-btn.primary {
+  background: var(--accent-blue); color: #fff; border-color: var(--accent-blue);
+}
+.lis-btn.primary:hover { background: #7ab9ff; border-color: #7ab9ff; }
+.lis-btn.primary:disabled {
+  opacity: 0.4; cursor: not-allowed;
+  background: var(--bg-secondary); color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 16px; }
+  .form-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. YANG</a>
+  <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link active" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
+  <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
+  <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
+  <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
+</nav>
+
+<div class="page-wrap">
+
+  <h1 class="page-title">高血脂｜健保 statin 給付判斷</h1>
+  <p class="page-sub">依健保 2.6.1 給付規定，輸入血脂與 5 項危險因子，判斷 statin 是否符合給付。<strong>不含</strong>台灣脂質指引 / ESC / AHA 風險計算，也不處理 Ezetimibe / PCSK9 / 升級判斷。</p>
+
+  <div class="mode-switch">
+    <a href="lipid.html">完整版（3 大指引 + 健保）</a>
+    <a href="lipid_nhi.html" class="active">簡化版（只看健保）</a>
+  </div>
+
+  <div class="input-panel">
+    <div class="panel-title-row">
+      <div class="panel-title">病人資料輸入</div>
+      <button type="button" class="lis-paste-btn" id="lisPasteBtn" title="從 LIS 系統貼上檢驗報告自動填入欄位">
+        <span id="lisPasteIcon"></span>從 LIS 貼上自動填入
+      </button>
+    </div>
+    <div class="form-grid">
+
+      <!-- 基本 -->
+      <div class="form-section-label">基本資料</div>
+      <div class="form-group">
+        <label>年齡 <span class="unit">歲</span></label>
+        <input type="number" id="age" min="18" max="99" placeholder="例：65">
+      </div>
+      <div class="form-group">
+        <label>性別</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="sex" value="M" checked> 男</label>
+          <label class="radio-label"><input type="radio" name="sex" value="F"> 女</label>
+        </div>
+      </div>
+      <div class="form-group" id="menopauseGroup" style="display:none;">
+        <label>已停經 <span class="optional">（女性）</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="menopause" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="menopause" value="1"> 是</label>
+        </div>
+      </div>
+
+      <!-- 血脂 -->
+      <div class="form-section-label">血脂檢驗 (mg/dL)</div>
+      <div class="form-group">
+        <label>TC <span class="unit">mg/dL</span></label>
+        <input type="number" id="tc" min="50" max="600" placeholder="總膽固醇">
+      </div>
+      <div class="form-group">
+        <label>LDL-C <span class="unit">mg/dL</span></label>
+        <input type="number" id="ldl" min="10" max="500" placeholder="壞膽固醇">
+      </div>
+      <div class="form-group">
+        <label>HDL-C <span class="unit">mg/dL</span></label>
+        <input type="number" id="hdl" min="10" max="150" placeholder="好膽固醇">
+      </div>
+      <div class="form-group">
+        <label>TG <span class="unit">mg/dL</span></label>
+        <input type="number" id="tg" min="20" max="3000" placeholder="三酸甘油酯">
+      </div>
+      <div class="form-group" id="calcLdlGroup" style="display:none;">
+        <label>Calculated LDL <span class="unit">mg/dL</span> <i class="info-icon" title="未實測 LDL 時用 Friedewald 公式推算：LDL = TC − HDL − TG/5。TG ≥ 400 時不適用。">!</i></label>
+        <div class="computed-field" id="calcLdl">—</div>
+      </div>
+
+      <!-- 共病 -->
+      <div class="form-section-label">心血管病史與糖尿病</div>
+      <div class="form-group">
+        <label>ASCVD 病史 <span class="optional">（CAD/stroke/PAD）</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="ascvd" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="ascvd" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>糖尿病</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="dm" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="dm" value="1"> 是</label>
+        </div>
+      </div>
+
+      <!-- 危險因子 -->
+      <div class="form-section-label">健保危險因子（5 項）</div>
+      <div class="form-group">
+        <label>高血壓</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="htn" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="htn" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>早發 CAD 家族史 <i class="info-icon" title="男性 ≦ 55 歲、女性 ≦ 65 歲一等親有冠心病">!</i></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="fhcad" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="fhcad" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>吸菸</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="smoking" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="smoking" value="1"> 是</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 結果區 -->
+  <div id="result-empty" class="empty-state">
+    請先輸入年齡、性別、TC 或 LDL-C，結果會自動顯示在這裡
+  </div>
+  <div id="result-card" class="result-card"></div>
+
+  <footer class="page-footer">
+    <strong>資料來源：</strong>
+    全民健康保險藥品給付規定 第 2.6.1 條（86/1/1 起；最新修訂 2020 年）<br>
+    本工具僅供醫護人員臨床參考，以健保署最新公告為準。
+    <div style="margin-top: 12px;">
+      <a class="feedback-link" id="feedbackLink"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"
+         target="_blank" rel="noopener">
+        <span id="feedbackIcon"></span>回報錯誤 / 提建議
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ── LIS 貼上 Modal ── -->
+<div class="lis-modal-backdrop" id="lisBackdrop" role="dialog" aria-modal="true">
+  <div class="lis-modal" onclick="event.stopPropagation()">
+    <div class="lis-modal-header">
+      <div class="lis-modal-title">
+        <span id="lisTitleIcon"></span>從 LIS 貼上自動填入
+      </div>
+      <button class="lis-modal-close" id="lisClose" aria-label="關閉">
+        <span id="lisCloseIcon"></span>
+      </button>
+    </div>
+    <div class="lis-modal-body">
+      <div class="lis-privacy-banner">
+        🔒 貼上的內容僅在本機瀏覽器處理，<b>不會上傳到任何伺服器</b>。按完「填入」後 textarea 會自動清空。
+      </div>
+      <div class="lis-modal-hint">
+        從成大醫院 LIS（檢驗報告查詢）<b>Ctrl + A 全選 → Ctrl + C 複製</b>，然後在下方貼上：
+      </div>
+      <textarea class="lis-textarea" id="lisInput"
+        placeholder="在這裡 Ctrl + V 貼上 LIS 全選複製的內容..."
+        spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+        data-do-not-share="true"></textarea>
+      <div class="lis-preview" id="lisPreview">
+        <div class="lis-preview-title">偵測結果</div>
+        <div class="lis-preview-empty">貼上 LIS 內容後，自動顯示能填入的欄位</div>
+      </div>
+      <div class="lis-warn-line" style="display:none;" id="lisWarnLine"></div>
+    </div>
+    <div class="lis-modal-footer">
+      <button class="lis-btn" id="lisCancel">取消</button>
+      <button class="lis-btn primary" id="lisApply" disabled>填入欄位</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  Helpers
+// ═══════════════════════════════════════════════════════════════
+const getNum = id => parseFloat(document.getElementById(id).value) || null;
+const getRadio = name => {
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? (isNaN(parseInt(el.value)) ? el.value : parseInt(el.value)) : null;
+};
+
+// ── Friedewald LDL ──
+function getEffectiveLDL() {
+  const ldl = getNum('ldl');
+  if (ldl) return { value: ldl, source: 'measured' };
+  const tc = getNum('tc'), hdl = getNum('hdl'), tg = getNum('tg');
+  if (tc && hdl && tg && tg < 400) {
+    const calc = tc - hdl - tg / 5;
+    if (calc > 0) return { value: Math.round(calc), source: 'calculated' };
+  }
+  return { value: null, source: null };
+}
+
+function updateCalcLdl() {
+  const tc = getNum('tc'), hdl = getNum('hdl'), tg = getNum('tg'), ldl = getNum('ldl');
+  const grp = document.getElementById('calcLdlGroup');
+  const el = document.getElementById('calcLdl');
+  if (ldl) {
+    grp.style.display = 'none';
+    el.textContent = '—'; el.style.color = '';
+    return;
+  }
+  if (tc && hdl && tg) {
+    grp.style.display = '';
+    if (tg >= 400) {
+      el.textContent = 'TG ≥ 400，公式不適用';
+      el.style.color = 'var(--accent-yellow)';
+    } else {
+      const calc = tc - hdl - tg / 5;
+      if (calc <= 0) {
+        el.textContent = '計算值異常，請覆核';
+        el.style.color = 'var(--accent-yellow)';
+      } else {
+        el.textContent = calc.toFixed(0) + ' mg/dL';
+        el.style.color = '';
+      }
+    }
+  } else {
+    grp.style.display = 'none';
+    el.textContent = '—'; el.style.color = '';
+  }
+}
+
+// ── 性別變動：顯示/隱藏停經欄位 ──
+function updateMenopauseField() {
+  const sex = getRadio('sex');
+  const grp = document.getElementById('menopauseGroup');
+  grp.style.display = sex === 'F' ? '' : 'none';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  健保 statin 給付判斷（僅 2.6.1）
+// ═══════════════════════════════════════════════════════════════
+function calcStatinNHISimple(p) {
+  const { age, sex, menopause, tc, ldl, ldlSource, hdl, ascvd, dm, htn, fhcad, smoking } = p;
+  const isMale = sex === 'M';
+
+  // ── 5 項健保危險因子 ──
+  const rfItems = [];
+  if (htn) rfItems.push('高血壓');
+  // 年齡：男 ≥ 45 / 女 ≥ 55 或停經
+  let ageRf = false;
+  if (age) {
+    if (isMale && age >= 45) { ageRf = true; rfItems.push(`年齡 ${age} 歲（男 ≥ 45）`); }
+    else if (!isMale && age >= 55) { ageRf = true; rfItems.push(`年齡 ${age} 歲（女 ≥ 55）`); }
+    else if (!isMale && menopause) { ageRf = true; rfItems.push(`已停經（女性年齡 < 55 仍計入）`); }
+  } else if (!isMale && menopause) {
+    ageRf = true; rfItems.push('已停經');
+  }
+  if (fhcad) rfItems.push('早發 CAD 家族史');
+  if (smoking) rfItems.push('吸菸');
+  if (hdl && hdl < 40) rfItems.push(`HDL-C ${hdl} < 40`);
+  const rfCount = rfItems.length;
+
+  // ── 分類 ──
+  let category, ldlThreshold, tcThreshold, needLifestyle;
+  let condition; // 條文：2.6.1 / 2.6.5（DM）/ 2.6.6（CV）
+
+  if (ascvd) {
+    condition = '2.6.6';
+    category = '心血管疾病（次發性預防）';
+    ldlThreshold = 100; tcThreshold = 160;
+    needLifestyle = false;
+  } else if (dm) {
+    condition = '2.6.5';
+    category = '糖尿病';
+    ldlThreshold = 100; tcThreshold = 160;
+    needLifestyle = false;
+  } else if (rfCount >= 2) {
+    condition = '2.6.1';
+    category = `一般民眾（≥ 2 項危險因子）`;
+    ldlThreshold = 130; tcThreshold = 200;
+    needLifestyle = true;
+  } else if (rfCount === 1) {
+    condition = '2.6.1';
+    category = `一般民眾（1 項危險因子）`;
+    ldlThreshold = 160; tcThreshold = 240;
+    needLifestyle = true;
+  } else {
+    condition = '2.6.1';
+    category = '一般民眾（0 項危險因子）';
+    ldlThreshold = 190; tcThreshold = null;
+    needLifestyle = true;
+  }
+
+  // ── 判斷是否符合起始給付 ──
+  let covered = false;
+  let alreadyAtGoal = false;
+  const triggers = [];
+  const reasons = [];
+
+  if (ldl && ldl >= ldlThreshold) {
+    covered = true;
+    triggers.push(`LDL-C ${ldl} mg/dL ≥ ${ldlThreshold}`);
+  }
+  if (tc && tcThreshold && tc >= tcThreshold) {
+    covered = true;
+    triggers.push(`TC ${tc} mg/dL ≥ ${tcThreshold}`);
+  }
+
+  // 已達目標（未達起始閾值）
+  if (!covered) {
+    if (ldl && ldl < ldlThreshold) {
+      alreadyAtGoal = true;
+      reasons.push(`LDL-C ${ldl} mg/dL < ${ldlThreshold} → 未達起始給付閾值${ldlSource === 'calculated' ? '（推算值）' : ''}`);
+    }
+    if (tc && tcThreshold && tc < tcThreshold) {
+      reasons.push(`TC ${tc} mg/dL < ${tcThreshold} → 未達起始給付閾值`);
+    }
+    if (!ldl && !tc) {
+      reasons.push('TC 或 LDL-C 未填，無法判斷');
+    }
+  } else {
+    reasons.push(triggers.join(' 或 ') + ' → <strong style="color:var(--accent-green);">符合起始給付</strong>');
+  }
+
+  return {
+    covered, alreadyAtGoal,
+    category, condition,
+    ldlThreshold, tcThreshold,
+    needLifestyle, rfItems, rfCount,
+    reasons,
+    ldl, tc, ldlSource,
+  };
+}
+
+// ── 渲染結果 ──
+function renderResult(r) {
+  const empty = document.getElementById('result-empty');
+  const card = document.getElementById('result-card');
+  empty.style.display = 'none';
+  card.classList.add('visible');
+
+  // header
+  let iconClass, iconChar, title;
+  if (r.covered) {
+    iconClass = 'covered'; iconChar = '✓';
+    title = '符合健保 statin 起始給付';
+  } else if (r.alreadyAtGoal) {
+    iconClass = 'targetmet'; iconChar = '✓';
+    title = '未達起始給付閾值（目前 LDL 已低於門檻）';
+  } else {
+    iconClass = 'notcov'; iconChar = '–';
+    title = '資料不足或未達起始給付';
+  }
+
+  let html = `<div class="result-header">
+    <div class="result-icon ${iconClass}">${iconChar}</div>
+    <div>
+      <div class="result-title">${title}</div>
+      <div class="result-cat">適用條文：${r.condition}　·　${r.category}</div>
+    </div>
+  </div>`;
+
+  // metrics
+  const metrics = [];
+  metrics.push(`<div class="metric">
+    <div class="metric-label">起始 LDL-C 閾值</div>
+    <div class="metric-val blue">≥ ${r.ldlThreshold} mg/dL</div>
+  </div>`);
+  if (r.tcThreshold) {
+    metrics.push(`<div class="metric">
+      <div class="metric-label">起始 TC 閾值</div>
+      <div class="metric-val blue">≥ ${r.tcThreshold} mg/dL</div>
+    </div>`);
+  }
+  if (r.ldl) {
+    const cls = r.ldl >= r.ldlThreshold ? 'green' : 'yellow';
+    metrics.push(`<div class="metric">
+      <div class="metric-label">目前 LDL-C${r.ldlSource === 'calculated' ? '（推算）' : ''}</div>
+      <div class="metric-val ${cls}">${r.ldl} mg/dL</div>
+    </div>`);
+  }
+  html += `<div class="result-metrics">${metrics.join('')}</div>`;
+
+  // reasons
+  const reasonItems = [];
+  reasonItems.push(...r.reasons.map(t => `<div class="reason-item">• ${t}</div>`));
+  if (r.rfCount > 0) {
+    reasonItems.push(`<div class="reason-item">• 危險因子（${r.rfCount}/5）：${r.rfItems.join('、')}</div>`);
+  } else if (!r.covered && !['2.6.5','2.6.6'].includes(r.condition)) {
+    reasonItems.push(`<div class="reason-item">• 危險因子（0/5）— LDL-C 需 ≥ 190 mg/dL 才達起始給付</div>`);
+  }
+  if (r.needLifestyle && r.covered) {
+    reasonItems.push(`<div class="reason-item" style="color:var(--text-secondary);">• 需先 3–6 個月非藥物治療（生活型態 / 飲食）後仍未達標，方得起始 statin</div>`);
+  }
+  if (!r.needLifestyle && r.covered) {
+    reasonItems.push(`<div class="reason-item" style="color:var(--text-secondary);">• 可與藥物治療並行（不需非藥物治療期）</div>`);
+  }
+  html += `<div class="result-reasons">
+    <strong>判斷依據</strong>
+    ${reasonItems.join('')}
+  </div>`;
+
+  card.innerHTML = html;
+}
+
+// ── 主流程 ──
+function calculateAuto() {
+  const age = getNum('age');
+  const sex = getRadio('sex');
+  if (!age || !sex) {
+    document.getElementById('result-empty').style.display = '';
+    document.getElementById('result-card').classList.remove('visible');
+    return;
+  }
+  const eff = getEffectiveLDL();
+  const p = {
+    age, sex,
+    menopause: getRadio('menopause'),
+    tc: getNum('tc'),
+    ldl: eff.value,
+    ldlSource: eff.source,
+    hdl: getNum('hdl'),
+    ascvd: getRadio('ascvd'),
+    dm: getRadio('dm'),
+    htn: getRadio('htn'),
+    fhcad: getRadio('fhcad'),
+    smoking: getRadio('smoking'),
+  };
+  const r = calcStatinNHISimple(p);
+  renderResult(r);
+}
+
+// ── 監聽輸入（debounce 250ms）──
+(function() {
+  let t = null;
+  function trigger() {
+    updateCalcLdl();
+    updateMenopauseField();
+    clearTimeout(t);
+    t = setTimeout(calculateAuto, 250);
+  }
+  document.querySelectorAll('.input-panel input').forEach(i => {
+    i.addEventListener('input', trigger);
+    i.addEventListener('change', trigger);
+  });
+  updateMenopauseField();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+//  LIS 貼上自動填入（與完整版同邏輯）
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  document.getElementById('lisPasteIcon').innerHTML = window.ICON?.copy || '📋';
+  document.getElementById('lisTitleIcon').innerHTML = window.ICON?.copy || '📋';
+  document.getElementById('lisCloseIcon').innerHTML = window.ICON?.close || '×';
+
+  const btn = document.getElementById('lisPasteBtn');
+  const backdrop = document.getElementById('lisBackdrop');
+  const closeBtn = document.getElementById('lisClose');
+  const cancelBtn = document.getElementById('lisCancel');
+  const applyBtn = document.getElementById('lisApply');
+  const textarea = document.getElementById('lisInput');
+  const preview = document.getElementById('lisPreview');
+  const warnLine = document.getElementById('lisWarnLine');
+
+  let parsedResult = null;
+
+  function open_() {
+    backdrop.classList.add('open');
+    textarea.value = '';
+    parsedResult = null;
+    renderPreview(null);
+    setTimeout(() => textarea.focus(), 50);
+  }
+  function close_() {
+    backdrop.classList.remove('open');
+    textarea.value = '';
+    parsedResult = null;
+  }
+  btn.addEventListener('click', open_);
+  closeBtn.addEventListener('click', close_);
+  cancelBtn.addEventListener('click', close_);
+  backdrop.addEventListener('click', close_);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) close_();
+  });
+
+  function parsePastedText(raw) {
+    if (!raw || !raw.trim()) return null;
+    const text = raw.replace(/\r/g, '');
+    const result = { fields: {}, raw: text, warnings: [] };
+
+    // 年齡
+    const ageM = text.match(/\((\d{1,3})歲\)/) || text.match(/年齡[^\d]{0,10}(\d{1,3})\s*歲/);
+    if (ageM) {
+      const age = parseInt(ageM[1]);
+      if (age >= 1 && age <= 120) result.fields.age = { value: age, label: '年齡', unit: '歲' };
+    }
+    // 性別
+    if (/姓名[\s\S]{0,40}\(男\)/.test(text)) {
+      result.fields.sex = { value: 'M', label: '性別', display: '男' };
+    } else if (/姓名[\s\S]{0,40}\(女\)/.test(text)) {
+      result.fields.sex = { value: 'F', label: '性別', display: '女' };
+    }
+
+    function extractValue(patterns, minVal, maxVal) {
+      for (const pat of patterns) {
+        const esc = pat.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp(esc + '[\\s\\S]{0,30}?[\\t ]([\\d.≧≦<>＜＞]+(?:\\.\\d+)?)', 'i');
+        const m = text.match(re);
+        if (m) {
+          const pos = m.index + m[0].lastIndexOf(m[1]);
+          const surround = text.substring(Math.max(0, pos - 6), pos + m[1].length + 6);
+          if (/\d{2,4}[-/]\d{1,2}[-/]\d{1,2}/.test(surround)) continue;
+          if (/\d{1,2}:\d{2}/.test(surround)) continue;
+          let valStr = m[1];
+          let val;
+          if (/^[≧≦<>＜＞]/.test(valStr)) {
+            const n = parseFloat(valStr.replace(/[≧≦<>＜＞]/g, ''));
+            if (isNaN(n)) continue;
+            val = n;
+          } else {
+            val = parseFloat(valStr);
+          }
+          if (isNaN(val)) continue;
+          if (minVal !== undefined && val < minVal) continue;
+          if (maxVal !== undefined && val > maxVal) continue;
+          return { value: val, rawText: valStr };
+        }
+      }
+      return null;
+    }
+
+    const targets = [
+      { id: 'tc', patterns: ['CHOL(mg/dL)', 'CHOL', '總膽固醇', 'Cholesterol'], min: 50, max: 600, unit: 'mg/dL', label: 'TC' },
+      { id: 'hdl', patterns: ['HDL-C(mg/dL)', 'HDL-C', 'HDL(mg/dL)', 'HDL'], min: 10, max: 150, unit: 'mg/dL', label: 'HDL-C' },
+      { id: 'ldl', patterns: ['LDL-C(mg/dL)', 'LDL-C', 'LDL(mg/dL)', 'LDL'], min: 10, max: 500, unit: 'mg/dL', label: 'LDL-C' },
+      { id: 'tg', patterns: ['TG(mg/dL)', 'TG', '三酸甘油酯'], min: 20, max: 3000, unit: 'mg/dL', label: 'TG' },
+    ];
+    targets.forEach(t => {
+      const f = extractValue(t.patterns, t.min, t.max);
+      if (f) result.fields[t.id] = { value: f.value, label: t.label, unit: t.unit };
+    });
+
+    const hasTcHdl = result.fields.tc && result.fields.hdl;
+    const hasTg = result.fields.tg;
+    const noLdl = !result.fields.ldl;
+    if (hasTcHdl && hasTg && noLdl) {
+      result.warnings.push('LIS 未報告 LDL-C — 欄位填入後將用 Friedewald 公式自動推算 LDL。');
+    } else if (hasTcHdl && !hasTg && noLdl) {
+      result.warnings.push('LIS 未報告 LDL-C — 已有 TC + HDL，若再補 TG 即可推算 LDL。');
+    }
+    return result;
+  }
+
+  function renderPreview(result) {
+    warnLine.style.display = 'none';
+    if (!result || Object.keys(result.fields).length === 0) {
+      preview.innerHTML = `<div class="lis-preview-title">偵測結果</div>
+        <div class="lis-preview-empty">${result === null ? '貼上 LIS 內容後，自動顯示能填入的欄位' : '未在貼上內容中找到任何已知欄位'}</div>`;
+      applyBtn.disabled = true;
+      return;
+    }
+    const rows = [];
+    Object.keys(result.fields).forEach(id => {
+      const f = result.fields[id];
+      const displayVal = f.display !== undefined ? f.display : f.value;
+      const valStr = `${displayVal}${f.unit ? ' ' + f.unit : ''}`;
+      let willOverwrite = false, existing = null;
+      if (id === 'sex') {
+        existing = document.querySelector('input[name="sex"]:checked')?.value;
+        willOverwrite = existing && existing !== f.value;
+      } else {
+        const el = document.getElementById(id);
+        existing = el && el.value ? el.value : null;
+        willOverwrite = existing !== null && parseFloat(existing) !== f.value;
+      }
+      const symClass = willOverwrite ? 'over-sym' : 'ok-sym';
+      const symChar = willOverwrite ? '⚠' : '✓';
+      const overNote = willOverwrite ? ` <span class="over-note">將覆寫原值 ${existing}</span>` : '';
+      rows.push(`<div class="lis-preview-row">
+        <span class="sym ${symClass}">${symChar}</span>
+        <span class="field">${f.label}</span>
+        <span class="val">${valStr}</span>${overNote}
+      </div>`);
+    });
+    // 提示沒帶到的欄位
+    const haveLdl = !!result.fields.ldl;
+    const haveTcHdl = !!(result.fields.tc && result.fields.hdl);
+    const missing = [];
+    if (!haveLdl && haveTcHdl) missing.push('LDL-C（將自動推算）');
+    if (!haveLdl && !haveTcHdl) missing.push('LDL-C');
+    if (missing.length) {
+      rows.push(`<div class="lis-preview-row" style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px;">
+        <span class="sym miss-sym">·</span>
+        <span class="field" style="width:auto;">未提供：</span>
+        <span style="color:var(--text-secondary);font-size:11.5px;font-family:'Noto Sans TC',sans-serif;">${missing.join('、')}</span>
+      </div>`);
+    }
+    preview.innerHTML = `<div class="lis-preview-title">偵測結果（${Object.keys(result.fields).length} 個欄位）</div>${rows.join('')}`;
+    applyBtn.disabled = false;
+    if (result.warnings && result.warnings.length) {
+      warnLine.textContent = result.warnings.join(' / ');
+      warnLine.style.display = '';
+    }
+  }
+
+  function tryParse() {
+    const raw = textarea.value;
+    if (!raw.trim()) { parsedResult = null; renderPreview(null); return; }
+    parsedResult = parsePastedText(raw);
+    renderPreview(parsedResult);
+  }
+  textarea.addEventListener('input', tryParse);
+  textarea.addEventListener('paste', () => setTimeout(tryParse, 30));
+
+  applyBtn.addEventListener('click', () => {
+    if (!parsedResult || Object.keys(parsedResult.fields).length === 0) return;
+    Object.keys(parsedResult.fields).forEach(id => {
+      const f = parsedResult.fields[id];
+      if (id === 'sex') {
+        const radio = document.querySelector(`input[name="sex"][value="${f.value}"]`);
+        if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change', { bubbles: true })); }
+      } else {
+        const el = document.getElementById(id);
+        if (el) { el.value = f.value; el.dispatchEvent(new Event('input', { bubbles: true })); }
+      }
+    });
+    updateCalcLdl();
+    updateMenopauseField();
+    calculateAuto();
+    close_();
+  });
+})();
+
+// ── Inject icons ──
+document.querySelectorAll('.ti[data-icon]').forEach(el => {
+  const k = el.dataset.icon;
+  if (window.ICON && window.ICON[k]) el.innerHTML = window.ICON[k];
+});
+const fbIcon = document.getElementById('feedbackIcon');
+if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
+</script>
+
+</body>
+</html>
