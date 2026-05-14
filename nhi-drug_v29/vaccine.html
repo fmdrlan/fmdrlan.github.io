@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>疫苗查詢 · DR. LAN's Toolbox</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="小兒公費/自費疫苗時程表、成人自費疫苗劑數與注意事項查詢工具（建造中）。">
+<meta name="keywords" content="疫苗,公費疫苗,自費疫苗,小兒疫苗,成人疫苗,疫苗時程,HPV,帶狀疱疹,流感">
+<meta name="author" content="DR. LAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://garrulous-cat.github.io/mindy/vaccine.html">
+
+<!-- ── Open Graph ── -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="疫苗查詢 · DR. LAN's Toolbox">
+<meta property="og:description" content="小兒公費/自費疫苗時程表、成人自費疫苗劑數與注意事項查詢工具。">
+<meta property="og:url" content="https://garrulous-cat.github.io/mindy/vaccine.html">
+<meta property="og:locale" content="zh_TW">
+
+<!-- ── Favicon ── -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="shortcut icon" href="assets/favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/shared.css">
+<script src="assets/icons.js"></script>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #161b27;
+  --surface: #1c2333;
+  --surface2: #212840;
+  --border: #2d3a52;
+  --border-strong: #3d4f6e;
+  --text: #e2e8f4;
+  --text-muted: #8fa3c0;
+  --text-light: #566880;
+  --accent: #4a9eff;
+  --accent-dim: #1e3a5f;
+  --accent-glow: rgba(74,158,255,0.15);
+  --green: #3fb950;
+  --green-dim: rgba(63,185,80,0.12);
+  --green-border: rgba(63,185,80,0.35);
+  --orange: #f0883e;
+  --orange-dim: rgba(240,136,62,0.12);
+  --orange-border: rgba(240,136,62,0.35);
+  --red: #f85149;
+  --yellow: #d4a843;
+  --purple: #a371f7;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; }
+
+/* tabs-bar 樣式由 assets/shared.css 提供 */
+
+/* Layout */
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+.page-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+
+/* Mode tabs */
+.mode-tabs { display: flex; gap: 8px; margin-bottom: 28px; }
+.mode-btn {
+  padding: 8px 20px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-muted); font-size: 14px;
+  font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit;
+}
+.mode-btn:hover { border-color: var(--border-strong); color: var(--text); }
+.mode-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+/* ─── Pediatric section ─── */
+#peds-section { }
+
+.dob-row {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.dob-label { font-size: 14px; color: var(--text-muted); white-space: nowrap; }
+.dob-input {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); font-size: 15px; padding: 9px 14px; font-family: inherit;
+  transition: border-color 0.15s;
+}
+.dob-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.age-display {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 16px; font-size: 14px; color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace; font-weight: 600;
+}
+
+/* Legend */
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-muted); }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+.legend-dot.pub { background: var(--green); }
+.legend-dot.priv { background: var(--orange); }
+.legend-dot.due { background: var(--accent); }
+.legend-dot.done { background: var(--border-strong); }
+.legend-dot.future { background: var(--surface2); border: 1px solid var(--border); }
+
+/* Timeline */
+.timeline-wrap { overflow-x: auto; padding-bottom: 12px; }
+.timeline-table {
+  width: 100%; min-width: 900px; border-collapse: separate; border-spacing: 0;
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.timeline-table th, .timeline-table td {
+  padding: 0; border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.timeline-table th:last-child, .timeline-table td:last-child { border-right: none; }
+.timeline-table tr:last-child td { border-bottom: none; }
+
+/* Header rows */
+.th-vaccine {
+  width: 160px; min-width: 140px; background: var(--surface); padding: 10px 12px;
+  font-size: 12px; font-weight: 600; color: var(--text-muted); text-align: left;
+  vertical-align: middle; position: sticky; left: 0; z-index: 10;
+}
+.th-time {
+  background: var(--surface); font-size: 11px; font-weight: 600;
+  color: var(--text-muted); text-align: center; padding: 8px 4px;
+  min-width: 54px;
+}
+.th-time.now-col { background: rgba(74,158,255,0.08); color: var(--accent); }
+
+/* Vaccine name cell */
+.td-vaccine {
+  background: var(--bg2); padding: 9px 12px;
+  font-size: 13px; font-weight: 500; vertical-align: middle;
+  position: sticky; left: 0; z-index: 5; line-height: 1.4;
+  border-right: 1px solid var(--border-strong) !important;
+}
+.td-vaccine .vname { display: block; }
+.td-vaccine .vtype {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.05em; padding: 1px 6px; border-radius: 4px; margin-top: 3px;
+}
+.vtype.pub { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.vtype.priv { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange-border); }
+
+/* Dose cells */
+.td-dose {
+  text-align: center; vertical-align: middle; padding: 6px 3px;
+  min-width: 54px; position: relative;
+}
+.td-dose.now-col { background: rgba(74,158,255,0.04); }
+.dose-dot {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  font-size: 11px; font-weight: 700; font-family: 'IBM Plex Mono', monospace;
+  transition: transform 0.15s;
+}
+.dose-dot:hover { transform: scale(1.15); cursor: default; }
+.dose-dot.pub-due { background: var(--green); color: #fff; box-shadow: 0 0 8px rgba(63,185,80,0.4); }
+.dose-dot.priv-due { background: var(--orange); color: #fff; box-shadow: 0 0 8px rgba(240,136,62,0.4); }
+.dose-dot.pub-now { background: var(--green); color: #fff; box-shadow: 0 0 12px rgba(63,185,80,0.6); animation: pulse-green 2s ease-in-out infinite; }
+.dose-dot.priv-now { background: var(--orange); color: #fff; box-shadow: 0 0 12px rgba(240,136,62,0.6); animation: pulse-orange 2s ease-in-out infinite; }
+.dose-dot.future { background: var(--surface2); color: var(--text-light); border: 1px solid var(--border); }
+.dose-dot.na { background: transparent; }
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 8px rgba(63,185,80,0.4); }
+  50% { box-shadow: 0 0 16px rgba(63,185,80,0.8); }
+}
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 0 8px rgba(240,136,62,0.4); }
+  50% { box-shadow: 0 0 16px rgba(240,136,62,0.8); }
+}
+
+/* Now indicator column */
+.now-indicator {
+  position: absolute; top: 0; bottom: 0; left: 0; right: 0;
+  border-left: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+/* Tooltip */
+.dose-dot[data-tip] { position: relative; }
+.dose-dot[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  background: #1a2540; border: 1px solid var(--border-strong);
+  color: var(--text); font-size: 11px; white-space: nowrap;
+  padding: 4px 8px; border-radius: 6px; z-index: 100; font-weight: 400;
+  font-family: 'Noto Sans TC', sans-serif; pointer-events: none;
+}
+
+/* Section header row */
+.section-row td {
+  background: var(--surface2); padding: 5px 12px;
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ─── Adult section ─── */
+#adult-section { display: none; }
+
+.adult-layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; }
+@media (max-width: 700px) { .adult-layout { grid-template-columns: 1fr; } }
+
+.vaccine-list-panel {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+.vlist-header {
+  padding: 12px 16px; font-size: 13px; font-weight: 700;
+  color: var(--text-muted); border-bottom: 1px solid var(--border);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.vlist-item {
+  padding: 10px 16px; cursor: pointer; border-bottom: 1px solid var(--border);
+  font-size: 14px; color: var(--text-muted); transition: all 0.1s;
+  display: flex; align-items: center; gap: 8px;
+}
+.vlist-item:last-child { border-bottom: none; }
+.vlist-item:hover { background: var(--surface); color: var(--text); }
+.vlist-item.selected { background: var(--accent-dim); color: var(--accent); border-left: 3px solid var(--accent); }
+.vlist-item .vl-icon { font-size: 16px; flex-shrink: 0; }
+
+.vaccine-detail-panel {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 24px;
+}
+.detail-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 300px; color: var(--text-light); gap: 10px;
+}
+.detail-placeholder svg { opacity: 0.3; }
+
+.detail-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.detail-en { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+@media (max-width: 500px) { .detail-grid { grid-template-columns: 1fr; } }
+.detail-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 14px;
+}
+.detail-card-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; font-weight: 600; }
+.detail-card-value { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.5; }
+.detail-card.highlight { border-color: var(--accent); background: var(--accent-dim); }
+.detail-card.highlight .detail-card-value { color: var(--accent); }
+
+.detail-section { margin-bottom: 16px; }
+.detail-section-title {
+  font-size: 12px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.detail-section ul { list-style: none; }
+.detail-section ul li {
+  font-size: 14px; color: var(--text); padding: 4px 0;
+  padding-left: 14px; position: relative;
+}
+.detail-section ul li::before {
+  content: '·'; position: absolute; left: 0; color: var(--accent);
+}
+.detail-note {
+  background: var(--surface); border-left: 3px solid var(--yellow);
+  border-radius: 0 6px 6px 0; padding: 10px 14px;
+  font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 8px;
+}
+.price-badge {
+  display: inline-block; background: rgba(212,168,67,0.12);
+  border: 1px solid rgba(212,168,67,0.35); color: var(--yellow);
+  border-radius: 6px; padding: 4px 12px; font-size: 13px; font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Footer */
+.footer-meta {
+  text-align: center; padding: 28px 20px 20px;
+  font-size: 12px; color: var(--text-light); line-height: 1.8;
+}
+.footer-meta a { color: var(--accent); text-decoration: none; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .page-wrap { padding: 16px 12px; }
+  .th-vaccine, .td-vaccine { width: 120px; min-width: 110px; }
+  .th-time { min-width: 40px; }
+  .dose-dot { width: 24px; height: 24px; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. LAN</a>
+  <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
+  <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
+  <a class="tab-link active" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
+  <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
+  <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-intro">
+    <span class="icon">💉</span>
+    <div>
+      <h1>疫苗查詢</h1>
+      <p>查詢小兒（0–18 歲）與成人疫苗接種建議。輸入出生日期，系統會列出該年齡層應接種、未接種的疫苗。</p>
+    </div>
+  </div>
+
+  <div class="mode-tabs">
+    <button class="mode-btn" id="btn-peds" onclick="setMode('peds')">👶 小兒（0–18歲）</button>
+    <button class="mode-btn" id="btn-adult" onclick="setMode('adult')">🧑 成人（18歲以上）</button>
+  </div>
+
+  <!-- ─── Pediatric ─── -->
+  <div id="peds-section" style="display:none">
+    <div class="dob-row">
+      <span class="dob-label">出生日期</span>
+      <input type="date" id="dobInput" class="dob-input" onchange="renderTimeline()">
+      <div class="age-display" id="ageDisplay">—</div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot pub"></div>公費疫苗</div>
+      <div class="legend-item"><div class="legend-dot priv"></div>自費疫苗</div>
+      <div class="legend-item"><div class="legend-dot due" style="animation: pulse-green 2s infinite;"></div>現在應打（高亮閃爍）</div>
+      <div class="legend-item"><div class="legend-dot done"></div>已到期</div>
+      <div class="legend-item"><div class="legend-dot future"></div>尚未到期</div>
+    </div>
+
+    <div class="timeline-wrap">
+      <table class="timeline-table" id="timelineTable">
+        <thead id="timelineHead"></thead>
+        <tbody id="timelineBody"></tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:16px; font-size:12px; color:var(--text-light); line-height:1.8;">
+      ※ 流感疫苗每年公費政策可能變動，自114/1/1起公費已擴大至全民（6個月以上未接種者，至疫苗用罄止）；6個月–8歲初次接種者須打 2 劑（間隔 4 週以上），9 歲以上 1 劑即可<br>
+      ※ 接種時程以 CDC 公告及醫師評估為準，本工具僅供參考
+    </div>
+  </div>
+
+  <!-- ─── Adult ─── -->
+  <div id="adult-section">
+    <div class="adult-search-row" style="margin-bottom:12px">
+      <input type="text" id="adultSearch" class="dob-input" placeholder="🔍 搜尋疫苗名稱..." oninput="renderAdultList(this.value)" style="width:100%;max-width:400px">
+    </div>
+    <div class="adult-layout">
+      <div class="vaccine-list-panel">
+        <div class="vlist-header">自費疫苗清單</div>
+        <div id="adultList"></div>
+      </div>
+      <div class="vaccine-detail-panel" id="adultDetail">
+        <div class="detail-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>← 點選左側疫苗查看詳細資訊</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feedback-footer">
+  <div>
+    資料來源：<a href="https://www.cdc.gov.tw" target="_blank" style="color:#4a9eff;text-decoration:none">衛生福利部疾病管制署</a>
+    · 本工具由 DR. LAN 個人維護，資訊僅供參考，以 CDC 官方公告為準
+  </div>
+  <a class="feedback-link" id="feedbackLink"
+     href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"
+     target="_blank" rel="noopener">
+    <span id="feedbackIcon"></span>回報錯誤 / 提建議
+  </a>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  VACCINE DATA
+// ══════════════════════════════════════════════════════
+
+// Time columns: label, age in months (0 = birth)
+const TIME_COLS = [
+  { label: '出生\n24hr', months: 0 },
+  { label: '1\nm', months: 1 },
+  { label: '2\nm', months: 2 },
+  { label: '4\nm', months: 4 },
+  { label: '5\nm', months: 5 },
+  { label: '6\nm', months: 6 },
+  { label: '12\nm', months: 12 },
+  { label: '15\nm', months: 15 },
+  { label: '18\nm', months: 18 },
+  { label: '24\nm', months: 24 },
+  { label: '27\nm', months: 27 },
+  { label: '4–6\ny', months: 54 },
+  { label: '5y\n入學前', months: 60 },
+  { label: '9y+\n(HPV)', months: 108 },
+  { label: '13y+', months: 156 },
+];
+
+// Pediatric vaccines
+// type: 'pub' = 公費, 'priv' = 自費
+// doses: array of { col_months, label, tip }
+const PED_VACCINES = [
+  // ── 公費 ──
+  {
+    section: '公費疫苗',
+    name: 'B型肝炎', en: 'Hepatitis B', type: 'pub',
+    doses: [
+      { months: 0, label: '第1', tip: '出生24hr內' },
+      { months: 1, label: '第2', tip: '出生滿1個月' },
+      { months: 6, label: '第3', tip: '出生滿6個月' },
+    ]
+  },
+  {
+    name: '卡介苗', en: 'BCG', type: 'pub',
+    doses: [{ months: 5, label: '1劑', tip: '出生滿5個月（建議5–8個月）' }]
+  },
+  {
+    name: '五合一\nDTaP-Hib-IPV', en: 'DTaP-Hib-IPV', type: 'pub',
+    doses: [
+      { months: 2, label: '第1', tip: '出生滿2個月' },
+      { months: 4, label: '第2', tip: '出生滿4個月' },
+      { months: 6, label: '第3', tip: '出生滿6個月' },
+      { months: 18, label: '第4', tip: '出生滿18個月' },
+    ]
+  },
+  {
+    name: '肺炎鏈球菌\nPCV13', en: 'PCV13', type: 'pub',
+    doses: [
+      { months: 2, label: '第1', tip: '出生滿2個月' },
+      { months: 4, label: '第2', tip: '出生滿4個月' },
+      { months: 12, label: '第3', tip: '出生滿12-15個月（建議於 12 個月後即可接種）' },
+    ]
+  },
+  {
+    name: '水痘\n(第1劑)', en: 'Varicella ×1', type: 'pub',
+    doses: [{ months: 12, label: '第1', tip: '出生滿12個月（公費）' }]
+  },
+  {
+    name: 'MMR\n麻疹腮腺炎德麻', en: 'MMR', type: 'pub',
+    doses: [
+      { months: 12, label: '第1', tip: '出生滿12個月（CDC 公費為 12 個月）' },
+      { months: 60, label: '第2', tip: '滿 5 歲，入國小前（與第 1 劑間隔至少 4 週）' },
+    ]
+  },
+  {
+    name: '日本腦炎\n(活性減毒)', en: 'JEV', type: 'pub',
+    doses: [
+      { months: 15, label: '第1', tip: '出生滿15個月' },
+      { months: 27, label: '第2', tip: '出生滿27個月（間隔12個月）' },
+    ]
+  },
+  {
+    name: 'A型肝炎\n(特定對象)', en: 'Hepatitis A', type: 'pub',
+    doses: [
+      { months: 18, label: '第1', tip: '出生滿18個月（114 年起新時程）' },
+      { months: 27, label: '第2', tip: '出生滿27個月（與第 1 劑間隔至少 6 個月）' },
+    ]
+  },
+  {
+    name: '四合一\nDTaP-IPV', en: 'DTaP-IPV', type: 'pub',
+    doses: [{ months: 60, label: '1劑', tip: '滿5歲，入國小前加強' }]
+  },
+  // ── 自費 ──
+  {
+    section: '自費疫苗',
+    name: '輪狀病毒\n羅特律 (Rotarix)', en: 'Rotavirus (Rotarix, 2-dose)', type: 'priv',
+    doses: [
+      { months: 2, label: '第1', tip: '出生滿2個月（最早出生6週可接種）' },
+      { months: 4, label: '第2', tip: '與第 1 劑間隔至少 4 週；最後 1 劑不得晚於 24 週（約 6 個月）' },
+    ]
+  },
+  {
+    name: '輪狀病毒\n輪達停 (RotaTeq)', en: 'Rotavirus (RotaTeq, 3-dose)', type: 'priv',
+    doses: [
+      { months: 2, label: '第1', tip: '出生滿2個月（最早出生6週可接種）' },
+      { months: 4, label: '第2', tip: '與前劑間隔至少 4 週' },
+      { months: 6, label: '第3', tip: '最後 1 劑不得晚於 32 週（約 8 個月）' },
+    ]
+  },
+  {
+    name: '腸病毒A71型\n國光/安特羅', en: 'EV71 (EnVAX-A71)', type: 'priv',
+    doses: [
+      { months: 2, label: '第1', tip: '出生滿2個月（2個月–未滿6歲）' },
+      { months: 3, label: '第2', tip: '間隔至少28天（4週）' },
+    ]
+  },
+  {
+    name: '腸病毒A71型\n高端', en: 'EV71 (Medigen)', type: 'priv',
+    doses: [
+      { months: 2, label: '第1', tip: '出生滿2個月（2個月–未滿6歲）' },
+      { months: 4, label: '第2', tip: '間隔至少56天（8週）' },
+      { months: 14, label: '追加', tip: '第1劑接種時未滿2歲者，建議於第1劑後1年接種追加劑' },
+    ]
+  },
+  {
+    name: 'RSV單株抗體\n(Nirsevimab)', en: 'RSV mAb', type: 'priv',
+    doses: [
+      { months: 0, label: '1劑', tip: '出生後即可；1歲以下嬰兒' },
+    ]
+  },
+  {
+    name: '流行性腦膜炎\nMenveo (ACWY)', en: 'MenACWY (Menveo)', type: 'priv',
+    doses: [
+      { months: 24, label: '1劑', tip: '2 歲以上單劑接種（台灣 CDC 旅遊醫學主要使用之 MCV4）' },
+    ]
+  },
+  {
+    name: '流行性腦膜炎\nMenactra (ACWY)', en: 'MenACWY (Menactra)', type: 'priv',
+    doses: [
+      { months: 9, label: '第1', tip: '9 個月以上未滿 2 歲：2 劑（間隔至少 3 個月）' },
+      { months: 12, label: '第2', tip: '與第 1 劑間隔至少 3 個月' },
+    ]
+  },
+  {
+    name: '流行性腦膜炎\nMenB (Bexsero)', en: 'MenB (4CMenB)', type: 'priv',
+    doses: [
+      { months: 2, label: '第1', tip: '出生滿2個月（2 個月起接種者為 3+1 共 4 劑）' },
+      { months: 4, label: '第2', tip: '與第 1 劑間隔至少 1 個月' },
+      { months: 6, label: '第3', tip: '與第 2 劑間隔至少 1 個月' },
+      { months: 12, label: '追加', tip: '12 個月以上接種，與第 3 劑間隔至少 6 個月' },
+    ]
+  },
+  {
+    name: '水痘\n(第2劑)', en: 'Varicella ×2', type: 'priv',
+    doses: [{ months: 54, label: '第2', tip: '滿4–6歲自費接種第2劑' }]
+  },
+
+
+];
+
+// Adult vaccines
+const ADULT_VACCINES = [
+  {
+    id: 'hpv', icon: '🧬', name: 'HPV 9價疫苗', en: 'Human Papillomavirus Vaccine (9-valent)',
+    doses: '2劑（9–14歲）/ 3劑（15歲以上）',
+    schedule: '9–14歲：0、6–12個月（2劑）；15歲以上：0、2、6個月（3劑）',
+    target: '仿單適應 9–45 歲男女',
+    notes: ['預防子宮頸癌、肛門癌、口咽癌、外生殖器癌等與 HPV 相關之疾病', '9–14歲2劑效果等同15歲以上3劑', '接種前不必常規篩檢 HPV', '已有性經驗者仍可接種，效力對未曾感染之型別仍有保護'],
+    public_note: '【公費對象】自 107 年 12 月起國中女生公費接種；自 114 年 9 月起擴大為全體國中生（男女皆可），由 113 學年度入學國中生開始，採校園集中接種 9 價疫苗，9–14 歲僅需 2 劑。<br>詳見：<a href="https://www.hpa.gov.tw/Pages/List.aspx?nodeid=1799" target="_blank" style="color:var(--accent)">國健署 HPV 疫苗 QA</a>',
+    contraindication: '對疫苗成分嚴重過敏；孕婦暫緩',
+    price: null,
+  },
+  {
+    id: 'shingrix', icon: '🦠', name: '帶狀疱疹疫苗', en: 'Zoster Vaccine (Shingrix)',
+    doses: '2劑',
+    schedule: '2劑，間隔 2–6 個月',
+    target: '50歲以上成人；18歲以上免疫不全/低下者',
+    notes: ['非活性基因重組蛋白疫苗，免疫不全者可接種', '預防帶狀疱疹及疱疹後神經痛', '曾得過帶狀疱疹者仍建議接種', '孕婦應避免接種'],
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'hepb', icon: '🩸', name: 'B型肝炎疫苗', en: 'Hepatitis B Vaccine',
+    doses: '3劑（或追加1劑）',
+    schedule: '0、1、6 個月（未曾接種者）',
+    target: '無抗體（<10 mIU/mL）且非帶原者',
+    notes: [
+      '建議先驗B肝表面抗體（anti-HBs）',
+      '已完成接種但抗體陰性：高危險群可追加1劑，1個月後再驗',
+      '非高危險群：尚無須全面追加，可自費追加1劑',
+      '高危險群：血液透析、器官移植、免疫不全、醫療人員等',
+    ],
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'hepa', icon: '🟡', name: 'A型肝炎疫苗', en: 'Hepatitis A Vaccine',
+    doses: '2劑',
+    schedule: '2劑，間隔至少 6 個月',
+    target: '未曾接種且未得過A型肝炎者',
+    notes: ['接種1劑後約95%產生保護抗體', '完成2劑後保護力可達20年以上', '前往A肝流行地區前建議接種', '孕婦暫緩接種'],
+    contraindication: '對疫苗成分嚴重過敏；孕婦',
+    price: null,
+  },
+  {
+    id: 'tdap', icon: '💪', name: '破傷風白喉百日咳疫苗', en: 'Tdap / Td Vaccine',
+    doses: 'Tdap 1劑；之後每10年 Td',
+    schedule: '成人加強1劑Tdap，每10年追加Td',
+    target: '成人；孕婦每次懷孕（27–36週）',
+    notes: ['孕婦每胎接種1劑Tdap，保護新生兒免於百日咳', '與新生兒接觸的家人也建議接種（繭式策略）', '傷口深、污染：若超過5年未打Td則補打'],
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'pneumo', icon: '🫁', name: '肺炎鏈球菌疫苗', en: 'Pneumococcal Vaccine (PCV20 / PPV23)',
+    doses: '1劑 PCV20（新政策）',
+    schedule: '從未接種過者：1劑 PCV20 即完整接種',
+    target: '65 歲以上；55–64 歲原住民；19–64 歲 IPD 高風險對象',
+    notes: [
+      'PCV20（20 價結合型）：自 115/1/15 起取代原 PCV13 + PPV23 雙劑接種模式，1 劑即完整保護',
+      'IPD 高風險對象：脾臟功能缺損、先天/後天免疫功能不全、人工耳植入、腦脊髓液滲漏、一年內接受免疫抑制劑或放射治療之惡性腫瘤患者及器官移植者',
+      '銜接規則（依過去接種紀錄）：',
+      '　• 從未接種：直接接種 1 劑 PCV20',
+      '　• 僅曾接種 PPV23（間隔≥1 年）：補打 1 劑 PCV20',
+      '　• 僅曾接種 PCV13/15（間隔≥1 年；高風險者≥8 週）：以 1 劑 PPV23 銜接（過渡期，俟 PPV23 用罄後改 PCV20）',
+      '　• 已接種 PCV13/15 + PPV23：視為完整接種，無需再打',
+      '　• 19–64 歲 IPD 高風險者，於 65 歲前完整接 PCV13/15+PPV23：滿 65 歲且距前劑≥5 年，可追加 1 劑 PCV20'
+    ],
+    public_note: '【公費對象（115 年起新制）】3 類人公費：(1) 65 歲以上、(2) 55–64 歲原住民、(3) 19–64 歲 IPD 高風險對象。自 115/1/15 起政策大改：以 1 劑 PCV20 取代原 2 劑接種。<br>詳見：<a href="https://www.cdc.gov.tw/Category/Page/U_hY1WCfa5BU6fuqW9FIXg" target="_blank" style="color:var(--accent)">CDC 成人肺炎鏈球菌疫苗</a>',
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'je', icon: '🦟', name: '日本腦炎疫苗', en: 'Japanese Encephalitis Vaccine',
+    doses: '2劑',
+    schedule: '2劑，間隔 4 週',
+    target: '前往東南亞/亞洲農村的旅遊者；長期居住流行區者',
+    notes: ['出發前至少4週完成接種', '活動減毒疫苗（IMOJEV）：2歲以上1劑', '不活化疫苗：2劑'],
+    contraindication: '對疫苗成分嚴重過敏；孕婦暫緩',
+    price: null,
+  },
+  {
+    id: 'varicella', icon: '💧', name: '水痘疫苗（成人）', en: 'Varicella Vaccine (Adult)',
+    doses: '2劑',
+    schedule: '2劑，間隔 4–8 週',
+    target: '13歲以上未曾接種且未得過水痘者',
+    notes: ['接種後4週內避免懷孕', '免疫不全者禁用（活性減毒疫苗）', '接種後若出現疹子，避免接觸免疫不全者'],
+    contraindication: '孕婦；已知嚴重免疫缺失者',
+    price: null,
+  },
+  {
+    id: 'menacwy', icon: '🧪', name: '流行性腦脊髓膜炎疫苗 ACWY', en: 'MenACWY (Menveo)',
+    doses: '1 劑（2 歲以上）',
+    schedule: '單劑肌肉注射，接種後 7-10 天產生保護力，預防接種證明書於接種 10 天後生效',
+    target: '前往腦膜炎流行地區（非洲腦膜炎帶）；沙烏地阿拉伯朝聖者；留學生（部分學校要求）；高危險族群（脾臟切除、補體缺損、HIV）',
+    notes: [
+      '台灣 CDC 旅遊醫學專案進口廠牌為 Menveo（GSK，腦寧安）',
+      '保護 A、C、W-135、Y 四種血清型；不涵蓋 B 型',
+      '保護力可維持約 5 年；持續暴露於高風險環境者，建議每 5 年追加 1 劑',
+      '可至疾管署合約之旅遊醫學門診接種；建議出國前至少 10 天完成接種',
+      '9 個月-未滿 2 歲嬰幼兒：可考慮 Menactra 接種 2 劑（間隔至少 3 個月）',
+    ],
+    contraindication: '對疫苗成分嚴重過敏（含白喉類毒素過敏者）',
+    price: null,
+  },
+  {
+    id: 'menb', icon: '🧪', name: '流行性腦脊髓膜炎疫苗 B 型', en: 'MenB (Bexsero / 4CMenB)',
+    doses: '依年齡 2-4 劑',
+    schedule: '依起始年齡決定劑次：2-5 個月起 → 3 + 1 共 4 劑；6-11 個月起 → 2 + 1 共 3 劑；12 個月以上起 → 2 劑',
+    target: '台灣本土流行性腦脊髓膜炎以 B 型為主（約佔 80%）；建議高危險族群接種：脾臟功能缺損、先天/後天補體缺損、原發性免疫缺損、HIV 感染者、接受 eculizumab 治療者、造血幹細胞移植者；學校群居族群亦可考慮自費接種',
+    notes: [
+      '台灣現用為 Bexsero（GSK，必思諾）四成份重組蛋白疫苗（4CMenB）',
+      '不涵蓋 ACWY 血清型（如有需要可同時接種 MenACWY，分開不同部位）',
+      '輝瑞 Trumenba（適用 10 歲以上）在台灣較少見',
+      '可預防性使用 acetaminophen 降低發燒發生率，不影響免疫生成效果',
+    ],
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'rsv', icon: '🫧', name: 'RSV 疫苗（成人/孕婦）', en: 'RSV Vaccine (Abrysvo / Arexvy)',
+    doses: '1 劑',
+    schedule: '1 劑（單次接種）',
+    target: '60 歲以上長者（尤其慢性肺病、心臟病等高危族群）；懷孕 28–36 週（為新生兒被動免疫）',
+    notes: [
+      'Abrysvo（艾沛兒，輝瑞）：2025 年於台灣上市，雙適應 — 60 歲以上成人 + 孕婦（28–36 週）',
+      'Arexvy（GSK）：適用 60 歲以上成人，未涵蓋孕婦',
+      '孕婦接種後抗體經胎盤傳給胎兒，可保護新生兒至出生後 6 個月',
+      '孕婦建議與百日咳疫苗（Tdap）間隔 2 週，避免可能免疫干擾',
+      '基因重組蛋白疫苗，非活性疫苗',
+      '60–74 歲一般健康成人建議與醫師討論後決定'
+    ],
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'mpox', icon: '🔴', name: 'M痘疫苗', en: 'Mpox Vaccine (JYNNEOS)',
+    doses: '2劑',
+    schedule: '2劑，間隔 4 週',
+    target: '高風險族群（多重性伴侶、男男性行為者等）',
+    notes: ['非複製型活性疫苗（天花疫苗改良版）', '接觸M痘後72小時內接種仍有效（暴露後預防）', '可能和疤痕天花疫苗有交叉保護'],
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'rabies', icon: '🐾', name: '狂犬病疫苗', en: 'Rabies Vaccine',
+    doses: '3劑（暴露前）/ 視情況（暴露後）',
+    schedule: '暴露前：0、7、21天',
+    target: '前往狂犬病流行地區的旅遊者；獸醫、野外工作者',
+    notes: ['暴露後：未曾接種者需4劑＋免疫球蛋白', '已完成暴露前接種者：暴露後只需補2劑', '台灣本島目前無狂犬病，但蝙蝠仍需注意'],
+    contraindication: '嚴重過敏（暴露後無絕對禁忌）',
+    price: null,
+  },
+  {
+    id: 'typhoid', icon: '🦠', name: '傷寒疫苗', en: 'Typhoid Vaccine',
+    doses: '1劑（注射型）',
+    schedule: '出發前至少2週完成接種',
+    target: '前往傷寒流行地區（南亞、非洲、東南亞）',
+    notes: ['注射型（Vi多醣體）：2歲以上，每3年追加', '保護力約70%，仍須注意飲食衛生', '非完美保護，旅途中仍應注意食物衛生'],
+    contraindication: '對疫苗成分嚴重過敏',
+    price: null,
+  },
+  {
+    id: 'flu', icon: '🤧', name: '流感疫苗（成人）', en: 'Influenza Vaccine',
+    doses: '每年 1 劑（9 歲以下初次接種者 2 劑）',
+    schedule: '每年施打，建議 10 月前完成；秋冬接種計畫於每年 10/1 起分階段開打',
+    target: '所有 6 個月以上民眾建議接種，尤其是高風險族群',
+    notes: ['9 歲以下初次接種者須接 2 劑，間隔至少 4 週；9 歲以上 1 劑即可', '每年病毒株不同，需年年接種', '孕婦、幼兒、65 歲以上長者、慢性病人為優先族群'],
+    public_note: '【公費對象（114 年起）】自 114/1/1 起公費流感疫苗已擴大全民接種，凡 6 個月以上具中華民國國民身分或持居留證者皆可接種，至疫苗用罄止。每年秋冬接種計畫於 10/1 起分階段優先服務高風險族群（醫事人員、65 歲以上長者、55 歲以上原住民、孕婦、學齡前幼兒、學生、高風險慢性病人 etc.），但全民皆可接種。<br>詳見：<a href="https://www.cdc.gov.tw/Category/MPage/JNTC9qza3F_rgt9sRHqV2Q" target="_blank" style="color:var(--accent)">CDC 流感疫苗接種計畫</a>',
+    contraindication: '對疫苗成分（含雞蛋蛋白）嚴重過敏；發燒中',
+    price: null,
+  },
+  {
+    id: 'yellowfever', icon: '🌡️', name: '黃熱病疫苗', en: 'Yellow Fever Vaccine',
+    doses: '1劑（終身有效）',
+    schedule: '出發前至少10天完成接種',
+    target: '前往非洲或南美洲黃熱病流行地區者',
+    notes: ['活性減毒疫苗，通常終身有效（已取消10年更新規定）', '許多非洲/南美國家入境時需出示黃熱病接種證明（小黃卡）', '僅部分合格機構可接種（需查詢CDC認證院所）'],
+    contraindication: '孕婦（特殊情況醫師評估）；免疫不全者；對雞蛋嚴重過敏',
+    price: null,
+  },
+];
+
+// ══════════════════════════════════════════════════════
+//  MODE SWITCH
+// ══════════════════════════════════════════════════════
+function setMode(mode) {
+  document.getElementById('btn-peds').className = 'mode-btn' + (mode === 'peds' ? ' active' : '');
+  document.getElementById('btn-adult').className = 'mode-btn' + (mode === 'adult' ? ' active' : '');
+  document.getElementById('peds-section').style.cssText = mode === 'peds' ? 'display:block' : 'display:none';
+  document.getElementById('adult-section').style.cssText = mode === 'adult' ? 'display:block' : 'display:none';
+  if (mode === 'adult') renderAdultList();
+  if (mode === 'peds') renderTimeline();
+}
+
+// ══════════════════════════════════════════════════════
+//  PEDIATRIC TIMELINE
+// ══════════════════════════════════════════════════════
+function getAgeMonths(dob) {
+  const today = new Date();
+  const birth = new Date(dob);
+  const y = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  return y * 12 + m + (today.getDate() >= birth.getDate() ? 0 : -1);
+}
+
+function formatAge(months) {
+  if (months < 0) return '未出生';
+  if (months < 1) return '新生兒';
+  if (months < 24) return months + ' 個月';
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  return m > 0 ? `${y} 歲 ${m} 個月` : `${y} 歲`;
+}
+
+function renderTimeline() {
+  const dob = document.getElementById('dobInput').value;
+  const ageDisplay = document.getElementById('ageDisplay');
+  const thead = document.getElementById('timelineHead');
+  const tbody = document.getElementById('timelineBody');
+
+  if (!dob) {
+    ageDisplay.textContent = '—';
+    renderTimelineNoAge(thead, tbody);
+    return;
+  }
+
+  const ageMonths = getAgeMonths(dob);
+  ageDisplay.textContent = '今日月齡：' + formatAge(ageMonths);
+
+  // Find "now" column index (closest time column to current age)
+  let nowColIdx = -1;
+  for (let i = 0; i < TIME_COLS.length; i++) {
+    if (TIME_COLS[i].months <= ageMonths) nowColIdx = i;
+  }
+
+  // Build header
+  let headHtml = '<tr><th class="th-vaccine">疫苗</th>';
+  TIME_COLS.forEach((col, i) => {
+    const isNow = (i === nowColIdx);
+    headHtml += `<th class="th-time${isNow ? ' now-col' : ''}">${col.label.replace('\n','<br>')}</th>`;
+  });
+  headHtml += '</tr>';
+  thead.innerHTML = headHtml;
+
+  // Build body
+  let bodyHtml = '';
+  let lastSection = '';
+
+  PED_VACCINES.forEach(vax => {
+    // Section separator
+    if (vax.section && vax.section !== lastSection) {
+      lastSection = vax.section;
+      bodyHtml += `<tr class="section-row"><td colspan="${TIME_COLS.length + 1}">${vax.section}</td></tr>`;
+    }
+
+    bodyHtml += '<tr>';
+    bodyHtml += `<td class="td-vaccine">
+      <span class="vname">${vax.name.replace('\n','<br>')}</span>
+      <span class="vtype ${vax.type}">${vax.type === 'pub' ? '公費' : '自費'}</span>
+    </td>`;
+
+    TIME_COLS.forEach((col, colIdx) => {
+      const isNowCol = (colIdx === nowColIdx);
+      // Find dose for this column
+      const dose = vax.doses.find(d => d.months === col.months);
+      const isColPast = col.months <= ageMonths;
+      const isColPresent = colIdx === nowColIdx;
+
+      let dotHtml = '';
+      if (dose) {
+        let cls = '';
+        if (isColPresent) {
+          cls = vax.type === 'pub' ? 'pub-now' : 'priv-now';
+        } else if (isColPast) {
+          cls = vax.type === 'pub' ? 'pub-due' : 'priv-due';
+        } else {
+          cls = 'future';
+        }
+        dotHtml = `<div class="dose-dot ${cls}" data-tip="${dose.tip}">${dose.label}</div>`;
+      }
+
+      bodyHtml += `<td class="td-dose${isNowCol ? ' now-col' : ''}">${dotHtml}</td>`;
+    });
+
+    bodyHtml += '</tr>';
+  });
+
+  tbody.innerHTML = bodyHtml;
+}
+
+function renderTimelineNoAge(thead, tbody) {
+  let headHtml = '<tr><th class="th-vaccine">疫苗</th>';
+  TIME_COLS.forEach(col => {
+    headHtml += `<th class="th-time">${col.label.replace('\n','<br>')}</th>`;
+  });
+  headHtml += '</tr>';
+  thead.innerHTML = headHtml;
+
+  let bodyHtml = '';
+  let lastSection = '';
+  PED_VACCINES.forEach(vax => {
+    if (vax.section && vax.section !== lastSection) {
+      lastSection = vax.section;
+      bodyHtml += `<tr class="section-row"><td colspan="${TIME_COLS.length + 1}">${vax.section}</td></tr>`;
+    }
+    bodyHtml += '<tr>';
+    bodyHtml += `<td class="td-vaccine">
+      <span class="vname">${vax.name.replace('\n','<br>')}</span>
+      <span class="vtype ${vax.type}">${vax.type === 'pub' ? '公費' : '自費'}</span>
+    </td>`;
+    TIME_COLS.forEach(col => {
+      const dose = vax.doses.find(d => d.months === col.months);
+      let dotHtml = '';
+      if (dose) {
+        dotHtml = `<div class="dose-dot future" data-tip="${dose.tip}">${dose.label}</div>`;
+      }
+      bodyHtml += `<td class="td-dose">${dotHtml}</td>`;
+    });
+    bodyHtml += '</tr>';
+  });
+  tbody.innerHTML = bodyHtml;
+}
+
+// ══════════════════════════════════════════════════════
+//  ADULT VACCINE LIST & DETAIL
+// ══════════════════════════════════════════════════════
+let selectedAdult = null;
+
+function renderAdultList(query) {
+  const container = document.getElementById('adultList');
+  const q = (query || '').toLowerCase().trim();
+  const filtered = q
+    ? ADULT_VACCINES.filter(v => v.name.toLowerCase().includes(q) || v.en.toLowerCase().includes(q))
+    : ADULT_VACCINES;
+  container.innerHTML = filtered.length
+    ? filtered.map(v =>
+        `<div class="vlist-item${selectedAdult === v.id ? ' selected' : ''}" onclick="showAdultDetail('${v.id}')">
+          <span>${v.name}</span>
+        </div>`
+      ).join('')
+    : '<div style="padding:16px;color:var(--text-light);font-size:13px">找不到相關疫苗</div>';
+}
+
+function showAdultDetail(id) {
+  selectedAdult = id;
+  renderAdultList();
+  const v = ADULT_VACCINES.find(x => x.id === id);
+  if (!v) return;
+
+  const noteItems = v.notes.map(n => `<li>${n}</li>`).join('');
+  const priceHtml = v.price
+    ? `<div class="price-badge">💰 ${v.price}</div>`
+    : `<div style="color:var(--text-light);font-size:13px;margin-top:4px">待補充（請洽診所）</div>`;
+
+  document.getElementById('adultDetail').innerHTML = `
+    <div class="detail-title">${v.name}</div>
+    <div class="detail-en">${v.en}</div>
+
+    <div class="detail-grid">
+      <div class="detail-card highlight">
+        <div class="detail-card-label">劑數</div>
+        <div class="detail-card-value">${v.doses}</div>
+      </div>
+      <div class="detail-card highlight">
+        <div class="detail-card-label">接種時程</div>
+        <div class="detail-card-value">${v.schedule}</div>
+      </div>
+      <div class="detail-card" style="grid-column: span 2">
+        <div class="detail-card-label">適用對象</div>
+        <div class="detail-card-value">${v.target}</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">注意事項</div>
+      <ul>${noteItems}</ul>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">接種禁忌</div>
+      <div class="detail-note">⚠️ ${v.contraindication}</div>
+    </div>
+
+    ${v.public_note ? `<div class="detail-section">
+      <div class="detail-section-title" style="color:var(--green)">📋 公費資訊</div>
+      <div class="detail-note" style="border-color:var(--green)">${v.public_note}</div>
+    </div>` : ''}
+
+    <div class="detail-section">
+      <div class="detail-section-title">自費價格</div>
+      ${priceHtml}
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════
+// No auto-init: user must click a button to reveal content
+
+// ── Inject tab SVG icons ──
+document.querySelectorAll('.ti[data-icon]').forEach(el => {
+  const k = el.dataset.icon;
+  if (window.ICON && window.ICON[k]) el.innerHTML = window.ICON[k];
+});
+// Feedback icon
+const fbIcon = document.getElementById('feedbackIcon');
+if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
+</script>
+</body>
+</html>

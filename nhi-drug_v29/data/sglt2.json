@@ -1,0 +1,379 @@
+{
+  "_meta": {
+    "class_name": "SGLT2 inhibitors",
+    "class_zh": "鈉-葡萄糖共同轉運器 2 抑制劑",
+    "class_short": "SGLT2i",
+    "last_updated": "2026-05",
+    "maintainer": "DR. LAN",
+    "data_quality_note": "本表內容整理自 TFDA 仿單、NEJM/Lancet 原始試驗論文、ADA 2025 / KDIGO 2024 / ESC 2023 指引。藥物之間若無註明 head-to-head 試驗，不應推論優劣。",
+    "hospital_context": {
+      "name": "成大醫院",
+      "note": "標示為「不在處方集」的藥物，於成大醫院非常備。實際庫存以藥劑部最新公告為準。"
+    }
+  },
+  "drugs": [
+    {
+      "id": "empagliflozin",
+      "generic": "Empagliflozin",
+      "brand_tw": "Jardiance",
+      "brand_zh": "恩排糖",
+      "in_formulary": true,
+      "manufacturer": "Boehringer Ingelheim / Lilly",
+
+      "basic": {
+        "doses_available": {
+          "value": "10 mg, 25 mg PO QD",
+          "source": "TFDA 仿單"
+        },
+        "renal_adjustment": {
+          "value": "eGFR ≥20：可用；< 20 不建議起始",
+          "source": "TFDA 仿單 (2024 修訂)"
+        },
+        "hepatic_adjustment": {
+          "value": "輕中度肝功能不全：免調整；嚴重肝功能不全：不建議",
+          "source": "TFDA 仿單"
+        }
+      },
+
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病（單方或合併治療）",
+          "成人 HFrEF（不論是否合併糖尿病）",
+          "成人 HFpEF（不論是否合併糖尿病）",
+          "成人慢性腎臟病（不論是否合併糖尿病）"
+        ],
+        "source": "TFDA 仿單 (2024 修訂)",
+        "last_verified": "2025-08"
+      },
+
+      "nhi_coverage": {
+        "value": "詳見健保藥品給付規定 2.18.7（SGLT2 抑制劑）。HFrEF、CKD 適應症另有對應給付條件。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.7"
+      },
+
+      "key_trials": [
+        {
+          "name": "EMPA-REG OUTCOME",
+          "year": 2015,
+          "population": "T2DM + 已知心血管疾病 (n=7,020)",
+          "intervention": "Empagliflozin 10 或 25 mg vs placebo",
+          "primary_outcome": "3-point MACE: HR 0.86 (95% CI 0.74-0.99)",
+          "secondary": "CV death HR 0.62 (0.49-0.77)；HF 住院 HR 0.65 (0.50-0.85)；全因死亡 HR 0.68",
+          "ref": "NEJM 2015;373:2117-28",
+          "pmid": "26378978"
+        },
+        {
+          "name": "EMPEROR-Reduced",
+          "year": 2020,
+          "population": "HFrEF (LVEF ≤40%, n=3,730)，含與不含糖尿病",
+          "intervention": "Empagliflozin 10 mg vs placebo",
+          "primary_outcome": "CV death 或 HF 住院: HR 0.75 (0.65-0.86)",
+          "ref": "NEJM 2020;383:1413-24",
+          "pmid": "32865377"
+        },
+        {
+          "name": "EMPEROR-Preserved",
+          "year": 2021,
+          "population": "HFpEF (LVEF >40%, n=5,988)",
+          "intervention": "Empagliflozin 10 mg vs placebo",
+          "primary_outcome": "CV death 或 HF 住院: HR 0.79 (0.69-0.90)",
+          "ref": "NEJM 2021;385:1451-61",
+          "pmid": "34449189",
+          "note": "首個在 HFpEF 證實有效的療法"
+        },
+        {
+          "name": "EMPA-KIDNEY",
+          "year": 2023,
+          "population": "CKD eGFR 20-90 (n=6,609)，含與不含糖尿病、含與不含蛋白尿",
+          "intervention": "Empagliflozin 10 mg vs placebo",
+          "primary_outcome": "腎病進展或 CV 死亡: HR 0.72 (0.64-0.82)",
+          "ref": "NEJM 2023;388:117-27",
+          "pmid": "36331190",
+          "note": "納入較廣 eGFR 範圍與不限蛋白尿，是目前 SGLT2i 在 CKD 的最大試驗"
+        }
+      ],
+
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM 合併 ASCVD/CKD/HF 者：建議使用具實證之 SGLT2i 或 GLP-1 RA，獨立於 HbA1c 與 metformin 使用與否。Empagliflozin 為具 CV/HF/CKD 完整實證之選項。",
+          "section": "Section 9 & 10"
+        },
+        {
+          "guideline": "KDIGO 2024 CKD",
+          "statement": "T2DM + CKD 病人：建議使用 SGLT2i（empagliflozin、dapagliflozin、canagliflozin 均具實證）。Empagliflozin 在 EMPA-KIDNEY 中對 eGFR 20-45 病人亦有效。",
+          "section": "Recommendation 3.1.1"
+        },
+        {
+          "guideline": "ESC 2023 HF Guideline Update",
+          "statement": "HFrEF / HFmrEF / HFpEF 均建議加上 SGLT2i (Class I)。Empagliflozin 與 dapagliflozin 為主要證據來源。",
+          "section": "Section 5"
+        }
+      ],
+
+      "common_ae": [
+        "泌尿生殖道感染（女性較多）",
+        "脫水、低血壓（尤其合併利尿劑時）",
+        "罕見 euglycemic DKA（糖尿病人）"
+      ]
+    },
+
+    {
+      "id": "dapagliflozin",
+      "generic": "Dapagliflozin",
+      "brand_tw": "Forxiga",
+      "brand_zh": "福適佳",
+      "in_formulary": true,
+      "manufacturer": "AstraZeneca",
+
+      "basic": {
+        "doses_available": {
+          "value": "5 mg, 10 mg PO QD",
+          "source": "TFDA 仿單"
+        },
+        "renal_adjustment": {
+          "value": "eGFR ≥25：可用於 T2DM；HFrEF/CKD 適應症 eGFR ≥25",
+          "source": "TFDA 仿單 (2024 修訂)"
+        },
+        "hepatic_adjustment": {
+          "value": "嚴重肝功能不全：自 5 mg 開始",
+          "source": "TFDA 仿單"
+        }
+      },
+
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病",
+          "成人 HFrEF（不論是否合併糖尿病）",
+          "成人 HFpEF / HFmrEF（不論是否合併糖尿病）",
+          "成人慢性腎臟病（不論是否合併糖尿病）"
+        ],
+        "source": "TFDA 仿單 (2024 修訂)",
+        "last_verified": "2025-08"
+      },
+
+      "nhi_coverage": {
+        "value": "詳見健保藥品給付規定 2.18.7（SGLT2 抑制劑）。HFrEF、CKD 適應症另有對應給付條件。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.7"
+      },
+
+      "key_trials": [
+        {
+          "name": "DECLARE-TIMI 58",
+          "year": 2019,
+          "population": "T2DM + ASCVD 或多重 CV 風險因子 (n=17,160)",
+          "intervention": "Dapagliflozin 10 mg vs placebo",
+          "primary_outcome": "MACE: HR 0.93 (0.84-1.03, p=0.17, NS)；CV death/HF住院: HR 0.83 (0.73-0.95)",
+          "ref": "NEJM 2019;380:347-57",
+          "pmid": "30415602",
+          "note": "MACE 未達顯著，但 HF 住院顯著下降"
+        },
+        {
+          "name": "DAPA-HF",
+          "year": 2019,
+          "population": "HFrEF (LVEF ≤40%, n=4,744)，含與不含糖尿病",
+          "intervention": "Dapagliflozin 10 mg vs placebo",
+          "primary_outcome": "CV death 或 HF 惡化: HR 0.74 (0.65-0.85)",
+          "ref": "NEJM 2019;381:1995-2008",
+          "pmid": "31535829"
+        },
+        {
+          "name": "DELIVER",
+          "year": 2022,
+          "population": "HFmrEF / HFpEF (LVEF >40%, n=6,263)",
+          "intervention": "Dapagliflozin 10 mg vs placebo",
+          "primary_outcome": "CV death 或 HF 惡化: HR 0.82 (0.73-0.92)",
+          "ref": "NEJM 2022;387:1089-98",
+          "pmid": "36027570"
+        },
+        {
+          "name": "DAPA-CKD",
+          "year": 2020,
+          "population": "CKD eGFR 25-75 + UACR 200-5000 (n=4,304)，含與不含糖尿病",
+          "intervention": "Dapagliflozin 10 mg vs placebo",
+          "primary_outcome": "腎病進展或 CV/腎死亡: HR 0.61 (0.51-0.72)",
+          "ref": "NEJM 2020;383:1436-46",
+          "pmid": "32970396",
+          "note": "因效益顯著提早終止"
+        }
+      ],
+
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM 合併 ASCVD/CKD/HF 者：建議使用具實證之 SGLT2i 或 GLP-1 RA。Dapagliflozin 為具 HF/CKD 完整實證之選項。",
+          "section": "Section 9 & 10"
+        },
+        {
+          "guideline": "KDIGO 2024 CKD",
+          "statement": "T2DM + CKD 病人：建議使用 SGLT2i。Dapagliflozin 在 DAPA-CKD 中對含蛋白尿之 CKD 有顯著效益。",
+          "section": "Recommendation 3.1.1"
+        },
+        {
+          "guideline": "ESC 2023 HF Guideline Update",
+          "statement": "HFrEF / HFmrEF / HFpEF 均建議加上 SGLT2i (Class I)。Dapagliflozin 為主要證據來源。",
+          "section": "Section 5"
+        }
+      ],
+
+      "common_ae": [
+        "泌尿生殖道感染",
+        "脫水、低血壓",
+        "罕見 euglycemic DKA"
+      ]
+    },
+
+    {
+      "id": "canagliflozin",
+      "generic": "Canagliflozin",
+      "brand_tw": "Invokana",
+      "brand_zh": "可拿糖",
+      "in_formulary": true,
+      "manufacturer": "Janssen",
+
+      "basic": {
+        "doses_available": {
+          "value": "100 mg, 300 mg PO QD",
+          "source": "TFDA 仿單"
+        },
+        "renal_adjustment": {
+          "value": "eGFR ≥30：可用；eGFR <30 不建議起始（CKD 適應症另有條件）",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "嚴重肝功能不全：未建議使用",
+          "source": "TFDA 仿單"
+        }
+      },
+
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病",
+          "T2DM 合併糖尿病腎病變"
+        ],
+        "source": "TFDA 仿單",
+        "last_verified": "2025-08",
+        "note": "HF 適應症在台灣仿單上未列入，雖然 CANVAS / CREDENCE 有相關資料"
+      },
+
+      "nhi_coverage": {
+        "value": "詳見健保藥品給付規定 2.18.7（SGLT2 抑制劑）。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.7"
+      },
+
+      "key_trials": [
+        {
+          "name": "CANVAS Program",
+          "year": 2017,
+          "population": "T2DM + 高 CV 風險 (n=10,142)",
+          "intervention": "Canagliflozin 100 或 300 mg vs placebo",
+          "primary_outcome": "3-point MACE: HR 0.86 (0.75-0.97)",
+          "secondary": "下肢截肢風險增加 (HR 1.97, 0.41 vs 0.83 截肢/100 人年)",
+          "ref": "NEJM 2017;377:644-57",
+          "pmid": "28605608",
+          "note": "首個顯示截肢風險增加的訊號（後續 CREDENCE 未再現）"
+        },
+        {
+          "name": "CREDENCE",
+          "year": 2019,
+          "population": "T2DM + CKD eGFR 30-90 + UACR 300-5000 (n=4,401)",
+          "intervention": "Canagliflozin 100 mg vs placebo",
+          "primary_outcome": "ESKD、Cr 倍增或腎/CV 死亡: HR 0.70 (0.59-0.82)",
+          "ref": "NEJM 2019;380:2295-306",
+          "pmid": "30990260",
+          "note": "因效益顯著提早終止；本試驗未觀察到截肢風險升高"
+        }
+      ],
+
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM 合併 ASCVD/CKD 者：canagliflozin 為具實證之選項之一（基於 CANVAS、CREDENCE）。",
+          "section": "Section 9 & 10"
+        },
+        {
+          "guideline": "KDIGO 2024 CKD",
+          "statement": "T2DM + CKD 病人：canagliflozin 為 KDIGO 列入之 SGLT2i 之一（CREDENCE 試驗）。",
+          "section": "Recommendation 3.1.1"
+        }
+      ],
+
+      "common_ae": [
+        "泌尿生殖道感染",
+        "脫水、低血壓",
+        "下肢截肢風險（FDA 黑框警告於 2020 移除，但仍列為注意事項）",
+        "罕見 euglycemic DKA"
+      ]
+    },
+
+    {
+      "id": "ertugliflozin",
+      "generic": "Ertugliflozin",
+      "brand_tw": "Steglatro",
+      "brand_zh": "適糖達",
+      "in_formulary": false,
+      "in_formulary_note": "成大醫院非常備，台灣使用率較低。",
+      "manufacturer": "MSD / Pfizer",
+
+      "basic": {
+        "doses_available": {
+          "value": "5 mg, 15 mg PO QD",
+          "source": "TFDA 仿單"
+        },
+        "renal_adjustment": {
+          "value": "eGFR <45 不建議起始",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "嚴重肝功能不全：未建議使用",
+          "source": "TFDA 仿單"
+        }
+      },
+
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病（單方或合併治療）"
+        ],
+        "source": "TFDA 仿單",
+        "last_verified": "2025-08"
+      },
+
+      "nhi_coverage": {
+        "value": "詳見健保藥品給付規定 2.18.7（SGLT2 抑制劑）。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.7"
+      },
+
+      "key_trials": [
+        {
+          "name": "VERTIS CV",
+          "year": 2020,
+          "population": "T2DM + ASCVD (n=8,246)",
+          "intervention": "Ertugliflozin 5 或 15 mg vs placebo",
+          "primary_outcome": "3-point MACE: HR 0.97 (0.85-1.11) — 達 non-inferiority，未達 superiority",
+          "secondary": "HF 住院 HR 0.70 (0.54-0.90)",
+          "ref": "NEJM 2020;383:1425-35",
+          "pmid": "32966714",
+          "note": "與其他 SGLT2i 不同，未證實 MACE 顯著降低；HF 住院仍有效益"
+        }
+      ],
+
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "ertugliflozin 在 T2DM 為合理之降糖選擇，但 CV/CKD/HF 之主要實證不如 empagliflozin/dapagliflozin/canagliflozin 充分。",
+          "section": "Section 9"
+        }
+      ],
+
+      "common_ae": [
+        "泌尿生殖道感染",
+        "脫水、低血壓",
+        "罕見 euglycemic DKA"
+      ]
+    }
+  ]
+}

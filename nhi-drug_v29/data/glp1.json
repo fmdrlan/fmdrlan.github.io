@@ -1,0 +1,465 @@
+{
+  "_meta": {
+    "class_name": "GLP-1 receptor agonists",
+    "class_zh": "類升糖素胜肽-1 受體促效劑",
+    "class_short": "GLP-1 RA",
+    "last_updated": "2026-05",
+    "maintainer": "DR. LAN",
+    "data_quality_note": "本表內容整理自 TFDA 仿單、原始試驗論文、ADA 2025 / ESC 2023 / 美國肥胖醫學會等指引。Tirzepatide 為 GIP/GLP-1 dual agonist，因臨床指引常與 GLP-1 RA 一同討論而納入比較。藥物之間若無註明 head-to-head 試驗，不應推論優劣。",
+    "hospital_context": {
+      "name": "成大醫院",
+      "note": "標示為「不在處方集」的藥物，於成大醫院非常備。實際庫存以藥劑部最新公告為準。"
+    }
+  },
+  "drugs": [
+    {
+      "id": "dulaglutide",
+      "generic": "Dulaglutide",
+      "brand_tw": "Trulicity",
+      "brand_zh": "易週糖",
+      "in_formulary": false,
+      "in_formulary_note": "成大醫院非常備。本院 GLP-1 RA 主力為 semaglutide 與 liraglutide。",
+      "manufacturer": "Eli Lilly",
+      "basic": {
+        "doses_available": {
+          "value": "0.75 mg, 1.5 mg, 3.0 mg, 4.5 mg SC QW（每週一次）",
+          "source": "TFDA 仿單"
+        },
+        "renal_adjustment": {
+          "value": "輕中重度腎功能不全：免調整劑量；ESRD 經驗有限",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "肝功能不全：經驗有限，使用時需監測",
+          "source": "TFDA 仿單"
+        }
+      },
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病（單方或合併治療）",
+          "T2DM 合併心血管疾病或心血管風險因子之 MACE 風險降低"
+        ],
+        "source": "TFDA 仿單",
+        "last_verified": "2025-08"
+      },
+      "nhi_coverage": {
+        "value": "詳見健保藥品給付規定 2.18.6（GLP-1 receptor agonist）。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.6"
+      },
+      "key_trials": [
+        {
+          "name": "REWIND",
+          "year": 2019,
+          "population": "T2DM + 已有 CVD 或多重 CV 風險因子 (n=9,901)，平均 follow-up 5.4 年",
+          "intervention": "Dulaglutide 1.5 mg QW vs placebo",
+          "primary_outcome": "3-point MACE: HR 0.88 (95% CI 0.79-0.99)",
+          "secondary": "non-fatal stroke 顯著下降 HR 0.76 (0.61-0.95)；腎臟複合終點 HR 0.85",
+          "ref": "Lancet 2019;394:121-30",
+          "pmid": "31189511",
+          "note": "此試驗納入較多無 CVD 之高風險人群（佔 69%），涵蓋一級預防"
+        },
+        {
+          "name": "AWARD-11",
+          "year": 2020,
+          "population": "T2DM 控制不佳於 metformin 之上 (n=1,842)",
+          "intervention": "Dulaglutide 1.5 mg vs 3.0 mg vs 4.5 mg QW",
+          "primary_outcome": "HbA1c 自基線下降 4.5 mg 組顯著優於 1.5 mg 組（差距 -0.24%）；體重下降亦較多",
+          "ref": "Diabetes Care 2020;43:2625-2635",
+          "pmid": "32873587",
+          "note": "為支持高劑量 dulaglutide 上市之關鍵試驗"
+        }
+      ],
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM 合併 ASCVD 或多重 CV 風險：建議使用具實證之 GLP-1 RA。Dulaglutide 為 ADA 列為具 CV benefit 之 GLP-1 RA 之一。",
+          "section": "Section 9 & 10"
+        },
+        {
+          "guideline": "ESC 2023 CVD Prevention",
+          "statement": "T2DM + ASCVD 或高 CV 風險者建議使用具 CV outcome 證據之 GLP-1 RA (Class I)。",
+          "section": ""
+        }
+      ],
+      "common_ae": [
+        "腸胃道：噁心、嘔吐、腹瀉（最常見，多數會隨時間減輕）",
+        "注射部位反應",
+        "急性胰臟炎風險（罕見）",
+        "甲狀腺髓質癌：個人或家族 MTC 病史、MEN2 為禁忌"
+      ]
+    },
+    {
+      "id": "semaglutide-ozempic",
+      "generic": "Semaglutide (Ozempic)",
+      "brand_tw": "Ozempic",
+      "brand_zh": "胰妥讚",
+      "in_formulary": true,
+      "manufacturer": "Novo Nordisk",
+      "class_note": "T2DM 仿單；與 Wegovy 同分子不同許可證",
+      "basic": {
+        "doses_available": {
+          "value": "0.25 mg, 0.5 mg, 1.0 mg, 2.0 mg SC QW；0.25 mg ×4 週起始後依需要遞增（最高 2.0 mg）",
+          "source": "TFDA 仿單（Ozempic）"
+        },
+        "renal_adjustment": {
+          "value": "輕中重度腎功能不全：免調整；ESRD 經驗有限",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "肝功能不全：免調整劑量",
+          "source": "TFDA 仿單"
+        }
+      },
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病（單方或合併治療）",
+          "T2DM 合併心血管疾病之 MACE 風險降低"
+        ],
+        "source": "TFDA 仿單（Ozempic）",
+        "last_verified": "2025-08",
+        "note": "本仿單為糖尿病劑型；體重控制適應症另由 Wegovy 仿單授權"
+      },
+      "nhi_coverage": {
+        "value": "詳見健保藥品給付規定 2.18.6（GLP-1 receptor agonist）。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.6"
+      },
+      "key_trials": [
+        {
+          "name": "FLOW",
+          "year": 2024,
+          "population": "T2DM + CKD eGFR 25-75 + UACR 100-5000 (n=3,533)",
+          "intervention": "Semaglutide 1.0 mg SC QW vs placebo",
+          "primary_outcome": "腎病進展或 CV/腎死亡複合終點: HR 0.76 (95% CI 0.66-0.88)",
+          "secondary": "MACE HR 0.82；全因死亡 HR 0.80",
+          "ref": "NEJM 2024;391:109-21",
+          "pmid": "38785317",
+          "note": "首個 GLP-1 RA 在 CKD 取得腎臟複合終點顯著下降之專屬試驗，使用 Ozempic 1.0 mg 劑量"
+        },
+        {
+          "name": "SUSTAIN-6",
+          "year": 2016,
+          "population": "T2DM + 已知 CVD 或高 CV 風險 (n=3,297)",
+          "intervention": "Semaglutide 0.5 或 1.0 mg SC QW vs placebo",
+          "primary_outcome": "3-point MACE: HR 0.74 (95% CI 0.58-0.95)",
+          "secondary": "non-fatal stroke HR 0.61；糖尿病視網膜病變併發症顯著上升 HR 1.76",
+          "ref": "NEJM 2016;375:1834-44",
+          "pmid": "27633186",
+          "note": "為支持 CV benefit 之關鍵試驗；視網膜病變訊號於後續研究未再確認"
+        }
+      ],
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM 合併 ASCVD/CKD 或多重 CV 風險：建議使用具實證之 GLP-1 RA。Semaglutide 具 CV、CKD 雙重實證。",
+          "section": "Section 9, 10 & 11"
+        },
+        {
+          "guideline": "KDIGO 2024 CKD",
+          "statement": "T2DM + CKD：建議考慮加上具腎臟保護證據之長效 GLP-1 RA（如 semaglutide），尤其 SGLT2i 已使用或不適合者。",
+          "section": "Recommendation 3.2"
+        },
+        {
+          "guideline": "ESC 2023 CVD Prevention",
+          "statement": "T2DM + ASCVD 或高 CV 風險者建議使用具 CV outcome 證據之 GLP-1 RA (Class I)。",
+          "section": ""
+        }
+      ],
+      "common_ae": [
+        "腸胃道：噁心、嘔吐、腹瀉（最常見）",
+        "注射部位反應",
+        "急性胰臟炎風險（罕見）",
+        "糖尿病視網膜病變惡化風險（SUSTAIN-6 訊號）",
+        "甲狀腺髓質癌：MTC 病史、MEN2 為禁忌"
+      ]
+    },
+    {
+      "id": "semaglutide-wegovy",
+      "generic": "Semaglutide (Wegovy)",
+      "brand_tw": "Wegovy",
+      "brand_zh": "猛纖瘦",
+      "in_formulary": true,
+      "manufacturer": "Novo Nordisk",
+      "class_note": "減重仿單；與 Ozempic 同分子不同許可證",
+      "basic": {
+        "doses_available": {
+          "value": "0.25 → 0.5 → 1.0 → 1.7 → 2.4 mg SC QW；每 4 週遞增至維持劑量 2.4 mg",
+          "source": "TFDA 仿單（Wegovy）"
+        },
+        "renal_adjustment": {
+          "value": "輕中重度腎功能不全：免調整；ESRD 經驗有限",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "肝功能不全：免調整劑量",
+          "source": "TFDA 仿單"
+        }
+      },
+      "indications_tfda": {
+        "value": [
+          "成人慢性體重控制（BMI ≥30，或 BMI ≥27 合併共病如高血壓、糖尿病、血脂異常）",
+          "成人 BMI ≥27 + 已知 CVD 之 MACE 風險降低"
+        ],
+        "source": "TFDA 仿單（Wegovy）",
+        "last_verified": "2025-08",
+        "note": "本仿單為體重控制劑型；糖尿病適應症由 Ozempic 仿單授權"
+      },
+      "nhi_coverage": {
+        "value": "減重適應症為自費。請以最新給付規定為準。",
+        "source": "健保署藥品給付規定"
+      },
+      "key_trials": [
+        {
+          "name": "SELECT",
+          "year": 2023,
+          "population": "BMI ≥27 + 已知 CVD（無糖尿病, n=17,604）",
+          "intervention": "Semaglutide 2.4 mg SC QW vs placebo",
+          "primary_outcome": "3-point MACE: HR 0.80 (95% CI 0.72-0.90)",
+          "ref": "NEJM 2023;389:2221-32",
+          "pmid": "37952131",
+          "note": "首個證實 GLP-1 RA 於非糖尿病人之 CV benefit 試驗；使用 Wegovy 2.4 mg 劑量"
+        },
+        {
+          "name": "STEP 1",
+          "year": 2021,
+          "population": "BMI ≥30 或 ≥27 合併共病（無糖尿病, n=1,961）",
+          "intervention": "Semaglutide 2.4 mg SC QW vs placebo + 生活型態介入",
+          "primary_outcome": "68 週體重平均減少 14.9% vs placebo 2.4%",
+          "ref": "NEJM 2021;384:989-1002",
+          "pmid": "33567185",
+          "note": "為支持減重適應症之關鍵試驗"
+        }
+      ],
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM 合併肥胖之共病管理：semaglutide（Wegovy 劑量）為高效減重選項，於 SELECT 試驗證實肥胖合併 CVD 病人之 CV benefit。",
+          "section": "Section 8 & 10"
+        },
+        {
+          "guideline": "AACE 2023 Obesity Algorithm",
+          "statement": "肥胖合併共病：semaglutide 2.4 mg 為高效減重藥物選項。",
+          "section": ""
+        }
+      ],
+      "common_ae": [
+        "腸胃道：噁心、嘔吐、腹瀉（最常見，劑量遞增期較明顯）",
+        "注射部位反應",
+        "急性胰臟炎風險（罕見）",
+        "膽結石、膽囊炎風險上升",
+        "甲狀腺髓質癌：MTC 病史、MEN2 為禁忌"
+      ]
+    },
+    {
+      "id": "liraglutide-victoza",
+      "generic": "Liraglutide (Victoza)",
+      "brand_tw": "Victoza",
+      "brand_zh": "胰妥善",
+      "in_formulary": true,
+      "manufacturer": "Novo Nordisk",
+      "class_note": "T2DM 仿單；與 Saxenda 同分子不同許可證",
+      "basic": {
+        "doses_available": {
+          "value": "0.6 mg, 1.2 mg, 1.8 mg SC QD；起始 0.6 mg ×1 週後遞增（最高 1.8 mg）",
+          "source": "TFDA 仿單（Victoza）"
+        },
+        "renal_adjustment": {
+          "value": "輕中重度腎功能不全：免調整；ESRD 經驗有限",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "肝功能不全：經驗有限",
+          "source": "TFDA 仿單"
+        }
+      },
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病（單方或合併治療）",
+          "T2DM 合併心血管疾病之 MACE 風險降低"
+        ],
+        "source": "TFDA 仿單（Victoza）",
+        "last_verified": "2025-08",
+        "note": "本仿單為糖尿病劑型；體重控制適應症另由 Saxenda 仿單授權"
+      },
+      "nhi_coverage": {
+        "value": "詳見健保藥品給付規定 2.18.6（GLP-1 receptor agonist）。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.6"
+      },
+      "key_trials": [
+        {
+          "name": "LEADER",
+          "year": 2016,
+          "population": "T2DM + 已知 CVD 或高 CV 風險 (n=9,340)",
+          "intervention": "Liraglutide 1.8 mg SC QD vs placebo",
+          "primary_outcome": "3-point MACE: HR 0.87 (95% CI 0.78-0.97)",
+          "secondary": "CV death HR 0.78 (0.66-0.93)；全因死亡 HR 0.85",
+          "ref": "NEJM 2016;375:311-22",
+          "pmid": "27295427",
+          "note": "首個證實 GLP-1 RA 在 T2DM 高 CV 風險人群有 CV benefit 的試驗；使用 Victoza 1.8 mg 劑量"
+        }
+      ],
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM 合併 ASCVD 或高 CV 風險：建議使用具實證之 GLP-1 RA。Liraglutide 為 ADA 列為具 CV benefit 之 GLP-1 RA 之一。",
+          "section": "Section 9 & 10"
+        },
+        {
+          "guideline": "ESC 2023 CVD Prevention",
+          "statement": "T2DM + ASCVD 或高 CV 風險者建議使用具 CV outcome 證據之 GLP-1 RA (Class I)。",
+          "section": ""
+        }
+      ],
+      "common_ae": [
+        "腸胃道：噁心、嘔吐、腹瀉（最常見）",
+        "需每日注射，順從性議題",
+        "注射部位反應",
+        "急性胰臟炎風險（罕見）",
+        "甲狀腺髓質癌：MTC 病史、MEN2 為禁忌"
+      ]
+    },
+    {
+      "id": "liraglutide-saxenda",
+      "generic": "Liraglutide (Saxenda)",
+      "brand_tw": "Saxenda",
+      "brand_zh": "善纖達",
+      "in_formulary": true,
+      "manufacturer": "Novo Nordisk",
+      "class_note": "減重仿單；與 Victoza 同分子不同許可證",
+      "basic": {
+        "doses_available": {
+          "value": "0.6 → 1.2 → 1.8 → 2.4 → 3.0 mg SC QD;每週遞增 0.6 mg 至維持劑量 3.0 mg",
+          "source": "TFDA 仿單（Saxenda）"
+        },
+        "renal_adjustment": {
+          "value": "輕中重度腎功能不全：免調整;ESRD 經驗有限",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "肝功能不全：經驗有限",
+          "source": "TFDA 仿單"
+        }
+      },
+      "indications_tfda": {
+        "value": [
+          "成人慢性體重控制（BMI ≥30，或 BMI ≥27 合併共病如高血壓、糖尿病、血脂異常）",
+          "12-17 歲青少年肥胖（BMI 對應成人 ≥30 之百分位）"
+        ],
+        "source": "TFDA 仿單（Saxenda）",
+        "last_verified": "2025-08",
+        "note": "本仿單為體重控制劑型;糖尿病適應症由 Victoza 仿單授權"
+      },
+      "nhi_coverage": {
+        "value": "減重適應症為自費。請以最新給付規定為準。",
+        "source": "健保署藥品給付規定"
+      },
+      "key_trials": [
+        {
+          "name": "SCALE Obesity & Prediabetes",
+          "year": 2015,
+          "population": "BMI ≥30 或 ≥27 合併共病（無糖尿病, n=3,731）",
+          "intervention": "Liraglutide 3.0 mg SC QD vs placebo + 生活型態介入",
+          "primary_outcome": "56 週體重平均減少 8.0% vs placebo 2.6%",
+          "ref": "NEJM 2015;373:11-22",
+          "pmid": "26132939",
+          "note": "為支持減重適應症之關鍵試驗"
+        }
+      ],
+      "guideline_position": [
+        {
+          "guideline": "AACE 2023 Obesity Algorithm",
+          "statement": "肥胖合併共病：liraglutide 3.0 mg 為 FDA 核准之減重藥物選項，但減重幅度與 CV 證據不及 semaglutide 2.4 mg 與 tirzepatide。",
+          "section": ""
+        }
+      ],
+      "common_ae": [
+        "腸胃道：噁心、嘔吐、腹瀉（最常見，劑量遞增期較明顯）",
+        "需每日注射",
+        "注射部位反應",
+        "急性胰臟炎風險（罕見）",
+        "甲狀腺髓質癌：MTC 病史、MEN2 為禁忌"
+      ]
+    },
+    {
+      "id": "tirzepatide",
+      "generic": "Tirzepatide",
+      "brand_tw": "Mounjaro",
+      "brand_zh": "猛健樂",
+      "in_formulary": true,
+      "manufacturer": "Eli Lilly",
+      "class_note": "GIP / GLP-1 dual agonist",
+      "basic": {
+        "doses_available": {
+          "value": "2.5, 5, 7.5, 10, 12.5, 15 mg SC QW；起始 2.5 mg ×4 週後遞增",
+          "source": "TFDA 仿單"
+        },
+        "renal_adjustment": {
+          "value": "輕中重度腎功能不全：免調整；ESRD 經驗有限",
+          "source": "TFDA 仿單"
+        },
+        "hepatic_adjustment": {
+          "value": "肝功能不全：免調整",
+          "source": "TFDA 仿單"
+        }
+      },
+      "indications_tfda": {
+        "value": [
+          "第 2 型糖尿病（單方或合併治療）",
+          "成人體重控制（BMI ≥30，或 BMI ≥27 合併共病）"
+        ],
+        "source": "TFDA 仿單",
+        "last_verified": "2025-08",
+        "note": "為 GIP / GLP-1 dual agonist，非單純 GLP-1 RA；指引將其列入 incretin-based therapy 一同討論"
+      },
+      "nhi_coverage": {
+        "value": "目前尚未列入糖尿病用藥健保給付（請以最新給付規定為準）。",
+        "source": "健保署藥品給付規定",
+        "cross_ref_section": "2.18.6"
+      },
+      "key_trials": [
+        {
+          "name": "SURMOUNT-1",
+          "year": 2022,
+          "population": "BMI ≥30 或 ≥27 合併共病（無糖尿病, n=2,539）",
+          "intervention": "Tirzepatide 5 / 10 / 15 mg SC QW vs placebo",
+          "primary_outcome": "72 週體重平均減少 15.0% / 19.5% / 20.9% vs placebo 3.1%",
+          "ref": "NEJM 2022;387:205-16",
+          "pmid": "35658024",
+          "note": "為支持減重適應症之關鍵試驗"
+        },
+        {
+          "name": "SURPASS-4",
+          "year": 2021,
+          "population": "T2DM + 高 CV 風險 (n=2,002)",
+          "intervention": "Tirzepatide 5 / 10 / 15 mg vs insulin glargine",
+          "primary_outcome": "HbA1c 自基線下降 −2.43% (15 mg) vs −1.44% (glargine)；體重 −11.7 kg vs +1.9 kg",
+          "secondary": "MACE 與 glargine 相比 HR 0.74 (0.51-1.08)（探索性，未達顯著）",
+          "ref": "Lancet 2021;398:1811-24",
+          "pmid": "34672967",
+          "note": "目前 tirzepatide 之 CV outcome 試驗 SURPASS-CVOT 尚未發表"
+        }
+      ],
+      "guideline_position": [
+        {
+          "guideline": "ADA Standards of Care 2025",
+          "statement": "T2DM：tirzepatide 為高效降糖與減重之選項。CV outcome 試驗 (SURPASS-CVOT) 進行中，目前 CV benefit 為探索性資料。",
+          "section": "Section 9"
+        },
+        {
+          "guideline": "AACE 2023 Obesity Algorithm",
+          "statement": "肥胖合併共病：tirzepatide 為高效減重藥物選項。",
+          "section": ""
+        }
+      ],
+      "common_ae": [
+        "腸胃道：噁心、嘔吐、腹瀉、便秘（與 GLP-1 RA 類似但程度可能更明顯）",
+        "注射部位反應",
+        "急性胰臟炎風險（罕見）",
+        "膽結石、膽囊炎風險上升",
+        "甲狀腺髓質癌：MTC 病史、MEN2 為禁忌"
+      ]
+    }
+  ]
+}
