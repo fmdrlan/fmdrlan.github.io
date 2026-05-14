@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>檢驗報告解讀 · DR. YANG's Toolbox</title>
+<title>檢驗報告解讀 · DR. LAN's Toolbox</title>
 
 <meta name="description" content="貼上成大 LIS 檢驗報告，自動標示異常值並產生 Objective 與 Diagnosis 段落，便於病歷複製。">
 <meta name="keywords" content="LIS,檢驗報告,異常值,Objective,Diagnosis,SOAP,病歷,生化,CBC,肝功能,UTI,血脂">
-<meta name="author" content="DR. YANG">
+<meta name="author" content="DR. LAN">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://garrulous-cat.github.io/mindy/lab.html">
 
@@ -52,38 +52,12 @@
     line-height: 1.6;
   }
 
-  /* tabs-bar fallback */
-  .tabs-bar {
-    display: flex; gap: 4px; padding: 8px 16px;
-    background: var(--bg-surface); border-bottom: 1px solid var(--border);
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
-  }
-  .tab-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 14px; font-size: 13.5px; font-weight: 500;
-    color: var(--text-secondary); text-decoration: none;
-    border-radius: 6px; white-space: nowrap; transition: background 0.15s, color 0.15s;
-  }
-  .tab-link:hover { background: var(--bg-elevated); color: var(--text-primary); }
-  .tab-link.active { background: rgba(88,166,255,0.12); color: var(--accent-blue); }
-  .tab-link .ti { width: 15px; height: 15px; display: inline-flex; }
+  /* tabs-bar 樣式由 assets/shared.css 提供 */
 
   .container { max-width: 1500px; margin: 0 auto; padding: 24px; }
 
   /* Page intro */
-  .page-intro {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .page-intro .icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  .page-intro h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  .page-intro p { font-size: 14px; color: var(--text-secondary); }
+  /* page-intro 樣式由 assets/shared.css 提供 */
 
   /* Layout */
   .work-grid {
@@ -250,10 +224,15 @@
   }
   .obj-row {
     display: grid;
-    grid-template-columns: 130px 90px 50px 1fr;
-    gap: 12px;
+    grid-template-columns: 92px 130px 1fr 42px minmax(0, 1.4fr);
+    gap: 10px;
     align-items: baseline;
     padding: 2px 0;
+  }
+  .obj-row .date {
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
   }
   .obj-row .name { color: var(--text-primary); font-weight: 500; }
   .obj-row .value { text-align: right; font-weight: 600; }
@@ -277,7 +256,6 @@
   }
   .obj-row .meta .past {
     color: var(--accent-orange);
-    margin-left: 6px;
   }
 
   /* Diagnosis: 2-column with left-copyable, right-evidence */
@@ -322,7 +300,7 @@
   .dx-row .dx-right .ev-item { color: var(--text-secondary); }
   .dx-row .dx-right .ev-value { color: var(--accent-red); font-weight: 600; }
   .dx-row .dx-right .ev-value.low { color: var(--accent-yellow); }
-  .dx-row .dx-right .ev-date { color: var(--text-dim); margin-left: 4px; }
+  .dx-row .dx-right .ev-date { color: var(--text-dim); margin-right: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; }
   .dx-row .dx-right .past-prefix {
     color: var(--accent-orange);
     font-size: 11px;
@@ -336,7 +314,8 @@
       border-top: 1px dashed var(--border-subtle);
       padding-top: 8px;
     }
-    .obj-row { grid-template-columns: 100px 70px 40px 1fr; font-size: 12px; }
+    .obj-row { grid-template-columns: 82px 100px 1fr 36px; font-size: 12px; }
+    .obj-row .meta { grid-column: 1 / -1; padding-left: 92px; }
   }
 
   .dx-right-label {
@@ -375,6 +354,29 @@
     font-size: 12px;
   }
   .pending-box li .type { color: var(--text-muted); }
+
+  /* Patient context box */
+  .pt-context {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    background: rgba(88,166,255,0.05);
+    border: 1px solid rgba(88,166,255,0.2);
+    border-radius: var(--radius);
+    font-size: 13px;
+  }
+  .pt-field { display: inline-flex; gap: 5px; align-items: baseline; }
+  .pt-label {
+    color: var(--text-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .pt-val { color: var(--text-primary); font-weight: 500; }
+  .pt-val.mono { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
 
   /* Toast */
   .toast {
@@ -415,12 +417,12 @@
 <body>
 
 <nav class="tabs-bar" aria-label="主選單">
-  <a class="tab-link" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. YANG</a>
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. LAN</a>
   <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link active" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
   <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
   <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
-  <a class="tab-link active" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
 </nav>
 
@@ -440,37 +442,12 @@
     <section class="panel">
       <div class="panel-title">輸入</div>
 
-      <div class="ctx-row">
-        <div class="ctx-field">
-          <label>性別</label>
-          <div class="radio-mini">
-            <label><input type="radio" name="sex" value="M" checked>男</label>
-            <label><input type="radio" name="sex" value="F">女</label>
-          </div>
-        </div>
-        <div class="ctx-field">
-          <label>年齡</label>
-          <input type="number" id="age" placeholder="—" min="0" max="120">
-        </div>
-        <div class="ctx-field" style="margin-left:auto">
-          <a class="btn ghost small" id="loadDemoBtn">載入範例</a>
-        </div>
-      </div>
-
       <textarea
         class="lab-input"
         id="labInput"
         spellcheck="false"
         autocomplete="off"
-        placeholder="貼上整份 LIS 報告（可包含多筆不同日期、不同檢體類型）
-
-支援：
-• 成大標準表格格式（生化、血液、尿液、糞便）
-• 動脈硬化檢查（ABI / PWV）
-• 多份報告跨日整合
-• 「已開立」報告自動跳過
-
-按下方「解析」或 Ctrl+Enter 即可。"
+        placeholder="貼上整份 LIS 報告（可包含多筆不同日期、不同檢體類型）"
       ></textarea>
 
       <div class="btn-row">
@@ -1098,7 +1075,35 @@ function parseSpecialSection(section) {
   return results;
 }
 
+function parseDemographics(text) {
+  // 嘗試從 LIS 文字頂端的「病人基本資料」抓姓名、病歷號、性別、年齡
+  // 範例：病歷號碼\t22536006\t姓名(性別)\t陳金惠(女)\t生日(年齡)\t1973-09-24(52歲)
+  const demo = { name: null, chartNo: null, sex: null, age: null, birthDate: null };
+
+  // 病歷號碼
+  let m = text.match(/病歷號碼\s*[\t　\s]*\s*(\d{4,12})/);
+  if (m) demo.chartNo = m[1];
+
+  // 姓名(性別)
+  m = text.match(/姓名\s*\([^)]*\)\s*[\t　\s]+\s*([\u4e00-\u9fff·•・\s]{2,15}?)\s*\(([男女MFmf])\)/);
+  if (m) {
+    demo.name = m[1].trim();
+    const s = m[2].toUpperCase();
+    demo.sex = (s === '男' || s === 'M') ? 'M' : (s === '女' || s === 'F') ? 'F' : null;
+  }
+
+  // 生日(年齡)：1973-09-24(52歲)  ← 必須含「歲」字才算
+  m = text.match(/(\d{4}-\d{2}-\d{2})\s*\(\s*(\d{1,3})\s*歲\s*\)/);
+  if (m) {
+    demo.birthDate = m[1];
+    demo.age = parseInt(m[2]);
+  }
+
+  return demo;
+}
+
 function parseLIS(text) {
+  const demographics = parseDemographics(text);
   const sections = splitReports(text);
   const allResults = [];
   const skipped = [];
@@ -1118,7 +1123,7 @@ function parseLIS(text) {
     const r = parseTableSection(sec);
     if (r) allResults.push(...r);
   }
-  return { results: allResults, skipped };
+  return { results: allResults, skipped, demographics };
 }
 
 function classifyResult(item, sex) {
@@ -1234,12 +1239,13 @@ function applyDiagnosisRules(integrated) {
 // ═══════════════════════════════════════════════════════════════
 
 const $ = id => document.getElementById(id);
-const state = { sex: 'M', age: null, integrated: [], skipped: [], dx: [] };
-
-function getSex() {
-  const r = document.querySelector('input[name="sex"]:checked');
-  return r ? r.value : 'M';
-}
+const state = {
+  sex: 'M',
+  demographics: { name: null, chartNo: null, sex: null, age: null, birthDate: null },
+  integrated: [],
+  skipped: [],
+  dx: []
+};
 
 function escHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({
@@ -1250,7 +1256,7 @@ function escHtml(s) {
 function fmtDate(iso) {
   if (!iso) return '';
   const m = iso.match(/(\d{4})-(\d{2})-(\d{2})/);
-  return m ? `${parseInt(m[2])}/${parseInt(m[3])}` : iso;
+  return m ? `${m[1]}/${m[2]}/${m[3]}` : iso;
 }
 
 function displayValue(item) {
@@ -1267,9 +1273,9 @@ function runParse() {
     showToast('請先貼上 LIS 報告');
     return;
   }
-  state.sex = getSex();
-  state.age = parseInt($('age').value) || null;
-  const { results, skipped } = parseLIS(text);
+  const { results, skipped, demographics } = parseLIS(text);
+  state.demographics = demographics;
+  state.sex = demographics.sex || 'M';  // 沒抓到就預設男（影響極小）
   state.integrated = integrateTimeline(results, state.sex);
   state.skipped = skipped;
   state.dx = applyDiagnosisRules(state.integrated);
@@ -1297,6 +1303,21 @@ function renderResults(totalParsed) {
 
   let html = '';
 
+  // ── Patient context (從 LIS 抓取) ──
+  const d = state.demographics;
+  if (d.name || d.chartNo || d.age != null || d.sex) {
+    const sexLabel = d.sex === 'M' ? '男' : d.sex === 'F' ? '女' : '—';
+    const ageLabel = d.age != null ? `${d.age} 歲` : '—';
+    html += `
+      <div class="pt-context">
+        ${d.name ? `<span class="pt-field"><span class="pt-label">姓名</span><span class="pt-val">${escHtml(d.name)}</span></span>` : ''}
+        ${d.chartNo ? `<span class="pt-field"><span class="pt-label">病歷號</span><span class="pt-val mono">${escHtml(d.chartNo)}</span></span>` : ''}
+        <span class="pt-field"><span class="pt-label">性別</span><span class="pt-val">${sexLabel}</span></span>
+        <span class="pt-field"><span class="pt-label">年齡</span><span class="pt-val">${ageLabel}</span></span>
+      </div>
+    `;
+  }
+
   // ── Objective ──
   html += `
     <div class="output-section">
@@ -1323,14 +1344,15 @@ function renderResults(totalParsed) {
       const value = displayValue(item);
       const unit = item.def.unit ? ` ${item.def.unit}` : '';
 
-      let meta = `${fmtDate(item.sampledAt)}`;
+      let meta = '';
       if (item.pastAbnormal) {
         const pv = displayValue(item.pastAbnormal);
-        meta += `<span class="past">⚠ 曾異常 ${pv} (${fmtDate(item.pastAbnormal.sampledAt)})</span>`;
+        meta = `<span class="past">⚠ 曾異常 ${escHtml(pv)} (${fmtDate(item.pastAbnormal.sampledAt)})</span>`;
       }
 
       html += `
         <div class="obj-row">
+          <span class="date">${fmtDate(item.sampledAt)}</span>
           <span class="name">${escHtml(item.key)}</span>
           <span class="value ${valCls}${critCls}">${escHtml(value)}${escHtml(unit)}</span>
           <span>${flagBadge}</span>
@@ -1364,7 +1386,7 @@ function renderResults(totalParsed) {
         const isPast = state.integrated.find(it => it.key === ev.key && it.pastAbnormal === ev);
         const pastTag = isPast ? `<span class="past-prefix">曾異常</span>` : '';
         const valCls = (ev.flag === 'L' || ev.flag === 'LL') ? 'low' : '';
-        return `<span class="evidence-row">${pastTag}<span class="ev-item">${escHtml(ev.key)}:</span> <span class="ev-value ${valCls}">${escHtml(displayValue(ev))}</span><span class="ev-date">${fmtDate(ev.sampledAt)}</span></span>`;
+        return `<span class="evidence-row"><span class="ev-date">${fmtDate(ev.sampledAt)}</span> ${pastTag}<span class="ev-item">${escHtml(ev.key)}:</span> <span class="ev-value ${valCls}">${escHtml(displayValue(ev))}</span></span>`;
       }).join('');
 
       html += `
@@ -1414,7 +1436,7 @@ function copyObjective() {
                : (item.flag === 'L' || item.flag === 'LL') ? '(L)'
                : '';
     const date = fmtDate(item.sampledAt);
-    let line = `${item.key}\t${value}${unit ? ' ' + unit : ''}\t${flag}\t${date}`;
+    let line = `${date}\t${item.key}\t${value}${unit ? ' ' + unit : ''}\t${flag}`;
     if (item.pastAbnormal) {
       const pv = displayValue(item.pastAbnormal);
       line += `  (past: ${pv} ${fmtDate(item.pastAbnormal.sampledAt)})`;
@@ -1442,17 +1464,10 @@ function showToast(msg) {
 $('parseBtn').addEventListener('click', runParse);
 $('clearBtn').addEventListener('click', () => {
   $('labInput').value = '';
+  state.demographics = { name: null, chartNo: null, sex: null, age: null, birthDate: null };
   state.integrated = []; state.skipped = []; state.dx = [];
   $('resultMeta').style.display = 'none';
   $('resultArea').innerHTML = `<div class="result-empty"><div class="big">🧪</div>貼上檢驗結果後按「解析」</div>`;
-});
-$('loadDemoBtn').addEventListener('click', e => {
-  e.preventDefault();
-  $('labInput').value = DEMO_TEXT;
-  // Demo patient is female
-  document.querySelector('input[name="sex"][value="F"]').checked = true;
-  $('age').value = 52;
-  runParse();
 });
 
 $('labInput').addEventListener('keydown', e => {
@@ -1469,85 +1484,6 @@ if (typeof ICON !== 'undefined') {
   });
 }
 
-// ─── Demo (anonymized version of provided sample) ─────────────
-const DEMO_TEXT = `報告結果 - 家醫部特殊檢查報告 (門診) - 單號:421026P10249
-報告\t2026-05-13 16:14\t開單\t2026-05-13 10:52\t執行醫師\t
-簽收\t2026-05-13 11:13\t檢體\t10-26-P10249\t原檢體
-動脈硬化檢查結果
-  足踝肱動脈血壓比(ABI): 左側: 1.08(正常參考值: 0.9-1.4)
-  足踝肱動脈血壓比(ABI): 右側: 1.17(正常參考值: 0.9-1.4)
-  肱踝動脈間脈波速率(PWV): 左側: 1466(正常參考值: <1400公分/秒)
-  肱踝動脈間脈波速率(PWV): 右側: 1457(正常參考值: <1400公分/秒)
-
-醫師診斷
-  診斷: 周邊血管檢查無異常, 動脈硬度增加
-
-報告結果 - 自動化生化免疫檢驗報告 (門診) - 單號:821126V66976
-報告\t2026-05-06 13:32\t開單\t2026-05-06 10:03\t執行醫師
-採檢\t2026-05-06 10:17\t檢體\t11-26-141953(血液)\t原檢體
-註\t檢驗名稱\t結果\t單位\t參考區間\t備註\tLONIC
-\tCREA\t0.67\tmg/dL\t0.50-0.90\t
-2160-0
-\teGFR(CKD-EPI)\t105\t \t≧60\t
-98979-8
-\tAST\t18\tU/L\t10-35\t
-30239-8
-\tALT\t21\tU/L\t≦35\t
-1743-4
-\tCHOL\t150\tmg/dL\t<200\t
-2093-3
-\tHDL-C\t55\tmg/dL\t>50\t
-2085-9
-\tTG\t93\tmg/dL\t<150\t
-1644-4
-\tURIC\t5.5\tmg/dL\t2.4-5.7\t
-3084-1
-
-報告結果 - 自動化生化免疫檢驗報告 (門診) - 單號:821126V66975
-報告\t2026-05-06 12:38\t開單\t2026-05-06 10:03\t執行醫師
-採檢\t2026-05-06 10:17\t檢體\t11-26-G52864(血液)\t原檢體
-註\t檢驗名稱\t結果\t單位\t參考區間\t備註\tLONIC
-\tGLU, AC\t85\tmg/dL\t60-99\t
-17865-7
-
-報告結果 - 常規尿液檢驗報告 (門診) - 單號:826426P25224
-報告\t2026-05-06 10:53\t開單\t2026-05-06 10:03\t執行醫師
-簽收\t2026-05-06 10:22\t檢體\t64-26-022445(尿液)\t原檢體
-註\t檢驗名稱\t結果\t單位\t參考區間\t備註\tLONIC
-\tSG\t1.025\t \t1.003~1.035\t
-50562-8
-\tpH\t5.0\t \t5.0~8.0\t
-50560-2
-\tLEU\t2+ (75)\t(cell/μl)\tNegative (<25)\t
-58805-3
-\tNIT\tNegative\t \tNegative\t
-50558-6
-\tPRO\tNegative (<15)\t(mg/dL)\tNegative(<15)\t
-50561-0
-\tGLU\tNegative (<50)\t(mg/dL)\tNegative(<50)\t
-53328-1
-\tKET\tNegative (<10)\t(mg/dL)\tNegative (<10)\t
-50557-8
-\tBlood\t2+ (0.15)\tmg/dL\tNegative (<0.03)\t
-50559-4
-\tRBC\t3~5 (22.6)\t/HPF (/µl)\t0~2 (<=11.1)\t
-46419-8
-\tWBC\t10~19 (50.4)\t/HPF (/µl)\t0~5 (<=27.8)\t
-46702-7
-\tBacteria\t2+ (2697.8)\t/HPF (/µl)\tNegative (<=100)\t
-33218-9
-
-報告結果 - 一般血液檢驗報告 (門診) - 單號:822126P61393
-報告\t\t開單\t2026-05-13 10:52\t執行醫師
-單據狀態：已開立
-
-醫令代碼：8221002　　項目名稱：CBC(含Plt)　　醫令狀態：已開立
-
-報告結果 - 核醫科免疫檢驗報告 (門診) - 單號:932026P36300
-報告\t\t開單\t2026-05-13 10:52\t執行醫師
-單據狀態：已開立
-
-醫令代碼：9320105　　項目名稱：TSH　　醫令狀態：已開立`;
 </script>
 
 </body>

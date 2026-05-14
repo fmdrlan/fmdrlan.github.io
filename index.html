@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>健保藥品給付規定查詢 · DR. YANG's Toolbox</title>
+<title>健保藥品給付規定查詢 · DR. LAN's Toolbox</title>
 
 <!-- ── SEO ── -->
 <meta name="description" content="健保署藥品給付規定全文搜尋。支援中英文藥名、商品名、成分、適應症、藥物類別（如 SGLT2、PPI、statin）。資料每週自動更新。">
 <meta name="keywords" content="健保給付,藥品查詢,給付規定,健保署,NHI,statin,SGLT2,PPI,GLP-1,DOAC,生物製劑,藥物給付條件">
-<meta name="author" content="DR. YANG">
+<meta name="author" content="DR. LAN">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://garrulous-cat.github.io/mindy/index.html">
 
@@ -212,32 +212,30 @@
 
 <!-- Tab bar：唯一 sticky，固定在頂端 -->
 <nav class="tabs-bar" aria-label="主選單">
-  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. YANG</a>
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. LAN</a>
   <a class="tab-link active" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
   <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
   <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
-  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
 </nav>
 
 <!-- 搜尋區（不 sticky，隨頁面滾動） -->
 <div class="search-header">
   <div class="search-header-inner">
-    <div class="logo" id="headerLogo"></div>
-    <div style="flex:1">
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <div>
-          <div class="site-title">健保藥品給付規定查詢</div>
-          <div class="site-sub">全民健康保險藥品給付規定 · 快速全文搜尋</div>
+    <div class="page-intro" style="margin-bottom:0;flex:1">
+      <span class="icon">💊</span>
+      <div style="flex:1">
+        <h1>藥品給付規定查詢</h1>
+        <p>全民健康保險藥品給付規定 · 快速全文搜尋</p>
+        <div class="search-wrap" style="margin-top:12px;">
+          <span class="search-icon" id="searchInputIcon"></span>
+          <input type="text" id="searchInput"
+            placeholder="輸入藥名、成分、適應症…（如 Pregabalin、SGLT2、PPI、prazole）"
+            autocomplete="off" autocorrect="off" spellcheck="false">
+          <button class="clear-btn" id="clearBtn" aria-label="清除"></button>
         </div>
-      </div>
-      <div class="search-wrap" style="margin-top:12px;">
-        <span class="search-icon" id="searchInputIcon"></span>
-        <input type="text" id="searchInput"
-          placeholder="輸入藥名、成分、適應症…（如 Pregabalin、SGLT2、PPI、prazole）"
-          autocomplete="off" autocorrect="off" spellcheck="false">
-        <button class="clear-btn" id="clearBtn" aria-label="清除"></button>
       </div>
     </div>
   </div>

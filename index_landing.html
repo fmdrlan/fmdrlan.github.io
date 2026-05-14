@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DR. YANG's Toolbox · 個人臨床工具箱</title>
+<title>DR. LAN's Toolbox · 個人臨床工具箱</title>
 
 <!-- ── SEO ── -->
 <meta name="description" content="家醫科醫師寫給自己用的查詢工具箱：健保藥品給付規定全文搜尋、高血脂風險評估、疫苗時程查詢。資料每週自動更新。">
 <meta name="keywords" content="健保給付規定,藥品查詢,高血脂,疫苗,家醫科,臨床工具,健保署,NHI,statin,SGLT2,PPI">
-<meta name="author" content="DR. YANG">
+<meta name="author" content="DR. LAN">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://garrulous-cat.github.io/mindy/">
 
 <!-- ── Open Graph ── -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="DR. YANG's Toolbox · 個人臨床工具箱">
+<meta property="og:title" content="DR. LAN's Toolbox · 個人臨床工具箱">
 <meta property="og:description" content="家醫科醫師寫給自己用的查詢工具箱：健保藥品給付、高血脂風險、疫苗時程，每週自動更新。">
 <meta property="og:url" content="https://garrulous-cat.github.io/mindy/">
 <meta property="og:locale" content="zh_TW">
 
 <!-- ── Twitter Card ── -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DR. YANG's Toolbox">
+<meta name="twitter:title" content="DR. LAN's Toolbox">
 <meta name="twitter:description" content="家醫科醫師寫給自己用的臨床查詢工具箱。">
 
 <!-- ── Favicon (inline SVG) ── -->
@@ -32,7 +32,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "DR. YANG's Toolbox",
+  "name": "DR. LAN's Toolbox",
   "description": "家醫科醫師個人臨床查詢工具箱",
   "url": "https://garrulous-cat.github.io/mindy/",
   "inLanguage": "zh-TW"
@@ -256,14 +256,15 @@
 <body>
 <div class="wrapper">
 
-  <h1 class="site-title">DR. YANG</h1>
+  <h1 class="site-title">DR. LAN</h1>
   <div class="site-sub">個人臨床工具箱</div>
-  <div class="site-byline">— 家醫科醫師寫給自己用的查詢工具 —</div>
+  <div class="site-byline">— 成大家醫科醫師寫給自己用的查詢工具 —</div>
 
   <div class="warning">
     <div class="warning-tag" id="warningTag"><span id="warningIcon"></span>Warning</div>
     <div class="warning-body">
-      本站使用對象為 <strong>DR. YANG 本人</strong>，僅作個人臨床工作備忘之用。<strong>任何路人請自負風險</strong>，醫療決策請以最新健保署公告及指引原文為準。
+      本站使用對象為 <strong>懶醫師本人</strong>。<strong>路人請自負風險</strong>——這裡沒有 IRB 把關、沒有同儕審閱、沒有 24 小時客服。
+      開立任何醫囑前，請以健保署最新公告與最新版指引原文為準。資料可能過時、可能筆誤、可能我心情不好那天寫錯。
     </div>
   </div>
 
@@ -277,13 +278,22 @@
       <span class="tool-arrow" id="arrow1"></span>
     </a>
 
+    <a class="tool-link" href="lab.html">
+      <div class="tool-icon" id="iconFlask"></div>
+      <div class="tool-text">
+        <div class="tool-name">檢驗報告解讀<span class="badge">NEW</span></div>
+        <div class="tool-desc">貼上 LIS 檢驗結果，自動辨識項目、跨日整合最近異常，產生可複製的 Objective 與 Diagnosis</div>
+      </div>
+      <span class="tool-arrow" id="arrow2"></span>
+    </a>
+
     <a class="tool-link" href="lipid.html">
       <div class="tool-icon" id="iconChart"></div>
       <div class="tool-text">
         <div class="tool-name">高血脂風險評估</div>
         <div class="tool-desc">台灣 2025 / ESC 2024 / AHA 2026 三大指引風險分級與健保給付判斷</div>
       </div>
-      <span class="tool-arrow" id="arrow2"></span>
+      <span class="tool-arrow" id="arrow3"></span>
     </a>
 
     <a class="tool-link" href="vaccine.html">
@@ -292,7 +302,7 @@
         <div class="tool-name">疫苗查詢<span class="badge badge-wip">建造中</span></div>
         <div class="tool-desc">小兒公費/自費疫苗時程表 · 成人自費疫苗劑數與注意事項</div>
       </div>
-      <span class="tool-arrow" id="arrow3"></span>
+      <span class="tool-arrow" id="arrow4"></span>
     </a>
 
     <a class="tool-link" href="compare.html">
@@ -300,15 +310,6 @@
       <div class="tool-text">
         <div class="tool-name">藥物類別比較<span class="badge badge-wip">建造中</span></div>
         <div class="tool-desc">同類藥之仿單適應症、里程碑試驗、指引建議分層比較，每筆標註來源</div>
-      </div>
-      <span class="tool-arrow" id="arrow4"></span>
-    </a>
-
-    <a class="tool-link" href="lab.html">
-      <div class="tool-icon" id="iconFlask"></div>
-      <div class="tool-text">
-        <div class="tool-name">檢驗報告解讀<span class="badge">NEW</span></div>
-        <div class="tool-desc">貼上 LIS 檢驗結果，自動辨識項目、標示 H/L 異常，整理為 SOAP Objective 段落</div>
       </div>
       <span class="tool-arrow" id="arrow5"></span>
     </a>
@@ -324,7 +325,8 @@
   </nav>
 
   <div class="footer">
-    工具由 DR. YANG 個人維護 · 本站不隸屬於任何醫療機構或政府機關
+    工具由 <strong>DR. LAN</strong> 個人維護 · 本站不隸屬於任何醫療機構或政府機關 ·
+    程式碼用咖啡跟夜班空檔寫的，bug 也是
     <div style="margin-top: 14px;">
       <a class="feedback-link" id="feedbackLink"
          href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"

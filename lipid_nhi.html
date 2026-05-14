@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>高血脂｜健保 statin 給付判斷（簡化版）· DR. YANG's Toolbox</title>
+<title>高血脂｜健保 statin 給付判斷（簡化版）· DR. LAN's Toolbox</title>
 
 <meta name="description" content="健保 2.6.1 降血脂藥物給付規定簡化判斷工具：輸入血脂與危險因子，自動依健保 5 項危險因子規則判斷是否符合 statin 給付條件。">
-<meta name="keywords" content="健保,2.6.1,降血脂,statin,給付,高血脂,LDL,DR. YANG">
-<meta name="author" content="DR. YANG">
+<meta name="keywords" content="健保,2.6.1,降血脂,statin,給付,高血脂,LDL,DR. LAN">
+<meta name="author" content="DR. LAN">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://garrulous-cat.github.io/mindy/lipid_nhi.html">
 
@@ -265,6 +265,9 @@ body {
   font-weight: 600;
   margin-bottom: 4px;
 }
+.result-title.covered { color: var(--accent-green); }
+.result-title.notcov { color: var(--accent-red); }
+.result-title.targetmet { color: var(--accent-blue); }
 .result-cat {
   font-size: 12px;
   color: var(--text-secondary);
@@ -486,19 +489,24 @@ body {
 <body>
 
 <nav class="tabs-bar" aria-label="主選單">
-  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. YANG</a>
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. LAN</a>
   <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link active" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
   <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
   <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
-  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
 </nav>
 
 <div class="page-wrap">
 
-  <h1 class="page-title">高血脂｜健保 statin 給付判斷</h1>
-  <p class="page-sub">依健保 2.6.1 給付規定，輸入血脂與 5 項危險因子，判斷 statin 是否符合給付。<strong>不含</strong>台灣脂質指引 / ESC / AHA 風險計算，也不處理 Ezetimibe / PCSK9 / 升級判斷。</p>
+  <div class="page-intro">
+    <span class="icon">📊</span>
+    <div>
+      <h1>高血脂｜健保 statin 給付判斷</h1>
+      <p>依健保 2.6.1 給付規定，輸入血脂與 5 項危險因子，判斷 statin 是否符合給付。<strong>不含</strong>台灣脂質指引 / ESC / AHA 風險計算，也不處理 Ezetimibe / PCSK9 / 升級判斷。</p>
+    </div>
+  </div>
 
   <div class="mode-switch">
     <a href="lipid.html">完整版（3 大指引 + 健保）</a>
@@ -836,7 +844,7 @@ function renderResult(r) {
   let html = `<div class="result-header">
     <div class="result-icon ${iconClass}">${iconChar}</div>
     <div>
-      <div class="result-title">${title}</div>
+      <div class="result-title ${iconClass}">${title}</div>
       <div class="result-cat">適用條文：${r.condition}　·　${r.category}</div>
     </div>
   </div>`;

@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>疫苗查詢 · DR. YANG's Toolbox</title>
+<title>疫苗查詢 · DR. LAN's Toolbox</title>
 
 <!-- ── SEO ── -->
 <meta name="description" content="小兒公費/自費疫苗時程表、成人自費疫苗劑數與注意事項查詢工具（建造中）。">
 <meta name="keywords" content="疫苗,公費疫苗,自費疫苗,小兒疫苗,成人疫苗,疫苗時程,HPV,帶狀疱疹,流感">
-<meta name="author" content="DR. YANG">
+<meta name="author" content="DR. LAN">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://garrulous-cat.github.io/mindy/vaccine.html">
 
 <!-- ── Open Graph ── -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="疫苗查詢 · DR. YANG's Toolbox">
+<meta property="og:title" content="疫苗查詢 · DR. LAN's Toolbox">
 <meta property="og:description" content="小兒公費/自費疫苗時程表、成人自費疫苗劑數與注意事項查詢工具。">
 <meta property="og:url" content="https://garrulous-cat.github.io/mindy/vaccine.html">
 <meta property="og:locale" content="zh_TW">
@@ -288,17 +288,23 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 <body>
 
 <nav class="tabs-bar" aria-label="主選單">
-  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. YANG</a>
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. LAN</a>
   <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
   <a class="tab-link active" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
   <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
-  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
   <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
 </nav>
 
 <div class="page-wrap">
-  <div class="page-title">疫苗查詢</div>
+  <div class="page-intro">
+    <span class="icon">💉</span>
+    <div>
+      <h1>疫苗查詢</h1>
+      <p>查詢小兒（0–18 歲）與成人疫苗接種建議。輸入出生日期，系統會列出該年齡層應接種、未接種的疫苗。</p>
+    </div>
+  </div>
 
   <div class="mode-tabs">
     <button class="mode-btn" id="btn-peds" onclick="setMode('peds')">👶 小兒（0–18歲）</button>
@@ -356,16 +362,16 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   </div>
 </div>
 
-<div class="footer-meta">
-  資料來源：<a href="https://www.cdc.gov.tw" target="_blank">衛生福利部疾病管制署</a>
-  · 本工具由 DR. YANG 個人維護，資訊僅供參考，以 CDC 官方公告為準
-  <div style="margin-top: 12px;">
-    <a class="feedback-link" id="feedbackLink"
-       href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"
-       target="_blank" rel="noopener">
-      <span id="feedbackIcon"></span>回報錯誤 / 提建議
-    </a>
+<div class="feedback-footer">
+  <div>
+    資料來源：<a href="https://www.cdc.gov.tw" target="_blank" style="color:#4a9eff;text-decoration:none">衛生福利部疾病管制署</a>
+    · 本工具由 DR. LAN 個人維護，資訊僅供參考，以 CDC 官方公告為準
   </div>
+  <a class="feedback-link" id="feedbackLink"
+     href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"
+     target="_blank" rel="noopener">
+    <span id="feedbackIcon"></span>回報錯誤 / 提建議
+  </a>
 </div>
 
 <script>
