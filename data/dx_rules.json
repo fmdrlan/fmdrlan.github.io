@@ -204,6 +204,15 @@
       ]
     },
     {
+      "id": "hbv_past_infection",
+      "name": "Past HBV infection (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "Anti-HBc", "op": "qual_positive" }
+      ],
+      "exclude_if": ["hbv_carrier"]
+    },
+    {
       "id": "hcv_infection",
       "name": "HCV infection (suspected)",
       "logic": "any",

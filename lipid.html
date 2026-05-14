@@ -685,6 +685,41 @@
   .coverage-text { color: var(--text-secondary); }
   .coverage-text strong { color: var(--text-primary); }
 
+  /* 跨工具快速跳轉：給付符合時的「查健保規定」按鈕列 */
+  .quick-action-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0 4px 0;
+    padding: 6px 8px;
+    flex-wrap: wrap;
+  }
+  .quick-action-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+    margin-right: 4px;
+  }
+  .quick-action-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    background: rgba(74,158,255,0.08);
+    border: 1px solid rgba(74,158,255,0.25);
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: all 0.15s;
+  }
+  .quick-action-chip:hover {
+    background: rgba(74,158,255,0.18);
+    border-color: rgba(74,158,255,0.5);
+  }
+  .quick-action-chip::after { content: ' →'; opacity: 0.5; }
+
   /* reasoning box */
   .reasoning-box {
     background: var(--bg-base);
@@ -2348,6 +2383,20 @@ function calcNHI(p) {
       ${statinReasons.map(r => `• ${r}`).join('<br>')}
     </span>
   </div>`;
+
+  // 跨工具快速跳轉：若符合 statin 給付，列出常見 statin 給付查詢連結
+  if (statinCovered) {
+    html += `
+      <div class="quick-action-row">
+        <span class="quick-action-label">查健保給付規定</span>
+        <a href="index.html?q=Atorvastatin" class="quick-action-chip">Atorvastatin</a>
+        <a href="index.html?q=Rosuvastatin" class="quick-action-chip">Rosuvastatin</a>
+        <a href="index.html?q=Pitavastatin" class="quick-action-chip">Pitavastatin</a>
+        <a href="index.html?q=Simvastatin"  class="quick-action-chip">Simvastatin</a>
+      </div>
+    `;
+  }
+
   html += `</div>`;
 
   // ════════════════════════════════════
@@ -2467,6 +2516,16 @@ function calcNHI(p) {
       ${ezeReasons.map(r => `• ${r}`).join('<br>')}
     </span>
   </div>`;
+
+  if (ezeCovered) {
+    html += `
+      <div class="quick-action-row">
+        <span class="quick-action-label">查健保給付規定</span>
+        <a href="index.html?q=Ezetimibe" class="quick-action-chip">Ezetimibe</a>
+      </div>
+    `;
+  }
+
   html += `</div>`;
 
   // ════════════════════════════════════
@@ -2537,6 +2596,17 @@ function calcNHI(p) {
       ${pcsk9Reasons.map(r => `• ${r}`).join('<br>')}
     </span>
   </div>`;
+
+  if (pcsk9Covered) {
+    html += `
+      <div class="quick-action-row">
+        <span class="quick-action-label">查健保給付規定</span>
+        <a href="index.html?q=Evolocumab" class="quick-action-chip">Evolocumab</a>
+        <a href="index.html?q=Alirocumab" class="quick-action-chip">Alirocumab</a>
+      </div>
+    `;
+  }
+
   html += `</div>`;
 
   return html;
@@ -2991,6 +3061,68 @@ if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
     if (typeof calcNonHDL === 'function') calcNonHDL();
     closeModal();
   });
+})();
+
+// ─── 從 URL query 帶入欄位（lab.html「下一步」按鈕跳過來時） ──────────
+(function loadFromQueryString() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.toString() === '') return;
+
+  const fieldMap = ['tc', 'ldl', 'hdl', 'tg', 'age', 'sbp', 'dbp'];
+  let filledCount = 0;
+
+  fieldMap.forEach(key => {
+    const val = params.get(key);
+    if (val == null || val === '') return;
+    const el = document.getElementById(key);
+    if (el) {
+      el.value = val;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      filledCount++;
+    }
+  });
+
+  const sex = params.get('sex');
+  if (sex) {
+    const radio = document.querySelector(`input[name="sex"][value="${sex.toUpperCase()}"]`);
+    if (radio) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change', { bubbles: true }));
+      filledCount++;
+    }
+  }
+
+  if (typeof calcNonHDL === 'function') calcNonHDL();
+
+  if (filledCount > 0) {
+    // 顯示成功提示（小 toast）
+    const toast = document.createElement('div');
+    toast.textContent = `已自動帶入 ${filledCount} 項檢驗報告資料`;
+    toast.style.cssText = `
+      position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+      background: rgba(74,158,255,0.15); border: 1px solid rgba(74,158,255,0.4);
+      color: #4a9eff; padding: 10px 18px; border-radius: 8px;
+      font-size: 13px; z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      animation: fadeInOut 4s ease-in-out forwards;
+    `;
+    // animation keyframes
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `
+      @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+        10%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+      }`;
+    document.head.appendChild(styleEl);
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4200);
+
+    // 清掉 query string（避免重整時又顯示一次 toast）
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }
 })();
 </script>
 </body>

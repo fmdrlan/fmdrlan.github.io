@@ -376,6 +376,44 @@
   }
 
   /* Pending reports notice */
+  /* Cross-tool 跳轉動作區 */
+  .next-action-box {
+    background: linear-gradient(135deg, rgba(74,158,255,0.06), rgba(74,158,255,0.02));
+    border: 1px solid rgba(74,158,255,0.3);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-top: 18px;
+  }
+  .next-action-title {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 8px;
+  }
+  .next-action-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .next-action-info .primary {
+    font-size: 14px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .next-action-info .secondary {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .next-action-row .btn {
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
   .pending-box {
     margin-top: 12px;
     padding: 10px 14px;
@@ -557,7 +595,10 @@
     { "id": "vit",      "label": "Vitamins" },
     { "id": "endocrine","label": "Endocrine" },
     { "id": "tumor",    "label": "Tumor Markers" },
-    { "id": "vascular", "label": "Vascular Studies" }
+    { "id": "vascular", "label": "Vascular Studies" },
+    { "id": "autoimm",  "label": "Autoimmune Markers" },
+    { "id": "protein",  "label": "Plasma Proteins" },
+    { "id": "u-protein","label": "Urine Albumin/ACR" }
   ],
 
   "items": {
@@ -570,9 +611,11 @@
     "MCHC":       { "group": "cbc",     "aliases": ["MCHC"],                               "unit": "g/dL",      "ref": [32, 36] },
     "RDW":        { "group": "cbc",     "aliases": ["RDW", "RDW-CV"],                      "unit": "%",         "ref": [11.5, 14.5] },
     "Platelet":   { "group": "cbc",     "aliases": ["Platelet", "PLT", "Plt", "血小板"],   "unit": "10^3/uL",   "ref": [150, 400], "crit_low": 50, "crit_high": 1000 },
+    "MPV":        { "group": "cbc",     "aliases": ["MPV"],                                "unit": "fL",        "ref": [6.8, 10.3] },
+    "MDW":        { "group": "cbc",     "aliases": ["MDW"],                                "unit": "",          "ref": [0, 20] },
 
-    "Neut%":      { "group": "diff",    "aliases": ["Neutrophil", "Neut", "Seg", "嗜中性白血球", "Neut%", "NEUT%"], "unit": "%", "ref": [40, 74] },
-    "Lym%":       { "group": "diff",    "aliases": ["Lymphocyte", "Lym", "淋巴球", "Lym%", "LYM%"], "unit": "%",  "ref": [19, 48] },
+    "Neut%":      { "group": "diff",    "aliases": ["Neutrophil", "Neut", "Seg", "嗜中性白血球", "Neut%", "NEUT%", "Seg%"], "unit": "%", "ref": [40, 74] },
+    "Lym%":       { "group": "diff",    "aliases": ["Lymphocyte", "Lym", "Lymph", "淋巴球", "Lym%", "LYM%"], "unit": "%",  "ref": [19, 48] },
     "Mono%":      { "group": "diff",    "aliases": ["Monocyte", "Mono", "單核球", "Mono%"], "unit": "%",         "ref": [3.4, 9] },
     "Eos%":       { "group": "diff",    "aliases": ["Eosinophil", "Eos", "嗜酸性", "Eos%"], "unit": "%",         "ref": [0, 7] },
     "Baso%":      { "group": "diff",    "aliases": ["Basophil", "Baso", "嗜鹼性", "Baso%"], "unit": "%",         "ref": [0, 1.5] },
@@ -582,9 +625,9 @@
     "ALT":        { "group": "lft",     "aliases": ["ALT", "GPT", "SGPT", "ALT(GPT)", "GPT(ALT)"], "unit": "U/L", "ref": [0, 35] },
     "ALP":        { "group": "lft",     "aliases": ["ALP", "ALK-P", "Alkaline Phosphatase", "鹼性磷酸酶"], "unit": "U/L", "ref": [35, 129] },
     "GGT":        { "group": "lft",     "aliases": ["GGT", "γ-GT", "gamma-GT", "r-GT", "rGT"],   "unit": "U/L", "ref_m": [10, 71], "ref_f": [6, 42] },
-    "T-Bil":      { "group": "lft",     "aliases": ["T-Bil", "TBIL", "Total Bilirubin", "T.Bil", "TB", "T-BIL"], "unit": "mg/dL", "ref": [0.2, 1.2] },
-    "D-Bil":      { "group": "lft",     "aliases": ["D-Bil", "DBIL", "Direct Bilirubin", "D.Bil", "D-BIL"], "unit": "mg/dL", "ref": [0, 0.3] },
-    "Albumin":    { "group": "lft",     "aliases": ["Albumin", "ALB", "Alb", "白蛋白"],   "unit": "g/dL",      "ref": [3.5, 5.2] },
+    "T-Bil":      { "group": "lft",     "aliases": ["T-Bil", "TBIL", "Total Bilirubin", "T.Bil", "TB", "T-BIL", "BIL-T"], "unit": "mg/dL", "ref": [0.2, 1.2] },
+    "D-Bil":      { "group": "lft",     "aliases": ["D-Bil", "DBIL", "Direct Bilirubin", "D.Bil", "D-BIL", "BIL-D"], "unit": "mg/dL", "ref": [0, 0.3] },
+    "Albumin":    { "group": "lft",     "aliases": ["Albumin", "ALB", "Alb", "白蛋白", "ALBUMIN"],   "unit": "g/dL",      "ref": [3.5, 5.2] },
     "Globulin":   { "group": "lft",     "aliases": ["Globulin", "GLOB", "Glob", "球蛋白"],"unit": "g/dL",      "ref": [2.0, 3.5] },
     "T-Protein":  { "group": "lft",     "aliases": ["T-Protein", "TP", "Total Protein"],  "unit": "g/dL",      "ref": [6.4, 8.3] },
     "LDH":        { "group": "lft",     "aliases": ["LDH", "Lactate Dehydrogenase"],      "unit": "U/L",       "ref": [120, 250] },
@@ -602,7 +645,8 @@
     "Mg":         { "group": "lyte",    "aliases": ["Mg", "Magnesium", "鎂"],             "unit": "mg/dL",    "ref": [1.6, 2.6] },
 
     "GLU-AC":     { "group": "dm",      "aliases": ["GLU AC", "GLU, AC", "Glucose AC", "Glucose, AC", "FBS", "Fasting glucose", "AC sugar", "空腹血糖"], "unit": "mg/dL", "ref": [60, 99] },
-    "GLU-PC":     { "group": "dm",      "aliases": ["GLU PC", "GLU, PC", "Glucose PC", "Glucose, PC", "PC sugar", "Postprandial glucose"], "unit": "mg/dL", "ref": [0, 140] },
+    "GLU-PC":     { "group": "dm",      "aliases": ["GLU PC", "GLU, PC", "Glucose PC", "Glucose, PC", "PC sugar", "Postprandial glucose", "微血管指血糖試驗(PC)", "微血管指血糖試驗", "指血糖(PC)"], "unit": "mg/dL", "ref": [0, 140] },
+    "GLU-random": { "group": "dm",      "aliases": ["GLU random", "GLU, random", "Random glucose", "隨機血糖"], "unit": "mg/dL", "ref": [0, 140] },
     "HbA1c":      { "group": "dm",      "aliases": ["HbA1c", "Hb A1c", "A1c", "HBA1C", "糖化血色素"], "unit": "%", "ref": [4.0, 5.6] },
 
     "TC":         { "group": "lipid",   "aliases": ["TC", "CHOL", "T-CHO", "Cholesterol", "T-Chol", "Total Cholesterol", "總膽固醇"], "unit": "mg/dL", "ref": [0, 200] },
@@ -630,7 +674,7 @@
     "Procalcitonin": { "group": "inflam", "aliases": ["Procalcitonin", "PCT"],            "unit": "ng/mL",    "ref": [0, 0.5] },
 
     "PT":         { "group": "coag",    "aliases": ["PT", "Prothrombin Time"],            "unit": "sec",      "ref": [9, 12.5] },
-    "INR":        { "group": "coag",    "aliases": ["INR"],                                "unit": "",         "ref": [0.8, 1.2] },
+    "INR":        { "group": "coag",    "aliases": ["INR", "PT(INR)", "PT INR"],          "unit": "",         "ref": [0.8, 1.2] },
     "aPTT":       { "group": "coag",    "aliases": ["aPTT", "APTT", "PTT"],               "unit": "sec",      "ref": [23, 35] },
     "D-Dimer":    { "group": "coag",    "aliases": ["D-Dimer", "DDimer"],                 "unit": "ug/mL FEU", "ref": [0, 0.5] },
     "Fibrinogen": { "group": "coag",    "aliases": ["Fibrinogen"],                        "unit": "mg/dL",    "ref": [200, 400] },
@@ -651,7 +695,7 @@
     "U-EC":       { "group": "urine",   "aliases": ["EC", "U-EC", "Epithelial Cell"],     "unit": "/HPF",     "ref": [0, 5] },
     "U-Cast":     { "group": "urine",   "aliases": ["Cast", "U-Cast"],                    "unit": "/LPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
     "U-Crystal":  { "group": "urine",   "aliases": ["Crystal", "U-Crystal"],              "unit": "/HPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "UACR":       { "group": "urine",   "aliases": ["UACR", "ACR", "Urine ACR", "Microalbumin/Cr"], "unit": "mg/g", "ref": [0, 30] },
+    "UACR":       { "group": "urine",   "aliases": ["UACR_old_unused"], "unit": "mg/g", "ref": [0, 30] },
 
     "Stool-OB":   { "group": "stool",   "aliases": ["O.B.", "OB", "Stool OB", "Occult Blood", "FOBT", "FIT"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
 
@@ -661,7 +705,7 @@
     "HBeAg":      { "group": "hepatitis", "aliases": ["HBeAg"],                            "unit": "",         "is_qual": true, "qual_neg": ["-", "Non-reactive", "Negative", "Neg"] },
     "Anti-HCV":   { "group": "hepatitis", "aliases": ["Anti-HCV", "HCVAb"],               "unit": "",         "is_qual": true, "qual_neg": ["-", "Non-reactive", "Negative", "Neg"] },
 
-    "Ferritin":   { "group": "iron",    "aliases": ["Ferritin"],                          "unit": "ng/mL",    "ref_m": [30, 400], "ref_f": [13, 150] },
+    "Ferritin":   { "group": "iron",    "aliases": ["Ferritin", "FERR"],                  "unit": "ng/mL",    "ref_m": [30, 400], "ref_f": [13, 150] },
     "Iron":       { "group": "iron",    "aliases": ["Iron", "Fe", "血清鐵"],              "unit": "ug/dL",    "ref_m": [65, 175], "ref_f": [50, 170] },
     "TIBC":       { "group": "iron",    "aliases": ["TIBC"],                              "unit": "ug/dL",    "ref": [250, 450] },
     "Transferrin":{ "group": "iron",    "aliases": ["Transferrin"],                       "unit": "mg/dL",    "ref": [200, 360] },
@@ -685,7 +729,23 @@
     "ABI-L":      { "group": "vascular","aliases": ["ABI-L", "ABI L", "ABI 左", "ABI-Left"], "unit": "", "ref": [0.9, 1.4] },
     "ABI-R":      { "group": "vascular","aliases": ["ABI-R", "ABI R", "ABI 右", "ABI-Right"], "unit": "", "ref": [0.9, 1.4] },
     "PWV-L":      { "group": "vascular","aliases": ["PWV-L", "PWV L", "PWV 左", "PWV-Left"], "unit": "cm/s", "ref": [0, 1400] },
-    "PWV-R":      { "group": "vascular","aliases": ["PWV-R", "PWV R", "PWV 右", "PWV-Right"], "unit": "cm/s", "ref": [0, 1400] }
+    "PWV-R":      { "group": "vascular","aliases": ["PWV-R", "PWV R", "PWV 右", "PWV-Right"], "unit": "cm/s", "ref": [0, 1400] },
+
+    "ANA":        { "group": "autoimm", "aliases": ["ANA", "ANA*", "Antinuclear Antibody", "抗核抗體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "AMA":        { "group": "autoimm", "aliases": ["AMA", "Antimitochondrial Antibody", "抗粒線體抗體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "ASMA":       { "group": "autoimm", "aliases": ["ASMA", "Anti-smooth muscle antibody", "抗平滑肌抗體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "Anti-LKM":   { "group": "autoimm", "aliases": ["Anti-LKM", "LKM"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "RF":         { "group": "autoimm", "aliases": ["RF", "Rheumatoid factor", "類風濕因子"], "unit": "IU/mL", "ref": [0, 14] },
+    "Anti-CCP":   { "group": "autoimm", "aliases": ["Anti-CCP", "CCP", "ACPA"], "unit": "U/mL", "ref": [0, 17] },
+
+    "IgG":        { "group": "protein", "aliases": ["IgG", "Immunoglobulin G"], "unit": "mg/dL", "ref": [751, 1560] },
+    "IgM":        { "group": "protein", "aliases": ["IgM", "Immunoglobulin M"], "unit": "mg/dL", "ref": [37, 286] },
+    "IgA":        { "group": "protein", "aliases": ["IgA", "Immunoglobulin A"], "unit": "mg/dL", "ref": [82, 453] },
+    "Ceruloplasmin": { "group": "protein", "aliases": ["Ceruloplasmin", "CER", "CP", "血漿銅藍蛋白"], "unit": "mg/dL", "ref": [22, 58] },
+
+    "Crea-U":     { "group": "u-protein", "aliases": ["Crea(U)", "Cr(U)", "Urine Creatinine", "尿肌酸酐"], "unit": "mg/dL", "ref": [0, 999] },
+    "Alb-U":      { "group": "u-protein", "aliases": ["Alb(U)", "Urine Albumin", "Microalbumin", "尿微量白蛋白"], "unit": "mg/L", "ref": [0, 20] },
+    "ACR":        { "group": "u-protein", "aliases": ["ACR", "UACR", "Urine ACR", "Microalbumin/Cr"], "unit": "mg/g", "ref": [0, 30] }
   }
 }
 </script>
@@ -895,6 +955,15 @@
       "criteria": [
         { "item": "HBsAg", "op": "qual_positive" }
       ]
+    },
+    {
+      "id": "hbv_past_infection",
+      "name": "Past HBV infection (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "Anti-HBc", "op": "qual_positive" }
+      ],
+      "exclude_if": ["hbv_carrier"]
     },
     {
       "id": "hcv_infection",
@@ -1323,6 +1392,117 @@ function parseFreeTextSection(section, typeInfo) {
   return results;
 }
 
+// ─── 家醫部特殊檢查的子類型 parser ───────────────────────────────────
+// 偵測是哪一種子類型（眼底篩檢/足部檢查/多汗症），不是的話回傳 null
+function detectFMSubtype(text) {
+  if (/糖尿病眼底篩檢|視網膜病變|NPDR|PDR|NDR/.test(text)) return 'fundus';
+  if (/足部檢查|足背動脈脈搏|單股尼龍線|皮膚受損|足癬|感染潰瘍|截肢/.test(text)) return 'foot';
+  if (/FEET SCORE|HANDS SCORE|CONDUCTANCES|sudomotor/i.test(text)) return 'sudomotor';
+  return null;
+}
+
+// 眼底篩檢：抓出哪眼有 retinopathy
+function parseFundusSection(section) {
+  const results = [];
+  const text = section.text;
+  // 右眼: 非增殖性視網膜病變NPDR-mild  /  左眼: 無糖尿病視網膜病變NDR
+  const eyePatterns = [
+    { side: '右眼', re: /右眼\s*[:：]\s*([^\n]+)/ },
+    { side: '左眼', re: /左眼\s*[:：]\s*([^\n]+)/ }
+  ];
+  const findings = [];
+  for (const e of eyePatterns) {
+    const m = text.match(e.re);
+    if (!m) continue;
+    const content = m[1].trim();
+    // 正常情況：NDR / 無糖尿病視網膜病變 / Normal
+    if (/^(無.*|NDR|Normal)/.test(content) || (/NDR/.test(content) && !/NPDR|PDR/.test(content))) continue;
+    // 有病變：NPDR-mild/moderate/severe、PDR、CSME、ME
+    if (/NPDR|PDR|增殖性|視網膜病變|黃斑部|maculopathy|CSME|edema/i.test(content)) {
+      findings.push(`${e.side}: ${content}`);
+    }
+  }
+  if (findings.length === 0) return [];
+  // 合併成一條
+  const dxText = `Diabetic retinopathy (${findings.join('; ')})`;
+  return [{
+    text: dxText,
+    sourceLabel: '眼底篩檢',
+    sourceShort: 'Fundus',
+    sampledAt: section.date
+  }];
+}
+
+// 足部檢查：列出 (+) 異常項目
+function parseFootSection(section) {
+  const text = section.text;
+  // 抓「項目: 右(?), 左(?)」格式
+  const abnormalItems = [];
+  const patterns = [
+    { key: '皮膚受損', en: 'skin lesion' },
+    { key: '足癬', en: 'tinea pedis' },
+    { key: '趾甲異常', en: 'nail deformity' },
+    { key: '感染潰瘍', en: 'infected ulcer' },
+    { key: '胼胝/雞眼', en: 'callus/corn' },
+    { key: '外觀變形', en: 'foot deformity' },
+    { key: '截肢', en: 'amputation' }
+  ];
+  for (const p of patterns) {
+    const re = new RegExp(p.key + '\\s*[:：]\\s*(右|左)\\s*\\(([+\\-－])\\)\\s*,?\\s*(右|左)\\s*\\(([+\\-－])\\)');
+    const m = text.match(re);
+    if (!m) continue;
+    const sides = [];
+    if (m[2] === '+') sides.push(m[1]);
+    if (m[4] === '+') sides.push(m[3]);
+    if (sides.length === 0) continue;
+    const sideStr = sides.length === 2 ? 'bilateral' : (sides[0] === '右' ? 'right' : 'left');
+    abnormalItems.push(`${p.en} (${sideStr})`);
+  }
+  // 抓單股尼龍線是否異常
+  const monoMatch = text.match(/單股尼龍線\s*[:：]\s*右\s*[:：]?\s*([^,，]+)\s*,?\s*左\s*[:：]?\s*([^\n]+)/);
+  if (monoMatch) {
+    const rNormal = /^正常|Normal/.test(monoMatch[1].trim());
+    const lNormal = /^正常|Normal/.test(monoMatch[2].trim());
+    if (!rNormal || !lNormal) {
+      const side = (!rNormal && !lNormal) ? 'bilateral' : (!rNormal ? 'right' : 'left');
+      abnormalItems.push(`reduced protective sensation by monofilament (${side})`);
+    }
+  }
+  if (abnormalItems.length === 0) return [];
+
+  const dxText = `Diabetic foot findings: ${abnormalItems.join(', ')}`;
+  return [{
+    text: dxText,
+    sourceLabel: '足部檢查',
+    sourceShort: 'Foot exam',
+    sampledAt: section.date
+  }];
+}
+
+// 多汗症 / sudomotor：若任一肢體 conductance <60µS → 提示自律神經異常
+function parseSudomotorSection(section) {
+  const text = section.text;
+  // 抓 Left: NNµS / Right: NNµS
+  const values = [];
+  const re = /(Left|Right|L|R)\s*[:：]\s*(\d+(?:\.\d+)?)\s*[µu]S/gi;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    values.push(parseFloat(m[2]));
+  }
+  if (values.length === 0) return [];
+  const minVal = Math.min(...values);
+  if (minVal >= 60) return [];   // 全部正常
+  let severity;
+  if (minVal < 40) severity = 'severely';
+  else severity = 'moderately';
+  return [{
+    text: `${severity.charAt(0).toUpperCase() + severity.slice(1)} reduced sudomotor function (min ${minVal}µS, suggesting autonomic neuropathy)`,
+    sourceLabel: '排汗神經',
+    sourceShort: 'Sudomotor',
+    sampledAt: section.date
+  }];
+}
+
 // ─── Free-text 診斷整合與去重 ─────────────────────────────────────────
 // 規範化文字以便比對：移除標點、grade/Grade、大小寫
 function normDxText(s) {
@@ -1371,11 +1551,10 @@ function parseLIS(text) {
     }
 
     // 動脈硬化（ABI/PWV）— 走特殊解析回到數值類
+    // 注意：不再從同一份報告抓 free-text「醫師診斷」，因為 PWV/ABI 數值會經由
+    // arterial_stiffness / pad_suspected 規則自動生成診斷，free-text 重複沒意義
     if (/動脈硬化檢查|肱踝動脈|足踝肱動脈/.test(sec.text)) {
       allResults.push(...parseSpecialSection(sec));
-      // 同一份家醫部報告可能還有 free-text「醫師診斷」段落
-      const ft = detectFreeTextType(sec.type);
-      if (ft) freeTextItems.push(...parseFreeTextSection(sec, ft));
       continue;
     }
 
@@ -1388,6 +1567,13 @@ function parseLIS(text) {
     // Free-text 報告（內視鏡、病理、影像…）
     const ftType = detectFreeTextType(sec.type);
     if (ftType) {
+      // 家醫部特殊檢查可能是眼底/足部/多汗症之類有特定格式的子類型
+      if (ftType.label === '家醫部') {
+        const subtype = detectFMSubtype(sec.text);
+        if (subtype === 'fundus')    { freeTextItems.push(...parseFundusSection(sec));    continue; }
+        if (subtype === 'foot')      { freeTextItems.push(...parseFootSection(sec));      continue; }
+        if (subtype === 'sudomotor') { freeTextItems.push(...parseSudomotorSection(sec)); continue; }
+      }
       freeTextItems.push(...parseFreeTextSection(sec, ftType));
       continue;
     }
@@ -1529,6 +1715,7 @@ const $ = id => document.getElementById(id);
 const state = {
   sex: 'M',
   demographics: { name: null, chartNo: null, sex: null, age: null, birthDate: null },
+  allResults: [],
   integrated: [],
   skipped: [],
   dx: [],
@@ -1570,6 +1757,7 @@ function runParse() {
   const { results, skipped, demographics, freeTextDx } = parseLIS(text);
   state.demographics = demographics;
   state.sex = demographics.sex || 'M';  // 沒抓到就預設男（影響極小）
+  state.allResults = results;
   state.integrated = integrateTimeline(results, state.sex);
   state.skipped = skipped;
   state.dx = applyDiagnosisRules(state.integrated);
@@ -1753,6 +1941,41 @@ function renderResults(totalParsed) {
     html += `</div>`;
   }
   html += `</div>`;
+
+  // ── Cross-tool 動作：若有血脂資料，提供「送到高血脂風險評估」按鈕 ──
+  const lipidKeys = ['TC', 'LDL-C', 'HDL-C', 'TG'];
+  const latestLipid = {};
+  for (const k of lipidKeys) {
+    // 找最新一筆（不論異常與否）
+    const candidates = state.allResults.filter(r => r.key === k && r.num != null);
+    if (candidates.length === 0) continue;
+    candidates.sort((a, b) => (b.sampledAt || '').localeCompare(a.sampledAt || ''));
+    latestLipid[k] = candidates[0];
+  }
+  const hasLipid = Object.keys(latestLipid).length > 0;
+  if (hasLipid) {
+    const params = new URLSearchParams();
+    if (latestLipid['TC'])    params.set('tc',  latestLipid['TC'].num);
+    if (latestLipid['LDL-C']) params.set('ldl', latestLipid['LDL-C'].num);
+    if (latestLipid['HDL-C']) params.set('hdl', latestLipid['HDL-C'].num);
+    if (latestLipid['TG'])    params.set('tg',  latestLipid['TG'].num);
+    if (state.sex)            params.set('sex', state.sex.toLowerCase());
+    if (state.demographics.age) params.set('age', state.demographics.age);
+    const date = Object.values(latestLipid).map(l => l.sampledAt).sort().pop();
+    const fields = Object.keys(latestLipid).map(k => `${k} ${latestLipid[k].num}`).join(' · ');
+    html += `
+      <div class="next-action-box">
+        <div class="next-action-title">下一步</div>
+        <div class="next-action-row">
+          <div class="next-action-info">
+            <div class="primary">用此血脂資料評估 statin 給付 / 風險分層</div>
+            <div class="secondary">${escHtml(fields)}  ·  ${escHtml(fmtDate(date))}</div>
+          </div>
+          <a href="lipid.html?${params.toString()}" class="btn small primary">前往風險評估 →</a>
+        </div>
+      </div>
+    `;
+  }
 
   // ── Pending reports notice ──
   if (state.skipped.length > 0) {

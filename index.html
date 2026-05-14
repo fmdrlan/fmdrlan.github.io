@@ -86,7 +86,7 @@
   .logo svg { width: 20px; height: 20px; stroke-width: 1.8; }
   .site-title { font-size: 17px; font-weight: 700; letter-spacing: 0.03em; }
   .site-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-  .search-wrap { position: relative; flex: 1; }
+  .search-wrap { position: relative; margin-bottom: 18px; }
   .search-icon {
     position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
     color: var(--text-muted); pointer-events: none;
@@ -225,26 +225,25 @@
 </nav>
 
 <!-- 搜尋區（不 sticky，隨頁面滾動） -->
-<div class="search-header">
-  <div class="search-header-inner">
-    <div class="page-intro" style="margin-bottom:0;flex:1">
-      <span class="icon">💊</span>
-      <div style="flex:1">
-        <h1>藥品給付規定查詢</h1>
-        <p>全民健康保險藥品給付規定 · 快速全文搜尋</p>
-        <div class="search-wrap" style="margin-top:12px;">
-          <span class="search-icon" id="searchInputIcon"></span>
-          <input type="text" id="searchInput"
-            placeholder="輸入藥名、成分、適應症…（如 Pregabalin、SGLT2、PPI、prazole）"
-            autocomplete="off" autocorrect="off" spellcheck="false">
-          <button class="clear-btn" id="clearBtn" aria-label="清除"></button>
-        </div>
-      </div>
+<main>
+  <!-- Page intro：跟其他工具頁一致 -->
+  <div class="page-intro">
+    <span class="icon">💊</span>
+    <div>
+      <h1>藥品給付規定查詢</h1>
+      <p>全民健康保險藥品給付規定 · 快速全文搜尋</p>
     </div>
   </div>
-</div>
 
-<main>
+  <!-- 搜尋框 -->
+  <div class="search-wrap" id="searchWrap">
+    <span class="search-icon" id="searchInputIcon"></span>
+    <input type="text" id="searchInput"
+      placeholder="輸入藥名、成分、適應症…（如 Pregabalin、SGLT2、PPI、prazole）"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <button class="clear-btn" id="clearBtn" aria-label="清除"></button>
+  </div>
+
   <!-- Changelog banner：本次更新摘要 -->
   <div id="changelogBanner"></div>
 
@@ -384,7 +383,20 @@ async function loadData() {
       }
     } catch(e) { /* changelog 是 optional */ }
 
-    showWelcome();
+    // 若 URL 帶 ?q= 參數（例如從 lipid.html 跳過來），自動執行搜尋
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialQuery = urlParams.get('q');
+    if (initialQuery) {
+      const searchEl = document.getElementById('searchInput');
+      searchEl.value = initialQuery;
+      doSearch(initialQuery);
+      // 清掉 query string（避免重整跑兩次）
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    } else {
+      showWelcome();
+    }
   } catch(e) {
     document.getElementById('results').innerHTML =
       `<div class="state-msg"><div class="icon">⚠️</div><h3>載入失敗</h3><p>${e.message}</p></div>`;

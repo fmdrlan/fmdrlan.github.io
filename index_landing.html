@@ -77,7 +77,7 @@
   .logo-hero {
     display: flex;
     justify-content: center;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
   }
   .logo-hero img {
     width: 360px;
@@ -86,7 +86,7 @@
     display: block;
   }
   @media (max-width: 480px) {
-    .logo-hero { margin-bottom: 24px; }
+    .logo-hero { margin-bottom: 8px; }
     .logo-hero img { width: 260px; }
   }
 
@@ -123,6 +123,7 @@
     margin-bottom: 40px;
     padding-bottom: 32px;
     border-bottom: 1px solid var(--border);
+    text-align: center;
   }
   .warning-tag {
     font-family: 'JetBrains Mono', monospace;
@@ -131,9 +132,10 @@
     color: var(--yellow);
     text-transform: uppercase;
     margin-bottom: 10px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
+    justify-content: center;
   }
   .warning-tag svg {
     width: 13px;
@@ -350,7 +352,8 @@
 
   <div class="footer">
     工具由 <strong>DR. LAN</strong> 個人維護 · 本站不隸屬於任何醫療機構或政府機關 ·
-    程式碼用青春在下班空檔寫的，bug 也是，僅紀念我被扣去的紅利
+    程式碼用青春在下班空檔寫的，bug 也是<br>
+    僅紀念我被扣去的紅利
     <div style="margin-top: 14px;">
       <a class="feedback-link" id="feedbackLink"
          href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"
