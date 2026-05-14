@@ -78,6 +78,11 @@
     weight:    svg('<circle cx="12" cy="15" r="6"/>' +
                    '<path d="M12 11v0M12 11l1.5-3.5h-3L12 11z"/>' +
                    '<path d="M9 6h6"/>'),
+
+    // 檢驗報告解讀工具：燒瓶
+    flask:     svg('<path d="M9 3h6"/>' +
+                   '<path d="M10 3v6.5L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9.5V3"/>' +
+                   '<path d="M8 14h8"/>'),
     // 初診評估：寫字板
     clipboard: svg('<rect x="8" y="2" width="8" height="4" rx="1"/>' +
                    '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>'),

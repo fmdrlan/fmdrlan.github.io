@@ -73,16 +73,22 @@ nhi-drug-search/
 ├── index_landing.html        # 工具箱首頁（landing page）
 ├── index.html                # 藥品搜尋頁
 ├── lipid.html                # 高血脂風險評估
+├── lipid_nhi.html            # 高血脂健保給付查詢
 ├── vaccine.html              # 疫苗查詢（建造中）
+├── compare.html              # 藥物類別比較
+├── obesity.html              # 門診問診（肥胖）
+├── lab.html                  # 檢驗報告解讀（NEW）
 │
 ├── assets/                   # 共用資源
-│   ├── shared.css            # 三頁共用樣式（tabs、footer、changelog、related drugs）
+│   ├── shared.css            # 各頁共用樣式（tabs、footer、changelog、related drugs）
 │   └── icons.js              # SVG icon（Lucide 風格，跨平台一致）
 │
 ├── data/
 │   ├── drugs.json            # 解析好的給付規定資料
 │   ├── changelog.json        # 與上一版的差異（新增/修改/刪除）
-│   └── last_version.txt      # 記錄目前版本號（如 1150323）
+│   ├── last_version.txt      # 記錄目前版本號（如 1150323）
+│   ├── sglt2.json / glp1.json  # 藥物類別比較資料
+│   └── lab_dict.json         # 檢驗項目對照字典（94 項、18 分組）
 │
 ├── scripts/
 │   ├── check_update.py       # 自動檢查健保署 PDF 更新
@@ -112,6 +118,16 @@ nhi-drug-search/
 3. 產生 `changelog.json`（包含 added / modified / removed 三組標題）
 4. Commit 三個檔案：`drugs.json`、`changelog.json`、`last_version.txt`
 5. 前端載入時 `fetch('data/changelog.json')` 顯示在頂端 banner
+
+### 檢驗報告解讀頁（lab.html）
+- **貼上即解析**：從 HIS / LIS 複製檢驗結果貼上，自動辨識項目並比對參考範圍
+- **彈性格式辨識**：支援 tab/多空格/中文名/GPT 或 GOT 舊命名/全形括號等多種格式
+- **異常標示**：H/L（紅/黃）標示偏高偏低，HH/LL（深色背景）標示危急值
+- **性別分層參考值**：可選男/女，自動套用對應 ref_m / ref_f（Hb、Cr、UA、HDL 等）
+- **SOAP Objective 段落**：一鍵複製異常值整理段落到病歷
+- **與血脂評估串接**：解析到 TC/LDL/HDL/TG 後可「→ 帶入血脂評估」直接跳到 lipid.html
+- **字典維護簡單**：項目別名、單位、參考範圍都在 `data/lab_dict.json`，加項目改 JSON 即可
+- **辨識失敗清單**：無法辨識的行列在下方，方便回饋字典更新
 
 ---
 
