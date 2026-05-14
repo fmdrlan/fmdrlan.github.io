@@ -88,7 +88,8 @@ nhi-drug-search/
 │   ├── changelog.json        # 與上一版的差異（新增/修改/刪除）
 │   ├── last_version.txt      # 記錄目前版本號（如 1150323）
 │   ├── sglt2.json / glp1.json  # 藥物類別比較資料
-│   └── lab_dict.json         # 檢驗項目對照字典（94 項、18 分組）
+│   ├── lab_dict.json         # 檢驗項目對照字典（107 項、19 分組，含成大命名與 ABI/PWV）
+│   └── dx_rules.json         # 診斷規則表（29 條，可編輯擴充）
 │
 ├── scripts/
 │   ├── check_update.py       # 自動檢查健保署 PDF 更新
@@ -120,14 +121,16 @@ nhi-drug-search/
 5. 前端載入時 `fetch('data/changelog.json')` 顯示在頂端 banner
 
 ### 檢驗報告解讀頁（lab.html）
-- **貼上即解析**：從 HIS / LIS 複製檢驗結果貼上，自動辨識項目並比對參考範圍
-- **彈性格式辨識**：支援 tab/多空格/中文名/GPT 或 GOT 舊命名/全形括號等多種格式
-- **異常標示**：H/L（紅/黃）標示偏高偏低，HH/LL（深色背景）標示危急值
-- **性別分層參考值**：可選男/女，自動套用對應 ref_m / ref_f（Hb、Cr、UA、HDL 等）
-- **SOAP Objective 段落**：一鍵複製異常值整理段落到病歷
-- **與血脂評估串接**：解析到 TC/LDL/HDL/TG 後可「→ 帶入血脂評估」直接跳到 lipid.html
-- **字典維護簡單**：項目別名、單位、參考範圍都在 `data/lab_dict.json`，加項目改 JSON 即可
-- **辨識失敗清單**：無法辨識的行列在下方，方便回饋字典更新
+- **三層解析器**：先按報告區塊切片 → 抓日期 → 表格 vs 特殊格式分流，能處理成大 LIS 的完整 copy 結果（生化、CBC、尿液、糞便、ABI/PWV 多份串接）
+- **跨日整合「最近異常」**：貼多份不同日期的報告 → 每個項目只顯示最近一次異常；最近這次正常但過去曾異常 → 一併標出（避免漏看）
+- **「已開立」自動跳過**：醫令簽收/已開立但無結果的整份報告會略過，並在下方列出跳過了哪些
+- **左右分欄 Diagnosis**：左欄「1. UTI suspected」可一鍵複製到 SOAP，右欄列佐證數值與日期（不被複製）
+- **107 項辨識 + 性別分層**：含成大命名（CREA / CHOL / URIC / GLU AC / LEU / Bacteria / EC 等），HDL、Cr、UA、Hb、GGT 等套用 ref_m / ref_f
+- **特殊格式支援**：動脈硬化檢查（ABI、PWV）自動轉成 Arterial stiffness / PAD suspected 診斷
+- **eGFR 智慧取值**：若有 eGFR(CKD-EPI) 優先採用；若只有舊式 ≧90 顯示，自動從備註「計算值: 92」提取真實數值
+- **診斷規則可編輯**：29 條規則（DM、Prediabetes、Dyslipidemia、CKD、UTI、Hematuria、Hyperuricemia、Anemia、Thyroid、HBV/HCV 等）全在 `data/dx_rules.json`，加新規則改 JSON 即可
+- **支援 exclude_if**：例如 HbA1c ≥6.5 觸發 DM，會自動排除 Prediabetes
+- **未來擴充**：超音波 / CT 等報告類型可逐步加入
 
 ---
 

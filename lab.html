@@ -5,14 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>檢驗報告解讀 · DR. YANG's Toolbox</title>
 
-<!-- ── SEO ── -->
-<meta name="description" content="貼上 LIS 檢驗報告，自動標示異常值（H/L），整理為 SOAP Objective 段落便於病歷複製。">
-<meta name="keywords" content="LIS,檢驗報告,異常值,Objective,SOAP,病歷,生化,CBC,肝功能">
+<meta name="description" content="貼上成大 LIS 檢驗報告，自動標示異常值並產生 Objective 與 Diagnosis 段落，便於病歷複製。">
+<meta name="keywords" content="LIS,檢驗報告,異常值,Objective,Diagnosis,SOAP,病歷,生化,CBC,肝功能,UTI,血脂">
 <meta name="author" content="DR. YANG">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://garrulous-cat.github.io/mindy/lab.html">
 
-<!-- ── Favicon ── -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230d1117'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='monospace' font-size='13' font-weight='700' fill='%234a9eff'%3EY%3C/text%3E%3C/svg%3E">
 
 <link rel="stylesheet" href="assets/shared.css">
@@ -31,6 +29,7 @@
     --text-primary: #e6edf3;
     --text-secondary: #b0bac6;
     --text-muted: #6e7681;
+    --text-dim: #4a5568;
     --accent-blue: #58a6ff;
     --accent-cyan: #39d3f2;
     --accent-green: #3fb950;
@@ -53,7 +52,7 @@
     line-height: 1.6;
   }
 
-  /* tabs-bar fallback（若 shared.css 沒載入） */
+  /* tabs-bar fallback */
   .tabs-bar {
     display: flex; gap: 4px; padding: 8px 16px;
     background: var(--bg-surface); border-bottom: 1px solid var(--border);
@@ -69,7 +68,7 @@
   .tab-link.active { background: rgba(88,166,255,0.12); color: var(--accent-blue); }
   .tab-link .ti { width: 15px; height: 15px; display: inline-flex; }
 
-  .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+  .container { max-width: 1500px; margin: 0 auto; padding: 24px; }
 
   /* Page intro */
   .page-intro {
@@ -86,13 +85,13 @@
   .page-intro h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
   .page-intro p { font-size: 14px; color: var(--text-secondary); }
 
-  /* Two-column layout */
+  /* Layout */
   .work-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
     gap: 20px;
   }
-  @media (max-width: 980px) {
+  @media (max-width: 1100px) {
     .work-grid { grid-template-columns: 1fr; }
     .container { padding: 12px; }
   }
@@ -115,8 +114,11 @@
   .panel-title::after {
     content: ''; flex: 1; height: 1px; background: var(--border);
   }
+  .panel-title-inner {
+    display: flex; align-items: center; gap: 8px;
+  }
 
-  /* Patient mini-context (for sex-based ref ranges) */
+  /* Patient mini-context */
   .ctx-row {
     display: flex; gap: 12px; flex-wrap: wrap;
     margin-bottom: 14px; padding-bottom: 14px;
@@ -133,9 +135,7 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
   }
-  .ctx-field .radio-mini {
-    display: inline-flex; gap: 4px;
-  }
+  .ctx-field .radio-mini { display: inline-flex; gap: 4px; }
   .ctx-field .radio-mini label {
     padding: 3px 10px;
     background: var(--bg-elevated);
@@ -146,8 +146,7 @@
     transition: all 0.15s;
   }
   .ctx-field .radio-mini input { display: none; }
-  .ctx-field .radio-mini input:checked + label,
-  .ctx-field .radio-mini label.checked {
+  .ctx-field .radio-mini input:checked + label {
     background: rgba(88,166,255,0.15);
     color: var(--accent-blue);
     border-color: rgba(88,166,255,0.4);
@@ -156,13 +155,13 @@
   /* Textarea */
   textarea.lab-input {
     width: 100%;
-    min-height: 380px;
+    min-height: 460px;
     background: var(--bg-base);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     color: var(--text-primary);
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
+    font-size: 12.5px;
     line-height: 1.5;
     padding: 12px;
     resize: vertical;
@@ -174,10 +173,7 @@
   textarea.lab-input::placeholder { color: var(--text-muted); }
 
   /* Buttons */
-  .btn-row {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    margin-top: 12px;
-  }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
   .btn {
     padding: 8px 14px;
     border-radius: 6px;
@@ -199,137 +195,186 @@
   }
   .btn.primary:hover { background: rgba(88,166,255,0.25); }
   .btn.ghost { background: transparent; }
+  .btn.small { font-size: 12px; padding: 4px 10px; }
 
-  /* Result table */
+  /* ── Output ── */
   .result-empty {
     color: var(--text-muted);
     font-size: 14px;
-    padding: 40px 20px;
+    padding: 60px 20px;
     text-align: center;
   }
-  .result-empty .big { font-size: 28px; opacity: 0.5; margin-bottom: 8px; }
+  .result-empty .big { font-size: 36px; opacity: 0.4; margin-bottom: 12px; }
 
-  .summary-bar {
-    display: flex; gap: 16px; flex-wrap: wrap;
-    padding: 10px 14px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 14px;
-    font-size: 13px;
+  .output-section {
+    margin-bottom: 24px;
   }
-  .summary-bar .stat { display: flex; align-items: center; gap: 6px; }
-  .summary-bar .stat-num {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 15px;
-  }
-  .stat-num.high { color: var(--accent-red); }
-  .stat-num.low  { color: var(--accent-yellow); }
-  .stat-num.ok   { color: var(--accent-green); }
-  .stat-num.unk  { color: var(--text-muted); }
+  .output-section:last-child { margin-bottom: 0; }
 
-  .group-header {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 12px 0 6px;
-    border-bottom: 1px solid var(--border-subtle);
-    margin-bottom: 4px;
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
   }
-
-  table.results {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-  }
-  table.results th {
-    text-align: left;
-    font-size: 11px;
+  .section-header h3 {
+    font-size: 14px;
     font-weight: 600;
-    color: var(--text-muted);
+    color: var(--text-primary);
+    display: flex; align-items: center; gap: 8px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    padding: 8px 8px;
-    border-bottom: 1px solid var(--border);
   }
-  table.results td {
-    padding: 7px 8px;
-    border-bottom: 1px solid var(--border-subtle);
-    vertical-align: middle;
-  }
-  table.results tr.row-abn-high { background: rgba(248,81,73,0.06); }
-  table.results tr.row-abn-low  { background: rgba(210,153,34,0.06); }
-  table.results tr.row-crit     { background: rgba(248,81,73,0.18); }
-  table.results .flag {
-    display: inline-block;
-    min-width: 24px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-align: center;
+  .section-header h3 .badge-count {
     font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 1px 7px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    font-weight: 600;
   }
-  .flag.h    { background: rgba(248,81,73,0.18);  color: var(--accent-red); }
-  .flag.l    { background: rgba(210,153,34,0.18); color: var(--accent-yellow); }
-  .flag.hh   { background: var(--accent-red);     color: #fff; }
-  .flag.ll   { background: var(--accent-yellow);  color: var(--bg-base); }
-  .flag.ok   { background: rgba(63,185,80,0.15);  color: var(--accent-green); }
-  .flag.none { color: var(--text-muted); }
 
-  td.t-name { font-family: 'IBM Plex Sans TC', sans-serif; color: var(--text-primary); font-weight: 500; }
-  td.t-val  { font-weight: 600; }
-  td.t-val.high { color: var(--accent-red); }
-  td.t-val.low  { color: var(--accent-yellow); }
-  td.t-unit { color: var(--text-muted); font-size: 12px; }
-  td.t-ref  { color: var(--text-muted); font-size: 12px; }
-  td.t-flag { width: 36px; }
-
-  /* SOAP output box */
-  .soap-box {
+  /* Objective: clean ASCII-style table */
+  .objective-box {
     background: var(--bg-base);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px;
-    margin-top: 16px;
+    padding: 12px 14px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
-    line-height: 1.65;
-    white-space: pre-wrap;
-    color: var(--text-primary);
-    max-height: 320px;
+    line-height: 1.7;
+    max-height: 360px;
     overflow-y: auto;
   }
-  .soap-box .h-mark { color: var(--accent-red); font-weight: 600; }
-  .soap-box .l-mark { color: var(--accent-yellow); font-weight: 600; }
-
-  /* Unparsed lines */
-  .unparsed-box {
-    margin-top: 14px;
-    padding: 10px 12px;
-    background: rgba(240,136,62,0.06);
-    border: 1px solid rgba(240,136,62,0.3);
-    border-radius: var(--radius);
-    font-size: 12px;
+  .obj-row {
+    display: grid;
+    grid-template-columns: 130px 90px 50px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding: 2px 0;
   }
-  .unparsed-box .title {
+  .obj-row .name { color: var(--text-primary); font-weight: 500; }
+  .obj-row .value { text-align: right; font-weight: 600; }
+  .obj-row .value.high { color: var(--accent-red); }
+  .obj-row .value.low  { color: var(--accent-yellow); }
+  .obj-row .value.crit { background: rgba(248,81,73,0.25); padding: 0 4px; border-radius: 3px; color: #fff; }
+  .obj-row .flag {
+    text-align: center;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 1px 0;
+    border-radius: 3px;
+  }
+  .obj-row .flag.h    { background: rgba(248,81,73,0.15); color: var(--accent-red); }
+  .obj-row .flag.l    { background: rgba(210,153,34,0.15); color: var(--accent-yellow); }
+  .obj-row .flag.hh   { background: var(--accent-red); color: #fff; }
+  .obj-row .flag.ll   { background: var(--accent-yellow); color: var(--bg-base); }
+  .obj-row .meta {
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+  .obj-row .meta .past {
+    color: var(--accent-orange);
+    margin-left: 6px;
+  }
+
+  /* Diagnosis: 2-column with left-copyable, right-evidence */
+  .dx-table {
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .dx-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .dx-row:last-child { border-bottom: none; }
+  .dx-row .dx-left {
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--bg-base);
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+  }
+  .dx-row .dx-left .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+  .dx-row .dx-right {
+    padding: 12px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.015);
+    border-left: 1px dashed var(--border-subtle);
+    line-height: 1.6;
+  }
+  .dx-row .dx-right .evidence-row { display: block; }
+  .dx-row .dx-right .ev-item { color: var(--text-secondary); }
+  .dx-row .dx-right .ev-value { color: var(--accent-red); font-weight: 600; }
+  .dx-row .dx-right .ev-value.low { color: var(--accent-yellow); }
+  .dx-row .dx-right .ev-date { color: var(--text-dim); margin-left: 4px; }
+  .dx-row .dx-right .past-prefix {
+    color: var(--accent-orange);
+    font-size: 11px;
+    margin-right: 4px;
+  }
+
+  @media (max-width: 700px) {
+    .dx-row { grid-template-columns: 1fr; }
+    .dx-row .dx-right {
+      border-left: none;
+      border-top: 1px dashed var(--border-subtle);
+      padding-top: 8px;
+    }
+    .obj-row { grid-template-columns: 100px 70px 40px 1fr; font-size: 12px; }
+  }
+
+  .dx-right-label {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans TC', sans-serif;
+  }
+
+  /* Pending reports notice */
+  .pending-box {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(240,136,62,0.06);
+    border: 1px solid rgba(240,136,62,0.25);
+    border-radius: var(--radius);
+    font-size: 12.5px;
+  }
+  .pending-box .title {
     font-weight: 600;
     color: var(--accent-orange);
     margin-bottom: 6px;
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; align-items: center; gap: 6px;
   }
-  .unparsed-box ul {
+  .pending-box ul {
     list-style: none;
-    font-family: 'IBM Plex Mono', monospace;
     color: var(--text-secondary);
-    max-height: 120px;
-    overflow-y: auto;
   }
-  .unparsed-box li { padding: 2px 0; }
+  .pending-box li {
+    padding: 2px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+  .pending-box li .type { color: var(--text-muted); }
 
   /* Toast */
   .toast {
@@ -352,16 +397,31 @@
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
+
+  /* Status pill */
+  .status-pill {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .status-pill.ok { color: var(--accent-green); border-color: rgba(63,185,80,0.4); background: rgba(63,185,80,0.08); }
 </style>
 </head>
 <body>
 
 <nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. YANG</a>
   <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
   <a class="tab-link" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
   <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
   <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
   <a class="tab-link active" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
+  <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
 </nav>
 
 <main class="container">
@@ -370,7 +430,7 @@
     <span class="icon">🧪</span>
     <div>
       <h2>檢驗報告解讀</h2>
-      <p>從 HIS / LIS 複製檢驗結果貼到左方，系統自動辨識項目、比對參考範圍、標示 H/L，並整理成可直接複製到病歷的 SOAP Objective 段落。</p>
+      <p>從 HIS / LIS 複製檢驗結果（可多份不同日期一起貼）。系統會自動辨識項目、比對參考範圍、跨日整合「最近一次異常」，並產生可直接複製的 Objective 與 Diagnosis 段落。「已開立但無結果」的報告會自動跳過並提醒。</p>
     </div>
   </div>
 
@@ -384,10 +444,8 @@
         <div class="ctx-field">
           <label>性別</label>
           <div class="radio-mini">
-            <input type="radio" name="sex" value="M" id="sx-m" checked>
-            <label for="sx-m">男</label>
-            <input type="radio" name="sex" value="F" id="sx-f">
-            <label for="sx-f">女</label>
+            <label><input type="radio" name="sex" value="M" checked>男</label>
+            <label><input type="radio" name="sex" value="F">女</label>
           </div>
         </div>
         <div class="ctx-field">
@@ -395,7 +453,7 @@
           <input type="number" id="age" placeholder="—" min="0" max="120">
         </div>
         <div class="ctx-field" style="margin-left:auto">
-          <a class="btn ghost" id="loadDemoBtn" style="font-size:12px;padding:4px 10px">載入範例</a>
+          <a class="btn ghost small" id="loadDemoBtn">載入範例</a>
         </div>
       </div>
 
@@ -404,37 +462,32 @@
         id="labInput"
         spellcheck="false"
         autocomplete="off"
-        placeholder="貼上 LIS 檢驗結果，例如：
+        placeholder="貼上整份 LIS 報告（可包含多筆不同日期、不同檢體類型）
 
-WBC          5.2        10^3/uL    3.9-10.6
-Hb           10.8   L    g/dL       13.5-17.5
-Platelet     220        10^3/uL    150-400
-AST (GOT)    85    H    U/L        <40
-ALT (GPT)    120   H    U/L        <41
-Glucose AC   145   H    mg/dL      70-99
-HbA1c        7.2   H    %          4.0-5.6
-TC           245   H    mg/dL      <200
-HDL-C        38    L    mg/dL      >40
-LDL-C        165   H    mg/dL      <130
-TG           220   H    mg/dL      <150
+支援：
+• 成大標準表格格式（生化、血液、尿液、糞便）
+• 動脈硬化檢查（ABI / PWV）
+• 多份報告跨日整合
+• 「已開立」報告自動跳過
 
-支援 H/L 旗標、各種項目別名（GOT/AST/SGOT 都認）、範圍格式（70-99、<200、>40）。"
+按下方「解析」或 Ctrl+Enter 即可。"
       ></textarea>
 
       <div class="btn-row">
         <button class="btn primary" id="parseBtn">解析</button>
         <button class="btn" id="clearBtn">清除</button>
-        <button class="btn ghost" id="toLipidBtn" title="把 TC/LDL/HDL/TG 帶入高血脂風險評估">→ 帶入血脂評估</button>
       </div>
     </section>
 
     <!-- ── 右：結果 ── -->
     <section class="panel">
-      <div class="panel-title">結果</div>
+      <div class="panel-title">
+        <span class="panel-title-inner">結果 <span id="resultMeta" class="status-pill" style="display:none"></span></span>
+      </div>
 
       <div id="resultArea">
         <div class="result-empty">
-          <div class="big">⏳</div>
+          <div class="big">🧪</div>
           貼上檢驗結果後按「解析」
         </div>
       </div>
@@ -443,8 +496,8 @@ TG           220   H    mg/dL      <150
   </div>
 
   <div style="margin-top:32px; font-size:12px; color:var(--text-muted); text-align:center; line-height:1.8;">
-    參考範圍以各家醫院公告值為準。本工具僅作個人臨床備忘，不取代臨床判斷。<br>
-    辨識失敗的項目會列在下方，可作為字典更新依據。
+    參考範圍以成大檢驗報告公告值為準。診斷規則可在 <code style="font-family:'IBM Plex Mono',monospace">data/dx_rules.json</code> 編輯。<br>
+    本工具僅作個人臨床備忘，不取代臨床判斷。
   </div>
 
 </main>
@@ -457,15 +510,14 @@ TG           220   H    mg/dL      <150
 <script id="lab-dict-data" type="application/json">
 {
   "_meta": {
-    "version": "0.1",
-    "note": "成大 LIS 常見項目對照表。每筆 ref 為 [下限, 上限]；若需性別分層用 ref_m / ref_f；單位為標準回報單位。",
+    "version": "0.2",
+    "note": "成大 LIS 項目對照表。每筆 ref 為 [下限, 上限]；性別分層用 ref_m / ref_f；direction='low_bad' 表上限不重要。",
     "updated": "2026-05-14"
   },
 
   "_groups": [
     { "id": "cbc",      "label": "Complete Blood Count" },
     { "id": "diff",     "label": "WBC Differential" },
-    { "id": "biochem",  "label": "Biochemistry" },
     { "id": "lipid",    "label": "Lipid Profile" },
     { "id": "lft",      "label": "Liver Function" },
     { "id": "rft",      "label": "Renal Function" },
@@ -476,11 +528,13 @@ TG           220   H    mg/dL      <150
     { "id": "inflam",   "label": "Inflammation" },
     { "id": "coag",     "label": "Coagulation" },
     { "id": "urine",    "label": "Urinalysis" },
+    { "id": "stool",    "label": "Stool" },
     { "id": "hepatitis","label": "Hepatitis Serology" },
     { "id": "iron",     "label": "Iron Studies" },
     { "id": "vit",      "label": "Vitamins" },
     { "id": "endocrine","label": "Endocrine" },
-    { "id": "tumor",    "label": "Tumor Markers" }
+    { "id": "tumor",    "label": "Tumor Markers" },
+    { "id": "vascular", "label": "Vascular Studies" }
   ],
 
   "items": {
@@ -492,50 +546,50 @@ TG           220   H    mg/dL      <150
     "MCH":        { "group": "cbc",     "aliases": ["MCH"],                                "unit": "pg",        "ref": [27, 33] },
     "MCHC":       { "group": "cbc",     "aliases": ["MCHC"],                               "unit": "g/dL",      "ref": [32, 36] },
     "RDW":        { "group": "cbc",     "aliases": ["RDW", "RDW-CV"],                      "unit": "%",         "ref": [11.5, 14.5] },
-    "Platelet":   { "group": "cbc",     "aliases": ["Platelet", "PLT", "血小板"],          "unit": "10^3/uL",   "ref": [150, 400], "crit_low": 50, "crit_high": 1000 },
+    "Platelet":   { "group": "cbc",     "aliases": ["Platelet", "PLT", "Plt", "血小板"],   "unit": "10^3/uL",   "ref": [150, 400], "crit_low": 50, "crit_high": 1000 },
 
-    "Neut%":      { "group": "diff",    "aliases": ["Neutrophil", "Neut", "Seg", "嗜中性白血球"], "unit": "%", "ref": [40, 74] },
-    "Lym%":       { "group": "diff",    "aliases": ["Lymphocyte", "Lym", "淋巴球"],         "unit": "%",         "ref": [19, 48] },
-    "Mono%":      { "group": "diff",    "aliases": ["Monocyte", "Mono", "單核球"],          "unit": "%",         "ref": [3.4, 9] },
-    "Eos%":       { "group": "diff",    "aliases": ["Eosinophil", "Eos", "嗜酸性"],         "unit": "%",         "ref": [0, 7] },
-    "Baso%":      { "group": "diff",    "aliases": ["Basophil", "Baso", "嗜鹼性"],          "unit": "%",         "ref": [0, 1.5] },
+    "Neut%":      { "group": "diff",    "aliases": ["Neutrophil", "Neut", "Seg", "嗜中性白血球", "Neut%", "NEUT%"], "unit": "%", "ref": [40, 74] },
+    "Lym%":       { "group": "diff",    "aliases": ["Lymphocyte", "Lym", "淋巴球", "Lym%", "LYM%"], "unit": "%",  "ref": [19, 48] },
+    "Mono%":      { "group": "diff",    "aliases": ["Monocyte", "Mono", "單核球", "Mono%"], "unit": "%",         "ref": [3.4, 9] },
+    "Eos%":       { "group": "diff",    "aliases": ["Eosinophil", "Eos", "嗜酸性", "Eos%"], "unit": "%",         "ref": [0, 7] },
+    "Baso%":      { "group": "diff",    "aliases": ["Basophil", "Baso", "嗜鹼性", "Baso%"], "unit": "%",         "ref": [0, 1.5] },
     "ANC":        { "group": "diff",    "aliases": ["ANC", "Absolute Neutrophil Count"],   "unit": "10^3/uL",   "ref": [1.8, 7.7], "crit_low": 0.5 },
 
-    "AST":        { "group": "lft",     "aliases": ["AST", "GOT", "SGOT", "AST(GOT)", "GOT(AST)"], "unit": "U/L", "ref": [0, 40] },
-    "ALT":        { "group": "lft",     "aliases": ["ALT", "GPT", "SGPT", "ALT(GPT)", "GPT(ALT)"], "unit": "U/L", "ref_m": [0, 41], "ref_f": [0, 33] },
-    "ALP":        { "group": "lft",     "aliases": ["ALP", "Alkaline Phosphatase", "鹼性磷酸酶"], "unit": "U/L", "ref": [35, 129] },
-    "GGT":        { "group": "lft",     "aliases": ["GGT", "r-GT", "γ-GT", "gamma-GT"],   "unit": "U/L",       "ref_m": [10, 71], "ref_f": [6, 42] },
-    "T-Bil":      { "group": "lft",     "aliases": ["T-Bil", "Total Bilirubin", "T.Bil", "TB"], "unit": "mg/dL", "ref": [0.2, 1.2] },
-    "D-Bil":      { "group": "lft",     "aliases": ["D-Bil", "Direct Bilirubin", "D.Bil"], "unit": "mg/dL",    "ref": [0, 0.3] },
-    "Albumin":    { "group": "lft",     "aliases": ["Albumin", "Alb", "白蛋白"],          "unit": "g/dL",      "ref": [3.5, 5.2] },
-    "Globulin":   { "group": "lft",     "aliases": ["Globulin", "Glob", "球蛋白"],        "unit": "g/dL",      "ref": [2.0, 3.5] },
-    "T-Protein":  { "group": "lft",     "aliases": ["T-Protein", "Total Protein", "TP"],  "unit": "g/dL",      "ref": [6.4, 8.3] },
+    "AST":        { "group": "lft",     "aliases": ["AST", "GOT", "SGOT", "AST(GOT)", "GOT(AST)"], "unit": "U/L", "ref": [10, 35] },
+    "ALT":        { "group": "lft",     "aliases": ["ALT", "GPT", "SGPT", "ALT(GPT)", "GPT(ALT)"], "unit": "U/L", "ref": [0, 35] },
+    "ALP":        { "group": "lft",     "aliases": ["ALP", "ALK-P", "Alkaline Phosphatase", "鹼性磷酸酶"], "unit": "U/L", "ref": [35, 129] },
+    "GGT":        { "group": "lft",     "aliases": ["GGT", "γ-GT", "gamma-GT", "r-GT", "rGT"],   "unit": "U/L", "ref_m": [10, 71], "ref_f": [6, 42] },
+    "T-Bil":      { "group": "lft",     "aliases": ["T-Bil", "TBIL", "Total Bilirubin", "T.Bil", "TB", "T-BIL"], "unit": "mg/dL", "ref": [0.2, 1.2] },
+    "D-Bil":      { "group": "lft",     "aliases": ["D-Bil", "DBIL", "Direct Bilirubin", "D.Bil", "D-BIL"], "unit": "mg/dL", "ref": [0, 0.3] },
+    "Albumin":    { "group": "lft",     "aliases": ["Albumin", "ALB", "Alb", "白蛋白"],   "unit": "g/dL",      "ref": [3.5, 5.2] },
+    "Globulin":   { "group": "lft",     "aliases": ["Globulin", "GLOB", "Glob", "球蛋白"],"unit": "g/dL",      "ref": [2.0, 3.5] },
+    "T-Protein":  { "group": "lft",     "aliases": ["T-Protein", "TP", "Total Protein"],  "unit": "g/dL",      "ref": [6.4, 8.3] },
     "LDH":        { "group": "lft",     "aliases": ["LDH", "Lactate Dehydrogenase"],      "unit": "U/L",       "ref": [120, 250] },
 
     "BUN":        { "group": "rft",     "aliases": ["BUN", "Blood Urea Nitrogen", "尿素氮"], "unit": "mg/dL",  "ref": [7, 20] },
-    "Cr":         { "group": "rft",     "aliases": ["Cr", "Creatinine", "肌酸酐"],         "unit": "mg/dL",    "ref_m": [0.7, 1.3], "ref_f": [0.6, 1.1] },
-    "eGFR":       { "group": "rft",     "aliases": ["eGFR", "GFR"],                       "unit": "mL/min/1.73m²", "ref": [60, 200], "direction": "low_bad" },
-    "UA":         { "group": "rft",     "aliases": ["UA", "Uric Acid", "尿酸"],           "unit": "mg/dL",    "ref_m": [3.5, 7.2], "ref_f": [2.6, 6.0] },
+    "Cr":         { "group": "rft",     "aliases": ["Cr", "CREA", "Creatinine", "肌酸酐"],"unit": "mg/dL",    "ref_m": [0.7, 1.3], "ref_f": [0.5, 0.9] },
+    "eGFR":       { "group": "rft",     "aliases": ["eGFR", "GFR", "eGFR(CKD-EPI)", "eGFR-CKD-EPI", "CKD-EPI"], "unit": "mL/min/1.73m²", "ref": [60, 999], "direction": "low_bad", "cap_value": true, "prefer_note": true },
+    "UA":         { "group": "rft",     "aliases": ["UA", "URIC", "Uric Acid", "尿酸"],   "unit": "mg/dL",    "ref_m": [2.4, 5.7], "ref_f": [2.4, 5.7] },
 
     "Na":         { "group": "lyte",    "aliases": ["Na", "Sodium", "鈉"],                "unit": "mmol/L",   "ref": [136, 145], "crit_low": 120, "crit_high": 160 },
     "K":          { "group": "lyte",    "aliases": ["K", "Potassium", "鉀"],              "unit": "mmol/L",   "ref": [3.5, 5.1], "crit_low": 2.8, "crit_high": 6.2 },
     "Cl":         { "group": "lyte",    "aliases": ["Cl", "Chloride", "氯"],              "unit": "mmol/L",   "ref": [98, 107] },
     "Ca":         { "group": "lyte",    "aliases": ["Ca", "Calcium", "鈣"],               "unit": "mg/dL",    "ref": [8.6, 10.3], "crit_low": 6.0, "crit_high": 13.0 },
-    "P":          { "group": "lyte",    "aliases": ["P", "Phosphate", "磷"],              "unit": "mg/dL",    "ref": [2.5, 4.5] },
+    "P":          { "group": "lyte",    "aliases": ["P", "PHOS", "Phosphate", "磷"],      "unit": "mg/dL",    "ref": [2.5, 4.5] },
     "Mg":         { "group": "lyte",    "aliases": ["Mg", "Magnesium", "鎂"],             "unit": "mg/dL",    "ref": [1.6, 2.6] },
 
-    "Glucose":    { "group": "dm",      "aliases": ["Glucose AC", "Glucose, AC", "FBS", "Fasting glucose", "AC sugar", "空腹血糖"], "unit": "mg/dL", "ref": [70, 99] },
-    "Glucose-PC": { "group": "dm",      "aliases": ["Glucose PC", "Glucose, PC", "PC sugar", "Postprandial glucose"], "unit": "mg/dL", "ref": [0, 140] },
-    "HbA1c":      { "group": "dm",      "aliases": ["HbA1c", "Hb A1c", "A1c", "糖化血色素"], "unit": "%",      "ref": [4.0, 5.6] },
+    "GLU-AC":     { "group": "dm",      "aliases": ["GLU AC", "GLU, AC", "Glucose AC", "Glucose, AC", "FBS", "Fasting glucose", "AC sugar", "空腹血糖"], "unit": "mg/dL", "ref": [60, 99] },
+    "GLU-PC":     { "group": "dm",      "aliases": ["GLU PC", "GLU, PC", "Glucose PC", "Glucose, PC", "PC sugar", "Postprandial glucose"], "unit": "mg/dL", "ref": [0, 140] },
+    "HbA1c":      { "group": "dm",      "aliases": ["HbA1c", "Hb A1c", "A1c", "HBA1C", "糖化血色素"], "unit": "%", "ref": [4.0, 5.6] },
 
-    "TC":         { "group": "lipid",   "aliases": ["TC", "T-CHO", "Cholesterol", "T-Chol", "Total Cholesterol", "總膽固醇"], "unit": "mg/dL", "ref": [0, 200] },
+    "TC":         { "group": "lipid",   "aliases": ["TC", "CHOL", "T-CHO", "Cholesterol", "T-Chol", "Total Cholesterol", "總膽固醇"], "unit": "mg/dL", "ref": [0, 200] },
     "TG":         { "group": "lipid",   "aliases": ["TG", "Triglyceride", "三酸甘油酯"],   "unit": "mg/dL",    "ref": [0, 150] },
-    "HDL-C":      { "group": "lipid",   "aliases": ["HDL-C", "HDL", "HDL Cholesterol", "高密度膽固醇"], "unit": "mg/dL", "ref_m": [40, 999], "ref_f": [50, 999], "direction": "low_bad" },
-    "LDL-C":      { "group": "lipid",   "aliases": ["LDL-C", "LDL", "LDL Cholesterol", "低密度膽固醇"], "unit": "mg/dL", "ref": [0, 130] },
+    "HDL-C":      { "group": "lipid",   "aliases": ["HDL-C", "HDL", "HDLC", "HDL Cholesterol", "高密度膽固醇"], "unit": "mg/dL", "ref_m": [40, 999], "ref_f": [50, 999], "direction": "low_bad" },
+    "LDL-C":      { "group": "lipid",   "aliases": ["LDL-C", "LDL", "LDLC", "LDL Cholesterol", "低密度膽固醇"], "unit": "mg/dL", "ref": [0, 100] },
 
     "TSH":        { "group": "thyroid", "aliases": ["TSH"],                               "unit": "uIU/mL",   "ref": [0.27, 4.2] },
-    "Free T4":    { "group": "thyroid", "aliases": ["Free T4", "FT4", "fT4"],             "unit": "ng/dL",    "ref": [0.93, 1.7] },
-    "Free T3":    { "group": "thyroid", "aliases": ["Free T3", "FT3", "fT3"],             "unit": "pg/mL",    "ref": [2.0, 4.4] },
+    "Free T4":    { "group": "thyroid", "aliases": ["Free T4", "FT4", "fT4", "Free-T4"],  "unit": "ng/dL",    "ref": [0.93, 1.7] },
+    "Free T3":    { "group": "thyroid", "aliases": ["Free T3", "FT3", "fT3", "Free-T3"],  "unit": "pg/mL",    "ref": [2.0, 4.4] },
     "T3":         { "group": "thyroid", "aliases": ["T3", "Total T3"],                    "unit": "ng/dL",    "ref": [80, 200] },
     "T4":         { "group": "thyroid", "aliases": ["T4", "Total T4"],                    "unit": "ug/dL",    "ref": [5.1, 14.1] },
     "Anti-TPO":   { "group": "thyroid", "aliases": ["Anti-TPO", "TPOAb", "Anti-Microsomal"], "unit": "IU/mL", "ref": [0, 34] },
@@ -558,15 +612,25 @@ TG           220   H    mg/dL      <150
     "D-Dimer":    { "group": "coag",    "aliases": ["D-Dimer", "DDimer"],                 "unit": "ug/mL FEU", "ref": [0, 0.5] },
     "Fibrinogen": { "group": "coag",    "aliases": ["Fibrinogen"],                        "unit": "mg/dL",    "ref": [200, 400] },
 
-    "U-pH":       { "group": "urine",   "aliases": ["U-pH", "Urine pH", "尿液 pH"],       "unit": "",         "ref": [5, 7.5], "is_qual": false },
-    "U-SG":       { "group": "urine",   "aliases": ["U-SG", "Specific Gravity", "比重"],  "unit": "",         "ref": [1.003, 1.030] },
-    "U-Protein":  { "group": "urine",   "aliases": ["U-Protein", "Urine Protein", "尿蛋白"], "unit": "",      "is_qual": true, "qual_neg": ["-", "Negative", "Neg", "Trace"] },
-    "U-Glucose":  { "group": "urine",   "aliases": ["U-Glucose", "Urine Glucose", "尿糖"], "unit": "",        "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-Ketone":   { "group": "urine",   "aliases": ["U-Ketone", "Urine Ketone", "尿酮體"], "unit": "",        "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-Blood":    { "group": "urine",   "aliases": ["U-Blood", "Urine Blood", "尿潛血"],  "unit": "",         "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "U-SG":       { "group": "urine",   "aliases": ["U-SG", "SG", "Specific Gravity", "比重"], "unit": "",     "ref": [1.003, 1.035] },
+    "U-pH":       { "group": "urine",   "aliases": ["U-pH", "Urine pH", "尿液 pH", "pH"], "unit": "",         "ref": [5.0, 8.0] },
+    "U-LEU":      { "group": "urine",   "aliases": ["LEU", "U-LEU", "Leukocyte Esterase", "白血球酯酶"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg", "Trace"] },
+    "U-NIT":      { "group": "urine",   "aliases": ["NIT", "U-NIT", "Nitrite", "亞硝酸鹽"], "unit": "",        "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "U-Protein":  { "group": "urine",   "aliases": ["PRO", "U-PRO", "U-Protein", "Urine Protein", "Protein", "尿蛋白"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg", "Trace"] },
+    "U-Glucose":  { "group": "urine",   "aliases": ["GLU", "U-GLU", "U-Glucose", "Urine Glucose", "尿糖"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"], "report_group_hint": "urine" },
+    "U-Ketone":   { "group": "urine",   "aliases": ["KET", "U-KET", "U-Ketone", "Ketone", "Urine Ketone", "尿酮體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "U-UBG":      { "group": "urine",   "aliases": ["UBG", "U-UBG", "Urobilinogen", "尿膽素原"], "unit": "",   "is_qual": true, "qual_neg": ["Normal", "Neg", "Negative", "-"] },
+    "U-Bil":      { "group": "urine",   "aliases": ["BIL", "U-BIL", "Urine Bilirubin", "尿膽紅素"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "U-Blood":    { "group": "urine",   "aliases": ["Blood", "U-Blood", "Urine Blood", "尿潛血"], "unit": "",  "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
     "U-RBC":      { "group": "urine",   "aliases": ["U-RBC", "Urine RBC"],                "unit": "/HPF",     "ref": [0, 4] },
     "U-WBC":      { "group": "urine",   "aliases": ["U-WBC", "Urine WBC"],                "unit": "/HPF",     "ref": [0, 5] },
+    "U-Bacteria": { "group": "urine",   "aliases": ["Bacteria", "U-Bacteria", "細菌"],    "unit": "/HPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "U-EC":       { "group": "urine",   "aliases": ["EC", "U-EC", "Epithelial Cell"],     "unit": "/HPF",     "ref": [0, 5] },
+    "U-Cast":     { "group": "urine",   "aliases": ["Cast", "U-Cast"],                    "unit": "/LPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
+    "U-Crystal":  { "group": "urine",   "aliases": ["Crystal", "U-Crystal"],              "unit": "/HPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
     "UACR":       { "group": "urine",   "aliases": ["UACR", "ACR", "Urine ACR", "Microalbumin/Cr"], "unit": "mg/g", "ref": [0, 30] },
+
+    "Stool-OB":   { "group": "stool",   "aliases": ["O.B.", "OB", "Stool OB", "Occult Blood", "FOBT", "FIT"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
 
     "HBsAg":      { "group": "hepatitis", "aliases": ["HBsAg"],                            "unit": "",         "is_qual": true, "qual_neg": ["-", "Non-reactive", "Negative", "Neg"] },
     "Anti-HBs":   { "group": "hepatitis", "aliases": ["Anti-HBs", "HBsAb"],               "unit": "mIU/mL",   "ref": [10, 1000], "direction": "low_bad" },
@@ -593,25 +657,279 @@ TG           220   H    mg/dL      <150
     "CEA":        { "group": "tumor",   "aliases": ["CEA"],                               "unit": "ng/mL",    "ref": [0, 5] },
     "CA-19-9":    { "group": "tumor",   "aliases": ["CA-19-9", "CA19-9", "CA199"],        "unit": "U/mL",     "ref": [0, 37] },
     "CA-125":     { "group": "tumor",   "aliases": ["CA-125", "CA125"],                   "unit": "U/mL",     "ref": [0, 35] },
-    "CA-15-3":    { "group": "tumor",   "aliases": ["CA-15-3", "CA15-3", "CA153"],        "unit": "U/mL",     "ref": [0, 25] }
+    "CA-15-3":    { "group": "tumor",   "aliases": ["CA-15-3", "CA15-3", "CA153"],        "unit": "U/mL",     "ref": [0, 25] },
+
+    "ABI-L":      { "group": "vascular","aliases": ["ABI-L", "ABI L", "ABI 左", "ABI-Left"], "unit": "", "ref": [0.9, 1.4] },
+    "ABI-R":      { "group": "vascular","aliases": ["ABI-R", "ABI R", "ABI 右", "ABI-Right"], "unit": "", "ref": [0.9, 1.4] },
+    "PWV-L":      { "group": "vascular","aliases": ["PWV-L", "PWV L", "PWV 左", "PWV-Left"], "unit": "cm/s", "ref": [0, 1400] },
+    "PWV-R":      { "group": "vascular","aliases": ["PWV-R", "PWV R", "PWV 右", "PWV-Right"], "unit": "cm/s", "ref": [0, 1400] }
   }
 }
+</script>
 
+<script id="dx-rules-data" type="application/json">
+{
+  "_meta": {
+    "version": "0.1",
+    "note": "診斷規則表。每條規則：any=任一條件符合即觸發、all=全部符合。op: > >= < <= ==。'qual_positive'=檢驗項目為陽性。切點預設使用 lab_dict 的 ref 範圍上下限；若需自訂可直接寫 value。",
+    "updated": "2026-05-14"
+  },
+
+  "rules": [
+    {
+      "id": "diabetes_mellitus",
+      "name": "Diabetes mellitus",
+      "logic": "any",
+      "criteria": [
+        { "item": "HbA1c",  "op": ">=", "value": 6.5 },
+        { "item": "GLU-AC", "op": ">=", "value": 126 }
+      ]
+    },
+    {
+      "id": "prediabetes",
+      "name": "Prediabetes (IFG/IGT)",
+      "logic": "any",
+      "exclude_if": ["diabetes_mellitus"],
+      "criteria": [
+        { "item": "HbA1c",  "op": "between", "value": [5.7, 6.4] },
+        { "item": "GLU-AC", "op": "between", "value": [100, 125] }
+      ]
+    },
+    {
+      "id": "dyslipidemia",
+      "name": "Dyslipidemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "LDL-C", "op": "out_of_ref" },
+        { "item": "HDL-C", "op": "out_of_ref" },
+        { "item": "TG",    "op": "out_of_ref" },
+        { "item": "TC",    "op": "out_of_ref" }
+      ]
+    },
+    {
+      "id": "severe_hypertg",
+      "name": "Severe hypertriglyceridemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "TG", "op": ">=", "value": 500 }
+      ]
+    },
+    {
+      "id": "ckd",
+      "name": "Chronic kidney disease",
+      "logic": "any",
+      "criteria": [
+        { "item": "eGFR", "op": "<", "value": 60 },
+        { "item": "UACR", "op": ">=", "value": 30 }
+      ]
+    },
+    {
+      "id": "hyperuricemia",
+      "name": "Hyperuricemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "UA", "op": "out_of_ref" }
+      ]
+    },
+    {
+      "id": "anemia",
+      "name": "Anemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "Hb", "op": "below_ref" }
+      ]
+    },
+    {
+      "id": "abn_liver",
+      "name": "Abnormal liver enzymes",
+      "logic": "any",
+      "criteria": [
+        { "item": "AST", "op": "above_ref" },
+        { "item": "ALT", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "thrombocytopenia",
+      "name": "Thrombocytopenia",
+      "logic": "any",
+      "criteria": [
+        { "item": "Platelet", "op": "below_ref" }
+      ]
+    },
+    {
+      "id": "thrombocytosis",
+      "name": "Thrombocytosis",
+      "logic": "any",
+      "criteria": [
+        { "item": "Platelet", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "leukocytosis",
+      "name": "Leukocytosis",
+      "logic": "any",
+      "criteria": [
+        { "item": "WBC", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "leukopenia",
+      "name": "Leukopenia",
+      "logic": "any",
+      "criteria": [
+        { "item": "WBC", "op": "below_ref" }
+      ]
+    },
+    {
+      "id": "hyponatremia",
+      "name": "Hyponatremia",
+      "logic": "any",
+      "criteria": [{ "item": "Na", "op": "below_ref" }]
+    },
+    {
+      "id": "hypernatremia",
+      "name": "Hypernatremia",
+      "logic": "any",
+      "criteria": [{ "item": "Na", "op": "above_ref" }]
+    },
+    {
+      "id": "hypokalemia",
+      "name": "Hypokalemia",
+      "logic": "any",
+      "criteria": [{ "item": "K", "op": "below_ref" }]
+    },
+    {
+      "id": "hyperkalemia",
+      "name": "Hyperkalemia",
+      "logic": "any",
+      "criteria": [{ "item": "K", "op": "above_ref" }]
+    },
+    {
+      "id": "hypothyroidism",
+      "name": "Hypothyroidism (suspected)",
+      "logic": "any",
+      "criteria": [{ "item": "TSH", "op": "above_ref" }]
+    },
+    {
+      "id": "hyperthyroidism",
+      "name": "Hyperthyroidism (suspected)",
+      "logic": "any",
+      "criteria": [{ "item": "TSH", "op": "below_ref" }]
+    },
+    {
+      "id": "b12_deficiency",
+      "name": "Vitamin B12 deficiency",
+      "logic": "any",
+      "criteria": [{ "item": "Vit B12", "op": "below_ref" }]
+    },
+    {
+      "id": "vitd_deficiency",
+      "name": "Vitamin D deficiency",
+      "logic": "any",
+      "criteria": [{ "item": "Vit D", "op": "below_ref" }]
+    },
+    {
+      "id": "uti_suspected",
+      "name": "Urinary tract infection (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-WBC",      "op": "above_ref" },
+        { "item": "U-LEU",      "op": "qual_positive" },
+        { "item": "U-NIT",      "op": "qual_positive" },
+        { "item": "U-Bacteria", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "hematuria",
+      "name": "Hematuria",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-RBC",   "op": "above_ref" },
+        { "item": "U-Blood", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "proteinuria",
+      "name": "Proteinuria",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-Protein", "op": "qual_positive" },
+        { "item": "UACR",      "op": ">=", "value": 30 }
+      ]
+    },
+    {
+      "id": "glycosuria",
+      "name": "Glycosuria",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-Glucose", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "hbv_carrier",
+      "name": "HBV carrier",
+      "logic": "any",
+      "criteria": [
+        { "item": "HBsAg", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "hcv_infection",
+      "name": "HCV infection (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "Anti-HCV", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "stool_ob_positive",
+      "name": "Positive fecal occult blood",
+      "logic": "any",
+      "criteria": [
+        { "item": "Stool-OB", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "arterial_stiffness",
+      "name": "Increased arterial stiffness",
+      "logic": "any",
+      "criteria": [
+        { "item": "PWV-L", "op": "above_ref" },
+        { "item": "PWV-R", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "pad_suspected",
+      "name": "Peripheral artery disease (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "ABI-L", "op": "below_ref" },
+        { "item": "ABI-R", "op": "below_ref" }
+      ]
+    }
+  ]
+}
 </script>
 
 <script>
 'use strict';
 
-// ─── Load dictionary ───────────────────────────────────────────
+// ─── Load data ─────────────────────────────────────────────────
 const LAB_DICT = (() => {
   try { return JSON.parse(document.getElementById('lab-dict-data').textContent); }
   catch (e) { console.error('Failed to parse lab dict:', e); return { items: {}, _groups: [] }; }
 })();
+const DX_RULES = (() => {
+  try { return JSON.parse(document.getElementById('dx-rules-data').textContent); }
+  catch (e) { console.error('Failed to parse dx rules:', e); return { rules: [] }; }
+})();
 
-// ─── Build alias -> canonical key lookup ───────────────────────
-// Normalize: lowercase, strip spaces, dots, hyphens, parens, commas
+// ═══════════════════════════════════════════════════════════════
+// PARSER + ENGINE  (mirrors scripts/parser.js)
+// ═══════════════════════════════════════════════════════════════
+
 const norm = s => String(s).toLowerCase()
-  .replace(/[\s\.\-_,/\\()（）（）]+/g, '')
+  .replace(/[\s\.\-_,/\\()（）]+/g, '')
   .replace(/[％]/g, '%')
   .replace(/[：:]/g, '');
 
@@ -627,316 +945,490 @@ const ALIAS_MAP = (() => {
   return m;
 })();
 
-// ─── State ─────────────────────────────────────────────────────
-const $ = id => document.getElementById(id);
-const state = { sex: 'M', age: null, parsed: [], unparsed: [] };
-
-function getSex() {
-  const r = document.querySelector('input[name="sex"]:checked');
-  return r ? r.value : 'M';
-}
-
-// ─── Parser ────────────────────────────────────────────────────
-// Strategy:
-//   For each non-empty line, identify "the longest alias that appears as a
-//   prefix-ish token in the line". Then from the remaining tokens, find the
-//   first numeric / qualitative value and any H/L flag.
-//
-// Why prefix matching with the alias map rather than splitting on whitespace?
-// Because LIS exports have wildly different separators (multiple spaces, tabs,
-// pipes, mixed) and many test names contain spaces or punctuation
-// ("Glucose AC", "AST (GOT)", "Anti-HCV"). Matching against the alias map by
-// normalized string is robust to all of that.
-
-function parseLine(line) {
-  const raw = line.trim();
-  if (!raw) return null;
-  // skip header-ish lines
-  if (/^(test|item|項目|檢驗|name|examination)/i.test(raw)) return null;
-  if (/^[-=─]+$/.test(raw)) return null;
-
-  // Try to find an alias match: take progressively longer left-substrings
-  // until one matches. Stop at first 1–6 tokens.
-  const tokens = raw.split(/[\s\t|｜]+/).filter(Boolean);
-  if (tokens.length < 2) return null;
-
-  let matchedKey = null;
-  let matchedTokenCount = 0;
-  // Try longest prefix first (up to 6 tokens), pick the longest match
-  for (let n = Math.min(6, tokens.length - 1); n >= 1; n--) {
-    const candidate = tokens.slice(0, n).join(' ');
-    const k = ALIAS_MAP.get(norm(candidate));
-    if (k) {
-      matchedKey = k;
-      matchedTokenCount = n;
-      break;
-    }
-  }
-
-  if (!matchedKey) return { _unparsed: raw };
-
-  const def = LAB_DICT.items[matchedKey];
-  const rest = tokens.slice(matchedTokenCount);
-
-  // Find numeric value, qualitative value, flag
-  let valueNum = null, valueStr = null, flag = null;
-  const flagRe = /^(H+|L+|HH|LL|H\*|L\*|\*H|\*L|↑|↓)$/i;
-  const numRe  = /^[<>]?\s*(-?\d+\.?\d*)$/;
-  const qualRe = /^(positive|negative|neg|pos|reactive|non-reactive|trace|\+{1,4}|-{1,2}|±)$/i;
-
-  for (const tok of rest) {
-    if (valueNum === null && valueStr === null) {
-      const m = tok.match(numRe);
-      if (m) { valueNum = parseFloat(m[1]); valueStr = tok; continue; }
-      if (qualRe.test(tok)) { valueStr = tok; continue; }
-    }
-    if (!flag && flagRe.test(tok)) {
-      const f = tok.toUpperCase();
-      if (f.startsWith('H') || f === '↑') flag = f === 'HH' || f === 'H*' || f === '*H' ? 'HH' : 'H';
-      else flag = f === 'LL' || f === 'L*' || f === '*L' ? 'LL' : 'L';
-    }
-  }
-
-  if (valueNum === null && valueStr === null) return { _unparsed: raw };
-
-  return {
-    key: matchedKey,
-    def,
-    valueNum,
-    valueStr,
-    flagFromReport: flag,
-    raw
-  };
-}
-
 function getRef(def, sex) {
   if (def.ref_m && sex === 'M') return def.ref_m;
   if (def.ref_f && sex === 'F') return def.ref_f;
   return def.ref || null;
 }
 
-function classify(item, sex) {
-  // Returns { flag: 'H'|'L'|'HH'|'LL'|'OK'|'?', ref: [lo,hi] }
-  // Trust report flag first if present; otherwise compute from ref.
-  if (item.def.is_qual) {
-    const neg = (item.def.qual_neg || []).map(s => s.toLowerCase());
-    const v = (item.valueStr || '').toLowerCase().replace(/\s/g, '');
-    if (neg.some(n => n.toLowerCase().replace(/\s/g, '') === v)) return { flag: 'OK', ref: null };
-    if (v) return { flag: 'H', ref: null };  // any reactive/positive counts as abnormal
-    return { flag: '?', ref: null };
+function splitReports(text) {
+  const parts = text.split(/(?=^報告結果\s*-\s*)/m).filter(s => s.trim());
+  return parts.map(part => {
+    const firstLine = part.split('\n')[0];
+    const typeMatch = firstLine.match(/報告結果\s*-\s*([^()]+?)(?:\s*\([^)]*\))?\s*-\s*單號/);
+    const type = typeMatch ? typeMatch[1].trim() : '';
+    const sampleMatch = part.match(/採檢\s+(\d{4}-\d{2}-\d{2})/);
+    const execMatch   = part.match(/執行\s+(\d{4}-\d{2}-\d{2})/);
+    const reportMatch = part.match(/報告\s+(\d{4}-\d{2}-\d{2})/);
+    const date = (sampleMatch || execMatch || reportMatch || [])[1] || null;
+    const isPending = /單據狀態[：:]\s*(?:已開立|簽收\/執行(?!\s*\S))/.test(part)
+      || (part.includes('單據狀態') && !/檢驗名稱.*結果/.test(part));
+    return { type, date, isPending, text: part };
+  });
+}
+
+function parseValue(cell, def) {
+  if (!cell) return { num: null, qual: null };
+  const s = cell.trim();
+  const plusMatch = s.match(/^([+-]?(?:\d+\+?|\+{1,4}|-{1,2}|Trace|trace))\s*\(\s*[<>]?\s*(\d+\.?\d*)\s*\)/);
+  if (plusMatch) return { num: parseFloat(plusMatch[2]), qual: plusMatch[1] };
+  const rangeMatch = s.match(/^(\d+\.?\d*)\s*~\s*(\d+\.?\d*)\s*\(\s*[<>]?\s*=?\s*(\d+\.?\d*)\s*\)/);
+  if (rangeMatch) return {
+    num: parseFloat(rangeMatch[3]),
+    qual: `${rangeMatch[1]}~${rangeMatch[2]}`,
+    range: [parseFloat(rangeMatch[1]), parseFloat(rangeMatch[2])]
+  };
+  const qualNumMatch = s.match(/^([A-Za-z]+)\s*\(\s*[<>]?\s*=?\s*(\d+\.?\d*)\s*\)/);
+  if (qualNumMatch) return { num: parseFloat(qualNumMatch[2]), qual: qualNumMatch[1] };
+  const capMatch = s.match(/^[≧≥>]\s*(-?\d+\.?\d*)$/) || s.match(/^[≦≤<]\s*(-?\d+\.?\d*)$/);
+  if (capMatch) return { num: parseFloat(capMatch[1]), qual: s, capped: true };
+  const numMatch = s.match(/^(-?\d+\.?\d*)$/);
+  if (numMatch) return { num: parseFloat(numMatch[1]), qual: null };
+  if (/^\+{1,4}$/.test(s) || /^\d+\+$/.test(s)) return { num: null, qual: s };
+  if (/^[A-Za-z][A-Za-z\s-]+$/.test(s)) return { num: null, qual: s };
+  return { num: null, qual: s };
+}
+
+function parseTableSection(section) {
+  const results = [];
+  const lines = section.text.split('\n');
+  const isUrineReport = /尿液檢驗報告|尿液、胃液/.test(section.type);
+  let tableStart = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes('檢驗名稱') && lines[i].includes('結果')) tableStart = i;
   }
+  if (tableStart < 0) return null;
 
-  const ref = getRef(item.def, sex);
-  if (item.valueNum === null) return { flag: item.flagFromReport || '?', ref };
+  let currentItem = null;
+  for (let i = tableStart + 1; i < lines.length; i++) {
+    const raw = lines[i];
+    if (!raw.trim()) continue;
+    if (raw.includes('檢驗名稱') && raw.includes('結果')) continue;
+    if (/^\s*\*?COMMENT/i.test(raw)) continue;
+    if (/^\s*\d{3,7}-\d+\s*$/.test(raw)) continue;
 
-  // Critical values first
-  if (item.def.crit_low != null && item.valueNum <= item.def.crit_low) return { flag: 'LL', ref };
-  if (item.def.crit_high != null && item.valueNum >= item.def.crit_high) return { flag: 'HH', ref };
-
-  if (item.flagFromReport === 'HH' || item.flagFromReport === 'LL') return { flag: item.flagFromReport, ref };
-
-  if (!ref) return { flag: item.flagFromReport || '?', ref: null };
-  const [lo, hi] = ref;
-  if (item.valueNum < lo) return { flag: 'L', ref };
-  if (item.valueNum > hi) return { flag: 'H', ref };
-  return { flag: 'OK', ref };
-}
-
-function fmtRef(def, sex) {
-  const r = getRef(def, sex);
-  if (!r) return '';
-  const [lo, hi] = r;
-  if (lo === 0 && hi >= 999) return `>${hi >= 999 ? '—' : hi}`;
-  if (lo === 0) return `<${hi}`;
-  if (hi >= 999) return `>${lo}`;
-  return `${lo}–${hi}`;
-}
-
-// ─── Main parse routine ────────────────────────────────────────
-function runParse() {
-  const text = $('labInput').value;
-  const sex = getSex();
-  state.sex = sex;
-  state.age = parseInt($('age').value) || null;
-  state.parsed = [];
-  state.unparsed = [];
-
-  const lines = text.split(/\r?\n/);
-  for (const line of lines) {
-    const r = parseLine(line);
-    if (!r) continue;
-    if (r._unparsed) {
-      // Only collect unparsed lines that look like they might be a lab line
-      // (contain a digit) — to avoid noise from headers/comments
-      if (/\d/.test(r._unparsed)) state.unparsed.push(r._unparsed);
+    const cells = raw.split(/\t/).map(c => c.trim());
+    const nonEmpty = cells.filter(c => c !== '');
+    if (nonEmpty.length < 2) {
+      if (currentItem && raw.trim() && !/^\s*\d/.test(raw)) {
+        currentItem.notes = (currentItem.notes || '') + ' ' + raw.trim();
+      }
       continue;
     }
-    const cls = classify(r, sex);
-    state.parsed.push({ ...r, flag: cls.flag, refResolved: cls.ref });
-  }
 
-  renderResults();
-}
-
-// ─── Render ────────────────────────────────────────────────────
-function renderResults() {
-  const area = $('resultArea');
-  if (state.parsed.length === 0) {
-    if (state.unparsed.length > 0) {
-      area.innerHTML = `
-        <div class="result-empty">
-          <div class="big">😕</div>
-          找到 ${state.unparsed.length} 行包含數字、但無法辨識任何檢驗項目。<br>
-          請檢查貼上格式，或回報這些行供新增字典：
-        </div>
-        ${renderUnparsed()}
-      `;
-    } else {
-      area.innerHTML = `<div class="result-empty"><div class="big">🤷</div>沒有解析到任何項目，請確認貼上的內容。</div>`;
+    let nameCell = nonEmpty[0];
+    let key = ALIAS_MAP.get(norm(nameCell));
+    if (!key && nonEmpty.length >= 2) {
+      key = ALIAS_MAP.get(norm(nonEmpty[1]));
+      if (key) nameCell = nonEmpty[1];
     }
-    return;
-  }
-
-  // Stats
-  const nHigh = state.parsed.filter(p => p.flag === 'H' || p.flag === 'HH').length;
-  const nLow  = state.parsed.filter(p => p.flag === 'L' || p.flag === 'LL').length;
-  const nOK   = state.parsed.filter(p => p.flag === 'OK').length;
-  const nUnk  = state.parsed.filter(p => p.flag === '?').length;
-
-  // Group by category
-  const groups = {};
-  for (const p of state.parsed) {
-    const g = p.def.group || 'other';
-    if (!groups[g]) groups[g] = [];
-    groups[g].push(p);
-  }
-  const groupOrder = (LAB_DICT._groups || []).map(g => g.id);
-  const sortedGroups = Object.keys(groups).sort((a, b) => {
-    const ia = groupOrder.indexOf(a); const ib = groupOrder.indexOf(b);
-    return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib);
-  });
-  const groupLabel = id => (LAB_DICT._groups || []).find(g => g.id === id)?.label || id;
-
-  let html = `
-    <div class="summary-bar">
-      <div class="stat">總項目 <span class="stat-num">${state.parsed.length}</span></div>
-      <div class="stat">偏高 <span class="stat-num high">${nHigh}</span></div>
-      <div class="stat">偏低 <span class="stat-num low">${nLow}</span></div>
-      <div class="stat">正常 <span class="stat-num ok">${nOK}</span></div>
-      ${nUnk ? `<div class="stat">未判定 <span class="stat-num unk">${nUnk}</span></div>` : ''}
-    </div>
-  `;
-
-  for (const gid of sortedGroups) {
-    html += `<div class="group-header">${groupLabel(gid)}</div>`;
-    html += `<table class="results"><thead><tr>
-      <th class="t-flag"></th>
-      <th>項目</th>
-      <th style="text-align:right">數值</th>
-      <th>單位</th>
-      <th>參考範圍</th>
-    </tr></thead><tbody>`;
-    for (const p of groups[gid]) {
-      const f = p.flag;
-      const rowCls = (f === 'HH' || f === 'LL') ? 'row-crit'
-        : f === 'H' ? 'row-abn-high'
-        : f === 'L' ? 'row-abn-low' : '';
-      const valCls = (f === 'H' || f === 'HH') ? 'high'
-        : (f === 'L' || f === 'LL') ? 'low' : '';
-      const flagBadge = f === 'OK' ? `<span class="flag ok">·</span>`
-        : f === '?'  ? `<span class="flag none">·</span>`
-        : f === 'HH' ? `<span class="flag hh">H!</span>`
-        : f === 'LL' ? `<span class="flag ll">L!</span>`
-        : `<span class="flag ${f.toLowerCase()}">${f}</span>`;
-      const display = p.valueStr ?? (p.valueNum != null ? String(p.valueNum) : '—');
-      html += `<tr class="${rowCls}">
-        <td class="t-flag">${flagBadge}</td>
-        <td class="t-name">${escapeHtml(p.key)}</td>
-        <td class="t-val ${valCls}" style="text-align:right">${escapeHtml(display)}</td>
-        <td class="t-unit">${escapeHtml(p.def.unit || '')}</td>
-        <td class="t-ref">${escapeHtml(fmtRef(p.def, state.sex))}</td>
-      </tr>`;
+    if (!key) {
+      if (nonEmpty.length >= 2) {
+        key = ALIAS_MAP.get(norm(nonEmpty[0] + ' ' + nonEmpty[1]));
+      }
+      if (!key) {
+        if (currentItem && /[a-zA-Z\u4e00-\u9fff]/.test(raw)) {
+          currentItem.notes = (currentItem.notes || '') + ' ' + raw.trim();
+        }
+        continue;
+      }
     }
-    html += `</tbody></table>`;
+
+    if (isUrineReport) {
+      if (key === 'WBC') key = 'U-WBC';
+      else if (key === 'RBC') key = 'U-RBC';
+    }
+
+    const def = LAB_DICT.items[key];
+    const nameIdx = nonEmpty.indexOf(nameCell);
+    const valueCell = nonEmpty[nameIdx + 1] || '';
+    const v = parseValue(valueCell, def);
+
+    currentItem = {
+      key, def, raw, valueCell,
+      num: v.num, qual: v.qual, capped: v.capped, range: v.range,
+      sampledAt: section.date,
+      sourceType: section.type,
+      notes: ''
+    };
+    results.push(currentItem);
   }
 
-  // SOAP block
-  const abn = state.parsed.filter(p => p.flag !== 'OK' && p.flag !== '?');
-  if (abn.length > 0) {
-    html += `
-      <div style="margin-top:18px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
-        <div style="font-size:13px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.08em;">
-          Objective（可複製到病歷）
-        </div>
-        <button class="btn" id="copySoapBtn" style="font-size:12px;padding:5px 12px">複製</button>
-      </div>
-      <div class="soap-box" id="soapBox">${renderSOAP(abn)}</div>
-    `;
-  }
-
-  if (state.unparsed.length > 0) {
-    html += renderUnparsed();
-  }
-
-  area.innerHTML = html;
-  const cb = $('copySoapBtn');
-  if (cb) cb.addEventListener('click', copySoap);
-}
-
-function renderSOAP(abn) {
-  // Group by category for cleaner output
-  const groups = {};
-  for (const p of abn) {
-    const g = p.def.group || 'other';
-    if (!groups[g]) groups[g] = [];
-    groups[g].push(p);
-  }
-  const groupOrder = (LAB_DICT._groups || []).map(g => g.id);
-  const sorted = Object.keys(groups).sort((a, b) => {
-    const ia = groupOrder.indexOf(a); const ib = groupOrder.indexOf(b);
-    return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib);
-  });
-
-  const lines = [];
-  for (const gid of sorted) {
-    for (const p of groups[gid]) {
-      const f = p.flag;
-      const mark = (f === 'H' || f === 'HH') ? `<span class="h-mark">↑</span>`
-                 : (f === 'L' || f === 'LL') ? `<span class="l-mark">↓</span>` : '';
-      const val = p.valueStr ?? p.valueNum;
-      const unit = p.def.unit ? ` ${p.def.unit}` : '';
-      const refStr = fmtRef(p.def, state.sex);
-      const refTxt = refStr ? ` (ref ${refStr})` : '';
-      lines.push(`  ${mark} ${p.key}: ${val}${unit}${refTxt}`);
+  // Apply prefer_note logic (e.g., eGFR 計算值: N)
+  for (const item of results) {
+    if (item.def.prefer_note && item.notes) {
+      const m = item.notes.match(/(?:計算值|計算結果)\s*[:：]\s*(-?\d+\.?\d*)/);
+      if (m) {
+        item.num = parseFloat(m[1]);
+        item.qual = m[1];
+        item.capped = false;
+      }
     }
   }
-  return lines.join('\n');
+
+  return results;
 }
 
-function copySoap() {
-  // Strip HTML tags from soap-box innerText
-  const text = $('soapBox').innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('已複製 Objective 段落');
-  });
+function parseSpecialSection(section) {
+  const results = [];
+  const lines = section.text.split('\n');
+  for (const raw of lines) {
+    let m = raw.match(/足踝肱動脈血壓比.*?(左側|右側).*?[:：]\s*(\d+\.?\d*)/);
+    if (m) {
+      const key = m[1] === '左側' ? 'ABI-L' : 'ABI-R';
+      const def = LAB_DICT.items[key];
+      if (def) results.push({
+        key, def, raw, valueCell: m[2],
+        num: parseFloat(m[2]), qual: null,
+        sampledAt: section.date, sourceType: section.type, notes: ''
+      });
+      continue;
+    }
+    m = raw.match(/肱踝動脈間脈波速率.*?(左側|右側).*?[:：]\s*(\d+\.?\d*)/);
+    if (m) {
+      const key = m[1] === '左側' ? 'PWV-L' : 'PWV-R';
+      const def = LAB_DICT.items[key];
+      if (def) results.push({
+        key, def, raw, valueCell: m[2],
+        num: parseFloat(m[2]), qual: null,
+        sampledAt: section.date, sourceType: section.type, notes: ''
+      });
+    }
+  }
+  return results;
 }
 
-function renderUnparsed() {
-  return `
-    <div class="unparsed-box">
-      <div class="title">
-        <span>⚠ 無法辨識的行 (${state.unparsed.length})</span>
-        <button class="btn ghost" id="copyUnparsedBtn" style="font-size:11px;padding:3px 8px">複製清單</button>
-      </div>
-      <ul>${state.unparsed.map(l => `<li>${escapeHtml(l)}</li>`).join('')}</ul>
-    </div>
-  `;
+function parseLIS(text) {
+  const sections = splitReports(text);
+  const allResults = [];
+  const skipped = [];
+  for (const sec of sections) {
+    if (sec.isPending) {
+      const itemMatches = [...sec.text.matchAll(/項目名稱[：:]\s*(.+?)(?:\s*　　|\s{2,}|\n|$)/g)];
+      skipped.push({
+        type: sec.type,
+        items: itemMatches.map(m => m[1].trim()).filter(Boolean)
+      });
+      continue;
+    }
+    if (/動脈硬化檢查|肱踝動脈|足踝肱動脈/.test(sec.text)) {
+      allResults.push(...parseSpecialSection(sec));
+      continue;
+    }
+    const r = parseTableSection(sec);
+    if (r) allResults.push(...r);
+  }
+  return { results: allResults, skipped };
 }
 
-function escapeHtml(s) {
+function classifyResult(item, sex) {
+  const def = item.def;
+  if (def.is_qual) {
+    const negs = (def.qual_neg || []).map(s => norm(s));
+    const q = norm(item.qual || '');
+    if (negs.includes(q) || q === '' || q === 'normal') return 'OK';
+    return 'H';
+  }
+  if (item.num === null) return '?';
+  if (def.crit_low != null && item.num <= def.crit_low) return 'LL';
+  if (def.crit_high != null && item.num >= def.crit_high) return 'HH';
+  const ref = getRef(def, sex);
+  if (!ref) return '?';
+  const [lo, hi] = ref;
+  if (def.direction === 'low_bad') return item.num < lo ? 'L' : 'OK';
+  if (item.num < lo) return 'L';
+  if (item.num > hi) return 'H';
+  return 'OK';
+}
+
+function integrateTimeline(allResults, sex) {
+  for (const r of allResults) r.flag = classifyResult(r, sex);
+  const byKey = {};
+  for (const r of allResults) {
+    if (!byKey[r.key]) byKey[r.key] = [];
+    byKey[r.key].push(r);
+  }
+  // Dedupe same-date readings
+  for (const key of Object.keys(byKey)) {
+    const byDate = {};
+    for (const r of byKey[key]) {
+      const d = r.sampledAt || '?';
+      if (!byDate[d]) { byDate[d] = r; continue; }
+      const cur = byDate[d];
+      const curScore = (cur.capped ? 0 : 2) + (cur.num != null ? 1 : 0);
+      const newScore = (r.capped ? 0 : 2) + (r.num != null ? 1 : 0);
+      if (newScore > curScore) byDate[d] = r;
+    }
+    byKey[key] = Object.values(byDate);
+  }
+  const integrated = [];
+  for (const [key, arr] of Object.entries(byKey)) {
+    arr.sort((a, b) => {
+      const da = a.sampledAt || '0000-00-00';
+      const db = b.sampledAt || '0000-00-00';
+      return db.localeCompare(da);
+    });
+    const latest = arr[0];
+    const olderAbnormal = arr.slice(1).find(r => r.flag !== 'OK' && r.flag !== '?');
+    if (latest.flag === 'OK' && !olderAbnormal) continue;
+    if (latest.flag === '?' && !olderAbnormal) continue;
+    integrated.push({
+      ...latest,
+      pastAbnormal: (latest.flag === 'OK' && olderAbnormal) ? olderAbnormal : null,
+      allReadings: arr
+    });
+  }
+  return integrated;
+}
+
+function getReading(integrated, itemKey) {
+  return integrated.find(r => r.key === itemKey);
+}
+
+function evaluateCriterion(crit, integrated) {
+  const reading = getReading(integrated, crit.item);
+  if (!reading) return { met: false };
+  const useReading = (reading.flag !== 'OK' && reading.flag !== '?')
+    ? reading : reading.pastAbnormal;
+  if (!useReading) return { met: false };
+  const num = useReading.num;
+  let met = false;
+  switch (crit.op) {
+    case '>':  met = num != null && num >  crit.value; break;
+    case '>=': met = num != null && num >= crit.value; break;
+    case '<':  met = num != null && num <  crit.value; break;
+    case '<=': met = num != null && num <= crit.value; break;
+    case '==': met = num != null && num === crit.value; break;
+    case 'between':
+      met = num != null && num >= crit.value[0] && num <= crit.value[1]; break;
+    case 'out_of_ref':
+      met = ['H','L','HH','LL'].includes(useReading.flag); break;
+    case 'above_ref':
+      met = useReading.flag === 'H' || useReading.flag === 'HH'; break;
+    case 'below_ref':
+      met = useReading.flag === 'L' || useReading.flag === 'LL'; break;
+    case 'qual_positive':
+      met = useReading.flag === 'H' || useReading.flag === 'HH'; break;
+  }
+  return { met, reading: useReading };
+}
+
+function applyDiagnosisRules(integrated) {
+  const triggered = [];
+  const triggeredIds = new Set();
+  for (const rule of DX_RULES.rules) {
+    if (rule.exclude_if && rule.exclude_if.some(id => triggeredIds.has(id))) continue;
+    const evals = rule.criteria.map(c => ({ crit: c, ...evaluateCriterion(c, integrated) }));
+    const ok = rule.logic === 'all' ? evals.every(e => e.met) : evals.some(e => e.met);
+    if (ok) {
+      const evidence = evals.filter(e => e.met).map(e => e.reading);
+      triggered.push({ rule, evidence });
+      triggeredIds.add(rule.id);
+    }
+  }
+  return triggered;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UI
+// ═══════════════════════════════════════════════════════════════
+
+const $ = id => document.getElementById(id);
+const state = { sex: 'M', age: null, integrated: [], skipped: [], dx: [] };
+
+function getSex() {
+  const r = document.querySelector('input[name="sex"]:checked');
+  return r ? r.value : 'M';
+}
+
+function escHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[c]));
+}
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const m = iso.match(/(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `${parseInt(m[2])}/${parseInt(m[3])}` : iso;
+}
+
+function displayValue(item) {
+  // Compose the display string preferring qual when meaningful
+  if (item.def.is_qual) return item.qual || (item.num != null ? String(item.num) : '—');
+  if (item.qual && /[~+]/.test(item.qual)) return item.qual;  // ranges like "3~5", "2+"
+  if (item.num != null) return String(item.num);
+  return item.qual || '—';
+}
+
+function runParse() {
+  const text = $('labInput').value;
+  if (!text.trim()) {
+    showToast('請先貼上 LIS 報告');
+    return;
+  }
+  state.sex = getSex();
+  state.age = parseInt($('age').value) || null;
+  const { results, skipped } = parseLIS(text);
+  state.integrated = integrateTimeline(results, state.sex);
+  state.skipped = skipped;
+  state.dx = applyDiagnosisRules(state.integrated);
+  renderResults(results.length);
+}
+
+function renderResults(totalParsed) {
+  const area = $('resultArea');
+  const meta = $('resultMeta');
+
+  if (totalParsed === 0 && state.skipped.length === 0) {
+    area.innerHTML = `
+      <div class="result-empty">
+        <div class="big">😕</div>
+        無法辨識任何檢驗項目。<br>
+        請確認貼上的是完整的成大 LIS 報告內容。
+      </div>`;
+    meta.style.display = 'none';
+    return;
+  }
+
+  meta.style.display = '';
+  meta.textContent = `解析 ${totalParsed} 項 · 異常 ${state.integrated.length} 項`;
+  meta.className = state.integrated.length === 0 ? 'status-pill ok' : 'status-pill';
+
+  let html = '';
+
+  // ── Objective ──
+  html += `
+    <div class="output-section">
+      <div class="section-header">
+        <h3>📊 Objective <span class="badge-count">${state.integrated.length}</span></h3>
+        ${state.integrated.length > 0 ? '<button class="btn small" id="copyObjBtn">複製</button>' : ''}
+      </div>
+  `;
+
+  if (state.integrated.length === 0) {
+    if (totalParsed > 0) {
+      html += `<div class="objective-box" style="text-align:center;color:var(--accent-green);padding:20px">
+        ✓ 所有解析項目均在正常範圍
+      </div>`;
+    }
+  } else {
+    html += `<div class="objective-box" id="objBox">`;
+    for (const item of state.integrated) {
+      const flag = item.flag;
+      const valCls = (flag === 'H' || flag === 'HH') ? 'high'
+                   : (flag === 'L' || flag === 'LL') ? 'low' : '';
+      const critCls = (flag === 'HH' || flag === 'LL') ? ' crit' : '';
+      const flagBadge = `<span class="flag ${flag.toLowerCase()}">${flag === 'HH' ? 'H!' : flag === 'LL' ? 'L!' : flag}</span>`;
+      const value = displayValue(item);
+      const unit = item.def.unit ? ` ${item.def.unit}` : '';
+
+      let meta = `${fmtDate(item.sampledAt)}`;
+      if (item.pastAbnormal) {
+        const pv = displayValue(item.pastAbnormal);
+        meta += `<span class="past">⚠ 曾異常 ${pv} (${fmtDate(item.pastAbnormal.sampledAt)})</span>`;
+      }
+
+      html += `
+        <div class="obj-row">
+          <span class="name">${escHtml(item.key)}</span>
+          <span class="value ${valCls}${critCls}">${escHtml(value)}${escHtml(unit)}</span>
+          <span>${flagBadge}</span>
+          <span class="meta">${meta}</span>
+        </div>
+      `;
+    }
+    html += `</div>`;
+  }
+  html += `</div>`;
+
+  // ── Diagnosis ──
+  html += `
+    <div class="output-section">
+      <div class="section-header">
+        <h3>🩺 Diagnosis <span class="badge-count">${state.dx.length}</span></h3>
+        ${state.dx.length > 0 ? '<button class="btn small primary" id="copyDxBtn">複製 Diagnosis</button>' : ''}
+      </div>
+  `;
+
+  if (state.dx.length === 0) {
+    if (state.integrated.length > 0) {
+      html += `<div class="objective-box" style="text-align:center;color:var(--text-muted);padding:20px">
+        異常項目未觸發任何預設診斷規則
+      </div>`;
+    }
+  } else {
+    html += `<div class="dx-table" id="dxTable">`;
+    state.dx.forEach((d, i) => {
+      const evList = d.evidence.map(ev => {
+        const isPast = state.integrated.find(it => it.key === ev.key && it.pastAbnormal === ev);
+        const pastTag = isPast ? `<span class="past-prefix">曾異常</span>` : '';
+        const valCls = (ev.flag === 'L' || ev.flag === 'LL') ? 'low' : '';
+        return `<span class="evidence-row">${pastTag}<span class="ev-item">${escHtml(ev.key)}:</span> <span class="ev-value ${valCls}">${escHtml(displayValue(ev))}</span><span class="ev-date">${fmtDate(ev.sampledAt)}</span></span>`;
+      }).join('');
+
+      html += `
+        <div class="dx-row">
+          <div class="dx-left">
+            <span class="num">${i + 1}.</span>
+            <span>${escHtml(d.rule.name)}</span>
+          </div>
+          <div class="dx-right">
+            <div class="dx-right-label">佐證數值（不複製）</div>
+            ${evList}
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+  html += `</div>`;
+
+  // ── Pending reports notice ──
+  if (state.skipped.length > 0) {
+    const totalPending = state.skipped.reduce((s, x) => s + x.items.length, 0);
+    html += `
+      <div class="pending-box">
+        <div class="title">⏳ 已開立但無結果（已跳過 ${totalPending} 項）</div>
+        <ul>
+          ${state.skipped.map(s => `<li><span class="type">${escHtml(s.type)}:</span> ${s.items.map(escHtml).join('、')}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  area.innerHTML = html;
+
+  // Wire copy buttons
+  const obj = $('copyObjBtn');
+  if (obj) obj.addEventListener('click', copyObjective);
+  const dx = $('copyDxBtn');
+  if (dx) dx.addEventListener('click', copyDiagnosis);
+}
+
+function copyObjective() {
+  const lines = state.integrated.map(item => {
+    const value = displayValue(item);
+    const unit = item.def.unit || '';
+    const flag = (item.flag === 'H' || item.flag === 'HH') ? '(H)'
+               : (item.flag === 'L' || item.flag === 'LL') ? '(L)'
+               : '';
+    const date = fmtDate(item.sampledAt);
+    let line = `${item.key}\t${value}${unit ? ' ' + unit : ''}\t${flag}\t${date}`;
+    if (item.pastAbnormal) {
+      const pv = displayValue(item.pastAbnormal);
+      line += `  (past: ${pv} ${fmtDate(item.pastAbnormal.sampledAt)})`;
+    }
+    return line;
+  });
+  navigator.clipboard.writeText(lines.join('\n'));
+  showToast('已複製 Objective（' + lines.length + ' 項）');
+}
+
+function copyDiagnosis() {
+  const lines = state.dx.map((d, i) => `${i + 1}. ${d.rule.name}`);
+  navigator.clipboard.writeText(lines.join('\n'));
+  showToast('已複製 Diagnosis（' + lines.length + ' 條）');
 }
 
 function showToast(msg) {
@@ -946,82 +1438,23 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-// ─── Pass lipid values to lipid.html ───────────────────────────
-function toLipidPage() {
-  const map = { 'TC': 'tc', 'LDL-C': 'ldl', 'HDL-C': 'hdl', 'TG': 'tg' };
-  const params = new URLSearchParams();
-  for (const p of state.parsed) {
-    if (map[p.key] && p.valueNum != null) {
-      params.set(map[p.key], p.valueNum);
-    }
-  }
-  if (state.age) params.set('age', state.age);
-  params.set('sex', state.sex);
-  if (params.toString() === '' || (!params.has('tc') && !params.has('ldl') && !params.has('hdl') && !params.has('tg'))) {
-    showToast('沒有解析到血脂項目，無法帶入');
-    return;
-  }
-  location.href = `lipid.html?${params.toString()}`;
-}
-
-// ─── Demo data ─────────────────────────────────────────────────
-const DEMO_TEXT = `WBC          5.2        10^3/uL    3.9-10.6
-RBC          4.8        10^6/uL    4.5-5.9
-Hb           10.8   L    g/dL       13.5-17.5
-Hct          33.2   L    %          41-53
-MCV          69.2   L    fL         80-100
-Platelet     220        10^3/uL    150-400
-
-AST (GOT)    85    H    U/L        <40
-ALT (GPT)    120   H    U/L        <41
-ALP          88         U/L        35-129
-T-Bil        0.9        mg/dL      0.2-1.2
-Albumin      3.8        g/dL       3.5-5.2
-
-BUN          18         mg/dL      7-20
-Cr           1.1        mg/dL      0.7-1.3
-eGFR         78         mL/min/1.73m²  >60
-UA           7.8   H    mg/dL      3.5-7.2
-
-Na           139        mmol/L     136-145
-K            4.2        mmol/L     3.5-5.1
-
-Glucose AC   145   H    mg/dL      70-99
-HbA1c        7.2   H    %          4.0-5.6
-
-TC           245   H    mg/dL      <200
-HDL-C        38    L    mg/dL      >40
-LDL-C        165   H    mg/dL      <130
-TG           220   H    mg/dL      <150
-
-Ferritin     12    L    ng/mL      30-400
-TSH          3.8        uIU/mL     0.27-4.2`;
-
-// ─── URL parameter support (for landing from other pages) ──────
-(function loadFromUrl() {
-  const p = new URLSearchParams(location.search);
-  if (p.has('sex')) {
-    const sx = p.get('sex');
-    if (sx === 'F') $('sx-f').checked = true;
-  }
-  if (p.has('age')) $('age').value = p.get('age');
-})();
-
 // ─── Wire up ───────────────────────────────────────────────────
 $('parseBtn').addEventListener('click', runParse);
 $('clearBtn').addEventListener('click', () => {
   $('labInput').value = '';
-  state.parsed = []; state.unparsed = [];
-  $('resultArea').innerHTML = `<div class="result-empty"><div class="big">⏳</div>貼上檢驗結果後按「解析」</div>`;
+  state.integrated = []; state.skipped = []; state.dx = [];
+  $('resultMeta').style.display = 'none';
+  $('resultArea').innerHTML = `<div class="result-empty"><div class="big">🧪</div>貼上檢驗結果後按「解析」</div>`;
 });
-$('toLipidBtn').addEventListener('click', toLipidPage);
 $('loadDemoBtn').addEventListener('click', e => {
   e.preventDefault();
   $('labInput').value = DEMO_TEXT;
+  // Demo patient is female
+  document.querySelector('input[name="sex"][value="F"]').checked = true;
+  $('age').value = 52;
   runParse();
 });
 
-// Auto-parse with Ctrl/Cmd+Enter
 $('labInput').addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
     e.preventDefault(); runParse();
@@ -1035,6 +1468,86 @@ if (typeof ICON !== 'undefined') {
     if (ICON[k]) el.innerHTML = ICON[k];
   });
 }
+
+// ─── Demo (anonymized version of provided sample) ─────────────
+const DEMO_TEXT = `報告結果 - 家醫部特殊檢查報告 (門診) - 單號:421026P10249
+報告\t2026-05-13 16:14\t開單\t2026-05-13 10:52\t執行醫師\t
+簽收\t2026-05-13 11:13\t檢體\t10-26-P10249\t原檢體
+動脈硬化檢查結果
+  足踝肱動脈血壓比(ABI): 左側: 1.08(正常參考值: 0.9-1.4)
+  足踝肱動脈血壓比(ABI): 右側: 1.17(正常參考值: 0.9-1.4)
+  肱踝動脈間脈波速率(PWV): 左側: 1466(正常參考值: <1400公分/秒)
+  肱踝動脈間脈波速率(PWV): 右側: 1457(正常參考值: <1400公分/秒)
+
+醫師診斷
+  診斷: 周邊血管檢查無異常, 動脈硬度增加
+
+報告結果 - 自動化生化免疫檢驗報告 (門診) - 單號:821126V66976
+報告\t2026-05-06 13:32\t開單\t2026-05-06 10:03\t執行醫師
+採檢\t2026-05-06 10:17\t檢體\t11-26-141953(血液)\t原檢體
+註\t檢驗名稱\t結果\t單位\t參考區間\t備註\tLONIC
+\tCREA\t0.67\tmg/dL\t0.50-0.90\t
+2160-0
+\teGFR(CKD-EPI)\t105\t \t≧60\t
+98979-8
+\tAST\t18\tU/L\t10-35\t
+30239-8
+\tALT\t21\tU/L\t≦35\t
+1743-4
+\tCHOL\t150\tmg/dL\t<200\t
+2093-3
+\tHDL-C\t55\tmg/dL\t>50\t
+2085-9
+\tTG\t93\tmg/dL\t<150\t
+1644-4
+\tURIC\t5.5\tmg/dL\t2.4-5.7\t
+3084-1
+
+報告結果 - 自動化生化免疫檢驗報告 (門診) - 單號:821126V66975
+報告\t2026-05-06 12:38\t開單\t2026-05-06 10:03\t執行醫師
+採檢\t2026-05-06 10:17\t檢體\t11-26-G52864(血液)\t原檢體
+註\t檢驗名稱\t結果\t單位\t參考區間\t備註\tLONIC
+\tGLU, AC\t85\tmg/dL\t60-99\t
+17865-7
+
+報告結果 - 常規尿液檢驗報告 (門診) - 單號:826426P25224
+報告\t2026-05-06 10:53\t開單\t2026-05-06 10:03\t執行醫師
+簽收\t2026-05-06 10:22\t檢體\t64-26-022445(尿液)\t原檢體
+註\t檢驗名稱\t結果\t單位\t參考區間\t備註\tLONIC
+\tSG\t1.025\t \t1.003~1.035\t
+50562-8
+\tpH\t5.0\t \t5.0~8.0\t
+50560-2
+\tLEU\t2+ (75)\t(cell/μl)\tNegative (<25)\t
+58805-3
+\tNIT\tNegative\t \tNegative\t
+50558-6
+\tPRO\tNegative (<15)\t(mg/dL)\tNegative(<15)\t
+50561-0
+\tGLU\tNegative (<50)\t(mg/dL)\tNegative(<50)\t
+53328-1
+\tKET\tNegative (<10)\t(mg/dL)\tNegative (<10)\t
+50557-8
+\tBlood\t2+ (0.15)\tmg/dL\tNegative (<0.03)\t
+50559-4
+\tRBC\t3~5 (22.6)\t/HPF (/µl)\t0~2 (<=11.1)\t
+46419-8
+\tWBC\t10~19 (50.4)\t/HPF (/µl)\t0~5 (<=27.8)\t
+46702-7
+\tBacteria\t2+ (2697.8)\t/HPF (/µl)\tNegative (<=100)\t
+33218-9
+
+報告結果 - 一般血液檢驗報告 (門診) - 單號:822126P61393
+報告\t\t開單\t2026-05-13 10:52\t執行醫師
+單據狀態：已開立
+
+醫令代碼：8221002　　項目名稱：CBC(含Plt)　　醫令狀態：已開立
+
+報告結果 - 核醫科免疫檢驗報告 (門診) - 單號:932026P36300
+報告\t\t開單\t2026-05-13 10:52\t執行醫師
+單據狀態：已開立
+
+醫令代碼：9320105　　項目名稱：TSH　　醫令狀態：已開立`;
 </script>
 
 </body>
