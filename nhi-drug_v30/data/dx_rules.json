@@ -1,0 +1,250 @@
+{
+  "_meta": {
+    "version": "0.1",
+    "note": "診斷規則表。每條規則：any=任一條件符合即觸發、all=全部符合。op: > >= < <= ==。'qual_positive'=檢驗項目為陽性。切點預設使用 lab_dict 的 ref 範圍上下限；若需自訂可直接寫 value。",
+    "updated": "2026-05-14"
+  },
+
+  "rules": [
+    {
+      "id": "diabetes_mellitus",
+      "name": "Diabetes mellitus",
+      "logic": "any",
+      "criteria": [
+        { "item": "HbA1c",  "op": ">=", "value": 6.5 },
+        { "item": "GLU-AC", "op": ">=", "value": 126 }
+      ]
+    },
+    {
+      "id": "prediabetes",
+      "name": "Prediabetes (IFG/IGT)",
+      "logic": "any",
+      "exclude_if": ["diabetes_mellitus"],
+      "criteria": [
+        { "item": "HbA1c",  "op": "between", "value": [5.7, 6.4] },
+        { "item": "GLU-AC", "op": "between", "value": [100, 125] }
+      ]
+    },
+    {
+      "id": "dyslipidemia",
+      "name": "Dyslipidemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "LDL-C", "op": "out_of_ref" },
+        { "item": "HDL-C", "op": "out_of_ref" },
+        { "item": "TG",    "op": "out_of_ref" },
+        { "item": "TC",    "op": "out_of_ref" }
+      ]
+    },
+    {
+      "id": "severe_hypertg",
+      "name": "Severe hypertriglyceridemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "TG", "op": ">=", "value": 500 }
+      ]
+    },
+    {
+      "id": "ckd",
+      "name": "Chronic kidney disease",
+      "logic": "any",
+      "criteria": [
+        { "item": "eGFR", "op": "<", "value": 60 },
+        { "item": "UACR", "op": ">=", "value": 30 }
+      ]
+    },
+    {
+      "id": "hyperuricemia",
+      "name": "Hyperuricemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "UA", "op": "out_of_ref" }
+      ]
+    },
+    {
+      "id": "anemia",
+      "name": "Anemia",
+      "logic": "any",
+      "criteria": [
+        { "item": "Hb", "op": "below_ref" }
+      ]
+    },
+    {
+      "id": "abn_liver",
+      "name": "Abnormal liver enzymes",
+      "logic": "any",
+      "criteria": [
+        { "item": "AST", "op": "above_ref" },
+        { "item": "ALT", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "thrombocytopenia",
+      "name": "Thrombocytopenia",
+      "logic": "any",
+      "criteria": [
+        { "item": "Platelet", "op": "below_ref" }
+      ]
+    },
+    {
+      "id": "thrombocytosis",
+      "name": "Thrombocytosis",
+      "logic": "any",
+      "criteria": [
+        { "item": "Platelet", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "leukocytosis",
+      "name": "Leukocytosis",
+      "logic": "any",
+      "criteria": [
+        { "item": "WBC", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "leukopenia",
+      "name": "Leukopenia",
+      "logic": "any",
+      "criteria": [
+        { "item": "WBC", "op": "below_ref" }
+      ]
+    },
+    {
+      "id": "hyponatremia",
+      "name": "Hyponatremia",
+      "logic": "any",
+      "criteria": [{ "item": "Na", "op": "below_ref" }]
+    },
+    {
+      "id": "hypernatremia",
+      "name": "Hypernatremia",
+      "logic": "any",
+      "criteria": [{ "item": "Na", "op": "above_ref" }]
+    },
+    {
+      "id": "hypokalemia",
+      "name": "Hypokalemia",
+      "logic": "any",
+      "criteria": [{ "item": "K", "op": "below_ref" }]
+    },
+    {
+      "id": "hyperkalemia",
+      "name": "Hyperkalemia",
+      "logic": "any",
+      "criteria": [{ "item": "K", "op": "above_ref" }]
+    },
+    {
+      "id": "hypothyroidism",
+      "name": "Hypothyroidism (suspected)",
+      "logic": "any",
+      "criteria": [{ "item": "TSH", "op": "above_ref" }]
+    },
+    {
+      "id": "hyperthyroidism",
+      "name": "Hyperthyroidism (suspected)",
+      "logic": "any",
+      "criteria": [{ "item": "TSH", "op": "below_ref" }]
+    },
+    {
+      "id": "b12_deficiency",
+      "name": "Vitamin B12 deficiency",
+      "logic": "any",
+      "criteria": [{ "item": "Vit B12", "op": "below_ref" }]
+    },
+    {
+      "id": "vitd_deficiency",
+      "name": "Vitamin D deficiency",
+      "logic": "any",
+      "criteria": [{ "item": "Vit D", "op": "below_ref" }]
+    },
+    {
+      "id": "uti_suspected",
+      "name": "Urinary tract infection (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-WBC",      "op": "above_ref" },
+        { "item": "U-LEU",      "op": "qual_positive" },
+        { "item": "U-NIT",      "op": "qual_positive" },
+        { "item": "U-Bacteria", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "hematuria",
+      "name": "Hematuria",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-RBC",   "op": "above_ref" },
+        { "item": "U-Blood", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "proteinuria",
+      "name": "Proteinuria",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-Protein", "op": "qual_positive" },
+        { "item": "UACR",      "op": ">=", "value": 30 }
+      ]
+    },
+    {
+      "id": "glycosuria",
+      "name": "Glycosuria",
+      "logic": "any",
+      "criteria": [
+        { "item": "U-Glucose", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "hbv_carrier",
+      "name": "HBV carrier",
+      "logic": "any",
+      "criteria": [
+        { "item": "HBsAg", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "hbv_past_infection",
+      "name": "Past HBV infection (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "Anti-HBc", "op": "qual_positive" }
+      ],
+      "exclude_if": ["hbv_carrier"]
+    },
+    {
+      "id": "hcv_infection",
+      "name": "HCV infection (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "Anti-HCV", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "stool_ob_positive",
+      "name": "Positive fecal occult blood",
+      "logic": "any",
+      "criteria": [
+        { "item": "Stool-OB", "op": "qual_positive" }
+      ]
+    },
+    {
+      "id": "arterial_stiffness",
+      "name": "Increased arterial stiffness",
+      "logic": "any",
+      "criteria": [
+        { "item": "PWV-L", "op": "above_ref" },
+        { "item": "PWV-R", "op": "above_ref" }
+      ]
+    },
+    {
+      "id": "pad_suspected",
+      "name": "Peripheral artery disease (suspected)",
+      "logic": "any",
+      "criteria": [
+        { "item": "ABI-L", "op": "below_ref" },
+        { "item": "ABI-R", "op": "below_ref" }
+      ]
+    }
+  ]
+}

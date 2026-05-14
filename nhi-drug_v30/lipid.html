@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高血脂風險評估 · DR. LAN's Toolbox</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="高血脂風險分級與健保給付判斷工具：整合台灣 2025 / ESC 2024 / AHA 2026 三大指引，協助臨床決策。">
+<meta name="keywords" content="高血脂,LDL,statin,PCSK9,ezetimibe,心血管風險,ASCVD,健保給付,ESC,AHA,台灣脂蛋白指引">
+<meta name="author" content="DR. LAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://garrulous-cat.github.io/mindy/lipid.html">
+
+<!-- ── Open Graph ── -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="高血脂風險評估 · DR. LAN's Toolbox">
+<meta property="og:description" content="整合台灣 2025 / ESC 2024 / AHA 2026 三大指引的高血脂風險分級與健保給付判斷工具。">
+<meta property="og:url" content="https://garrulous-cat.github.io/mindy/lipid.html">
+<meta property="og:locale" content="zh_TW">
+
+<!-- ── Favicon ── -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="shortcut icon" href="assets/favicon.ico">
+
+<link rel="stylesheet" href="assets/shared.css">
+<script src="assets/icons.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+TC:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg-base: #0d1117;
+    --bg-surface: #161b22;
+    --bg-elevated: #1c2128;
+    --bg-hover: #222832;
+    --border: #30363d;
+    --border-subtle: #21262d;
+    --text-primary: #e6edf3;
+    --text-secondary: #b0bac6;
+    --text-muted: #6e7681;
+    --accent-blue: #58a6ff;
+    --accent-cyan: #39d3f2;
+    --accent-green: #3fb950;
+    --accent-yellow: #d29922;
+    --accent-orange: #f0883e;
+    --accent-red: #f85149;
+    --accent-purple: #bc8cff;
+    --risk-low: #3fb950;
+    --risk-border-low: #238636;
+    --risk-moderate: #d29922;
+    --risk-border-moderate: #9e6a03;
+    --risk-high: #f0883e;
+    --risk-border-high: #bd5e03;
+    --risk-veryhigh: #f85149;
+    --risk-border-veryhigh: #b91c1c;
+    --risk-extreme: #bc8cff;
+    --risk-border-extreme: #6e40c9;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans TC', sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* tabs-bar 樣式由 assets/shared.css 提供 */
+
+  /* ── Layout ── */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  /* page-intro 樣式由 assets/shared.css 提供 */
+
+  /* ── 完整版 / 簡化版 切換鈕 ── */
+  .mode-switch-row {
+    display: inline-flex;
+    gap: 0;
+    margin-bottom: 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3px;
+  }
+  .mode-switch-row a {
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.15s;
+  }
+  .mode-switch-row a:hover { color: var(--text-primary); }
+  .mode-switch-row a.active {
+    background: var(--accent-blue);
+    color: #fff;
+    font-weight: 500;
+  }
+
+  /* ── Input form ── */
+  .input-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .panel-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .panel-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── LIS 貼上按鈕 ── */
+  .lis-paste-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--bg-secondary);
+    color: var(--accent-blue);
+    border: 1px solid rgba(88,166,255,0.35);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+  .lis-paste-btn:hover {
+    background: rgba(88,166,255,0.08);
+    border-color: var(--accent-blue);
+  }
+  .lis-paste-btn svg {
+    width: 13px; height: 13px; stroke-width: 1.8;
+  }
+
+  /* ── LIS 貼上 Modal ── */
+  .lis-modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(13,17,23,0.78);
+    backdrop-filter: blur(3px);
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px 20px;
+    overflow-y: auto;
+  }
+  .lis-modal-backdrop.open { display: flex; }
+  .lis-modal {
+    background: var(--bg-elevated, #1c2333);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 640px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 80px);
+  }
+  .lis-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+  .lis-modal-title {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+  }
+  .lis-modal-title svg {
+    width: 15px; height: 15px;
+    color: var(--accent-blue);
+    stroke-width: 1.8;
+  }
+  .lis-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    border-radius: 4px;
+  }
+  .lis-modal-close:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+  .lis-modal-close svg { width: 16px; height: 16px; stroke-width: 2; }
+
+  .lis-modal-body {
+    padding: 16px 18px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .lis-modal-hint {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.7;
+  }
+  .lis-modal-hint b { color: var(--text-primary); }
+  .lis-privacy-banner {
+    background: rgba(63,185,80,0.07);
+    border: 1px solid rgba(63,185,80,0.25);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: #b3d8b8;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .lis-textarea {
+    width: 100%;
+    min-height: 180px;
+    padding: 10px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .lis-textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+  }
+  .lis-preview {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .lis-preview-title {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .lis-preview-empty {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 12.5px;
+  }
+  .lis-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+  }
+  .lis-preview-row .sym { width: 16px; text-align: center; flex-shrink: 0; }
+  .lis-preview-row .ok-sym { color: var(--accent-green); }
+  .lis-preview-row .miss-sym { color: var(--text-secondary); }
+  .lis-preview-row .over-sym { color: var(--accent-yellow); }
+  .lis-preview-row .field { color: var(--text-secondary); width: 90px; flex-shrink: 0; }
+  .lis-preview-row .val { color: var(--text-primary); font-weight: 500; }
+  .lis-preview-row .over-note {
+    color: var(--accent-yellow);
+    font-size: 11px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .lis-warn-line {
+    margin-top: 10px;
+    padding: 7px 12px;
+    background: rgba(210,153,34,0.06);
+    border: 1px solid rgba(210,153,34,0.25);
+    border-radius: 5px;
+    font-size: 11.5px;
+    color: #d8c08a;
+    line-height: 1.6;
+  }
+
+  .lis-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+  .lis-btn {
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .lis-btn:hover { border-color: var(--text-secondary); }
+  .lis-btn.primary {
+    background: var(--accent-blue);
+    color: #fff;
+    border-color: var(--accent-blue);
+  }
+  .lis-btn.primary:hover {
+    background: #7ab9ff;
+    border-color: #7ab9ff;
+  }
+  .lis-btn.primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-color: var(--border);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px 16px;
+  }
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr 1fr; }
+    .form-group.wide { grid-column: span 2; }
+    .results-grid { grid-template-columns: 1fr; }
+    .statin-row { grid-template-columns: 1fr; }
+    .container { padding: 12px; }
+    .input-panel { padding: 14px; }
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .form-group.wide { grid-column: span 2; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  label .unit {
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+  label .optional {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  input[type="number"], input[type="text"], select {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 7px 10px;
+    width: 100%;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input[type="number"]:focus, input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    background: var(--bg-hover);
+  }
+  input[type="number"]::placeholder { color: var(--text-muted); }
+  select option { background: var(--bg-elevated); }
+
+  /* computed field */
+  .computed-field {
+    background: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    color: var(--accent-cyan);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 7px 10px;
+    width: 100%;
+  }
+
+  /* radio / checkbox group */
+  .radio-group, .check-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .radio-label, .check-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-primary);
+    padding: 6px 10px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .radio-label:hover, .check-label:hover {
+    border-color: var(--accent-blue);
+    background: var(--bg-hover);
+  }
+  input[type="radio"], input[type="checkbox"] {
+    accent-color: var(--accent-blue);
+    width: 14px;
+    height: 14px;
+  }
+
+  /* tag select for ASCVD type */
+  .tag-select {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tag-option {
+    cursor: pointer;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .tag-option.selected {
+    border-color: var(--accent-red);
+    background: rgba(248,81,73,0.12);
+    color: var(--accent-red);
+  }
+
+  /* statin section */
+  .statin-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    align-items: end;
+  }
+
+  /* submit */
+  .btn-calc {
+    background: var(--accent-blue);
+    color: #0d1117;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'IBM Plex Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 28px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 8px;
+  }
+  .btn-calc:hover { background: #79c0ff; transform: translateY(-1px); }
+  .btn-calc:active { transform: translateY(0); }
+  .btn-reset {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'IBM Plex Sans TC', sans-serif;
+    font-size: 13px;
+    padding: 9px 16px;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-left: 8px;
+    transition: all 0.15s;
+  }
+  .btn-reset:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+  .form-actions { margin-top: 16px; }
+
+  /* ── Results ── */
+  .results-section { display: none; }
+  .results-section.visible { display: block; }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 1200px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 700px) { .results-grid { grid-template-columns: 1fr; } }
+
+  .result-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .result-card-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .result-card-header .guideline-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+  .result-card-header .guideline-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .result-card-body { padding: 16px; flex: 1; }
+
+  /* risk badge */
+  .risk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    border: 1px solid;
+  }
+  .risk-low    { background: rgba(63,185,80,0.12); color: var(--risk-low); border-color: var(--risk-border-low); }
+  .risk-moderate { background: rgba(210,153,34,0.12); color: var(--risk-moderate); border-color: var(--risk-border-moderate); }
+  .risk-high   { background: rgba(240,136,62,0.12); color: var(--risk-high); border-color: var(--risk-border-high); }
+  .risk-veryhigh { background: rgba(248,81,73,0.12); color: var(--risk-veryhigh); border-color: var(--risk-border-veryhigh); }
+  .risk-extreme  { background: rgba(188,140,255,0.12); color: var(--risk-extreme); border-color: var(--risk-border-extreme); }
+  .risk-incomplete {
+    background: rgba(143,163,192,0.10);
+    color: var(--text-muted, #8fa3c0);
+    border-color: var(--border-strong, #3d4f6e);
+  }
+
+  /* main risk drivers - chips below the risk score */
+  .drivers-block {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-subtle);
+  }
+  .drivers-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .drivers-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .driver-chip {
+    display: inline-block;
+    padding: 3px 9px;
+    background: rgba(255,210,60,0.10);
+    color: var(--risk-moderate, #d29922);
+    border: 1px solid rgba(255,210,60,0.25);
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  /* "data insufficient" notice */
+  .insufficient-notice {
+    padding: 14px 12px;
+    background: var(--bg-base);
+    border: 1px dashed var(--border-strong, #3d4f6e);
+    border-radius: var(--radius);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .insufficient-notice .ins-title {
+    font-size: 14px;
+    color: var(--text-primary, var(--text));
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .result-metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .result-metric:last-child { border-bottom: none; }
+  .result-metric .metric-label { font-size: 13px; color: var(--text-secondary); }
+  .result-metric .metric-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .metric-value.target { color: var(--accent-cyan); }
+  .metric-value.score { color: var(--accent-blue); }
+
+  /* NHI card special */
+  .nhi-card .result-card-header { background: rgba(63,185,80,0.06); }
+  .nhi-section { margin-bottom: 12px; }
+  .nhi-section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .coverage-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .coverage-item.covered {
+    background: rgba(63,185,80,0.08);
+    border: 1px solid rgba(63,185,80,0.2);
+  }
+  .coverage-item.not-covered {
+    background: rgba(248,81,73,0.06);
+    border: 1px solid rgba(248,81,73,0.15);
+  }
+  .coverage-item.conditional {
+    background: rgba(210,153,34,0.08);
+    border: 1px solid rgba(210,153,34,0.2);
+  }
+  .coverage-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .coverage-text { color: var(--text-secondary); }
+  .coverage-text strong { color: var(--text-primary); }
+
+  /* 跨工具快速跳轉：給付符合時的「查健保規定」按鈕列 */
+  .quick-action-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0 4px 0;
+    padding: 6px 8px;
+    flex-wrap: wrap;
+  }
+  .quick-action-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+    margin-right: 4px;
+  }
+  .quick-action-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    background: rgba(74,158,255,0.08);
+    border: 1px solid rgba(74,158,255,0.25);
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: all 0.15s;
+  }
+  .quick-action-chip:hover {
+    background: rgba(74,158,255,0.18);
+    border-color: rgba(74,158,255,0.5);
+  }
+  .quick-action-chip::after { content: ' →'; opacity: 0.5; }
+
+  /* reasoning box */
+  .reasoning-box {
+    background: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .reasoning-box .reasoning-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* comparison note */
+  .comparison-note {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-yellow);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .comparison-note strong { color: var(--accent-yellow); }
+
+  /* footer */
+  .page-footer {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-top: 40px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    text-align: center;
+  }
+  .footer-sources { margin-bottom: 8px; }
+  .footer-sources strong { color: var(--text-primary); }
+  .disclaimer {
+    color: var(--accent-blue);
+    font-size: 11px;
+    margin-top: 8px;
+  }
+
+  .form-section-note {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    color: var(--text-secondary);
+    background: rgba(88,166,255,0.06);
+    border: 1px solid rgba(88,166,255,0.15);
+    border-radius: var(--radius);
+    padding: 7px 12px;
+    line-height: 1.6;
+    margin-bottom: 2px;
+  }
+
+  /* separator in form */
+  .form-section-sep {
+    grid-column: 1 / -1;
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 4px 0;
+  }
+  .form-section-label {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-top: 4px;
+  }
+
+  /* alert */
+  .alert-info {
+    background: rgba(88,166,255,0.08);
+    border: 1px solid rgba(88,166,255,0.25);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--accent-blue);
+    margin-top: 12px;
+    grid-column: 1 / -1;
+  }
+
+  /* score display */
+  .score-display {
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+  }
+  .score-big {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .score-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+
+  /* small helper */
+  .text-muted { color: var(--text-muted); }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── Tooltip ── */
+  .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(88,166,255,0.18);
+    color: var(--accent-blue);
+    font-size: 10px;
+    font-weight: 700;
+    font-style: normal;
+    cursor: help;
+    flex-shrink: 0;
+    position: relative;
+    border: 1px solid rgba(88,166,255,0.35);
+    line-height: 1;
+    vertical-align: middle;
+  }
+  .info-icon::after {
+    display: none;
+  }
+  .info-icon::before { display: none; }
+  .info-icon:hover::after { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- Tabs -->
+<nav class="tabs-bar" aria-label="主選單">
+  <a class="tab-link tab-home" href="index_landing.html"><span class="ti" data-icon="home"></span>DR. LAN</a>
+  <a class="tab-link" href="index.html"><span class="ti" data-icon="search"></span>藥品給付查詢</a>
+  <a class="tab-link" href="lab.html"><span class="ti" data-icon="flask"></span>檢驗報告解讀</a>
+  <a class="tab-link active" href="lipid.html"><span class="ti" data-icon="chart"></span>高血脂風險評估</a>
+  <a class="tab-link" href="vaccine.html"><span class="ti" data-icon="syringe"></span>疫苗查詢</a>
+  <a class="tab-link" href="compare.html"><span class="ti" data-icon="scale"></span>藥物類別比較</a>
+  <a class="tab-link" href="obesity.html"><span class="ti" data-icon="weight"></span>門診問診</a>
+</nav>
+
+<!-- Main -->
+<main class="container">
+
+  <div class="page-intro">
+    <span class="icon">⚕️</span>
+    <div>
+      <h2>高血脂風險評估工具</h2>
+      <p>輸入病人基本資料及檢驗值，自動依台灣 2025、ESC 2025、AHA 2026 PREVENT 三大指引分類風險等級、計算 LDL 目標，並判斷健保給付資格。</p>
+    </div>
+  </div>
+
+  <div class="mode-switch-row">
+    <a href="lipid.html" class="active">完整版（3 大指引 + 健保）</a>
+    <a href="lipid_nhi.html">簡化版（只看健保 statin）</a>
+  </div>
+
+  <!-- Input Panel -->
+  <div class="input-panel">
+    <div class="panel-title-row">
+      <div class="panel-title">病人資料輸入</div>
+      <button type="button" class="lis-paste-btn" id="lisPasteBtn" title="從 LIS 系統貼上檢驗報告自動填入欄位">
+        <span id="lisPasteIcon"></span>從 LIS 貼上自動填入
+      </button>
+    </div>
+    <div class="form-grid">
+
+      <!-- 基本 -->
+      <div class="form-section-label">基本資料</div>
+
+      <div class="form-group">
+        <label>年齡 <span class="unit">歲</span></label>
+        <input type="number" id="age" min="18" max="99" placeholder="例：65">
+      </div>
+      <div class="form-group">
+        <label>性別</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="sex" value="M" checked> 男</label>
+          <label class="radio-label"><input type="radio" name="sex" value="F"> 女</label>
+        </div>
+      </div>
+
+      <!-- 血脂 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label">血脂檢驗 <span class="text-muted">(mg/dL)</span></div>
+
+      <div class="form-group">
+        <label>TC <span class="unit">mg/dL</span></label>
+        <input type="number" id="tc" min="50" max="600" placeholder="總膽固醇" oninput="calcNonHDL()">
+      </div>
+      <div class="form-group">
+        <label>LDL-C <span class="unit">mg/dL</span></label>
+        <input type="number" id="ldl" min="10" max="500" placeholder="壞膽固醇" oninput="calcNonHDL()">
+      </div>
+      <div class="form-group">
+        <label>HDL-C <span class="unit">mg/dL</span></label>
+        <input type="number" id="hdl" min="10" max="150" placeholder="好膽固醇" oninput="calcNonHDL()">
+      </div>
+      <div class="form-group">
+        <label>TG <span class="unit">mg/dL</span></label>
+        <input type="number" id="tg" min="20" max="3000" placeholder="三酸甘油酯" oninput="calcNonHDL()">
+      </div>
+      <div class="form-group">
+        <label>是否用 TG 血脂藥 <i class="info-icon" data-tip="使用降 TG 藥物（如 fibrate、魚油）即符合代謝症候群 TG 偏高條件">!</i></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="tgmed" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="tgmed" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>non-HDL-C <span class="unit">mg/dL</span> <span class="optional">自動計算</span></label>
+        <div class="computed-field" id="nonhdl">—</div>
+      </div>
+      <div class="form-group" id="calcLdlGroup" style="display:none;">
+        <label>Calculated LDL <span class="unit">mg/dL</span> <i class="info-icon" data-tip="未實測 LDL 時，由 TC、HDL、TG 用 Friedewald 公式推算：LDL = TC − HDL − TG/5。TG ≥ 400 mg/dL 時公式不適用，建議實測 LDL。">!</i></label>
+        <div class="computed-field" id="calcLdl">—</div>
+      </div>
+
+      <!-- 血壓 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label">血壓</div>
+
+      <div class="form-group">
+        <label>收縮壓 <span class="unit">mmHg</span></label>
+        <input type="number" id="sbp" min="60" max="260" placeholder="SBP">
+      </div>
+      <div class="form-group">
+        <label>舒張壓 <span class="unit">mmHg</span> <i class="info-icon" data-tip="代謝症候群判斷：舒張壓 ≥85 mmHg 或使用降壓藥即符合">!</i></label>
+        <input type="number" id="dbp" min="40" max="160" placeholder="DBP">
+      </div>
+      <div class="form-group">
+        <label>是否用降壓藥</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="bpmed" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="bpmed" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>高血壓診斷</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="htn" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="htn" value="1"> 是</label>
+        </div>
+      </div>
+
+      <!-- 血糖 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label">血糖代謝</div>
+
+      <div class="form-group">
+        <label>空腹血糖 <span class="unit">mg/dL</span> <span class="optional">擇一</span></label>
+        <input type="number" id="fpg" min="40" max="600" placeholder="FPG">
+      </div>
+      <div class="form-group">
+        <label>HbA1c <span class="unit">%</span> <span class="optional">擇一</span></label>
+        <input type="number" id="hba1c" min="3" max="18" step="0.1" placeholder="糖化血色素">
+      </div>
+      <div class="form-group">
+        <label>是否用降血糖藥</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="dmmed" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="dmmed" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>糖尿病 (DM)</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="dm" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="dm" value="1"> 是</label>
+        </div>
+      </div>
+
+      <!-- 腎功能 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label">腎功能</div>
+
+      <div class="form-group">
+        <label>eGFR <span class="unit">mL/min/1.73m²</span></label>
+        <input type="number" id="egfr" min="1" max="150" placeholder="估算腎絲球過濾率">
+      </div>
+      <div class="form-group">
+        <label>UACR <span class="unit">mg/g</span> <i class="info-icon" data-tip="尿液白蛋白肌酸酐比值 ≥30 mg/g 符合慢性腎臟病定義，可影響台灣指引風險分級">!</i></label>
+        <input type="number" id="uacr" min="0" max="10000" placeholder="尿白蛋白/肌酸酐">
+      </div>
+
+      <!-- 代謝症候群 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label" style="display:flex;align-items:center;gap:6px;">
+        代謝症候群 <i class="info-icon" data-tip="符合以下 ≥3 項即為代謝症候群（台灣 2025 低/中風險危險因子之一）：腹部肥胖、血壓偏高/用藥、血糖偏高/用藥、TG 偏高/用藥、HDL-C 偏低。系統將自動根據您填入的數值判斷。">!</i>
+      </div>
+
+      <div class="form-group">
+        <label>腰圍 <span class="unit">cm</span> <i class="info-icon" data-tip="代謝症候群腹部肥胖切點：男性 ≥90 cm、女性 ≥80 cm">!</i></label>
+        <input type="number" id="waist" min="40" max="200" placeholder="腰圍">
+      </div>
+
+      <!-- 危險因子 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label">危險因子 & 病史</div>
+
+      <div class="form-group">
+        <label>抽菸</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="smoking" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="smoking" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>家族性高膽固醇 (FH)</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="fh" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="fh" value="1"> 是</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          早發冠心病家族史
+          <i class="info-icon" data-tip="男性親屬 &lt;55 歲、女性親屬 &lt;65 歲發生冠心病（CAD）即屬早發。">!</i>
+        </label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="fhcad" value="0" checked> 否</label>
+          <label class="radio-label"><input type="radio" name="fhcad" value="1"> 是</label>
+        </div>
+      </div>
+
+      <!-- ASCVD -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label" style="display:flex;align-items:center;gap:6px;">
+        臨床 ASCVD
+        <i class="info-icon" data-tip="包含：急性冠心症（ACS）、心肌梗塞、穩定性冠心病、經皮冠狀動脈介入（PCI）、冠狀動脈繞道手術（CABG）、缺血性中風/TIA、周邊動脈疾病（PAD，含踝臂指數 &lt;0.9）">!</i>
+      </div>
+
+      <div class="form-group">
+        <label>有無臨床 ASCVD</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="ascvd" value="0" checked onchange="toggleAscvd()"> 無</label>
+          <label class="radio-label"><input type="radio" name="ascvd" value="1" onchange="toggleAscvd()"> 有</label>
+        </div>
+      </div>
+      <div class="form-group wide" id="ascvd-types-group" style="display:none">
+        <label>ASCVD 類型（可複選）</label>
+        <div class="tag-select" id="ascvd-types">
+          <span class="tag-option" data-val="ACS" onclick="toggleTag(this)">急性冠心症 ACS</span>
+          <span class="tag-option" data-val="MI_1yr" onclick="toggleTag(this)">一年內心肌梗塞</span>
+          <span class="tag-option" data-val="MI_multi" onclick="toggleTag(this)">≥2次心肌梗塞</span>
+          <span class="tag-option" data-val="PCI" onclick="toggleTag(this)">PCI 介入</span>
+          <span class="tag-option" data-val="CABG" onclick="toggleTag(this)">CABG 繞道</span>
+          <span class="tag-option" data-val="multivessel" onclick="toggleTag(this)">多支冠狀動脈阻塞</span>
+          <span class="tag-option" data-val="stroke" onclick="toggleTag(this)">缺血性中風/TIA</span>
+          <span class="tag-option" data-val="PAD" onclick="toggleTag(this)">周邊動脈病 PAD</span>
+          <span class="tag-option" data-val="carotid" onclick="toggleTag(this)">頸動脈狹窄</span>
+          <span class="tag-option" data-val="ACS_DM" onclick="toggleTag(this)">ACS 合併糖尿病</span>
+        </div>
+      </div>
+      <div class="form-group wide" id="ascvd-multi-group" style="display:none">
+        <label>有無多次/多部位 ASCVD 事件（極高風險判斷）</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="ascvd_multi" value="0" checked> 無（單次事件）</label>
+          <label class="radio-label"><input type="radio" name="ascvd_multi" value="1"> 有（多次或多部位）</label>
+        </div>
+      </div>
+
+      <!-- 影像學 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label" style="display:flex;align-items:center;gap:6px;">
+        影像學檢查
+        <i class="info-icon" data-tip="影像確認有顯著斑塊負擔（≥50% 直徑狹窄）即達非常高風險，包含：冠狀動脈攝影、CTA、頸動脈或周邊血管超音波">!</i>
+      </div>
+      <div class="form-group wide">
+        <label>影像確認 ≥50% 冠狀動脈/頸動脈/周邊血管狹窄</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="imaging_stenosis" value="0" checked> 無/未做</label>
+          <label class="radio-label"><input type="radio" name="imaging_stenosis" value="1"> 是，有 ≥50% 狹窄</label>
+        </div>
+      </div>
+
+      <!-- 可選 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label" style="display:flex;align-items:center;gap:6px;">
+        進階指標
+        <i class="info-icon" data-tip="CAC ≥400 分（台灣 2025 高風險條件之一）；CAC ≥100 或 Lp(a) ≥50 mg/dL 或 hsCRP ≥2 mg/L 任一陽性，可將低/中風險上調一級。">!</i>
+      </div>
+
+      <div class="form-group">
+        <label>CAC 分數 <i class="info-icon" data-tip="≥400 分：台灣 2025 直接列為高風險條件；≥100 分：低/中風險者上移一級">!</i></label>
+        <input type="number" id="cac" min="0" placeholder="Agatston 分">
+      </div>
+      <div class="form-group">
+        <label>Lp(a) <span class="unit">mg/dL</span></label>
+        <input type="number" id="lpa" min="0" max="500" placeholder="">
+      </div>
+      <div class="form-group">
+        <label>hsCRP <span class="unit">mg/L</span></label>
+        <input type="number" id="hscrp" min="0" step="0.1" placeholder="">
+      </div>
+
+      <!-- 目前用藥 -->
+      <div class="form-section-sep"></div>
+      <div class="form-section-label">目前用藥</div>
+
+      <div class="form-group wide">
+        <label>是否使用 Statin</label>
+        <div class="statin-row">
+          <select id="statin_drug">
+            <option value="">— 未使用 —</option>
+            <option value="rosu">Rosuvastatin（可定）</option>
+            <option value="ator">Atorvastatin（立普妥）</option>
+            <option value="simva">Simvastatin</option>
+            <option value="prava">Pravastatin</option>
+            <option value="fluva">Fluvastatin</option>
+            <option value="pitava">Pitavastatin</option>
+            <option value="lova">Lovastatin</option>
+          </select>
+          <select id="statin_dose">
+            <option value="">劑量</option>
+            <option value="low">低強度</option>
+            <option value="moderate">中強度</option>
+            <option value="high">高強度</option>
+          </select>
+          <div class="radio-group" style="align-items:center">
+            <span style="font-size:12px;color:var(--text-secondary)">Ezetimibe：</span>
+            <label class="radio-label"><input type="radio" name="eze" value="0" checked> 否</label>
+            <label class="radio-label"><input type="radio" name="eze" value="1"> 是</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section-sep"></div>
+      <div class="form-actions full" style="grid-column:1/-1">
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;text-align:center;">輸入欄位後自動計算（停止輸入約 0.3 秒後更新）</div>
+        <button class="btn-calc" onclick="calculate()">↓ 跳至結果</button>
+        <button class="btn-reset" onclick="resetForm()">↺ 重設</button>
+      </div>
+
+    </div><!-- /form-grid -->
+  </div><!-- /input-panel -->
+
+  <!-- Results -->
+  <div class="results-section" id="results">
+
+    <div class="results-grid">
+
+      <!-- NHI Coverage (first) -->
+      <div class="result-card nhi-card" id="card-nhi">
+        <div class="result-card-header">
+          <div>
+            <div class="guideline-label">健保署</div>
+            <div class="guideline-name">給付資格判斷</div>
+          </div>
+        </div>
+        <div class="result-card-body" id="body-nhi"></div>
+      </div>
+
+      <!-- Taiwan 2025 -->
+      <div class="result-card" id="card-tw">
+        <div class="result-card-header">
+          <div>
+            <div class="guideline-label">台灣</div>
+            <div class="guideline-name">2025 血脂指引</div>
+          </div>
+        </div>
+        <div class="result-card-body" id="body-tw"></div>
+      </div>
+
+      <!-- ESC 2025 -->
+      <div class="result-card" id="card-esc">
+        <div class="result-card-header">
+          <div>
+            <div class="guideline-label">歐洲心臟學會</div>
+            <div class="guideline-name">ESC 2024/2025</div>
+          </div>
+        </div>
+        <div class="result-card-body" id="body-esc"></div>
+      </div>
+
+      <!-- AHA PREVENT -->
+      <div class="result-card" id="card-aha">
+        <div class="result-card-header">
+          <div>
+            <div class="guideline-label">美國心臟學會</div>
+            <div class="guideline-name">AHA 2026 Dyslipidemia</div>
+          </div>
+        </div>
+        <div class="result-card-body" id="body-aha"></div>
+      </div>
+
+    </div><!-- /results-grid -->
+  </div><!-- /results -->
+
+</main>
+
+<footer class="page-footer">
+  <div class="footer-sources">
+    <strong>資料來源：</strong>
+    台灣脂質暨動脈硬化學會 2025 血脂異常臨床治療指引 ｜
+    ESC Guidelines on Cardiovascular Disease Prevention 2024 ｜
+    AHA 2026 ACC/AHA PREVENT Equations ｜
+    <a href="https://www.nhi.gov.tw/ch/np-2505-1.html" target="_blank" style="color:var(--accent-blue);text-decoration:none;">全民健康保險藥品給付規定 第 2.6 節</a>
+  </div>
+  <div class="disclaimer">
+    ⚠️ 本工具僅供醫護人員臨床參考，不取代個別病人評估與醫師判斷。
+  </div>
+  <div style="margin-top: 14px;">
+    <a class="feedback-link" id="feedbackLink"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"
+       target="_blank" rel="noopener">
+      <span id="feedbackIcon"></span>回報錯誤 / 提建議
+    </a>
+  </div>
+</footer>
+
+<!-- ── LIS 貼上 Modal ── -->
+<div class="lis-modal-backdrop" id="lisBackdrop" role="dialog" aria-modal="true" aria-labelledby="lisTitle">
+  <div class="lis-modal" onclick="event.stopPropagation()">
+    <div class="lis-modal-header">
+      <div class="lis-modal-title" id="lisTitle">
+        <span id="lisTitleIcon"></span>從 LIS 貼上自動填入
+      </div>
+      <button class="lis-modal-close" id="lisClose" aria-label="關閉">
+        <span id="lisCloseIcon"></span>
+      </button>
+    </div>
+    <div class="lis-modal-body">
+      <div class="lis-privacy-banner">
+        🔒 貼上的內容僅在本機瀏覽器處理，<b>不會上傳到任何伺服器</b>。按完「填入」後 textarea 會自動清空。
+      </div>
+      <div class="lis-modal-hint">
+        從成大醫院 LIS（檢驗報告查詢）<b>Ctrl + A 全選 → Ctrl + C 複製</b>，然後在下方貼上：
+      </div>
+      <textarea class="lis-textarea" id="lisInput"
+        placeholder="在這裡 Ctrl + V 貼上 LIS 全選複製的內容..."
+        spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+        data-do-not-share="true"></textarea>
+
+      <div class="lis-preview" id="lisPreview">
+        <div class="lis-preview-title">偵測結果</div>
+        <div class="lis-preview-empty">貼上 LIS 內容後，自動顯示能填入的欄位</div>
+      </div>
+      <div class="lis-warn-line" style="display:none;" id="lisWarnLine"></div>
+    </div>
+    <div class="lis-modal-footer">
+      <button class="lis-btn" id="lisCancel">取消</button>
+      <button class="lis-btn primary" id="lisApply" disabled>填入欄位</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+//  Helpers
+// ─────────────────────────────────────────────────────────────
+const getNum = id => parseFloat(document.getElementById(id).value) || null;
+const getRadio = name => {
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? (isNaN(el.value) ? el.value : Number(el.value)) : null;
+};
+const hasAscvd = () => getRadio('ascvd') === 1;
+
+function calcNonHDL() {
+  const tc = getNum('tc'), hdl = getNum('hdl'), tg = getNum('tg'), ldl = getNum('ldl');
+  const elNH = document.getElementById('nonhdl');
+  elNH.textContent = (tc && hdl) ? (tc - hdl).toFixed(0) + ' mg/dL' : '—';
+
+  // ── Calculated LDL（Friedewald）: 只在使用者「沒有」實測 LDL 時顯示
+  const grp = document.getElementById('calcLdlGroup');
+  const elCL = document.getElementById('calcLdl');
+  if (ldl) {
+    // 使用者已輸入實測 LDL → 隱藏計算欄位
+    grp.style.display = 'none';
+    elCL.textContent = '—';
+    elCL.style.color = '';
+    return;
+  }
+  // 沒輸入 LDL → 嘗試用 TC/HDL/TG 算
+  if (tc && hdl && tg) {
+    grp.style.display = '';
+    if (tg >= 400) {
+      // Friedewald 公式不適用
+      elCL.textContent = 'TG ≥ 400，公式不適用';
+      elCL.style.color = 'var(--accent-yellow, #d4a843)';
+    } else {
+      const calc = tc - hdl - tg / 5;
+      if (calc < 0) {
+        elCL.textContent = '計算值異常（< 0），請覆核數值';
+        elCL.style.color = 'var(--accent-yellow, #d4a843)';
+      } else {
+        elCL.textContent = calc.toFixed(0) + ' mg/dL';
+        elCL.style.color = '';
+      }
+    }
+  } else {
+    // TC/HDL/TG 缺一不可
+    grp.style.display = 'none';
+    elCL.textContent = '—';
+    elCL.style.color = '';
+  }
+}
+
+// ── Helper：取「實際可用的 LDL」（實測優先，否則 Friedewald）──
+// 回傳 { value: number|null, source: 'measured'|'calculated'|null }
+function getEffectiveLDL() {
+  const ldl = getNum('ldl');
+  if (ldl) return { value: ldl, source: 'measured' };
+  const tc = getNum('tc'), hdl = getNum('hdl'), tg = getNum('tg');
+  if (tc && hdl && tg && tg < 400) {
+    const calc = tc - hdl - tg / 5;
+    if (calc > 0) return { value: Math.round(calc), source: 'calculated' };
+  }
+  return { value: null, source: null };
+}
+
+function toggleAscvd() {
+  const yes = hasAscvd();
+  document.getElementById('ascvd-types-group').style.display = yes ? '' : 'none';
+  document.getElementById('ascvd-multi-group').style.display = yes ? '' : 'none';
+}
+
+function toggleTag(el) {
+  el.classList.toggle('selected');
+}
+
+function getAscvdTypes() {
+  return [...document.querySelectorAll('#ascvd-types .tag-option.selected')].map(e => e.dataset.val);
+}
+
+function resetForm() {
+  document.querySelectorAll('input[type="number"]').forEach(e => e.value = '');
+  document.querySelector('input[name="sex"][value="M"]').checked = true;
+  document.querySelector('input[name="bpmed"][value="0"]').checked = true;
+  document.querySelector('input[name="tgmed"][value="0"]').checked = true;
+  document.querySelector('input[name="dmmed"][value="0"]').checked = true;
+  document.querySelector('input[name="dm"][value="0"]').checked = true;
+  document.querySelector('input[name="ascvd"][value="0"]').checked = true;
+  document.querySelector('input[name="ascvd_multi"][value="0"]').checked = true;
+  document.querySelector('input[name="imaging_stenosis"][value="0"]').checked = true;
+  document.querySelector('input[name="smoking"][value="0"]').checked = true;
+  document.querySelector('input[name="htn"][value="0"]').checked = true;
+  document.querySelector('input[name="fh"][value="0"]').checked = true;
+  document.querySelector('input[name="fhcad"][value="0"]').checked = true;
+  document.querySelector('input[name="eze"][value="0"]').checked = true;
+  document.getElementById('statin_drug').value = '';
+  document.getElementById('statin_dose').value = '';
+  document.querySelectorAll('.tag-option').forEach(e => e.classList.remove('selected'));
+  document.getElementById('nonhdl').textContent = '—';
+  document.getElementById('calcLdlGroup').style.display = 'none';
+  document.getElementById('calcLdl').textContent = '—';
+  toggleAscvd();
+  document.getElementById('results').classList.remove('visible');
+}
+
+// ─────────────────────────────────────────────────────────────
+//  SCORE2 / SCORE2-OP — 10-yr fatal + non-fatal CVD risk
+//
+//  Sources:
+//   • SCORE2 (40–69 歲)：SCORE2 working group, Eur Heart J 2021;42:2439-54
+//     DOI: 10.1093/eurheartj/ehab309
+//   • SCORE2-OP (70+ 歲)：SCORE2-OP working group, Eur Heart J 2021;42:2455-67
+//     DOI: 10.1093/eurheartj/ehab312
+//
+//  Coefficients 取自 R package 'RiskScorescvd' (CRAN, MIT license)
+//  的 11_SCORE2_func.R，與兩篇 supplementary material 一致。
+//
+//  注意：原始 SCORE2 為歐洲族群設計，並依四個 risk region
+//  (Low / Moderate / High / Very-high) 校正絕對風險。台灣不在
+//  原始 region 分類中，因此本工具刻意不套用 region calibration，
+//  直接回報「未校正」的 baseline 10-yr 風險(即 step 2 結束時的數值)。
+//  此值反映的是相對風險強度，絕對數字應以官方 SCORE2 Asia-Pacific
+//  或本地 cohort 校正後的工具為準。
+//
+//  驗證(uncalibrated 模型，即移除 step 3):
+//    SCORE2 50 歲男性 smoker, SBP 140, TC 5.5, HDL 1.3 mmol/L
+//    → 對應 R package 中 xx_male2 的中間值 (約 5.5%)
+//    SCORE2-OP 73 歲 baseline (無危險因子)
+//    → 對應 R package 中 xx_male2_op / xx_female2_op
+// ─────────────────────────────────────────────────────────────
+
+// SCORE2 (40–69 歲)
+function _score2Base(age, sex, sbp, tc_mmol, hdl_mmol, smoking) {
+  const isMale = sex === 'M';
+  const ageC = (age - 60) / 5;
+  const sbpC = (sbp - 120) / 20;
+  const tcC  = tc_mmol - 6;
+  const hdlC = (hdl_mmol - 1.3) / 0.5;
+  const smk  = smoking ? 1 : 0;
+  const dm   = 0;  // SCORE2 不適用於糖尿病患者，此項固定 0
+
+  let lp;
+  if (isMale) {
+    lp = 0.3742 * ageC
+       + 0.6012 * smk
+       + 0.2777 * sbpC
+       + 0.6457 * dm
+       + 0.1458 * tcC
+       - 0.2698 * hdlC
+       - 0.0755 * ageC * smk
+       - 0.0255 * ageC * sbpC
+       - 0.0281 * ageC * tcC
+       + 0.0426 * ageC * hdlC
+       - 0.0983 * ageC * dm;
+  } else {
+    lp = 0.4648 * ageC
+       + 0.7744 * smk
+       + 0.3131 * sbpC
+       + 0.8096 * dm
+       + 0.1002 * tcC
+       - 0.2606 * hdlC
+       - 0.1088 * ageC * smk
+       - 0.0277 * ageC * sbpC
+       - 0.0226 * ageC * tcC
+       + 0.0613 * ageC * hdlC
+       - 0.1272 * ageC * dm;
+  }
+
+  const S0 = isMale ? 0.9605 : 0.9776;
+  return 1 - Math.pow(S0, Math.exp(lp));
+}
+
+// SCORE2-OP (70+ 歲)。OP 模型有自己的 mean linear predictor，需要減掉。
+function _score2OPBase(age, sex, sbp, tc_mmol, hdl_mmol, smoking) {
+  const isMale = sex === 'M';
+  const ageC = age - 73;
+  const sbpC = sbp - 150;
+  const tcC  = tc_mmol - 6;
+  const hdlC = hdl_mmol - 1.4;
+  const smk  = smoking ? 1 : 0;
+  const dm   = 0;
+
+  let lp, meanLP, S0;
+  if (isMale) {
+    lp = 0.0634 * ageC
+       + 0.4245 * dm
+       + 0.3524 * smk
+       + 0.0094 * sbpC
+       + 0.0850 * tcC
+       - 0.3564 * hdlC
+       - 0.0174 * ageC * dm
+       - 0.0247 * ageC * smk
+       - 0.0005 * ageC * sbpC
+       + 0.0073 * ageC * tcC
+       + 0.0091 * ageC * hdlC;
+    meanLP = 0.0929;
+    S0 = 0.7576;
+  } else {
+    lp = 0.0789 * ageC
+       + 0.6010 * dm
+       + 0.4921 * smk
+       + 0.0102 * sbpC
+       + 0.0605 * tcC
+       - 0.3040 * hdlC
+       - 0.0107 * ageC * dm
+       - 0.0255 * ageC * smk
+       - 0.0004 * ageC * sbpC
+       - 0.0009 * ageC * tcC
+       + 0.0154 * ageC * hdlC;
+    meanLP = 0.229;
+    S0 = 0.8082;
+  }
+
+  return 1 - Math.pow(S0, Math.exp(lp - meanLP));
+}
+
+// 對外統一介面：依年齡自動切換 SCORE2 / SCORE2-OP，回傳百分比
+function calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking) {
+  if (age == null || sbp == null || tc_mmol == null || hdl_mmol == null) return null;
+  const risk = age >= 70
+    ? _score2OPBase(age, sex, sbp, tc_mmol, hdl_mmol, smoking)
+    : _score2Base(age, sex, sbp, tc_mmol, hdl_mmol, smoking);
+  return Math.max(0, Math.min(1, risk)) * 100;
+}
+
+// ESC 2025 Focused Update on Dyslipidaemias — SCORE2/SCORE2-OP 風險分層
+//
+// 來源:Mach F et al., 2025 Focused Update of the 2019 ESC/EAS
+//      Guidelines for the management of dyslipidaemias.
+//      Eur Heart J 2025;46:4359-4378 (Table 3 / Figure 1)
+//
+// SCORE2 / SCORE2-OP 採固定閾值(不分年齡):
+//   Very high : ≥20%
+//   High      : ≥10% 且 <20%
+//   Moderate  : ≥2%  且 <10%
+//   Low       : <2%
+//
+// 回傳:
+//   { band: 'veryhigh'|'high'|'moderate'|'low'|null, label }
+function score2RiskBand(score2) {
+  if (score2 === null || score2 === undefined) return { band: null, label: null };
+  if (score2 >= 20) return { band: 'veryhigh', label: '≥20%' };
+  if (score2 >= 10) return { band: 'high',     label: '≥10% 且 <20%' };
+  if (score2 >= 2)  return { band: 'moderate', label: '≥2% 且 <10%' };
+                    return { band: 'low',      label: '<2%' };
+}
+
+// ─────────────────────────────────────────────────────────────
+//  AHA PREVENT 10-yr ASCVD risk (base equation)
+//
+//  Source: Khan SS et al., Circulation. 2024;149(6):430–449.
+//          DOI: 10.1161/CIRCULATIONAHA.123.067626
+//  Coefficients: 與 preventr R package (sysdata.rda) 完全一致，
+//                該 package 由 Khan 原論文 PI 認可、MIT license。
+//
+//  驗證 (Khan 2024 supplemental Table S25 sample case):
+//    女性 50 歲, SBP 160, on bp_tx, TC 200, HDL 45, DM, eGFR 90, BMI 35
+//    → 10-yr ASCVD 0.092 (此實作 0.0920) ✓
+//
+//  本工具僅實作 base 模型 (不含 UACR / HbA1c / SDI 延伸)，
+//  此即 AHA 對一般臨床推薦使用的版本。
+//  ASCVD outcome 的 BMI 係數為 0，因此未收集 BMI 不影響結果。
+// ─────────────────────────────────────────────────────────────
+
+// Base 10-yr ASCVD coefficients (from preventr::sysdata.rda)
+const PREVENT_ASCVD_10YR = {
+  female: {age10:0.719883, nonHdl:0.1176967, hdl:-0.151185, sbpLt:-0.0835358, sbpGe:0.3592852, dm:0.8348585, smk:0.4831078, bmiLt:0.0, bmiGe:0.0, egfrLt:0.4864619, egfrGe:0.0397779, bpTx:0.2265309, statin:-0.0592374, txSbp:-0.0395762, txNonHdl:0.0844423, ageNonHdl:-0.0567839, ageHdl:0.0325692, ageSbpGe:-0.1035985, ageDm:-0.2417542, ageSmk:-0.0791142, ageBmiGe:0.0, ageEgfrLt:-0.1671492, k0:-3.819975},
+  male:   {age10:0.7099847, nonHdl:0.1658663, hdl:-0.1144285, sbpLt:-0.2837212, sbpGe:0.3239977, dm:0.7189597, smk:0.3956973, bmiLt:0.0, bmiGe:0.0, egfrLt:0.3690075, egfrGe:0.0203619, bpTx:0.2036522, statin:-0.0865581, txSbp:-0.0322916, txNonHdl:0.114563, ageNonHdl:-0.0300005, ageHdl:0.0232747, ageSbpGe:-0.0927024, ageDm:-0.2018525, ageSmk:-0.0970527, ageBmiGe:0.0, ageEgfrLt:-0.1217081, k0:-3.500655},
+};
+
+function calcPrevent(age, sex, sbp, tc_mgdl, hdl_mgdl, dm, smoking, bpMed, dmMed, egfr) {
+  // 對應舊 signature；statin 沒收，預設 false。BMI 沒收，預設 25 (centering)。
+  // ASCVD 模型對 BMI 係數為 0，預設值不影響結果。
+  const sexKey = sex === 'M' ? 'male' : 'female';
+  const statinFlag = 0;
+  const bmi  = 25;
+  const eGFR = egfr || 90;  // 90 = centering; 缺值時不貢獻 logit
+
+  const MGDL_PER_MMOL = 38.67;
+  const nonHdlMmol = (tc_mgdl - hdl_mgdl) / MGDL_PER_MMOL;
+  const hdlMmol    = hdl_mgdl / MGDL_PER_MMOL;
+
+  const age10  = (age - 55) / 10;
+  const dmF    = dm ? 1 : 0;
+  const smkF   = smoking ? 1 : 0;
+  const bpTxF  = bpMed ? 1 : 0;
+
+  const nonHdl = nonHdlMmol - 3.5;
+  const hdl    = (hdlMmol - 1.3) / 0.3;
+
+  // Piece-wise splines
+  const sbpLt = (Math.min(sbp, 110) - 110) / 20;
+  const sbpGe = (Math.max(sbp, 110) - 130) / 20;
+  const bmiLt = (Math.min(bmi, 30) - 25) / 5;
+  const bmiGe = (Math.max(bmi, 30) - 30) / 5;
+  const egfrLt = (Math.min(eGFR, 60) - 60) / -15;
+  const egfrGe = (Math.max(eGFR, 60) - 90) / -15;
+
+  const t = {
+    age10, nonHdl, hdl, sbpLt, sbpGe,
+    dm: dmF, smk: smkF, bmiLt, bmiGe, egfrLt, egfrGe,
+    bpTx: bpTxF, statin: statinFlag,
+    txSbp:    bpTxF * sbpGe,
+    txNonHdl: statinFlag * nonHdl,
+    ageNonHdl: age10 * nonHdl,
+    ageHdl:    age10 * hdl,
+    ageSbpGe:  age10 * sbpGe,
+    ageDm:     age10 * dmF,
+    ageSmk:    age10 * smkF,
+    ageBmiGe:  age10 * bmiGe,
+    ageEgfrLt: age10 * egfrLt,
+  };
+
+  const b = PREVENT_ASCVD_10YR[sexKey];
+  let lp = b.k0;
+  for (const k in t) lp += (b[k] || 0) * t[k];
+
+  const risk = 100 / (1 + Math.exp(-lp));
+  return Math.max(0, Math.min(99, risk));
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Risk classification helpers
+// ─────────────────────────────────────────────────────────────
+function riskBadge(level, text) {
+  return `<div class="risk-badge risk-${level}">${text}</div>`;
+}
+
+function metricRow(label, value, cls = '') {
+  return `<div class="result-metric">
+    <span class="metric-label">${label}</span>
+    <span class="metric-value ${cls}">${value}</span>
+  </div>`;
+}
+
+function reasoningBox(text) {
+  return `<div class="reasoning-box">
+    <div class="reasoning-label">推論依據</div>
+    ${text}
+  </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Taiwan 2025
+// ─────────────────────────────────────────────────────────────
+function calcTaiwan(p) {
+  const { age, sex, ldl, ldlSource, tc, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist,
+          smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis,
+          ascvdTypes, cac, lpa, hscrp } = p;
+  let level, ldlTarget, nonhdlTarget, reasons = [];
+
+  const nonhdl = tc && hdl ? tc - hdl : null;
+  const isMale = sex === 'M';
+
+  // ── 代謝症候群（≥3 項符合，共5項）──
+  const metSyn = (() => {
+    let count = 0; const items = [];
+    // 1. 腹部肥胖
+    if (waist && ((isMale && waist >= 90) || (!isMale && waist >= 80)))
+      { count++; items.push(`腹部肥胖（腰圍 ${waist}cm）`); }
+    // 2. 血壓偏高 ≥130/85 或用降壓藥
+    if (bpMed || (sbp && sbp >= 130) || (dbp && dbp >= 85))
+      { count++; items.push(bpMed ? '血壓用藥' : `血壓偏高（${sbp||'?'}/${dbp||'?'} mmHg）`); }
+    // 3. 空腹血糖偏高 ≥100 或用降血糖藥
+    if (p.dmMed || (p.fpg && p.fpg >= 100))
+      { count++; items.push(p.dmMed ? '血糖用藥' : `空腹血糖 ${p.fpg} mg/dL`); }
+    // 4. TG 偏高 ≥150 或用 TG 藥
+    if (tgmed || (tg && tg >= 150))
+      { count++; items.push(tgmed ? 'TG 血脂用藥' : `TG ${tg} mg/dL`); }
+    // 5. HDL-C 偏低（男<40、女<50）
+    if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50)))
+      { count++; items.push(`HDL-C ${hdl} mg/dL（男<40/女<50）`); }
+    return { count, items, positive: count >= 3 };
+  })();
+
+  // ── CKD 定義（UACR ≥30 mg/g 或 eGFR <60，至少持續3個月）──
+  const hasCKD = (egfr && egfr < 60) || (uacr && uacr >= 30);
+  const ckdDesc = [];
+  if (egfr && egfr < 60) ckdDesc.push(`eGFR ${egfr} mL/min/1.73m²`);
+  if (uacr && uacr >= 30) ckdDesc.push(`UACR ${uacr} mg/g`);
+
+  // ── 年齡危險因子（男≥45歲、女≥55歲）──
+  const ageRF = age && ((isMale && age >= 45) || (!isMale && age >= 55));
+
+  // ── CAC 切點 ──
+  const cac400 = cac !== null && cac >= 400;
+
+  // ══════════════════════════════════════
+  //  極高風險（LDL 目標 <55 mg/dL）
+  //  定義：冠狀動脈疾病合併以下任一
+  //    1) 一年內心肌梗塞
+  //    2) ≥2次心肌梗塞病史
+  //    3) 多支冠狀動脈阻塞
+  //    4) 急性冠心症合併糖尿病
+  //    5) 周邊動脈疾病或頸動脈狹窄
+  //  或：周邊動脈疾病合併 冠狀動脈疾病 或 頸動脈狹窄
+  // ══════════════════════════════════════
+  const hasCAD = ascvd && ascvdTypes.some(t =>
+    ['ACS','MI_1yr','MI_multi','PCI','CABG','multivessel'].includes(t));
+  const hasPAD = ascvd && ascvdTypes.includes('PAD');
+  const hasCarotid = ascvd && ascvdTypes.includes('carotid');
+
+  const extremeConditions = [];
+  if (hasCAD) {
+    if (ascvdTypes.includes('MI_1yr'))      extremeConditions.push('一年內心肌梗塞');
+    if (ascvdTypes.includes('MI_multi'))    extremeConditions.push('≥2次心肌梗塞病史');
+    if (ascvdTypes.includes('multivessel')) extremeConditions.push('多支冠狀動脈阻塞');
+    if (ascvdTypes.includes('ACS_DM') || (ascvdTypes.includes('ACS') && dm))
+                                            extremeConditions.push('急性冠心症合併糖尿病');
+    if (hasPAD)    extremeConditions.push('合併周邊動脈疾病');
+    if (hasCarotid) extremeConditions.push('合併頸動脈狹窄');
+    if (!hasPAD && hasCarotid && hasCAD) extremeConditions.push('冠狀動脈疾病合併頸動脈狹窄');
+  }
+  // PAD + CAD 或 PAD + 頸動脈狹窄
+  const polyvascExtreme = hasPAD && (hasCAD || hasCarotid);
+
+  if (extremeConditions.length > 0 || polyvascExtreme) {
+    level = 'extreme'; ldlTarget = 55; nonhdlTarget = 85;
+    if (extremeConditions.length > 0)
+      reasons.push(`冠狀動脈疾病合併：${extremeConditions.join('、')} → 極高風險`);
+    if (polyvascExtreme && !extremeConditions.length)
+      reasons.push(`周邊動脈疾病合併${hasCAD ? '冠狀動脈疾病' : ''}${hasCarotid ? '頸動脈狹窄' : ''} → 極高風險`);
+  }
+
+  // ══════════════════════════════════════
+  //  非常高風險（LDL 目標 <70 mg/dL）
+  //  1. 臨床確診 ASCVD（急性冠心症、血管再通術、缺血性中風/TIA、周邊動脈疾病）
+  //  2. 影像確認 ≥50% 直徑狹窄
+  // ══════════════════════════════════════
+  else if (ascvd || imaging_stenosis) {
+    level = 'veryhigh'; ldlTarget = 70; nonhdlTarget = 100;
+    if (ascvd)
+      reasons.push('臨床確診 ASCVD（' + (ascvdTypes.length ? ascvdTypes.join('、') : '已記錄') + '）→ 非常高風險');
+    if (imaging_stenosis)
+      reasons.push('影像確認 ≥50% 直徑狹窄（冠狀動脈攝影/CTA/頸動脈或周邊血管超音波）→ 非常高風險');
+  }
+
+  // ══════════════════════════════════════
+  //  高風險（LDL 目標 <100 mg/dL）
+  //  1. 糖尿病
+  //  2. 慢性腎臟病（UACR ≥30 mg/g 或 eGFR <60）
+  //  3. LDL-C ≥190 mg/dL
+  //  4. CAC ≥400 分
+  // ══════════════════════════════════════
+  else if (dm || hasCKD || (ldl && ldl >= 190) || cac400) {
+    level = 'high'; ldlTarget = 100; nonhdlTarget = 130;
+    if (dm)           reasons.push('糖尿病 → 高風險');
+    if (hasCKD)       reasons.push(`慢性腎臟病（${ckdDesc.join('、')}）→ 高風險`);
+    if (ldl && ldl >= 190) reasons.push(`LDL-C ${ldl} mg/dL ≥190 → 高風險（可能 FH，建議家族篩檢）`);
+    if (cac400)       reasons.push(`冠狀動脈鈣化分數 CAC ${cac} ≥400 → 高風險`);
+  }
+
+  // ══════════════════════════════════════
+  //  中/低風險：依心血管危險因子數量
+  //  共 6 項危險因子：
+  //    1) 高血壓
+  //    2) 年齡（男≥45、女≥55）
+  //    3) 早發冠心病家族史（男≤55、女≤65）
+  //    4) HDL-C 偏低（男<40、女<50）
+  //    5) 抽菸
+  //    6) 代謝症候群（≥3項符合）
+  //  ≥2項 → 中度風險
+  //  1項  → 低度風險
+  //  0項  → 視為低度風險（無危險因子）
+  // ══════════════════════════════════════
+  else {
+    let rfCount = 0; const rfList = [];
+
+    if (htn)   { rfCount++; rfList.push('高血壓'); }
+    if (ageRF) { rfCount++; rfList.push(`年齡（${age}歲，${isMale ? '男≥45' : '女≥55'}歲）`); }
+    if (fhcad) { rfCount++; rfList.push(`早發冠心病家族史`); }
+    if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50)))
+               { rfCount++; rfList.push(`HDL-C 偏低（${hdl} mg/dL）`); }
+    if (smoking) { rfCount++; rfList.push('抽菸'); }
+    if (metSyn.positive)
+               { rfCount++; rfList.push(`代謝症候群（${metSyn.count}/5項：${metSyn.items.join('、')}）`); }
+
+    if (rfList.length)
+      reasons.push(`心血管危險因子（${rfCount} 項）：${rfList.join('、')}`);
+
+    // 注意：CAC 100-399、Lp(a)≥50、hsCRP≥2 為文獻建議的輔助評估指標
+    // 原始台灣 2025 共識未明確規定這些指標可直接上移風險等級
+    // 此處保留提示，供臨床醫師參考
+    const advNotes = [];
+    if (cac !== null && cac >= 100 && cac < 400) advNotes.push(`CAC ${cac}（100-399，建議考慮積極治療）`);
+    if (lpa !== null && lpa >= 50)  advNotes.push(`Lp(a) ${lpa} mg/dL（≥50，獨立心血管風險因子）`);
+    if (hscrp !== null && hscrp >= 2) advNotes.push(`hsCRP ${hscrp} mg/L（≥2，發炎指標升高）`);
+    if (advNotes.length)
+      reasons.push(`⚠️ 輔助評估指標（供醫師參考，不自動上移等級）：${advNotes.join('、')}`);
+
+    if (rfCount >= 2) {
+      level = 'moderate'; ldlTarget = 115; nonhdlTarget = 145;
+      reasons.push(`≥2 項危險因子 → 中度風險`);
+    } else if (rfCount === 1) {
+      level = 'low'; ldlTarget = 130; nonhdlTarget = 160;
+      reasons.push(`1 項危險因子 → 低度風險`);
+    } else {
+      level = 'low'; ldlTarget = 130; nonhdlTarget = 160;
+      reasons.push('無主要心血管危險因子 → 低度風險');
+    }
+  }
+
+  const labels = { low:'低度風險', moderate:'中度風險', high:'高度風險', veryhigh:'非常高風險', extreme:'極高風險' };
+  const ldlOK = ldl
+    ? (ldl < ldlTarget ? '✓ 已達標' : `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）`)
+    : '—';
+  const metSynRow = metSyn.count > 0
+    ? metricRow(`代謝症候群（${metSyn.count}/5 項）`, metSyn.positive ? '✓ 符合（≥3項）' : `未符合（${metSyn.count}/5項）`)
+    : '';
+
+  let html = riskBadge(level, labels[level]);
+  html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
+  html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
+  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL${ldlSource === 'calculated' ? ' <span style="color:var(--text-muted);font-size:12px;">(Friedewald 推算)</span>' : ''}`);
+  html += metricRow('達標狀況', ldlOK);
+  if (nonhdl) html += metricRow('目前 non-HDL-C', `${nonhdl} mg/dL`);
+  html += metSynRow;
+  html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+  return html;
+}
+
+function calcESC(p) {
+  const { age, sex, sbp, dbp, tc, hdl, ldl, ldlSource, smoking, ascvd, ascvd_multi,
+          ascvdTypes, dm, fh, egfr, statin, statinDose, imaging_stenosis } = p;
+  let level, ldlTarget, nonhdlTarget, score2 = null;
+  let reasons = [];
+
+  const tc_mmol  = tc  ? tc  / 38.67 : null;
+  const ldl_mmol = ldl ? ldl / 38.67 : null;
+  const hdl_mmol = hdl ? hdl / 38.67 : null;
+
+  const hasSevereCKD = egfr && egfr < 30;
+  const hasModCKD    = egfr && egfr >= 30 && egfr < 60;
+
+  // DM target organ damage 判斷：eGFR<45、UACR>300、已知視網膜病變/神經病變
+  // 簡化：CKD(eGFR<60)、UACR≥300 視為靶器官損傷
+  const dmTargetOrgan = dm && (hasSevereCKD || (egfr && egfr < 45) || (p.uacr && p.uacr >= 300));
+
+  // DM ≥3 major RF（高血壓、抽菸、LDL高、CKD）
+  const dmMajorRFcount = [p.htn, smoking, (ldl_mmol && ldl_mmol > 2.6), hasModCKD].filter(Boolean).length;
+
+  // Polyvascular: 冠狀動脈 + 周邊動脈同時
+  const hasPolyvasc = ascvd &&
+    (ascvdTypes.includes('PAD') || ascvdTypes.includes('carotid')) &&
+    (ascvdTypes.some(t => ['ACS','MI_1yr','PCI','CABG','MI_multi','multivessel'].includes(t)));
+
+  // Recurrent event on max statin
+  const onMaxStatin = statin && statinDose === 'high';
+  const hasRecurrentOnStatin = ascvd && ascvd_multi && onMaxStatin;
+
+  // ══════════════════════════════════════════
+  //  計算 SCORE2（先算，後面多處會用到）
+  // ══════════════════════════════════════════
+  if (age && sbp && tc_mmol && hdl_mmol) {
+    score2 = calcScore2(age, sex, sbp, tc_mmol, hdl_mmol, smoking);
+  }
+  const score2Band = score2RiskBand(score2);  // {band, label}
+
+  // ══════════════════════════════════════════
+  //  Extreme risk
+  //  - ASCVD 患者在最大耐受 statin 下仍復發
+  //  - Polyvascular disease
+  // ══════════════════════════════════════════
+  if (hasRecurrentOnStatin || hasPolyvasc) {
+    level = 'extreme'; ldlTarget = 40; nonhdlTarget = 55;
+    if (hasRecurrentOnStatin)
+      reasons.push('ASCVD 患者在最大耐受 statin 治療下仍發生復發性血管事件 → Extreme risk（LDL 目標 <40 mg/dL）');
+    if (hasPolyvasc)
+      reasons.push('Polyvascular disease（冠狀動脈 + 周邊/頸動脈同時受累）→ Extreme risk');
+  }
+
+  // ══════════════════════════════════════════
+  //  Very high risk（符合任一即是）
+  //  1. Documented ASCVD（臨床或影像）
+  //  2. DM + 靶器官損傷 or ≥3 主要危險因子 or T1DM長期(>20yr)
+  //  3. Severe CKD（eGFR <30）
+  //  4. SCORE2 ≥20%
+  //  5. FH + ASCVD 或另一主要危險因子
+  // ══════════════════════════════════════════
+  else if (
+    ascvd ||
+    imaging_stenosis ||
+    dmTargetOrgan ||
+    (dm && dmMajorRFcount >= 3) ||
+    hasSevereCKD ||
+    (score2Band.band === 'veryhigh') ||
+    (fh && (ascvd || p.htn || smoking || hasModCKD || (ldl_mmol && ldl_mmol > 4.9)))
+  ) {
+    level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
+
+    if (ascvd)
+      reasons.push('Documented ASCVD（' + (ascvdTypes.length ? ascvdTypes.join('、') : '臨床已記錄') + '）→ Very high risk');
+    if (imaging_stenosis)
+      reasons.push('影像確認顯著斑塊（≥50% 狹窄）→ Very high risk');
+    if (dmTargetOrgan)
+      reasons.push(`DM + 靶器官損傷（${[hasSevereCKD&&`eGFR ${egfr}`, (p.uacr&&p.uacr>=300)&&`UACR ${p.uacr}`].filter(Boolean).join('、')}）→ Very high risk`);
+    if (dm && dmMajorRFcount >= 3)
+      reasons.push(`DM + ≥3 主要危險因子（${[p.htn&&'高血壓', smoking&&'抽菸', (ldl_mmol&&ldl_mmol>2.6)&&`LDL ${ldl}mg/dL`, hasModCKD&&`CKD(eGFR${egfr})`].filter(Boolean).join('、')}）→ Very high risk`);
+    if (hasSevereCKD)
+      reasons.push(`Severe CKD（eGFR ${egfr} <30 mL/min/1.73m²）→ Very high risk`);
+    if (score2Band.band === 'veryhigh')
+      reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → Very high risk`);
+    if (fh && !ascvd)
+      reasons.push('FH + 另一主要危險因子 → Very high risk');
+  }
+
+  // ══════════════════════════════════════════
+  //  High risk（符合任一即是）
+  //  1. TC >8 mmol/L (>310 mg/dL) 或 LDL-C >4.9 mmol/L (>190 mg/dL) 或 BP ≥180/110
+  //  2. FH 無其他主要危險因子
+  //  3. DM 無靶器官損傷，病程 ≥10yr 或有另一額外危險因子
+  //  4. Moderate CKD（eGFR 30–59）
+  //  5. SCORE2 ≥10% and <20%
+  // ══════════════════════════════════════════
+  else if (
+    (tc_mmol && tc_mmol > 8) ||
+    (ldl_mmol && ldl_mmol > 4.9) ||
+    (sbp && sbp >= 180) || (dbp && dbp >= 110) ||
+    (fh && !ascvd) ||
+    (dm && !dmTargetOrgan && dmMajorRFcount >= 1) ||
+    hasModCKD ||
+    (score2Band.band === 'high')
+  ) {
+    level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+
+    if (tc_mmol && tc_mmol > 8)
+      reasons.push(`TC ${tc} mg/dL（>${(8*38.67).toFixed(0)} mg/dL, >8 mmol/L）→ High risk`);
+    if (ldl_mmol && ldl_mmol > 4.9)
+      reasons.push(`LDL-C ${ldl} mg/dL（>190 mg/dL, >4.9 mmol/L）→ High risk`);
+    if ((sbp && sbp >= 180) || (dbp && dbp >= 110))
+      reasons.push(`BP ${sbp||'?'}/${dbp||'?'} mmHg ≥180/110 → High risk`);
+    if (fh && !ascvd)
+      reasons.push('FH 無其他主要危險因子 → High risk');
+    if (dm && !dmTargetOrgan)
+      reasons.push(`DM 無靶器官損傷${dmMajorRFcount >= 1 ? '，有額外危險因子' : '，病程可能≥10年'} → High risk`);
+    if (hasModCKD)
+      reasons.push(`Moderate CKD（eGFR ${egfr} 30–59 mL/min/1.73m²）→ High risk`);
+    if (score2Band.band === 'high')
+      reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → High risk`);
+  }
+
+  // ══════════════════════════════════════════
+  //  Moderate risk（ESC 2025 Focused Update Table 3）：
+  //    1. SCORE2 ≥2% 且 <10%
+  //    2. Young DM（T1DM<35y / T2DM<50y）病程<10y 且無其他危險因子
+  // ══════════════════════════════════════════
+  else if (
+    (score2Band.band === 'moderate') ||
+    (dm && age < 50 && dmMajorRFcount === 0)
+  ) {
+    level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+    if (score2Band.band === 'moderate')
+      reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → Moderate risk`);
+    if (dm && age < 50 && dmMajorRFcount === 0)
+      reasons.push('Young DM（T2DM <50歲，病程<10年且無其他危險因子）→ Moderate risk');
+  }
+
+  // ══════════════════════════════════════════
+  //  Low risk：SCORE2 <2%
+  //  注意:ESC 2025 Recommendation Table 1 對 Low risk + LDL 3.0–4.9 mmol/L
+  //       (116–<190 mg/dL) 的個案,「藥物治療 should be considered」(Class IIa, A)
+  // ══════════════════════════════════════════
+  else if (score2Band.band === 'low') {
+    level = 'low'; ldlTarget = 116; nonhdlTarget = 145;
+    reasons.push(`SCORE2 ${score2.toFixed(1)}%，${score2Band.label} → Low risk`);
+    if (ldl_mmol && ldl_mmol >= 3.0 && ldl_mmol < 4.9)
+      reasons.push(`LDL-C ${ldl} mg/dL 偏高（3.0–<4.9 mmol/L）→ ESC 2025 建議考慮藥物治療（Class IIa, A）`);
+  }
+
+  // 資料不足
+  else {
+    level = null;
+    reasons.push('需年齡、SBP、TC、HDL-C 才能計算 SCORE2');
+  }
+
+  // SCORE2 主要貢獻因子（獨立 chips 區塊，不再塞在 reasons 裡）
+  let drivers = [];
+  if (score2 !== null) {
+    if (smoking) drivers.push('抽菸');
+    if (sbp && sbp >= 140) drivers.push(`SBP ${sbp} mmHg`);
+    if (tc_mmol && tc_mmol >= 6) drivers.push(`TC ${tc} mg/dL`);
+    if (hdl_mmol && hdl_mmol < 1.0) drivers.push(`HDL ${hdl} mg/dL 偏低`);
+    if (age >= 60) drivers.push(`年齡 ${age} 歲`);
+  }
+
+  const labels = {
+    low:      'Low risk（低度）',
+    moderate: 'Moderate risk（中度）',
+    high:     'High risk（高度）',
+    veryhigh: 'Very high risk（非常高）',
+    extreme:  'Extreme risk（極高）'
+  };
+  const ldlOK = ldl
+    ? (ldlTarget && ldl < ldlTarget ? '✓ 已達標' : (ldlTarget ? `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）` : '—'))
+    : '—';
+
+  // ── 渲染 ──
+  let html = '';
+  if (level === null) {
+    // 資料不足，不顯示 risk badge / 不亂設目標
+    html += `<div class="insufficient-notice">
+      <div class="ins-title">資料不足</div>
+      需年齡、SBP、總膽固醇、HDL-C 才能依 ESC 2024 指引分類風險
+    </div>`;
+    html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+    return html;
+  }
+
+  html += riskBadge(level, labels[level]);
+  if (score2 !== null) {
+    const modelLabel = age >= 70 ? 'SCORE2-OP' : 'SCORE2';
+    html += `<div class="score-display">
+      <div class="score-big score">${score2.toFixed(1)}<small style="font-size:14px">%</small></div>
+      <div class="score-label">${modelLabel} 10年 CVD 風險</div>
+    </div>`;
+  }
+  html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
+  html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
+  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL${ldlSource === 'calculated' ? ' <span style="color:var(--text-muted);font-size:12px;">(Friedewald 推算)</span>' : ''}`);
+  html += metricRow('達標狀況', ldlOK);
+  html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+  if (score2 !== null && drivers.length) {
+    const modelLabel = age >= 70 ? 'SCORE2-OP' : 'SCORE2';
+    html += `<div class="drivers-block">
+      <div class="drivers-label">${modelLabel} 主要貢獻因子</div>
+      <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
+    </div>`;
+  }
+  return html;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  AHA PREVENT 2023
+// ─────────────────────────────────────────────────────────────
+function calcAHA(p) {
+  const { age, sex, sbp, tc, hdl, ldl, ldlSource, dm, smoking, bpMed, dmMed, egfr,
+          ascvd, ascvd_multi, ascvdTypes, fh, cac, imaging_stenosis } = p;
+  let level, ldlTarget, nonhdlTarget, prevent = null;
+  let reasons = [];
+
+  const nonhdl = tc && hdl ? tc - hdl : null;
+  const isMale = sex === 'M';
+
+  // ══════════════════════════════════════
+  //  二級預防（有臨床 ASCVD）
+  // ══════════════════════════════════════
+  if (ascvd) {
+    // ── AHA 2026 二級預防 Very high-risk vs Not very high-risk ──
+    // Figure 11 / Figure 12 + 內文:Very high-risk ASCVD 包含
+    //   • ASCVD 合併 CKD (Figure 11 標題明確列出)
+    //   • 在最大耐受 statin 治療下仍復發 vascular event
+    //   • Polyvascular disease (冠狀動脈 + 周邊/頸動脈)
+    //   • Multivessel coronary disease
+    //   • Severe CKD (eGFR <30)
+    //   • DM 合併 ASCVD
+    //   • 近期 ACS / MI within 1 yr
+    const hasCAD = ascvdTypes.some(t =>
+      ['ACS','MI_1yr','MI_multi','PCI','CABG','multivessel'].includes(t));
+    const hasPAD = ascvdTypes.includes('PAD');
+    const hasCarotid = ascvdTypes.includes('carotid');
+    const hasPolyvasc = (hasPAD || hasCarotid) && hasCAD;
+    const onMaxStatin = p.statin && p.statinDose === 'high';
+    const recurrentOnStatin = ascvd_multi && onMaxStatin;
+    const hasCKD = egfr && egfr < 60;
+    const recentACS = ascvdTypes.some(t => ['ACS','MI_1yr'].includes(t));
+    const multivessel = ascvdTypes.includes('multivessel') || ascvdTypes.includes('MI_multi');
+
+    const veryHighFlags = [];
+    if (hasCKD)            veryHighFlags.push(`CKD（eGFR ${egfr}）合併 ASCVD`);
+    if (recurrentOnStatin) veryHighFlags.push('在最大耐受 statin 下復發 vascular event');
+    if (hasPolyvasc)       veryHighFlags.push('Polyvascular disease（冠狀動脈 + 周邊/頸動脈）');
+    if (multivessel)       veryHighFlags.push('多支冠狀動脈或多次 MI');
+    if (recentACS)         veryHighFlags.push('近期 ACS 或 1 年內 MI');
+    if (dm)                veryHighFlags.push('糖尿病合併 ASCVD');
+
+    if (veryHighFlags.length > 0) {
+      level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
+      reasons.push('臨床 ASCVD → 二級預防（AHA 2026 Figure 11: Very high-risk）');
+      reasons.push(`ASCVD 類型：${ascvdTypes.length ? ascvdTypes.join('、') : '已記錄'}`);
+      reasons.push(`Very high-risk 條件：${veryHighFlags.join('、')}`);
+      reasons.push('目標：LDL-C <55 mg/dL（且降幅 ≥50%），non-HDL-C <85 mg/dL（COR 1）');
+      if (fh) reasons.push('合併 FH（建議 apoB <55 mg/dL）');
+    } else {
+      // Not very high-risk ASCVD：穩定 ASCVD、無上述 enhancer
+      level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+      reasons.push('臨床 ASCVD → 二級預防（AHA 2026 Figure 12: Not very high-risk）');
+      reasons.push(`ASCVD 類型：${ascvdTypes.length ? ascvdTypes.join('、') : '已記錄'}`);
+      reasons.push('目標：LDL-C <70 mg/dL（降幅 ≥50%），non-HDL-C <100 mg/dL（COR 1）');
+      reasons.push('Optional goal：LDL-C <55 mg/dL、non-HDL-C <85 mg/dL（COR 2a）');
+      if (fh) reasons.push('合併 FH');
+    }
+  }
+
+  // ══════════════════════════════════════
+  //  LDL-C ≥190 mg/dL（嚴重高膽固醇血症，獨立章節）
+  // ══════════════════════════════════════
+  else if (ldl && ldl >= 190) {
+    // 無 ASCVD，無 FH/其他危險因子/亞臨床動脈硬化 → LDL <100
+    // 無 ASCVD，但有 FH 或其他危險因子 → LDL <70
+    const hasFHorRF = fh || (cac && cac >= 100) || imaging_stenosis ||
+                      [dm, smoking, p.htn, egfr && egfr < 60].filter(Boolean).length >= 1;
+
+    if (hasFHorRF) {
+      level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+      reasons.push(`LDL-C ${ldl} mg/dL ≥190（嚴重高膽固醇血症）合併 FH/危險因子/亞臨床動脈硬化`);
+      reasons.push('目標：LDL-C <70 mg/dL，non-HDL-C <100 mg/dL');
+      if (cac && cac >= 100) reasons.push(`CAC ${cac} ≥100 → 亞臨床動脈硬化證據`);
+    } else {
+      level = 'high'; ldlTarget = 100; nonhdlTarget = 130;
+      reasons.push(`LDL-C ${ldl} mg/dL ≥190（嚴重高膽固醇血症）`);
+      reasons.push('無其他危險因子/FH/亞臨床動脈硬化 → 目標 LDL-C <100 mg/dL');
+    }
+  }
+
+  // ══════════════════════════════════════
+  //  亞臨床動脈硬化（CAC，無 ASCVD）
+  // ══════════════════════════════════════
+  else if (cac !== null && cac >= 1) {
+    if (cac >= 1000) {
+      level = 'veryhigh'; ldlTarget = 55; nonhdlTarget = 85;
+      reasons.push(`CAC ${cac} ≥1000（Extensive）→ 風險等同二級預防`);
+      reasons.push('目標：LDL-C <55 mg/dL，non-HDL-C <85 mg/dL');
+    } else if (cac >= 300) {
+      level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+      reasons.push(`CAC ${cac} 300–999（Severe）`);
+      reasons.push('目標：LDL-C <70 mg/dL，non-HDL-C <100 mg/dL');
+    } else if (cac >= 100) {
+      level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+      reasons.push(`CAC ${cac} 100–299 或 ≥75 百分位`);
+      reasons.push('目標：LDL-C <70 mg/dL，non-HDL-C <100 mg/dL');
+    } else {
+      // CAC 1–99，<75 百分位
+      level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+      reasons.push(`CAC ${cac} 1–99（Mild，<75 百分位）`);
+      reasons.push('目標：LDL-C <100 mg/dL，non-HDL-C <130 mg/dL');
+    }
+  }
+
+  // ══════════════════════════════════════
+  //  糖尿病（無 ASCVD，獨立路徑）
+  // ══════════════════════════════════════
+  else if (dm && !ascvd) {
+    if (age && age >= 40 && age <= 75) {
+      // 計算 PREVENT
+      if (age && sbp && tc && hdl) {
+        prevent = calcPrevent(age, sex, sbp, tc, hdl, dm, smoking, bpMed, dmMed, egfr || 75);
+      }
+      const highRisk = prevent !== null ? (prevent >= 10) :
+                       [p.htn, smoking, egfr && egfr < 60, ldl && ldl >= 130].filter(Boolean).length >= 2;
+
+      if (highRisk || (prevent !== null && prevent >= 10)) {
+        level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+        reasons.push(`DM 40–75歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}%，≥10%` : '，多重危險因子'} → High risk`);
+        reasons.push('目標：LDL-C <70 mg/dL，non-HDL-C <100 mg/dL');
+      } else {
+        level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+        reasons.push(`DM 40–75歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}%，<10%` : ''} → Moderate risk`);
+        reasons.push('目標：LDL-C <100 mg/dL，non-HDL-C <130 mg/dL');
+      }
+    } else if (age && age > 75) {
+      level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+      reasons.push('DM >75歲 → Benefit-risk discussion');
+      reasons.push('目標：LDL-C <100 mg/dL，non-HDL-C <130 mg/dL');
+    } else {
+      // 20–39 歲：計算 PREVENT，若 ≥3% 或 30年風險 ≥10% 考慮 moderate statin
+      if (age && sbp && tc && hdl) {
+        prevent = calcPrevent(age, sex, sbp, tc, hdl, dm, smoking, bpMed, dmMed, egfr || 75);
+      }
+      if (prevent !== null && prevent >= 3) {
+        level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+        reasons.push(`DM 20–39歲，PREVENT ${prevent.toFixed(1)}%，≥3% → 考慮 moderate statin`);
+      } else {
+        level = 'low'; ldlTarget = 130; nonhdlTarget = 160;
+        reasons.push(`DM 20–39歲${prevent !== null ? `，PREVENT ${prevent.toFixed(1)}%，<3%` : ''} → 評估 DM 特定風險增強因子`);
+      }
+    }
+  }
+
+  // ══════════════════════════════════════
+  //  一級預防（LDL 70–189，無 ASCVD/DM/嚴重高膽）
+  //  用 PREVENT-ASCVD 計算 10年風險
+  // ══════════════════════════════════════
+  else if (age && sbp && tc && hdl) {
+    prevent = calcPrevent(age, sex, sbp, tc, hdl, dm, smoking, bpMed, dmMed, egfr || 75);
+
+    if (prevent < 3) {
+      level = 'low'; ldlTarget = 160; nonhdlTarget = 190;
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，<3% → Low risk`);
+      if (ldl && ldl >= 160) {
+        ldlTarget = 100; nonhdlTarget = 130;
+        reasons.push(`LDL-C ${ldl} mg/dL 160–189，10年風險低但 LDL 偏高`);
+      }
+    } else if (prevent < 5) {
+      level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，3% 至 <5% → Borderline risk`);
+
+    } else if (prevent < 10) {
+      level = 'moderate'; ldlTarget = 100; nonhdlTarget = 130;
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，5% 至 <10% → Intermediate risk`);
+
+    } else {
+      level = 'high'; ldlTarget = 70; nonhdlTarget = 100;
+      reasons.push(`PREVENT ${prevent.toFixed(1)}%，≥10% → High risk`);
+      reasons.push('AHA 2026 Recommendation 8（COR 2a, B-R）：高風險一級預防 LDL-C <70 mg/dL，non-HDL-C <100 mg/dL');
+      reasons.push('AHA 2026 Recommendation 7（COR 1, A）：建議 high-intensity statin、LDL-C 降幅 ≥50%');
+    }
+
+  } else {
+    level = null;
+    reasons.push('需年齡、SBP、TC、HDL-C 才能計算 PREVENT');
+  }
+
+  // PREVENT 主要貢獻因子（獨立 chips 區塊）
+  let drivers = [];
+  if (prevent !== null) {
+    if (smoking) drivers.push('抽菸');
+    if (dm) drivers.push('糖尿病');
+    if (sbp && sbp >= 130) drivers.push(`SBP ${sbp} mmHg`);
+    if (egfr && egfr < 60) drivers.push(`eGFR ${egfr}（CKD）`);
+    if (hdl && hdl < 40) drivers.push(`HDL ${hdl} mg/dL 偏低`);
+    if (age >= 60) drivers.push(`年齡 ${age} 歲`);
+  }
+
+  const labels = {
+    low:      'Low risk（低度）',
+    moderate: 'Borderline / Intermediate',
+    high:     'High risk（高度）',
+    veryhigh: 'Very high risk（非常高）',
+    extreme:  'Extreme risk（極高）'
+  };
+  const ldlOK = ldl
+    ? (ldlTarget && ldl < ldlTarget ? '✓ 已達標' : (ldlTarget ? `✗ 未達標（差 ${(ldl - ldlTarget).toFixed(0)} mg/dL）` : '—'))
+    : '—';
+
+  // ── 渲染 ──
+  let html = '';
+  if (level === null) {
+    html += `<div class="insufficient-notice">
+      <div class="ins-title">資料不足</div>
+      需年齡、SBP、總膽固醇、HDL-C 才能依 AHA 2026 指引分類風險
+    </div>`;
+    html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+    return html;
+  }
+
+  html += riskBadge(level, labels[level]);
+  if (prevent !== null) {
+    html += `<div class="score-display">
+      <div class="score-big score">${prevent.toFixed(1)}<small style="font-size:14px">%</small></div>
+      <div class="score-label">PREVENT-ASCVD 10年風險</div>
+    </div>`;
+  }
+  html += metricRow('LDL-C 目標', `< ${ldlTarget} mg/dL`, 'target');
+  html += metricRow('non-HDL-C 目標', `< ${nonhdlTarget} mg/dL`, 'target');
+  if (ldl) html += metricRow('目前 LDL-C', `${ldl} mg/dL${ldlSource === 'calculated' ? ' <span style="color:var(--text-muted);font-size:12px;">(Friedewald 推算)</span>' : ''}`);
+  html += metricRow('達標狀況', ldlOK);
+  html += reasoningBox(reasons.map(r => `• ${r}`).join('<br>'));
+  if (prevent !== null && drivers.length) {
+    html += `<div class="drivers-block">
+      <div class="drivers-label">PREVENT 主要貢獻因子</div>
+      <div class="drivers-chips">${drivers.map(d => `<span class="driver-chip">${d}</span>`).join('')}</div>
+    </div>`;
+  }
+  return html;
+}
+
+function calcNHI(p) {
+  const { ldl, ldlSource, tc, hdl, tg, tgmed, ascvd, ascvdTypes, dm, htn, smoking,
+          fhcad, statin, statinDose, eze, egfr, age, sex, sbp, dbp, bpMed } = p;
+  let html = '';
+
+  const isMale = sex === 'M';
+
+  // ── 心血管疾病判斷（健保定義）──
+  // 冠狀動脈粥狀硬化（心導管/缺氧心電圖/負荷試驗）、TIA、有症狀頸動脈狹窄、腦梗塞
+  const hasCV = ascvd;
+
+  // 急性冠心症/PCI/CABG（第一類）
+  const hasAcuteOrRevascularization = ascvd && ascvdTypes.some(t =>
+    ['ACS', 'MI_1yr', 'MI_multi', 'PCI', 'CABG'].includes(t));
+
+  // 危險因子（健保定義，共5項）
+  const rfItems = [];
+  if (htn) rfItems.push('高血壓');
+  if (age && ((isMale && age >= 45) || (!isMale && age >= 55))) rfItems.push(`年齡（${age}歲）`);
+  if (p.fhcad) rfItems.push('早發冠心病家族史');
+  if (smoking) rfItems.push('吸菸');
+  if (hdl && hdl < 40) rfItems.push(`HDL-C ${hdl} mg/dL <40`);
+  const rfCount = rfItems.length;
+
+  // ════════════════════════════════════
+  //  一、降膽固醇藥物（Statin）給付
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">降膽固醇藥物（Statin）</div>`;
+
+  let statinCovered = false;
+  let statinCategory = '';
+  let statinLDLTarget = null;
+  let statinTCTarget = null;
+  const statinReasons = [];
+
+  if (hasAcuteOrRevascularization) {
+    // 第一類：急性冠心症/PCI/CABG
+    statinCategory = '第一類（急性冠心症/PCI/CABG）';
+    statinLDLTarget = 70;
+    if (ldl && ldl >= 70) {
+      statinCovered = true;
+      statinReasons.push(`LDL-C ${ldl} mg/dL ≥70 → 符合給付`);
+    } else if (ldl) {
+      statinReasons.push(`LDL-C ${ldl} mg/dL <70，目前已達目標值，暫不符合起始給付條件`);
+    } else {
+      statinCovered = true;
+      statinReasons.push('急性冠心症/PCI/CABG 病史，建議檢測 LDL-C 確認');
+    }
+    statinReasons.push('目標：LDL-C <70 mg/dL');
+    statinReasons.push('追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月');
+
+  } else if (hasCV || dm) {
+    // 第二類：心血管疾病或糖尿病
+    statinCategory = '第二類（心血管疾病或糖尿病）';
+    statinLDLTarget = 100; statinTCTarget = 160;
+    const ldlOK = ldl && ldl >= 100;
+    const tcOK  = tc  && tc  >= 160;
+    if (ldlOK || tcOK) {
+      statinCovered = true;
+      const triggers = [];
+      if (tcOK)  triggers.push(`TC ${tc} mg/dL ≥160`);
+      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥100`);
+      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`);
+    } else {
+      const vals = [];
+      if (tc)  vals.push(`TC ${tc} mg/dL <160`);
+      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <100`);
+      statinReasons.push(`${vals.join('、')}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：TC <160 mg/dL 或 LDL-C <100 mg/dL');
+    statinReasons.push('可與藥物治療並行（不需非藥物治療期）');
+
+  } else if (rfCount >= 2) {
+    // 第三類：≥2 個危險因子
+    statinCategory = `第三類（≥2個危險因子：${rfItems.join('、')}）`;
+    statinLDLTarget = 130; statinTCTarget = 200;
+    const ldlOK = ldl && ldl >= 130;
+    const tcOK  = tc  && tc  >= 200;
+    if (ldlOK || tcOK) {
+      statinCovered = true;
+      const triggers = [];
+      if (tcOK)  triggers.push(`TC ${tc} mg/dL ≥200`);
+      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥130`);
+      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`);
+    } else {
+      const vals = [];
+      if (tc)  vals.push(`TC ${tc} mg/dL <200`);
+      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <130`);
+      statinReasons.push(`${vals.join('、')}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：TC <200 mg/dL 或 LDL-C <130 mg/dL');
+    statinReasons.push('需先有 3–6 個月非藥物治療');
+
+  } else if (rfCount === 1) {
+    // 第四類：1 個危險因子
+    statinCategory = `第四類（1個危險因子：${rfItems.join('、')}）`;
+    statinLDLTarget = 160; statinTCTarget = 240;
+    const ldlOK = ldl && ldl >= 160;
+    const tcOK  = tc  && tc  >= 240;
+    if (ldlOK || tcOK) {
+      statinCovered = true;
+      const triggers = [];
+      if (tcOK)  triggers.push(`TC ${tc} mg/dL ≥240`);
+      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥160`);
+      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`);
+    } else {
+      const vals = [];
+      if (tc)  vals.push(`TC ${tc} mg/dL <240`);
+      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <160`);
+      statinReasons.push(`${vals.join('、')}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：TC <240 mg/dL 或 LDL-C <160 mg/dL');
+    statinReasons.push('需先有 3–6 個月非藥物治療');
+
+  } else {
+    // 第五類：0 個危險因子
+    statinCategory = '第五類（0個危險因子）';
+    statinLDLTarget = 190;
+    if (ldl && ldl >= 190) {
+      statinCovered = true;
+      statinReasons.push(`LDL-C ${ldl} mg/dL ≥190 → 符合給付`);
+    } else {
+      statinReasons.push(`LDL-C ${ldl ? ldl + ' mg/dL <190' : '未填'}，未達起始給付條件`);
+    }
+    statinReasons.push('目標：LDL-C <190 mg/dL');
+    statinReasons.push('需先有 3–6 個月非藥物治療');
+  }
+
+  // 危險因子列表
+  if (rfCount > 0) statinReasons.push(`健保危險因子（${rfCount}/5）：${rfItems.join('、')}`);
+
+  html += `<div class="coverage-item ${statinCovered ? 'covered' : 'not-covered'}">
+    <span class="coverage-icon">${statinCovered ? '✅' : '❌'}</span>
+    <span class="coverage-text">
+      <strong>Statin｜${statinCategory}</strong><br>
+      ${statinReasons.map(r => `• ${r}`).join('<br>')}
+    </span>
+  </div>`;
+
+  // 跨工具快速跳轉：若符合 statin 給付，列出常見 statin 給付查詢連結
+  if (statinCovered) {
+    html += `
+      <div class="quick-action-row">
+        <span class="quick-action-label">查健保給付規定</span>
+        <a href="index.html?q=Atorvastatin" class="quick-action-chip">Atorvastatin</a>
+        <a href="index.html?q=Rosuvastatin" class="quick-action-chip">Rosuvastatin</a>
+        <a href="index.html?q=Pitavastatin" class="quick-action-chip">Pitavastatin</a>
+        <a href="index.html?q=Simvastatin"  class="quick-action-chip">Simvastatin</a>
+      </div>
+    `;
+  }
+
+  html += `</div>`;
+
+  // ════════════════════════════════════
+  //  二、降 TG 藥物給付
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">降 TG 藥物（Fibrate / 魚油等）</div>`;
+
+  let tgCovered = false;
+  const tgReasons = [];
+  const tcHdlRatio = (tc && hdl && hdl > 0) ? (tc / hdl) : null;
+  const hdlLow = hdl && hdl < 40;
+
+  if (hasCV || dm) {
+    // 心血管疾病或糖尿病：TG ≥200 且（TC/HDL >5 或 HDL <40）
+    if (tg && tg >= 500) {
+      tgCovered = true;
+      tgReasons.push(`TG ${tg} mg/dL ≥500 → 符合給付（可與藥物治療並行）`);
+      tgReasons.push('目標：TG <500 mg/dL');
+    } else if (tg && tg >= 200 && (tcHdlRatio && tcHdlRatio > 5 || hdlLow)) {
+      tgCovered = true;
+      const cond = [];
+      if (tcHdlRatio && tcHdlRatio > 5) cond.push(`TC/HDL-C ${tcHdlRatio.toFixed(1)} >5`);
+      if (hdlLow) cond.push(`HDL-C ${hdl} mg/dL <40`);
+      tgReasons.push(`TG ${tg} mg/dL ≥200 且（${cond.join(' 或 ')}）→ 符合給付`);
+      tgReasons.push('目標：TG <200 mg/dL');
+      tgReasons.push('可與藥物治療並行（不需非藥物治療期）');
+    } else {
+      if (tg) {
+        const missing = [];
+        if (tg < 200) missing.push(`TG ${tg} mg/dL <200`);
+        else {
+          const condMissing = [];
+          if (!tcHdlRatio || tcHdlRatio <= 5) condMissing.push(`TC/HDL-C ${tcHdlRatio ? tcHdlRatio.toFixed(1) : '未知'} ≤5`);
+          if (!hdlLow) condMissing.push(`HDL-C ${hdl || '未填'} mg/dL ≥40`);
+          missing.push(`不符合附加條件（${condMissing.join(' 且 ')}）`);
+        }
+        tgReasons.push(`未達給付條件：${missing.join('、')}`);
+      } else {
+        tgReasons.push('未填 TG 值，無法判斷');
+      }
+    }
+  } else {
+    // 無心血管疾病
+    if (tg && tg >= 500) {
+      tgCovered = true;
+      tgReasons.push(`TG ${tg} mg/dL ≥500 → 符合給付（可與藥物治療並行）`);
+      tgReasons.push('目標：TG <500 mg/dL');
+    } else if (tg && tg >= 200 && (tcHdlRatio && tcHdlRatio > 5 || hdlLow)) {
+      tgCovered = true;
+      const cond = [];
+      if (tcHdlRatio && tcHdlRatio > 5) cond.push(`TC/HDL-C ${tcHdlRatio.toFixed(1)} >5`);
+      if (hdlLow) cond.push(`HDL-C ${hdl} mg/dL <40`);
+      tgReasons.push(`TG ${tg} mg/dL ≥200 且（${cond.join(' 或 ')}）→ 符合給付`);
+      tgReasons.push('目標：TG <200 mg/dL');
+      tgReasons.push('需先有 3–6 個月非藥物治療');
+    } else {
+      if (tg) {
+        const missing = [];
+        if (tg < 200) missing.push(`TG ${tg} mg/dL <200`);
+        else {
+          const condMissing = [];
+          if (!tcHdlRatio || tcHdlRatio <= 5) condMissing.push(`TC/HDL-C ≤5`);
+          if (!hdlLow) condMissing.push(`HDL-C ≥40 mg/dL`);
+          missing.push(`不符合附加條件（${condMissing.join(' 且 ')}）`);
+        }
+        tgReasons.push(`未達給付條件：${missing.join('、')}`);
+      } else {
+        tgReasons.push('未填 TG 值，無法判斷');
+      }
+    }
+  }
+  tgReasons.push('追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月');
+
+  html += `<div class="coverage-item ${tgCovered ? 'covered' : 'not-covered'}">
+    <span class="coverage-icon">${tgCovered ? '✅' : '❌'}</span>
+    <span class="coverage-text">
+      <strong>降 TG 藥物</strong><br>
+      ${tgReasons.map(r => `• ${r}`).join('<br>')}
+    </span>
+  </div>`;
+  html += `</div>`;
+
+  // ════════════════════════════════════
+  //  三、Ezetimibe 給付
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">Ezetimibe（如 Ezetrol）</div>`;
+  let ezeCovered = false;
+  const ezeReasons = [];
+
+  if (!statinCovered) {
+    ezeReasons.push('Statin 本身不符合給付條件，Ezetimibe 亦不予給付');
+  } else {
+    const onStatin = statin !== '';
+    if (!onStatin) {
+      ezeCovered = true;
+      ezeReasons.push('未使用 Statin（Statin 不耐受）→ 可單獨申請 Ezetimibe 給付');
+      ezeReasons.push('條件：Severe myalgia 或 Myositis');
+    } else {
+      // 已用 statin，看是否未達標
+      if (statinLDLTarget && ldl && ldl >= statinLDLTarget) {
+        ezeCovered = true;
+        ezeReasons.push(`使用 Statin ≥3 個月後 LDL-C ${ldl} mg/dL 仍 ≥ 目標值 ${statinLDLTarget} mg/dL → 可合併 Ezetimibe`);
+      } else if (statinTCTarget && tc && tc >= statinTCTarget) {
+        ezeCovered = true;
+        ezeReasons.push(`使用 Statin ≥3 個月後 TC ${tc} mg/dL 仍 ≥ 目標值 ${statinTCTarget} mg/dL → 可合併 Ezetimibe`);
+      } else {
+        ezeReasons.push(`使用 Statin 後血脂已達目標（LDL-C <${statinLDLTarget}${statinTCTarget ? ' 且 TC <'+statinTCTarget : ''} mg/dL）→ 暫不符合 Ezetimibe 給付`);
+      }
+    }
+    ezeReasons.push('適用診斷：原發性高膽固醇血症、HoFH、植物脂醇血症');
+  }
+
+  html += `<div class="coverage-item ${ezeCovered ? 'covered' : (statinCovered ? 'conditional' : 'not-covered')}">
+    <span class="coverage-icon">${ezeCovered ? '✅' : (statinCovered ? '⚠️' : '❌')}</span>
+    <span class="coverage-text">
+      <strong>Ezetimibe</strong><br>
+      ${ezeReasons.map(r => `• ${r}`).join('<br>')}
+    </span>
+  </div>`;
+
+  if (ezeCovered) {
+    html += `
+      <div class="quick-action-row">
+        <span class="quick-action-label">查健保給付規定</span>
+        <a href="index.html?q=Ezetimibe" class="quick-action-chip">Ezetimibe</a>
+      </div>
+    `;
+  }
+
+  html += `</div>`;
+
+  // ════════════════════════════════════
+  //  四、PCSK9 抑制劑
+  // ════════════════════════════════════
+  html += `<div class="nhi-section"><div class="nhi-section-title">PCSK9 抑制劑<br><small style="color:var(--text-muted);font-weight:400">Evolocumab（Repatha）/ Alirocumab（Praluent）</small></div>`;
+  let pcsk9Covered = false;
+  let pcsk9Class = 'not-covered';
+  const pcsk9Reasons = [];
+
+  // 重大心血管事件定義
+  const majorEventTypes = ['ACS', 'MI_1yr', 'MI_multi', 'PCI', 'CABG', 'stroke'];
+  const hasMajorEvent = ascvd && ascvdTypes.some(t => majorEventTypes.includes(t));
+
+  // 最大耐受 statin 判斷
+  const onHighStatin = statin !== '' && statinDose === 'high';
+  // 高強度 statin = rosuvastatin 20mg 或 atorvastatin ≥40mg（以 high 代表）
+  const onMaxStatinPlusEze = onHighStatin && eze;
+  // Statin 不耐受且用 ezetimibe
+  const statinIntolerantWithEze = statin === '' && eze;
+
+  if (!ascvd) {
+    pcsk9Reasons.push('無臨床 ASCVD → 不符合 PCSK9 抑制劑給付（重大心血管事件後一年內才符合）');
+  } else if (!hasMajorEvent) {
+    pcsk9Reasons.push(`ASCVD 類型（${ascvdTypes.join('、')}）不屬於重大心血管事件（需為心肌梗塞、冠狀動脈/其他動脈血管再通術、或動脈硬化相關缺血性腦中風）`);
+  } else {
+    pcsk9Reasons.push(`重大心血管事件：${ascvdTypes.filter(t => majorEventTypes.includes(t)).join('、')} ✓`);
+
+    if (onMaxStatinPlusEze) {
+      // 情境 A：高強度 statin ≥3個月 + ezetimibe ≥3個月
+      if (ldl && ldl > 100) {
+        pcsk9Covered = true; pcsk9Class = 'covered';
+        pcsk9Reasons.push(`情境 A：高強度 Statin + Ezetimibe 10mg 各 ≥3 個月後，LDL-C ${ldl} mg/dL 仍 >100 mg/dL → 符合給付`);
+      } else {
+        pcsk9Reasons.push(`情境 A：使用高強度 Statin + Ezetimibe，但 LDL-C ${ldl || '未填'} mg/dL ≤100 → 不符合`);
+      }
+    } else if (statinIntolerantWithEze) {
+      // 情境 B：statin 不耐受，用 ezetimibe
+      if (ldl && ldl > 100) {
+        pcsk9Covered = true; pcsk9Class = 'covered';
+        pcsk9Reasons.push(`情境 B：Statin 禁忌/不耐受，使用含 Ezetimibe 10mg 的降脂藥 ≥3 個月，LDL-C ${ldl} mg/dL 仍 >100 mg/dL → 符合給付`);
+      } else {
+        pcsk9Reasons.push(`情境 B：Statin 不耐受 + Ezetimibe，但 LDL-C ${ldl || '未填'} mg/dL ≤100 → 不符合`);
+      }
+    } else {
+      pcsk9Class = 'conditional';
+      const missing = [];
+      if (!onHighStatin && statin !== '') missing.push('Statin 劑量需升至高強度（rosuvastatin 20mg 或 atorvastatin ≥40mg）');
+      if (!eze) missing.push('尚未加上 Ezetimibe 10mg');
+      if (onHighStatin && !eze) missing.push('需再加 Ezetimibe 10mg ≥3 個月後評估');
+      pcsk9Reasons.push(`尚未完成最大耐受療程：${missing.join('；')}`);
+    }
+
+    if (!pcsk9Covered) {
+      pcsk9Reasons.push('需事前審查，每次核准 12 個月');
+      pcsk9Reasons.push('LDL-C 下降未達 30% → 不再給付');
+    } else {
+      pcsk9Reasons.push('需事前審查（附表二-D），每次核准 12 個月');
+      pcsk9Reasons.push('最高劑量：每兩週 1 支；LDL-C 下降未達 30% → 不再給付');
+      pcsk9Reasons.push('不可同時使用其他 PCSK9 抑制劑');
+    }
+  }
+
+  html += `<div class="coverage-item ${pcsk9Class}">
+    <span class="coverage-icon">${pcsk9Covered ? '✅' : (pcsk9Class === 'conditional' ? '⚠️' : '❌')}</span>
+    <span class="coverage-text">
+      <strong>PCSK9 抑制劑</strong><br>
+      ${pcsk9Reasons.map(r => `• ${r}`).join('<br>')}
+    </span>
+  </div>`;
+
+  if (pcsk9Covered) {
+    html += `
+      <div class="quick-action-row">
+        <span class="quick-action-label">查健保給付規定</span>
+        <a href="index.html?q=Evolocumab" class="quick-action-chip">Evolocumab</a>
+        <a href="index.html?q=Alirocumab" class="quick-action-chip">Alirocumab</a>
+      </div>
+    `;
+  }
+
+  html += `</div>`;
+
+  return html;
+}
+
+// 內部計算函式 — 不顯示 alert、不 scroll、僅在資料足夠時更新結果
+function calculateAuto() {
+  const age = getNum('age');
+  const sex = getRadio('sex');
+  // 至少需要 age + sex 才開始計算，否則靜默
+  if (!age || !sex) return false;
+
+  const tc = getNum('tc');
+  const effLDL = getEffectiveLDL();
+  const ldl = effLDL.value;
+  const ldlSource = effLDL.source;
+  const hdl = getNum('hdl');
+  const tg = getNum('tg');
+  const tgmed = getRadio('tgmed');
+  const sbp = getNum('sbp');
+  const dbp = getNum('dbp');
+  const bpMed = getRadio('bpmed');
+  const fpg = getNum('fpg');
+  const hba1c = getNum('hba1c');
+  const dmMed = getRadio('dmmed');
+  const egfr = getNum('egfr');
+  const uacr = getNum('uacr');
+  const waist = getNum('waist');
+  const smoking = getRadio('smoking');
+  const htn = getRadio('htn');
+  const fh = getRadio('fh');
+  const fhcad = getRadio('fhcad');
+  const dm = getRadio('dm') || (fpg && fpg >= 126) || (hba1c && hba1c >= 6.5) ? 1 : 0;
+  const ascvd = getRadio('ascvd');
+  const ascvd_multi = getRadio('ascvd_multi');
+  const imaging_stenosis = getRadio('imaging_stenosis');
+  const ascvdTypes = getAscvdTypes();
+  const cac = getNum('cac');
+  const lpa = getNum('lpa');
+  const hscrp = getNum('hscrp');
+  const statin = document.getElementById('statin_drug').value;
+  const statinDose = document.getElementById('statin_dose').value;
+  const eze = getRadio('eze');
+
+  const p = { age, sex, tc, ldl, ldlSource, hdl, tg, tgmed, sbp, dbp, bpMed, egfr, uacr, waist, smoking, htn, fh, fhcad, dm, ascvd, ascvd_multi, imaging_stenosis, ascvdTypes, cac, lpa, hscrp, statin, statinDose, eze, fpg, hba1c, dmMed };
+
+  document.getElementById('body-tw').innerHTML = calcTaiwan(p);
+  document.getElementById('body-esc').innerHTML = calcESC(p);
+  document.getElementById('body-aha').innerHTML = calcAHA(p);
+  document.getElementById('body-nhi').innerHTML = calcNHI(p);
+
+  document.getElementById('results').classList.add('visible');
+  return true;
+}
+
+// 按鈕觸發的計算 — 會 alert + scroll
+function calculate() {
+  const age = getNum('age');
+  const sex = getRadio('sex');
+  if (!age || !sex) {
+    alert('請至少輸入年齡與性別');
+    return;
+  }
+  calculateAuto();
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── 自動計算：監聽所有 form 變動，debounce 350ms ──
+(function setupAutoCalc() {
+  let debounceTimer = null;
+  function trigger() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => { calculateAuto(); }, 350);
+  }
+  const panel = document.querySelector('.input-panel');
+  if (panel) {
+    panel.addEventListener('input', trigger);
+    panel.addEventListener('change', trigger);
+  }
+})();
+// ── Smart tooltip positioning ──
+// Uses mousemove to place the ::after pseudo via a CSS var trick isn't possible,
+// so we use a real floating div instead.
+(function() {
+  const tip = document.createElement('div');
+  tip.id = 'tooltip-popup';
+  Object.assign(tip.style, {
+    position: 'fixed',
+    background: '#1c2740',
+    border: '1px solid rgba(88,166,255,0.3)',
+    borderRadius: '8px',
+    color: '#e6edf3',
+    fontSize: '13px',
+    fontWeight: '400',
+    lineHeight: '1.6',
+    padding: '8px 12px',
+    width: '300px',
+    whiteSpace: 'normal',
+    pointerEvents: 'none',
+    opacity: '0',
+    transition: 'opacity 0.15s',
+    zIndex: '9999',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.55)',
+    maxWidth: 'calc(100vw - 32px)',
+  });
+  document.body.appendChild(tip);
+
+  document.querySelectorAll('.info-icon').forEach(icon => {
+    icon.addEventListener('mouseenter', function(e) {
+      tip.textContent = this.dataset.tip;
+      tip.style.opacity = '1';
+      positionTip(e, this);
+    });
+    icon.addEventListener('mousemove', function(e) {
+      positionTip(e, this);
+    });
+    icon.addEventListener('mouseleave', function() {
+      tip.style.opacity = '0';
+    });
+  });
+
+  function positionTip(e, icon) {
+    const TIP_W = 300, TIP_H = 100, MARGIN = 12;
+    const rect = icon.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight;
+
+    // Prefer above, centred on icon
+    let left = rect.left + rect.width / 2 - TIP_W / 2;
+    let top = rect.top - TIP_H - 10;
+
+    // Clamp horizontally
+    if (left < MARGIN) left = MARGIN;
+    if (left + TIP_W > vw - MARGIN) left = vw - TIP_W - MARGIN;
+
+    // If not enough room above, flip below
+    if (top < MARGIN) top = rect.bottom + 8;
+
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+  }
+})();
+
+// ── Inject tab SVG icons ──
+document.querySelectorAll('.ti[data-icon]').forEach(el => {
+  const k = el.dataset.icon;
+  if (window.ICON && window.ICON[k]) el.innerHTML = window.ICON[k];
+});
+// Feedback icon
+const fbIcon = document.getElementById('feedbackIcon');
+if (fbIcon && window.ICON) fbIcon.innerHTML = window.ICON.message;
+
+// ═══════════════════════════════════════════════════════════════
+//  LIS 貼上自動填入
+//  從成大醫院 LIS 全選複製的純文字中，用 regex 抓出檢驗值
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const PASTE_BTN_ICON = window.ICON && window.ICON.copy;
+  const CLOSE_ICON = window.ICON && window.ICON.close;
+  document.getElementById('lisPasteIcon').innerHTML = PASTE_BTN_ICON || '📋';
+  document.getElementById('lisTitleIcon').innerHTML = PASTE_BTN_ICON || '📋';
+  document.getElementById('lisCloseIcon').innerHTML = CLOSE_ICON || '×';
+
+  const btn       = document.getElementById('lisPasteBtn');
+  const backdrop  = document.getElementById('lisBackdrop');
+  const closeBtn  = document.getElementById('lisClose');
+  const cancelBtn = document.getElementById('lisCancel');
+  const applyBtn  = document.getElementById('lisApply');
+  const textarea  = document.getElementById('lisInput');
+  const preview   = document.getElementById('lisPreview');
+  const warnLine  = document.getElementById('lisWarnLine');
+
+  // 解析結果暫存（按下「填入」時使用）
+  let parsedResult = null;
+
+  function openModal() {
+    backdrop.classList.add('open');
+    textarea.value = '';
+    parsedResult = null;
+    renderPreview(null);
+    setTimeout(() => textarea.focus(), 50);
+  }
+  function closeModal() {
+    backdrop.classList.remove('open');
+    // 安全：關閉時自動清空，避免遺留病人資料
+    textarea.value = '';
+    parsedResult = null;
+  }
+  btn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+
+  // ── 解析器 ───────────────────────────────────────────────────
+  // 從 LIS 貼上文字中抓取結構化資料
+  //
+  // 觀察 NCKU LIS 格式：
+  //  • 「生日(年齡) 1995-06-12(30歲)」 → 年齡可從 (NN歲) 取
+  //  • 「姓名(性別) XXX(女)」 → 性別 (男)/(女)
+  //  • 檢驗值格式： "CREA(mg/dL)\t\t0.62" 或 "CHOL(mg/dL)\t\t176"
+  //    通常欄位名 + 單位 + tab + (空格或值) + tab + (值或空格)
+  //  • 特殊值如 "≧90"、"<10" → 解析為界限值
+  //  • 同一份報告可能重複出現（LIS 複製的特性），只取第一個有效值
+
+  function parsePastedText(raw) {
+    if (!raw || !raw.trim()) return null;
+
+    const text = raw.replace(/\r/g, '');
+    const result = {
+      fields: {},      // { fieldId: { value, label, unit } }
+      raw: text,
+      warnings: []
+    };
+
+    // ── 1. 年齡 ──
+    // pattern: (30歲) 或 30 歲
+    const ageMatch = text.match(/\((\d{1,3})歲\)/) || text.match(/年齡[^\d]{0,10}(\d{1,3})\s*歲/);
+    if (ageMatch) {
+      const age = parseInt(ageMatch[1]);
+      if (age >= 1 && age <= 120) {
+        result.fields.age = { value: age, label: '年齡', unit: '歲' };
+      }
+    }
+
+    // ── 2. 性別 ──
+    // pattern: (男) 或 (女) 在姓名後
+    if (/姓名[\s\S]{0,40}\(男\)/.test(text)) {
+      result.fields.sex = { value: 'M', label: '性別', unit: '', display: '男' };
+    } else if (/姓名[\s\S]{0,40}\(女\)/.test(text)) {
+      result.fields.sex = { value: 'F', label: '性別', unit: '', display: '女' };
+    }
+
+    // ── 3. 檢驗值（核心解析）──
+    // 設計策略：對每個目標欄位寫一個 (label patterns + value extractor)
+    // 因為 LIS 同一欄位可能重複出現多次，加上同列可能有空白與值兩格，
+    // 用「label 之後找最近的數字」策略最穩健。
+
+    /**
+     * 從給定文字中、給定 label patterns，抓出第一個合理的數值
+     * @param patterns 字串 array 例 ['CHOL', 'CHOLESTEROL', '總膽固醇']
+     * @param minVal/maxVal 合理範圍（避免亂抓）
+     * @param specialHandler 處理 ≧/≦/< / > 等界限值，傳入 string 回傳 number 或 null
+     */
+    function extractValue(patterns, minVal, maxVal, specialHandler) {
+      for (const pat of patterns) {
+        const escapedPat = pat.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp(
+          escapedPat + '[\\s\\S]{0,30}?[\\t ]([\\d.≧≦<>＜＞]+(?:\\.\\d+)?)',
+          'i'
+        );
+        const m = text.match(re);
+        if (m) {
+          let valStr = m[1];
+
+          // ── 防線：拒絕來自日期字串的片段 ──
+          // 例如「2026-03-04」會被切成 2026 / 03 / 04，匹配位置周圍若是日期 pattern 就拒絕
+          const matchPos = m.index + m[0].lastIndexOf(valStr);
+          const surround = text.substring(Math.max(0, matchPos - 6), matchPos + valStr.length + 6);
+          if (/\d{2,4}[-/]\d{1,2}[-/]\d{1,2}/.test(surround)) continue;
+          // 拒絕來自時間字串（如 10:30）
+          if (/\d{1,2}:\d{2}/.test(surround)) continue;
+
+          // 處理特殊值
+          let val;
+          if (specialHandler) {
+            val = specialHandler(valStr);
+            if (val === null) continue;
+          } else if (/^[≧≦<>＜＞]/.test(valStr)) {
+            const numPart = valStr.replace(/[≧≦<>＜＞]/g, '');
+            val = parseFloat(numPart);
+            if (isNaN(val)) continue;
+          } else {
+            val = parseFloat(valStr);
+          }
+          if (isNaN(val)) continue;
+          if (minVal !== undefined && val < minVal) continue;
+          if (maxVal !== undefined && val > maxVal) continue;
+          return { value: val, rawText: valStr };
+        }
+      }
+      return null;
+    }
+
+    // 各欄位定義
+    const targets = [
+      { id: 'tc',  patterns: ['CHOL(mg/dL)', 'CHOL', '總膽固醇', 'Cholesterol'],
+        min: 50, max: 600, unit: 'mg/dL', label: 'TC' },
+      { id: 'hdl', patterns: ['HDL-C(mg/dL)', 'HDL-C', 'HDL(mg/dL)', 'HDL', 'High Density'],
+        min: 10, max: 150, unit: 'mg/dL', label: 'HDL-C' },
+      { id: 'ldl', patterns: ['LDL-C(mg/dL)', 'LDL-C', 'LDL(mg/dL)', 'LDL', 'Low Density'],
+        min: 10, max: 500, unit: 'mg/dL', label: 'LDL-C' },
+      { id: 'tg',  patterns: ['TG(mg/dL)', 'TG', '三酸甘油酯', 'Triglyceride'],
+        min: 20, max: 3000, unit: 'mg/dL', label: 'TG' },
+      { id: 'fpg', patterns: ['GLU, AC(mg/dL)', 'GLU, AC', 'GLU,AC', 'GLU AC', 'GLU(mg/dL)', 'Glucose AC', '空腹血糖'],
+        min: 40, max: 600, unit: 'mg/dL', label: '空腹血糖' },
+      { id: 'hba1c', patterns: ['HbA1c(%)', 'HbA1C(%)', 'HbA1c', 'HbA1C', '糖化血色素'],
+        min: 3, max: 20, unit: '%', label: 'HbA1c' },
+      { id: 'egfr', patterns: ['eGFR(CKD-EPI)', 'eGFR(MDRD)', 'eGFR'],
+        min: 1, max: 200, unit: '', label: 'eGFR',
+        // eGFR 特殊處理：≧90 → 90（保守取下限）
+        special: (s) => {
+          if (/^≧/.test(s) || /^>=/.test(s)) {
+            const n = parseFloat(s.replace(/[≧≦<>＜＞=]/g, ''));
+            return isNaN(n) ? null : n;
+          }
+          if (/^<|^≦|^＜/.test(s)) {
+            // <10 → 10（保守取上限的話 GFR 會看起來好；取數字本身比較中性）
+            const n = parseFloat(s.replace(/[≧≦<>＜＞=]/g, ''));
+            return isNaN(n) ? null : n;
+          }
+          const n = parseFloat(s);
+          return isNaN(n) ? null : n;
+        }
+      },
+      { id: 'uacr', patterns: ['UACR', 'U-ACR', 'Albumin/Creatinine'],
+        min: 0, max: 10000, unit: 'mg/g', label: 'UACR' },
+    ];
+
+    targets.forEach(t => {
+      const found = extractValue(t.patterns, t.min, t.max, t.special);
+      if (found) {
+        result.fields[t.id] = {
+          value: found.value,
+          label: t.label,
+          unit: t.unit,
+          rawText: found.rawText
+        };
+      }
+    });
+
+    // eGFR：CKD-EPI 比 raw eGFR 更準，若兩個都有，CKD-EPI 已被優先匹配，OK
+
+    // ── 4. 給 user 友善的補充訊息 ──
+    const hasTcHdl = result.fields.tc && result.fields.hdl;
+    const hasTg = result.fields.tg;
+    const noLdl = !result.fields.ldl;
+    if (hasTcHdl && hasTg && noLdl) {
+      result.warnings.push('LIS 未報告 LDL-C — 欄位填入後將用 Friedewald 公式自動推算 LDL。');
+    } else if (hasTcHdl && !hasTg && noLdl) {
+      result.warnings.push('LIS 未報告 LDL-C — 已有 TC + HDL，若再補 TG 即可用 Friedewald 公式推算 LDL。');
+    }
+
+    return result;
+  }
+
+  // ── 預覽渲染 ────────────────────────────────────────────────
+  function renderPreview(result) {
+    warnLine.style.display = 'none';
+    warnLine.textContent = '';
+
+    if (!result || Object.keys(result.fields).length === 0) {
+      preview.innerHTML = `
+        <div class="lis-preview-title">偵測結果</div>
+        <div class="lis-preview-empty">${
+          result === null ? '貼上 LIS 內容後，自動顯示能填入的欄位' : '未在貼上內容中找到任何已知欄位'
+        }</div>`;
+      applyBtn.disabled = true;
+      return;
+    }
+
+    const rows = [];
+    Object.keys(result.fields).forEach(id => {
+      const f = result.fields[id];
+      const displayVal = f.display !== undefined ? f.display : f.value;
+      const valStr = `${displayVal}${f.unit ? ' ' + f.unit : ''}`;
+
+      // 檢查是否會覆寫現有資料
+      let willOverwrite = false;
+      let existing = null;
+      if (id === 'sex') {
+        existing = document.querySelector('input[name="sex"]:checked')?.value;
+        willOverwrite = existing && existing !== f.value;
+      } else {
+        const el = document.getElementById(id);
+        existing = el && el.value ? el.value : null;
+        // 數字比較容忍小數誤差
+        willOverwrite = existing !== null && parseFloat(existing) !== f.value;
+      }
+
+      const symClass = willOverwrite ? 'over-sym' : 'ok-sym';
+      const symChar  = willOverwrite ? '⚠' : '✓';
+      const overNote = willOverwrite ? ` <span class="over-note">將覆寫原值 ${existing}</span>` : '';
+      rows.push(`<div class="lis-preview-row">
+        <span class="sym ${symClass}">${symChar}</span>
+        <span class="field">${f.label}</span>
+        <span class="val">${valStr}</span>${overNote}
+      </div>`);
+    });
+
+    // 列出常見但 LIS 不會有的欄位（提醒醫師手動補）
+    const haveLdl = !!result.fields.ldl;
+    const haveTcHdl = !!(result.fields.tc && result.fields.hdl);
+    const missing = [];
+    if (!haveLdl && haveTcHdl) missing.push('LDL-C（將自動推算）');
+    if (!haveLdl && !haveTcHdl) missing.push('LDL-C');
+    missing.push('SBP / DBP（血壓）');
+
+    if (missing.length) {
+      rows.push(`<div class="lis-preview-row" style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px;">
+        <span class="sym miss-sym">·</span>
+        <span class="field" style="width:auto;">未提供：</span>
+        <span style="color:var(--text-secondary);font-size:11.5px;font-family:'Noto Sans TC',sans-serif;">${missing.join('、')}</span>
+      </div>`);
+    }
+
+    preview.innerHTML = `<div class="lis-preview-title">偵測結果（${Object.keys(result.fields).length} 個欄位）</div>${rows.join('')}`;
+    applyBtn.disabled = false;
+
+    if (result.warnings && result.warnings.length) {
+      warnLine.textContent = result.warnings.join(' / ');
+      warnLine.style.display = '';
+    }
+  }
+
+  // ── 解析 textarea 內容 ──────────────────────────────────────
+  function tryParse() {
+    const raw = textarea.value;
+    if (!raw.trim()) {
+      parsedResult = null;
+      renderPreview(null);
+      return;
+    }
+    parsedResult = parsePastedText(raw);
+    renderPreview(parsedResult);
+  }
+  textarea.addEventListener('input', tryParse);
+  textarea.addEventListener('paste', () => setTimeout(tryParse, 30));
+
+  // ── 套用到表單 ─────────────────────────────────────────────
+  applyBtn.addEventListener('click', () => {
+    if (!parsedResult || Object.keys(parsedResult.fields).length === 0) return;
+
+    Object.keys(parsedResult.fields).forEach(id => {
+      const f = parsedResult.fields[id];
+      if (id === 'sex') {
+        const radio = document.querySelector(`input[name="sex"][value="${f.value}"]`);
+        if (radio) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      } else {
+        const el = document.getElementById(id);
+        if (el) {
+          el.value = f.value;
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    });
+    // 重新計算 non-HDL 與 calc LDL
+    if (typeof calcNonHDL === 'function') calcNonHDL();
+    closeModal();
+  });
+})();
+
+// ─── 從 URL query 帶入欄位（lab.html「下一步」按鈕跳過來時） ──────────
+(function loadFromQueryString() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.toString() === '') return;
+
+  const fieldMap = ['tc', 'ldl', 'hdl', 'tg', 'age', 'sbp', 'dbp'];
+  let filledCount = 0;
+
+  fieldMap.forEach(key => {
+    const val = params.get(key);
+    if (val == null || val === '') return;
+    const el = document.getElementById(key);
+    if (el) {
+      el.value = val;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      filledCount++;
+    }
+  });
+
+  const sex = params.get('sex');
+  if (sex) {
+    const radio = document.querySelector(`input[name="sex"][value="${sex.toUpperCase()}"]`);
+    if (radio) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change', { bubbles: true }));
+      filledCount++;
+    }
+  }
+
+  if (typeof calcNonHDL === 'function') calcNonHDL();
+
+  if (filledCount > 0) {
+    // 顯示成功提示（小 toast）
+    const toast = document.createElement('div');
+    toast.textContent = `已自動帶入 ${filledCount} 項檢驗報告資料`;
+    toast.style.cssText = `
+      position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+      background: rgba(74,158,255,0.15); border: 1px solid rgba(74,158,255,0.4);
+      color: #4a9eff; padding: 10px 18px; border-radius: 8px;
+      font-size: 13px; z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      animation: fadeInOut 4s ease-in-out forwards;
+    `;
+    // animation keyframes
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `
+      @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+        10%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+      }`;
+    document.head.appendChild(styleEl);
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4200);
+
+    // 清掉 query string（避免重整時又顯示一次 toast）
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }
+})();
+</script>
+</body>
+</html>
