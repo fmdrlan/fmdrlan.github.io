@@ -77,17 +77,17 @@
   .logo-hero {
     display: flex;
     justify-content: center;
-    margin-bottom: 8px;
+    margin-bottom: 32px;
   }
   .logo-hero img {
-    width: 240px;
+    width: 360px;
     height: auto;
-    max-width: 80%;
+    max-width: 90%;
     display: block;
-    /* logo 本身已含暗底色，與頁面背景自然融合；無需額外處理 */
   }
   @media (max-width: 480px) {
-    .logo-hero img { width: 200px; }
+    .logo-hero { margin-bottom: 24px; }
+    .logo-hero img { width: 260px; }
   }
 
   /* Title (kept as visually-hidden a11y label) */
@@ -281,14 +281,14 @@
   <div class="logo-hero">
     <img src="assets/logo.png" alt="DR. LAN — 成大家醫科">
   </div>
-  <div class="site-sub">個人臨床工具箱</div>
-  <div class="site-byline">— 成大家醫科醫師寫給自己用的查詢工具 —</div>
 
   <div class="warning">
     <div class="warning-tag" id="warningTag"><span id="warningIcon"></span>Warning</div>
     <div class="warning-body">
-      本站使用對象為 <strong>懶醫師本人</strong>。<strong>路人請自負風險</strong>——這裡沒有 IRB 把關、沒有同儕審閱、沒有 24 小時客服。
-      開立任何醫囑前，請以健保署最新公告與最新版指引原文為準。資料可能過時、可能筆誤、可能我心情不好那天寫錯。
+      本站使用對象為 <strong>懶醫師本人</strong>，<strong>路人請自負風險</strong><br>
+      這裡沒有 IRB 把關、沒有同儕審閱、沒有 24 小時客服<br>
+      開立任何醫囑前，請以你的知識為準，或參考健保署最新公告與最新版指引原文<br>
+      資料可能過時、可能筆誤、可能我心情不好那天寫錯
     </div>
   </div>
 
@@ -350,7 +350,7 @@
 
   <div class="footer">
     工具由 <strong>DR. LAN</strong> 個人維護 · 本站不隸屬於任何醫療機構或政府機關 ·
-    程式碼用咖啡跟夜班空檔寫的，bug 也是
+    程式碼用青春在下班空檔寫的，bug 也是，僅紀念我被扣去的紅利
     <div style="margin-top: 14px;">
       <a class="feedback-link" id="feedbackLink"
          href="https://docs.google.com/forms/d/e/1FAIpQLSfNUXEtUPxavNh_ga1khBQr0VOcY0ZYVmkMK3Ux3CNxznPUSg/viewform"

@@ -213,6 +213,41 @@
     font-weight: 600;
   }
 
+  /* Free-text 報告診斷列（接在 objective 數值表下方） */
+  .ft-list {
+    margin-top: 10px;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+  .ft-row {
+    display: grid;
+    grid-template-columns: 70px 90px 1fr;
+    gap: 10px;
+    align-items: baseline;
+    padding: 3px 0;
+  }
+  .ft-row .ft-date {
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+  .ft-row .ft-source {
+    color: var(--accent-blue);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+  .ft-row .ft-text { color: var(--text-primary); }
+  @media (max-width: 700px) {
+    .ft-row { grid-template-columns: 60px 70px 1fr; font-size: 12px; }
+  }
+
   /* Objective: clean ASCII-style table */
   .objective-box {
     background: var(--bg-base);
@@ -289,6 +324,13 @@
     font-weight: 600;
     color: var(--text-secondary);
     flex-shrink: 0;
+  }
+  .dx-row .dx-left .dx-tag {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    margin-left: 2px;
   }
   .dx-row .dx-right {
     padding: 12px 14px;
@@ -1162,18 +1204,25 @@ function parseDemographics(text) {
 // 回傳 [{ text, sourceLabel, sampledAt }]
 
 const FREE_TEXT_TYPES = [
-  { match: /內視鏡室檢查報告/,          label: '內視鏡',     keywords: ['DIAGNOSIS', 'IMPRESSION'] },
-  { match: /病理組織切片報告/,          label: '病理切片',   keywords: ['PATHOLOGICAL DIAGNOSIS', 'DIAGNOSIS'] },
-  { match: /細胞學檢查報告/,            label: '細胞學',     keywords: ['DIAGNOSIS', 'IMPRESSION', 'CYTOLOGIC DIAGNOSIS'] },
-  { match: /放射線部超音波檢查報告/,    label: '超音波',     keywords: ['Impression', 'IMPRESSION'] },
-  { match: /(電腦斷層|CT)/,             label: 'CT',         keywords: ['Impression', 'IMPRESSION'] },
-  { match: /Ｘ光|X光|X-ray|放射線/,     label: 'X光',        keywords: ['Impression', 'IMPRESSION'] },
-  { match: /皮膚科檢查報告/,            label: '皮膚科超音', keywords: ['Impression', 'IMPRESSION'] },
-  { match: /家醫部特殊檢查報告/,        label: '家醫部',     keywords: ['醫師診斷', 'DIAGNOSIS', '診斷'] },
-  { match: /心臟內科檢查報告/,          label: '心臟內科',   keywords: ['Impression', 'IMPRESSION', 'DIAGNOSIS'] },
-  { match: /神經傳導速度/,              label: '神經傳導',   keywords: ['IMPRESSION', 'DIAGNOSIS'] },
-  { match: /泌尿科部檢查報告/,          label: '泌尿科',     keywords: ['Impression', 'IMPRESSION', 'DIAGNOSIS'] }
+  { match: /內視鏡室檢查報告/,          label: '內視鏡',     short: 'EGD',       keywords: ['DIAGNOSIS', 'IMPRESSION'] },
+  { match: /病理組織切片報告/,          label: '病理切片',   short: 'Pathology', keywords: ['PATHOLOGICAL DIAGNOSIS', 'DIAGNOSIS'] },
+  { match: /細胞學檢查報告/,            label: '細胞學',     short: 'Cytology',  keywords: ['DIAGNOSIS', 'IMPRESSION', 'CYTOLOGIC DIAGNOSIS'] },
+  { match: /放射線部超音波檢查報告/,    label: '超音波',     short: 'US',        keywords: ['Impression', 'IMPRESSION'] },
+  { match: /(電腦斷層|CT)/,             label: 'CT',         short: 'CT',        keywords: ['Impression', 'IMPRESSION'] },
+  { match: /Ｘ光|X光|X-ray|放射線/,     label: 'X光',        short: 'XR',        keywords: ['Impression', 'IMPRESSION'] },
+  { match: /皮膚科檢查報告/,            label: '皮膚科超音', short: 'Skin US',   keywords: ['Impression', 'IMPRESSION'] },
+  { match: /家醫部特殊檢查報告/,        label: '家醫部',     short: 'FM',        keywords: ['醫師診斷', 'DIAGNOSIS', '診斷'] },
+  { match: /心臟內科檢查報告/,          label: '心臟內科',   short: 'Cardio',    keywords: ['Impression', 'IMPRESSION', 'DIAGNOSIS'] },
+  { match: /神經傳導速度/,              label: '神經傳導',   short: 'NCV',       keywords: ['IMPRESSION', 'DIAGNOSIS'] },
+  { match: /泌尿科部檢查報告/,          label: '泌尿科',     short: 'Urology',   keywords: ['Impression', 'IMPRESSION', 'DIAGNOSIS'] }
 ];
+
+// X 光細分：KUB / CXR / 其他 — 根據報告內容偵測
+function refineXrayShort(text) {
+  if (/KUB\b|abdominal\s+plain|abd\.?\s+plain/i.test(text)) return 'KUB';
+  if (/CXR\b|chest\s+plain|chest\s+film|chest\s+x[- ]?ray/i.test(text)) return 'CXR';
+  return 'XR';
+}
 
 function detectFreeTextType(sectionType) {
   for (const t of FREE_TEXT_TYPES) {
@@ -1194,7 +1243,7 @@ function parseCultureSection(section) {
   if (isolateMatch) {
     const cleaned = isolateMatch[1].trim().split(/\n+/)[0].replace(/^[-•・]+\s*/, '').trim();
     if (cleaned && cleaned.length < 200) {
-      dx.push({ text: cleaned, sourceLabel: '細菌培養', sampledAt: section.date });
+      dx.push({ text: cleaned, sourceLabel: '細菌培養', sourceShort: 'Culture', sampledAt: section.date });
     }
   }
   return dx;
@@ -1243,13 +1292,28 @@ function parseFreeTextSection(section, typeInfo) {
       if (/^\d/.test(line) && line.length < 8) return false;
       if (/^[a-z\u4e00-\u9fff]+\s*[:：]\s*$/.test(line)) return false;
       if (/^(?:[Ii]so|[Hh]yper|[Hh]ypo|[Aa]n)[\-\s]?(?:to|echoic|echogenic)/.test(line) && !/lipoma|cyst|stone|tumor|mass|lesion\s+suspect/i.test(line)) return false;
+
+      // Negative finding 過濾：「No XXX」開頭、無 caveat、無重要排除疾病 → 跳過
+      // 但保留：含 caveat 字眼或重要 rule-out
+      if (/^No\s+(?:obvious|abnormal|definite|evidence|focal|gross|significant)?/i.test(line)) {
+        const hasCaveat = /\b(may|might|but|however|cannot\s+(?:exclude|rule\s+out)|too\s+subtle|despite|though|although|further\s+(?:follow|workup|evaluation)|suggest(?:ed|s)?\s+(?:follow|workup))\b/i.test(line);
+        const hasImportantDx = /\b(malignan(?:t|cy)|metasta(?:sis|tic|ses)|cancer|carcinoma|sarcoma|lymphoma|recurren(?:t|ce)|invasion|neoplasm|tumor|mass\b)\b/i.test(line);
+        if (!hasCaveat && !hasImportantDx) return false;
+      }
+
       return true;
     });
 
     for (const line of lines) {
+      let short = typeInfo.short;
+      // X 光特殊：根據內容細分 CXR / KUB
+      if (typeInfo.label === 'X光') {
+        short = refineXrayShort(text);
+      }
       results.push({
         text: line,
         sourceLabel: typeInfo.label,
+        sourceShort: short,
         sampledAt: section.date
       });
     }
@@ -1282,6 +1346,7 @@ function integrateFreeTextDx(items) {
     }
     grouped[key].sources.push({
       label: item.sourceLabel,
+      short: item.sourceShort || item.sourceLabel,
       date: item.sampledAt
     });
   }
@@ -1549,48 +1614,71 @@ function renderResults(totalParsed) {
   }
 
   // ── Objective ──
+  const totalObjCount = state.integrated.length + state.freeTextDx.length;
   html += `
     <div class="output-section">
       <div class="section-header">
-        <h3>📊 Objective <span class="badge-count">${state.integrated.length}</span></h3>
-        ${state.integrated.length > 0 ? '<button class="btn small" id="copyObjBtn">複製</button>' : ''}
+        <h3>📊 Objective <span class="badge-count">${totalObjCount}</span></h3>
+        ${totalObjCount > 0 ? '<button class="btn small" id="copyObjBtn">複製</button>' : ''}
       </div>
   `;
 
-  if (state.integrated.length === 0) {
+  if (totalObjCount === 0) {
     if (totalParsed > 0) {
       html += `<div class="objective-box" style="text-align:center;color:var(--accent-green);padding:20px">
         ✓ 所有解析項目均在正常範圍
       </div>`;
     }
   } else {
-    html += `<div class="objective-box" id="objBox">`;
-    for (const item of state.integrated) {
-      const flag = item.flag;
-      const valCls = (flag === 'H' || flag === 'HH') ? 'high'
-                   : (flag === 'L' || flag === 'LL') ? 'low' : '';
-      const critCls = (flag === 'HH' || flag === 'LL') ? ' crit' : '';
-      const flagBadge = `<span class="flag ${flag.toLowerCase()}">${flag === 'HH' ? 'H!' : flag === 'LL' ? 'L!' : flag}</span>`;
-      const value = displayValue(item);
-      const unit = item.def.unit ? ` ${item.def.unit}` : '';
+    // 數值表
+    if (state.integrated.length > 0) {
+      html += `<div class="objective-box" id="objBox">`;
+      for (const item of state.integrated) {
+        const flag = item.flag;
+        const valCls = (flag === 'H' || flag === 'HH') ? 'high'
+                     : (flag === 'L' || flag === 'LL') ? 'low' : '';
+        const critCls = (flag === 'HH' || flag === 'LL') ? ' crit' : '';
+        const flagBadge = `<span class="flag ${flag.toLowerCase()}">${flag === 'HH' ? 'H!' : flag === 'LL' ? 'L!' : flag}</span>`;
+        const value = displayValue(item);
+        const unit = item.def.unit ? ` ${item.def.unit}` : '';
 
-      let meta = '';
-      if (item.pastAbnormal) {
-        const pv = displayValue(item.pastAbnormal);
-        meta = `<span class="past">⚠ 曾異常 ${escHtml(pv)} (${fmtDate(item.pastAbnormal.sampledAt)})</span>`;
+        let meta = '';
+        if (item.pastAbnormal) {
+          const pv = displayValue(item.pastAbnormal);
+          meta = `<span class="past">⚠ 曾異常 ${escHtml(pv)} (${fmtDate(item.pastAbnormal.sampledAt)})</span>`;
+        }
+
+        html += `
+          <div class="obj-row">
+            <span class="date">${fmtDate(item.sampledAt)}</span>
+            <span class="name">${escHtml(item.key)}</span>
+            <span class="value ${valCls}${critCls}">${escHtml(value)}${escHtml(unit)}</span>
+            <span>${flagBadge}</span>
+            <span class="meta">${meta}</span>
+          </div>
+        `;
       }
-
-      html += `
-        <div class="obj-row">
-          <span class="date">${fmtDate(item.sampledAt)}</span>
-          <span class="name">${escHtml(item.key)}</span>
-          <span class="value ${valCls}${critCls}">${escHtml(value)}${escHtml(unit)}</span>
-          <span>${flagBadge}</span>
-          <span class="meta">${meta}</span>
-        </div>
-      `;
+      html += `</div>`;
     }
-    html += `</div>`;
+
+    // Free-text 報告列表（每條 = 日期 + 簡寫 + 文字）
+    if (state.freeTextDx.length > 0) {
+      html += `<div class="ft-list" id="ftList">`;
+      for (const d of state.freeTextDx) {
+        // 多來源時排序後取最近的當主日期，其他簡寫合併
+        const sourcesSorted = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        const primary = sourcesSorted[0];
+        const shortList = sourcesSorted.map(s => s.short).filter((v, i, arr) => arr.indexOf(v) === i).join(', ');
+        html += `
+          <div class="ft-row">
+            <span class="ft-date">${fmtYearMonth(primary.date)}</span>
+            <span class="ft-source">${escHtml(shortList)}</span>
+            <span class="ft-text">${escHtml(d.text)}</span>
+          </div>
+        `;
+      }
+      html += `</div>`;
+    }
   }
   html += `</div>`;
 
@@ -1640,7 +1728,10 @@ function renderResults(totalParsed) {
 
     // Free-text 診斷（病理、影像、內視鏡等）
     state.freeTextDx.forEach(d => {
-      const srcList = d.sources.map(s =>
+      const sortedSources = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      const tag = sortedSources.map(s => `${fmtYearMonth(s.date)} ${s.short}`).join(' / ');
+      // 右欄列出中文 label 詳細來源
+      const srcList = sortedSources.map(s =>
         `<span class="evidence-row"><span class="ev-date">${fmtYearMonth(s.date)}</span> <span class="ev-source">${escHtml(s.label)}</span></span>`
       ).join('');
 
@@ -1648,10 +1739,10 @@ function renderResults(totalParsed) {
         <div class="dx-row">
           <div class="dx-left">
             <span class="num">${idx}.</span>
-            <span>${escHtml(d.text)}</span>
+            <span>${escHtml(d.text)} <span class="dx-tag">(${escHtml(tag)})</span></span>
           </div>
           <div class="dx-right">
-            <div class="dx-right-label">來源（不複製）</div>
+            <div class="dx-right-label">來源詳情（不複製）</div>
             ${srcList}
           </div>
         </div>
@@ -1685,8 +1776,19 @@ function renderResults(totalParsed) {
   if (dx) dx.addEventListener('click', copyDiagnosis);
 }
 
+// 把 free-text 診斷格式化為 "Lipoma (2026/02 Pathology)" 樣式
+function formatFreeTextDx(d) {
+  const sortedSources = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const tagParts = sortedSources.map(s => `${fmtYearMonth(s.date)} ${s.short}`);
+  // 同一診斷若多來源 → 用「/」串接，例：(2026/02 Pathology / 2026/01 Skin US)
+  const tag = tagParts.join(' / ');
+  return `${d.text} (${tag})`;
+}
+
 function copyObjective() {
-  const lines = state.integrated.map(item => {
+  const lines = [];
+  // 1) 數值表（tab-separated）
+  state.integrated.forEach(item => {
     const value = displayValue(item);
     const unit = item.def.unit || '';
     const flag = (item.flag === 'H' || item.flag === 'HH') ? '(H)'
@@ -1698,7 +1800,11 @@ function copyObjective() {
       const pv = displayValue(item.pastAbnormal);
       line += `  (past: ${pv} ${fmtDate(item.pastAbnormal.sampledAt)})`;
     }
-    return line;
+    lines.push(line);
+  });
+  // 2) Free-text 報告（每條一行）
+  state.freeTextDx.forEach(d => {
+    lines.push(formatFreeTextDx(d));
   });
   navigator.clipboard.writeText(lines.join('\n'));
   showToast('已複製 Objective（' + lines.length + ' 項）');
@@ -1708,7 +1814,10 @@ function copyDiagnosis() {
   const lines = [];
   let idx = 1;
   state.dx.forEach(d => { lines.push(`${idx}. ${d.rule.name}`); idx++; });
-  state.freeTextDx.forEach(d => { lines.push(`${idx}. ${d.text}`); idx++; });
+  state.freeTextDx.forEach(d => {
+    lines.push(`${idx}. ${formatFreeTextDx(d)}`);
+    idx++;
+  });
   navigator.clipboard.writeText(lines.join('\n'));
   showToast('已複製 Diagnosis（' + lines.length + ' 條）');
 }
