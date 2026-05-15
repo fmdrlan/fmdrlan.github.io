@@ -3529,7 +3529,7 @@ function parseTableSection(section) {
 
   // Apply prefer_note logic (e.g., eGFR 計算值: N)
   for (const item of results) {
-    if (item.def.prefer_note && item.notes) {
+    if (item.def && item.def.prefer_note && item.notes) {
       const m = item.notes.match(/(?:計算值|計算結果)\s*[:：]\s*(-?\d+\.?\d*)/);
       if (m) {
         item.num = parseFloat(m[1]);
@@ -4160,7 +4160,7 @@ function fmtYearMonth(iso) {
 
 function displayValue(item) {
   // Compose the display string preferring qual when meaningful
-  if (item.def.is_qual) return item.qual || (item.num != null ? String(item.num) : '—');
+  if (item.def && item.def.is_qual) return item.qual || (item.num != null ? String(item.num) : '—');
   if (item.qual && /[~+]/.test(item.qual)) return item.qual;  // ranges like "3~5", "2+"
   if (item.num != null) return String(item.num);
   return item.qual || '—';
@@ -4247,7 +4247,7 @@ function renderResults(totalParsed) {
         const critCls = (flag === 'HH' || flag === 'LL') ? ' crit' : '';
         const flagBadge = `<span class="flag ${flag.toLowerCase()}">${flag === 'HH' ? 'H!' : flag === 'LL' ? 'L!' : flag}</span>`;
         const value = displayValue(item);
-        const unit = item.def.unit ? ` ${item.def.unit}` : '';
+        const unit = (item.def && item.def.unit) ? ` ${item.def.unit}` : '';
 
         let meta = '';
         if (item.pastAbnormal) {
@@ -4446,7 +4446,7 @@ function copyObjective() {
   // 1) 數值表（tab-separated）
   state.integrated.forEach(item => {
     const value = displayValue(item);
-    const unit = item.def.unit || '';
+    const unit = (item.def && item.def.unit) || '';
     const flag = (item.flag === 'H' || item.flag === 'HH') ? '(H)'
                : (item.flag === 'L' || item.flag === 'LL') ? '(L)'
                : '';
