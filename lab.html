@@ -623,177 +623,2214 @@
     "note": "成大 LIS 項目對照表。每筆 ref 為 [下限, 上限]；性別分層用 ref_m / ref_f；direction='low_bad' 表上限不重要。",
     "updated": "2026-05-14"
   },
-
   "_groups": [
-    { "id": "cbc",      "label": "Complete Blood Count" },
-    { "id": "diff",     "label": "WBC Differential" },
-    { "id": "lipid",    "label": "Lipid Profile" },
-    { "id": "lft",      "label": "Liver Function" },
-    { "id": "rft",      "label": "Renal Function" },
-    { "id": "lyte",     "label": "Electrolytes" },
-    { "id": "dm",       "label": "Diabetes" },
-    { "id": "thyroid",  "label": "Thyroid" },
-    { "id": "cardiac",  "label": "Cardiac Markers" },
-    { "id": "inflam",   "label": "Inflammation" },
-    { "id": "coag",     "label": "Coagulation" },
-    { "id": "urine",    "label": "Urinalysis" },
-    { "id": "stool",    "label": "Stool" },
-    { "id": "hepatitis","label": "Hepatitis Serology" },
-    { "id": "iron",     "label": "Iron Studies" },
-    { "id": "vit",      "label": "Vitamins" },
-    { "id": "endocrine","label": "Endocrine" },
-    { "id": "tumor",    "label": "Tumor Markers" },
-    { "id": "vascular", "label": "Vascular Studies" },
-    { "id": "autoimm",  "label": "Autoimmune Markers" },
-    { "id": "protein",  "label": "Plasma Proteins" },
-    { "id": "u-protein","label": "Urine Albumin/ACR" }
+    {
+      "id": "cbc",
+      "label": "Complete Blood Count"
+    },
+    {
+      "id": "diff",
+      "label": "WBC Differential"
+    },
+    {
+      "id": "lipid",
+      "label": "Lipid Profile"
+    },
+    {
+      "id": "lft",
+      "label": "Liver Function"
+    },
+    {
+      "id": "rft",
+      "label": "Renal Function"
+    },
+    {
+      "id": "lyte",
+      "label": "Electrolytes"
+    },
+    {
+      "id": "dm",
+      "label": "Diabetes"
+    },
+    {
+      "id": "thyroid",
+      "label": "Thyroid"
+    },
+    {
+      "id": "cardiac",
+      "label": "Cardiac Markers"
+    },
+    {
+      "id": "inflam",
+      "label": "Inflammation"
+    },
+    {
+      "id": "coag",
+      "label": "Coagulation"
+    },
+    {
+      "id": "urine",
+      "label": "Urinalysis"
+    },
+    {
+      "id": "stool",
+      "label": "Stool"
+    },
+    {
+      "id": "hepatitis",
+      "label": "Hepatitis Serology"
+    },
+    {
+      "id": "iron",
+      "label": "Iron Studies"
+    },
+    {
+      "id": "vit",
+      "label": "Vitamins"
+    },
+    {
+      "id": "endocrine",
+      "label": "Endocrine"
+    },
+    {
+      "id": "tumor",
+      "label": "Tumor Markers"
+    },
+    {
+      "id": "vascular",
+      "label": "Vascular Studies"
+    },
+    {
+      "id": "autoimm",
+      "label": "Autoimmune Markers"
+    },
+    {
+      "id": "protein",
+      "label": "Plasma Proteins"
+    },
+    {
+      "id": "u-protein",
+      "label": "Urine Albumin/ACR"
+    }
   ],
-
   "items": {
-    "WBC":        { "group": "cbc",     "aliases": ["WBC", "White Blood Cell", "白血球"], "unit": "10^3/uL",  "ref": [3.9, 10.6] },
-    "RBC":        { "group": "cbc",     "aliases": ["RBC", "Red Blood Cell", "紅血球"],   "unit": "10^6/uL",  "ref_m": [4.5, 5.9], "ref_f": [4.0, 5.2] },
-    "Hb":         { "group": "cbc",     "aliases": ["Hb", "HGB", "Hemoglobin", "血紅素"], "unit": "g/dL",     "ref_m": [13.5, 17.5], "ref_f": [12.0, 16.0], "crit_low": 7 },
-    "Hct":        { "group": "cbc",     "aliases": ["Hct", "HCT", "Hematocrit", "血容比"],"unit": "%",         "ref_m": [41, 53], "ref_f": [36, 46] },
-    "MCV":        { "group": "cbc",     "aliases": ["MCV"],                                "unit": "fL",        "ref": [80, 100] },
-    "MCH":        { "group": "cbc",     "aliases": ["MCH"],                                "unit": "pg",        "ref": [27, 33] },
-    "MCHC":       { "group": "cbc",     "aliases": ["MCHC"],                               "unit": "g/dL",      "ref": [32, 36] },
-    "RDW":        { "group": "cbc",     "aliases": ["RDW", "RDW-CV"],                      "unit": "%",         "ref": [11.5, 14.5] },
-    "Platelet":   { "group": "cbc",     "aliases": ["Platelet", "PLT", "Plt", "血小板"],   "unit": "10^3/uL",   "ref": [150, 400], "crit_low": 50, "crit_high": 1000 },
-    "MPV":        { "group": "cbc",     "aliases": ["MPV"],                                "unit": "fL",        "ref": [6.8, 10.3] },
-    "MDW":        { "group": "cbc",     "aliases": ["MDW"],                                "unit": "",          "ref": [0, 20] },
-
-    "Neut%":      { "group": "diff",    "aliases": ["Neutrophil", "Neut", "Seg", "嗜中性白血球", "Neut%", "NEUT%", "Seg%"], "unit": "%", "ref": [40, 74] },
-    "Lym%":       { "group": "diff",    "aliases": ["Lymphocyte", "Lym", "Lymph", "淋巴球", "Lym%", "LYM%"], "unit": "%",  "ref": [19, 48] },
-    "Mono%":      { "group": "diff",    "aliases": ["Monocyte", "Mono", "單核球", "Mono%"], "unit": "%",         "ref": [3.4, 9] },
-    "Eos%":       { "group": "diff",    "aliases": ["Eosinophil", "Eos", "嗜酸性", "Eos%"], "unit": "%",         "ref": [0, 7] },
-    "Baso%":      { "group": "diff",    "aliases": ["Basophil", "Baso", "嗜鹼性", "Baso%"], "unit": "%",         "ref": [0, 1.5] },
-    "ANC":        { "group": "diff",    "aliases": ["ANC", "Absolute Neutrophil Count"],   "unit": "10^3/uL",   "ref": [1.8, 7.7], "crit_low": 0.5 },
-
-    "AST":        { "group": "lft",     "aliases": ["AST", "GOT", "SGOT", "AST(GOT)", "GOT(AST)"], "unit": "U/L", "ref": [10, 35] },
-    "ALT":        { "group": "lft",     "aliases": ["ALT", "GPT", "SGPT", "ALT(GPT)", "GPT(ALT)"], "unit": "U/L", "ref": [0, 35] },
-    "ALP":        { "group": "lft",     "aliases": ["ALP", "ALK-P", "Alkaline Phosphatase", "鹼性磷酸酶"], "unit": "U/L", "ref": [35, 129] },
-    "GGT":        { "group": "lft",     "aliases": ["GGT", "γ-GT", "gamma-GT", "r-GT", "rGT"],   "unit": "U/L", "ref_m": [10, 71], "ref_f": [6, 42] },
-    "T-Bil":      { "group": "lft",     "aliases": ["T-Bil", "TBIL", "Total Bilirubin", "T.Bil", "TB", "T-BIL", "BIL-T"], "unit": "mg/dL", "ref": [0.2, 1.2] },
-    "D-Bil":      { "group": "lft",     "aliases": ["D-Bil", "DBIL", "Direct Bilirubin", "D.Bil", "D-BIL", "BIL-D"], "unit": "mg/dL", "ref": [0, 0.3] },
-    "Albumin":    { "group": "lft",     "aliases": ["Albumin", "ALB", "Alb", "白蛋白", "ALBUMIN"],   "unit": "g/dL",      "ref": [3.5, 5.2] },
-    "Globulin":   { "group": "lft",     "aliases": ["Globulin", "GLOB", "Glob", "球蛋白"],"unit": "g/dL",      "ref": [2.0, 3.5] },
-    "T-Protein":  { "group": "lft",     "aliases": ["T-Protein", "TP", "Total Protein"],  "unit": "g/dL",      "ref": [6.4, 8.3] },
-    "LDH":        { "group": "lft",     "aliases": ["LDH", "Lactate Dehydrogenase"],      "unit": "U/L",       "ref": [120, 250] },
-
-    "BUN":        { "group": "rft",     "aliases": ["BUN", "Blood Urea Nitrogen", "尿素氮"], "unit": "mg/dL",  "ref": [7, 20] },
-    "Cr":         { "group": "rft",     "aliases": ["Cr", "CREA", "Creatinine", "肌酸酐"],"unit": "mg/dL",    "ref_m": [0.7, 1.3], "ref_f": [0.5, 0.9] },
-    "eGFR":       { "group": "rft",     "aliases": ["eGFR", "GFR", "eGFR(CKD-EPI)", "eGFR-CKD-EPI", "CKD-EPI"], "unit": "mL/min/1.73m²", "ref": [60, 999], "direction": "low_bad", "cap_value": true, "prefer_note": true },
-    "UA":         { "group": "rft",     "aliases": ["UA", "URIC", "Uric Acid", "尿酸"],   "unit": "mg/dL",    "ref_m": [2.4, 5.7], "ref_f": [2.4, 5.7] },
-
-    "Na":         { "group": "lyte",    "aliases": ["Na", "Sodium", "鈉"],                "unit": "mmol/L",   "ref": [136, 145], "crit_low": 120, "crit_high": 160 },
-    "K":          { "group": "lyte",    "aliases": ["K", "Potassium", "鉀"],              "unit": "mmol/L",   "ref": [3.5, 5.1], "crit_low": 2.8, "crit_high": 6.2 },
-    "Cl":         { "group": "lyte",    "aliases": ["Cl", "Chloride", "氯"],              "unit": "mmol/L",   "ref": [98, 107] },
-    "Ca":         { "group": "lyte",    "aliases": ["Ca", "Calcium", "鈣"],               "unit": "mg/dL",    "ref": [8.6, 10.3], "crit_low": 6.0, "crit_high": 13.0 },
-    "P":          { "group": "lyte",    "aliases": ["P", "PHOS", "Phosphate", "磷"],      "unit": "mg/dL",    "ref": [2.5, 4.5] },
-    "Mg":         { "group": "lyte",    "aliases": ["Mg", "Magnesium", "鎂"],             "unit": "mg/dL",    "ref": [1.6, 2.6] },
-
-    "GLU-AC":     { "group": "dm",      "aliases": ["GLU AC", "GLU, AC", "Glucose AC", "Glucose, AC", "FBS", "Fasting glucose", "AC sugar", "空腹血糖"], "unit": "mg/dL", "ref": [60, 99] },
-    "GLU-PC":     { "group": "dm",      "aliases": ["GLU PC", "GLU, PC", "Glucose PC", "Glucose, PC", "PC sugar", "Postprandial glucose", "微血管指血糖試驗(PC)", "微血管指血糖試驗", "指血糖(PC)"], "unit": "mg/dL", "ref": [0, 140] },
-    "GLU-random": { "group": "dm",      "aliases": ["GLU random", "GLU, random", "Random glucose", "隨機血糖"], "unit": "mg/dL", "ref": [0, 140] },
-    "HbA1c":      { "group": "dm",      "aliases": ["HbA1c", "Hb A1c", "A1c", "HBA1C", "糖化血色素"], "unit": "%", "ref": [4.0, 5.6] },
-
-    "TC":         { "group": "lipid",   "aliases": ["TC", "CHOL", "T-CHO", "Cholesterol", "T-Chol", "Total Cholesterol", "總膽固醇"], "unit": "mg/dL", "ref": [0, 200] },
-    "TG":         { "group": "lipid",   "aliases": ["TG", "Triglyceride", "三酸甘油酯"],   "unit": "mg/dL",    "ref": [0, 150] },
-    "HDL-C":      { "group": "lipid",   "aliases": ["HDL-C", "HDL", "HDLC", "HDL Cholesterol", "高密度膽固醇"], "unit": "mg/dL", "ref_m": [40, 999], "ref_f": [50, 999], "direction": "low_bad" },
-    "LDL-C":      { "group": "lipid",   "aliases": ["LDL-C", "LDL", "LDLC", "LDL Cholesterol", "低密度膽固醇"], "unit": "mg/dL", "ref": [0, 100] },
-
-    "TSH":        { "group": "thyroid", "aliases": ["TSH"],                               "unit": "uIU/mL",   "ref": [0.27, 4.2] },
-    "Free T4":    { "group": "thyroid", "aliases": ["Free T4", "FT4", "fT4", "Free-T4"],  "unit": "ng/dL",    "ref": [0.93, 1.7] },
-    "Free T3":    { "group": "thyroid", "aliases": ["Free T3", "FT3", "fT3", "Free-T3"],  "unit": "pg/mL",    "ref": [2.0, 4.4] },
-    "T3":         { "group": "thyroid", "aliases": ["T3", "Total T3"],                    "unit": "ng/dL",    "ref": [80, 200] },
-    "T4":         { "group": "thyroid", "aliases": ["T4", "Total T4"],                    "unit": "ug/dL",    "ref": [5.1, 14.1] },
-    "Anti-TPO":   { "group": "thyroid", "aliases": ["Anti-TPO", "TPOAb", "Anti-Microsomal"], "unit": "IU/mL", "ref": [0, 34] },
-
-    "CK":         { "group": "cardiac", "aliases": ["CK", "Creatine Kinase", "CPK"],      "unit": "U/L",      "ref_m": [38, 174], "ref_f": [26, 140] },
-    "CK-MB":      { "group": "cardiac", "aliases": ["CK-MB", "CKMB"],                     "unit": "ng/mL",    "ref": [0, 4.94] },
-    "Troponin I": { "group": "cardiac", "aliases": ["Troponin I", "TnI", "cTnI"],         "unit": "ng/mL",    "ref": [0, 0.04] },
-    "Troponin T": { "group": "cardiac", "aliases": ["Troponin T", "TnT", "hs-TnT"],       "unit": "ng/L",     "ref": [0, 14] },
-    "BNP":        { "group": "cardiac", "aliases": ["BNP"],                                "unit": "pg/mL",   "ref": [0, 100] },
-    "NT-proBNP":  { "group": "cardiac", "aliases": ["NT-proBNP", "NTproBNP"],             "unit": "pg/mL",    "ref": [0, 125] },
-
-    "CRP":        { "group": "inflam",  "aliases": ["CRP", "C-Reactive Protein", "C反應蛋白"], "unit": "mg/L", "ref": [0, 5] },
-    "hs-CRP":     { "group": "inflam",  "aliases": ["hs-CRP", "hsCRP", "High-sensitivity CRP"], "unit": "mg/L", "ref": [0, 3] },
-    "ESR":        { "group": "inflam",  "aliases": ["ESR"],                                "unit": "mm/hr",   "ref_m": [0, 15], "ref_f": [0, 20] },
-    "Procalcitonin": { "group": "inflam", "aliases": ["Procalcitonin", "PCT"],            "unit": "ng/mL",    "ref": [0, 0.5] },
-
-    "PT":         { "group": "coag",    "aliases": ["PT", "Prothrombin Time"],            "unit": "sec",      "ref": [9, 12.5] },
-    "INR":        { "group": "coag",    "aliases": ["INR", "PT(INR)", "PT INR"],          "unit": "",         "ref": [0.8, 1.2] },
-    "aPTT":       { "group": "coag",    "aliases": ["aPTT", "APTT", "PTT"],               "unit": "sec",      "ref": [23, 35] },
-    "D-Dimer":    { "group": "coag",    "aliases": ["D-Dimer", "DDimer"],                 "unit": "ug/mL FEU", "ref": [0, 0.5] },
-    "Fibrinogen": { "group": "coag",    "aliases": ["Fibrinogen"],                        "unit": "mg/dL",    "ref": [200, 400] },
-
-    "U-SG":       { "group": "urine",   "aliases": ["U-SG", "SG", "Specific Gravity", "比重"], "unit": "",     "ref": [1.003, 1.035] },
-    "U-pH":       { "group": "urine",   "aliases": ["U-pH", "Urine pH", "尿液 pH", "pH"], "unit": "",         "ref": [5.0, 8.0] },
-    "U-LEU":      { "group": "urine",   "aliases": ["LEU", "U-LEU", "Leukocyte Esterase", "白血球酯酶"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg", "Trace"] },
-    "U-NIT":      { "group": "urine",   "aliases": ["NIT", "U-NIT", "Nitrite", "亞硝酸鹽"], "unit": "",        "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-Protein":  { "group": "urine",   "aliases": ["PRO", "U-PRO", "U-Protein", "Urine Protein", "Protein", "尿蛋白"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg", "Trace"] },
-    "U-Glucose":  { "group": "urine",   "aliases": ["GLU", "U-GLU", "U-Glucose", "Urine Glucose", "尿糖"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"], "report_group_hint": "urine" },
-    "U-Ketone":   { "group": "urine",   "aliases": ["KET", "U-KET", "U-Ketone", "Ketone", "Urine Ketone", "尿酮體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-UBG":      { "group": "urine",   "aliases": ["UBG", "U-UBG", "Urobilinogen", "尿膽素原"], "unit": "",   "is_qual": true, "qual_neg": ["Normal", "Neg", "Negative", "-"] },
-    "U-Bil":      { "group": "urine",   "aliases": ["BIL", "U-BIL", "Urine Bilirubin", "尿膽紅素"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-Blood":    { "group": "urine",   "aliases": ["Blood", "U-Blood", "Urine Blood", "尿潛血"], "unit": "",  "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-RBC":      { "group": "urine",   "aliases": ["U-RBC", "Urine RBC"],                "unit": "/HPF",     "ref": [0, 4] },
-    "U-WBC":      { "group": "urine",   "aliases": ["U-WBC", "Urine WBC"],                "unit": "/HPF",     "ref": [0, 5] },
-    "U-Bacteria": { "group": "urine",   "aliases": ["Bacteria", "U-Bacteria", "細菌"],    "unit": "/HPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-EC":       { "group": "urine",   "aliases": ["EC", "U-EC", "Epithelial Cell"],     "unit": "/HPF",     "ref": [0, 5] },
-    "U-Cast":     { "group": "urine",   "aliases": ["Cast", "U-Cast"],                    "unit": "/LPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "U-Crystal":  { "group": "urine",   "aliases": ["Crystal", "U-Crystal"],              "unit": "/HPF",     "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "UACR":       { "group": "urine",   "aliases": ["UACR_old_unused"], "unit": "mg/g", "ref": [0, 30] },
-
-    "Stool-OB":   { "group": "stool",   "aliases": ["O.B.", "OB", "Stool OB", "Occult Blood", "FOBT", "FIT"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-
-    "HBsAg":      { "group": "hepatitis", "aliases": ["HBsAg"],                            "unit": "",         "is_qual": true, "qual_neg": ["-", "Non-reactive", "Negative", "Neg"] },
-    "Anti-HBs":   { "group": "hepatitis", "aliases": ["Anti-HBs", "HBsAb"],               "unit": "mIU/mL",   "ref": [10, 1000], "direction": "low_bad" },
-    "Anti-HBc":   { "group": "hepatitis", "aliases": ["Anti-HBc", "HBcAb"],               "unit": "",         "is_qual": true, "qual_neg": ["-", "Non-reactive", "Negative", "Neg"] },
-    "HBeAg":      { "group": "hepatitis", "aliases": ["HBeAg"],                            "unit": "",         "is_qual": true, "qual_neg": ["-", "Non-reactive", "Negative", "Neg"] },
-    "Anti-HCV":   { "group": "hepatitis", "aliases": ["Anti-HCV", "HCVAb"],               "unit": "",         "is_qual": true, "qual_neg": ["-", "Non-reactive", "Negative", "Neg"] },
-
-    "Ferritin":   { "group": "iron",    "aliases": ["Ferritin", "FERR"],                  "unit": "ng/mL",    "ref_m": [30, 400], "ref_f": [13, 150] },
-    "Iron":       { "group": "iron",    "aliases": ["Iron", "Fe", "血清鐵"],              "unit": "ug/dL",    "ref_m": [65, 175], "ref_f": [50, 170] },
-    "TIBC":       { "group": "iron",    "aliases": ["TIBC"],                              "unit": "ug/dL",    "ref": [250, 450] },
-    "Transferrin":{ "group": "iron",    "aliases": ["Transferrin"],                       "unit": "mg/dL",    "ref": [200, 360] },
-
-    "Vit D":      { "group": "vit",     "aliases": ["Vit D", "Vitamin D", "25-OH-D", "25(OH)D"], "unit": "ng/mL", "ref": [30, 100], "direction": "low_bad" },
-    "Vit B12":    { "group": "vit",     "aliases": ["Vit B12", "Vitamin B12", "B12"],     "unit": "pg/mL",    "ref": [187, 883], "direction": "low_bad" },
-    "Folate":     { "group": "vit",     "aliases": ["Folate", "Folic Acid", "葉酸"],      "unit": "ng/mL",    "ref": [3.1, 19.9], "direction": "low_bad" },
-
-    "Cortisol":   { "group": "endocrine", "aliases": ["Cortisol", "皮質醇"],              "unit": "ug/dL",    "ref": [6.2, 19.4] },
-    "ACTH":       { "group": "endocrine", "aliases": ["ACTH"],                            "unit": "pg/mL",    "ref": [7.2, 63] },
-    "PTH":        { "group": "endocrine", "aliases": ["PTH", "Parathyroid Hormone"],     "unit": "pg/mL",    "ref": [15, 65] },
-    "Testosterone": { "group": "endocrine", "aliases": ["Testosterone", "睪固酮"],        "unit": "ng/dL",    "ref_m": [240, 950], "ref_f": [8, 60] },
-
-    "PSA":        { "group": "tumor",   "aliases": ["PSA", "Prostate Specific Antigen"],  "unit": "ng/mL",    "ref": [0, 4] },
-    "AFP":        { "group": "tumor",   "aliases": ["AFP", "Alpha-Fetoprotein"],          "unit": "ng/mL",    "ref": [0, 8.04] },
-    "CEA":        { "group": "tumor",   "aliases": ["CEA"],                               "unit": "ng/mL",    "ref": [0, 5] },
-    "CA-19-9":    { "group": "tumor",   "aliases": ["CA-19-9", "CA19-9", "CA199"],        "unit": "U/mL",     "ref": [0, 37] },
-    "CA-125":     { "group": "tumor",   "aliases": ["CA-125", "CA125"],                   "unit": "U/mL",     "ref": [0, 35] },
-    "CA-15-3":    { "group": "tumor",   "aliases": ["CA-15-3", "CA15-3", "CA153"],        "unit": "U/mL",     "ref": [0, 25] },
-
-    "ABI-L":      { "group": "vascular","aliases": ["ABI-L", "ABI L", "ABI 左", "ABI-Left"], "unit": "", "ref": [0.9, 1.4] },
-    "ABI-R":      { "group": "vascular","aliases": ["ABI-R", "ABI R", "ABI 右", "ABI-Right"], "unit": "", "ref": [0.9, 1.4] },
-    "PWV-L":      { "group": "vascular","aliases": ["PWV-L", "PWV L", "PWV 左", "PWV-Left"], "unit": "cm/s", "ref": [0, 1400] },
-    "PWV-R":      { "group": "vascular","aliases": ["PWV-R", "PWV R", "PWV 右", "PWV-Right"], "unit": "cm/s", "ref": [0, 1400] },
-
-    "ANA":        { "group": "autoimm", "aliases": ["ANA", "ANA*", "Antinuclear Antibody", "抗核抗體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "AMA":        { "group": "autoimm", "aliases": ["AMA", "Antimitochondrial Antibody", "抗粒線體抗體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "ASMA":       { "group": "autoimm", "aliases": ["ASMA", "Anti-smooth muscle antibody", "抗平滑肌抗體"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "Anti-LKM":   { "group": "autoimm", "aliases": ["Anti-LKM", "LKM"], "unit": "", "is_qual": true, "qual_neg": ["-", "Negative", "Neg"] },
-    "RF":         { "group": "autoimm", "aliases": ["RF", "Rheumatoid factor", "類風濕因子"], "unit": "IU/mL", "ref": [0, 14] },
-    "Anti-CCP":   { "group": "autoimm", "aliases": ["Anti-CCP", "CCP", "ACPA"], "unit": "U/mL", "ref": [0, 17] },
-
-    "IgG":        { "group": "protein", "aliases": ["IgG", "Immunoglobulin G"], "unit": "mg/dL", "ref": [751, 1560] },
-    "IgM":        { "group": "protein", "aliases": ["IgM", "Immunoglobulin M"], "unit": "mg/dL", "ref": [37, 286] },
-    "IgA":        { "group": "protein", "aliases": ["IgA", "Immunoglobulin A"], "unit": "mg/dL", "ref": [82, 453] },
-    "Ceruloplasmin": { "group": "protein", "aliases": ["Ceruloplasmin", "CER", "CP", "血漿銅藍蛋白"], "unit": "mg/dL", "ref": [22, 58] },
-
-    "Crea-U":     { "group": "u-protein", "aliases": ["Crea(U)", "Cr(U)", "Urine Creatinine", "尿肌酸酐"], "unit": "mg/dL", "ref": [0, 999] },
-    "Alb-U":      { "group": "u-protein", "aliases": ["Alb(U)", "Urine Albumin", "Microalbumin", "尿微量白蛋白"], "unit": "mg/L", "ref": [0, 20] },
-    "ACR":        { "group": "u-protein", "aliases": ["ACR", "UACR", "Urine ACR", "Microalbumin/Cr"], "unit": "mg/g", "ref": [0, 30] }
+    "WBC": {
+      "group": "cbc",
+      "aliases": [
+        "WBC",
+        "White Blood Cell",
+        "白血球"
+      ],
+      "unit": "10^3/uL",
+      "ref": [
+        3.9,
+        10.6
+      ]
+    },
+    "RBC": {
+      "group": "cbc",
+      "aliases": [
+        "RBC",
+        "Red Blood Cell",
+        "紅血球"
+      ],
+      "unit": "10^6/uL",
+      "ref_m": [
+        4.5,
+        5.9
+      ],
+      "ref_f": [
+        4.0,
+        5.2
+      ]
+    },
+    "Hb": {
+      "group": "cbc",
+      "aliases": [
+        "Hb",
+        "HGB",
+        "Hemoglobin",
+        "血紅素"
+      ],
+      "unit": "g/dL",
+      "ref_m": [
+        13.5,
+        17.5
+      ],
+      "ref_f": [
+        12.0,
+        16.0
+      ],
+      "crit_low": 7
+    },
+    "Hct": {
+      "group": "cbc",
+      "aliases": [
+        "Hct",
+        "HCT",
+        "Hematocrit",
+        "血容比"
+      ],
+      "unit": "%",
+      "ref_m": [
+        41,
+        53
+      ],
+      "ref_f": [
+        36,
+        46
+      ]
+    },
+    "MCV": {
+      "group": "cbc",
+      "aliases": [
+        "MCV"
+      ],
+      "unit": "fL",
+      "ref": [
+        80,
+        100
+      ]
+    },
+    "MCH": {
+      "group": "cbc",
+      "aliases": [
+        "MCH"
+      ],
+      "unit": "pg",
+      "ref": [
+        27,
+        33
+      ]
+    },
+    "MCHC": {
+      "group": "cbc",
+      "aliases": [
+        "MCHC"
+      ],
+      "unit": "g/dL",
+      "ref": [
+        32,
+        36
+      ]
+    },
+    "RDW": {
+      "group": "cbc",
+      "aliases": [
+        "RDW",
+        "RDW-CV"
+      ],
+      "unit": "%",
+      "ref": [
+        11.5,
+        14.5
+      ]
+    },
+    "Platelet": {
+      "group": "cbc",
+      "aliases": [
+        "Platelet",
+        "PLT",
+        "Plt",
+        "血小板"
+      ],
+      "unit": "10^3/uL",
+      "ref": [
+        150,
+        400
+      ],
+      "crit_low": 50,
+      "crit_high": 1000
+    },
+    "MPV": {
+      "group": "cbc",
+      "aliases": [
+        "MPV"
+      ],
+      "unit": "fL",
+      "ref": [
+        6.8,
+        10.3
+      ]
+    },
+    "MDW": {
+      "group": "cbc",
+      "aliases": [
+        "MDW"
+      ],
+      "unit": "",
+      "ref": [
+        0,
+        20
+      ]
+    },
+    "Neut%": {
+      "group": "diff",
+      "aliases": [
+        "Neutrophil",
+        "Neut",
+        "Seg",
+        "嗜中性白血球",
+        "Neut%",
+        "NEUT%",
+        "Seg%"
+      ],
+      "unit": "%",
+      "ref": [
+        40,
+        74
+      ]
+    },
+    "Lym%": {
+      "group": "diff",
+      "aliases": [
+        "Lymphocyte",
+        "Lym",
+        "Lymph",
+        "淋巴球",
+        "Lym%",
+        "LYM%"
+      ],
+      "unit": "%",
+      "ref": [
+        19,
+        48
+      ]
+    },
+    "Mono%": {
+      "group": "diff",
+      "aliases": [
+        "Monocyte",
+        "Mono",
+        "單核球",
+        "Mono%"
+      ],
+      "unit": "%",
+      "ref": [
+        3.4,
+        9
+      ]
+    },
+    "Eos%": {
+      "group": "diff",
+      "aliases": [
+        "Eosinophil",
+        "Eos",
+        "嗜酸性",
+        "Eos%"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        7
+      ]
+    },
+    "Baso%": {
+      "group": "diff",
+      "aliases": [
+        "Basophil",
+        "Baso",
+        "嗜鹼性",
+        "Baso%"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        1.5
+      ]
+    },
+    "ANC": {
+      "group": "diff",
+      "aliases": [
+        "ANC",
+        "Absolute Neutrophil Count"
+      ],
+      "unit": "10^3/uL",
+      "ref": [
+        1.8,
+        7.7
+      ],
+      "crit_low": 0.5
+    },
+    "AST": {
+      "group": "lft",
+      "aliases": [
+        "AST",
+        "GOT",
+        "SGOT",
+        "AST(GOT)",
+        "GOT(AST)"
+      ],
+      "unit": "U/L",
+      "ref": [
+        10,
+        35
+      ]
+    },
+    "ALT": {
+      "group": "lft",
+      "aliases": [
+        "ALT",
+        "GPT",
+        "SGPT",
+        "ALT(GPT)",
+        "GPT(ALT)"
+      ],
+      "unit": "U/L",
+      "ref": [
+        0,
+        35
+      ]
+    },
+    "ALP": {
+      "group": "lft",
+      "aliases": [
+        "ALP",
+        "ALK-P",
+        "Alkaline Phosphatase",
+        "鹼性磷酸酶"
+      ],
+      "unit": "U/L",
+      "ref": [
+        35,
+        129
+      ]
+    },
+    "GGT": {
+      "group": "lft",
+      "aliases": [
+        "GGT",
+        "γ-GT",
+        "gamma-GT",
+        "r-GT",
+        "rGT"
+      ],
+      "unit": "U/L",
+      "ref_m": [
+        10,
+        71
+      ],
+      "ref_f": [
+        6,
+        42
+      ]
+    },
+    "T-Bil": {
+      "group": "lft",
+      "aliases": [
+        "T-Bil",
+        "TBIL",
+        "Total Bilirubin",
+        "T.Bil",
+        "TB",
+        "T-BIL",
+        "BIL-T"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0.2,
+        1.2
+      ]
+    },
+    "D-Bil": {
+      "group": "lft",
+      "aliases": [
+        "D-Bil",
+        "DBIL",
+        "Direct Bilirubin",
+        "D.Bil",
+        "D-BIL",
+        "BIL-D"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        0.3
+      ]
+    },
+    "Albumin": {
+      "group": "lft",
+      "aliases": [
+        "Albumin",
+        "ALB",
+        "Alb",
+        "白蛋白",
+        "ALBUMIN"
+      ],
+      "unit": "g/dL",
+      "ref": [
+        3.5,
+        5.2
+      ]
+    },
+    "Globulin": {
+      "group": "lft",
+      "aliases": [
+        "Globulin",
+        "GLOB",
+        "Glob",
+        "球蛋白"
+      ],
+      "unit": "g/dL",
+      "ref": [
+        2.0,
+        3.5
+      ]
+    },
+    "T-Protein": {
+      "group": "lft",
+      "aliases": [
+        "T-Protein",
+        "TP",
+        "Total Protein"
+      ],
+      "unit": "g/dL",
+      "ref": [
+        6.4,
+        8.3
+      ]
+    },
+    "LDH": {
+      "group": "lft",
+      "aliases": [
+        "LDH",
+        "LD",
+        "Lactate dehydrogenase",
+        "乳酸脫氫酶",
+        "Lactate Dehydrogenase"
+      ],
+      "unit": "U/L",
+      "ref": [
+        120,
+        250
+      ]
+    },
+    "BUN": {
+      "group": "rft",
+      "aliases": [
+        "BUN",
+        "Blood Urea Nitrogen",
+        "尿素氮"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        7,
+        20
+      ]
+    },
+    "Cr": {
+      "group": "rft",
+      "aliases": [
+        "Cr",
+        "CREA",
+        "Creatinine",
+        "肌酸酐"
+      ],
+      "unit": "mg/dL",
+      "ref_m": [
+        0.7,
+        1.3
+      ],
+      "ref_f": [
+        0.5,
+        0.9
+      ]
+    },
+    "eGFR": {
+      "group": "rft",
+      "aliases": [
+        "eGFR",
+        "GFR",
+        "eGFR(CKD-EPI)",
+        "eGFR-CKD-EPI",
+        "CKD-EPI"
+      ],
+      "unit": "mL/min/1.73m²",
+      "ref": [
+        60,
+        999
+      ],
+      "direction": "low_bad",
+      "cap_value": true,
+      "prefer_note": true
+    },
+    "UA": {
+      "group": "rft",
+      "aliases": [
+        "UA",
+        "URIC",
+        "Uric Acid",
+        "尿酸"
+      ],
+      "unit": "mg/dL",
+      "ref_m": [
+        2.4,
+        5.7
+      ],
+      "ref_f": [
+        2.4,
+        5.7
+      ]
+    },
+    "Na": {
+      "group": "lyte",
+      "aliases": [
+        "Na",
+        "Sodium",
+        "鈉"
+      ],
+      "unit": "mmol/L",
+      "ref": [
+        136,
+        145
+      ],
+      "crit_low": 120,
+      "crit_high": 160
+    },
+    "K": {
+      "group": "lyte",
+      "aliases": [
+        "K",
+        "Potassium",
+        "鉀"
+      ],
+      "unit": "mmol/L",
+      "ref": [
+        3.5,
+        5.1
+      ],
+      "crit_low": 2.8,
+      "crit_high": 6.2
+    },
+    "Cl": {
+      "group": "lyte",
+      "aliases": [
+        "Cl",
+        "Chloride",
+        "氯"
+      ],
+      "unit": "mmol/L",
+      "ref": [
+        98,
+        107
+      ]
+    },
+    "Ca": {
+      "group": "lyte",
+      "aliases": [
+        "Ca",
+        "Calcium",
+        "鈣"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        8.6,
+        10.3
+      ],
+      "crit_low": 6.0,
+      "crit_high": 13.0
+    },
+    "P": {
+      "group": "lyte",
+      "aliases": [
+        "P",
+        "PHOS",
+        "Phosphate",
+        "磷"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        2.5,
+        4.5
+      ]
+    },
+    "Mg": {
+      "group": "lyte",
+      "aliases": [
+        "Mg",
+        "Magnesium",
+        "鎂"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        1.6,
+        2.6
+      ]
+    },
+    "GLU-AC": {
+      "group": "dm",
+      "aliases": [
+        "GLU AC",
+        "GLU, AC",
+        "Glucose AC",
+        "Glucose, AC",
+        "FBS",
+        "Fasting glucose",
+        "AC sugar",
+        "空腹血糖"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        60,
+        99
+      ]
+    },
+    "GLU-PC": {
+      "group": "dm",
+      "aliases": [
+        "GLU PC",
+        "GLU, PC",
+        "Glucose PC",
+        "Glucose, PC",
+        "PC sugar",
+        "Postprandial glucose",
+        "微血管指血糖試驗(PC)",
+        "微血管指血糖試驗",
+        "指血糖(PC)"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        140
+      ]
+    },
+    "GLU-random": {
+      "group": "dm",
+      "aliases": [
+        "GLU random",
+        "GLU, random",
+        "Random glucose",
+        "隨機血糖"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        140
+      ]
+    },
+    "HbA1c": {
+      "group": "dm",
+      "aliases": [
+        "HbA1c",
+        "Hb A1c",
+        "A1c",
+        "HBA1C",
+        "糖化血色素"
+      ],
+      "unit": "%",
+      "ref": [
+        4.0,
+        5.6
+      ]
+    },
+    "TC": {
+      "group": "lipid",
+      "aliases": [
+        "TC",
+        "CHOL",
+        "T-CHO",
+        "Cholesterol",
+        "T-Chol",
+        "Total Cholesterol",
+        "總膽固醇"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        200
+      ]
+    },
+    "TG": {
+      "group": "lipid",
+      "aliases": [
+        "TG",
+        "Triglyceride",
+        "三酸甘油酯"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        150
+      ]
+    },
+    "HDL-C": {
+      "group": "lipid",
+      "aliases": [
+        "HDL-C",
+        "HDL",
+        "HDLC",
+        "HDL Cholesterol",
+        "高密度膽固醇"
+      ],
+      "unit": "mg/dL",
+      "ref_m": [
+        40,
+        999
+      ],
+      "ref_f": [
+        50,
+        999
+      ],
+      "direction": "low_bad"
+    },
+    "LDL-C": {
+      "group": "lipid",
+      "aliases": [
+        "LDL-C",
+        "LDL",
+        "LDLC",
+        "LDL Cholesterol",
+        "低密度膽固醇"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        100
+      ]
+    },
+    "TSH": {
+      "group": "thyroid",
+      "aliases": [
+        "TSH"
+      ],
+      "unit": "uIU/mL",
+      "ref": [
+        0.27,
+        4.2
+      ]
+    },
+    "Free T4": {
+      "group": "thyroid",
+      "aliases": [
+        "Free T4",
+        "FT4",
+        "fT4",
+        "Free-T4"
+      ],
+      "unit": "ng/dL",
+      "ref": [
+        0.93,
+        1.7
+      ]
+    },
+    "Free T3": {
+      "group": "thyroid",
+      "aliases": [
+        "Free T3",
+        "FT3",
+        "fT3",
+        "Free-T3"
+      ],
+      "unit": "pg/mL",
+      "ref": [
+        2.0,
+        4.4
+      ]
+    },
+    "T3": {
+      "group": "thyroid",
+      "aliases": [
+        "T3",
+        "Total T3"
+      ],
+      "unit": "ng/dL",
+      "ref": [
+        80,
+        200
+      ]
+    },
+    "T4": {
+      "group": "thyroid",
+      "aliases": [
+        "T4",
+        "Total T4"
+      ],
+      "unit": "ug/dL",
+      "ref": [
+        5.1,
+        14.1
+      ]
+    },
+    "Anti-TPO": {
+      "group": "thyroid",
+      "aliases": [
+        "Anti-TPO",
+        "TPOAb",
+        "Anti-Microsomal"
+      ],
+      "unit": "IU/mL",
+      "ref": [
+        0,
+        34
+      ]
+    },
+    "CK": {
+      "group": "cardiac",
+      "aliases": [
+        "CK",
+        "Creatine Kinase",
+        "CPK"
+      ],
+      "unit": "U/L",
+      "ref_m": [
+        38,
+        174
+      ],
+      "ref_f": [
+        26,
+        140
+      ]
+    },
+    "CK-MB": {
+      "group": "cardiac",
+      "aliases": [
+        "CK-MB",
+        "CKMB"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        0,
+        4.94
+      ]
+    },
+    "Troponin I": {
+      "group": "cardiac",
+      "aliases": [
+        "Troponin I",
+        "TnI",
+        "cTnI"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        0,
+        0.04
+      ]
+    },
+    "Troponin T": {
+      "group": "cardiac",
+      "aliases": [
+        "Troponin T",
+        "TnT",
+        "hs-TnT"
+      ],
+      "unit": "ng/L",
+      "ref": [
+        0,
+        14
+      ]
+    },
+    "BNP": {
+      "group": "cardiac",
+      "aliases": [
+        "BNP"
+      ],
+      "unit": "pg/mL",
+      "ref": [
+        0,
+        100
+      ]
+    },
+    "NT-proBNP": {
+      "group": "cardiac",
+      "aliases": [
+        "NT-proBNP",
+        "NTproBNP"
+      ],
+      "unit": "pg/mL",
+      "ref": [
+        0,
+        125
+      ]
+    },
+    "CRP": {
+      "group": "inflam",
+      "aliases": [
+        "CRP",
+        "C-Reactive Protein",
+        "C反應蛋白"
+      ],
+      "unit": "mg/L",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "hs-CRP": {
+      "group": "inflam",
+      "aliases": [
+        "hs-CRP",
+        "hsCRP",
+        "High-sensitivity CRP"
+      ],
+      "unit": "mg/L",
+      "ref": [
+        0,
+        3
+      ]
+    },
+    "ESR": {
+      "group": "inflam",
+      "aliases": [
+        "ESR"
+      ],
+      "unit": "mm/hr",
+      "ref_m": [
+        0,
+        15
+      ],
+      "ref_f": [
+        0,
+        20
+      ]
+    },
+    "Procalcitonin": {
+      "group": "inflam",
+      "aliases": [
+        "Procalcitonin",
+        "PCT"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        0,
+        0.5
+      ]
+    },
+    "PT": {
+      "group": "coag",
+      "aliases": [
+        "PT",
+        "Prothrombin Time"
+      ],
+      "unit": "sec",
+      "ref": [
+        9,
+        12.5
+      ]
+    },
+    "INR": {
+      "group": "coag",
+      "aliases": [
+        "INR",
+        "PT(INR)",
+        "PT INR"
+      ],
+      "unit": "",
+      "ref": [
+        0.8,
+        1.2
+      ]
+    },
+    "aPTT": {
+      "group": "coag",
+      "aliases": [
+        "aPTT",
+        "APTT",
+        "PTT"
+      ],
+      "unit": "sec",
+      "ref": [
+        23,
+        35
+      ]
+    },
+    "D-Dimer": {
+      "group": "coag",
+      "aliases": [
+        "D-Dimer",
+        "DDimer"
+      ],
+      "unit": "ug/mL FEU",
+      "ref": [
+        0,
+        0.5
+      ]
+    },
+    "Fibrinogen": {
+      "group": "coag",
+      "aliases": [
+        "Fibrinogen"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        200,
+        400
+      ]
+    },
+    "U-SG": {
+      "group": "urine",
+      "aliases": [
+        "U-SG",
+        "SG",
+        "Specific Gravity",
+        "比重"
+      ],
+      "unit": "",
+      "ref": [
+        1.003,
+        1.035
+      ]
+    },
+    "U-pH": {
+      "group": "urine",
+      "aliases": [
+        "U-pH",
+        "Urine pH",
+        "尿液 pH",
+        "pH"
+      ],
+      "unit": "",
+      "ref": [
+        5.0,
+        8.0
+      ]
+    },
+    "U-LEU": {
+      "group": "urine",
+      "aliases": [
+        "LEU",
+        "U-LEU",
+        "Leukocyte Esterase",
+        "白血球酯酶"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg",
+        "Trace"
+      ]
+    },
+    "U-NIT": {
+      "group": "urine",
+      "aliases": [
+        "NIT",
+        "U-NIT",
+        "Nitrite",
+        "亞硝酸鹽"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "U-Protein": {
+      "group": "urine",
+      "aliases": [
+        "PRO",
+        "U-PRO",
+        "U-Protein",
+        "Urine Protein",
+        "Protein",
+        "尿蛋白"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg",
+        "Trace"
+      ]
+    },
+    "U-Glucose": {
+      "group": "urine",
+      "aliases": [
+        "GLU",
+        "U-GLU",
+        "U-Glucose",
+        "Urine Glucose",
+        "尿糖"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ],
+      "report_group_hint": "urine"
+    },
+    "U-Ketone": {
+      "group": "urine",
+      "aliases": [
+        "KET",
+        "U-KET",
+        "U-Ketone",
+        "Ketone",
+        "Urine Ketone",
+        "尿酮體"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "U-UBG": {
+      "group": "urine",
+      "aliases": [
+        "UBG",
+        "U-UBG",
+        "Urobilinogen",
+        "尿膽素原"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "Normal",
+        "Neg",
+        "Negative",
+        "-"
+      ]
+    },
+    "U-Bil": {
+      "group": "urine",
+      "aliases": [
+        "BIL",
+        "U-BIL",
+        "Urine Bilirubin",
+        "尿膽紅素"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "U-Blood": {
+      "group": "urine",
+      "aliases": [
+        "Blood",
+        "U-Blood",
+        "Urine Blood",
+        "尿潛血"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "U-RBC": {
+      "group": "urine",
+      "aliases": [
+        "U-RBC",
+        "Urine RBC"
+      ],
+      "unit": "/HPF",
+      "ref": [
+        0,
+        4
+      ]
+    },
+    "U-WBC": {
+      "group": "urine",
+      "aliases": [
+        "U-WBC",
+        "Urine WBC"
+      ],
+      "unit": "/HPF",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "U-Bacteria": {
+      "group": "urine",
+      "aliases": [
+        "Bacteria",
+        "U-Bacteria",
+        "細菌"
+      ],
+      "unit": "/HPF",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "U-EC": {
+      "group": "urine",
+      "aliases": [
+        "EC",
+        "U-EC",
+        "Epithelial Cell"
+      ],
+      "unit": "/HPF",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "U-Cast": {
+      "group": "urine",
+      "aliases": [
+        "Cast",
+        "U-Cast"
+      ],
+      "unit": "/LPF",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "U-Crystal": {
+      "group": "urine",
+      "aliases": [
+        "Crystal",
+        "U-Crystal"
+      ],
+      "unit": "/HPF",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Stool-OB": {
+      "group": "stool",
+      "aliases": [
+        "O.B.",
+        "OB",
+        "Stool OB",
+        "Occult Blood",
+        "FOBT",
+        "FIT"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "HBsAg": {
+      "group": "hepatitis",
+      "aliases": [
+        "HBsAg",
+        "HBs Ag",
+        "HBs-Ag"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Anti-HBs": {
+      "group": "hepatitis",
+      "aliases": [
+        "Anti-HBs",
+        "HBsAb"
+      ],
+      "unit": "mIU/mL",
+      "ref": [
+        10,
+        1000
+      ],
+      "direction": "low_bad"
+    },
+    "Anti-HBc": {
+      "group": "hepatitis",
+      "aliases": [
+        "Anti-HBc",
+        "HBcAb"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "HBeAg": {
+      "group": "hepatitis",
+      "aliases": [
+        "HBeAg"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Anti-HCV": {
+      "group": "hepatitis",
+      "aliases": [
+        "Anti-HCV",
+        "HCVAb",
+        "HCV Ab",
+        "HCV-Ab"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Ferritin": {
+      "group": "iron",
+      "aliases": [
+        "Ferritin",
+        "FERR"
+      ],
+      "unit": "ng/mL",
+      "ref_m": [
+        30,
+        400
+      ],
+      "ref_f": [
+        13,
+        150
+      ]
+    },
+    "Iron": {
+      "group": "iron",
+      "aliases": [
+        "Iron",
+        "Fe",
+        "血清鐵"
+      ],
+      "unit": "ug/dL",
+      "ref_m": [
+        65,
+        175
+      ],
+      "ref_f": [
+        50,
+        170
+      ]
+    },
+    "TIBC": {
+      "group": "iron",
+      "aliases": [
+        "TIBC"
+      ],
+      "unit": "ug/dL",
+      "ref": [
+        250,
+        450
+      ]
+    },
+    "Transferrin": {
+      "group": "iron",
+      "aliases": [
+        "Transferrin"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        200,
+        360
+      ]
+    },
+    "Vit D": {
+      "group": "vit",
+      "aliases": [
+        "Vit D",
+        "Vitamin D",
+        "25-OH-D",
+        "25(OH)D"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        30,
+        100
+      ],
+      "direction": "low_bad"
+    },
+    "Vit B12": {
+      "group": "vit",
+      "aliases": [
+        "Vit B12",
+        "Vitamin B12",
+        "B12"
+      ],
+      "unit": "pg/mL",
+      "ref": [
+        187,
+        883
+      ],
+      "direction": "low_bad"
+    },
+    "Folate": {
+      "group": "vit",
+      "aliases": [
+        "Folate",
+        "Folic Acid",
+        "葉酸"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        3.1,
+        19.9
+      ],
+      "direction": "low_bad"
+    },
+    "Cortisol": {
+      "group": "endocrine",
+      "aliases": [
+        "CORT AM",
+        "CORT PM",
+        "Cortisol AM",
+        "Cortisol PM",
+        "Cortisol",
+        "皮質醇"
+      ],
+      "unit": "ug/dL",
+      "ref": [
+        6.2,
+        19.4
+      ]
+    },
+    "ACTH": {
+      "group": "endocrine",
+      "aliases": [
+        "ACTH"
+      ],
+      "unit": "pg/mL",
+      "ref": [
+        7.2,
+        63
+      ]
+    },
+    "PTH": {
+      "group": "endocrine",
+      "aliases": [
+        "PTH",
+        "Parathyroid Hormone"
+      ],
+      "unit": "pg/mL",
+      "ref": [
+        15,
+        65
+      ]
+    },
+    "Testosterone": {
+      "group": "endocrine",
+      "aliases": [
+        "Testosterone",
+        "睪固酮"
+      ],
+      "unit": "ng/dL",
+      "ref_m": [
+        240,
+        950
+      ],
+      "ref_f": [
+        8,
+        60
+      ]
+    },
+    "PSA": {
+      "group": "tumor",
+      "aliases": [
+        "PSA",
+        "Prostate Specific Antigen"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        0,
+        4
+      ]
+    },
+    "AFP": {
+      "group": "tumor",
+      "aliases": [
+        "AFP",
+        "Alpha-Fetoprotein"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        0,
+        8.04
+      ]
+    },
+    "CEA": {
+      "group": "tumor",
+      "aliases": [
+        "CEA"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "CA-19-9": {
+      "group": "tumor",
+      "aliases": [
+        "CA-19-9",
+        "CA19-9",
+        "CA199"
+      ],
+      "unit": "U/mL",
+      "ref": [
+        0,
+        37
+      ]
+    },
+    "CA-125": {
+      "group": "tumor",
+      "aliases": [
+        "CA-125",
+        "CA125"
+      ],
+      "unit": "U/mL",
+      "ref": [
+        0,
+        35
+      ]
+    },
+    "CA-15-3": {
+      "group": "tumor",
+      "aliases": [
+        "CA-15-3",
+        "CA15-3",
+        "CA153"
+      ],
+      "unit": "U/mL",
+      "ref": [
+        0,
+        25
+      ]
+    },
+    "ABI-L": {
+      "group": "vascular",
+      "aliases": [
+        "ABI-L",
+        "ABI L",
+        "ABI 左",
+        "ABI-Left"
+      ],
+      "unit": "",
+      "ref": [
+        0.9,
+        1.4
+      ]
+    },
+    "ABI-R": {
+      "group": "vascular",
+      "aliases": [
+        "ABI-R",
+        "ABI R",
+        "ABI 右",
+        "ABI-Right"
+      ],
+      "unit": "",
+      "ref": [
+        0.9,
+        1.4
+      ]
+    },
+    "PWV-L": {
+      "group": "vascular",
+      "aliases": [
+        "PWV-L",
+        "PWV L",
+        "PWV 左",
+        "PWV-Left"
+      ],
+      "unit": "cm/s",
+      "ref": [
+        0,
+        1400
+      ]
+    },
+    "PWV-R": {
+      "group": "vascular",
+      "aliases": [
+        "PWV-R",
+        "PWV R",
+        "PWV 右",
+        "PWV-Right"
+      ],
+      "unit": "cm/s",
+      "ref": [
+        0,
+        1400
+      ]
+    },
+    "ANA": {
+      "group": "autoimm",
+      "aliases": [
+        "ANA",
+        "ANA*",
+        "Antinuclear Antibody",
+        "抗核抗體"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "AMA": {
+      "group": "autoimm",
+      "aliases": [
+        "AMA",
+        "Antimitochondrial Antibody",
+        "抗粒線體抗體"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "ASMA": {
+      "group": "autoimm",
+      "aliases": [
+        "ASMA",
+        "Anti-smooth muscle antibody",
+        "抗平滑肌抗體"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Anti-LKM": {
+      "group": "autoimm",
+      "aliases": [
+        "Anti-LKM",
+        "LKM"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "RF": {
+      "group": "autoimm",
+      "aliases": [
+        "RF",
+        "Rheumatoid factor",
+        "類風濕因子"
+      ],
+      "unit": "IU/mL",
+      "ref": [
+        0,
+        14
+      ]
+    },
+    "Anti-CCP": {
+      "group": "autoimm",
+      "aliases": [
+        "Anti-CCP",
+        "CCP",
+        "ACPA"
+      ],
+      "unit": "U/mL",
+      "ref": [
+        0,
+        17
+      ]
+    },
+    "IgG": {
+      "group": "protein",
+      "aliases": [
+        "IgG",
+        "Immunoglobulin G"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        751,
+        1560
+      ]
+    },
+    "IgM": {
+      "group": "protein",
+      "aliases": [
+        "IgM",
+        "Immunoglobulin M"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        37,
+        286
+      ]
+    },
+    "IgA": {
+      "group": "protein",
+      "aliases": [
+        "IgA",
+        "Immunoglobulin A"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        82,
+        453
+      ]
+    },
+    "Ceruloplasmin": {
+      "group": "protein",
+      "aliases": [
+        "Ceruloplasmin",
+        "CER",
+        "CP",
+        "血漿銅藍蛋白"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        22,
+        58
+      ]
+    },
+    "Crea-U": {
+      "group": "u-protein",
+      "aliases": [
+        "Crea(U)",
+        "Cr(U)",
+        "Urine Creatinine",
+        "尿肌酸酐"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        999
+      ]
+    },
+    "Alb-U": {
+      "group": "u-protein",
+      "aliases": [
+        "Alb(U)",
+        "Urine Albumin",
+        "Microalbumin",
+        "尿微量白蛋白"
+      ],
+      "unit": "mg/L",
+      "ref": [
+        0,
+        20
+      ]
+    },
+    "ACR": {
+      "group": "u-protein",
+      "aliases": [
+        "ACR",
+        "UACR",
+        "Urine ACR",
+        "Microalbumin/Cr"
+      ],
+      "unit": "mg/g",
+      "ref": [
+        0,
+        30
+      ]
+    },
+    "LH": {
+      "group": "endocrine",
+      "aliases": [
+        "LH",
+        "黃體激素",
+        "Luteinizing hormone"
+      ],
+      "unit": "mIU/mL",
+      "ref": [
+        1.7,
+        8.6
+      ]
+    },
+    "FSH": {
+      "group": "endocrine",
+      "aliases": [
+        "FSH",
+        "濾泡刺激素",
+        "Follicle-stimulating hormone"
+      ],
+      "unit": "mIU/mL",
+      "ref": [
+        1.5,
+        12.4
+      ]
+    },
+    "Estradiol": {
+      "group": "endocrine",
+      "aliases": [
+        "Estradiol",
+        "E2",
+        "Estradiol II",
+        "雌二醇"
+      ],
+      "unit": "pg/mL",
+      "ref": [
+        11,
+        250
+      ]
+    },
+    "Progesterone": {
+      "group": "endocrine",
+      "aliases": [
+        "Progesterone",
+        "PG",
+        "P4",
+        "黃體素"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        0.2,
+        25
+      ]
+    },
+    "HCG": {
+      "group": "endocrine",
+      "aliases": [
+        "HCG",
+        "β-hCG",
+        "beta-hCG",
+        "絨毛膜促性腺激素"
+      ],
+      "unit": "mIU/mL",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "AMH": {
+      "group": "endocrine",
+      "aliases": [
+        "AMH",
+        "Anti-Mullerian Hormone",
+        "抗穆勒氏管荷爾蒙"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        1.0,
+        4.0
+      ]
+    },
+    "DHEA-S": {
+      "group": "endocrine",
+      "aliases": [
+        "DHEA-S",
+        "DHEAS",
+        "Dehydroepiandrosterone-sulfate",
+        "硫酸-脫氫表雄酯酮"
+      ],
+      "unit": "ug/dL",
+      "ref": [
+        60,
+        555
+      ]
+    },
+    "Lp(a)": {
+      "group": "lipid",
+      "aliases": [
+        "Lp(a)",
+        "Lipoprotein (a)",
+        "Lipoprotein a",
+        "脂蛋白a"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        0,
+        30
+      ]
+    },
+    "Homocysteine": {
+      "group": "cardiac",
+      "aliases": [
+        "Homocysteine",
+        "HCY",
+        "同半胱胺酸"
+      ],
+      "unit": "umol/L",
+      "ref": [
+        5,
+        15
+      ]
+    },
+    "Cystatin C": {
+      "group": "rft",
+      "aliases": [
+        "Cystatin C",
+        "CysC",
+        "胱蛋白C"
+      ],
+      "unit": "mg/L",
+      "ref": [
+        0.57,
+        0.96
+      ]
+    },
+    "Glycated Albumin": {
+      "group": "dm",
+      "aliases": [
+        "Glycated Albumin",
+        "GA",
+        "糖化白蛋白"
+      ],
+      "unit": "%",
+      "ref": [
+        11,
+        16
+      ]
+    },
+    "C-peptide": {
+      "group": "dm",
+      "aliases": [
+        "C-peptide",
+        "C peptide",
+        "C-胜肽"
+      ],
+      "unit": "ng/mL",
+      "ref": [
+        1.1,
+        4.4
+      ]
+    },
+    "Anti-HAV": {
+      "group": "hepatitis",
+      "aliases": [
+        "Anti-HAV",
+        "HAV Ab",
+        "A肝抗體"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Anti-HAV IgM": {
+      "group": "hepatitis",
+      "aliases": [
+        "Anti-HAV IgM",
+        "HAV IgM",
+        "A肝IgM抗體"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "IgG4": {
+      "group": "protein",
+      "aliases": [
+        "IgG4",
+        "Immunoglobin G4",
+        "免疫球蛋白G4"
+      ],
+      "unit": "mg/dL",
+      "ref": [
+        4,
+        86
+      ]
+    },
+    "ASLO": {
+      "group": "inflam",
+      "aliases": [
+        "ASLO",
+        "ASO",
+        "Anti-streptolysin O",
+        "抗鏈球菌溶血素O"
+      ],
+      "unit": "IU/mL",
+      "ref": [
+        0,
+        200
+      ]
+    },
+    "Amylase": {
+      "group": "lft",
+      "aliases": [
+        "Amylase",
+        "AMY",
+        "澱粉酶"
+      ],
+      "unit": "U/L",
+      "ref": [
+        25,
+        125
+      ]
+    },
+    "Lipase": {
+      "group": "lft",
+      "aliases": [
+        "Lipase",
+        "LIP",
+        "解脂酶"
+      ],
+      "unit": "U/L",
+      "ref": [
+        13,
+        60
+      ]
+    },
+    "CMV IgG": {
+      "group": "hepatitis",
+      "aliases": [
+        "CMV IgG",
+        "Cytomegalovirus IgG",
+        "Cytomegalovirus(CMV) Ab (IgG)",
+        "巨細胞病毒IgG"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "CMV IgM": {
+      "group": "hepatitis",
+      "aliases": [
+        "CMV IgM",
+        "Cytomegalovirus IgM",
+        "Cytomegalovirus(CMV) Ab(IgM)",
+        "巨細胞病毒IgM"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Rubella IgG": {
+      "group": "hepatitis",
+      "aliases": [
+        "Rubella IgG",
+        "Rubella Ab (IgG)",
+        "德國麻疹IgG"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Rubella IgM": {
+      "group": "hepatitis",
+      "aliases": [
+        "Rubella IgM",
+        "Rubella Ab (IgM)",
+        "德國麻疹IgM"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Toxoplasma IgG": {
+      "group": "hepatitis",
+      "aliases": [
+        "Toxoplasma IgG",
+        "Toxoplasma Ab (IgG)",
+        "弓漿蟲IgG"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Toxoplasma IgM": {
+      "group": "hepatitis",
+      "aliases": [
+        "Toxoplasma IgM",
+        "Toxoplasma Ab (IgM)",
+        "弓漿蟲IgM"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "HIV": {
+      "group": "hepatitis",
+      "aliases": [
+        "HIV",
+        "HIV screening test",
+        "HIV screen",
+        "HIV Ab",
+        "Anti-HIV",
+        "愛滋篩檢"
+      ],
+      "unit": "",
+      "is_qual": true,
+      "qual_neg": [
+        "-",
+        "Non-reactive",
+        "Negative",
+        "Neg"
+      ]
+    },
+    "Reticulocyte": {
+      "group": "cbc",
+      "aliases": [
+        "Reticulocyte",
+        "Retic",
+        "Retic count",
+        "網狀紅血球"
+      ],
+      "unit": "%",
+      "ref": [
+        0.5,
+        2.0
+      ]
+    }
   }
 }
 </script>
@@ -805,247 +2842,472 @@
     "note": "診斷規則表。每條規則：any=任一條件符合即觸發、all=全部符合。op: > >= < <= ==。'qual_positive'=檢驗項目為陽性。切點預設使用 lab_dict 的 ref 範圍上下限；若需自訂可直接寫 value。",
     "updated": "2026-05-14"
   },
-
   "rules": [
     {
       "id": "diabetes_mellitus",
       "name": "Diabetes mellitus",
       "logic": "any",
       "criteria": [
-        { "item": "HbA1c",  "op": ">=", "value": 6.5 },
-        { "item": "GLU-AC", "op": ">=", "value": 126 }
-      ]
+        {
+          "item": "HbA1c",
+          "op": ">=",
+          "value": 6.5
+        },
+        {
+          "item": "GLU-AC",
+          "op": ">=",
+          "value": 126
+        }
+      ],
+      "icd10": "E11.9",
+      "icd10_desc": "Type 2 diabetes mellitus without complications"
     },
     {
       "id": "prediabetes",
       "name": "Prediabetes (IFG/IGT)",
       "logic": "any",
-      "exclude_if": ["diabetes_mellitus"],
+      "exclude_if": [
+        "diabetes_mellitus"
+      ],
       "criteria": [
-        { "item": "HbA1c",  "op": "between", "value": [5.7, 6.4] },
-        { "item": "GLU-AC", "op": "between", "value": [100, 125] }
-      ]
+        {
+          "item": "HbA1c",
+          "op": "between",
+          "value": [
+            5.7,
+            6.4
+          ]
+        },
+        {
+          "item": "GLU-AC",
+          "op": "between",
+          "value": [
+            100,
+            125
+          ]
+        }
+      ],
+      "icd10": "R73.03",
+      "icd10_desc": "Prediabetes"
     },
     {
       "id": "dyslipidemia",
       "name": "Dyslipidemia",
       "logic": "any",
       "criteria": [
-        { "item": "LDL-C", "op": "out_of_ref" },
-        { "item": "HDL-C", "op": "out_of_ref" },
-        { "item": "TG",    "op": "out_of_ref" },
-        { "item": "TC",    "op": "out_of_ref" }
-      ]
+        {
+          "item": "LDL-C",
+          "op": "out_of_ref"
+        },
+        {
+          "item": "HDL-C",
+          "op": "out_of_ref"
+        },
+        {
+          "item": "TG",
+          "op": "out_of_ref"
+        },
+        {
+          "item": "TC",
+          "op": "out_of_ref"
+        }
+      ],
+      "icd10": "E78.5",
+      "icd10_desc": "Hyperlipidemia, unspecified"
     },
     {
       "id": "severe_hypertg",
       "name": "Severe hypertriglyceridemia",
       "logic": "any",
       "criteria": [
-        { "item": "TG", "op": ">=", "value": 500 }
-      ]
+        {
+          "item": "TG",
+          "op": ">=",
+          "value": 500
+        }
+      ],
+      "icd10": "E78.1",
+      "icd10_desc": "Pure hyperglyceridemia"
     },
     {
       "id": "ckd",
       "name": "Chronic kidney disease",
       "logic": "any",
       "criteria": [
-        { "item": "eGFR", "op": "<", "value": 60 },
-        { "item": "UACR", "op": ">=", "value": 30 }
-      ]
+        {
+          "item": "eGFR",
+          "op": "<",
+          "value": 60
+        },
+        {
+          "item": "UACR",
+          "op": ">=",
+          "value": 30
+        }
+      ],
+      "icd10": "N18.9",
+      "icd10_desc": "Chronic kidney disease, unspecified"
     },
     {
       "id": "hyperuricemia",
       "name": "Hyperuricemia",
       "logic": "any",
       "criteria": [
-        { "item": "UA", "op": "out_of_ref" }
-      ]
+        {
+          "item": "UA",
+          "op": "out_of_ref"
+        }
+      ],
+      "icd10": "E79.0",
+      "icd10_desc": "Hyperuricemia w/o gout or arthritis"
     },
     {
       "id": "anemia",
       "name": "Anemia",
       "logic": "any",
       "criteria": [
-        { "item": "Hb", "op": "below_ref" }
-      ]
+        {
+          "item": "Hb",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "D64.9",
+      "icd10_desc": "Anemia, unspecified"
     },
     {
       "id": "abn_liver",
       "name": "Abnormal liver enzymes",
       "logic": "any",
       "criteria": [
-        { "item": "AST", "op": "above_ref" },
-        { "item": "ALT", "op": "above_ref" }
-      ]
+        {
+          "item": "AST",
+          "op": "above_ref"
+        },
+        {
+          "item": "ALT",
+          "op": "above_ref"
+        }
+      ],
+      "icd10": "R74.0",
+      "icd10_desc": "Elevated transaminase levels"
     },
     {
       "id": "thrombocytopenia",
       "name": "Thrombocytopenia",
       "logic": "any",
       "criteria": [
-        { "item": "Platelet", "op": "below_ref" }
-      ]
+        {
+          "item": "Platelet",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "D69.6",
+      "icd10_desc": "Thrombocytopenia, unspecified"
     },
     {
       "id": "thrombocytosis",
       "name": "Thrombocytosis",
       "logic": "any",
       "criteria": [
-        { "item": "Platelet", "op": "above_ref" }
-      ]
+        {
+          "item": "Platelet",
+          "op": "above_ref"
+        }
+      ],
+      "icd10": "D75.838",
+      "icd10_desc": "Other thrombocytosis"
     },
     {
       "id": "leukocytosis",
       "name": "Leukocytosis",
       "logic": "any",
       "criteria": [
-        { "item": "WBC", "op": "above_ref" }
-      ]
+        {
+          "item": "WBC",
+          "op": "above_ref"
+        }
+      ],
+      "icd10": "D72.829",
+      "icd10_desc": "Elevated WBC count, unspecified"
     },
     {
       "id": "leukopenia",
       "name": "Leukopenia",
       "logic": "any",
       "criteria": [
-        { "item": "WBC", "op": "below_ref" }
-      ]
+        {
+          "item": "WBC",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "D72.819",
+      "icd10_desc": "Decreased WBC count, unspecified"
     },
     {
       "id": "hyponatremia",
       "name": "Hyponatremia",
       "logic": "any",
-      "criteria": [{ "item": "Na", "op": "below_ref" }]
+      "criteria": [
+        {
+          "item": "Na",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "E87.1",
+      "icd10_desc": "Hypo-osmolality and hyponatremia"
     },
     {
       "id": "hypernatremia",
       "name": "Hypernatremia",
       "logic": "any",
-      "criteria": [{ "item": "Na", "op": "above_ref" }]
+      "criteria": [
+        {
+          "item": "Na",
+          "op": "above_ref"
+        }
+      ],
+      "icd10": "E87.0",
+      "icd10_desc": "Hyperosmolality and hypernatremia"
     },
     {
       "id": "hypokalemia",
       "name": "Hypokalemia",
       "logic": "any",
-      "criteria": [{ "item": "K", "op": "below_ref" }]
+      "criteria": [
+        {
+          "item": "K",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "E87.6",
+      "icd10_desc": "Hypokalemia"
     },
     {
       "id": "hyperkalemia",
       "name": "Hyperkalemia",
       "logic": "any",
-      "criteria": [{ "item": "K", "op": "above_ref" }]
+      "criteria": [
+        {
+          "item": "K",
+          "op": "above_ref"
+        }
+      ],
+      "icd10": "E87.5",
+      "icd10_desc": "Hyperkalemia"
     },
     {
       "id": "hypothyroidism",
       "name": "Hypothyroidism (suspected)",
       "logic": "any",
-      "criteria": [{ "item": "TSH", "op": "above_ref" }]
+      "criteria": [
+        {
+          "item": "TSH",
+          "op": "above_ref"
+        }
+      ],
+      "icd10": "E03.9",
+      "icd10_desc": "Hypothyroidism, unspecified"
     },
     {
       "id": "hyperthyroidism",
       "name": "Hyperthyroidism (suspected)",
       "logic": "any",
-      "criteria": [{ "item": "TSH", "op": "below_ref" }]
+      "criteria": [
+        {
+          "item": "TSH",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "E05.90",
+      "icd10_desc": "Thyrotoxicosis, unspecified"
     },
     {
       "id": "b12_deficiency",
       "name": "Vitamin B12 deficiency",
       "logic": "any",
-      "criteria": [{ "item": "Vit B12", "op": "below_ref" }]
+      "criteria": [
+        {
+          "item": "Vit B12",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "E53.8",
+      "icd10_desc": "Deficiency of other specified B group vitamins"
     },
     {
       "id": "vitd_deficiency",
       "name": "Vitamin D deficiency",
       "logic": "any",
-      "criteria": [{ "item": "Vit D", "op": "below_ref" }]
+      "criteria": [
+        {
+          "item": "Vit D",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "E55.9",
+      "icd10_desc": "Vitamin D deficiency, unspecified"
     },
     {
       "id": "uti_suspected",
       "name": "Urinary tract infection (suspected)",
       "logic": "any",
       "criteria": [
-        { "item": "U-WBC",      "op": "above_ref" },
-        { "item": "U-LEU",      "op": "qual_positive" },
-        { "item": "U-NIT",      "op": "qual_positive" },
-        { "item": "U-Bacteria", "op": "qual_positive" }
-      ]
+        {
+          "item": "U-WBC",
+          "op": "above_ref"
+        },
+        {
+          "item": "U-LEU",
+          "op": "qual_positive"
+        },
+        {
+          "item": "U-NIT",
+          "op": "qual_positive"
+        },
+        {
+          "item": "U-Bacteria",
+          "op": "qual_positive"
+        }
+      ],
+      "icd10": "N39.0",
+      "icd10_desc": "Urinary tract infection, site not specified"
     },
     {
       "id": "hematuria",
       "name": "Hematuria",
       "logic": "any",
       "criteria": [
-        { "item": "U-RBC",   "op": "above_ref" },
-        { "item": "U-Blood", "op": "qual_positive" }
-      ]
+        {
+          "item": "U-RBC",
+          "op": "above_ref"
+        },
+        {
+          "item": "U-Blood",
+          "op": "qual_positive"
+        }
+      ],
+      "icd10": "R31.9",
+      "icd10_desc": "Hematuria, unspecified"
     },
     {
       "id": "proteinuria",
       "name": "Proteinuria",
       "logic": "any",
       "criteria": [
-        { "item": "U-Protein", "op": "qual_positive" },
-        { "item": "UACR",      "op": ">=", "value": 30 }
-      ]
+        {
+          "item": "U-Protein",
+          "op": "qual_positive"
+        },
+        {
+          "item": "UACR",
+          "op": ">=",
+          "value": 30
+        }
+      ],
+      "icd10": "R80.9",
+      "icd10_desc": "Proteinuria, unspecified"
     },
     {
       "id": "glycosuria",
       "name": "Glycosuria",
       "logic": "any",
       "criteria": [
-        { "item": "U-Glucose", "op": "qual_positive" }
-      ]
+        {
+          "item": "U-Glucose",
+          "op": "qual_positive"
+        }
+      ],
+      "icd10": "R81",
+      "icd10_desc": "Glycosuria"
     },
     {
       "id": "hbv_carrier",
       "name": "HBV carrier",
       "logic": "any",
       "criteria": [
-        { "item": "HBsAg", "op": "qual_positive" }
-      ]
+        {
+          "item": "HBsAg",
+          "op": "qual_positive"
+        }
+      ],
+      "icd10": "B18.1",
+      "icd10_desc": "Chronic viral hepatitis B without delta-agent"
     },
     {
       "id": "hbv_past_infection",
       "name": "Past HBV infection (suspected)",
       "logic": "any",
       "criteria": [
-        { "item": "Anti-HBc", "op": "qual_positive" }
+        {
+          "item": "Anti-HBc",
+          "op": "qual_positive"
+        }
       ],
-      "exclude_if": ["hbv_carrier"]
+      "exclude_if": [
+        "hbv_carrier"
+      ],
+      "icd10": "Z22.51",
+      "icd10_desc": "Carrier of viral hepatitis B"
     },
     {
       "id": "hcv_infection",
       "name": "HCV infection (suspected)",
       "logic": "any",
       "criteria": [
-        { "item": "Anti-HCV", "op": "qual_positive" }
-      ]
+        {
+          "item": "Anti-HCV",
+          "op": "qual_positive"
+        }
+      ],
+      "icd10": "B19.20",
+      "icd10_desc": "Unspecified viral hepatitis C without hepatic coma"
     },
     {
       "id": "stool_ob_positive",
       "name": "Positive fecal occult blood",
       "logic": "any",
       "criteria": [
-        { "item": "Stool-OB", "op": "qual_positive" }
-      ]
+        {
+          "item": "Stool-OB",
+          "op": "qual_positive"
+        }
+      ],
+      "icd10": "R19.5",
+      "icd10_desc": "Other fecal abnormalities"
     },
     {
       "id": "arterial_stiffness",
       "name": "Increased arterial stiffness",
       "logic": "any",
       "criteria": [
-        { "item": "PWV-L", "op": "above_ref" },
-        { "item": "PWV-R", "op": "above_ref" }
-      ]
+        {
+          "item": "PWV-L",
+          "op": "above_ref"
+        },
+        {
+          "item": "PWV-R",
+          "op": "above_ref"
+        }
+      ],
+      "icd10": "I77.81",
+      "icd10_desc": "Stenosis of artery (peripheral)"
     },
     {
       "id": "pad_suspected",
       "name": "Peripheral artery disease (suspected)",
       "logic": "any",
       "criteria": [
-        { "item": "ABI-L", "op": "below_ref" },
-        { "item": "ABI-R", "op": "below_ref" }
-      ]
+        {
+          "item": "ABI-L",
+          "op": "below_ref"
+        },
+        {
+          "item": "ABI-R",
+          "op": "below_ref"
+        }
+      ],
+      "icd10": "I73.9",
+      "icd10_desc": "Peripheral vascular disease, unspecified"
     }
   ]
 }
