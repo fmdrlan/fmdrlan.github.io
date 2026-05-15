@@ -1506,8 +1506,10 @@
       "group": "thyroid",
       "aliases": [
         "Anti-TPO",
-        "TPOAb",
-        "Anti-Microsomal"
+        "TPO Ab",
+        "Anti-microsomal Ab",
+        "Microsomal Ab",
+        "TPOAb"
       ],
       "unit": "IU/mL",
       "ref": [
@@ -1975,7 +1977,10 @@
       "aliases": [
         "HBsAg",
         "HBs Ag",
-        "HBs-Ag"
+        "HBs-Ag",
+        "HBsAg (Quantitation)",
+        "HBsAg Quantitation",
+        "HBsAg Quant"
       ],
       "unit": "",
       "is_qual": true,
@@ -1983,7 +1988,8 @@
         "-",
         "Non-reactive",
         "Negative",
-        "Neg"
+        "Neg",
+        "<0.05"
       ]
     },
     "Anti-HBs": {
@@ -2106,7 +2112,10 @@
         "Vit D",
         "Vitamin D",
         "25-OH-D",
-        "25(OH)D"
+        "25(OH)D",
+        "VIT D (25-OH)",
+        "Vit D (25-OH)",
+        "VIT D"
       ],
       "unit": "ng/mL",
       "ref": [
@@ -2916,6 +2925,80 @@
         "Neg",
         "NR"
       ]
+    },
+    "TRAb": {
+      "group": "thyroid",
+      "aliases": [
+        "TRAb",
+        "Anti-TSH receptor",
+        "TSH receptor Ab",
+        "TSHR Ab",
+        "TSI"
+      ],
+      "unit": "U/L",
+      "ref": [
+        0,
+        1.5
+      ]
+    },
+    "TgAb": {
+      "group": "thyroid",
+      "aliases": [
+        "TgAb",
+        "Anti-Tg",
+        "Thyroglobulin Ab",
+        "Anti-thyroglobulin"
+      ],
+      "unit": "IU/mL",
+      "ref": [
+        0,
+        115
+      ]
+    },
+    "Zinc": {
+      "group": "trace_element",
+      "aliases": [
+        "Zinc",
+        "Zn",
+        "鋅"
+      ],
+      "unit": "ug/dL",
+      "ref": [
+        70,
+        120
+      ]
+    },
+    "A/G": {
+      "group": "lft",
+      "aliases": [
+        "A/G",
+        "A/G ratio",
+        "Albumin/Globulin",
+        "白蛋白球蛋白比"
+      ],
+      "unit": "",
+      "is_text_only": true
+    },
+    "MNAPTT": {
+      "group": "qc",
+      "aliases": [
+        "MNAPTT",
+        "Mean Normal APTT"
+      ],
+      "unit": "secs",
+      "hide_if_normal": true,
+      "is_qc": true
+    },
+    "MNPT": {
+      "group": "qc",
+      "aliases": [
+        "MNPT",
+        "PT(MNPT)",
+        "Mean Normal PT"
+      ],
+      "unit": "secs",
+      "hide_if_normal": true,
+      "is_qc": true
     }
   }
 }
@@ -3708,6 +3791,8 @@ const FREE_TEXT_TYPES = [
   { match: /Ｘ光|X光|X-ray|放射線/,     label: 'X光',        short: 'XR',        keywords: ['Impression', 'IMPRESSION', 'IMP'] },
   { match: /皮膚科檢查報告/,            label: '皮膚科超音', short: 'Skin US',   keywords: ['Impression', 'IMPRESSION', 'IMP'] },
   { match: /家醫部特殊檢查報告/,        label: '家醫部',     short: 'FM',        keywords: ['醫師診斷', 'DIAGNOSIS', '診斷'] },
+  { match: /健檢中心檢查報告/,          label: '健檢中心',   short: 'Checkup',   keywords: ['Impression', 'IMPRESSION', 'IMP', 'DIAGNOSIS'] },
+  { match: /新陳代謝科檢查報告/,        label: '新陳代謝',   short: 'Endo',      keywords: ['Impression', 'IMPRESSION', 'IMP'] },
   { match: /心臟內科檢查報告/,          label: '心臟內科',   short: 'ECG',       keywords: ['Impression', 'IMPRESSION', 'IMP', 'DIAGNOSIS', '__SPECIAL_ECG__'] },
   { match: /神經傳導速度/,              label: '神經傳導',   short: 'NCV',       keywords: ['IMPRESSION', 'DIAGNOSIS', 'IMP'] },
   { match: /泌尿科部檢查報告/,          label: '泌尿科',     short: 'Urology',   keywords: ['Impression', 'IMPRESSION', 'DIAGNOSIS', 'IMP'] },
@@ -3845,7 +3930,7 @@ function parseFreeTextSection(section, typeInfo) {
     // 分行 / bullet / 分號 / 句號（保留條目）
     let lines = body
       .split(/\n+|;|；/)
-      .map(s => s.replace(/^[\s\->•・*>＞\]\[]+/, '')
+      .map(s => s.replace(/^[\s\->•・*>＞＝=\]\[]+/, '')   // 加 = / ＝ 前綴去除（健檢中心格式）
                   .replace(/^\d+[\)\.]\s*/, '')
                   .replace(/^診斷\s*[:：]\s*/, '')
                   .replace(/^Dx\s*[:：]\s*/i, '')
@@ -3862,11 +3947,43 @@ function parseFreeTextSection(section, typeInfo) {
       if (/^(Normal\s+(?:heart\s+size|sized?))$/i.test(line)) return false;
       if (/(?:is\s+not\s+(?:widened|enlarged|dilated)|is\s+intact|are\s+intact|appears?\s+normal|are\s+free\s+of|unremarkable|not\s+distended)$/i.test(line)) return false;
 
-      // 「形容詞 + 部位」型的正常 finding：
-      //   "Clear bilateral CP angles" / "Clear lung fields" / "Patent airway" 等
-      //   開頭是 Clear / Patent / Normal / Intact / Symmetric / Symmetrical / Smooth 等正常形容詞
+      // === 加強過濾：報告中的 meta/標記/常見 noise ===
+      // checkbox 表單行（新陳代謝科 FNA / 健檢中心常見）
+      if (/^[□■☐☑✓✔]/i.test(line)) return false;
+      if (/^(Suggestion|Suggestions)\s*[:：]?\s*$/i.test(line)) return false;
+      // R\d+ 醫師名（住院醫師輪訓格式 R4 ABC XX）
+      if (/^R\d+\s+[A-Z]/.test(line)) return false;
+      // (數字) 標題行（如 (4)NOTE:、(1)Liver stiffness:）
+      if (/^\(\d+\)\s*[A-Z]/i.test(line) && /[:：]\s*$/.test(line)) return false;
+      // 太長的描述（>120 chars 通常是 finding 細節而非診斷）
+      if (line.length > 120) return false;
+      // FibroScan 數值描述
+      if (/^The\s+controlled\s+attenuation\s+parameter/i.test(line)) return false;
+      if (/^The\s+liver\s+stiff(?:i?)ness/i.test(line)) return false;
+      // BIRADs / Bethesda 分級為陰性的整行
+      if (/BIRADs?\s+category\s*[:：]?\s*[01]\b/i.test(line)) return false;
+      if (/^BIRADs?\s+category\s*\d\s*[:：]/i.test(line)) {
+        // 只有明確 1（normal/benign）才過濾、3+ 保留
+        if (/[:：]\s*(Negative|Benign)/i.test(line)) return false;
+      }
+      // 純粹的「Negative」/「Normal」/「Within normal limit」開頭
+      if (/^(NEGATIVE\s+FOR|Within\s+normal\s+limit|Negative\s+finding)/i.test(line)) return false;
+      // FNA 不滿意 / unsatisfactory（不是診斷、是取樣失敗）
+      if (/^UNSATISFACTORY/i.test(line)) return false;
+      // Note 段落
+      if (/^Note\s*[:：]?\s*$/i.test(line)) return false;
+      if (/^\(\d+\)\s+/.test(line)) return false;  // (1) (2) (3) 開頭的條列
+      // Suggest XXX（建議追蹤）通常不是診斷
+      if (/^Suggest\s+/i.test(line) && !/(suspicious|malignan|tumor|mass)/i.test(line)) return false;
+      // 病理單純的部位 + biopsy 行（不是診斷、只是樣本來源）
+      if (/^(Colon|Liver|Kidney|Lung|Thyroid|Breast|Stomach|Skin|Soft\s+tissue),\s+\w+;?\s*biopsy/i.test(line)) return false;
+      if (/biopsy\s+and\s+removal\s*[:：]?\s*$/i.test(line)) return false;
+      // FibroScan 等 normal 結果
+      if (/Metavir\s+F\s*0[\-~]?1?/i.test(line)) return false;
+      if (/無明顯肝臟纖維化/.test(line)) return false;
+
+      // 「形容詞 + 部位」型的正常 finding
       if (/^(Clear|Patent|Normal|Intact|Symmetric(?:al)?|Smooth|Preserved|Well[-\s]?(?:defined|aerated|preserved))\b/i.test(line)) {
-        // 但若同時提到「mass / lesion / tumor」等懷疑詞 → 保留
         if (!/\b(mass|lesion|tumor|nodule|opacity|infiltrate|suspicious)\b/i.test(line)) return false;
       }
       if (/[,，][\s\S]+[,，][\s\S]+[:：]\s*$/.test(line)) return false;
@@ -3877,7 +3994,6 @@ function parseFreeTextSection(section, typeInfo) {
       if (/^(?:[Ii]so|[Hh]yper|[Hh]ypo|[Aa]n)[\-\s]?(?:to|echoic|echogenic)/.test(line) && !/lipoma|cyst|stone|tumor|mass|lesion\s+suspect/i.test(line)) return false;
 
       // Negative finding 過濾：「No XXX」開頭、無 caveat、無重要排除疾病 → 跳過
-      // 但保留：含 caveat 字眼或重要 rule-out
       if (/^No\s+(?:obvious|abnormal|definite|evidence|focal|gross|significant)?/i.test(line)) {
         const hasCaveat = /\b(may|might|but|however|cannot\s+(?:exclude|rule\s+out)|too\s+subtle|despite|though|although|further\s+(?:follow|workup|evaluation)|suggest(?:ed|s)?\s+(?:follow|workup))\b/i.test(line);
         const hasImportantDx = /\b(malignan(?:t|cy)|metasta(?:sis|tic|ses)|cancer|carcinoma|sarcoma|lymphoma|recurren(?:t|ce)|invasion|neoplasm|tumor|mass\b)\b/i.test(line);
@@ -4143,6 +4259,28 @@ const FREE_TEXT_ICD_MAP = [
   // ─ 婦科 ─
   { pattern: /uterine\s+(myoma|fibroid|leiomyoma)/i, icd: 'D25.9', desc: 'Leiomyoma of uterus, unspecified' },
   { pattern: /ovarian\s+(cyst|cysts)/i,        icd: 'N83.20',  desc: 'Unspecified ovarian cysts' },
+
+  // ─ 副鼻竇 / 上呼吸道 ─
+  { pattern: /(maxillary|ethmoid|frontal|sphenoid)\s+sinusitis|sinusitis/i, icd: 'J32.9', desc: 'Chronic sinusitis, unspecified' },
+
+  // ─ 健檢中心常見影像 ─
+  { pattern: /gallbladder\s+polyp/i,           icd: 'K82.8',   desc: 'Other specified diseases of gallbladder (GB polyp)' },
+  { pattern: /(left|right)?\s*renal\s+cyst/i,  icd: 'N28.1',   desc: 'Cyst of kidney, acquired' },
+  { pattern: /renal\s+hyperechoic\s+nodule/i,  icd: 'N28.89',  desc: 'Other specified disorders of kidney and ureter' },
+  { pattern: /milk\s+of\s+calcium/i,           icd: 'N28.89',  desc: 'Other specified disorders of kidney (milk of calcium)' },
+  { pattern: /phlebolith/i,                    icd: 'I86.8',   desc: 'Varicose veins of other specified sites (phlebolith)' },
+  { pattern: /thyroid\s+nodule/i,              icd: 'E04.1',   desc: 'Nontoxic single thyroid nodule' },
+  { pattern: /thyroid\s+cyst/i,                icd: 'E04.1',   desc: 'Nontoxic thyroid cyst' },
+  // FibroScan / 肝臟纖維化（保留性質：抓到才有意義）
+  { pattern: /metavir\s+f[3-4]|liver\s+fibrosis|liver\s+cirrhosis/i, icd: 'K74.60', desc: 'Unspecified cirrhosis of liver' },
+
+  // ─ 病理 / 內視鏡（補項）─
+  { pattern: /non[-\s]?specific\s+colitis/i,   icd: 'K52.9',   desc: 'Noninfective gastroenteritis and colitis, unspecified' },
+  { pattern: /hyperplastic\s+polyp/i,          icd: 'K63.5',   desc: 'Polyp of colon (hyperplastic)' },
+  { pattern: /colonic\s+polyp|colon\s+polyp/i, icd: 'K63.5',   desc: 'Polyp of colon' },
+  { pattern: /colonic\s+diverticul(um|osis)|colon\s+diverticul(um|osis)/i, icd: 'K57.30', desc: 'Diverticulosis of large intestine without perforation' },
+  { pattern: /superficial\s+gastritis/i,       icd: 'K29.70',  desc: 'Gastritis, unspecified, without bleeding' },
+  { pattern: /antrum.*hyperemic|hyperemic.*mucosa/i, icd: 'K29.70', desc: 'Gastritis, unspecified, without bleeding' },
 
   // ─ 眼底（家醫常見）─
   { pattern: /diabetic\s+retinopathy/i,        icd: 'E11.319', desc: 'T2DM with unspecified diabetic retinopathy without macular edema' },

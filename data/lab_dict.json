@@ -836,8 +836,10 @@
       "group": "thyroid",
       "aliases": [
         "Anti-TPO",
-        "TPOAb",
-        "Anti-Microsomal"
+        "TPO Ab",
+        "Anti-microsomal Ab",
+        "Microsomal Ab",
+        "TPOAb"
       ],
       "unit": "IU/mL",
       "ref": [
@@ -1305,7 +1307,10 @@
       "aliases": [
         "HBsAg",
         "HBs Ag",
-        "HBs-Ag"
+        "HBs-Ag",
+        "HBsAg (Quantitation)",
+        "HBsAg Quantitation",
+        "HBsAg Quant"
       ],
       "unit": "",
       "is_qual": true,
@@ -1313,7 +1318,8 @@
         "-",
         "Non-reactive",
         "Negative",
-        "Neg"
+        "Neg",
+        "<0.05"
       ]
     },
     "Anti-HBs": {
@@ -1436,7 +1442,10 @@
         "Vit D",
         "Vitamin D",
         "25-OH-D",
-        "25(OH)D"
+        "25(OH)D",
+        "VIT D (25-OH)",
+        "Vit D (25-OH)",
+        "VIT D"
       ],
       "unit": "ng/mL",
       "ref": [
@@ -2246,6 +2255,80 @@
         "Neg",
         "NR"
       ]
+    },
+    "TRAb": {
+      "group": "thyroid",
+      "aliases": [
+        "TRAb",
+        "Anti-TSH receptor",
+        "TSH receptor Ab",
+        "TSHR Ab",
+        "TSI"
+      ],
+      "unit": "U/L",
+      "ref": [
+        0,
+        1.5
+      ]
+    },
+    "TgAb": {
+      "group": "thyroid",
+      "aliases": [
+        "TgAb",
+        "Anti-Tg",
+        "Thyroglobulin Ab",
+        "Anti-thyroglobulin"
+      ],
+      "unit": "IU/mL",
+      "ref": [
+        0,
+        115
+      ]
+    },
+    "Zinc": {
+      "group": "trace_element",
+      "aliases": [
+        "Zinc",
+        "Zn",
+        "鋅"
+      ],
+      "unit": "ug/dL",
+      "ref": [
+        70,
+        120
+      ]
+    },
+    "A/G": {
+      "group": "lft",
+      "aliases": [
+        "A/G",
+        "A/G ratio",
+        "Albumin/Globulin",
+        "白蛋白球蛋白比"
+      ],
+      "unit": "",
+      "is_text_only": true
+    },
+    "MNAPTT": {
+      "group": "qc",
+      "aliases": [
+        "MNAPTT",
+        "Mean Normal APTT"
+      ],
+      "unit": "secs",
+      "hide_if_normal": true,
+      "is_qc": true
+    },
+    "MNPT": {
+      "group": "qc",
+      "aliases": [
+        "MNPT",
+        "PT(MNPT)",
+        "Mean Normal PT"
+      ],
+      "unit": "secs",
+      "hide_if_normal": true,
+      "is_qc": true
     }
   }
 }
