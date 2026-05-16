@@ -145,8 +145,9 @@
     display: inline;
   }
   .warning-banner-label {
-    color: var(--text-light, #566880);
-    font-size: 11px;
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 500;
     margin-right: 4px;
   }
   .warning-banner-chip {
@@ -4973,10 +4974,15 @@ function renderResults(totalParsed) {
   emptyState.style.display = 'none';
   resultGrid.style.display = '';
 
-  // 滑到病人資訊（或結果區）位置
+  // 滑到病人資訊（或結果區）位置 — 讓元素出現在視窗上方約 1/5 位置，留空間給輸入區尾巴
   setTimeout(() => {
     const target = $('patientInfo') && $('patientInfo').style.display !== 'none' ? $('patientInfo') : resultGrid;
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      const targetTop = window.scrollY + rect.top;
+      const offset = window.innerHeight * 0.18;  // 留視窗上方 18% 高度
+      window.scrollTo({ top: targetTop - offset, behavior: 'smooth' });
+    }
   }, 50);
 
   // ── 渲染病人資訊（獨立區、結果 grid 之上） ──
