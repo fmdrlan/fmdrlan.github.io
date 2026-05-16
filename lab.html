@@ -355,8 +355,6 @@
     padding: 12px 14px;
     font-size: 13px;
     line-height: 1.7;
-    max-height: 360px;
-    overflow-y: auto;
   }
   .objective-box .obj-group-date,
   .objective-box .value,
@@ -397,9 +395,11 @@
     font-weight: 600;
   }
   .obj-group-type {
-    color: var(--text-muted);
+    color: var(--accent, #4a9eff);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11.5px;
-    background: rgba(255,255,255,0.04);
+    background: rgba(74,158,255,0.10);
+    border: 1px solid rgba(74,158,255,0.30);
     padding: 1px 7px;
     border-radius: 8px;
   }
@@ -597,8 +597,8 @@
     font-weight: 500;
     background: rgba(74,158,255,0.10);
     border: 1px solid rgba(74,158,255,0.30);
-    padding: 1px 6px;
-    border-radius: 3px;
+    padding: 1px 7px;
+    border-radius: 8px;
     margin-left: 6px;
     cursor: help;
     user-select: all;
@@ -828,7 +828,7 @@
     <div class="result-grid" id="resultGrid" style="display:none">
       <section class="panel">
         <div class="panel-title">
-          <span class="panel-title-inner">Objective <span id="resultMeta" class="status-pill" style="display:none"></span></span>
+          <span class="panel-title-inner">Objective</span>
         </div>
         <div id="objArea"></div>
       </section>
@@ -4958,7 +4958,6 @@ function renderResults(totalParsed) {
   const resultGrid = $('resultGrid');
   const emptyState = $('emptyState');
   const warningBanner = $('warningBanner');
-  const meta = $('resultMeta');
 
   // 無法辨識：顯示錯誤、不收合輸入區、不顯示 grid
   if (totalParsed === 0 && state.skipped.length === 0) {
@@ -4966,19 +4965,19 @@ function renderResults(totalParsed) {
     emptyState.innerHTML = `<div class="big">😕</div>無法辨識任何檢驗項目。<br>請確認貼上的是完整的成大 LIS 報告內容。`;
     resultGrid.style.display = 'none';
     warningBanner.style.display = 'none';
-    meta.style.display = 'none';
     // 不收合輸入區
     return;
   }
 
-  // 解析成功：隱藏 emptyState、顯示結果 grid、收合輸入區
+  // 解析成功：隱藏 emptyState、顯示結果 grid
   emptyState.style.display = 'none';
   resultGrid.style.display = '';
-  collapseInputPanel(totalParsed);
 
-  meta.style.display = '';
-  meta.textContent = `解析 ${totalParsed} 項 · 異常 ${state.integrated.length} 項`;
-  meta.className = state.integrated.length === 0 ? 'status-pill ok' : 'status-pill';
+  // 滑到病人資訊（或結果區）位置
+  setTimeout(() => {
+    const target = $('patientInfo') && $('patientInfo').style.display !== 'none' ? $('patientInfo') : resultGrid;
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
 
   // ── 渲染病人資訊（獨立區、結果 grid 之上） ──
   const patientInfo = $('patientInfo');
@@ -5130,14 +5129,14 @@ function renderResults(totalParsed) {
     const total = unassignedUnique.length + state.unknown.length;
     let parts = [];
     if (unassignedUnique.length > 0) {
-      parts.push(`<span class="warning-banner-group"><span class="warning-banner-label">數值異常</span> ${unassignedUnique.map(item => `<span class="warning-banner-chip">${escHtml(item.key)}</span>`).join('<span class="warning-banner-sep">·</span>')}</span>`);
+      parts.push(`<span class="warning-banner-group"><span class="warning-banner-label">Objective 已列、未自動診斷</span> ${unassignedUnique.map(item => `<span class="warning-banner-chip">${escHtml(item.key)}</span>`).join('<span class="warning-banner-sep">·</span>')}</span>`);
     }
     if (state.unknown.length > 0) {
-      parts.push(`<span class="warning-banner-group"><span class="warning-banner-label">字典未收錄</span> ${state.unknown.map(item => `<span class="warning-banner-chip unknown" title="原始值：${escHtml(item.valueCell || '')}">${escHtml(item.key)}</span>`).join('<span class="warning-banner-sep">·</span>')}</span>`);
+      parts.push(`<span class="warning-banner-group"><span class="warning-banner-label">未列出（字典未收錄）</span> ${state.unknown.map(item => `<span class="warning-banner-chip unknown" title="原始值：${escHtml(item.valueCell || '')}">${escHtml(item.key)}</span>`).join('<span class="warning-banner-sep">·</span>')}</span>`);
     }
     warningBanner.className = 'warning-banner';
     warningBanner.innerHTML = `
-      <span class="warning-banner-warn">⚠ ${total} 項異常／未收錄請醫師判讀</span>
+      <span class="warning-banner-warn">⚠ 共 ${total} 項請醫師確認</span>
       ${parts.join('<span class="warning-banner-group-sep">　</span>')}
     `;
     warningBanner.style.display = '';
