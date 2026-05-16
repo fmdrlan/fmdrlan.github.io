@@ -604,6 +604,24 @@
     cursor: help;
     user-select: all;
   }
+  /* 同 ICD 合併診斷的歷史 [日期 + severity] chips */
+  .dx-row .dx-left .occ-chips {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .dx-row .dx-left .occ-chip {
+    font-size: 10.5px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    padding: 1px 6px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
   .dx-row .dx-right {
     padding: 12px 14px;
     font-family: 'JetBrains Mono', monospace;
@@ -1885,7 +1903,8 @@
       "group": "coag",
       "aliases": [
         "D-Dimer",
-        "DDimer"
+        "DDimer",
+        "FDP"
       ],
       "unit": "ug/mL FEU",
       "ref": [
@@ -3194,6 +3213,20 @@
       "unit": "secs",
       "hide_if_normal": true,
       "is_qc": true
+    },
+    "FDP(Dimer)": {
+      "group": "coag",
+      "aliases": [
+        "FDP(Dimer)",
+        "FDP-Dimer",
+        "D-Dimer (FEU)",
+        "D-dimer FEU"
+      ],
+      "unit": "ng/mL(FEU)",
+      "ref": [
+        0,
+        500
+      ]
     }
   }
 }
@@ -4204,6 +4237,13 @@ function parseFreeTextSection(section, typeInfo) {
       if (/(?:is\s+not\s+(?:widened|enlarged|dilated)|is\s+intact|are\s+intact|appears?\s+normal|are\s+free\s+of|unremarkable|not\s+distended)$/i.test(line)) return false;
 
       // === 加強過濾：報告中的 meta/標記/常見 noise ===
+      // 病理單行「Confirmed」「Confirmed.」（外科病理確認用語，不是診斷）
+      if (/^Confirmed\s*\.?\s*$/i.test(line)) return false;
+      // 建議文：Recommend...、Please correlate...、Suggest clinical correlation 等
+      if (/^(Recommend(?:ed|ation)?\s+|Please\s+correlate|Clinical\s+correlation\s+is)/i.test(line)) return false;
+      if (/^Suggest\b/i.test(line) && !/(suspicious|malignan|tumor|mass)/i.test(line)) return false;
+      // 正常解剖描述（Bilateral X are sharp/clear、X is unremarkable）
+      if (/\b(are|is)\s+(sharp|clear|patent|unremarkable|symmetric(?:al)?|smooth|intact)\b/i.test(line) && !/\b(mass|lesion|tumor|nodule|opacity|infiltrate|suspicious|hernia|polyp|cyst|effusion)\b/i.test(line)) return false;
       // checkbox 表單行（新陳代謝科 FNA / 健檢中心常見）
       if (/^[□■☐☑✓✔]/i.test(line)) return false;
       if (/^(Suggestion|Suggestions)\s*[:：]?\s*$/i.test(line)) return false;
@@ -4224,13 +4264,9 @@ function parseFreeTextSection(section, typeInfo) {
       }
       // 純粹的「Negative」/「Normal」/「Within normal limit」開頭
       if (/^(NEGATIVE\s+FOR|Within\s+normal\s+limit|Negative\s+finding)/i.test(line)) return false;
-      // FNA 不滿意 / unsatisfactory（不是診斷、是取樣失敗）
-      if (/^UNSATISFACTORY/i.test(line)) return false;
       // Note 段落
       if (/^Note\s*[:：]?\s*$/i.test(line)) return false;
       if (/^\(\d+\)\s+/.test(line)) return false;  // (1) (2) (3) 開頭的條列
-      // Suggest XXX（建議追蹤）通常不是診斷
-      if (/^Suggest\s+/i.test(line) && !/(suspicious|malignan|tumor|mass)/i.test(line)) return false;
       // 病理單純的部位 + biopsy 行（不是診斷、只是樣本來源）
       if (/^(Colon|Liver|Kidney|Lung|Thyroid|Breast|Stomach|Skin|Soft\s+tissue),\s+\w+;?\s*biopsy/i.test(line)) return false;
       if (/biopsy\s+and\s+removal\s*[:：]?\s*$/i.test(line)) return false;
@@ -4249,11 +4285,14 @@ function parseFreeTextSection(section, typeInfo) {
       if (/^[a-z\u4e00-\u9fff]+\s*[:：]\s*$/.test(line)) return false;
       if (/^(?:[Ii]so|[Hh]yper|[Hh]ypo|[Aa]n)[\-\s]?(?:to|echoic|echogenic)/.test(line) && !/lipoma|cyst|stone|tumor|mass|lesion\s+suspect/i.test(line)) return false;
 
-      // Negative finding 過濾：「No XXX」開頭、無 caveat、無重要排除疾病 → 跳過
-      if (/^No\s+(?:obvious|abnormal|definite|evidence|focal|gross|significant)?/i.test(line)) {
+      // Negative finding 過濾（強化）：
+      // 「No XXX」「No obvious XXX」「No obivious XXX (typo)」「No active XXX」開頭
+      // 注意：obivious 是醫師手寫常見 typo
+      if (/^No\s+(?:obi?vious|abnormal|definite|evidence|focal|gross|significant|active|obvious|apparent|specific)?/i.test(line)) {
+        // 只有「有重要 dx + 有 caveat」才保留（例: No obvious cancer, but suggest follow up）
+        // 純 negative finding（No XXX mass、No tumor）即使提到 mass/tumor 也不算診斷
         const hasCaveat = /\b(may|might|but|however|cannot\s+(?:exclude|rule\s+out)|too\s+subtle|despite|though|although|further\s+(?:follow|workup|evaluation)|suggest(?:ed|s)?\s+(?:follow|workup))\b/i.test(line);
-        const hasImportantDx = /\b(malignan(?:t|cy)|metasta(?:sis|tic|ses)|cancer|carcinoma|sarcoma|lymphoma|recurren(?:t|ce)|invasion|neoplasm|tumor|mass\b)\b/i.test(line);
-        if (!hasCaveat && !hasImportantDx) return false;
+        if (!hasCaveat) return false;  // 沒 caveat 一律過濾
       }
 
       return true;
@@ -4261,8 +4300,17 @@ function parseFreeTextSection(section, typeInfo) {
 
     for (const line of lines) {
       const short = refineShortByContent(typeInfo, text);
+      // 細胞學/病理的「UNSATISFACTORY due to ...」簡化為「unsatisfactory」
+      let cleanText = line;
+      if (/^UNSATISFACTORY\b/i.test(cleanText)) {
+        cleanText = 'unsatisfactory';
+      }
+      // 病理/細胞學的「Thyroid, left, FNA:」這類部位前綴去除（保留實際 finding）
+      cleanText = cleanText.replace(/^(Thyroid|Breast|Skin|Lymph\s+node|Lung|Liver|Colon|Stomach)[,，][\s\S]*?(FNA|biopsy|cytology|smear)\s*[:：]\s*/i, '');
+      // 「R/O XXX」轉成「XXX (suspected)」（影像 IMP 常見、表示 rule out）
+      cleanText = cleanText.replace(/^R\s*\/\s*O\s+(.+?)\.?$/i, '$1 (suspected)');
       results.push({
-        text: line,
+        text: cleanText,
         sourceLabel: typeInfo.label,
         sourceShort: short,
         sampledAt: section.date
@@ -4456,13 +4504,21 @@ const FREE_TEXT_ICD_MAP = [
   { pattern: /esophagitis/i,                   icd: 'K20.9',   desc: 'Esophagitis, unspecified' },
   { pattern: /gerd|reflux\s+esophagitis|gastroesophageal\s+reflux/i, icd: 'K21.9', desc: 'Gastro-esophageal reflux disease without esophagitis' },
   { pattern: /(barrett'?s|barrett)/i,          icd: 'K22.7',   desc: 'Barrett\'s esophagus' },
-  { pattern: /hiatal\s+hernia/i,               icd: 'K44.9',   desc: 'Diaphragmatic hernia without obstruction or gangrene' },
+  { pattern: /(hiatal|hiatus)\s+hernia/i,      icd: 'K44.9',   desc: 'Diaphragmatic hernia without obstruction or gangrene' },
   { pattern: /gastric\s+ulcer/i,               icd: 'K25.9',   desc: 'Gastric ulcer, unspecified' },
   { pattern: /duodenal\s+ulcer/i,              icd: 'K26.9',   desc: 'Duodenal ulcer, unspecified' },
+  { pattern: /duodenal?\s+erosion/i,           icd: 'K29.80',  desc: 'Duodenitis without bleeding' },
   { pattern: /gastritis/i,                     icd: 'K29.70',  desc: 'Gastritis, unspecified, without bleeding' },
   { pattern: /colon\s+polyp|colonic\s+polyp/i, icd: 'K63.5',   desc: 'Polyp of colon' },
   { pattern: /diverticul(um|osis|itis)/i,      icd: 'K57.30',  desc: 'Diverticulosis of large intestine without perforation or abscess' },
   { pattern: /hemorrhoid/i,                    icd: 'K64.9',   desc: 'Unspecified hemorrhoids' },
+  { pattern: /appendicitis/i,                  icd: 'K35.80',  desc: 'Unspecified acute appendicitis' },
+
+  // ─ 耳鼻喉 ─
+  { pattern: /(septal|nasal\s+septum)\s+deviation|deviated\s+(nasal\s+)?septum/i, icd: 'J34.2', desc: 'Deviated nasal septum' },
+  { pattern: /(turbinate\s+hypertrophy|hypertrophic\s+(?:inferior\s+)?turbinate)/i, icd: 'J34.3', desc: 'Hypertrophy of nasal turbinates' },
+  { pattern: /adenoid\s+(hypertrophy|vegetation)|tongue\s+base\s+lymphoid\s+hypertrophy/i, icd: 'J35.2', desc: 'Hypertrophy of adenoids' },
+  { pattern: /hearing\s+loss/i,                icd: 'H91.90',  desc: 'Unspecified hearing loss, unspecified ear' },
 
   // ─ 影像（CT/CXR/KUB/US 通用）─
   { pattern: /pulmonary\s+nodule|lung\s+nodule/i, icd: 'R91.1', desc: 'Solitary pulmonary nodule' },
@@ -4575,70 +4631,211 @@ function integrateFreeTextDx(items) {
     });
   }
   const integrated = Object.values(grouped);
-  return mergePathologyIntoEndoscopy(integrated);
+  const afterPathMerge = mergePathologyIntoEndoscopy(integrated);
+  return mergeDiagnosesByICD(afterPathMerge);
 }
 
-// Pathology short 對應的「主檢查 short」(同一檢體)
-const PATHOLOGY_TO_PROCEDURE = {
-  'Colon Pathology': 'Colonoscopy',
-  'EGD Pathology': 'EGD',
-  'Thy Pathology': 'Thy FNA',         // 甲狀腺病理通常配 FNA
-  'Breast Pathology': 'Breast FNA',
-  'Skin Pathology': 'Skin US',
-};
+// 從診斷文字抽出嚴重程度/分級
+function extractSeverity(text) {
+  // LA grade A/B/C/D (LA-A 也算)、grade A/B/C/D
+  let m = text.match(/\bLA[\s\-]*(?:grade\s+)?([A-D])\b/i);
+  if (m) return `LA-${m[1].toUpperCase()}`;
+  m = text.match(/\bgrade\s+([A-D]|[I1-4])\b/i);
+  if (m) return `grade ${m[1].toUpperCase()}`;
+  // BIRADs category 1-5
+  m = text.match(/BIRADs?\s+category\s+([1-5])/i);
+  if (m) return `BIRADs ${m[1]}`;
+  // mild / moderate / severe
+  m = text.match(/\b(mild|moderate|severe|acute|chronic|suppurative|hyperplastic)\b/i);
+  if (m) return m[1].toLowerCase();
+  // (suspected) (suspect)
+  if (/\(suspect(?:ed)?\)/i.test(text)) return 'suspected';
+  return null;
+}
 
-// 把 pathology 診斷合併到對應的內視鏡/影像診斷
+// 計算診斷的「具體度分數」— 越高越具體（用於合併時選最佳文字）
+function diagnosisSpecificity(dx) {
+  let score = 0;
+  const text = dx.text.toLowerCase();
+  // 病理確認 +3
+  if (/pathology|biopsy/.test(text)) score += 3;
+  // 具體形容詞 +2 (acute, severe, suppurative, grade B/C/D)
+  if (/\b(acute|severe|suppurative|grade\s+[bcd])\b/i.test(text)) score += 2;
+  // mild / suspected / mild / grade A -1（較不嚴重/不確定）
+  if (/\b(mild|grade\s+a|suspect)/i.test(text)) score -= 1;
+  // 文字長度也算 (越長通常越具體)
+  score += Math.min(text.length / 30, 3);
+  // 最新日期加分
+  const latestDate = [...dx.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''))[0]?.date;
+  if (latestDate) {
+    const year = parseInt(latestDate.slice(0, 4));
+    score += (year - 2000) * 0.01;  // 新的小幅加分
+  }
+  return score;
+}
+
+// 抽出診斷文字中的「位置」前綴（用於避免左右病灶合併）
+function extractLocation(text) {
+  // Left/Right/Bilateral/L't/R't 等
+  const m = text.match(/^\s*(Left|Right|Bilateral|Bil\.?|L'?t|R'?t)\b/i);
+  if (m) {
+    const word = m[1].toLowerCase().replace(/[.'`]/g, '');
+    if (word === 'lt' || word === 'l') return 'left';
+    if (word === 'rt' || word === 'r') return 'right';
+    if (word === 'bil' || word === 'bilateral') return 'bilateral';
+    return word;  // left/right
+  }
+  return null;
+}
+
+// 同 ICD 的診斷合併成一條、保留歷史 occurrences (日期+severity)
+// 注意：不同位置（Left vs Right）不合併
+function mergeDiagnosesByICD(items) {
+  const byKey = new Map();
+  const noIcd = [];
+  for (const item of items) {
+    const icd = lookupFreeTextIcd(item.text);
+    if (!icd) {
+      noIcd.push(item);
+      continue;
+    }
+    const location = extractLocation(item.text);
+    // 加位置到 key、不同位置不合
+    const key = `${icd.icd10}|${location || ''}`;
+    if (!byKey.has(key)) {
+      byKey.set(key, { icd, items: [] });
+    }
+    byKey.get(key).items.push(item);
+  }
+
+  const result = [];
+  for (const [_key, group] of byKey) {
+    if (group.items.length === 1) {
+      result.push(group.items[0]);
+      continue;
+    }
+    // 多個同 ICD + 同位置 → 合併
+    const sorted = [...group.items].sort((a, b) => diagnosisSpecificity(b) - diagnosisSpecificity(a));
+    const primary = sorted[0];
+    const occurrences = group.items.map(item => {
+      const dates = item.sources.map(s => s.date).filter(Boolean).sort();
+      const date = dates[0] || null;
+      const severity = extractSeverity(item.text);
+      return { date, severity, text: item.text };
+    }).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    // 去重複的「年/月」組合（同月不同 source 不重複顯示）
+    const seenMonth = new Set();
+    const uniqueOcc = occurrences.filter(o => {
+      const month = (o.date || '').slice(0, 7);
+      if (seenMonth.has(month)) return false;
+      seenMonth.add(month);
+      return true;
+    });
+    const allSources = group.items.flatMap(i => i.sources);
+    result.push({
+      text: primary.text,
+      sources: allSources,
+      occurrences: uniqueOcc,
+    });
+  }
+  return [...result, ...noIcd];
+}
+
+// Pathology / 細胞學 short 配對 目標 procedure（同檢體的母檢查）
+// value 物件：{ target: 對應的 procedure short, prefix: 合併時用的字串, maxDays: 配對窗口（天） }
+const PATHOLOGY_TO_PROCEDURE_MAP = {
+  'Colon Pathology':  { target: 'Colonoscopy',  prefix: 'pathology', maxDays: 31 },
+  'EGD Pathology':    { target: 'EGD',          prefix: 'pathology', maxDays: 31 },
+  'Thy Pathology':    { target: 'Thy FNA',      prefix: 'pathology', maxDays: 31 },
+  'Breast Pathology': { target: 'Breast FNA',   prefix: 'pathology', maxDays: 31 },
+  'Skin Pathology':   { target: 'Skin US',      prefix: 'pathology', maxDays: 31 },
+  // 細胞學配影像（甲狀腺 FNA 結果合到 Thy Echo 的結節那條）
+  'Thy FNA':          { target: 'Thy Echo',     prefix: 'FNA',       maxDays: 365 },
+  'Breast FNA':       { target: 'Breast Echo',  prefix: 'FNA',       maxDays: 365 },
+};
+// 保留原本物件給其他地方查（過濾 source tag 用）
+const PATHOLOGY_TO_PROCEDURE = Object.fromEntries(
+  Object.entries(PATHOLOGY_TO_PROCEDURE_MAP).map(([k, v]) => [k, v.target])
+);
+
+// 把 pathology / 細胞學 診斷合併到對應的內視鏡/影像診斷
 // 例如 "Colonic polyp" (2025/02 Colonoscopy) + "Non-specific colitis" (2025/02 Colon Pathology)
 //   → "Colonic polyp, pathology: Non-specific colitis" (2025/02 Colonoscopy)
 function mergePathologyIntoEndoscopy(items) {
-  // 把 items 分成「pathology」和「procedure」
-  const pathologyItems = [];
-  const procedureItems = [];
+  // 把 items 分成「pathology/cytology」和「procedure」
+  const pathologyItems = [];   // 要合進別人的
+  const procedureItems = [];   // 主檢查（被合進來的）
   const otherItems = [];
 
   for (const item of items) {
     const primarySrc = [...item.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''))[0];
     const short = primarySrc.short;
-    if (short in PATHOLOGY_TO_PROCEDURE) {
-      pathologyItems.push({ item, primarySrc, targetShort: PATHOLOGY_TO_PROCEDURE[short] });
-    } else if (Object.values(PATHOLOGY_TO_PROCEDURE).includes(short)) {
+    if (short in PATHOLOGY_TO_PROCEDURE_MAP) {
+      const cfg = PATHOLOGY_TO_PROCEDURE_MAP[short];
+      pathologyItems.push({ item, primarySrc, cfg });
+    } else if (Object.values(PATHOLOGY_TO_PROCEDURE_MAP).some(c => c.target === short)) {
       procedureItems.push({ item, primarySrc, short });
     } else {
       otherItems.push(item);
     }
   }
 
-  // 合併：每個 pathology 找同月份 + 對應 procedure
-  // 優先配「polyp / mass / tumor / lesion / 出血」這類有切片的診斷、不要配 diverticulum
+  // 合併：每個 pathology 找對應 procedure
+  // 優先配「polyp / mass / lesion / nodule」等有切片價值的、不要配 diverticulum
   const usedPathology = new Set();
-
-  // procedure 內部排序：含 polyp/mass/lesion 等優先
   const procPriority = (item) => {
     const t = item.text.toLowerCase();
-    if (/polyp|mass|tumor|nodule|lesion|biops|ulcer/.test(t)) return 0;  // 高優先
-    if (/diverticul|gastritis|colitis|esophagitis/.test(t)) return 2;     // 低優先
+    if (/polyp|mass|tumor|nodule|lesion|biops|ulcer|cyst/.test(t)) return 0;
+    if (/diverticul|gastritis|colitis|esophagitis/.test(t)) return 2;
     return 1;
   };
 
+  // 配對判斷：依 maxDays 比較日期差
+  function inWindow(dateA, dateB, maxDays) {
+    if (!dateA || !dateB) return false;
+    const ta = new Date(dateA).getTime();
+    const tb = new Date(dateB).getTime();
+    if (isNaN(ta) || isNaN(tb)) return false;
+    const diffDays = Math.abs(ta - tb) / (1000 * 60 * 60 * 24);
+    return diffDays <= maxDays;
+  }
+
   for (const proc of procedureItems.slice().sort((a, b) => procPriority(a.item) - procPriority(b.item))) {
-    const procMonth = (proc.primarySrc.date || '').slice(0, 7);
-    const matchingPaths = pathologyItems.filter(p =>
-      !usedPathology.has(p.item) &&
-      p.targetShort === proc.short &&
-      (p.primarySrc.date || '').slice(0, 7) === procMonth
-    );
+    const matchingPaths = pathologyItems.filter(p => {
+      if (usedPathology.has(p.item)) return false;
+      if (p.cfg.target !== proc.short) return false;
+      return inWindow(p.primarySrc.date, proc.primarySrc.date, p.cfg.maxDays);
+    });
     if (matchingPaths.length === 0) continue;
-    // 把所有 matching pathology 的 text 合併
-    const pathTexts = matchingPaths.map(p => p.item.text).join(', ');
-    proc.item.text = `${proc.item.text}, pathology: ${pathTexts}`;
-    // 加上 pathology 來源
+    // 用每個 path 的 prefix 串成合併字串
+    // 若所有 path 用同 prefix，合成「procText, prefix: pathTexts」
+    // 若 prefix 不同，個別串接
+    // 文字自動去重（不分大小寫）
+    const byPrefix = new Map();
+    for (const p of matchingPaths) {
+      if (!byPrefix.has(p.cfg.prefix)) byPrefix.set(p.cfg.prefix, []);
+      byPrefix.get(p.cfg.prefix).push(p.item.text);
+    }
+    let mergedText = proc.item.text;
+    for (const [prefix, texts] of byPrefix) {
+      // 去重複：同一段 prefix 內，文字一樣的（不分大小寫）合併
+      const seenLower = new Set();
+      const uniqueTexts = texts.filter(t => {
+        const lo = t.toLowerCase().trim();
+        if (seenLower.has(lo)) return false;
+        seenLower.add(lo);
+        return true;
+      });
+      mergedText += `, ${prefix}: ${uniqueTexts.join(', ')}`;
+    }
+    proc.item.text = mergedText;
     for (const p of matchingPaths) {
       proc.item.sources.push(...p.item.sources);
       usedPathology.add(p.item);
     }
   }
 
-  // 組合：procedure（已合併過）+ 沒被合併的 pathology + 其他
+  // 組合
   const result = [
     ...procedureItems.map(p => p.item),
     ...pathologyItems.filter(p => !usedPathology.has(p.item)).map(p => p.item),
@@ -5215,11 +5412,22 @@ function renderResults(totalParsed) {
         ? ` <span class="icd-tag" title="${escHtml(icdInfo.icd10_desc)}">${escHtml(icdInfo.icd10)}</span>`
         : '';
 
+      // occurrences chips（多次出現的歷史 [日期 + severity]）
+      let occHtml = '';
+      if (dx.occurrences && dx.occurrences.length > 1) {
+        const chips = dx.occurrences.map(o => {
+          const dateStr = fmtYearMonth(o.date);
+          const sevStr = o.severity ? ` ${escHtml(o.severity)}` : '';
+          return `<span class="occ-chip">${dateStr}${sevStr}</span>`;
+        }).join('');
+        occHtml = ` <span class="occ-chips">${chips}</span>`;
+      }
+
       dxHtml += `
         <div class="dx-row">
           <div class="dx-left">
             <span class="num">${idx}.</span>
-            <span>${escHtml(dx.text)}${icdHtml} <span class="dx-tag">(${escHtml(tag)})</span></span>
+            <span>${escHtml(dx.text)}${icdHtml}${occHtml} <span class="dx-tag">(${escHtml(tag)})</span></span>
           </div>
           <div class="dx-right">
             <div class="dx-right-label">來源詳情（不複製）</div>

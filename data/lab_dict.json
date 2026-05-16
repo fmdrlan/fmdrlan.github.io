@@ -1020,7 +1020,8 @@
       "group": "coag",
       "aliases": [
         "D-Dimer",
-        "DDimer"
+        "DDimer",
+        "FDP"
       ],
       "unit": "ug/mL FEU",
       "ref": [
@@ -2329,6 +2330,20 @@
       "unit": "secs",
       "hide_if_normal": true,
       "is_qc": true
+    },
+    "FDP(Dimer)": {
+      "group": "coag",
+      "aliases": [
+        "FDP(Dimer)",
+        "FDP-Dimer",
+        "D-Dimer (FEU)",
+        "D-dimer FEU"
+      ],
+      "unit": "ng/mL(FEU)",
+      "ref": [
+        0,
+        500
+      ]
     }
   }
 }
