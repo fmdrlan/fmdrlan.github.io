@@ -20,7 +20,7 @@
 <script src="assets/icons.js"></script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+TC:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
   :root {
     --bg-base: #0d1117;
@@ -47,7 +47,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'IBM Plex Sans TC', sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     background: var(--bg-base);
     color: var(--text-primary);
     min-height: 100vh;
@@ -151,7 +151,7 @@
   }
   .warning-banner-chip {
     color: var(--yellow, #d4a843);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
   }
   .warning-banner-chip.unknown {
@@ -204,7 +204,7 @@
     border: 1px solid var(--border);
     border-radius: 6px;
     color: var(--text-primary);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
   }
   .ctx-field .radio-mini { display: inline-flex; gap: 4px; }
@@ -232,7 +232,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     color: var(--text-primary);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12.5px;
     line-height: 1.5;
     padding: 12px;
@@ -261,13 +261,24 @@
   }
   .btn:hover { background: var(--bg-hover); border-color: var(--text-muted); }
   .btn.primary {
-    background: rgba(88,166,255,0.15);
-    color: var(--accent-blue);
-    border-color: rgba(88,166,255,0.4);
+    background: var(--accent-blue);
+    color: #fff;
+    border-color: var(--accent-blue);
+    font-weight: 600;
   }
-  .btn.primary:hover { background: rgba(88,166,255,0.25); }
+  .btn.primary:hover {
+    background: #4090e0;
+    border-color: #4090e0;
+  }
   .btn.ghost { background: transparent; }
   .btn.small { font-size: 12px; padding: 4px 10px; }
+
+  /* 區段複製按鈕列 */
+  .section-copy-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
 
   /* ── Output ── */
   .result-empty {
@@ -298,7 +309,7 @@
     letter-spacing: 0.06em;
   }
   .section-header h3 .badge-count {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     padding: 1px 7px;
     background: var(--bg-elevated);
@@ -308,17 +319,10 @@
     font-weight: 600;
   }
 
-  /* Free-text 報告診斷列（接在 objective 數值表下方） */
-  .ft-list {
-    margin-top: 10px;
-    background: var(--bg-base);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 10px 14px;
-    font-size: 13px;
-    line-height: 1.5;
-    max-height: 280px;
-    overflow-y: auto;
+  /* Free-text 報告診斷列（接在 objective 數值表下方、無自己的滾輪） */
+  .ft-list-divider {
+    margin: 12px 0 8px;
+    border-top: 1px dashed var(--border);
   }
   .ft-row {
     display: grid;
@@ -329,12 +333,12 @@
   }
   .ft-row .ft-date {
     color: var(--text-muted);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
   }
   .ft-row .ft-source {
     color: var(--accent-blue);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11.5px;
     font-weight: 500;
   }
@@ -349,11 +353,15 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 12px 14px;
-    font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
     line-height: 1.7;
     max-height: 360px;
     overflow-y: auto;
+  }
+  .objective-box .obj-group-date,
+  .objective-box .value,
+  .objective-box .meta {
+    font-family: 'JetBrains Mono', monospace;
   }
   .obj-row {
     display: grid;
@@ -384,7 +392,7 @@
   }
   .obj-group-date {
     color: var(--text-primary);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12.5px;
     font-weight: 600;
   }
@@ -400,6 +408,11 @@
   .ft-group {
     margin-bottom: 10px;
   }
+  .objective-box .ft-group:first-of-type {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+  }
   .ft-group:last-child { margin-bottom: 0; }
   .ft-group-header {
     display: flex;
@@ -410,13 +423,13 @@
   }
   .ft-group-date {
     color: var(--text-primary);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12.5px;
     font-weight: 600;
   }
   .ft-group-short {
     color: var(--accent, #4a9eff);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11.5px;
     background: rgba(74,158,255,0.10);
     border: 1px solid rgba(74,158,255,0.30);
@@ -434,7 +447,7 @@
   }
   .obj-row .date {
     color: var(--text-muted);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
   }
   .obj-row .name { color: var(--text-primary); font-weight: 500; }
@@ -486,7 +499,7 @@
     border: 1px solid rgba(212, 168, 67, 0.35);
     border-radius: 12px;
     font-size: 12.5px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     color: var(--yellow, #d4a843);
   }
   .unassigned-chip.unknown {
@@ -524,7 +537,7 @@
   }
   .ua-inline-chip {
     color: var(--yellow, #d4a843);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
   }
   .ua-inline-chip.unknown {
@@ -565,7 +578,7 @@
     align-items: baseline;
   }
   .dx-row .dx-left .num {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-weight: 600;
     color: var(--text-secondary);
     flex-shrink: 0;
@@ -573,20 +586,14 @@
   .dx-row .dx-left .dx-tag {
     color: var(--text-muted);
     font-size: 12px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-weight: 400;
     margin-left: 2px;
-  }
-  .dx-row .dx-left .ft-marker {
-    font-size: 12px;
-    opacity: 0.7;
-    cursor: help;
-    margin-right: 2px;
   }
   .dx-row .dx-left .icd-tag {
     color: var(--accent);
     font-size: 11px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-weight: 500;
     background: rgba(74,158,255,0.10);
     border: 1px solid rgba(74,158,255,0.30);
@@ -598,7 +605,7 @@
   }
   .dx-row .dx-right {
     padding: 12px 14px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     color: var(--text-muted);
     background: rgba(255,255,255,0.015);
@@ -607,10 +614,10 @@
   }
   .dx-row .dx-right .evidence-row { display: block; }
   .dx-row .dx-right .ev-item { color: var(--text-secondary); }
-  .dx-row .dx-right .ev-source { color: var(--text-secondary); font-family: 'IBM Plex Sans TC', sans-serif; font-size: 12px; }
+  .dx-row .dx-right .ev-source { color: var(--text-secondary); font-family: 'Noto Sans TC', sans-serif; font-size: 12px; }
   .dx-row .dx-right .ev-value { color: var(--accent-red); font-weight: 600; }
   .dx-row .dx-right .ev-value.low { color: var(--accent-yellow); }
-  .dx-row .dx-right .ev-date { color: var(--text-dim); margin-right: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; }
+  .dx-row .dx-right .ev-date { color: var(--text-dim); margin-right: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
   .dx-row .dx-right .past-prefix {
     color: var(--accent-orange);
     font-size: 11px;
@@ -636,7 +643,7 @@
     color: var(--text-dim);
     margin-bottom: 4px;
     font-weight: 600;
-    font-family: 'IBM Plex Sans TC', sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
   }
 
   /* Pending reports notice */
@@ -653,7 +660,7 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--accent-blue);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     margin-bottom: 8px;
   }
   .next-action-row {
@@ -671,7 +678,7 @@
   .next-action-info .secondary {
     font-size: 11.5px;
     color: var(--text-muted);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
   }
   .next-action-row .btn {
     text-decoration: none;
@@ -698,7 +705,7 @@
   }
   .pending-box li {
     padding: 2px 0;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
   }
   .pending-box li .type { color: var(--text-muted); }
@@ -724,7 +731,7 @@
     font-weight: 600;
   }
   .pt-val { color: var(--text-primary); font-weight: 500; }
-  .pt-val.mono { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
+  .pt-val.mono { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; }
 
   /* Toast */
   .toast {
@@ -751,7 +758,7 @@
   /* Status pill */
   .status-pill {
     display: inline-block;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 10px;
@@ -811,6 +818,9 @@
       </div>
     </section>
 
+    <!-- ── 病人資訊（解析後顯示） ── -->
+    <div id="patientInfo" style="display:none"></div>
+
     <!-- ── 上方警示橫條（異常但未自動診斷） ── -->
     <div id="warningBanner" style="display:none"></div>
 
@@ -840,7 +850,7 @@
   </div>
 
   <div style="margin-top:32px; font-size:12px; color:var(--text-muted); text-align:center; line-height:1.8;">
-    參考範圍以成大檢驗報告公告值為準。診斷規則可在 <code style="font-family:'IBM Plex Mono',monospace'">data/dx_rules.json</code> 編輯。<br>
+    參考範圍以成大檢驗報告公告值為準。診斷規則可在 <code style="font-family:'JetBrains Mono',monospace'">data/dx_rules.json</code> 編輯。<br>
     本工具僅作個人臨床備忘，不取代臨床判斷。
   </div>
 
@@ -4970,13 +4980,13 @@ function renderResults(totalParsed) {
   meta.textContent = `解析 ${totalParsed} 項 · 異常 ${state.integrated.length} 項`;
   meta.className = state.integrated.length === 0 ? 'status-pill ok' : 'status-pill';
 
-  // ── 渲染 Patient context + Objective 區到 objArea ──
-  let objHtml = '';
+  // ── 渲染病人資訊（獨立區、結果 grid 之上） ──
+  const patientInfo = $('patientInfo');
   const d = state.demographics;
   if (d.name || d.chartNo || d.age != null || d.sex) {
     const sexLabel = d.sex === 'M' ? '男' : d.sex === 'F' ? '女' : '—';
     const ageLabel = d.age != null ? `${d.age} 歲` : '—';
-    objHtml += `
+    patientInfo.innerHTML = `
       <div class="pt-context">
         ${d.name ? `<span class="pt-field"><span class="pt-label">姓名</span><span class="pt-val">${escHtml(d.name)}</span></span>` : ''}
         ${d.chartNo ? `<span class="pt-field"><span class="pt-label">病歷號</span><span class="pt-val mono">${escHtml(d.chartNo)}</span></span>` : ''}
@@ -4984,24 +4994,32 @@ function renderResults(totalParsed) {
         <span class="pt-field"><span class="pt-label">年齡</span><span class="pt-val">${ageLabel}</span></span>
       </div>
     `;
+    patientInfo.style.display = '';
+  } else {
+    patientInfo.style.display = 'none';
   }
 
+  // ── 渲染 Objective 到 objArea（合成單一連續區、不分兩個 box） ──
+  let objHtml = '';
   const totalObjCount = state.integrated.length + state.freeTextDx.length;
-  objHtml += `
-    <div class="output-section">
-      <div class="section-header">
-        <h3>📊 Objective <span class="badge-count">${totalObjCount}</span></h3>
-        ${totalObjCount > 0 ? '<button class="btn small" id="copyObjBtn">複製</button>' : ''}
-      </div>
-  `;
+
+  // 複製按鈕（右上角浮動）
+  if (totalObjCount > 0) {
+    objHtml += `<div class="section-copy-bar">
+      <button class="btn primary small" id="copyObjBtn">複製</button>
+    </div>`;
+  }
 
   if (totalObjCount === 0) {
     if (totalParsed > 0) {
-      objHtml += `<div class="objective-box" style="text-align:center;color:var(--accent-green);padding:20px">
+      objHtml += `<div style="text-align:center;color:var(--accent-green);padding:20px">
         ✓ 所有解析項目均在正常範圍
       </div>`;
     }
   } else {
+    // 合一：lab values + free-text 都在同一個外層 box、單一滾輪
+    objHtml += `<div class="objective-box" id="objBox">`;
+
     // 數值表 — 依採檢日期 + 檢查類型分組
     if (state.integrated.length > 0) {
       const labGroups = new Map();
@@ -5016,7 +5034,6 @@ function renderResults(totalParsed) {
       }
       const sortedGroups = [...labGroups.values()].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-      objHtml += `<div class="objective-box" id="objBox">`;
       for (const grp of sortedGroups) {
         objHtml += `<div class="obj-group">
           <div class="obj-group-header">
@@ -5050,10 +5067,9 @@ function renderResults(totalParsed) {
         }
         objHtml += `</div>`;
       }
-      objHtml += `</div>`;
     }
 
-    // Free-text 報告列表 — 依日期+short 分組
+    // Free-text 報告列表 — 依日期+short 分組（合在同一外層 box，跟 lab values 接續）
     if (state.freeTextDx.length > 0) {
       const ftGroups = new Map();
       for (const dx of state.freeTextDx) {
@@ -5069,7 +5085,6 @@ function renderResults(totalParsed) {
       }
       const sortedFtGroups = [...ftGroups.values()].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-      objHtml += `<div class="ft-list" id="ftList">`;
       for (const grp of sortedFtGroups) {
         objHtml += `<div class="ft-group">
           <div class="ft-group-header">
@@ -5086,7 +5101,6 @@ function renderResults(totalParsed) {
         }
         objHtml += `</div>`;
       }
-      objHtml += `</div>`;
     }
   }
   objHtml += `</div>`;
@@ -5134,17 +5148,17 @@ function renderResults(totalParsed) {
   // ── 渲染 Diagnosis 到 dxArea ──
   let dxHtml = '';
   const totalDxCount = state.dx.length + state.freeTextDx.length;
-  dxHtml += `
-    <div class="output-section">
-      <div class="section-header">
-        <h3>🩺 Diagnosis <span class="badge-count">${totalDxCount}</span></h3>
-        ${totalDxCount > 0 ? '<button class="btn small" id="copyDxBtn">複製</button>' : ''}
-      </div>
-  `;
+
+  // 複製按鈕
+  if (totalDxCount > 0) {
+    dxHtml += `<div class="section-copy-bar">
+      <button class="btn primary small" id="copyDxBtn">複製</button>
+    </div>`;
+  }
 
   if (totalDxCount === 0) {
     if (state.integrated.length > 0) {
-      dxHtml += `<div class="objective-box" style="text-align:center;color:var(--text-muted);padding:20px">
+      dxHtml += `<div style="text-align:center;color:var(--text-muted);padding:20px">
         異常項目未觸發任何預設診斷規則
       </div>`;
     }
@@ -5200,7 +5214,7 @@ function renderResults(totalParsed) {
         <div class="dx-row">
           <div class="dx-left">
             <span class="num">${idx}.</span>
-            <span><span class="ft-marker" title="從報告文字自動抽取，請醫師確認">🔎</span> ${escHtml(dx.text)}${icdHtml} <span class="dx-tag">(${escHtml(tag)})</span></span>
+            <span>${escHtml(dx.text)}${icdHtml} <span class="dx-tag">(${escHtml(tag)})</span></span>
           </div>
           <div class="dx-right">
             <div class="dx-right-label">來源詳情（不複製）</div>
@@ -5213,7 +5227,6 @@ function renderResults(totalParsed) {
 
     dxHtml += `</div>`;
   }
-  dxHtml += `</div>`;
   dxArea.innerHTML = dxHtml;
 
   // Wire copy buttons
