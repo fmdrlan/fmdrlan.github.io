@@ -3227,6 +3227,195 @@
         0,
         500
       ]
+    },
+    "IgE": {
+      "group": "immunology",
+      "aliases": [
+        "IgE",
+        "Total IgE"
+      ],
+      "unit": "IU/mL",
+      "ref": [
+        0,
+        100
+      ]
+    },
+    "SQEP": {
+      "group": "urine",
+      "aliases": [
+        "SQEP",
+        "Squamous epithelial cell"
+      ],
+      "unit": "/HPF",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "NSQEP": {
+      "group": "urine",
+      "aliases": [
+        "NSQEP",
+        "Non-squamous epithelial cell"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "VitC": {
+      "group": "urine",
+      "aliases": [
+        "VitC",
+        "Vitamin C",
+        "Ascorbic acid"
+      ],
+      "unit": "mg/dL",
+      "ref_qualitative": "Negative"
+    },
+    "AMOR": {
+      "group": "urine",
+      "aliases": [
+        "AMOR",
+        "Amorphous"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "CAOX": {
+      "group": "urine",
+      "aliases": [
+        "CAOX",
+        "Calcium oxalate"
+      ],
+      "unit": "/HPF",
+      "ref_qualitative": "Negative"
+    },
+    "Hyaline": {
+      "group": "urine",
+      "aliases": [
+        "Hyaline",
+        "Hyaline cast"
+      ],
+      "unit": "/LPF",
+      "ref": [
+        0,
+        2
+      ]
+    },
+    "Cast": {
+      "group": "urine",
+      "aliases": [
+        "Cast"
+      ],
+      "unit": "/LPF",
+      "ref_qualitative": "Negative"
+    },
+    "Crystal": {
+      "group": "urine",
+      "aliases": [
+        "Crystal"
+      ],
+      "unit": "/HPF",
+      "ref_qualitative": "Negative"
+    },
+    "Mucus": {
+      "group": "urine",
+      "aliases": [
+        "Mucus"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "Yeast": {
+      "group": "urine",
+      "aliases": [
+        "Yeast"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "Blast": {
+      "group": "cbc",
+      "aliases": [
+        "Blast",
+        "Blast cell"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Pro": {
+      "group": "cbc",
+      "aliases": [
+        "Pro",
+        "Promyelocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Myelo": {
+      "group": "cbc",
+      "aliases": [
+        "Myelo",
+        "Myelocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Meta": {
+      "group": "cbc",
+      "aliases": [
+        "Meta",
+        "Metamyelocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Band": {
+      "group": "cbc",
+      "aliases": [
+        "Band",
+        "Band cell"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "Aty-lym": {
+      "group": "cbc",
+      "aliases": [
+        "Aty-lym",
+        "Atypical lymphocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "NRBC": {
+      "group": "cbc",
+      "aliases": [
+        "NRBC",
+        "Nucleated RBC"
+      ],
+      "unit": "/Count WBCs",
+      "ref": [
+        0,
+        0
+      ]
     }
   }
 }
@@ -4105,7 +4294,13 @@ function detectFreeTextType(sectionType) {
 // 抓 culture 報告（陰性跳過、陽性回傳菌名）
 function parseCultureSection(section) {
   const text = section.text;
-  if (/No\s+aerobic\s+bacteria\s+isolated|No\s+anaerobic\s+bacteria\s+isolated|No\s+(?:growth|bacteria|organism)/i.test(text)) {
+  // 陰性培養各種寫法：
+  //   "No aerobic and No anaerobic pathogens were isolated after 5 days incubation"
+  //   "No aerobic bacteria isolated"
+  //   "No growth"
+  //   "No bacteria isolated"
+  //   "No organism"
+  if (/No\s+(?:aerobic|anaerobic|growth|bacteria|organism|pathogen)/i.test(text)) {
     return [];   // 陰性培養：跳過
   }
   // 嘗試抓「ISOLATE:」或「Final report:」後的菌名
@@ -4635,6 +4830,31 @@ function integrateFreeTextDx(items) {
   return mergeDiagnosesByICD(afterPathMerge);
 }
 
+// Raw 版本：只做 pathology+endoscopy 合併、不做同 ICD 合併
+// 用於 Objective 區、按時間每次都列出
+function integrateFreeTextDxRaw(items) {
+  if (!items.length) return [];
+  const grouped = {};
+  for (const item of items) {
+    // 注意：用「文字+日期」當 key（同診斷不同時間視為不同 entry）
+    const key = `${normDxText(item.text)}|${item.sampledAt || ''}`;
+    if (!grouped[key]) {
+      grouped[key] = {
+        text: item.text,
+        sources: []
+      };
+    }
+    grouped[key].sources.push({
+      label: item.sourceLabel,
+      short: item.sourceShort || item.sourceLabel,
+      date: item.sampledAt
+    });
+  }
+  const integrated = Object.values(grouped);
+  // 只跑 pathology+endoscopy 合併、不跑 ICD 合併
+  return mergePathologyIntoEndoscopy(integrated);
+}
+
 // 從診斷文字抽出嚴重程度/分級
 function extractSeverity(text) {
   // LA grade A/B/C/D (LA-A 也算)、grade A/B/C/D
@@ -4844,7 +5064,33 @@ function mergePathologyIntoEndoscopy(items) {
   return result;
 }
 
+// 清掉 LIS 網頁的 navigation/目錄樹/分頁 noise
+function sanitizeLISNoise(text) {
+  // 移除目錄樹條目：「摺疊 XXX (N)」「展開 XXX (N)」「略過巡覽連結。」
+  text = text.replace(/^[ \t]*(?:摺疊|展開)\s+[\s\S]*?\(\d+\)[ \t]*$/gm, '');
+  text = text.replace(/^略過巡覽連結。?[ \t]*$/gm, '');
+  // 移除分頁工具列：「最前頁   前一頁   第 X / Y 頁   下一頁   最後頁   總筆數： N」
+  text = text.replace(/^[ \t]*最前頁\s+前一頁[\s\S]*?總筆數[：:]\s*\d+[ \t]*$/gm, '');
+  // 移除查詢條件頭
+  text = text.replace(/^查詢條件[ \t]*$/gm, '');
+  text = text.replace(/^(?:起始日|結束日)[：:][ \t]*$/gm, '');
+  text = text.replace(/^[ \t]*提交[ \t]*$/gm, '');
+  text = text.replace(/^[ \t]*(?:二年|一年|六月|三月|門\s*診|急\s*診|住\s*院)(?:\s*\|\s*(?:二年|一年|六月|三月|門\s*診|急\s*診|住\s*院))+[ \t]*$/gm, '');
+  text = text.replace(/^累加顯示[ \t]*$/gm, '');
+  text = text.replace(/^依表單\s+依類別\s+依日期[ \t]*$/gm, '');
+  // 移除側邊工具列頭
+  text = text.replace(/^計算機[ \t]*$/gm, '');
+  text = text.replace(/^數據判讀參考資料[ \t]*$/gm, '');
+  text = text.replace(/^病理部網頁\(?[^)]*\)?[ \t]*$/gm, '');
+  text = text.replace(/^外科病理研究委託申請表單[ \t]*$/gm, '');
+  text = text.replace(/^查詢結果[ \t]*$/gm, '');
+  return text;
+}
+
 function parseLIS(text) {
+  // 先清掉 LIS 網頁的目錄樹/Navigation/分頁 noise
+  text = sanitizeLISNoise(text);
+
   const demographics = parseDemographics(text);
   const sections = splitReports(text);
   const allResults = [];
@@ -4896,6 +5142,8 @@ function parseLIS(text) {
 
   // 去重整合 free-text 診斷
   const freeTextDx = integrateFreeTextDx(freeTextItems);
+  // 也產生「未合併」版本給 Objective 用（按時間列出每次檢查）
+  const freeTextDxRaw = integrateFreeTextDxRaw(freeTextItems);
 
   // 分離出 unknown items（字典未收錄）— 不進入 integrate / dx 流程
   const knownResults = allResults.filter(r => !r.unknown);
@@ -4907,7 +5155,7 @@ function parseLIS(text) {
   }
   const unknownUnique = Object.values(unknownByKey);
 
-  return { results: knownResults, skipped, demographics, freeTextDx, unknown: unknownUnique };
+  return { results: knownResults, skipped, demographics, freeTextDx, freeTextDxRaw, unknown: unknownUnique };
 }
 
 function classifyResult(item, sex) {
@@ -5138,7 +5386,7 @@ function runParse() {
     showToast('請先貼上 LIS 報告');
     return;
   }
-  const { results, skipped, demographics, freeTextDx, unknown } = parseLIS(text);
+  const { results, skipped, demographics, freeTextDx, freeTextDxRaw, unknown } = parseLIS(text);
   state.demographics = demographics;
   state.sex = demographics.sex || 'M';  // 沒抓到就預設男（影響極小）
   state.allResults = results;
@@ -5146,6 +5394,7 @@ function runParse() {
   state.skipped = skipped;
   state.dx = applyDiagnosisRules(state.integrated);
   state.freeTextDx = freeTextDx || [];
+  state.freeTextDxRaw = freeTextDxRaw || [];
   state.unknown = unknown || [];
   renderResults(results.length);
 }
@@ -5203,7 +5452,7 @@ function renderResults(totalParsed) {
 
   // ── 渲染 Objective 到 objArea（合成單一連續區、不分兩個 box） ──
   let objHtml = '';
-  const totalObjCount = state.integrated.length + state.freeTextDx.length;
+  const totalObjCount = state.integrated.length + state.freeTextDxRaw.length;
 
   // 複製按鈕（右上角浮動）
   if (totalObjCount > 0) {
@@ -5272,9 +5521,10 @@ function renderResults(totalParsed) {
     }
 
     // Free-text 報告列表 — 依日期+short 分組（合在同一外層 box，跟 lab values 接續）
-    if (state.freeTextDx.length > 0) {
+    // 注意：Objective 用 freeTextDxRaw（未合併、按時間每次列出）
+    if (state.freeTextDxRaw.length > 0) {
       const ftGroups = new Map();
-      for (const dx of state.freeTextDx) {
+      for (const dx of state.freeTextDxRaw) {
         const sourcesSorted = [...dx.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         const primary = sourcesSorted[0];
         const dateKey = (primary.date || '').slice(0, 7);
@@ -5423,11 +5673,15 @@ function renderResults(totalParsed) {
         occHtml = ` <span class="occ-chips">${chips}</span>`;
       }
 
+      // dx-tag (灰色「(日期 來源)」) — 合併版（有 occurrences）就不顯示、因為已被 occ chips 取代且重複
+      const showDxTag = !(dx.occurrences && dx.occurrences.length > 1);
+      const dxTagHtml = showDxTag ? ` <span class="dx-tag">(${escHtml(tag)})</span>` : '';
+
       dxHtml += `
         <div class="dx-row">
           <div class="dx-left">
             <span class="num">${idx}.</span>
-            <span>${escHtml(dx.text)}${icdHtml}${occHtml} <span class="dx-tag">(${escHtml(tag)})</span></span>
+            <span>${escHtml(dx.text)}${icdHtml}${occHtml}${dxTagHtml}</span>
           </div>
           <div class="dx-right">
             <div class="dx-right-label">來源詳情（不複製）</div>
@@ -5494,7 +5748,22 @@ function formatFreeTextDx(d) {
   const sortedSources = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
   // 過濾掉 pathology source（已合併進 text、不重複顯示）
   const tagSources = sortedSources.filter(s => !(s.short in PATHOLOGY_TO_PROCEDURE));
-  // 去重（同短名 + 同日期只算一次）
+  // 取所有獨立 short（通常 1-2 個、例如 EGD、Colonoscopy）
+  const uniqueShorts = [...new Set(tagSources.map(s => s.short))];
+  const shortTag = uniqueShorts.join(', ');
+
+  // 有 multiple occurrences（同 ICD 合併過）→ 「主診斷, YYYY/MM severity, YYYY/MM severity (short)」
+  if (d.occurrences && d.occurrences.length > 1) {
+    // 主診斷脫掉 severity 後綴（如「Reflux esophagitis, LA grade B」→「Reflux esophagitis」）
+    const cleanName = stripSeverityFromText(d.text);
+    const occParts = d.occurrences.map(o => {
+      const dateStr = fmtYearMonth(o.date);
+      return o.severity ? `${dateStr} ${o.severity}` : dateStr;
+    });
+    return `${cleanName}, ${occParts.join(', ')} (${shortTag})`;
+  }
+
+  // 單一來源 → 「Reflux esophagitis, LA grade B (2021/04 EGD)」
   const seen = new Set();
   const uniqueTagSources = tagSources.filter(s => {
     const k = `${fmtYearMonth(s.date)}|${s.short}`;
@@ -5504,6 +5773,16 @@ function formatFreeTextDx(d) {
   });
   const tag = uniqueTagSources.map(s => `${fmtYearMonth(s.date)} ${s.short}`).join(' / ');
   return `${d.text} (${tag})`;
+}
+
+// 從診斷文字中移除 severity 後綴（合併版複製時用、避免「Reflux esophagitis, LA grade B, 2021/04 grade A」）
+function stripSeverityFromText(text) {
+  // 移除「, LA grade X」「, grade X」「, mild/moderate/severe/...」尾段
+  return text
+    .replace(/,\s*LA[\s\-]*(?:grade\s+)?[A-D]\s*$/i, '')
+    .replace(/,\s*grade\s+[A-D1-4I]+\s*$/i, '')
+    .replace(/,\s*(?:mild|moderate|severe|acute|chronic|suppurative|hyperplastic)(?:\s+\w+)?\s*$/i, '')
+    .trim();
 }
 
 function copyObjective() {
@@ -5543,10 +5822,10 @@ function copyObjective() {
     }
   }
 
-  // ── 2) Free-text 報告 — 依「日期 + 檢查」分組 ──
-  if (state.freeTextDx.length > 0) {
+  // ── 2) Free-text 報告 — 依「日期 + 檢查」分組（用未合併版） ──
+  if (state.freeTextDxRaw.length > 0) {
     const ftGroups = new Map();
-    for (const d of state.freeTextDx) {
+    for (const d of state.freeTextDxRaw) {
       const sourcesSorted = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
       const primary = sourcesSorted[0];
       const dateKey = (primary.date || '').slice(0, 7);
@@ -5599,7 +5878,7 @@ $('parseBtn').addEventListener('click', runParse);
 $('clearBtn').addEventListener('click', () => {
   $('labInput').value = '';
   state.demographics = { name: null, chartNo: null, sex: null, age: null, birthDate: null };
-  state.integrated = []; state.skipped = []; state.dx = []; state.unknown = []; state.freeTextDx = [];
+  state.integrated = []; state.skipped = []; state.dx = []; state.unknown = []; state.freeTextDx = []; state.freeTextDxRaw = [];
   $('resultMeta').style.display = 'none';
   $('resultGrid').style.display = 'none';
   $('warningBanner').style.display = 'none';

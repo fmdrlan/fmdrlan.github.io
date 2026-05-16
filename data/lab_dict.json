@@ -2344,6 +2344,195 @@
         0,
         500
       ]
+    },
+    "IgE": {
+      "group": "immunology",
+      "aliases": [
+        "IgE",
+        "Total IgE"
+      ],
+      "unit": "IU/mL",
+      "ref": [
+        0,
+        100
+      ]
+    },
+    "SQEP": {
+      "group": "urine",
+      "aliases": [
+        "SQEP",
+        "Squamous epithelial cell"
+      ],
+      "unit": "/HPF",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "NSQEP": {
+      "group": "urine",
+      "aliases": [
+        "NSQEP",
+        "Non-squamous epithelial cell"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "VitC": {
+      "group": "urine",
+      "aliases": [
+        "VitC",
+        "Vitamin C",
+        "Ascorbic acid"
+      ],
+      "unit": "mg/dL",
+      "ref_qualitative": "Negative"
+    },
+    "AMOR": {
+      "group": "urine",
+      "aliases": [
+        "AMOR",
+        "Amorphous"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "CAOX": {
+      "group": "urine",
+      "aliases": [
+        "CAOX",
+        "Calcium oxalate"
+      ],
+      "unit": "/HPF",
+      "ref_qualitative": "Negative"
+    },
+    "Hyaline": {
+      "group": "urine",
+      "aliases": [
+        "Hyaline",
+        "Hyaline cast"
+      ],
+      "unit": "/LPF",
+      "ref": [
+        0,
+        2
+      ]
+    },
+    "Cast": {
+      "group": "urine",
+      "aliases": [
+        "Cast"
+      ],
+      "unit": "/LPF",
+      "ref_qualitative": "Negative"
+    },
+    "Crystal": {
+      "group": "urine",
+      "aliases": [
+        "Crystal"
+      ],
+      "unit": "/HPF",
+      "ref_qualitative": "Negative"
+    },
+    "Mucus": {
+      "group": "urine",
+      "aliases": [
+        "Mucus"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "Yeast": {
+      "group": "urine",
+      "aliases": [
+        "Yeast"
+      ],
+      "unit": "",
+      "ref_qualitative": "Negative"
+    },
+    "Blast": {
+      "group": "cbc",
+      "aliases": [
+        "Blast",
+        "Blast cell"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Pro": {
+      "group": "cbc",
+      "aliases": [
+        "Pro",
+        "Promyelocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Myelo": {
+      "group": "cbc",
+      "aliases": [
+        "Myelo",
+        "Myelocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Meta": {
+      "group": "cbc",
+      "aliases": [
+        "Meta",
+        "Metamyelocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "Band": {
+      "group": "cbc",
+      "aliases": [
+        "Band",
+        "Band cell"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        5
+      ]
+    },
+    "Aty-lym": {
+      "group": "cbc",
+      "aliases": [
+        "Aty-lym",
+        "Atypical lymphocyte"
+      ],
+      "unit": "%",
+      "ref": [
+        0,
+        0
+      ]
+    },
+    "NRBC": {
+      "group": "cbc",
+      "aliases": [
+        "NRBC",
+        "Nucleated RBC"
+      ],
+      "unit": "/Count WBCs",
+      "ref": [
+        0,
+        0
+      ]
     }
   }
 }
