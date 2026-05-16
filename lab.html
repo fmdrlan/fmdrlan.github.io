@@ -4453,19 +4453,19 @@ function integrateFreeTextDx(items) {
   return mergePathologyIntoEndoscopy(integrated);
 }
 
+// Pathology short 對應的「主檢查 short」(同一檢體)
+const PATHOLOGY_TO_PROCEDURE = {
+  'Colon Pathology': 'Colonoscopy',
+  'EGD Pathology': 'EGD',
+  'Thy Pathology': 'Thy FNA',         // 甲狀腺病理通常配 FNA
+  'Breast Pathology': 'Breast FNA',
+  'Skin Pathology': 'Skin US',
+};
+
 // 把 pathology 診斷合併到對應的內視鏡/影像診斷
 // 例如 "Colonic polyp" (2025/02 Colonoscopy) + "Non-specific colitis" (2025/02 Colon Pathology)
 //   → "Colonic polyp, pathology: Non-specific colitis" (2025/02 Colonoscopy)
 function mergePathologyIntoEndoscopy(items) {
-  // Pathology short 對應的「主檢查 short」(同一檢體)
-  const PATHOLOGY_TO_PROCEDURE = {
-    'Colon Pathology': 'Colonoscopy',
-    'EGD Pathology': 'EGD',
-    'Thy Pathology': 'Thy FNA',         // 甲狀腺病理通常配 FNA
-    'Breast Pathology': 'Breast FNA',
-    'Skin Pathology': 'Skin US',
-  };
-
   // 把 items 分成「pathology」和「procedure」
   const pathologyItems = [];
   const procedureItems = [];
@@ -5042,8 +5042,18 @@ function renderResults(totalParsed) {
     // Free-text 診斷（病理、影像、內視鏡等）
     state.freeTextDx.forEach(d => {
       const sortedSources = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-      const tag = sortedSources.map(s => `${fmtYearMonth(s.date)} ${s.short}`).join(' / ');
-      // 右欄列出中文 label 詳細來源
+      // 過濾掉 pathology source（這些已合併進 text，不該重複顯示）
+      const tagSources = sortedSources.filter(s => !(s.short in PATHOLOGY_TO_PROCEDURE));
+      // 去重（同短名 + 同日期只算一次）
+      const seen = new Set();
+      const uniqueTagSources = tagSources.filter(s => {
+        const k = `${fmtYearMonth(s.date)}|${s.short}`;
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      });
+      const tag = uniqueTagSources.map(s => `${fmtYearMonth(s.date)} ${s.short}`).join(' / ');
+      // 右欄列出中文 label 詳細來源（這個保留全部 source、含 pathology，方便醫師看完整來源）
       const srcList = sortedSources.map(s =>
         `<span class="evidence-row"><span class="ev-date">${fmtYearMonth(s.date)}</span> <span class="ev-source">${escHtml(s.label)}</span></span>`
       ).join('');
@@ -5106,35 +5116,87 @@ function renderResults(totalParsed) {
 // 把 free-text 診斷格式化為 "Lipoma (2026/02 Pathology)" 樣式
 function formatFreeTextDx(d) {
   const sortedSources = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-  const tagParts = sortedSources.map(s => `${fmtYearMonth(s.date)} ${s.short}`);
-  // 同一診斷若多來源 → 用「/」串接，例：(2026/02 Pathology / 2026/01 Skin US)
-  const tag = tagParts.join(' / ');
+  // 過濾掉 pathology source（已合併進 text、不重複顯示）
+  const tagSources = sortedSources.filter(s => !(s.short in PATHOLOGY_TO_PROCEDURE));
+  // 去重（同短名 + 同日期只算一次）
+  const seen = new Set();
+  const uniqueTagSources = tagSources.filter(s => {
+    const k = `${fmtYearMonth(s.date)}|${s.short}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  const tag = uniqueTagSources.map(s => `${fmtYearMonth(s.date)} ${s.short}`).join(' / ');
   return `${d.text} (${tag})`;
 }
 
 function copyObjective() {
   const lines = [];
-  // 1) 數值表（tab-separated）
-  state.integrated.forEach(item => {
-    const value = displayValue(item);
-    const unit = (item.def && item.def.unit) || '';
-    const flag = (item.flag === 'H' || item.flag === 'HH') ? '(H)'
-               : (item.flag === 'L' || item.flag === 'LL') ? '(L)'
-               : '';
-    const date = fmtDate(item.sampledAt);
-    let line = `${date}\t${item.key}\t${value}${unit ? ' ' + unit : ''}\t${flag}`;
-    if (item.pastAbnormal) {
-      const pv = displayValue(item.pastAbnormal);
-      line += `  (past: ${pv} ${fmtDate(item.pastAbnormal.sampledAt)})`;
+
+  // ── 1) 數值表 — 依「採檢日期 + 檢查類型」分組 ──
+  if (state.integrated.length > 0) {
+    const labGroups = new Map();
+    for (const item of state.integrated) {
+      const dateKey = (item.sampledAt || '').slice(0, 10);
+      const sourceGroup = labGroupName(item.sourceType);
+      const key = `${dateKey}|${sourceGroup}`;
+      if (!labGroups.has(key)) {
+        labGroups.set(key, { date: dateKey, group: sourceGroup, items: [] });
+      }
+      labGroups.get(key).items.push(item);
     }
-    lines.push(line);
-  });
-  // 2) Free-text 報告（每條一行）
-  state.freeTextDx.forEach(d => {
-    lines.push(formatFreeTextDx(d));
-  });
+    // 排序：日期新→舊
+    const sortedGroups = [...labGroups.values()].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+    for (const grp of sortedGroups) {
+      lines.push(`${fmtDate(grp.date)} ${grp.group}:`);
+      for (const item of grp.items) {
+        const value = displayValue(item);
+        const unit = (item.def && item.def.unit) || '';
+        const flag = (item.flag === 'H' || item.flag === 'HH') ? ' (H)'
+                   : (item.flag === 'L' || item.flag === 'LL') ? ' (L)'
+                   : '';
+        let line = `  ${item.key}: ${value}${unit ? ' ' + unit : ''}${flag}`;
+        if (item.pastAbnormal) {
+          const pv = displayValue(item.pastAbnormal);
+          line += ` (past: ${pv} ${fmtDate(item.pastAbnormal.sampledAt)})`;
+        }
+        lines.push(line);
+      }
+      lines.push('');  // 分組間空一行
+    }
+  }
+
+  // ── 2) Free-text 報告 — 依「日期 + 檢查」分組 ──
+  if (state.freeTextDx.length > 0) {
+    const ftGroups = new Map();
+    for (const d of state.freeTextDx) {
+      const sourcesSorted = [...d.sources].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      const primary = sourcesSorted[0];
+      const dateKey = (primary.date || '').slice(0, 7);
+      const shortKey = primary.short || 'Other';
+      const key = `${dateKey}|${shortKey}`;
+      if (!ftGroups.has(key)) {
+        ftGroups.set(key, { date: dateKey, short: shortKey, items: [] });
+      }
+      ftGroups.get(key).items.push(d);
+    }
+    const sortedFtGroups = [...ftGroups.values()].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+    for (const grp of sortedFtGroups) {
+      lines.push(`${fmtYearMonth(grp.date)} ${grp.short}:`);
+      for (const d of grp.items) {
+        lines.push(`  ${d.text}`);
+      }
+      lines.push('');
+    }
+  }
+
+  // 移除尾端多餘空行
+  while (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
+
   navigator.clipboard.writeText(lines.join('\n'));
-  showToast('已複製 Objective（' + lines.length + ' 項）');
+  showToast('已複製 Objective');
 }
 
 function copyDiagnosis() {
