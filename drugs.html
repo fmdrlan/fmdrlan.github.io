@@ -178,6 +178,85 @@
   .copy-btn:hover { background: var(--accent-dim); color: var(--accent); border-color: rgba(74,158,255,0.4); }
   .copy-btn.copied { background: var(--green-bg); color: var(--green); border-color: rgba(74,222,128,0.3); }
 
+  /* ── 章節適用藥品列表（從健保署 API） ── */
+  .section-items-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #2d3a52;
+  }
+  .section-items-title {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-items-count {
+    background: var(--surface2);
+    color: var(--text-muted);
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .section-items-note { color: var(--text-light, #566880); font-size: 11px; }
+  .section-items-list {
+    max-height: 280px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 8px;
+  }
+  .si-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 4px;
+    font-size: 12px;
+    border-bottom: 1px dashed rgba(255,255,255,0.03);
+  }
+  .si-row:last-child { border-bottom: none; }
+  .si-code {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-light, #566880);
+    flex-shrink: 0;
+    min-width: 96px;
+  }
+  .si-name {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .si-name-en { color: #e2e8f4; }
+  .si-name-zh { color: var(--text-muted); font-size: 11px; }
+  .si-atc {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(74,158,255,0.10);
+    color: rgba(74,158,255,0.95);
+    border: 1px solid rgba(74,158,255,0.30);
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: 10.5px;
+    flex-shrink: 0;
+  }
+  .si-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 2px 4px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .si-link:hover { color: var(--accent); background: var(--accent-dim); }
+  .si-more {
+    text-align: center;
+    color: var(--text-light, #566880);
+    font-size: 11px;
+    padding: 6px;
+  }
+
   /* Content blocks with indentation levels */
   .content-block { font-size: 14px; line-height: 1.8; color: #e2e8f4; padding: 2px 0; }
   .block-l0 { font-size: 14px; font-weight: 600; margin-top: 10px; padding-top: 4px;
@@ -244,8 +323,8 @@
     <button class="clear-btn" id="clearBtn" aria-label="清除"></button>
   </div>
 
-  <!-- Changelog banner：本次更新摘要 -->
-  <div id="changelogBanner"></div>
+  <!-- Changelog banner 已停用 -->
+
 
   <div class="status-bar">
     <div class="result-count" id="resultCount"></div>
@@ -275,7 +354,10 @@
 
 <script>
 let allDrugs = [];
+let drugItems = [];                  // 健保用藥品項（從 API）
+let itemsBySection = new Map();      // Map<section_id, [items...]> 按章節分組
 let fuse;
+let itemFuse;                        // 額外的 drug item Fuse 索引
 let currentQuery = '';
 
 const ALIAS_MAP = {
@@ -442,6 +524,8 @@ const ALIAS_MAP = {
   'proton pump':    ['omeprazole','esomeprazole','pantoprazole','氫離子幫浦','消化性潰瘍'],
   '氫離子幫浦':      ['ppi','消化性潰瘍','omeprazole','esomeprazole'],
   '消化性潰瘍':      ['ppi','氫離子幫浦','胃潰瘍','十二指腸潰瘍'],
+  '胃藥':            ['消化性潰瘍','ppi','氫離子幫浦','制酸劑','乙型組織胺受體阻斷劑'],
+  '制酸劑':          ['消化性潰瘍','胃藥','胃酸'],
   'sglt2':          ['empagliflozin','dapagliflozin','canagliflozin','sglt-2','jardiance','forxiga'],
   'sglt-2':         ['empagliflozin','dapagliflozin','canagliflozin'],
   'empagliflozin':  ['sglt-2','sglt2'],
@@ -514,12 +598,44 @@ async function loadData() {
       ignoreLocation: true
     });
 
+    // 載入健保用藥品項 (API)、建立章節索引
+    try {
+      const ir = await fetch('data/drug_items.json');
+      if (ir.ok) {
+        drugItems = await ir.json();
+        // 章節 → items map
+        for (const it of drugItems) {
+          if (it.section) {
+            if (!itemsBySection.has(it.section)) itemsBySection.set(it.section, []);
+            itemsBySection.get(it.section).push(it);
+          }
+        }
+        // 建獨立 Fuse 索引（給搜尋用）
+        itemFuse = new Fuse(drugItems, {
+          keys: [
+            { name: 'name_zh',     weight: 0.4 },
+            { name: 'name_en',     weight: 0.4 },
+            { name: 'ingredient',  weight: 0.15 },
+            { name: 'atc',         weight: 0.05 },
+          ],
+          threshold: 0.3,
+          includeScore: true,
+          minMatchCharLength: 2,
+          ignoreLocation: true
+        });
+        console.log(`✓ 載入健保用藥品項：${drugItems.length} 筆，含章節 ${itemsBySection.size} 類`);
+      }
+    } catch(e) { console.warn('drug_items.json 載入失敗（功能會降級）：', e); }
+
     try {
       const vr = await fetch('data/last_version.txt');
       const ver = (await vr.text()).trim();
-      const rocY = ver.slice(0,3), m = ver.slice(3,5), d = ver.slice(5,7);
-      const label = `民國${rocY}年${m}月${d}日`;
-      document.getElementById('nhiVersion').textContent = label;
+      if (ver.length === 7) {
+        const rocY = parseInt(ver.slice(0,3), 10), m = ver.slice(3,5), d = ver.slice(5,7);
+        const adY = rocY + 1911;               // 民國轉西元，與「最後檢查」統一用西元
+        const label = `${adY}/${m}/${d}`;       // 例：1150522 → 2026/05/22
+        document.getElementById('nhiVersion').textContent = label;
+      }
     } catch(e) {}
 
     // 載入「最後檢查時間」(由 GitHub Actions 每週一寫入，不論有無新版本都會更新)
@@ -533,14 +649,7 @@ async function loadData() {
       }
     } catch(e) {}
 
-    // 載入 changelog（若存在）
-    try {
-      const cr = await fetch('data/changelog.json');
-      if (cr.ok) {
-        const cl = await cr.json();
-        renderChangelog(cl);
-      }
-    } catch(e) { /* changelog 是 optional */ }
+    // 「本次更新」banner 已停用（依需求移除）
 
     // 若 URL 帶 ?q= 參數（例如從 lipid.html 跳過來），自動執行搜尋
     const urlParams = new URLSearchParams(window.location.search);
@@ -689,6 +798,36 @@ function doSearch(q) {
   allDrugs.forEach(d => { if (exactIds.has(d.id)) { merged.push(d); seen.add(d.id); } });
   fuzzy.forEach(r => { if (!seen.has(r.item.id) && !r.item.is_appendix) { merged.push(r.item); seen.add(r.item.id); } });
 
+  // 補搜：用 itemFuse（健保用藥品項）找對應章節、補上「給付規定」結果
+  // 主要解決：搜尋「立普妥」「Lipitor」這種商品名找不到的問題
+  let viaItems = 0;
+  if (itemFuse && merged.length < 5) {
+    const itemHits = itemFuse.search(currentQuery, { limit: 10 });
+    for (const r of itemHits) {
+      const sec = r.item.section;
+      if (!sec) continue;
+      // 找對應這個章節的給付規定 entry
+      // 嘗試：完全比對 → 父章節比對
+      const candidates = [sec];
+      const parts = sec.split('.');
+      for (let i = parts.length - 1; i >= 2; i--) {
+        candidates.push(parts.slice(0, i).join('.'));
+      }
+      for (const c of candidates) {
+        const matched = allDrugs.filter(d => {
+          if (d.is_appendix || seen.has(d.id)) return false;
+          const m = d.title.match(/^([\d.]+?)\.?(?=\D|$)/);
+          if (!m) return false;
+          return m[1].replace(/\.$/, '') === c;
+        });
+        if (matched.length > 0) {
+          matched.forEach(d => { merged.push(d); seen.add(d.id); viaItems++; });
+          break;
+        }
+      }
+    }
+  }
+
   document.getElementById('resultCount').innerHTML =
     `搜尋「<strong>${esc(currentQuery)}</strong>」，找到 <strong>${merged.length}</strong> 筆`;
 
@@ -767,6 +906,7 @@ function renderCard(drug) {
   const is26 = sec && sec.startsWith('2.6');
   const bodyHtml = is26 ? render26Table(drug) : renderBlocks(drug);
   const relatedHtml = renderRelated(drug);
+  const sectionItemsHtml = renderSectionItems(drug);
 
   return [
     '<div class="drug-card">',
@@ -781,7 +921,70 @@ function renderCard(drug) {
     '<div class="card-body">',
     bodyHtml,
     '<button class="copy-btn" data-id="' + drug.id + '">' + ICON.copy + '<span>複製條文</span></button>',
+    sectionItemsHtml,
     relatedHtml,
+    '</div>',
+    '</div>'
+  ].join('');
+}
+
+// ── 該章節適用的藥品列表（從健保署 API） ─────────
+function renderSectionItems(drug) {
+  if (!drug || !drug.title) return '';
+  // 從 title 抽出章節編號（例 "2.5.4.1.史塔汀(Statin)類..." → "2.5.4.1"）
+  const m = drug.title.match(/^([\d.]+?)\.?(?=\D|$)/);
+  if (!m) return '';
+  const fullSection = m[1].replace(/\.$/, '');
+
+  // 多層回退：完整章節 (2.5.4.1) → 父章節 (2.5.4) → 祖父章節 (2.5)
+  let items = [];
+  let matchedSection = fullSection;
+  const tries = [fullSection];
+  const parts = fullSection.split('.');
+  for (let i = parts.length - 1; i >= 2; i--) {
+    tries.push(parts.slice(0, i).join('.'));
+  }
+  for (const s of tries) {
+    if (itemsBySection.has(s)) {
+      items = itemsBySection.get(s);
+      matchedSection = s;
+      break;
+    }
+  }
+
+  if (items.length === 0) return '';
+
+  // 限制最多 20 筆、避免太長
+  const MAX = 20;
+  const shown = items.slice(0, MAX);
+  const more = items.length - shown.length;
+  const isSubsection = matchedSection !== fullSection;
+  const noteHtml = isSubsection
+    ? '<span class="section-items-note">（對應章節 ' + esc(matchedSection) + '，本章 + 子章節）</span>'
+    : '';
+
+  return [
+    '<div class="section-items-wrap">',
+    '<div class="section-items-title">📋 本章適用藥品 <span class="section-items-count">' + items.length + ' 筆</span>' + noteHtml + '</div>',
+    '<div class="section-items-list">',
+    shown.map(it => {
+      const atcHtml = it.atc ? '<span class="si-atc">' + esc(it.atc) + '</span>' : '';
+      const link = it.section_link
+        ? '<a href="' + esc(it.section_link) + '" target="_blank" rel="noopener" title="健保署原始連結" class="si-link">↗</a>'
+        : '';
+      return [
+        '<div class="si-row">',
+        '  <span class="si-code">' + esc(it.code) + '</span>',
+        '  <span class="si-name">',
+        '    <span class="si-name-en">' + esc(it.name_en) + '</span>',
+        it.name_zh ? '<span class="si-name-zh">' + esc(it.name_zh) + '</span>' : '',
+        '  </span>',
+        atcHtml,
+        link,
+        '</div>'
+      ].join('');
+    }).join(''),
+    more > 0 ? '<div class="si-more">…還有 ' + more + ' 筆未顯示</div>' : '',
     '</div>',
     '</div>'
   ].join('');
