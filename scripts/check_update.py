@@ -89,45 +89,88 @@ def fetch_with_retry(session, url, *, referer=None, timeout=30, tries=3):
     raise last_err
 
 
+def _abs_url(href):
+    if href.startswith("http"):
+        return href
+    if href.startswith("/"):
+        return "https://www.nhi.gov.tw" + href
+    return "https://www.nhi.gov.tw/" + href
+
+
+def extract_version(*texts):
+    """從多個字串裡抽民國版本日期，回傳 7 碼（如 1150522）。
+    支援 1150522 / 115.05.22 / 115/05/22 / 115-05-22。"""
+    for t in texts:
+        if not t:
+            continue
+        s = t.replace(" ", "")
+        m = re.search(r'(\d{3})[.\-/](\d{1,2})[.\-/](\d{1,2})', s)
+        if m:
+            y, mo, d = m.groups()
+            return f"{int(y):03d}{int(mo):02d}{int(d):02d}"
+        m = re.search(r'(\d{7})', s)
+        if m:
+            return m.group(1)
+    return None
+
+
 def get_latest_pdf_info():
-    """從健保署網頁找最新的整份 PDF 連結與日期"""
+    """從健保署網頁找最新「整份/完整」給付規定 PDF 連結與版本日期"""
     print(f"🌐 檢查健保署網頁：{NHI_URL}")
     session = make_session()
     resp = fetch_with_retry(session, NHI_URL)
 
     soup = BeautifulSoup(resp.text, "html.parser")
 
-    pdf_url = None
-    version_str = None
+    # 頁面標題/內文常見「115.05.22更新」，先抽一個版本日期備用
+    page_version = extract_version(soup.title.get_text() if soup.title else "", resp.text)
 
-    # 找所有超連結中包含「完整給付規定」字樣的 PDF
+    # 收集所有可能是「整份給付規定」的連結
+    KEYWORDS = ("完整給付規定", "整份", "整份帶走", "給付規定")
+    candidates = []          # (score, version, url, text)
+    all_pdf_links = []       # 診斷用：所有 PDF / 下載連結
     for a in soup.find_all("a", href=True):
         href = a["href"]
         text = a.get_text(strip=True)
-        if ".pdf" in href.lower() and "完整給付規定" in (href + text):
-            # 從檔名中抽日期，如 完整給付規定1150323.pdf → 1150323
-            m = re.search(r'(\d{7})', href)
-            if m:
-                version_str = m.group(1)
-                # 補全 URL
-                if href.startswith("http"):
-                    pdf_url = href
-                elif href.startswith("/"):
-                    pdf_url = "https://www.nhi.gov.tw" + href
-                else:
-                    pdf_url = "https://www.nhi.gov.tw/" + href
-                break
+        is_pdf = ".pdf" in href.lower()
+        is_dl = ("dl-" in href.lower()) or ("download" in href.lower()) or ("/resource/" in href.lower())
+        if is_pdf or is_dl:
+            all_pdf_links.append((text or "(無文字)", href))
+        if not (is_pdf or is_dl):
+            continue
+        blob = href + " " + text
+        # 評分：命中越多關鍵字、且是 PDF，分數越高
+        score = sum(2 for k in KEYWORDS if k in blob)
+        if is_pdf:
+            score += 1
+        if score == 0:
+            continue
+        ver = extract_version(text, href, page_version)
+        candidates.append((score, ver, _abs_url(href), text))
 
-    if not pdf_url:
-        # 備用：直接嘗試已知格式的 URL
-        print("⚠️  頁面上找不到 PDF 連結，嘗試備用方法...")
-        # 從頁面文字找日期
-        m = re.search(r'完整給付規定(\d{7})', resp.text)
-        if m:
-            version_str = m.group(1)
-            pdf_url = f"https://www.nhi.gov.tw/ch/dl-{version_str}-完整給付規定{version_str}.pdf"
+    if candidates:
+        candidates.sort(key=lambda c: c[0], reverse=True)
+        _, version_str, pdf_url, text = candidates[0]
+        version_str = version_str or page_version
+        print(f"🔗 命中連結：{text or '(無文字)'} → {pdf_url}")
+        return pdf_url, version_str
 
-    return pdf_url, version_str
+    # ── 找不到：印出診斷資訊，讓我們從 log 看健保署現在的真實結構 ──
+    print("⚠️  自動規則找不到「整份給付規定」連結，列出頁面上所有 PDF / 下載連結供診斷：")
+    if all_pdf_links:
+        for i, (txt, href) in enumerate(all_pdf_links[:40], 1):
+            print(f"   [{i}] 文字「{txt}」 → {href}")
+    else:
+        print("   ⛔ 頁面上完全沒有 PDF / 下載連結（可能是 JS 動態載入，或頁面結構大改）")
+    print(f"   📅 從頁面文字抽到的版本日期：{page_version or '（無）'}")
+
+    # 仍嘗試用舊的已知格式湊一個 URL（搭配抽到的版本）
+    if page_version:
+        guess = f"https://www.nhi.gov.tw/ch/dl-{page_version}-完整給付規定{page_version}.pdf"
+        print(f"   🤔 備用猜測 URL：{guess}")
+        return guess, page_version
+
+    return None, None
 
 
 def read_last_version():
