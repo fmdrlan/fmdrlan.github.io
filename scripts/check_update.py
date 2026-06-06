@@ -18,20 +18,69 @@ VERSION_FILE = Path("data/last_version.txt")
 LAST_CHECK_FILE = Path("data/last_check.txt")
 DATA_DIR = Path("data")
 
+import time
+
+# 一整組「真瀏覽器」會送出的標頭。健保署的防火牆會檢查這些是否齊全，
+# 只設 User-Agent 不夠，會被擋 403。
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/122.0.0.0 Safari/537.36"
-    )
+    ),
+    "Accept": (
+        "text/html,application/xhtml+xml,application/xml;q=0.9,"
+        "image/avif,image/webp,image/apng,*/*;q=0.8"
+    ),
+    "Accept-Language": "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0",
+    "Connection": "keep-alive",
 }
+
+
+def make_session():
+    """建立一個帶完整標頭的 session，並先逛一次首頁取得 cookie，
+    這樣後續抓資料看起來才像正常瀏覽行為，降低被擋 403 的機率。"""
+    s = requests.Session()
+    s.headers.update(HEADERS)
+    try:
+        # 暖身：先 GET 首頁拿 cookie（失敗不致命，繼續試目標頁）
+        s.get("https://www.nhi.gov.tw/ch/mp-1.html", timeout=30)
+    except Exception as e:
+        print(f"⚠️  暖身連線首頁未成功（繼續嘗試目標頁）：{e}")
+    return s
+
+
+def fetch_with_retry(session, url, *, referer=None, timeout=30, stream=False, tries=3):
+    """帶重試的 GET，第二次起補上 Referer / same-origin 標頭，模擬點連結進來。"""
+    last_err = None
+    for i in range(tries):
+        extra = {}
+        if referer or i > 0:
+            extra["Referer"] = referer or "https://www.nhi.gov.tw/ch/mp-1.html"
+            extra["Sec-Fetch-Site"] = "same-origin"
+        try:
+            resp = session.get(url, headers=extra, timeout=timeout, stream=stream)
+            resp.raise_for_status()
+            return resp
+        except Exception as e:
+            last_err = e
+            print(f"⚠️  第 {i+1} 次連線失敗：{e}")
+            time.sleep(3 * (i + 1))
+    raise last_err
 
 
 def get_latest_pdf_info():
     """從健保署網頁找最新的整份 PDF 連結與日期"""
     print(f"🌐 檢查健保署網頁：{NHI_URL}")
-    resp = requests.get(NHI_URL, headers=HEADERS, timeout=30)
-    resp.raise_for_status()
+    session = make_session()
+    resp = fetch_with_retry(session, NHI_URL)
 
     soup = BeautifulSoup(resp.text, "html.parser")
 
@@ -81,8 +130,8 @@ def save_version(version_str):
 
 def download_pdf(url: str, dest: Path):
     print(f"⬇️  下載 PDF：{url}")
-    resp = requests.get(url, headers=HEADERS, timeout=120, stream=True)
-    resp.raise_for_status()
+    session = make_session()
+    resp = fetch_with_retry(session, url, referer=NHI_URL, timeout=120, stream=True)
 
     total = int(resp.headers.get("content-length", 0))
     downloaded = 0
