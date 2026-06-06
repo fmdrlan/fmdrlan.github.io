@@ -9,6 +9,7 @@ import json
 import subprocess
 import sys
 import time
+import random
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from bs4 import BeautifulSoup
@@ -71,9 +72,12 @@ def make_session():
     return s
 
 
-def fetch_with_retry(session, url, *, referer=None, timeout=30, tries=3):
-    """帶重試的 GET，第二次起補上 Referer，模擬點連結進來。"""
+def fetch_with_retry(session, url, *, referer=None, timeout=30, tries=4):
+    """帶重試的 GET，第二次起補上 Referer。被臨時限流(403)時拉長等待，
+    並加隨機抖動，給對方防火牆時間解除冷凍。"""
     last_err = None
+    # 每次重試的基礎等待秒數（越後面等越久）
+    backoff = [20, 45, 90, 120]
     for i in range(tries):
         extra = {}
         if referer or i > 0:
@@ -85,7 +89,10 @@ def fetch_with_retry(session, url, *, referer=None, timeout=30, tries=3):
         except Exception as e:
             last_err = e
             print(f"⚠️  第 {i+1} 次連線失敗：{e}")
-            time.sleep(3 * (i + 1))
+            if i < tries - 1:
+                wait = backoff[min(i, len(backoff) - 1)] + random.randint(0, 15)
+                print(f"   ⏳ 等待 {wait} 秒後重試...")
+                time.sleep(wait)
     raise last_err
 
 
