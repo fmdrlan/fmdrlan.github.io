@@ -1,0 +1,87 @@
+name: 每週自動更新藥品給付規定
+
+on:
+  schedule:
+    # 每週一早上 10:00（台灣時間 = UTC+8，所以 UTC 02:00）
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+    # 也可以在 GitHub 網頁上手動點擊「Run workflow」執行
+
+permissions:
+  contents: write  # 允許 commit 回 repo
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取得程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 安裝相依套件
+        run: pip install requests beautifulsoup4 pdfplumber
+
+      - name: 檢查並更新 PDF
+        id: check
+        run: |
+          python scripts/check_update.py
+          # check_update.py 無新版本時會在家目錄 touch 一個 no_update 檔
+          # hashFiles() 看不到 workspace 外的檔，所以改用 step output 傳遞狀態
+          if [ -f ~/no_update ]; then
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 抓取健保用藥品項 API
+        id: fetch_items
+        run: python scripts/fetch_drug_items.py
+        continue-on-error: true   # API 掛掉也不要連 PDF 一起拖累
+
+      - name: 更新版本顯示
+        if: steps.check.outputs.updated == 'true'
+        run: |
+          VERSION=$(cat data/last_version.txt)
+          # 更新 index.html 裡的版本號
+          sed -i "s/'[0-9]\{3\}\.[0-9]\{2\}\.[0-9]\{2\}'/'${VERSION:0:3}.${VERSION:3:2}.${VERSION:5:2}'/g" index.html || true
+
+      - name: Commit 更新（有新版本）
+        if: steps.check.outputs.updated == 'true'
+        run: |
+          VERSION=$(cat data/last_version.txt 2>/dev/null || echo "unknown")
+          git config user.name "NHI Update Bot"
+          git config user.email "bot@nhi-drug-search"
+          # 把 drugs.json、changelog.json、版本檔、index.html、檢查時間一起 commit
+          git add data/drugs.json data/changelog.json data/last_version.txt data/last_check.txt index.html
+          # drug_items.json 是 API 補充資料，可能不存在，缺檔不要讓 commit 失敗
+          git add data/drug_items.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "🤖 自動更新：藥品給付規定 ${VERSION}"
+          git push
+
+      - name: Commit 檢查時間（無新版本時也要）
+        if: steps.check.outputs.updated == 'false'
+        run: |
+          git config user.name "NHI Update Bot"
+          git config user.email "bot@nhi-drug-search"
+          # 即使沒新版本、drug_items.json 也可能更新（每月）
+          git add data/last_check.txt
+          git add data/drug_items.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "🤖 自動檢查（PDF 無新版本、藥品項目可能更新）"
+          git push
+
+      - name: 完成通知
+        run: |
+          if [ -f ~/no_update ]; then
+            echo "✅ 版本未更新，無需處理"
+          else
+            echo "🎉 成功更新藥品給付規定！"
+            if [ -f data/changelog.json ]; then
+              echo "📊 本次變動摘要："
+              python -c "import json; c=json.load(open('data/changelog.json')); print('  新增:', len(c.get('added',[])), '條'); print('  修改:', len(c.get('modified',[])), '條'); print('  刪除:', len(c.get('removed',[])), '條')"
+            fi
+          fi
