@@ -24,7 +24,7 @@ jobs:
           cache: 'pip'
 
       - name: 安裝相依套件
-        run: pip install requests beautifulsoup4 pdfplumber
+        run: pip install requests beautifulsoup4 pdfplumber curl_cffi
 
       - name: 檢查並更新 PDF
         id: check
