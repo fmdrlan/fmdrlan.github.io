@@ -4,21 +4,29 @@
 由 GitHub Actions 每週自動執行。
 """
 
-import requests
 import re
 import json
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from bs4 import BeautifulSoup
 
+# 優先用 curl_cffi（能模擬 Chrome 的底層 TLS 指紋，破解 403 封鎖）；
+# 若環境沒裝，退回一般 requests。
+try:
+    from curl_cffi import requests as httpclient
+    _USE_CFFI = True
+except ImportError:
+    import requests as httpclient
+    _USE_CFFI = False
+
 NHI_URL = "https://www.nhi.gov.tw/ch/np-2508-1.html"
+NHI_HOME = "https://www.nhi.gov.tw/ch/mp-1.html"
 VERSION_FILE = Path("data/last_version.txt")
 LAST_CHECK_FILE = Path("data/last_check.txt")
 DATA_DIR = Path("data")
-
-import time
 
 # 一整組「真瀏覽器」會送出的標頭。健保署的防火牆會檢查這些是否齊全，
 # 只設 User-Agent 不夠，會被擋 403。
@@ -45,28 +53,33 @@ HEADERS = {
 
 
 def make_session():
-    """建立一個帶完整標頭的 session，並先逛一次首頁取得 cookie，
-    這樣後續抓資料看起來才像正常瀏覽行為，降低被擋 403 的機率。"""
-    s = requests.Session()
-    s.headers.update(HEADERS)
+    """建立連線 session。有 curl_cffi 時模擬 Chrome（連 TLS 指紋一起），
+    並先逛一次首頁取得 cookie，最大化通過健保署防火牆的機率。"""
+    if _USE_CFFI:
+        s = httpclient.Session(impersonate="chrome")
+        s.headers.update({"Accept-Language": "zh-TW,zh;q=0.9,en;q=0.8"})
+        print("🦊 使用 curl_cffi（模擬 Chrome 指紋）")
+    else:
+        s = httpclient.Session()
+        s.headers.update(HEADERS)
+        print("ℹ️  使用一般 requests（未安裝 curl_cffi）")
     try:
         # 暖身：先 GET 首頁拿 cookie（失敗不致命，繼續試目標頁）
-        s.get("https://www.nhi.gov.tw/ch/mp-1.html", timeout=30)
+        s.get(NHI_HOME, timeout=30)
     except Exception as e:
         print(f"⚠️  暖身連線首頁未成功（繼續嘗試目標頁）：{e}")
     return s
 
 
-def fetch_with_retry(session, url, *, referer=None, timeout=30, stream=False, tries=3):
-    """帶重試的 GET，第二次起補上 Referer / same-origin 標頭，模擬點連結進來。"""
+def fetch_with_retry(session, url, *, referer=None, timeout=30, tries=3):
+    """帶重試的 GET，第二次起補上 Referer，模擬點連結進來。"""
     last_err = None
     for i in range(tries):
         extra = {}
         if referer or i > 0:
-            extra["Referer"] = referer or "https://www.nhi.gov.tw/ch/mp-1.html"
-            extra["Sec-Fetch-Site"] = "same-origin"
+            extra["Referer"] = referer or NHI_HOME
         try:
-            resp = session.get(url, headers=extra, timeout=timeout, stream=stream)
+            resp = session.get(url, headers=extra, timeout=timeout)
             resp.raise_for_status()
             return resp
         except Exception as e:
@@ -131,17 +144,11 @@ def save_version(version_str):
 def download_pdf(url: str, dest: Path):
     print(f"⬇️  下載 PDF：{url}")
     session = make_session()
-    resp = fetch_with_retry(session, url, referer=NHI_URL, timeout=120, stream=True)
+    resp = fetch_with_retry(session, url, referer=NHI_URL, timeout=120)
 
-    total = int(resp.headers.get("content-length", 0))
-    downloaded = 0
     dest.parent.mkdir(exist_ok=True)
-
     with open(dest, "wb") as f:
-        for chunk in resp.iter_content(chunk_size=65536):
-            if chunk:
-                f.write(chunk)
-                downloaded += len(chunk)
+        f.write(resp.content)
 
     size_mb = dest.stat().st_size / 1024 / 1024
     print(f"✅ 下載完成：{dest}（{size_mb:.1f} MB）")
