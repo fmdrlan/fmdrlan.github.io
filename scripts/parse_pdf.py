@@ -19,18 +19,19 @@ from pathlib import Path
 APPENDIX_PATTERN = re.compile(r'附表[一二三四五六七八九十百零\d]+')
 
 # ── 編號層次正則（由高到低優先）──
+# 重點：健保署 PDF 的編號後面常「沒有空格」（如 1.使用、(1)經、Ⅰ.限），
+# 所以不強制要求尾隨空白；數字點用 (?=\D) 確保後面不是數字，避免誤判 1.5mg 這種小數。
 LEVEL_PATTERNS = [
-    (0, re.compile(r'^(\d+\.\d+(?:\.\d+)*\.?)\s')),           # 1.2.3. 章節編號
-    (1, re.compile(r'^[（(]\d+[）)]\s')),                        # (1) 第一層括號
-    (2, re.compile(r'^[IVXivx]+\.\s')),                          # I. II. 羅馬數字
-    (2, re.compile(r'^[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ][\.\s]')),            # 全形羅馬數字
-    (3, re.compile(r'^[①②③④⑤⑥⑦⑧⑨⑩]\s')),                  # 圓圈數字
-    (3, re.compile(r'^[ａ-ｚa-z]\.\s')),                        # a. b. 字母
-    (1, re.compile(r'^\d+\.\s')),                                # 1. 2. 純數字點
-    (2, re.compile(r'^[（(][一二三四五六七八九十][）)]\s')),      # (一) 中文括號
-    (2, re.compile(r'^[一二三四五六七八九十][、\.]\s')),           # 一、 中文序號
-    (3, re.compile(r'^[（(][IVXivx]+[）)]\s')),                  # (I) 括號羅馬
-    (4, re.compile(r'^[①-⑳]\s')),                              # 其他圓圈
+    (0, re.compile(r'^\d+\.\d+(?:\.\d+)*\.?(?=\D)')),            # 1.2.3 章節編號
+    (1, re.compile(r'^[（(]\d+[）)]')),                          # (1) 第一層括號
+    (2, re.compile(r'^[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ]')),                   # 全形羅馬數字 Ⅰ Ⅱ
+    (2, re.compile(r'^[IVX]{1,4}\.(?=\D|\s)')),                  # I. II. 半形羅馬數字
+    (3, re.compile(r'^[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮]')),               # 圓圈數字
+    (3, re.compile(r'^[ａ-ｚ]\.')),                              # 全形字母 a.
+    (1, re.compile(r'^\d+\.(?=\D)')),                            # 1. 2. 純數字點
+    (2, re.compile(r'^[（(][一二三四五六七八九十]+[）)]')),       # (一) 中文括號
+    (2, re.compile(r'^[一二三四五六七八九十]+、')),               # 一、 中文序號
+    (3, re.compile(r'^[（(][IVXivx]+[）)]')),                    # (I) 括號羅馬
 ]
 
 
@@ -65,11 +66,12 @@ def parse_content_to_blocks(content: str) -> list[dict]:
             continue
         level = detect_level(line)
         if level == -1:
-            # 連接到上一行
+            # 無編號 → 視為上一個項目的換行續行，接到目前 block
             current_text.append(line)
         else:
-            if current_level != -1 and level != current_level:
-                flush()
+            # 任何「新編號」都另起一個 block（即使與上一個同層），
+            # 否則同層的兄弟項目（如連續的 (1) (2)、Ⅰ. Ⅱ.）會被黏成一坨。
+            flush()
             current_level = level
             current_text.append(line)
 
@@ -92,14 +94,30 @@ def parse_drug_sections(pdf_path: str) -> list[dict]:
     print(f"✅ 共讀取 {total} 頁，開始解析...")
 
     # 清理頁首頁尾和換頁符號
-    full_text = re.sub(r'\(\d{3}\.\d+\.\d+更新\)', '', full_text)
     full_text = re.sub(r'\f', '\n', full_text)
     # 清理 PDF cid 亂碼
     full_text = re.sub(r'\(cid:\d+\)', '', full_text)
 
-    # 切割條目：形如 "1.2.3.藥名" 或 "1.2.3 藥名"
+    # 移除「單獨成行的頁碼」與「頁尾更新標記行」：
+    # 這些頁尾雜訊會把跨頁的同一句話切斷、產生破碎的 block。
+    # 一定要「整行」移除（而非行內 sub），否則會留下空行 → 觸發斷段。
+    def _is_noise_line(ln: str) -> bool:
+        s = ln.strip()
+        if re.fullmatch(r'\d{1,3}', s):            # 頁碼（1~3 碼純數字）
+            return True
+        if re.fullmatch(r'[（(]?\d{3}[.\u3001/]\d{1,2}[.\u3001/]\d{1,2}更新[）)]?', s):
+            return True                             # 頁尾更新標記行
+        return False
+
+    full_text = '\n'.join(ln for ln in full_text.split('\n') if not _is_noise_line(ln))
+
+    # 行內殘留的更新標記（夾在內文中、非整行）再清一次（不會產生空行）
+    full_text = re.sub(r'[（(]\d{3}[.\u3001/]\d{1,2}[.\u3001/]\d{1,2}更新[）)]', '', full_text)
+
+    # 切割條目：形如 "1.2.3.藥名"、"1.2.3 藥名"、或 "7.1 .消化性潰瘍用藥"
+    # 號碼本身維持緊湊（7.1），但號碼與標題之間容許空白與點（健保署排版不一致）
     pattern = re.compile(
-        r'^(\d+\.\d+(?:\.\d+)?\.?\s{0,3}[A-Za-z\u4e00-\u9fff\(（][^\n]{2,120})$',
+        r'^(\d+\.\d+(?:\.\d+)?\s*\.?\s*[A-Za-z\u4e00-\u9fff\(（][^\n]{2,120})$',
         re.MULTILINE
     )
 
@@ -108,6 +126,8 @@ def parse_drug_sections(pdf_path: str) -> list[dict]:
 
     for i, m in enumerate(matches):
         title = m.group(1).strip()
+        # 標題號碼正規化：把「7.1 .消化」這種怪空格收成「7.1.消化」
+        title = re.sub(r'^(\d+(?:\.\d+)+)\s*\.?\s*', r'\1.', title)
         start = m.end()
         end = matches[i + 1].start() if i + 1 < len(matches) else len(full_text)
         body = full_text[start:end].strip()

@@ -104,20 +104,33 @@ def _abs_url(href):
     return "https://www.nhi.gov.tw/" + href
 
 
+def _valid_minguo(v):
+    """檢查是否為合理的民國日期 7 碼 YYYMMDD（月 1-12、日 1-31、民國年 >=100）。"""
+    if not v or len(v) != 7 or not v.isdigit():
+        return False
+    yyy, mm, dd = int(v[0:3]), int(v[3:5]), int(v[5:7])
+    return yyy >= 100 and 1 <= mm <= 12 and 1 <= dd <= 31
+
+
 def extract_version(*texts):
     """從多個字串裡抽民國版本日期，回傳 7 碼（如 1150522）。
-    支援 1150522 / 115.05.22 / 115/05/22 / 115-05-22。"""
+    支援 1150522 / 115.05.22 / 115/05/22 / 115-05-22，並驗證月日合理，
+    避免把下載連結裡的內部編號（如 dl-1548463）誤當成日期。"""
     for t in texts:
         if not t:
             continue
         s = t.replace(" ", "")
+        # 點/斜線/連字號分隔的民國日期（最可靠）
         m = re.search(r'(\d{3})[.\-/](\d{1,2})[.\-/](\d{1,2})', s)
         if m:
             y, mo, d = m.groups()
-            return f"{int(y):03d}{int(mo):02d}{int(d):02d}"
-        m = re.search(r'(\d{7})', s)
-        if m:
-            return m.group(1)
+            cand = f"{int(y):03d}{int(mo):02d}{int(d):02d}"
+            if _valid_minguo(cand):
+                return cand
+        # 連續 7 碼，但要通過月日合理性檢查（擋掉內部編號）
+        for m in re.finditer(r'(\d{7})', s):
+            if _valid_minguo(m.group(1)):
+                return m.group(1)
     return None
 
 
@@ -152,14 +165,16 @@ def get_latest_pdf_info():
             score += 1
         if score == 0:
             continue
-        ver = extract_version(text, href, page_version)
-        candidates.append((score, ver, _abs_url(href), text))
+        candidates.append((score, _abs_url(href), text))
 
     if candidates:
         candidates.sort(key=lambda c: c[0], reverse=True)
-        _, version_str, pdf_url, text = candidates[0]
-        version_str = version_str or page_version
+        _, pdf_url, text = candidates[0]
+        # 版本一律以頁面「更新日期」為準（如標題「115.05.22更新」），
+        # 不用下載連結裡的內部編號；連結文字只在頁面抽不到時才退而求其次。
+        version_str = page_version or extract_version(text)
         print(f"🔗 命中連結：{text or '(無文字)'} → {pdf_url}")
+        print(f"📅 採用版本：{version_str}")
         return pdf_url, version_str
 
     # ── 找不到：印出診斷資訊，讓我們從 log 看健保署現在的真實結構 ──
