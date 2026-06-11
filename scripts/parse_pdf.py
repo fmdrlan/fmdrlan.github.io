@@ -230,7 +230,7 @@ def diff_drugs(old: list[dict], new: list[dict]) -> dict:
 
 def write_changelog(new_entries: list[dict], from_version: str = None, to_version: str = None):
     """讀取舊 drugs.json、跟新的 diff、寫入 data/changelog.json"""
-    old_path = Path('data/drugs.json')
+    old_path = Path('public/data/drugs.json')
     if not old_path.exists():
         print("ℹ️  找不到舊 drugs.json，跳過 changelog 產生（首次解析）")
         # 首次解析也寫一個空 changelog，避免前端 fetch 失敗
@@ -239,7 +239,7 @@ def write_changelog(new_entries: list[dict], from_version: str = None, to_versio
             'from_version': from_version, 'to_version': to_version,
             'note': '首次建置，無歷史資料可比對'
         }
-        out = Path('data/changelog.json')
+        out = Path('public/data/changelog.json')
         out.parent.mkdir(exist_ok=True)
         with open(out, 'w', encoding='utf-8') as f:
             json.dump(empty, f, ensure_ascii=False, indent=2)
@@ -256,7 +256,7 @@ def write_changelog(new_entries: list[dict], from_version: str = None, to_versio
     diff['from_version'] = from_version
     diff['to_version'] = to_version
 
-    out = Path('data/changelog.json')
+    out = Path('public/data/changelog.json')
     with open(out, 'w', encoding='utf-8') as f:
         json.dump(diff, f, ensure_ascii=False, indent=2)
 
@@ -268,7 +268,7 @@ def main():
     if len(sys.argv) > 1:
         pdf_path = sys.argv[1]
     else:
-        pdfs = sorted(Path('.').glob('*.pdf')) + sorted(Path('data').glob('*.pdf'))
+        pdfs = sorted(Path('.').glob('*.pdf')) + sorted(Path('public/data').glob('*.pdf'))
         if not pdfs:
             print("❌ 找不到 PDF 檔案")
             sys.exit(1)
@@ -283,7 +283,7 @@ def main():
 
     # 從 last_version.txt 讀舊版本
     from_version = None
-    ver_file = Path('data/last_version.txt')
+    ver_file = Path('public/data/last_version.txt')
     if ver_file.exists():
         from_version = ver_file.read_text(encoding='utf-8').strip() or None
 
@@ -293,7 +293,7 @@ def main():
     # ── 在覆蓋 drugs.json 之前，先 diff 出 changelog ──
     write_changelog(entries, from_version=from_version, to_version=new_version)
 
-    out = Path('data/drugs.json')
+    out = Path('public/data/drugs.json')
     out.parent.mkdir(exist_ok=True)
     with open(out, 'w', encoding='utf-8') as f:
         json.dump(entries, f, ensure_ascii=False, indent=2)

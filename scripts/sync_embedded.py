@@ -14,9 +14,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-LAB_HTML = ROOT / 'lab.html'
-LAB_DICT_JSON = ROOT / 'data' / 'lab_dict.json'
-DX_RULES_JSON = ROOT / 'data' / 'dx_rules.json'
+LAB_HTML = ROOT / 'public' / 'lab.html'
+LAB_DICT_JSON = ROOT / 'public' / 'data' / 'lab_dict.json'
+DX_RULES_JSON = ROOT / 'public' / 'data' / 'dx_rules.json'
 
 def sync():
     if not LAB_HTML.exists():
