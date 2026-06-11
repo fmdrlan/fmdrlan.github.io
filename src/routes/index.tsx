@@ -51,11 +51,10 @@ function Landing() {
             desc="台灣 2025 / ESC 2024 / AHA 2026 三大指引風險分級與健保給付判斷"
           />
           <ToolCard
-            href="/vaccine.html"
+            href="/vaccine"
             icon={Syringe}
             name="疫苗查詢"
             desc="小兒疫苗時程、成人自費疫苗資訊"
-            badge={<Badge variant="wip">建造中</Badge>}
           />
           <ToolCard
             href="/compare.html"

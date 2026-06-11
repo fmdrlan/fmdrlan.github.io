@@ -4,16 +4,55 @@
   --color-bg: #0d1117;
   --color-bg2: #161b27;
   --color-border: #2d3a52;
+  --color-border-strong: #3d4f6e;
+  --color-surface: #1c2333;
+  --color-surface2: #212840;
   --color-text: #e2e8f4;
   --color-text-muted: #8fa3c0;
   --color-text-dim: #4a5568;
+  --color-text-light: #566880;
   --color-accent: #4a9eff;
+  --color-accent-dim: #1e3a5f;
   --color-yellow: #d4a843;
   --color-green: #3fb950;
   --color-orange: #f0883e;
+  --color-warn: #f85149;
+
+  /* shadcn / Base UI design tokens — alias to our palette */
+  --color-background: #0d1117;
+  --color-foreground: #e2e8f4;
+  --color-card: #161b27;
+  --color-card-foreground: #e2e8f4;
+  --color-popover: #161b27;
+  --color-popover-foreground: #e2e8f4;
+  --color-primary: #4a9eff;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #161b27;
+  --color-secondary-foreground: #e2e8f4;
+  --color-muted: #161b27;
+  --color-muted-foreground: #8fa3c0;
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #f85149;
+  --color-destructive-foreground: #ffffff;
+  --color-input: #161b27;
+  --color-ring: #4a9eff;
+  --radius: 0.5rem;
 
   --font-sans: 'Noto Sans TC', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  --animate-pulse-green: pulse-green 2s ease-in-out infinite;
+  --animate-pulse-orange: pulse-orange 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 8px rgba(63, 185, 80, 0.4); }
+  50% { box-shadow: 0 0 16px rgba(63, 185, 80, 0.8); }
+}
+
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 0 8px rgba(240, 136, 62, 0.4); }
+  50% { box-shadow: 0 0 16px rgba(240, 136, 62, 0.8); }
 }
 
 * {
