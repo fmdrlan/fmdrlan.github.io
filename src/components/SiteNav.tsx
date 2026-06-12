@@ -7,11 +7,11 @@ type NavItem = { href: string; label: string; icon: LucideIcon }
 
 const NAV_ITEMS: NavItem[] = [
   { href: '/drugs', label: '藥品給付查詢', icon: Search },
-  { href: '/lab.html', label: '檢驗報告解讀', icon: FlaskConical },
-  { href: '/lipid.html', label: '高血脂風險評估', icon: TrendingUp },
+  { href: '/lab', label: '檢驗報告解讀', icon: FlaskConical },
+  { href: '/lipid', label: '高血脂風險評估', icon: TrendingUp },
   { href: '/vaccine', label: '疫苗查詢', icon: Syringe },
-  { href: '/compare.html', label: '藥物類別比較', icon: Scale },
-  { href: '/obesity.html', label: '門診問診', icon: Weight },
+  { href: '/compare', label: '藥物類別比較', icon: Scale },
+  { href: '/obesity', label: '門診問診', icon: Weight },
 ]
 
 function isReactRoute(href: string) {
@@ -63,7 +63,7 @@ export function SiteNav() {
           <NavLink
             key={item.href}
             href={item.href}
-            className={`flex items-center gap-[7px] whitespace-nowrap border-b-2 px-4 py-2.5 text-sm no-underline transition-colors ${
+            className={`flex items-center gap-[7px] whitespace-nowrap border-b-2 px-4 pt-3 pb-2.5 text-sm no-underline transition-colors ${
               isActive
                 ? 'border-accent text-accent'
                 : 'border-transparent text-text-muted hover:text-text'

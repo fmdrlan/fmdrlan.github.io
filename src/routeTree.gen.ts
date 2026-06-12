@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaccineRouteImport } from './routes/vaccine'
+import { Route as ObesityRouteImport } from './routes/obesity'
+import { Route as LipidRouteImport } from './routes/lipid'
+import { Route as LabRouteImport } from './routes/lab'
 import { Route as DrugsRouteImport } from './routes/drugs'
+import { Route as CompareRouteImport } from './routes/compare'
 import { Route as IndexRouteImport } from './routes/index'
 
 const VaccineRoute = VaccineRouteImport.update({
@@ -18,9 +22,29 @@ const VaccineRoute = VaccineRouteImport.update({
   path: '/vaccine',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObesityRoute = ObesityRouteImport.update({
+  id: '/obesity',
+  path: '/obesity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LipidRoute = LipidRouteImport.update({
+  id: '/lipid',
+  path: '/lipid',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabRoute = LabRouteImport.update({
+  id: '/lab',
+  path: '/lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DrugsRoute = DrugsRouteImport.update({
   id: '/drugs',
   path: '/drugs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,31 +55,62 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
   '/drugs': typeof DrugsRoute
+  '/lab': typeof LabRoute
+  '/lipid': typeof LipidRoute
+  '/obesity': typeof ObesityRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
   '/drugs': typeof DrugsRoute
+  '/lab': typeof LabRoute
+  '/lipid': typeof LipidRoute
+  '/obesity': typeof ObesityRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
   '/drugs': typeof DrugsRoute
+  '/lab': typeof LabRoute
+  '/lipid': typeof LipidRoute
+  '/obesity': typeof ObesityRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/drugs' | '/vaccine'
+  fullPaths:
+    | '/'
+    | '/compare'
+    | '/drugs'
+    | '/lab'
+    | '/lipid'
+    | '/obesity'
+    | '/vaccine'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/drugs' | '/vaccine'
-  id: '__root__' | '/' | '/drugs' | '/vaccine'
+  to: '/' | '/compare' | '/drugs' | '/lab' | '/lipid' | '/obesity' | '/vaccine'
+  id:
+    | '__root__'
+    | '/'
+    | '/compare'
+    | '/drugs'
+    | '/lab'
+    | '/lipid'
+    | '/obesity'
+    | '/vaccine'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompareRoute: typeof CompareRoute
   DrugsRoute: typeof DrugsRoute
+  LabRoute: typeof LabRoute
+  LipidRoute: typeof LipidRoute
+  ObesityRoute: typeof ObesityRoute
   VaccineRoute: typeof VaccineRoute
 }
 
@@ -68,11 +123,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VaccineRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/obesity': {
+      id: '/obesity'
+      path: '/obesity'
+      fullPath: '/obesity'
+      preLoaderRoute: typeof ObesityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lipid': {
+      id: '/lipid'
+      path: '/lipid'
+      fullPath: '/lipid'
+      preLoaderRoute: typeof LipidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab': {
+      id: '/lab'
+      path: '/lab'
+      fullPath: '/lab'
+      preLoaderRoute: typeof LabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/drugs': {
       id: '/drugs'
       path: '/drugs'
       fullPath: '/drugs'
       preLoaderRoute: typeof DrugsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,7 +170,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompareRoute: CompareRoute,
   DrugsRoute: DrugsRoute,
+  LabRoute: LabRoute,
+  LipidRoute: LipidRoute,
+  ObesityRoute: ObesityRoute,
   VaccineRoute: VaccineRoute,
 }
 export const routeTree = rootRouteImport

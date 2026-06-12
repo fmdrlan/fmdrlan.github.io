@@ -24,6 +24,8 @@ function Landing() {
           <img
             src="/assets/logo.png"
             alt="DR. LAN — 成大家醫科"
+            width={1254}
+            height={1254}
             className="block h-auto w-[360px] max-w-[90%]"
           />
         </div>
@@ -38,14 +40,14 @@ function Landing() {
             desc="全文搜尋健保給付條件"
           />
           <ToolCard
-            href="/lab.html"
+            href="/lab"
             icon={FlaskConical}
             name="檢驗報告解讀"
             desc="貼上成大 LIS 檢驗結果，自動辨識項目，產生可複製的 Objective 與 Diagnosis"
             badge={<Badge variant="new">NEW</Badge>}
           />
           <ToolCard
-            href="/lipid.html"
+            href="/lipid"
             icon={TrendingUp}
             name="高血脂風險評估"
             desc="台灣 2025 / ESC 2024 / AHA 2026 三大指引風險分級與健保給付判斷"
@@ -55,16 +57,17 @@ function Landing() {
             icon={Syringe}
             name="疫苗查詢"
             desc="小兒疫苗時程、成人自費疫苗資訊"
+            badge={<Badge variant="wip">建造中</Badge>}
           />
           <ToolCard
-            href="/compare.html"
+            href="/compare"
             icon={Scale}
             name="藥物類別比較"
             desc="同類藥之仿單適應症、指引建議比較"
             badge={<Badge variant="wip">建造中</Badge>}
           />
           <ToolCard
-            href="/obesity.html"
+            href="/obesity"
             icon={Weight}
             name="門診問診工具"
             desc="結構化問診表，自動生成病歷文字及症狀導向 order 提示。僅支援肥胖議題"

@@ -104,12 +104,14 @@ function DrugsPage() {
     }
   }, [])
 
-  // ── Strip ?q= from URL after initial use ──
+  // ── Sync query → URL (?q=) so searches are shareable ──
   useEffect(() => {
-    if (urlQuery) {
-      navigate({ to: '/drugs', search: {}, replace: true })
-    }
-  }, [urlQuery, navigate])
+    navigate({
+      to: '/drugs',
+      search: debouncedQuery ? { q: debouncedQuery } : {},
+      replace: true,
+    })
+  }, [debouncedQuery, navigate])
 
   // ── Debounce query ──
   useEffect(() => {
@@ -261,13 +263,12 @@ function DrugsPage() {
   return (
     <>
       <SiteNav />
-      <main className="mx-auto max-w-[860px] px-6 pt-5 pb-16">
-        <div className="mb-5 flex items-start gap-3">
-          <span className="text-2xl">💊</span>
-          <div>
-            <h1 className="mb-1 text-[22px] font-bold text-text">藥品給付規定查詢</h1>
-            <p className="text-[13px] text-text-muted">全民健康保險藥品給付規定</p>
-          </div>
+      <main className="mx-auto max-w-[860px] px-6 py-8 max-md:px-3 max-md:py-5">
+        <div className="mb-5 min-w-0">
+          <h1 className="text-[22px] font-bold leading-tight text-text">藥品給付規定查詢</h1>
+          <p className="mt-1.5 max-w-[640px] text-[13px] leading-relaxed text-text-muted">
+            全民健康保險藥品給付規定
+          </p>
         </div>
 
         <SearchBar
@@ -399,7 +400,7 @@ function TipChips({ onPick }: { onPick: (q: string) => void }) {
             key={t}
             type="button"
             onClick={() => onPick(t)}
-            className="cursor-pointer rounded-full border border-border bg-surface px-3.5 py-1 font-mono text-sm text-text-muted transition-all hover:border-accent/40 hover:bg-accent-dim hover:text-accent"
+            className="cursor-pointer rounded-full border border-border bg-surface px-3.5 py-1 text-sm text-text-muted transition-all hover:border-accent/40 hover:bg-accent-dim hover:text-accent"
           >
             {t}
           </button>
@@ -456,14 +457,18 @@ function DrugCard({
       id={`drug-${drug.id}`}
       className={`overflow-hidden rounded-xl border bg-surface transition-colors ${
         expanded
-          ? 'border-accent/40 shadow-[0_0_0_1px_rgba(74,158,255,0.08)]'
+          ? 'border-accent/40 shadow-[0_0_0_1px_rgba(43,184,201,0.08)]'
           : 'border-border hover:border-border-strong'
       }`}
     >
       <button
         type="button"
-        onClick={onToggle}
-        className="flex w-full items-start gap-3 bg-transparent px-4 py-3.5 text-left transition-colors hover:bg-surface2"
+        onClick={() => {
+          const sel = window.getSelection()
+          if (sel && !sel.isCollapsed && sel.toString().length > 0) return
+          onToggle()
+        }}
+        className="flex w-full cursor-pointer select-text items-start gap-3 bg-transparent px-4 py-3.5 text-left transition-colors hover:bg-surface2"
       >
         {sec && (
           <span className="mt-0.5 flex-shrink-0 rounded-md border border-accent/25 bg-accent-dim px-[7px] py-[3px] font-mono text-[10px] font-semibold text-accent">
@@ -784,7 +789,7 @@ function RelatedDrugs({
         <Link2 className="h-3.5 w-3.5" strokeWidth={1.8} />
         <span>相關條目</span>
       </div>
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-col gap-1.5">
         {related.map((d) => {
           const sec = getSectionFromTitle(d.title)
           return (
@@ -795,14 +800,14 @@ function RelatedDrugs({
                 e.stopPropagation()
                 onClick(d.id)
               }}
-              className="flex items-center gap-1.5 rounded-md border border-border bg-bg2 px-2 py-1 text-xs text-text-muted transition-all hover:border-accent/40 hover:bg-accent-dim hover:text-accent"
+              className="group flex w-full items-center gap-2.5 rounded-lg border border-border bg-bg2 px-3 py-2 text-left text-sm text-text-muted transition-all hover:border-accent/40 hover:bg-accent-dim hover:text-text"
             >
               {sec && (
-                <span className="rounded-sm bg-accent-dim px-1 py-px font-mono text-[10px] text-accent">
+                <span className="flex-shrink-0 rounded-md border border-accent/25 bg-accent-dim px-2 py-0.5 font-mono text-[11px] font-semibold text-accent">
                   {sec}
                 </span>
               )}
-              <span>{stripSection(d.title)}</span>
+              <span className="flex-1 truncate">{stripSection(d.title)}</span>
             </button>
           )
         })}

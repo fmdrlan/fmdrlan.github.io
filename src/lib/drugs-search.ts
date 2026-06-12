@@ -107,8 +107,8 @@ export function findRelated(drug: Drug, allDrugs: Drug[]): Drug[] {
 
 /** Extract leading section number from a drug title, e.g. "2.6.1.史塔汀..." → "2.6.1" */
 export function getSectionFromTitle(title: string): string {
-  const m = title.match(/^([\d.]+?)\.?(?=\D|$)/)
-  return m ? m[1].replace(/\.$/, '') : ''
+  const m = title.match(/^\d+(?:\.\d+)*/)
+  return m ? m[0] : ''
 }
 
 /** Strip leading section number from title for display, e.g. "2.6.1.史塔汀..." → "史塔汀..." */
