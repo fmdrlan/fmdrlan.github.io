@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 type NavItem = { href: string; label: string; icon: LucideIcon }
 
 const NAV_ITEMS: NavItem[] = [
-  { href: '/drugs.html', label: '藥品給付查詢', icon: Search },
+  { href: '/drugs', label: '藥品給付查詢', icon: Search },
   { href: '/lab.html', label: '檢驗報告解讀', icon: FlaskConical },
   { href: '/lipid.html', label: '高血脂風險評估', icon: TrendingUp },
   { href: '/vaccine', label: '疫苗查詢', icon: Syringe },

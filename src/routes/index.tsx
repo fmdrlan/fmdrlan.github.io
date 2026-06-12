@@ -32,7 +32,7 @@ function Landing() {
 
         <nav className="mb-12 flex flex-col gap-2.5" aria-label="工具列表">
           <ToolCard
-            href="/drugs.html"
+            href="/drugs"
             icon={Search}
             name="健保藥品給付規定查詢"
             desc="全文搜尋健保給付條件"

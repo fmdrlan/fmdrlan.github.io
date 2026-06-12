@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaccineRouteImport } from './routes/vaccine'
+import { Route as DrugsRouteImport } from './routes/drugs'
 import { Route as IndexRouteImport } from './routes/index'
 
 const VaccineRoute = VaccineRouteImport.update({
   id: '/vaccine',
   path: '/vaccine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DrugsRoute = DrugsRouteImport.update({
+  id: '/drugs',
+  path: '/drugs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/drugs': typeof DrugsRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/drugs': typeof DrugsRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/drugs': typeof DrugsRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/vaccine'
+  fullPaths: '/' | '/drugs' | '/vaccine'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/vaccine'
-  id: '__root__' | '/' | '/vaccine'
+  to: '/' | '/drugs' | '/vaccine'
+  id: '__root__' | '/' | '/drugs' | '/vaccine'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DrugsRoute: typeof DrugsRoute
   VaccineRoute: typeof VaccineRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/vaccine'
       fullPath: '/vaccine'
       preLoaderRoute: typeof VaccineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/drugs': {
+      id: '/drugs'
+      path: '/drugs'
+      fullPath: '/drugs'
+      preLoaderRoute: typeof DrugsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DrugsRoute: DrugsRoute,
   VaccineRoute: VaccineRoute,
 }
 export const routeTree = rootRouteImport
