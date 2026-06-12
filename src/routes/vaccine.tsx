@@ -140,7 +140,7 @@ function PedsSection() {
       <Legend />
 
       <div className="overflow-x-auto pb-3">
-        <table className="w-full min-w-[900px] border-separate border-spacing-0 overflow-hidden rounded-[10px] border border-border">
+        <table className="w-full min-w-[900px] border-separate border-spacing-0 overflow-hidden rounded-[10px] border border-border [&_td]:border-b [&_td]:border-r [&_td]:border-border [&_td:last-child]:border-r-0 [&_th]:border-b [&_th]:border-r [&_th]:border-border [&_th:last-child]:border-r-0 [&_tbody_tr:last-child_td]:border-b-0">
           <thead>
             <tr>
               <th className="sticky left-0 z-10 w-[160px] min-w-[140px] bg-surface px-3 py-2.5 text-left align-middle text-xs font-semibold text-text-muted">
@@ -237,7 +237,7 @@ function VaccineRow({
 }) {
   return (
     <tr>
-      <td className="sticky left-0 z-[5] !border-r border-border-strong bg-bg2 px-3 py-2.5 align-middle text-[13px] font-medium leading-tight">
+      <td className="sticky left-0 z-[5] !border-r !border-border-strong bg-bg2 px-3 py-2.5 align-middle text-[13px] font-medium leading-tight">
         <span className="block">
           {vax.name.split('\n').map((line, idx, arr) => (
             <span key={idx}>

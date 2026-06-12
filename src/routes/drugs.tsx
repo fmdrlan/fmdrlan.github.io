@@ -45,35 +45,60 @@ function DrugsPage() {
   // ── Load data ──
   useEffect(() => {
     let cancelled = false
-    ;(async () => {
+
+    async function fetchJson<T>(url: string): Promise<T | null> {
       try {
-        const [dRes, iRes, vRes, cRes] = await Promise.all([
-          fetch('/data/drugs.json'),
-          fetch('/data/drug_items.json').catch(() => null),
-          fetch('/data/last_version.txt').catch(() => null),
-          fetch('/data/last_check.txt').catch(() => null),
-        ])
-        if (cancelled) return
-        if (!dRes.ok) throw new Error(`drugs.json: ${dRes.status}`)
-        setAllDrugs(await dRes.json())
-        if (iRes?.ok) setDrugItems(await iRes.json())
-        if (vRes?.ok) {
-          const ver = (await vRes.text()).trim()
-          if (ver.length === 7) {
-            const rocY = parseInt(ver.slice(0, 3), 10)
-            const m = ver.slice(3, 5)
-            const d = ver.slice(5, 7)
-            setVersion(`${rocY + 1911}/${m}/${d}`)
-          }
-        }
-        if (cRes?.ok) {
-          const t = (await cRes.text()).trim()
-          setLastCheck(t.replace(/-/g, '/'))
-        }
+        const r = await fetch(url)
+        if (!r.ok) return null
+        const ct = r.headers.get('content-type') ?? ''
+        if (!ct.includes('json')) return null
+        return await r.json()
+      } catch {
+        return null
+      }
+    }
+    async function fetchText(url: string): Promise<string | null> {
+      try {
+        const r = await fetch(url)
+        if (!r.ok) return null
+        return await r.text()
+      } catch {
+        return null
+      }
+    }
+
+    ;(async () => {
+      // drugs.json is the only required fetch
+      try {
+        const r = await fetch('/data/drugs.json')
+        if (!r.ok) throw new Error(`drugs.json: ${r.status}`)
+        const data = await r.json()
+        if (!cancelled) setAllDrugs(data)
       } catch (e: any) {
         if (!cancelled) setLoadError(e?.message ?? String(e))
+        return
       }
+
+      const [items, ver, chk] = await Promise.all([
+        fetchJson<DrugItem[]>('/data/drug_items.json'),
+        fetchText('/data/last_version.txt'),
+        fetchText('/data/last_check.txt'),
+      ])
+      if (cancelled) return
+
+      if (items) setDrugItems(items)
+      if (ver) {
+        const v = ver.trim()
+        if (v.length === 7) {
+          const rocY = parseInt(v.slice(0, 3), 10)
+          const m = v.slice(3, 5)
+          const d = v.slice(5, 7)
+          setVersion(`${rocY + 1911}/${m}/${d}`)
+        }
+      }
+      if (chk) setLastCheck(chk.trim().replace(/-/g, '/'))
     })()
+
     return () => {
       cancelled = true
     }
