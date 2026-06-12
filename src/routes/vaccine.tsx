@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { MessageSquare, CircleCheck } from 'lucide-react'
+import { MessageSquare, CircleCheck, Baby, CircleUserRound, Search } from 'lucide-react'
 import { SiteNav } from '@/components/SiteNav'
+import { DateOfBirthPicker } from '@/components/DateOfBirthPicker'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
 import {
   TIME_COLS,
@@ -28,60 +30,40 @@ function VaccinePage() {
   return (
     <>
       <SiteNav />
-      <div className="mx-auto max-w-[1200px] px-6 py-6 max-md:px-3 max-md:py-4">
-        <div className="mb-5 flex items-start gap-3">
-          <span className="text-2xl">💉</span>
-          <div>
-            <h1 className="mb-1 text-[22px] font-bold text-text">疫苗查詢</h1>
-            <p className="text-[13px] text-text-muted">
-              查詢小兒（0–18 歲）與成人疫苗接種建議。輸入出生日期，系統會列出該年齡層應接種、未接種的疫苗。
-            </p>
-          </div>
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-6 py-8 max-md:px-3 max-md:py-5">
+        <div className="min-w-0">
+          <h1 className="text-[22px] font-bold leading-tight text-text">疫苗查詢</h1>
+          <p className="mt-1.5 max-w-[640px] text-[13px] leading-relaxed text-text-muted">
+            查詢小兒（0–18 歲）與成人疫苗接種建議。輸入出生日期，系統會列出該年齡層應接種、未接種的疫苗。
+          </p>
         </div>
 
-        <ModeButtons mode={mode} onChange={setMode} />
-
-        {mode === 'peds' ? <PedsSection /> : <AdultSection />}
+        <Tabs
+          value={mode}
+          onValueChange={(v) => setMode(v as 'peds' | 'adult')}
+          className="gap-6"
+        >
+          <TabsList variant="line" className="w-full justify-start border-b border-border">
+            <TabsTrigger value="peds" className="flex-none gap-1.5">
+              <Baby className="h-[18px] w-[18px]" strokeWidth={1.8} />
+              小兒（0–18歲）
+            </TabsTrigger>
+            <TabsTrigger value="adult" className="flex-none gap-1.5">
+              <CircleUserRound className="h-[18px] w-[18px]" strokeWidth={1.8} />
+              成人（18歲以上）
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="peds">
+            <PedsSection />
+          </TabsContent>
+          <TabsContent value="adult">
+            <AdultSection />
+          </TabsContent>
+        </Tabs>
       </div>
 
       <FeedbackFooter />
     </>
-  )
-}
-
-// ────────────────────────────────────────────────────────
-//  Mode switch (peds / adult)
-// ────────────────────────────────────────────────────────
-function ModeButtons({
-  mode,
-  onChange,
-}: {
-  mode: 'peds' | 'adult'
-  onChange: (m: 'peds' | 'adult') => void
-}) {
-  const base =
-    'rounded-lg border px-5 py-2 text-sm font-medium transition-colors'
-  const inactive =
-    'border-border bg-surface text-text-muted hover:border-border-strong hover:text-text'
-  const active = 'border-accent bg-accent-dim text-accent'
-
-  return (
-    <div className="mb-7 flex gap-2">
-      <button
-        type="button"
-        onClick={() => onChange('peds')}
-        className={`${base} ${mode === 'peds' ? active : inactive}`}
-      >
-        👶 小兒（0–18歲）
-      </button>
-      <button
-        type="button"
-        onClick={() => onChange('adult')}
-        className={`${base} ${mode === 'adult' ? active : inactive}`}
-      >
-        🧑 成人（18歲以上）
-      </button>
-    </div>
   )
 }
 
@@ -123,23 +105,22 @@ function PedsSection() {
   }, [ageMonths])
 
   return (
-    <div>
-      <div className="mb-7 flex flex-wrap items-center gap-4">
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-center gap-3">
         <span className="whitespace-nowrap text-sm text-text-muted">出生日期</span>
-        <Input
-          type="date"
-          value={dob}
-          onChange={(e) => setDob(e.target.value)}
-          className="!w-auto !rounded-lg !border-border !bg-surface !px-3.5 !py-2 !text-[15px] !text-text focus-visible:!border-accent focus-visible:!ring-accent/15"
-        />
-        <div className="rounded-lg border border-border bg-surface px-4 py-2 font-mono text-sm font-semibold text-accent">
-          {ageMonths === null ? '—' : `今日月齡：${formatAge(ageMonths)}`}
+        <DateOfBirthPicker value={dob} onChange={setDob} />
+        <div
+          className={`rounded-lg border border-border bg-surface px-4 py-2 font-mono text-sm font-semibold ${
+            ageMonths === null ? 'text-text-light' : 'text-accent'
+          }`}
+        >
+          {ageMonths === null ? '尚未選擇' : `今日月齡：${formatAge(ageMonths)}`}
         </div>
       </div>
 
       <Legend />
 
-      <div className="overflow-x-auto pb-3">
+      <div className="-mt-2 overflow-x-auto">
         <table className="w-full min-w-[900px] border-separate border-spacing-0 overflow-hidden rounded-[10px] border border-border [&_td]:border-b [&_td]:border-r [&_td]:border-border [&_td:last-child]:border-r-0 [&_th]:border-b [&_th]:border-r [&_th]:border-border [&_th:last-child]:border-r-0 [&_tbody_tr:last-child_td]:border-b-0">
           <thead>
             <tr>
@@ -185,7 +166,7 @@ function Legend() {
     { color: 'bg-surface2 border border-border', label: '尚未到期' },
   ]
   return (
-    <div className="mb-5 flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-4">
       {items.map((it, i) => (
         <div key={i} className="flex items-center gap-[7px] text-[13px] text-text-muted">
           <div className={`h-3 w-3 rounded-full ${it.color}`} />
@@ -237,7 +218,7 @@ function VaccineRow({
 }) {
   return (
     <tr>
-      <td className="sticky left-0 z-[5] !border-r !border-border-strong bg-bg2 px-3 py-2.5 align-middle text-[13px] font-medium leading-tight">
+      <td className="sticky left-0 z-[5] !border-r !border-border-strong bg-bg2 px-3 py-2.5 align-middle text-[13px] font-medium">
         <span className="block">
           {vax.name.split('\n').map((line, idx, arr) => (
             <span key={idx}>
@@ -247,7 +228,7 @@ function VaccineRow({
           ))}
         </span>
         <span
-          className={`mt-[3px] inline-block rounded border px-1.5 py-[1px] text-[10px] font-semibold tracking-wide ${
+          className={`mt-1 inline-block rounded border px-1.5 py-[1px] text-[10px] font-semibold tracking-wide ${
             vax.type === 'pub'
               ? 'border-green/35 bg-green/12 text-green'
               : 'border-orange/35 bg-orange/12 text-orange'
@@ -325,13 +306,19 @@ function AdultSection() {
   return (
     <div>
       <div className="mb-3">
-        <Input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="🔍 搜尋疫苗名稱..."
-          className="!w-full !max-w-[400px] !rounded-lg !border-border !bg-surface !px-3.5 !py-2 !text-[15px] !text-text focus-visible:!border-accent focus-visible:!ring-accent/15"
-        />
+        <div className="relative w-full max-w-[400px]">
+          <Search
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-light"
+            strokeWidth={1.8}
+          />
+          <Input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="搜尋疫苗名稱..."
+            className="!w-full !rounded-lg !border-border !bg-surface !py-2 !pl-9 !pr-3.5 !text-[15px] !text-text focus-visible:!border-accent focus-visible:!ring-accent/15"
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-[260px_1fr] gap-5 max-md:grid-cols-1">
@@ -484,39 +471,31 @@ function DetailSection({
 // ────────────────────────────────────────────────────────
 function SpecialPopulations() {
   const [activeId, setActiveId] = useState(SPECIAL_POPULATIONS[0].id)
-  const active =
-    SPECIAL_POPULATIONS.find((p) => p.id === activeId) ?? SPECIAL_POPULATIONS[0]
 
   return (
-    <div className="mt-9 border-t border-border pt-7">
-      <div className="mb-1.5 flex items-center gap-2.5">
+    <div className="mt-9 flex flex-col gap-4 border-t border-border pt-7">
+      <div>
         <h2 className="text-[20px] font-semibold text-text">特殊族群速查</h2>
-      </div>
-      <div className="mb-4 text-[13px] text-text-muted">
-        針對特定族群與一般成人時程不同之疫苗建議；點選下方頁籤切換族群。
-      </div>
-
-      <div className="mb-4 flex gap-2 overflow-x-auto border-b border-border">
-        {SPECIAL_POPULATIONS.map((p) => {
-          const isActive = p.id === activeId
-          return (
-            <button
-              key={p.id}
-              type="button"
-              onClick={() => setActiveId(p.id)}
-              className={`-mb-px whitespace-nowrap border-b-2 bg-transparent px-4 py-2.5 text-sm font-medium transition-colors ${
-                isActive
-                  ? 'border-accent text-accent'
-                  : 'border-transparent text-text-muted hover:text-text'
-              }`}
-            >
-              {p.icon} {p.name}
-            </button>
-          )
-        })}
+        <p className="mt-1.5 text-[13px] text-text-muted">
+          針對特定族群與一般成人時程不同之疫苗建議；點選下方頁籤切換族群。
+        </p>
       </div>
 
-      <SpecialPopCard pop={active} />
+      <Tabs value={activeId} onValueChange={setActiveId} className="gap-4">
+        <TabsList variant="line" className="w-full justify-start overflow-x-auto border-b border-border">
+          {SPECIAL_POPULATIONS.map((p) => (
+            <TabsTrigger key={p.id} value={p.id} className="flex-none gap-1.5">
+              <span>{p.icon}</span>
+              {p.name}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {SPECIAL_POPULATIONS.map((p) => (
+          <TabsContent key={p.id} value={p.id}>
+            <SpecialPopCard pop={p} />
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   )
 }
