@@ -34,6 +34,7 @@ import {
 } from 'lucide-react'
 import { SiteNav } from '@/components/SiteNav'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { cn } from '@/lib/utils'
 import {
   renderNote,
   renderOrders,
@@ -52,35 +53,45 @@ export const Route = createFileRoute('/obesity')({
   component: ObesityPage,
 })
 
+// ── Shared Tailwind class strings ──
+const SEC = 'mb-3 rounded-[10px] border border-border bg-surface px-5 py-4'
+const H3 =
+  'mb-3.5 flex items-center gap-2 text-[15px] font-semibold text-text [&>svg]:h-4 [&>svg]:w-4 [&>svg]:shrink-0 [&>svg]:text-accent [&>svg]:[stroke-width:1.8]'
+const ROW = 'mb-2.5 flex flex-wrap items-center gap-2 last:mb-0'
+const FL = 'min-w-[88px] text-[13px] text-text-muted max-[600px]:min-w-[70px]'
+const SUBGRID =
+  'grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-2 max-[600px]:grid-cols-2'
+const INPUT =
+  'rounded-md border border-border bg-bg2 px-2.5 py-1.5 text-[14px] text-text transition-colors placeholder:text-text-dim focus:border-accent focus:outline-none'
+const CHK =
+  'inline-flex cursor-pointer select-none items-center gap-1.5 rounded-md border px-3 py-[5px] text-[13.5px] transition-all [&>input]:m-0 [&>input]:cursor-pointer [&>input]:accent-accent'
+const SUBHEADER =
+  'mt-3.5 mb-1.5 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-text-muted first:mt-0'
+const OUTPUT =
+  'max-h-[450px] min-h-[120px] overflow-y-auto whitespace-pre-wrap rounded-md border border-border bg-bg2 px-4 py-3.5 font-mono text-[13px] leading-[1.75] text-text'
+const BTNBAR = 'mt-3 flex flex-wrap gap-2'
+const ACT =
+  'inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border bg-bg2 px-3.5 py-[7px] text-[13px] text-text transition-all hover:border-border-strong hover:bg-surface2 [&>svg]:h-[13px] [&>svg]:w-[13px] [&>svg]:[stroke-width:1.8]'
+const ACT_PRIMARY = 'border-accent bg-accent text-white hover:border-[#45c8d8] hover:bg-[#45c8d8]'
+const PILL =
+  'my-0.5 mr-1 inline-block rounded border border-accent/30 bg-surface px-2.5 py-0.5 font-mono text-xs text-text'
+
+const chkCls = (on: boolean) =>
+  cn(CHK, on ? 'border-accent/50 bg-accent-dim text-accent' : 'border-border bg-bg2 text-text hover:border-border-strong')
+
 // ── Stable field components (module-level so inputs keep focus) ──
-function Chk({
-  checked,
-  label,
-  onToggle,
-}: {
-  checked: boolean
-  label: ReactNode
-  onToggle: () => void
-}) {
+function Chk({ checked, label, onToggle }: { checked: boolean; label: ReactNode; onToggle: () => void }) {
   return (
-    <label className={`chk${checked ? ' active' : ''}`}>
+    <label className={chkCls(checked)}>
       <input type="checkbox" checked={checked} onChange={onToggle} />
       {label}
     </label>
   )
 }
 
-function RadioPill({
-  checked,
-  label,
-  onSelect,
-}: {
-  checked: boolean
-  label: ReactNode
-  onSelect: () => void
-}) {
+function RadioPill({ checked, label, onSelect }: { checked: boolean; label: ReactNode; onSelect: () => void }) {
   return (
-    <label className={`chk${checked ? ' active' : ''}`}>
+    <label className={chkCls(checked)}>
       <input type="radio" checked={checked} onChange={onSelect} />
       {label}
     </label>
@@ -91,23 +102,22 @@ function TextIn({
   value,
   onChange,
   placeholder,
-  className = 'txtin',
-  style,
+  small,
+  className,
 }: {
   value: string
   onChange: (v: string) => void
   placeholder?: string
+  small?: boolean
   className?: string
-  style?: React.CSSProperties
 }) {
   return (
     <input
       type="text"
-      className={className}
+      className={cn(INPUT, small ? 'w-[130px]' : 'w-full', className)}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      style={style}
     />
   )
 }
@@ -116,17 +126,15 @@ function NumIn({
   value,
   onChange,
   step,
-  className = 'numin',
 }: {
   value: string
   onChange: (v: string) => void
   step?: string
-  className?: string
 }) {
   return (
     <input
       type="number"
-      className={className}
+      className={cn(INPUT, 'w-20')}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       step={step}
@@ -144,8 +152,14 @@ function NoteRow({
   placeholder: string
 }) {
   return (
-    <div className="note-input-row">
-      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+    <div className="mt-2.5">
+      <input
+        type="text"
+        className={cn(INPUT, 'w-full')}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+      />
     </div>
   )
 }
@@ -162,14 +176,27 @@ function Sec({
   children: ReactNode
 }) {
   return (
-    <div className="sec">
-      <h3>
+    <div className={SEC}>
+      <h3 className={H3}>
         {icon}
         {title}
         {extra}
       </h3>
       {children}
     </div>
+  )
+}
+
+function CopyFb({ show }: { show: boolean }) {
+  return (
+    <span
+      className={cn(
+        'ml-auto font-mono text-[11px] uppercase tracking-[0.05em] text-green transition-opacity',
+        show ? 'opacity-100' : 'opacity-0',
+      )}
+    >
+      已複製
+    </span>
   )
 }
 
@@ -325,7 +352,6 @@ function ObesityPage() {
   const bmi = useMemo(() => computeBmi(bmiHeight, bmiWt), [bmiHeight, bmiWt])
   const wNote = useMemo(() => waistNote(sex, text['waist'] ?? ''), [sex, text])
 
-  // Esc closes BMI modal
   useEffect(() => {
     if (!bmiOpen) return
     const onKey = (e: KeyboardEvent) => {
@@ -362,7 +388,7 @@ function ObesityPage() {
   }
 
   const subgrid = (items: Item[]) => (
-    <div className="subgrid">
+    <div className={SUBGRID}>
       {items.filter(showItem).map((it) => (
         <Chk key={it.f} checked={checks.has(it.f)} label={it.label} onToggle={() => toggle(it.f)} />
       ))}
@@ -370,10 +396,10 @@ function ObesityPage() {
   )
 
   return (
-    <div className="obesity-page">
+    <>
       <SiteNav />
 
-      <div className="mx-auto max-w-[1100px] px-6 pt-8 max-md:px-3 max-md:pt-5">
+      <div className="mx-auto max-w-[1100px] px-6 pt-8 pb-10 max-md:px-4 max-md:pt-5">
         <div className="mb-5 min-w-0">
           <h1 className="text-[22px] font-bold leading-tight text-text">門診結構化問診</h1>
           <p className="mt-1.5 max-w-[640px] text-[13px] leading-relaxed text-text-muted">
@@ -381,23 +407,24 @@ function ObesityPage() {
           </p>
         </div>
 
-        <div className="topic-selector" aria-label="問診議題">
-          <span className="topic-label">議題</span>
-          <button className="topic-btn active" data-topic="obesity">
+        <div className="mb-[18px] flex flex-wrap items-center gap-2" aria-label="問診議題">
+          <span className="mr-1 font-mono text-[11px] uppercase tracking-[0.08em] text-text-muted">議題</span>
+          <button className="cursor-pointer rounded-md border border-accent/40 bg-accent-dim px-3.5 py-1.5 text-[13px] text-accent">
             肥胖
           </button>
-          <button className="topic-btn disabled" disabled title="待加入">
-            DM 控制
-          </button>
-          <button className="topic-btn disabled" disabled title="待加入">
-            高血壓
-          </button>
-          <button className="topic-btn disabled" disabled title="待加入">
-            戒菸諮詢
-          </button>
+          {['DM 控制', '高血壓', '戒菸諮詢'].map((t) => (
+            <button
+              key={t}
+              disabled
+              title="待加入"
+              className="cursor-not-allowed rounded-md border border-border bg-surface px-3.5 py-1.5 text-[13px] text-text-muted opacity-40"
+            >
+              {t}
+            </button>
+          ))}
         </div>
 
-        <div className="disclaimer-banner">
+        <div className="mb-[18px] flex items-start gap-2.5 rounded-lg border border-yellow/25 bg-yellow/[0.06] px-3.5 py-2.5 text-[12.5px] leading-[1.7] text-[#d8c08a] [&_strong]:text-[#e8d8a8] [&>svg]:mt-0.5 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:shrink-0 [&>svg]:text-yellow [&>svg]:[stroke-width:1.8]">
           <AlertTriangle />
           <div>
             <strong>使用提醒：</strong>本工具為醫師端輔助記錄使用。產出之病歷文字與檢驗建議僅供臨床參考，
@@ -412,104 +439,75 @@ function ObesityPage() {
           className="mb-[18px]"
         >
           <TabsList variant="line" className="w-full justify-start border-b border-border">
-            <TabsTrigger value="intake" className="flex-none data-active:text-accent after:bg-accent">
+            <TabsTrigger value="intake" className="flex-none">
               <ClipboardList />
               初診評估
             </TabsTrigger>
-            <TabsTrigger value="followup" className="flex-none data-active:text-accent after:bg-accent">
+            <TabsTrigger value="followup" className="flex-none">
               <CalendarDays />
               回診追蹤
             </TabsTrigger>
           </TabsList>
         </Tabs>
-      </div>
 
-      <div className="form-wrap">
         {/* ============= 初診 ============= */}
         {mode === 'intake' && (
           <div>
             <Sec icon={<User />} title="性別">
-              <div className="row">
+              <div className={ROW}>
                 <RadioPill checked={sex === '男'} label="男" onSelect={() => setRadio('sex', '男')} />
                 <RadioPill checked={sex === '女'} label="女" onSelect={() => setRadio('sex', '女')} />
               </div>
             </Sec>
 
             <Sec icon={<Target />} title="減重動機與目標">
-              <div className="row">
-                <label className="field-label">就診動機</label>
+              <div className={ROW}>
+                <label className={FL}>就診動機</label>
                 <TextIn
                   value={text['motivation'] ?? ''}
                   onChange={(v) => setT('motivation', v)}
                   placeholder="健康/外觀/共病改善/其他"
-                  style={{ flex: 1 }}
+                  className="flex-1"
                 />
               </div>
-              <div className="row">
-                <label className="field-label">目標體重</label>
+              <div className={ROW}>
+                <label className={FL}>目標體重</label>
                 <NumIn value={text['goal-wt'] ?? ''} onChange={(v) => setT('goal-wt', v)} step="0.1" /> kg
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  期望時程
-                </label>
-                <TextIn
-                  className="smallin"
-                  value={text['goal-time'] ?? ''}
-                  onChange={(v) => setT('goal-time', v)}
-                  placeholder="例：6個月"
-                />
+                <label className={cn(FL, 'ml-3')}>期望時程</label>
+                <TextIn small value={text['goal-time'] ?? ''} onChange={(v) => setT('goal-time', v)} placeholder="例：6個月" />
               </div>
               <NoteRow value={text['goal-note'] ?? ''} onChange={(v) => setT('goal-note', v)} placeholder="其他備註" />
             </Sec>
 
             <Sec icon={<Clock />} title="體重變化史">
-              <div className="row">
-                <label className="field-label">最高體重</label>
+              <div className={ROW}>
+                <label className={FL}>最高體重</label>
                 <NumIn value={text['max-wt'] ?? ''} onChange={(v) => setT('max-wt', v)} step="0.1" /> kg
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  何時
-                </label>
-                <TextIn
-                  className="smallin"
-                  value={text['max-wt-when'] ?? ''}
-                  onChange={(v) => setT('max-wt-when', v)}
-                  placeholder="例：去年"
-                />
+                <label className={cn(FL, 'ml-3')}>何時</label>
+                <TextIn small value={text['max-wt-when'] ?? ''} onChange={(v) => setT('max-wt-when', v)} placeholder="例：去年" />
               </div>
-              <div className="row">
-                <label className="field-label">最低體重</label>
+              <div className={ROW}>
+                <label className={FL}>最低體重</label>
                 <NumIn value={text['min-wt'] ?? ''} onChange={(v) => setT('min-wt', v)} step="0.1" /> kg
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  起始增重
-                </label>
-                <TextIn
-                  className="smallin"
-                  value={text['onset'] ?? ''}
-                  onChange={(v) => setT('onset', v)}
-                  placeholder="例：30歲後"
-                />
+                <label className={cn(FL, 'ml-3')}>起始增重</label>
+                <TextIn small value={text['onset'] ?? ''} onChange={(v) => setT('onset', v)} placeholder="例：30歲後" />
               </div>
-              <div className="row">
+              <div className={ROW}>
                 <Chk
                   checked={checks.has('weight-cycling')}
                   label="反覆減重 (weight cycling)"
                   onToggle={() => toggle('weight-cycling')}
                 />
-                <label className="field-label" style={{ marginLeft: 4 }}>
-                  次數/方式
-                </label>
-                <TextIn
-                  className="smallin"
-                  value={text['cycling-times'] ?? ''}
-                  onChange={(v) => setT('cycling-times', v)}
-                />
+                <label className={cn(FL, 'ml-1')}>次數/方式</label>
+                <TextIn small value={text['cycling-times'] ?? ''} onChange={(v) => setT('cycling-times', v)} />
               </div>
-              <div className="row">
-                <label className="field-label">過去減重方式</label>
+              <div className={ROW}>
+                <label className={FL}>過去減重方式</label>
                 <TextIn
                   value={text['prev-method'] ?? ''}
                   onChange={(v) => setT('prev-method', v)}
                   placeholder="飲食/運動/藥物/手術，成效，失敗原因"
-                  style={{ flex: 1, minWidth: 240 }}
+                  className="flex-1 min-w-[240px]"
                 />
               </div>
             </Sec>
@@ -550,55 +548,26 @@ function ObesityPage() {
 
             <Sec icon={<Clock />} title="用餐型態">
               {subgrid(DIET_PATTERN)}
-              <div className="row" style={{ marginTop: 10 }}>
-                <label className="field-label">外食比例</label>
-                <RadioPill
-                  checked={radios['eat-out'] === '低（<30%）'}
-                  label="低"
-                  onSelect={() => setRadio('eat-out', '低（<30%）')}
-                />
-                <RadioPill
-                  checked={radios['eat-out'] === '中（30–70%）'}
-                  label="中"
-                  onSelect={() => setRadio('eat-out', '中（30–70%）')}
-                />
-                <RadioPill
-                  checked={radios['eat-out'] === '高（>70%）'}
-                  label="高"
-                  onSelect={() => setRadio('eat-out', '高（>70%）')}
-                />
+              <div className={cn(ROW, 'mt-2.5')}>
+                <label className={FL}>外食比例</label>
+                <RadioPill checked={radios['eat-out'] === '低（<30%）'} label="低" onSelect={() => setRadio('eat-out', '低（<30%）')} />
+                <RadioPill checked={radios['eat-out'] === '中（30–70%）'} label="中" onSelect={() => setRadio('eat-out', '中（30–70%）')} />
+                <RadioPill checked={radios['eat-out'] === '高（>70%）'} label="高" onSelect={() => setRadio('eat-out', '高（>70%）')} />
               </div>
-              <div className="row">
-                <label className="field-label">備餐者</label>
-                <TextIn
-                  className="smallin"
-                  value={text['cook-person'] ?? ''}
-                  onChange={(v) => setT('cook-person', v)}
-                  placeholder="自己/家人/外食"
-                />
+              <div className={ROW}>
+                <label className={FL}>備餐者</label>
+                <TextIn small value={text['cook-person'] ?? ''} onChange={(v) => setT('cook-person', v)} placeholder="自己/家人/外食" />
               </div>
               <NoteRow value={text['pattern-note'] ?? ''} onChange={(v) => setT('pattern-note', v)} placeholder="其他用餐型態備註" />
             </Sec>
 
             <Sec icon={<Utensils />} title="飲食內容">
               {subgrid(DIET_CONTENT)}
-              <div className="row" style={{ marginTop: 8 }}>
-                <label className="field-label">含糖飲頻率</label>
-                <TextIn
-                  className="smallin"
-                  value={text['sugary-freq'] ?? ''}
-                  onChange={(v) => setT('sugary-freq', v)}
-                  placeholder="例：每天1杯"
-                />
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  酒精
-                </label>
-                <TextIn
-                  className="smallin"
-                  value={text['alc-amount'] ?? ''}
-                  onChange={(v) => setT('alc-amount', v)}
-                  placeholder="種類/量/週"
-                />
+              <div className={cn(ROW, 'mt-2')}>
+                <label className={FL}>含糖飲頻率</label>
+                <TextIn small value={text['sugary-freq'] ?? ''} onChange={(v) => setT('sugary-freq', v)} placeholder="例：每天1杯" />
+                <label className={cn(FL, 'ml-3')}>酒精</label>
+                <TextIn small value={text['alc-amount'] ?? ''} onChange={(v) => setT('alc-amount', v)} placeholder="種類/量/週" />
               </div>
               <NoteRow value={text['content-note'] ?? ''} onChange={(v) => setT('content-note', v)} placeholder="其他飲食內容備註" />
             </Sec>
@@ -609,64 +578,39 @@ function ObesityPage() {
             </Sec>
 
             <Sec icon={<Footprints />} title="身體活動">
-              <div className="row">
-                <label className="field-label">運動類型</label>
-                <TextIn
-                  value={text['exercise-type'] ?? ''}
-                  onChange={(v) => setT('exercise-type', v)}
-                  placeholder="例：快走、重訓"
-                  style={{ flex: 1 }}
-                />
+              <div className={ROW}>
+                <label className={FL}>運動類型</label>
+                <TextIn value={text['exercise-type'] ?? ''} onChange={(v) => setT('exercise-type', v)} placeholder="例：快走、重訓" className="flex-1" />
               </div>
-              <div className="row">
-                <label className="field-label">頻率/時間</label>
-                <TextIn
-                  className="smallin"
-                  value={text['exercise-freq'] ?? ''}
-                  onChange={(v) => setT('exercise-freq', v)}
-                  placeholder="例：3次/週"
-                />
-                <TextIn
-                  className="smallin"
-                  value={text['exercise-dur'] ?? ''}
-                  onChange={(v) => setT('exercise-dur', v)}
-                  placeholder="例：30分/次"
-                  style={{ marginLeft: 8 }}
-                />
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  強度
-                </label>
+              <div className={ROW}>
+                <label className={FL}>頻率/時間</label>
+                <TextIn small value={text['exercise-freq'] ?? ''} onChange={(v) => setT('exercise-freq', v)} placeholder="例：3次/週" />
+                <TextIn small value={text['exercise-dur'] ?? ''} onChange={(v) => setT('exercise-dur', v)} placeholder="例：30分/次" className="ml-2" />
+                <label className={cn(FL, 'ml-3')}>強度</label>
                 <RadioPill checked={radios['intensity'] === '低'} label="低" onSelect={() => setRadio('intensity', '低')} />
                 <RadioPill checked={radios['intensity'] === '中'} label="中" onSelect={() => setRadio('intensity', '中')} />
                 <RadioPill checked={radios['intensity'] === '高'} label="高" onSelect={() => setRadio('intensity', '高')} />
               </div>
-              <div className="row">
+              <div className={ROW}>
                 <Chk checked={checks.has('ls-sedentary')} label="久坐 > 8 小時/天" onToggle={() => toggle('ls-sedentary')} />
                 <Chk checked={checks.has('ls-act-limit')} label="有活動受限因子" onToggle={() => toggle('ls-act-limit')} />
               </div>
-              <div className="row">
-                <label className="field-label">活動限制</label>
-                <TextIn
-                  value={text['act-limit-detail'] ?? ''}
-                  onChange={(v) => setT('act-limit-detail', v)}
-                  placeholder="例：膝痛、心肺功能"
-                  style={{ flex: 1 }}
-                />
+              <div className={ROW}>
+                <label className={FL}>活動限制</label>
+                <TextIn value={text['act-limit-detail'] ?? ''} onChange={(v) => setT('act-limit-detail', v)} placeholder="例：膝痛、心肺功能" className="flex-1" />
               </div>
             </Sec>
 
             <Sec icon={<Moon />} title="睡眠">
-              <div className="row">
-                <label className="field-label">睡眠時數</label>
+              <div className={ROW}>
+                <label className={FL}>睡眠時數</label>
                 <NumIn value={text['sleep-hr'] ?? ''} onChange={(v) => setT('sleep-hr', v)} step="0.5" /> 小時
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  品質
-                </label>
+                <label className={cn(FL, 'ml-3')}>品質</label>
                 <RadioPill checked={radios['sleep-q'] === '好'} label="好" onSelect={() => setRadio('sleep-q', '好')} />
                 <RadioPill checked={radios['sleep-q'] === '普通'} label="普通" onSelect={() => setRadio('sleep-q', '普通')} />
                 <RadioPill checked={radios['sleep-q'] === '差'} label="差" onSelect={() => setRadio('sleep-q', '差')} />
               </div>
-              <div className="row">
+              <div className={ROW}>
                 <Chk checked={checks.has('ls-shift')} label="夜班/輪班工作" onToggle={() => toggle('ls-shift')} />
                 <Chk checked={checks.has('ls-irreg')} label="作息不規律" onToggle={() => toggle('ls-irreg')} />
               </div>
@@ -675,88 +619,73 @@ function ObesityPage() {
 
             <Sec icon={<Smile />} title="心理與社會">
               {subgrid(PSYCHO)}
-              <div className="row" style={{ marginTop: 8 }}>
-                <label className="field-label">家庭支持</label>
+              <div className={cn(ROW, 'mt-2')}>
+                <label className={FL}>家庭支持</label>
                 <RadioPill checked={radios['support'] === '好'} label="好" onSelect={() => setRadio('support', '好')} />
                 <RadioPill checked={radios['support'] === '普通'} label="普通" onSelect={() => setRadio('support', '普通')} />
                 <RadioPill checked={radios['support'] === '差'} label="差" onSelect={() => setRadio('support', '差')} />
-                <label className="field-label" style={{ marginLeft: 16 }}>
-                  工作型態
-                </label>
-                <TextIn
-                  className="smallin"
-                  value={text['work-type'] ?? ''}
-                  onChange={(v) => setT('work-type', v)}
-                  placeholder="例：辦公室"
-                />
+                <label className={cn(FL, 'ml-4')}>工作型態</label>
+                <TextIn small value={text['work-type'] ?? ''} onChange={(v) => setT('work-type', v)} placeholder="例：辦公室" />
               </div>
               <NoteRow value={text['psy-note'] ?? ''} onChange={(v) => setT('psy-note', v)} placeholder="其他心理社會備註" />
             </Sec>
 
             <Sec icon={<Stethoscope />} title="系統性理學檢查">
-              <div className="row">
-                <label className="field-label">腰圍 (cm)</label>
+              <div className={ROW}>
+                <label className={FL}>腰圍 (cm)</label>
                 <NumIn value={text['waist'] ?? ''} onChange={(v) => setT('waist', v)} step="0.1" />
-                <span className={`note-hint${wNote.warn ? ' warn' : ''}`} style={{ marginLeft: 8 }}>
+                <span className={cn('ml-2 text-xs', wNote.warn ? 'text-yellow' : 'text-text-light')}>
                   {text['waist'] || sex ? wNote.text : ''}
                 </span>
               </div>
-              <div className="row">
-                <label className="field-label">頸圍 (cm)</label>
+              <div className={ROW}>
+                <label className={FL}>頸圍 (cm)</label>
                 <NumIn value={text['neck'] ?? ''} onChange={(v) => setT('neck', v)} step="0.1" />
-                <span className="note-hint" style={{ marginLeft: 8 }}>
-                  男 ≥ 43、女 ≥ 38 提示 OSA 風險
-                </span>
+                <span className="ml-2 text-xs text-text-light">男 ≥ 43、女 ≥ 38 提示 OSA 風險</span>
               </div>
 
-              <div className="subheader">皮膚徵象（代謝異常）</div>
+              <div className={SUBHEADER}>皮膚徵象（代謝異常）</div>
               {subgrid(PE_SKIN)}
-              <div className="subheader">頭頸部</div>
+              <div className={SUBHEADER}>頭頸部</div>
               {subgrid(PE_HEADNECK)}
-              <div className="subheader">心肺與下肢</div>
+              <div className={SUBHEADER}>心肺與下肢</div>
               {subgrid(PE_CARDIO)}
               <NoteRow value={text['pe-note'] ?? ''} onChange={(v) => setT('pe-note', v)} placeholder="其他理學檢查發現" />
             </Sec>
 
             <Sec icon={<Dumbbell />} title="肌少肥胖症評估（懷疑時加做）">
-              <div className="criteria-box">
-                <strong>異常切點 · AWGS 2019 / 指引建議</strong>
+              <div className="mb-3 rounded-md border border-border bg-bg2 px-3.5 py-2.5 text-[12.5px] leading-[1.7] text-text-muted">
+                <strong className="mb-1 block font-mono text-[11px] font-semibold uppercase tracking-[0.05em] text-text">
+                  異常切點 · AWGS 2019 / 指引建議
+                </strong>
                 ・小腿圍：男 &lt; 34 cm、女 &lt; 33 cm<br />
                 ・握力：男 &lt; 28 kg、女 &lt; 18 kg<br />
                 ・5 次坐站：≥ 12 秒<br />
                 ・6 公尺步行速度：&lt; 1.0 m/s（≈ 6 公尺 &gt; 6 秒）
               </div>
-              <div className="row">
-                <label className="field-label">小腿圍 (cm)</label>
+              <div className={ROW}>
+                <label className={FL}>小腿圍 (cm)</label>
                 <NumIn value={text['calf'] ?? ''} onChange={(v) => setT('calf', v)} step="0.1" />
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  握力 (kg)
-                </label>
+                <label className={cn(FL, 'ml-3')}>握力 (kg)</label>
                 <NumIn value={text['grip'] ?? ''} onChange={(v) => setT('grip', v)} step="0.1" />
               </div>
-              <div className="row">
-                <label className="field-label">5次坐站 (秒)</label>
+              <div className={ROW}>
+                <label className={FL}>5次坐站 (秒)</label>
                 <NumIn value={text['sts'] ?? ''} onChange={(v) => setT('sts', v)} step="0.1" />
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  6m步行 (秒)
-                </label>
+                <label className={cn(FL, 'ml-3')}>6m步行 (秒)</label>
                 <NumIn value={text['walk'] ?? ''} onChange={(v) => setT('walk', v)} step="0.1" />
               </div>
             </Sec>
 
-            <Sec
-              icon={<FileText />}
-              title="病歷文字（自動生成英文）"
-              extra={<span className={`copy-feedback${copied === 'note' ? ' show' : ''}`}>已複製</span>}
-            >
-              <div className="output">{note}</div>
-              <div className="btnbar">
-                <button className="act-btn btn-primary" onClick={() => copyText(note, 'note')}>
+            <Sec icon={<FileText />} title="病歷文字（自動生成英文）" extra={<CopyFb show={copied === 'note'} />}>
+              <div className={OUTPUT}>{note}</div>
+              <div className={BTNBAR}>
+                <button className={cn(ACT, ACT_PRIMARY)} onClick={() => copyText(note, 'note')}>
                   <Copy />
                   複製病歷
                 </button>
                 <button
-                  className="act-btn"
+                  className={ACT}
                   onClick={() => {
                     if (confirm('確定要清空初診所有欄位？')) resetPane('intake')
                   }}
@@ -767,43 +696,39 @@ function ObesityPage() {
               </div>
             </Sec>
 
-            <Sec
-              icon={<FlaskConical />}
-              title="建議檢驗 order"
-              extra={<span className={`copy-feedback${copied === 'order' ? ' show' : ''}`}>已複製</span>}
-            >
-              <div className="order-card">
-                <div className="order-title">
+            <Sec icon={<FlaskConical />} title="建議檢驗 order" extra={<CopyFb show={copied === 'order'} />}>
+              <div className="mt-2.5 rounded-lg border border-accent/25 bg-accent/5 px-3.5 py-3">
+                <div className="mb-2 flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-accent [&>svg]:h-[13px] [&>svg]:w-[13px] [&>svg]:[stroke-width:2]">
                   <Check />
                   Routine（所有肥胖病人）
                 </div>
-                <div className="order-list">
+                <div className="text-[13px] leading-[1.8] text-text">
                   {orders.routine.map((t) => (
-                    <span key={t} className="pill">
+                    <span key={t} className={PILL}>
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
               {orders.cond.length > 0 && (
-                <div className="order-card">
-                  <div className="order-title">
+                <div className="mt-2.5 rounded-lg border border-accent/25 bg-accent/5 px-3.5 py-3">
+                  <div className="mb-2 flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-accent [&>svg]:h-[13px] [&>svg]:w-[13px] [&>svg]:[stroke-width:2]">
                     <Target />
                     Symptom-directed（症狀導向加做）
                   </div>
-                  <div className="order-list">
+                  <div className="text-[13px] leading-[1.8] text-text">
                     {orders.cond.map((c) => (
-                      <div key={c.test} style={{ margin: '4px 0' }}>
-                        <span className="pill">{c.test}</span>
-                        <span className="order-reason">— {c.reason}</span>
+                      <div key={c.test} className="my-1">
+                        <span className={PILL}>{c.test}</span>
+                        <span className="ml-1 text-xs text-text-muted">— {c.reason}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
-              <div className="btnbar">
+              <div className={BTNBAR}>
                 <button
-                  className="act-btn"
+                  className={ACT}
                   onClick={() => {
                     let t = '[Routine] ' + orders.routine.join(', ')
                     if (orders.cond.length) t += '\n[Symptom-directed] ' + orders.cond.map((c) => c.test).join(', ')
@@ -822,89 +747,56 @@ function ObesityPage() {
         {mode === 'followup' && (
           <div>
             <Sec icon={<Scale />} title="體重變化">
-              <div className="row">
-                <label className="field-label">本次體重</label>
+              <div className={ROW}>
+                <label className={FL}>本次體重</label>
                 <NumIn value={text['fu-wt'] ?? ''} onChange={(v) => setT('fu-wt', v)} step="0.1" /> kg
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  上次體重
-                </label>
+                <label className={cn(FL, 'ml-3')}>上次體重</label>
                 <NumIn value={text['fu-wt-prev'] ?? ''} onChange={(v) => setT('fu-wt-prev', v)} step="0.1" /> kg
                 {fu.wtDelta && (
-                  <span
-                    className="note-hint"
-                    style={{ marginLeft: 8, color: fu.wtDelta.good ? 'var(--color-green)' : 'var(--color-yellow)' }}
-                  >
-                    {fu.wtDelta.text}
-                  </span>
+                  <span className={cn('ml-2 text-xs', fu.wtDelta.good ? 'text-green' : 'text-yellow')}>{fu.wtDelta.text}</span>
                 )}
               </div>
-              <div className="row">
-                <label className="field-label">起始體重</label>
+              <div className={ROW}>
+                <label className={FL}>起始體重</label>
                 <NumIn value={text['fu-wt-start'] ?? ''} onChange={(v) => setT('fu-wt-start', v)} step="0.1" /> kg
                 {fu.wtTotal && (
-                  <span
-                    className="note-hint"
-                    style={{ marginLeft: 8, color: fu.wtTotal.good ? 'var(--color-green)' : 'var(--color-yellow)' }}
-                  >
-                    {fu.wtTotal.text}
-                  </span>
+                  <span className={cn('ml-2 text-xs', fu.wtTotal.good ? 'text-green' : 'text-yellow')}>{fu.wtTotal.text}</span>
                 )}
               </div>
-              <div className="row">
-                <label className="field-label">腰圍 (cm)</label>
+              <div className={ROW}>
+                <label className={FL}>腰圍 (cm)</label>
                 <NumIn value={text['fu-waist'] ?? ''} onChange={(v) => setT('fu-waist', v)} step="0.1" />
-                <label className="field-label" style={{ marginLeft: 12 }}>
-                  上次腰圍
-                </label>
+                <label className={cn(FL, 'ml-3')}>上次腰圍</label>
                 <NumIn value={text['fu-waist-prev'] ?? ''} onChange={(v) => setT('fu-waist-prev', v)} step="0.1" />
                 {fu.waistDelta && (
-                  <span
-                    className="note-hint"
-                    style={{ marginLeft: 8, color: fu.waistDelta.good ? 'var(--color-green)' : 'var(--color-yellow)' }}
-                  >
-                    {fu.waistDelta.text}
-                  </span>
+                  <span className={cn('ml-2 text-xs', fu.waistDelta.good ? 'text-green' : 'text-yellow')}>{fu.waistDelta.text}</span>
                 )}
               </div>
-              <div className="row">
+              <div className={ROW}>
                 {['持續下降', '平台期', '反彈', '持平'].map((v) => (
-                  <RadioPill
-                    key={v}
-                    checked={radios['fu-trend'] === v}
-                    label={v}
-                    onSelect={() => setRadio('fu-trend', v)}
-                  />
+                  <RadioPill key={v} checked={radios['fu-trend'] === v} label={v} onSelect={() => setRadio('fu-trend', v)} />
                 ))}
               </div>
             </Sec>
 
             <Sec icon={<Pill />} title="減重藥物">
-              <div className="row">
-                <label className="field-label">使用藥物</label>
+              <div className={ROW}>
+                <label className={FL}>使用藥物</label>
                 <Chk checked={checks.has('fu-med-glp1')} label="GLP-1 RA" onToggle={() => toggle('fu-med-glp1')} />
                 <Chk checked={checks.has('fu-med-orlistat')} label="Orlistat" onToggle={() => toggle('fu-med-orlistat')} />
-                <Chk
-                  checked={checks.has('fu-med-pb')}
-                  label="Phentermine/Bupropion"
-                  onToggle={() => toggle('fu-med-pb')}
-                />
+                <Chk checked={checks.has('fu-med-pb')} label="Phentermine/Bupropion" onToggle={() => toggle('fu-med-pb')} />
                 <Chk checked={checks.has('fu-med-none')} label="未使用" onToggle={() => toggle('fu-med-none')} />
               </div>
-              <div className="row">
-                <label className="field-label">藥名/劑量</label>
-                <TextIn
-                  value={text['fu-med-detail'] ?? ''}
-                  onChange={(v) => setT('fu-med-detail', v)}
-                  placeholder="例：Semaglutide 1.0 mg QW"
-                  style={{ flex: 1 }}
-                />
+              <div className={ROW}>
+                <label className={FL}>藥名/劑量</label>
+                <TextIn value={text['fu-med-detail'] ?? ''} onChange={(v) => setT('fu-med-detail', v)} placeholder="例：Semaglutide 1.0 mg QW" className="flex-1" />
               </div>
-              <div className="row">
-                <label className="field-label">依從性</label>
+              <div className={ROW}>
+                <label className={FL}>依從性</label>
                 <RadioPill checked={radios['fu-adh'] === '佳'} label="佳" onSelect={() => setRadio('fu-adh', '佳')} />
                 <RadioPill checked={radios['fu-adh'] === '尚可'} label="尚可" onSelect={() => setRadio('fu-adh', '尚可')} />
                 <RadioPill checked={radios['fu-adh'] === '差'} label="差" onSelect={() => setRadio('fu-adh', '差')} />
-                <span style={{ marginLeft: 12 }}>
+                <span className="ml-3">
                   <Chk checked={checks.has('fu-self-pay')} label="自費" onToggle={() => toggle('fu-self-pay')} />
                 </span>
               </div>
@@ -917,14 +809,14 @@ function ObesityPage() {
             </Sec>
 
             <Sec icon={<Check />} title="生活型態執行">
-              <div className="row">
-                <label className="field-label">飲食控制</label>
+              <div className={ROW}>
+                <label className={FL}>飲食控制</label>
                 <RadioPill checked={radios['fu-diet'] === '佳'} label="佳" onSelect={() => setRadio('fu-diet', '佳')} />
                 <RadioPill checked={radios['fu-diet'] === '尚可'} label="尚可" onSelect={() => setRadio('fu-diet', '尚可')} />
                 <RadioPill checked={radios['fu-diet'] === '差'} label="差" onSelect={() => setRadio('fu-diet', '差')} />
               </div>
-              <div className="row">
-                <label className="field-label">運動執行</label>
+              <div className={ROW}>
+                <label className={FL}>運動執行</label>
                 <RadioPill checked={radios['fu-exer'] === '佳'} label="佳" onSelect={() => setRadio('fu-exer', '佳')} />
                 <RadioPill checked={radios['fu-exer'] === '尚可'} label="尚可" onSelect={() => setRadio('fu-exer', '尚可')} />
                 <RadioPill checked={radios['fu-exer'] === '差'} label="差" onSelect={() => setRadio('fu-exer', '差')} />
@@ -933,12 +825,8 @@ function ObesityPage() {
             </Sec>
 
             <Sec icon={<FlaskConical />} title="檢驗追蹤">
-              <div className="row">
-                <Chk
-                  checked={checks.has('fu-lab-followup')}
-                  label="本次需追蹤檢驗"
-                  onToggle={() => toggle('fu-lab-followup')}
-                />
+              <div className={ROW}>
+                <Chk checked={checks.has('fu-lab-followup')} label="本次需追蹤檢驗" onToggle={() => toggle('fu-lab-followup')} />
               </div>
               <NoteRow
                 value={text['fu-lab-note'] ?? ''}
@@ -952,19 +840,15 @@ function ObesityPage() {
               <NoteRow value={text['fu-plan-note'] ?? ''} onChange={(v) => setT('fu-plan-note', v)} placeholder="計畫細節、下次回診時間" />
             </Sec>
 
-            <Sec
-              icon={<FileText />}
-              title="回診病歷文字（自動生成英文）"
-              extra={<span className={`copy-feedback${copied === 'fu' ? ' show' : ''}`}>已複製</span>}
-            >
-              <div className="output">{fu.text}</div>
-              <div className="btnbar">
-                <button className="act-btn btn-primary" onClick={() => copyText(fu.text, 'fu')}>
+            <Sec icon={<FileText />} title="回診病歷文字（自動生成英文）" extra={<CopyFb show={copied === 'fu'} />}>
+              <div className={OUTPUT}>{fu.text}</div>
+              <div className={BTNBAR}>
+                <button className={cn(ACT, ACT_PRIMARY)} onClick={() => copyText(fu.text, 'fu')}>
                   <Copy />
                   複製病歷
                 </button>
                 <button
-                  className="act-btn"
+                  className={ACT}
                   onClick={() => {
                     if (confirm('確定要清空回診所有欄位？')) resetPane('followup')
                   }}
@@ -977,12 +861,17 @@ function ObesityPage() {
           </div>
         )}
 
-        <div className="obesity-footer">
+        <div className="mt-8 text-center text-xs leading-[1.8] text-text-light">
           肥胖議題依據：台灣成人肥胖臨床實證指引（2026）第八章「肥胖患者的全面性評估」
           <br />
           本工具僅供醫護人員臨床參考，不取代個別病人評估與最新指引。
-          <div style={{ marginTop: 12 }}>
-            <a className="feedback-link" href={FEEDBACK_URL} target="_blank" rel="noopener">
+          <div className="mt-3">
+            <a
+              href={FEEDBACK_URL}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-1.5 rounded-[5px] border border-border bg-transparent px-3 py-[5px] text-xs leading-[1.4] text-white no-underline transition-all hover:border-text-dim hover:bg-white/5 [&>svg]:h-[13px] [&>svg]:w-[13px] [&>svg]:[stroke-width:1.8]"
+            >
               <MessageSquare />
               回報錯誤 / 提建議
             </a>
@@ -991,32 +880,45 @@ function ObesityPage() {
       </div>
 
       {/* ── BMI 對照浮動工具 ── */}
-      <button className="bmi-fab" onClick={() => setBmiOpen(true)} aria-label="開啟 BMI 對照工具">
+      <button
+        onClick={() => setBmiOpen(true)}
+        aria-label="開啟 BMI 對照工具"
+        className="fixed right-6 bottom-6 z-50 inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-accent px-4 py-2.5 text-[13px] font-medium text-white shadow-[0_4px_14px_rgba(43,184,201,0.35)] transition-all hover:-translate-y-px hover:shadow-[0_6px_18px_rgba(43,184,201,0.45)] [&>svg]:h-[14px] [&>svg]:w-[14px] [&>svg]:[stroke-width:2]"
+      >
         <Ruler />
         BMI 對照
       </button>
 
       {bmiOpen && (
         <div
-          className="bmi-modal-backdrop open"
           role="dialog"
           aria-modal="true"
           onClick={() => setBmiOpen(false)}
+          className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-[rgba(13,17,23,0.7)] px-5 pt-[60px] pb-5 backdrop-blur-[2px]"
         >
-          <div className="bmi-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="bmi-modal-header">
-              <div className="bmi-modal-title">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-[480px] overflow-hidden rounded-xl border border-border bg-surface shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+          >
+            <div className="flex items-center justify-between border-b border-border bg-bg2 px-5 py-4">
+              <div className="flex items-center gap-2 text-[15px] font-semibold [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-accent [&>svg]:[stroke-width:1.8]">
                 <Ruler />
                 BMI 對照（台灣標準）
               </div>
-              <button className="bmi-close-btn" onClick={() => setBmiOpen(false)} aria-label="關閉">
+              <button
+                onClick={() => setBmiOpen(false)}
+                aria-label="關閉"
+                className="flex cursor-pointer rounded border-none bg-transparent p-1 text-text-muted transition-all hover:bg-bg2 hover:text-text [&>svg]:h-4 [&>svg]:w-4 [&>svg]:[stroke-width:2]"
+              >
                 <X />
               </button>
             </div>
-            <div className="bmi-modal-body">
-              <div className="bmi-input-row">
-                <div className="field">
-                  <label htmlFor="bmiHeight">身高 (cm)</label>
+            <div className="px-5 py-[18px]">
+              <div className="mb-3.5 flex flex-wrap gap-3">
+                <div className="min-w-[140px] flex-1">
+                  <label htmlFor="bmiHeight" className="mb-1 block text-xs text-text-muted">
+                    身高 (cm)
+                  </label>
                   <input
                     type="number"
                     id="bmiHeight"
@@ -1027,12 +929,13 @@ function ObesityPage() {
                     value={bmiHeight}
                     onChange={(e) => setBmiHeight(e.target.value)}
                     autoFocus
+                    className="w-full rounded-md border border-border bg-bg2 px-2.5 py-[7px] text-[14px] text-text focus:border-accent focus:outline-none"
                   />
                 </div>
-                <div className="field">
-                  <label htmlFor="bmiCurrentWt">
+                <div className="min-w-[140px] flex-1">
+                  <label htmlFor="bmiCurrentWt" className="mb-1 block text-xs text-text-muted">
                     目前體重 (kg)
-                    <span style={{ color: 'var(--color-text-dim)', fontWeight: 'normal' }}>（選填）</span>
+                    <span className="font-normal text-text-dim">（選填）</span>
                   </label>
                   <input
                     type="number"
@@ -1043,42 +946,55 @@ function ObesityPage() {
                     placeholder="例：80"
                     value={bmiWt}
                     onChange={(e) => setBmiWt(e.target.value)}
+                    className="w-full rounded-md border border-border bg-bg2 px-2.5 py-[7px] text-[14px] text-text focus:border-accent focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className={`bmi-current-bmi${bmi.current ? '' : ' empty'}`}>
+              <div
+                className={cn(
+                  'mb-3.5 flex items-center rounded-lg border border-border bg-bg2 px-3.5 py-2.5 text-[13px]',
+                  bmi.current ? 'justify-between' : 'justify-center text-text-dim',
+                )}
+              >
                 {bmi.current ? (
                   <>
                     <span>目前 BMI</span>
-                    <span className="bmi-val">{bmi.current.bmi.toFixed(1)}</span>
-                    <span className="bmi-cat">{bmi.current.cat}</span>
+                    <span className="font-mono text-[18px] font-semibold text-accent">{bmi.current.bmi.toFixed(1)}</span>
+                    <span className="rounded bg-surface2 px-2.5 py-[3px] text-xs text-text-muted">{bmi.current.cat}</span>
                   </>
                 ) : (
                   bmi.currentHint
                 )}
               </div>
 
-              <table className="bmi-table">
+              <table className="w-full border-collapse text-[13px]">
                 <thead>
                   <tr>
-                    <th>分級</th>
-                    <th>BMI</th>
-                    <th>對應體重</th>
+                    {['分級', 'BMI', '對應體重'].map((h) => (
+                      <th
+                        key={h}
+                        className="border-b border-border bg-bg2 px-2.5 py-[7px] text-left text-[11px] font-semibold uppercase tracking-[0.05em] text-text-muted"
+                      >
+                        {h}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
                   {bmi.rows ? (
                     bmi.rows.map((r) => (
-                      <tr key={r.label} className={r.highlight ? 'current-cat' : ''}>
-                        <td className="cat">{r.label}</td>
-                        <td className="bmi-num">{r.bmiStr}</td>
-                        <td className="wt-num">{r.wtStr}</td>
+                      <tr key={r.label} className={r.highlight ? '[&>td]:bg-accent-dim [&>td]:text-accent' : ''}>
+                        <td className={cn('border-b border-border px-2.5 py-[7px] text-xs text-text-muted', r.highlight && 'font-semibold')}>
+                          {r.label}
+                        </td>
+                        <td className="border-b border-border px-2.5 py-[7px] font-mono font-semibold text-text">{r.bmiStr}</td>
+                        <td className="border-b border-border px-2.5 py-[7px] font-mono text-text">{r.wtStr}</td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={3} style={{ textAlign: 'center', color: 'var(--color-text-dim)', padding: 18 }}>
+                      <td colSpan={3} className="border-b border-border px-2.5 py-[18px] text-center text-text-dim">
                         先輸入身高
                       </td>
                     </tr>
@@ -1086,15 +1002,19 @@ function ObesityPage() {
                 </tbody>
               </table>
 
-              {bmi.diff && <div className="bmi-diff-row show">{bmi.diff}</div>}
+              {bmi.diff && (
+                <div className="mt-3 rounded-md border border-green/25 bg-green/[0.06] px-3.5 py-2.5 text-[13px] text-[#b3d8b8]">
+                  {bmi.diff}
+                </div>
+              )}
             </div>
-            <div className="bmi-modal-foot">
+            <div className="border-t border-border bg-bg2 px-5 pt-2.5 pb-3.5 text-[11px] leading-[1.6] text-text-dim">
               台灣標準（衛福部）：過重 24–27 · 輕度肥胖 27–30 · 中度肥胖 30–35 · 重度肥胖 ≥ 35
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
 
