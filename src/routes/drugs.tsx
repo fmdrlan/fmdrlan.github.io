@@ -247,17 +247,11 @@ function DrugsPage() {
   const jumpToDrug = (id: Drug['id']) => {
     const drug = allDrugs.find((d) => d.id === id)
     if (!drug) return
-    // If not in current results, re-search by title
-    if (!results.some((d) => d.id === id)) {
-      const title = stripSection(drug.title).slice(0, 20)
-      setQuery(title)
-    }
+    // Always search to the target's section, expand it, and jump back to the top.
+    const section = getSectionFromTitle(drug.title)
+    setQuery(section || stripSection(drug.title).slice(0, 20))
     setExpanded((prev) => new Set(prev).add(id))
-    // Scroll after render
-    setTimeout(() => {
-      const el = document.getElementById(`drug-${id}`)
-      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }, 100)
+    window.scrollTo({ top: 0 })
   }
 
   return (
