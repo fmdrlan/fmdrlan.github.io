@@ -25,9 +25,9 @@ except ImportError:
 
 NHI_URL = "https://www.nhi.gov.tw/ch/np-2508-1.html"
 NHI_HOME = "https://www.nhi.gov.tw/ch/mp-1.html"
-VERSION_FILE = Path("data/last_version.txt")
-LAST_CHECK_FILE = Path("data/last_check.txt")
-DATA_DIR = Path("data")
+VERSION_FILE = Path("public/data/last_version.txt")
+LAST_CHECK_FILE = Path("public/data/last_check.txt")
+DATA_DIR = Path("public/data")
 
 # 一整組「真瀏覽器」會送出的標頭。健保署的防火牆會檢查這些是否齊全，
 # 只設 User-Agent 不夠，會被擋 403。
