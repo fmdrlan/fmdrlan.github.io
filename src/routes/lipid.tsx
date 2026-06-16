@@ -506,10 +506,14 @@ const YN = [{ v: 0, l: '否' }, { v: 1, l: '是' }]
 function InfoTip({ tip }: { tip: string }) {
   return (
     <span className="group relative ml-1 inline-flex align-middle">
-      <i className="inline-flex h-4 w-4 cursor-help items-center justify-center rounded-full border border-accent/35 bg-accent/[0.18] text-[10px] font-bold not-italic leading-none text-accent">
+      <button
+        type="button"
+        aria-label="說明"
+        className="inline-flex h-4 w-4 cursor-help items-center justify-center rounded-full border border-accent/35 bg-accent/[0.18] text-[10px] font-bold not-italic leading-none text-accent"
+      >
         !
-      </i>
-      <span className="pointer-events-none absolute bottom-full left-1/2 z-[9999] mb-2 w-[280px] max-w-[calc(100vw-32px)] -translate-x-1/2 rounded-lg border border-accent/30 bg-[#1c2740] px-3 py-2 text-[13px] font-normal leading-relaxed text-text opacity-0 shadow-[0_4px_20px_rgba(0,0,0,0.55)] transition-opacity duration-150 group-hover:opacity-100">
+      </button>
+      <span className="pointer-events-none absolute bottom-full left-1/2 z-[9999] mb-2 w-[280px] max-w-[calc(100vw-32px)] -translate-x-1/2 rounded-lg border border-accent/30 bg-[#1c2740] px-3 py-2 text-[13px] font-normal leading-relaxed text-text opacity-0 shadow-[0_4px_20px_rgba(0,0,0,0.55)] transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
         {tip}
       </span>
     </span>
