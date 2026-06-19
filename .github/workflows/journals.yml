@@ -1,0 +1,37 @@
+name: 每週更新頂尖期刊速覽
+
+on:
+  schedule:
+    # 每週一 UTC 03:00（台灣 11:00），錯開藥品更新（UTC 02:00）
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  journals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取得程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 抓取期刊文章
+        run: python scripts/fetch_journals.py
+        env:
+          # 非機密，僅用於提高 MyMemory 免費翻譯的每日額度。
+          # 在 Settings → Secrets and variables → Actions → Variables 新增 MYMEMORY_EMAIL。
+          MYMEMORY_EMAIL: ${{ vars.MYMEMORY_EMAIL }}
+
+      - name: Commit 更新（有變動才推）
+        run: |
+          git config user.name "Journals Bot"
+          git config user.email "bot@journals"
+          git add public/data/journals.json
+          git diff --staged --quiet || git commit -m "🤖 自動更新：頂尖期刊速覽 $(date -u +%Y-%m-%d)"
+          git push

@@ -13,6 +13,7 @@ import { Route as VaccineRouteImport } from './routes/vaccine'
 import { Route as ObesityRouteImport } from './routes/obesity'
 import { Route as LipidRouteImport } from './routes/lipid'
 import { Route as LabRouteImport } from './routes/lab'
+import { Route as JournalsRouteImport } from './routes/journals'
 import { Route as DrugsRouteImport } from './routes/drugs'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as IndexRouteImport } from './routes/index'
@@ -37,6 +38,11 @@ const LabRoute = LabRouteImport.update({
   path: '/lab',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalsRoute = JournalsRouteImport.update({
+  id: '/journals',
+  path: '/journals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DrugsRoute = DrugsRouteImport.update({
   id: '/drugs',
   path: '/drugs',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/drugs': typeof DrugsRoute
+  '/journals': typeof JournalsRoute
   '/lab': typeof LabRoute
   '/lipid': typeof LipidRoute
   '/obesity': typeof ObesityRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/drugs': typeof DrugsRoute
+  '/journals': typeof JournalsRoute
   '/lab': typeof LabRoute
   '/lipid': typeof LipidRoute
   '/obesity': typeof ObesityRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/drugs': typeof DrugsRoute
+  '/journals': typeof JournalsRoute
   '/lab': typeof LabRoute
   '/lipid': typeof LipidRoute
   '/obesity': typeof ObesityRoute
@@ -87,17 +96,27 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/drugs'
+    | '/journals'
     | '/lab'
     | '/lipid'
     | '/obesity'
     | '/vaccine'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/compare' | '/drugs' | '/lab' | '/lipid' | '/obesity' | '/vaccine'
+  to:
+    | '/'
+    | '/compare'
+    | '/drugs'
+    | '/journals'
+    | '/lab'
+    | '/lipid'
+    | '/obesity'
+    | '/vaccine'
   id:
     | '__root__'
     | '/'
     | '/compare'
     | '/drugs'
+    | '/journals'
     | '/lab'
     | '/lipid'
     | '/obesity'
@@ -108,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
   DrugsRoute: typeof DrugsRoute
+  JournalsRoute: typeof JournalsRoute
   LabRoute: typeof LabRoute
   LipidRoute: typeof LipidRoute
   ObesityRoute: typeof ObesityRoute
@@ -144,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LabRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journals': {
+      id: '/journals'
+      path: '/journals'
+      fullPath: '/journals'
+      preLoaderRoute: typeof JournalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/drugs': {
       id: '/drugs'
       path: '/drugs'
@@ -172,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
   DrugsRoute: DrugsRoute,
+  JournalsRoute: JournalsRoute,
   LabRoute: LabRoute,
   LipidRoute: LipidRoute,
   ObesityRoute: ObesityRoute,

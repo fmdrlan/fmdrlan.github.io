@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 本機實驗用，不進版控
+experiment/
+
+# 建置與快取
+.vite/
+__pycache__/

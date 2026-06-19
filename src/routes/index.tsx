@@ -6,6 +6,7 @@ import {
   Syringe,
   Scale,
   Weight,
+  BookOpen,
 } from 'lucide-react'
 import { WarningBox } from '../components/WarningBox'
 import { ToolCard } from '../components/ToolCard'
@@ -72,6 +73,12 @@ function Landing() {
             name="門診問診工具"
             desc="結構化問診表，自動生成病歷文字及症狀導向 order 提示。僅支援肥胖議題"
             badge={<Badge variant="wip">建造中</Badge>}
+          />
+          <ToolCard
+            href="/journals"
+            icon={BookOpen}
+            name="頂尖期刊速覽"
+            desc="四大綜合與家醫科期刊近期研究、回顧文章，每週自動更新"
           />
         </nav>
 

@@ -1,4 +1,4 @@
-import { Home, Search, FlaskConical, TrendingUp, Syringe, Scale, Weight } from 'lucide-react'
+import { Home, Search, FlaskConical, TrendingUp, Syringe, Scale, Weight, BookOpen } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
@@ -12,6 +12,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: '/vaccine', label: '疫苗查詢', icon: Syringe },
   { href: '/compare', label: '藥物類別比較', icon: Scale },
   { href: '/obesity', label: '門診問診', icon: Weight },
+  { href: '/journals', label: '期刊速覽', icon: BookOpen },
 ]
 
 function isReactRoute(href: string) {
