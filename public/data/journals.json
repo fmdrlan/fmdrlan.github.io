@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19",
+  "generatedAt": "2026-06-22",
   "windowDays": 30,
   "journals": [
     {
@@ -35,8 +35,27 @@
       "name": "BJGP"
     }
   ],
-  "count": 64,
+  "count": 60,
   "articles": [
+    {
+      "pmid": "42314718",
+      "title": "The UCL-Lancet Commission on Migration and Health: review of the state of progress",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jun 20",
+      "sortDate": "2026-06-20",
+      "authors": "Abubakar I, Tellez D, Aldridge RW, Altare C, Barreto ML, Boukari Y, Burns R, Cabieses B, et al.",
+      "abstract": [
+        {
+          "text": "Although progress towards implementation of international agreements since publication of the UCL-Lancet Commission on Migration and Health in December, 2018, has been slow, global trends in migration and forced displacement have continued to rise. However, the COVID-19 pandemic showed that reaching refugees and migrants with health interventions is feasible with political will. The benefits of refugee-inclusive and migrant-inclusive health-care systems during emergencies (eg, COVID-19 and the war in Ukraine) are apparent, with numerous examples of inclusive policy making being rapidly introduced and innovative models developed to support health-care access, including preventive measures such as vaccination. Lessons from these successes should be learned and incorporated into future policy and practice. However, global political and financial uncertainty and disruption-combined with multiple conflicts and natural disasters-have increased individuals' need to move, which will continue to be exacerbated by the climate crisis. Although new conflicts and exacerbations of existing ones have led to a rise in forced displacement within and across national borders, labour migration has also risen dramatically, with the pandemic highlighting the health and social needs of these groups globally. The need for strong leadership and accountability, engagement of policy makers in the highest-level fora, and improved access to quality health services for refugees and migrants has never been greater. In this Review, nearly 8 years after the UCL-Lancet Commission on Migration and Health was published, we renew our call for action to: (1) improve health-care access and optimise outcomes for refugees and migrants by emphasising health in all migration and forced displacement policies; (2) establish data systems to monitor progress, together with appropriate use of new technologies to improve access, prevent harm, and safeguard privacy; (3) support research on adaptation to and mitigation of the health consequences of climate change on refugees and migrants; and (4) renew focus on the political determinants of health outcomes for people on the move. At this pivotal moment, with geopolitical, sociodemographic, and environmental turmoil, political leaders and societies can shape a better future by leveraging the human capital of migrants and upholding the human rights and dignity of all.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)00494-0",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42314718/",
+      "titleZh": ""
+    },
     {
       "pmid": "42259343",
       "title": "Elecoglipron, an oral small molecule GLP-1 receptor agonist in adults with type 2 diabetes (SOLSTICE): a multicentre, phase 2b, randomised, placebo-controlled trial",
@@ -433,138 +452,6 @@
       "doi": "10.3399/BJGP.2025.0720",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41807080/",
       "titleZh": "有色皮膚患者的濕疹、痤瘡和牛皮癬：一項基於英國的定性研究"
-    },
-    {
-      "pmid": "42309117",
-      "title": "Cervical cancer mortality trends following HPV vaccination in England, 2001-24: an analysis of population-based mortality data",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 17",
-      "sortDate": "2026-06-17",
-      "authors": "Sasieni P, Falcaro M",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Human papillomavirus (HPV) vaccination is a key component of global cervical cancer elimination strategies. While substantial declines in cervical cancer incidence have been observed in several countries, evidence of its effect on mortality is scarce. England introduced a national HPV vaccination programme in 2008 for girls aged 12-13 years (achieving 80-90% coverage before the COVID-19 pandemic), with a catch-up campaign in 2008-10 for girls aged 14-18 years. We aimed to investigate trends in cervical cancer mortality and to estimate the reduction in cervical cancer deaths in young women in England following the introduction of HPV vaccination.",
-          "labelZh": "背景",
-          "textZh": "人類乳突病毒 (HPV) 疫苗接種是全球子宮頸癌消除策略的關鍵組成部分。雖然在一些國家觀察到子宮頸癌發病率大幅下降，但對死亡率影響的證據卻很少。英格蘭於 2008 年針對 12-13 歲女孩推出了全國 HPV 疫苗接種計劃（在 COVID-19 大流行之前已實現 80-90% 的覆蓋率），並於 2008-10 年針對 14-18 歲女孩開展了一項追趕運動。我們的目的是調查子宮頸癌死亡率的趨勢，並估計引入 HPV 疫苗接種後英國年輕女性子宮頸癌死亡率的減少情況。"
-        },
-        {
-          "label": "METHODS",
-          "text": "We analysed population-based cervical cancer mortality data from England between 2001 and 2024 among women aged 20-24, 25-29, and 30-34 years. HPV vaccination coverage by birth cohort was obtained from official reports and used to estimate, for each age group and calendar year of death, the proportion of women who had been vaccinated. We plotted observed and adjusted age-specific mortality rates against year of death and overlaid a smoothed curve. Poisson regression applied to the numbers of deaths was used to estimate the relative risk reduction in vaccinated women compared with what was expected in the absence of vaccination, assuming no herd immunity. Confidence intervals were obtained by inverting the likelihood ratio test.",
-          "labelZh": "方法",
-          "textZh": "我們分析了 2001 年至 2024 年間英國 20-24 歲、25-29 歲和 30-34 歲女性的子宮頸癌死亡率數據。按出生隊列劃分的 HPV 疫苗接種覆蓋率來自官方報告，並用於估計每個年齡組和死亡日曆年的已接種疫苗的女性比例。我們根據死亡年份繪製了觀察到的和調整後的特定年齡死亡率，並疊加了一條平滑曲線。假設沒有群體免疫，對死亡人數應用泊松回歸來估計接種疫苗的婦女與未接種疫苗的預期相比的相對風險降低程度。透過反轉似然比檢定獲得信賴區間。"
-        },
-        {
-          "label": "FINDINGS",
-          "text": "In women aged 20-24 years between 2020 and 2024, in whom vaccination coverage was around 88-90% at age 12-13 years, no deaths occurred, compared with 23·1 expected deaths based on historical rates, corresponding to a mortality reduction of 100% (95% CI 84-100). In earlier birth cohorts, who were offered vaccination up to age 18 years with coverage of around 63-87%, mortality reductions of 80% (51-94) in women aged 20-24 years in 2015-19, and 69% (55-79) in women aged 25-29 years in 2020-24 were observed. The relative risk reduction in vaccinated women was estimated from population-level data to be 100% (95% CI 81 to 100) in women aged 20-24 years, 100% (89 to 100) in those aged 25-29 years, and 63% (-13 to 100) in those aged 30-34 years. Up until the end of 2024, HPV vaccination in England was associated with a reduction of around 199·6 cervical cancer deaths (95% CI 125·0-274·2).",
-          "labelZh": "發現",
-          "textZh": "2020 年至 2024 年間，年齡在 20-24 歲的女性中，12-13 歲時疫苗接種覆蓋率約為 88-90%，沒有發生死亡，而根據歷史率計算的預期死亡人數為 23·1，相當於死亡率降低了 100%（95% CI 84-100）。在較早出生的隊列中，接種疫苗的年齡在 18 歲以下，覆蓋率約為 63-87%，觀察到 2015-19 年 20-24 歲女性的死亡率下降了 80%（51-94），2020-24 年 25-29 歲女性的死亡率下降了 69%（55-79%（55-79%）。根據人口層級數據估計，接種疫苗的女性的相對風險降低率在 20-24 歲女性中為 100%（95% CI 81 至 100），在 25-29 歲女性中為 100%（89 至 100），在 30-34 歲女性中為 63%（13 至 100）。截至 2024 年底，英格蘭的 HPV 疫苗接種使子宮頸癌死亡人數減少了約 199·6（95% CI 125·0-274·2）。"
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "Our findings provide the first robust national-level evidence, albeit observational, that high HPV vaccination coverage is associated with a substantial reduction in cervical cancer deaths. This is shown by the substantial decrease in cervical cancer deaths observed among women aged 20-29 years in England, particularly among those vaccinated at ages 12-13 years. These findings support the achievability of the WHO goal of eliminating cervical cancer as a public health problem, and efforts should be made to achieve high vaccine uptake among young adolescents globally.",
-          "labelZh": "詮釋",
-          "textZh": "我們的研究結果提供了第一個強有力的國家級證據（儘管是觀察性的），表明高 HPV 疫苗接種覆蓋率與子宮頸癌死亡人數的大幅減少有關。英國 20-29 歲女性，尤其是 12-13 歲接種疫苗的女性中，子宮頸癌死亡率大幅下降就證明了這一點。這些發現支持世衛組織消除子宮頸癌這個公共衛生問題的目標的可實現性，並應努力提高全球青少年的疫苗接種率。"
-        },
-        {
-          "label": "FUNDING",
-          "text": "Cancer Research UK.",
-          "labelZh": "經費來源",
-          "textZh": "英國癌症研究中心。"
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00918-9",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42309117/",
-      "titleZh": "2001-24 年英格蘭接種 HPV 疫苗後的子宮頸癌死亡率趨勢：基於人群的死亡率數據分析"
-    },
-    {
-      "pmid": "42309116",
-      "title": "Patellar resurfacing in total knee replacement: 20-year clinical and economic results of a large multicentre, randomised controlled trial in the UK",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 17",
-      "sortDate": "2026-06-17",
-      "authors": "Murray DW, Hudson J, Dakin H, MacLennan G, Little M, Gray A, Breeman S, Campbell MK",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "There is conflicting evidence regarding the merits of patellar resurfacing during total knee replacement (TKR), as previous randomised controlled trials (RCTs) have been under-powered and with follow-up of ten years or less.",
-          "labelZh": "背景",
-          "textZh": "關於全膝關節置換術 (TKR) 期間髕骨表面置換的優點，存在相互矛盾的證據，因為先前的隨機對照試驗 (RCT) 效力不足，且追蹤時間為十年或更短。"
-        },
-        {
-          "label": "METHODS",
-          "text": "A pragmatic, multicentre, open-label RCT was initiated in 1999 in the UK. Within a partial-factorial design, participants were randomly allocated to receive or not receive patellar resurfacing during primary TKR and were followed up for 20 years. Adult (aged ≥18 years) patients due to have a primary TKR under the care of a collaborating surgeon were eligible. Participants were allocated (1:1) using an automated telephone service stratified by surgeon, with minimisation according to the patients' age (<60 years, 60-79 years, ≥80 years), sex, and location of d isease. The primary outcome measure was the Oxford Knee Score (OKS), analysed using repeated measures mixed-effects linear regression analysis with marginal differences reported. Secondary measures included the 12-Item Short Form Health Survey (SF-12), the European Quality of Life 5-Dimensions 3-Levels (EQ-5D-3L), costs, cost-effectiveness, and subsequent knee surgery. This trial is registered with ISRCTN Registry, ISRCTN45837371.",
-          "labelZh": "方法",
-          "textZh": "一項務實、多中心、開放標籤的隨機對照試驗於 1999 年在英國啟動。在部分因素設計中，參與者在初次 TKR 期間被隨機分配接受或不接受髕骨表面置換術，並追蹤 20 年。在合作外科醫生的護理下進行初次 TKR 的成年（年齡≥18 歲）患者符合資格。參與者透過外科醫師分層的自動電話服務進行分配（1:1），並根據患者的年齡（<60 歲、60-79 歲、≥80 歲）、性別和疾病部位進行最小化分配。主要結果指標為牛津膝評分 (OKS)，使用重複測量混合效應線性迴歸分析進行分析，並報告邊際差異。次要指標包括 12 項簡短健康調查 (SF-12)、歐洲生活品質 5 維 3 級 (EQ-5D-3L)、費用、成本效益以及隨後的膝關節手術。本試驗已在 ISRCTN 註冊中心註冊，ISRCTN45837371。"
-        },
-        {
-          "label": "FINDINGS",
-          "text": "Between April 8, 1999, and Jan 13, 2003, 1715 participants (955 female and 760 male; mean age 70 years [SD 8], mean BMI 29·7 kg/m2) were randomly assigned: 861 to patellar resurfacing and 854 to no resurfacing. At the 20-year follow-up, 132 participants in the patellar resurfacing group and 110 participants in the non-resurfacing group provided outcome data, although marginal differences included earlier data for participants who died or had missing 20-year data. The marginal difference in OKS over the whole 20-year follow-up was 0·76 (95% CI -0·08 to 1·59; p=0·076) in favour of patellar resurfacing. During the 20-year follow-up period, although not significant, differences in OKS, SF-12, and EQ-5D-3L, readmissions, minor or intermediate operations, patella-related operations, major operations, and complications all favoured patellar resurfacing. At 20 years, the resurfaced group accrued significantly more quality-adjusted life-years (QALYs) than the non-resurfaced group (7·295 vs 6·884; difference 0·380, 95% CI 0·061 to 0·700; p=0·020). However, QALY differences were smaller in a sensitivity analysis assuming no difference in mortality (7·209 vs 6·964; difference 0·183, 95% CI -0·034 to 0·400; p=0·10). The cost of readmissions was non-significantly lower in the resurfaced group and offset the higher cost of primary TKR; therefore, overall 20-year health-care costs per participant were similar (£10 825 vs £10 889; difference -£6, 95% CI -£721 to £708; p=0·99).",
-          "labelZh": "發現",
-          "textZh": "1999年4月8日至2003年1月13日期間，1715名參與者（955名女性和760名男性；平均年齡70歲[SD 8]，平均BMI 29·7 kg/m2）被隨機分配：861名接受髕骨表面置換，854名不接受表面重修。在 20 年的追蹤中，髕骨表面置換組的 132 名參與者和非表面置換組的 110 名參與者提供了結果數據，儘管邊際差異包括死亡或缺失 20 年數據的參與者的早期數據。整個 20 年追蹤期間 OKS 的邊際差異為 0·76（95% CI -0·08 至 1·59；p=0·076），有利於髕骨表面置換。在 20 年的追蹤期間，雖然不顯著，但 OKS、SF-12 和 EQ-5D-3L、再入院、小中或中級手術、髕骨相關手術、大手術和併發症的差異均有利於髕骨表面置換。 20 年時，重新表面治療組比未重新表面治療組獲得了顯著更多的質量調整生命年 (QALY)（7·295 vs 6·884；差異 0·380，95% CI 0·061 至 0·700；p=0·020）。然而，假設死亡率沒有差異，敏感性分析的 QALY 差異較小（7·209 vs 6·964；差異 0·183，95% CI -0·034 至 0·400；p=0·10）。重新出現組別的再入院費用並沒有顯著降低，抵消了初級 TKR 的較高費用；因此，每位參與者的 20 年總體醫療保健費用相似（10 825 英鎊與 10 889 英鎊；差異 - 6 英鎊，95% CI - 721 英鎊至 708 英鎊；p=0·99）。"
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "There was no significant difference in primary outcome (OKS) or other clinical endpoints. However, as clinical differences tend to support patellar resurfacing, the resurfacing group had significantly higher QALYs. There was no difference in costs over the 20-year period, and patellar resurfacing had a 99% probability of being cost-effective at any threshold above £10 000 per QALY gained. The evidence is therefore weighted towards resurfacing being the approach of first choice.",
-          "labelZh": "詮釋",
-          "textZh": "主要結局（OKS）或其他臨床終點沒有顯著差異。然而，由於臨床差異往往支持髕骨表面置換，因此表面置換組的 QALY 顯著較高。 20 年期間的成本沒有差異，在每 QALY 收益超過 10 000 英鎊的任何閾值下，髕骨表面置換術具有成本效益的可能性為 99%。因此，證據傾向於將表面重鋪作為首選方法。"
-        },
-        {
-          "label": "FUNDING",
-          "text": "UK National Institute for Health and Care Research Health Technology Assessment Programme.",
-          "labelZh": "經費來源",
-          "textZh": "英國國家健康與護理研究所健康技術評估計劃。"
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00652-5",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42309116/",
-      "titleZh": "全膝關節置換術中的髕骨表面置換：英國一項大型多中心隨機對照試驗的 20 年臨床和經濟結果"
-    },
-    {
-      "pmid": "42309115",
-      "title": "Benzylpenicillin versus flucloxacillin or cloxacillin for the treatment of penicillin-susceptible Staphylococcus aureus bacteraemia (SNAP): an international, multicentre, open-label, non-inferiority randomised controlled trial",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 17",
-      "sortDate": "2026-06-17",
-      "authors": "Staphylococcus aureus Network Adaptive Platform (SNAP) Trial Group",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Previously considered rare, penicillin-susceptible Staphylococcus aureus (PSSA) bacteraemia has re-emerged worldwide. Although benzylpenicillin might offer advantages in terms of pharmacokinetic and adverse effect profiles, anti-staphylococcal penicillins are recommended for serious infections because of concern over undetected penicillin resistance. We aimed to compare benzylpenicillin with anti-staphylococcal penicillins (cloxacillin or flucloxacillin) for the treatment of PSSA bacteraemia in adults.",
-          "labelZh": "背景",
-          "textZh": "以前被認為罕見的青黴素敏感金黃色葡萄球菌 (PSSA) 菌血症如今在世界各地重新出現。儘管芐青黴素在藥物動力學和不良反應方面可能具有優勢，但由於擔心未檢測到青黴素抗藥性，建議將抗葡萄球菌青黴素用於嚴重感染。我們的目的是比較芐青黴素與抗葡萄球菌青黴素（氯唑西林或氟氯西林）治療成人 PSSA 菌血症的效果。"
-        },
-        {
-          "label": "METHODS",
-          "text": "This investigator-initiated, international, multicentre, open-label, non-inferiority, randomised controlled trial was conducted within the PSSA silo of the backbone domain of the ongoing S aureus Network Adaptive Platform (SNAP) trial. We enrolled patients of all ages who were admitted with S aureus bacteraemia at 67 hospitals across Australia, New Zealand, Canada, Israel, the Netherlands, the UK, Singapore, and South Africa. Herein, we report results for adult patients (aged ≥18 years). Participants were randomly allocated 1:1 to receive either benzylpenicillin, or flucloxacillin or cloxacillin. Trial staff, staff caring for participants, and participants were aware of the treatment allocated and received. Cloxacillin was used only where flucloxacillin was not available (ie, Canada, Israel, Singapore, and South Africa). Recommended standard dosing for benzylpenicillin was 1·8 g intravenously once every 4 h or 2·4 g once every 6 h; for flucloxacillin 2·0 g intravenously once every 6 h; and for cloxacillin 2·0 g intravenously once every 4 h. The primary outcome was all-cause mortality 90 days after platform entry, assessed in the intention-to-treat population, including all patients with available data. The primary outcome was analysed by use of a hierarchical Bayesian logistic regression model, with non-inferiority of benzylpenicillin defined as an adjusted odds ratio (OR) of less than 1·20. Analyses occurred after every 500 participants reached 90-day follow-up. The SNAP trial is registered with ClinicalTrials.gov (NCT05137119) and is ongoing.",
-          "labelZh": "方法",
-          "textZh": "這項由研究者發起的、國際性的、多中心的、開放標籤的、非劣效性的隨機對照試驗是在正在進行的金黃色葡萄球菌網絡自適應平台 (SNAP) 試驗的骨幹領域的 PSSA 孤島內進行的。我們招募了澳洲、紐西蘭、加拿大、以色列、荷蘭、英國、新加坡和南非 67 家醫院因金黃色葡萄球菌菌血症入院的所有年齡層的患者。在此，我們報告成年患者（年齡≥18 歲）的結果。參與者以 1:1 的比例隨機分配接受芐青黴素、氟氯西林或氯唑西林治療。試驗工作人員、照顧參與者的工作人員以及參與者都了解分配和接受的治療。僅在無法取得氟氯西林的地區（即加拿大、以色列、新加坡和南非）使用氯唑西林。建議的青黴素標準劑量為靜脈注射1·8 g，每4 h一次或2·4 g，每6 h一次；氟氯西林 2·0 g，靜脈注射，每 6 小時一次；氯唑西林2·0 g，靜脈注射，每4小時1次。主要結局是進入平台後 90 天的全因死亡率，在意圖治療族群中進行評估，包括所有具有可用數據的患者。主要結果採用分層貝葉斯邏輯迴歸模型進行分析，青黴素的非劣效性定義為調整後的比值比 (OR) 小於 1·20。每 500 名參與者達到 90 天的追蹤後進行分析。 SNAP 試驗已在 ClinicalTrials.gov 註冊 (NCT05137119)，並且正在進行中。"
-        },
-        {
-          "label": "FINDINGS",
-          "text": "Following the fourth interim analysis, the data and safety monitoring committee recommended ceasing recruitment before prespecified stopping thresholds were reached because of increased acute kidney injury (AKI) in participants receiving flucloxacillin or cloxacillin, and the PSSA silo was closed for recruitment on Aug 7, 2024. Between Feb 18, 2022, and June 21, 2024, of 493 adults with PSSA bacteraemia, 125 were randomly assigned to the flucloxacillin or cloxacillin group and 156 to the benzylpenicillin group. The median age was 67 years (IQR 56-77), 87 (31%) were female, and 194 (69%) were male. 21 (14%) of 152 in the benzylpenicillin group and 26 (22%) of 121 in the flucloxacillin or cloxacillin group met the primary outcome of death at 90 days (adjusted OR 0·67, 95% credible interval [CrI] 0·35-1·28), with a posterior probability of benzylpenicillin non-inferiority of 96·1% and of benzylpenicillin superiority of 88·9%. AKI occurred in 17 (11%) of 153 patients in the benzylpenicillin group and 27 (22%) of 124 patients in the flucloxacillin or cloxacillin group (adjusted OR 0·50, 95% CrI 0·26-0·94), corresponding to a posterior probability of non-inferiority of benzylpenicillin of 99·8% and superiority of benzylpenicillin of 98·4%. Seven total serious adverse reactions were reported from six (4%) of 156 participants in the benzylpenicillin group and ten were reported from nine (7%) of 125 participants in the flucloxacillin or cloxacillin group.",
-          "labelZh": "發現",
-          "textZh": "在第四次中期分析之後，數據和安全監測委員會建議在達到預先設定的停止閾值之前停止招募，因為接受氟氯西林或氯唑西林的參與者急性腎損傷（AKI）增加，並且 PSSA 孤島於 2024 年 8 月 7 日關閉招募。在 2022 年 2 月 18 日至 2024 年 6 月 21 日期間，在 493 名患有 PSSA 菌血症的成年人中，隨機抽取了 125 名分配給氟氯西林或氯唑西林組，156分配給芐青黴素組。中位數年齡為 67 歲 (IQR 56-77)，其中 87 名 (31%) 為女性，194 名 (69%) 為男性。青黴素組 152 例中有 21 例 (14%) 以及氟氯西林或氯唑西林組 121 例中有 26 例 (22%) 在 90 天時達到死亡主要結局（調整後 OR 0·67，95% 可信區間 [CrI] 0·35-1·28），青黴素非劣效性後驗機率為96·1%，青黴素優越性88·9%。青黴素組 153 名患者中有 17 名 (11%) 發生 AKI（調整後 OR 0·50，95% CrI 0·26-0·94），調整後 OR 0·50，95% CrI 0·26-0·94），對應於青黴素機率為非劣效性。 98·4%的芐青黴素。青黴素組 156 名參與者中有 6 名 (4%) 報告了 7 項嚴重不良反應，氟氯西林或氯唑西林組 125 名參與者中有 9 名 (7%) 報告了 10 項嚴重不良反應。"
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "Although the prespecified non-inferiority criterion for benzylpenicillin was not met, the probability of benzylpenicillin being non-inferior for mortality, along with a reduction in risk of AKI, indicates that benzylpenicillin should be preferred over flucloxacillin or cloxacillin for treatment of PSSA bacteraemia in adults.",
-          "labelZh": "詮釋",
-          "textZh": "儘管未滿足預先設定的芐青黴素非劣效標準，但芐青黴素在死亡率方面非劣效的可能性以及 AKI 風險的降低表明，在治療成人 PSSA 菌血症時，應優先選擇芐青黴素而不是氟氯西林或氯唑西林。"
-        },
-        {
-          "label": "FUNDING",
-          "text": "National Health and Medical Research Council, Medical Research Future Fund, Canadian Institutes of Health Research, Accelerating Clinical Trials Consortium, UMC Utrecht, ZonMW Good Use of Medicines programme, Health Research Council of New Zealand, Starship Foundation, National Healthcare Group Fund, National Medical Research Council, National Institute for Health and Care Research, Medical Research Council, and Paterson Family Foundation.",
-          "labelZh": "經費來源",
-          "textZh": "國家健康與醫學研究委員會、醫學研究未來基金、加拿大健康研究所、加速臨床試驗聯盟、UMC Utrecht、ZonMW Good Use of Medicines 計劃、新西蘭健康研究委員會、Starship 基金會、國家醫療保健集團基金、國家醫學研究委員會、國家健康和護理研究所、醫學研究委員會和帕特森家庭基金會。"
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00761-0",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42309115/",
-      "titleZh": "芐青黴素與氟氯西林或氯唑西林治療青黴素敏感金黃色葡萄球菌菌血症 (SNAP)：一項國際、多中心、開放標籤、非劣效性隨機對照試驗"
     },
     {
       "pmid": "42307937",
@@ -1325,50 +1212,6 @@
       "titleZh": "測量腰圍在初級保健中的價值：一項混合方法研究"
     },
     {
-      "pmid": "42289183",
-      "title": "Mezigdomide, carfilzomib, and dexamethasone versus carfilzomib and dexamethasone in patients with relapsed or refractory multiple myeloma (SUCCESSOR-2): a phase 3, open-label, randomised controlled trial",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 14",
-      "sortDate": "2026-06-14",
-      "authors": "Dimopoulos MA, Schjesvold F, Fu C, Hartley-Brown MA, Gomez C, Reece D, Mikala G, Alkharabsheh O, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "A growing number of patients with multiple myeloma are anti-CD38 antibody-exposed and lenalidomide-exposed at first relapse, subsequently limiting their treatment options. Mezigdomide, a potent cereblon E3 ligase modulator, induces maximal, rapid Ikaros and Aiolos degradation, resulting in enhanced myeloma cell cytotoxicity and immune stimulation versus immunomodulatory drugs. The SUCCESSOR-2 trial evaluates the efficacy and safety of mezigdomide in combination with carfilzomib and dexamethasone versus carfilzomib plus dexamethasone.",
-          "labelZh": "背景",
-          "textZh": "越來越多的多發性骨髓瘤患者在首次復發時暴露於抗 CD38 抗體和來那度胺，從而限制了他們的治療選擇。 Mezigdomide 是一種有效的 cereblon E3 連接酶調節劑，可誘導最大、快速的 Ikaros 和 Aiolos 降解，從而與免疫調節藥物相比增強骨髓瘤細胞的細胞毒性和免疫刺激。 SUCCESSOR-2 試驗評估了美齊格多胺合併卡非佐米和地塞米松與卡非佐米加地塞米鬆的療效和安全性。"
-        },
-        {
-          "label": "METHODS",
-          "text": "This phase 3, open-label, randomised controlled trial was conducted at 160 hospital-based sites in 26 countries using a two-stage, inferentially seamless design. Eligible adult patients had measurable multiple myeloma, had received at least one previous regimen (including anti-CD38 antibodies and lenalidomide) on which they had achieved minimal response or better, and documented disease progression during or after their most recent treatment. Interactive response technology was used to randomly assign patients, stratified by age (≤70 years or >70 years), number of previous lines of therapy (≤2 or >2), and International Staging System stage (I, II, or III). Patients received oral mezigdomide (days 1-21 of each 28-day cycle) plus intravenous carfilzomib (56 mg/m2 weekly) and oral or intravenous dexamethasone (40 mg weekly) or carfilzomib (56 mg/m2 twice weekly or 70 mg/m2 weekly) and dexamethasone (20 mg twice weekly or 40 mg weekly). In stage 1, mezigdomide dosing across three levels was optimised. In stage 2, patients were randomly assigned to the selected mezigdomide dose (1·0 mg) plus carfilzomib and dexamethasone or carfilzomib-dexamethasone alone. The primary endpoint was progression-free survival (PFS) evaluated in patients who received 1·0 mg mezigdomide plus carfilzomib and dexamethasone or carfilzomib-dexamethasone alone across both study stages. No imputation was planned for missing efficacy endpoint values or missing safety evaluations. The trial is registered with ClinicalTrials.gov (NCT05552976) and EUClinicalTrials.eu (EUCT number 2022-500861-29-00). The trial is active but not recruiting.",
-          "labelZh": "方法",
-          "textZh": "這項 3 期開放標籤隨機對照試驗在 26 個國家的 160 家醫院進行，採用兩階段推理無縫設計。符合條件的成年患者患有可測量的多發性骨髓瘤，接受過至少一種既往治療方案（包括抗 CD38 抗體和來那度胺），並取得了最低反應或更好的反應，並記錄了最近一次治療期間或治療後的疾病進展。採用互動式反應技術對患者進行隨機分配，並依年齡（≤70 歲或>70 歲）、先前治療次數（≤2 或>2）和國際分期系統分期（I、II 或 III）進行分層。患者接受口服美齊格多胺（每個 28 天週期的第 1-21 天）加靜脈注射卡非佐米（每週 56 mg/m2）和口服或靜脈注射地塞米松（每週 40 mg）或卡非佐米（56 mg/m2 每週兩次或 70 mg/m2 每週兩次）和地塞米（200 mg 每週兩次或每週 40 mg 每週 40 mg 每週 40 mg 40 mg 40 mg 每週 40 mg 每週 40 mg）每週 40 mg 每週 40 mg 每週 40 mg 每週 40 mg）和地塞40 mg 每週 40 mg 每週兩次）和地塞40 mg 每週 40 mg 每週 40 mg 40 mg）和地塞40 mg 每週 40 mg 每週兩次或地在第一階段，優化了三個等級的美齊格多胺劑量。在第2階段，患者被隨機分配至選定的美齊格多胺劑量（1·0 mg）加卡非佐米和地塞米鬆或單獨使用卡非佐米-地塞米松。主要終點是在兩個研究階段接受 1·0 mg 美齊格多胺加卡非佐米和地塞米鬆或單獨使用卡非佐米-地塞米鬆的患者中評估的無進展生存期 (PFS)。沒有計劃對缺失的療效終點值或缺失的安全性評估進行插補。該試驗已在 ClinicalTrials.gov (NCT05552976) 和 EUClinicalTrials.eu（EUCT 號 2022-500861-29-00）註冊。試驗正在進行中，但尚未招募。"
-        },
-        {
-          "label": "FINDINGS",
-          "text": "Between Feb 3, 2023, and Nov 28, 2025, 762 patients were assessed for eligibility, of which 606 patients were enrolled and 479 were included in the analyses (288 patients in the mezigdomide-carfilzomib-dexamethasone group and 191 patients in the carfilzomib-dexamethasone group). 252 (53%) patients were male, 411 (86%) were anti-CD38 antibody-refractory, and 363 (76%) were lenalidomide-refractory, with a median of two previous lines of therapy (IQR 2-4). At 10·6 months median follow-up, mezigdomide-carfilzomib-dexamethasone significantly improved PFS compared with carfilzomib-dexamethasone (median 18·0 months vs 8·3 months; hazard ratio 0·48 [95% CI 0·36-0·63]; p<0·0001). Grade 3 or 4 adverse events were observed in 241 (84%) patients receiving mezigdomide-carfilzomib-dexamethasone versus 105 (56%) patients receiving carfilzomib-dexamethasone, including neutropenia (176 [61%] vs 17 [9%]) and infections (98 [34%] vs 29 [16%]). Eight (3%; 95% CI 1-5) and one (1%; 95% CI 0-3) treatment-related grade 5 adverse events were reported with mezigdomide-carfilzomib-dexamethasone and with carfilzomib-dexamethasone, respectively (rate difference 2%; 95% CI -1 to 5). Deaths occurred in 62 (22%) patients in the mezigdomide-carfilzomib-dexamethasone group and 51 (27%) patients in the carfilzomib-dexamethasone group, mainly due to disease progression.",
-          "labelZh": "發現",
-          "textZh": "2023年2月3日至2025年11月28日期間，對762名患者進行了資格評估，其中606名患者入組，479名患者納入分析（美齊格多胺-卡非佐米-地塞米松組有288名患者，卡非佐米-地塞米松組有191名患者組）。 252 名患者 (53%) 為男性，411 名患者 (86%) 為抗 CD38 抗體難治性患者，363 名患者 (76%) 為來那度胺難治性患者，中位數為既往兩線治療 (IQR 2-4)。中位追蹤 10·6 個月時，與卡非佐米-地塞米松相比，美齊格多胺-卡非佐米-地塞米松顯著改善 PFS（中位數 18·0 個月 vs 8·3 個月；風險比 0·48 [95% CI 0·36-0·63]；p<0·0·001）。接受美齊格多胺-卡非佐米-地塞米松治療的患者中有 241 例 (84%) 觀察到 3 級或 4 級不良事件，而接受卡非佐米-地塞米松治療的患者有 105 例 (56%)，其中包括中性粒細胞減少症（176 例 [61%] 比 17%] [16%]）。美齊格多胺-卡非佐米-地塞米松組和卡非佐米-地塞米松組分別報告了 8 例（3%；95% CI 1-5）和 1 例（1%；95% CI 0-3）與治療相關的 5 級不良事件（發生率差異 2%；95% CI -1 至 5）。美齊格多胺-卡非佐米-地塞米松組有 62 名患者（22%）死亡，卡非佐米-地塞米松組有 51 名患者（27%）死亡，主要是因為疾病惡化。"
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "Mezigdomide-carfilzomib-dexamethasone provided a significant PFS benefit compared with carfilzomib-dexamethasone alone, with higher rates of grade 3 or 4 adverse events, including infections, which were mostly manageable with standard clinical practice and supportive care. These findings support mezigdomide-carfilzomib-dexamethasone as a clinically meaningful treatment option as early as first relapse in predominantly triple-class-exposed, anti-CD38 antibody-refractory and lenalidomide-refractory patients, a growing population with substantial unmet need.",
-          "labelZh": "詮釋",
-          "textZh": "與單用卡非佐米-地塞米松相比，美齊格多胺-卡非佐米-地塞米松提供了顯著的 PFS 益處，但 3 級或 4 級不良事件（包括感染）的發生率更高，而這些不良事件大多可以透過標準臨床實踐和支持性護理來控制。這些發現支持美齊格多胺-卡非佐米-地塞米松作為一種有臨床意義的治療選擇，早在主要是三類暴露、抗CD38抗體難治性和來那度胺難治性患者的首次復發時，這些患者的需求大量未得到滿足，且不斷增長的人群。"
-        },
-        {
-          "label": "FUNDING",
-          "text": "Bristol Myers Squibb.",
-          "labelZh": "經費來源",
-          "textZh": "百時美施貴寶。"
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)01088-3",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42289183/",
-      "titleZh": "美齊格多胺、卡非佐米和地塞米松與卡非佐米和地塞米松治療復發或難治性多發性骨髓瘤患者的比較 (SUCCESSOR-2)：一項 3 期、開放標籤、隨機對照試驗"
-    },
-    {
       "pmid": "42294842",
       "title": "Lonvoguran Ziclumeran - In Vivo CRISPR Gene Editing in Hereditary Angioedema",
       "journal": "NEJM",
@@ -1443,50 +1286,6 @@
       "doi": "10.1056/NEJMoa2604657",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42294841/",
       "titleZh": "他克他單抗-達雷木單抗治療復發性或難治性骨髓瘤"
-    },
-    {
-      "pmid": "42250575",
-      "title": "Efficacy and safety of retatrutide, a GIP, GLP-1, and glucagon receptor agonist, in people with type 2 diabetes and inadequate glycaemic control with diet and exercise (TRANSCEND-T2D-1): a double-blind, randomised, phase 3 trial",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 13",
-      "sortDate": "2026-06-13",
-      "authors": "Bajaj HS, Welch M, Shah P, Luna E, Jaouimaa FZ, Liu B, Liu R, Chen Y, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Retatrutide is a GIP, GLP-1, and glucagon triple hormone receptor agonist, under clinical development for type 2 diabetes, obesity, and related complications. We aimed to assess the efficacy and safety of retatrutide as a monotherapy in people with type 2 diabetes that is inadequately controlled by diet and exercise alone.",
-          "labelZh": "背景",
-          "textZh": "Retatrutide 是一種 GIP、GLP-1 和胰高血糖素三激素受體激動劑，目前正在臨床開發中，用於治療第 2 型糖尿病、肥胖症和相關併發症。我們的目的是評估瑞他魯肽作為單一療法治療僅靠飲食和運動不足以控制的 2 型糖尿病患者的療效和安全性。"
-        },
-        {
-          "label": "METHODS",
-          "text": "In this 40-week, phase 3, randomised, double-blind, placebo-controlled trial at 48 sites in the USA, Mexico, and India, we recruited adults (aged ≥18 years) with type 2 diabetes that is inadequately controlled by diet and exercise alone, glycated haemoglobin (HbA1c) between 7·0% and 9·5% (53-80 mmol/mol), and BMI of at least 23 kg/m2. Participants were randomly assigned (1:1:1:1) to receive retatrutide (4 mg, 9 mg, or 12 mg) or placebo by once-weekly subcutaneous injection. The primary endpoint was the change in HbA1c concentration from baseline to week 40. A key secondary endpoint was the percentage change in bodyweight from baseline to week 40. This trial is registered with ClinicalTrials.gov, NCT06354660, and is completed.",
-          "labelZh": "方法",
-          "textZh": "在這項為期 40 週、第 3 期、隨機、雙盲、安慰劑對照試驗中，我們在美國、墨西哥和印度的 48 個地點進行了隨機、雙盲、安慰劑對照試驗，我們招募了僅靠飲食和運動不足以控制的 2 型糖尿病成人（年齡≥18 歲），糖化血紅蛋白 (HbA1c) 至少 7·0% 23公斤/平方公尺。參與者被隨機分配（1:1:1:1）接受瑞他魯肽（4 mg、9 mg 或 12 mg）或安慰劑，每週一次皮下注射。主要終點是 HbA1c 濃度從基線到第 40 週的變化。關鍵的次要終點是體重從基線到第 40 週的百分比變化。該試驗已在 ClinicalTrials.gov 註冊（NCT06354660）並已完成。"
-        },
-        {
-          "label": "FINDINGS",
-          "text": "Between April 10, 2024, and April 21, 2025, 930 participants were screened and 537 (296 [55%] female and 241 [45%] male) were randomly assigned: 134 to retatrutide 4 mg, 133 to retatrutide 9 mg, 136 to retatrutide 12 mg, and 134 to placebo. Baseline mean age was 48·8 years (SD 12·1), mean HbA1c concentration was 7·9% (SD 1·1), mean duration of diabetes was 2·5 years (SD 4·4), and mean BMI was 35·8 kg/m2 (SD 7·0). 490 (91%) participants completed the treatment period on study drug and 504 (94%) completed the study. For the treatment regimen estimand, the mean change from baseline in HbA1c concentration was -1·69% (SE 0·11) with retatrutide 4 mg, -1·86% (0·10) with 9 mg, and -1·94% (0·08) with 12 mg, versus -0·81% (0·12) with placebo, resulting in estimated treatment differences versus placebo of -0·88% (95% CI -1·18 to -0·59) with retatrutide 4 mg, -1·04% (-1·32 to -0·76) with 9 mg, and -1·12% (-1·39 to -0·85) with 12 mg (all p<0·0001). The mean percentage change from baseline in bodyweight was -11·5% (SE 0·7) with retatrutide 4 mg, -13·9% (0·8) with 9 mg, and -15·3% (0·8) with 12 mg, versus -2·6% (0·5) with placebo. The most frequent adverse events with retatrutide were generally mild to moderate gastrointestinal events, which subsided over time. Study intervention discontinuations due to adverse events were 2-5% with retatrutide and 0% with placebo. No severe hypoglycaemia was reported. Two deaths occurred during the study, both in the retatrutide 4 mg group and unrelated to the study drug.",
-          "labelZh": "發現",
-          "textZh": "2024年4月10日至2025年4月21日期間，對930名參與者進行了篩檢，並將537名參與者（296名[55%]女性和241名[45%]男性）隨機分配：134名受試者接受瑞他魯肽4 mg，133名[45%]男性）隨機分配：134名受試者接受瑞他魯肽4 mg，133名[45%]男性）隨機分配：134名受試者接受瑞他魯肽4 mg，133名受試者接受雷他139 mg，他接受雷肽139 mg，他接受雷他139 mg。基線平均年齡為 48·8 歲 (SD 12·1)，平均 HbA1c 濃度為 7·9% (SD 1·1)，平均糖尿病病程為 2·5 年 (SD 4·4)，平均 BMI 為 35·8 kg/m2 (SD 7·0)。 490 名（91%）參與者完成了研究藥物的治療期，504 名（94%）參與者完成了研究。對於治療方案估計值，瑞他魯肽 4 mg 組的 HbA1c 濃度相對於基線的平均變化為 -1·69% (SE 0·11)，9 mg 組為 -1·86% (0·10)，12 mg 組為 -1·94% (0·08)，而安慰劑組為 -018% (95%)瑞他魯肽 4 mg 的 CI -1·18 至 -0·59)，9 mg 的 CI -1·04% (-1·32 至 -0·76)，12 mg 的 CI -1·12% (-1·39 至 -0·85)（全部 p<0·0001）。瑞他魯肽 4 mg 組相對於基線的體重平均變化百分比為 -11·5% (SE 0·7)，9 mg 組為 -13·9% (0·8)，12 mg 組為 -15·3% (0·8)，而安慰劑組為 -2·6% (0·5)。瑞他魯肽最常見的不良事件通常是輕度至中度胃腸道事件，這些事件會隨著時間的推移而消退。瑞他魯肽組因不良事件導致研究介入終止的比例為 2-5%，安慰劑組為 0%。沒有嚴重低血糖的報告。研究期間發生了兩例死亡，均發生在瑞他魯肽 4 mg 組，且與研究藥物無關。"
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "Retatrutide showed significant improvements in glycaemic control and bodyweight reduction as a monotherapy in adults with type 2 diabetes that is inadequately controlled with diet and exercise alone, with an adverse event profile consistent with molecules with GLP-1 agonist activity, supporting its potential as an effective treatment for type 2 diabetes.",
-          "labelZh": "詮釋",
-          "textZh": "瑞他魯肽作為單藥治療 2 型糖尿病成人患者，在血糖控制和體重減輕方面表現出顯著改善，僅靠飲食和運動不足以控制病情，其不良事件特徵與 GLP-1 激動劑活性分子一致，支持其作為 2 型糖尿病有效治療的潛力。"
-        },
-        {
-          "label": "FUNDING",
-          "text": "Eli Lilly and Company.",
-          "labelZh": "經費來源",
-          "textZh": "禮來公司。"
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00967-0",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42250575/",
-      "titleZh": "瑞他魯肽（一種 GIP、GLP-1 和胰高血糖素受體激動劑）對飲食和運動血糖控制不足的 2 型糖尿病患者的療效和安全性 (TRANSCEND-T2D-1)：一項雙盲、隨機、3 期試驗"
     },
     {
       "pmid": "42258827",
