@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-29",
+  "generatedAt": "2026-07-06",
   "windowDays": 30,
   "journals": [
     {
@@ -35,8 +35,650 @@
       "name": "BJGP"
     }
   ],
-  "count": 40,
+  "count": 43,
   "articles": [
+    {
+      "pmid": "42335920",
+      "title": "Combined bladder-kidney transplantation: first-in-human feasibility trial",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jul 04",
+      "sortDate": "2026-07-04",
+      "authors": "Nassiri N, Gill IS",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Current surgical treatments for terminal bladder dysfunction include intestinal-based reconstructive approaches that carry substantial morbidity, particularly in immunosuppressed patients. These limitations prompted investigation into vascularised composite bladder allograft transplantation as a novel reconstructive alternative.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "This is an ongoing phase 0 feasibility trial of decreased-donor bladder or combined bladder-kidney transplantation at two academic medical centres in the USA. Eligible bladder transplant recipients are adults aged 18-70 years with non-functional, poorly compliant bladders. Ideal candidates for this trial include patients with pre-existing or concurrent immunosuppression requirements. The primary endpoints are technical feasibility, defined as completion of the operation with restoration of urinary continuity with graft perfusion, and patient safety, reported through adverse events. Here, we report on the safety, feasibility, and immunological and functional outcomes from the first-in-human kidney and bladder transplant as part of the study. This study was registered with ClinicalTrials.gov, NCT06337942 and NCT05462561, and is ongoing.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "FINDINGS",
+          "text": "The surgery was carried out in May, 2025. The patient was a 41-year-old anephric male with a terminal bladder and end-stage kidney disease from hypertension who had been on peritoneal dialysis for 7 years. Kidney and bladder were recovered from an ABO compatible 35-year-old female donor with terminal anoxic brain injury. The 8 h surgery was successful, with both organs having excellent perfusion and no intraoperative complications. On postoperative day 25, the patient developed a urine leak from the suprapubic tube tract and wound breakdown (Clavien-Dindo 4), which was managed surgically with good recovery. More than 6 months post-transplantation, the patient maintained appropriate renal (estimation glomerular filtration rate 52-55 mL/min per 1·73 m2) and bladder allograft function, with intact sensation and appropriate urge, bladder capacity of 600 mL, complete continence, spontaneous voiding with maximum flow rate 17 mL/s, and complete emptying with negligible post-void residual urine. The patient is maintained on triple therapy immunosuppression with tacrolimus, mycophenolate mofetil, and prednisone. Serial bladder biopsies have remained negative for cell-mediated or antibody-mediated rejection.",
+          "labelZh": "發現",
+          "textZh": ""
+        },
+        {
+          "label": "INTERPRETATION",
+          "text": "The first-in-human combined bladder-kidney transplantation demonstrates the technical feasibility of vascularised composite bladder allograft transplantation, with sustained bladder allograft function, sensation, continence, and voiding parameters, and no evidence of rejection beyond 6 months. These findings suggest bladder transplantation might represent a viable option for select patients with terminal bladder dysfunction, particularly those already requiring immunosuppression.",
+          "labelZh": "詮釋",
+          "textZh": ""
+        },
+        {
+          "label": "FUNDING",
+          "text": "American Urological Association's Research Scholar Award, the National Kidney Registry, OneLegacy, and University of California Los Angeles Department of Urology.",
+          "labelZh": "經費來源",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)00718-X",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42335920/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42309116",
+      "title": "Patellar resurfacing in total knee replacement: 20-year clinical and economic results of a large multicentre, randomised controlled trial in the UK",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jul 04",
+      "sortDate": "2026-07-04",
+      "authors": "Murray DW, Hudson J, Dakin H, MacLennan G, Little M, Gray A, Breeman S, Campbell MK",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "There is conflicting evidence regarding the merits of patellar resurfacing during total knee replacement (TKR), as previous randomised controlled trials (RCTs) have been under-powered and with follow-up of ten years or less.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "A pragmatic, multicentre, open-label RCT was initiated in 1999 in the UK. Within a partial-factorial design, participants were randomly allocated to receive or not receive patellar resurfacing during primary TKR and were followed up for 20 years. Adult (aged ≥18 years) patients due to have a primary TKR under the care of a collaborating surgeon were eligible. Participants were allocated (1:1) using an automated telephone service stratified by surgeon, with minimisation according to the patients' age (<60 years, 60-79 years, ≥80 years), sex, and location of d isease. The primary outcome measure was the Oxford Knee Score (OKS), analysed using repeated measures mixed-effects linear regression analysis with marginal differences reported. Secondary measures included the 12-Item Short Form Health Survey (SF-12), the European Quality of Life 5-Dimensions 3-Levels (EQ-5D-3L), costs, cost-effectiveness, and subsequent knee surgery. This trial is registered with ISRCTN Registry, ISRCTN45837371.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "FINDINGS",
+          "text": "Between April 8, 1999, and Jan 13, 2003, 1715 participants (955 female and 760 male; mean age 70 years [SD 8], mean BMI 29·7 kg/m2) were randomly assigned: 861 to patellar resurfacing and 854 to no resurfacing. At the 20-year follow-up, 132 participants in the patellar resurfacing group and 110 participants in the non-resurfacing group provided outcome data, although marginal differences included earlier data for participants who died or had missing 20-year data. The marginal difference in OKS over the whole 20-year follow-up was 0·76 (95% CI -0·08 to 1·59; p=0·076) in favour of patellar resurfacing. During the 20-year follow-up period, although not significant, differences in OKS, SF-12, and EQ-5D-3L, readmissions, minor or intermediate operations, patella-related operations, major operations, and complications all favoured patellar resurfacing. At 20 years, the resurfaced group accrued significantly more quality-adjusted life-years (QALYs) than the non-resurfaced group (7·295 vs 6·884; difference 0·380, 95% CI 0·061 to 0·700; p=0·020). However, QALY differences were smaller in a sensitivity analysis assuming no difference in mortality (7·209 vs 6·964; difference 0·183, 95% CI -0·034 to 0·400; p=0·10). The cost of readmissions was non-significantly lower in the resurfaced group and offset the higher cost of primary TKR; therefore, overall 20-year health-care costs per participant were similar (£10 825 vs £10 889; difference -£6, 95% CI -£721 to £708; p=0·99).",
+          "labelZh": "發現",
+          "textZh": ""
+        },
+        {
+          "label": "INTERPRETATION",
+          "text": "There was no significant difference in primary outcome (OKS) or other clinical endpoints. However, as clinical differences tend to support patellar resurfacing, the resurfacing group had significantly higher QALYs. There was no difference in costs over the 20-year period, and patellar resurfacing had a 99% probability of being cost-effective at any threshold above £10 000 per QALY gained. The evidence is therefore weighted towards resurfacing being the approach of first choice.",
+          "labelZh": "詮釋",
+          "textZh": ""
+        },
+        {
+          "label": "FUNDING",
+          "text": "UK National Institute for Health and Care Research Health Technology Assessment Programme.",
+          "labelZh": "經費來源",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)00652-5",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42309116/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42285120",
+      "title": "Diagnosis and treatment of postpartum haemorrhage: a race against time",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jul 04",
+      "sortDate": "2026-07-04",
+      "authors": "Coomarasamy A, Devall AJ, Bell S, Sindhu KN, Mammoliti KM, Nausheen S, Ali-Masri H, Deneux-Tharaux C, et al.",
+      "abstract": [
+        {
+          "text": "Postpartum haemorrhage (PPH) is common, affecting an estimated 13% of women having vaginal birth and 31% of women having caesarean birth. Successful management of PPH requires early and accurate diagnosis and effective treatment. A systematic review found that subjective visual estimation of blood loss misses 52% of PPH diagnoses at vaginal birth (pooled sensitivity 48%, 95% CI 44-53), and probably more at caesarean birth. The WHO-International Federation of Gynecology and Obstetrics-International Confederation of Midwives consolidated guidelines on PPH therefore recommend objective quantification of blood loss with products such as a calibrated blood collection drape. When supported by a robust implementation strategy and a first-response treatment bundle, objective measurement of blood loss and monitoring of vital signs has been shown to diagnose PPH accurately and early, and improve clinical outcomes. Refractory PPH can progress to life-threatening PPH, which should be managed by a multidisciplinary team providing aggressive resuscitation and targeted treatment. Saving the life of a woman with excessive postpartum bleeding is a race against time. The six delays to avoid are: (1) in the diagnosis (by use of objective cumulative blood loss measurement and early trigger criteria), (2) in the first-response treatment (by authorising midwives to administer all components of a standardised bundle of interventions), (3) in the escalation (by use of explicit escalation criteria and red flags), (4) in the use of temporising measures (eg, non-pneumatic anti-shock garment), (5) in the identification and targeted management of any specific causes of bleeding, and (6) in the provision of blood and blood products. Quick actions to avoid these delays can mean the difference between life and death for a woman with PPH.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)01031-7",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42285120/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42285119",
+      "title": "Postpartum haemorrhage: epidemiology, consequences, and missed opportunities",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jul 04",
+      "sortDate": "2026-07-04",
+      "authors": "Coomarasamy A, Sindhu KN, Gallos I, Periyathambi N, Price MJ, Yunas I, Qureshi Z, Muriithi FG, et al.",
+      "abstract": [
+        {
+          "text": "Excessive bleeding after childbirth, known as postpartum haemorrhage (PPH), can turn an uncomplicated birth into a catastrophe. Each year, PPH occurs in an estimated 27 million women worldwide-17 million after vaginal birth and 10 million during or after caesarean birth. An estimated 43 000 women die from PPH annually, translating to a death every 12 min. The pooled prevalence of PPH at vaginal birth is 12·6% (95% CI 10·1-15·2) and at caesarean birth 30·9% (95% credible interval 24·9-37·6), based on the conventional definition of PPH. Common causes of PPH are uterine atony, genital tract trauma, retained placenta, abnormal placentation, and coagulopathy. Risk factors include caesarean birth, multiple pregnancy, anaemia, high maternal BMI, previous PPH, female genital mutilation, sepsis, pre-eclampsia, macrosomia, and inadequate antenatal care. In addition to being the leading cause of maternal mortality worldwide, the consequences of PPH include serious morbidities such as severe anaemia, hysterectomy, organ failure, and long-term psychological trauma. The global economic burden of PPH is estimated at US$10·4 billion (95% credible interval $9·8-13·2 billion) annually, consisting of $3·6 billion ($3·2-6·2 billion) for health systems and $6·8 billion ($6·2-7·5 billion) for societies. Based on a rigorous review of the evidence, WHO has recently redefined PPH as objectively measured blood loss of at least 300 mL plus an abnormal haemodynamic sign, or objectively measured blood loss of at least 500 mL, whichever occurs first. This new definition prioritises early PPH diagnosis and treatment to avert life-threatening maternal outcomes. Comprehensive efforts to address missed opportunities in the prevention, diagnosis, and treatment of PPH are needed to improve outcomes. These efforts include addressing the unmet need for contraception, mitigating modifiable risks such as anaemia, avoiding caesarean sections that are not medically indicated, using effective single uterotonic prophylaxis for all births and combination prophylaxis for women at high risk of PPH, ensuring accurate and objective measurement of blood loss for early PPH diagnosis, and promptly implementing treatment with an evidence-based bundle. The PPH Roadmap (2023-30) provides a global framework for action.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)00902-5",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42285119/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42285117",
+      "title": "Prevention of postpartum haemorrhage: from evidence to implementation at scale",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jul 04",
+      "sortDate": "2026-07-04",
+      "authors": "Gallos ID, Sindhu KN, Yunas I, Sobhy S, Mavrides E, Sheikh L, Escobar MF, Al-Beity FA, et al.",
+      "abstract": [
+        {
+          "text": "Postpartum haemorrhage (PPH) is a leading cause of maternal death. Preventing PPH can spare women from experiencing the trauma and risks of PPH, reduce the strain on overstretched health systems, and probably produce better outcomes than a strategy solely focused on PPH treatment. Prevention of PPH is often interpreted as provision of uterotonic drugs to contract the uterus at the time of childbirth. Although uterotonics are a central strategy for PPH prevention, several other approaches can prevent PPH or ameliorate its severity. These approaches include addressing the unmet need for contraception, remedying anaemia and other modifiable risk factors for PPH, optimising medical conditions that predispose to PPH, and tackling the rise in caesarean births in many countries. Effective delivery of preventive care requires early and regular antenatal care and planned birth at appropriately resourced health facilities. Social and behavioural change interventions for improving contraceptive provision and uptake, targeting adolescents, postpartum women, geographically remote communities, and families on low income, are a priority. Effective interventions to tackle anaemia include the management of heavy menstrual bleeding, pre-pregnancy or antenatal haemoglobin testing and oral or intravenous iron treatment, dietary improvements, and-on rare occasions-blood transfusion. Risk factors for PPH that need attention include high BMI, multiple pregnancy, gestational diabetes, pre-eclampsia, macrosomia, and several medical conditions. Caesarean births are associated with a substantial increase in PPH risk and should therefore only be done when medically indicated. A Cochrane network meta-analysis of 122 trials, with 121 931 women, found that the combinations of oxytocin plus misoprostol, or oxytocin plus ergometrine, were the most effective prophylaxis for PPH when given at the time of childbirth; however, these combinations had a higher risk of side-effects compared with single-drug prophylaxis. Oxytocin and carbetocin were the most effective single drugs for PPH prophylaxis, with minimal side-effects. Single uterotonic prophylaxis with either oxytocin or carbetocin is, therefore, recommended for routine prophylaxis. However, if oxytocin or carbetocin is not accessible, misoprostol is an alternative. Combination prophylaxis with oxytocin plus misoprostol can be considered for women at high risk of PPH. Ergometrine alone and oxytocin plus ergometrine combination are no longer recommended due to hypertension-related safety concerns. A robust implementation approach that engages various stakeholders to promote change, ensures the supply of quality-assured medicines and devices, provides training and support, and secures ongoing political and financial commitment is necessary to translate evidence into global impact.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)00903-7",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42285117/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42251856",
+      "title": "Cagrilintide-semaglutide (CagriSema) as an add-on to basal insulin in adults with type 2 diabetes (REIMAGINE 3): a randomised, double-blind, placebo-controlled, multicentre, phase 3 study",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jul 04",
+      "sortDate": "2026-07-04",
+      "authors": "Rosenstock J, Billings LK, Gajria R, Giorgino F, Johansen NB, Klein KR, Thamattoor UK, Buse JB, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Basal insulin treatment for type 2 diabetes often results in inadequate glycaemic control and is associated with weight gain and increased risk of hypoglycaemia. We aimed to compare the efficacy and safety of a once per week combination of cagrilintide with semaglutide (CagriSema) versus placebo as an add-on to basal insulin in individuals with type 2 diabetes.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "This double-blind, parallel-group, randomised, controlled, phase 3a study (REIMAGINE 3) was done at 46 centres (university hospitals, health-care centres, research centres, and other clinical trial sites) in six countries (the USA, China, Japan, Serbia, Slovakia, and South Africa). Adults with type 2 diabetes (glycated haemoglobin [HbA1c] 7·0-10·5%) receiving stable once per day basal insulin with or without metformin were randomly assigned (2:2:1:1) to once per week subcutaneous cagrilintide 2·4 mg plus semaglutide 2·4 mg (hereafter cagrilintide-semaglutide [2·4 mg each]) or cagrilintide 1·0 mg plus semaglutide 1·0 mg (hereafter cagrilintide-semaglutide [1·0 mg each]) or dose-matched placebo (2·4 mg plus 2·4 mg or 1·0 mg plus 1·0 mg) for 40 weeks. Randomisation was stratified by HbA1c of less than 8·5% at screening (yes or no) and country (Japan; yes or no). Participants, care providers, investigators, and outcome assessors were masked within each dose level to treatment allocation, with active treatments visually identical to placebo. The primary endpoint was mean HbA1c change (percentage points) from baseline to week 40 in all participants randomly assigned to treatment; secondary endpoints included change in bodyweight and safety, including hypoglycaemia. This trial was registered with ClinicalTrials.gov (NCT06323161) and is complete.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "FINDINGS",
+          "text": "Between March 26 and Nov 29, 2024, we screened 340 individuals and 274 were included and randomly assigned to cagrilintide-semaglutide (2·4 mg each; n=90), cagrilintide-semaglutide (1·0 mg each; n=93), or placebo (pooled; n=91). Mean baseline HbA1c was 8·8% (SD 1·0), 159 (58%) participants were male, and 115 (42%) were female. Mean HbA1c reductions were significantly greater with cagrilintide-semaglutide (2·4 mg each -2·33% [SE 0·08] and 1·0 mg each -2·10% [0·08]) versus placebo (-0·66% [0·11]) at week 40, using the efficacy estimand (estimated treatment difference for cagrilintide-semaglutide [2·4 mg each] vs placebo -1·68 percentage points [95% CI -1·95 to -1·41], p<0·0001; for cagrilintide-semaglutide [1·0 mg each] vs placebo -1·44 percentage points [95% CI -1·71 to -1·17], p<0·0001). Cagrilintide-semaglutide provided bodyweight reductions of 10-12%. Adverse events were reported by 72 (80%) of 90 participants receiving cagrilintide-semaglutide (2·4 mg each), 66 (71%) of 93 receiving cagrilintide-semaglutide (1·0 mg each), and 65 (71%) of 91 receiving placebo, and were mostly mild or moderate gastrointestinal disorders. No severe hypoglycaemia was reported. There was one death in the cagrilintide-semaglutide (1·0 mg each) group not related to treatment (due to malignancy).",
+          "labelZh": "發現",
+          "textZh": ""
+        },
+        {
+          "label": "INTERPRETATION",
+          "text": "Cagrilintide-semaglutide at doses of 2·4 mg each and 1·0 mg each met the primary endpoint, with statistically significant and clinically relevant HbA1c reductions versus placebo when added to basal insulin-treated type 2 diabetes. These reductions were accompanied by robust bodyweight reduction and no additional risk of hypoglycaemia. The safety profile was consistent with that of the GLP-1 receptor agonist class and previous safety data for cagrilintide. Findings support the use of cagrilintide-semaglutide as an add-on to once per day basal insulin to significantly improve glycaemic control.",
+          "labelZh": "詮釋",
+          "textZh": ""
+        },
+        {
+          "label": "FUNDING",
+          "text": "Novo Nordisk.",
+          "labelZh": "經費來源",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)01022-6",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42251856/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42384871",
+      "title": "Advances in Multiple Sclerosis",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Hauser SL",
+      "abstract": [
+        {
+          "text": "Multiple sclerosis is a chronic autoimmune disorder that affects the central nervous system, causing episodes of neurologic dysfunction and often gradual disease progression. The immune system primarily targets myelin, the protective covering of nerve fibers, leading to inflammation and damage, and secondary neurodegeneration is a major cause of long-term disability. Common symptoms include vision problems, sensory disturbances, muscle weakness, balance difficulties, and bladder dysfunction. Important advances in treatment have improved outcomes in patients with relapsing forms of multiple sclerosis, particularly through highly effective immune-modifying therapies such as CD20-targeting monoclonal antibodies. However, treatment options for progressive forms remain limited, which highlights the need for therapies that can prevent progression and promote myelin repair. Comprehensive symptom management and lifestyle support are also essential to maintaining quality of life and reducing disability.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1056/NEJMra2501195",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42384871/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42384870",
+      "title": "Rituximab versus Ocrelizumab in Newly Diagnosed Relapsing Multiple Sclerosis",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Torkildsen Ø, Brustad HK, Høgestøl EA, Alstadhaug KB, Bhan A, Flemmen HØ, Habbestad A, Høglund RAA, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Anti-CD20 monoclonal antibodies are effective for relapsing multiple sclerosis. However, data from head-to-head trials are lacking.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "In this phase 3, multicenter, double-blind, noninferiority trial, we randomly assigned adults with newly diagnosed relapsing multiple sclerosis and recent disease activity in a 3:2 ratio to receive rituximab or ocrelizumab every 6 months for 24 months. The primary end point was the absence of new or enlarging lesions on T2-weighted magnetic resonance imaging (MRI) from month 6 to month 24. Noninferiority was defined as a lower limit of the 95% confidence interval for the risk difference (rituximab minus ocrelizumab) of greater than or equal to -10 percentage points. Secondary end points included efficacy and safety.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 218 participants underwent randomization; 216 received treatment (132 assigned to the rituximab group and 84 assigned to the ocrelizumab group). Between months 6 and 24, the estimated probability of having no new or enlarging lesions detected on T2-weighted MRI was 92.2% with rituximab and 94.8% with ocrelizumab, corresponding to a risk difference of -2.6 percentage points (95% confidence interval, -9.4 to 4.3), which met the prespecified noninferiority criterion. Relapse rates, disability outcomes, and cognitive-performance profiles appeared to be similar in the two groups. Infections were more common in the rituximab group than in the ocrelizumab group (in 82% vs. 69% of participants), although the percentage of participants with serious adverse events was similar in the two groups (8% and 7%, respectively).",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "In participants with newly diagnosed relapsing multiple sclerosis and recent disease activity, rituximab was noninferior to ocrelizumab in suppressing disease activity as detected by MRI from 6 to 24 months, with a similar incidence of serious adverse events. (Funded by the Research Council of Norway and others; OVERLORD-MS ClinicalTrials.gov number, NCT04578639; EudraCT number, 2020-001205-23; EU Clinical Trials Register number, 2024-510716-71-00.).",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1056/NEJMoa2600993",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42384870/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42384869",
+      "title": "Adjuvant Pembrolizumab plus Belzutifan for Renal-Cell Carcinoma",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Choueiri TK, Motzer RJ, Karam JA, Yip W, Suárez C, Ye D, He Z, Caglevic C, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Adjuvant pembrolizumab improves disease-free and overall survival among patients with resected clear-cell renal-cell carcinoma. The hypoxia-inducible factor 2α inhibitor belzutifan has activity in advanced disease. Adjuvant pembrolizumab with belzutifan may further improve outcomes in patients with clear-cell renal-cell carcinoma at increased risk for recurrence.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "In this phase 3, double-blind trial, we randomly assigned participants in a 1:1 ratio to receive intravenous pembrolizumab at a dose of 400 mg every 6 weeks (≤9 doses) and either daily oral belzutifan at a dose of 120 mg (pembrolizumab-belzutifan) or placebo (pembrolizumab-placebo) for up to 1 year. The primary end point was disease-free survival as assessed by the investigator; secondary end points included overall survival and safety.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 921 participants were assigned to receive pembrolizumab-belzutifan and 920 were assigned to receive pembrolizumab-placebo. The median time from randomization to the data-cutoff date (August 23, 2025) was 28.4 months (range, 15.0 to 40.1). Disease-free survival was significantly higher with pembrolizumab-belzutifan than with pembrolizumab-placebo (hazard ratio for disease recurrence or death, 0.72; 95% confidence interval [CI], 0.59 to 0.87; two-sided P<0.001); the estimated 24-month disease-free survival was 80.7% and 73.7%, respectively. At this interim analysis with 29% of the final-analysis events observed, overall survival did not differ significantly between the groups (hazard ratio for death, 0.78; 95% CI, 0.51 to 1.19; two-sided P = 0.24); the estimated 24-month overall survival was 96.2% with pembrolizumab-belzutifan and 95.7% with pembrolizumab-placebo. Adverse events of grade 3 or higher occurred in 52.1% of the participants who received pembrolizumab-belzutifan and in 30.2% of those who received pembrolizumab-placebo.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "Treatment with pembrolizumab-belzutifan led to significantly higher disease-free survival, with a greater risk of grade 3 or higher toxic effects, than treatment with pembrolizumab monotherapy after nephrectomy in participants with clear-cell renal-cell carcinoma at increased risk for recurrence. (Funded by Merck Sharp and Dohme, a subsidiary of Merck [Rahway, NJ]; LITESPARK-022 ClinicalTrials.gov number, NCT05239728.).",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1056/NEJMoa2518245",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42384869/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "41910384",
+      "title": "Angiography-Derived Fractional Flow Reserve to Guide PCI",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Fearon WF, Jeremias A, Witberg G, Al-Lamee R, Cohen DJ, Kaki A, Sharma RP, Yeh RW, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Assessing intermediate coronary lesions with an intracoronary pressure wire improves clinical outcomes in patients undergoing cardiac catheterization and percutaneous coronary intervention (PCI). However, clinical use of pressure-wire-based physiological assessment remains low. Measurement of fractional flow reserve (FFR) derived from coronary angiographic images alone correlates well with pressure-wire-based FFR measurements and may simplify procedures, but its effect on clinical outcomes is unknown.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "In this international noninferiority trial, we randomly assigned patients undergoing coronary angiography who were found to have at least one intermediate coronary stenosis to physiological assessment with measurements derived from angiographic images (FFRangio) or with pressure-wire-based measurements. The primary end point was a composite of death, myocardial infarction, or unplanned, clinically indicated coronary revascularization at 1 year. The noninferiority margin was 3.5 percentage points.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 1930 patients were randomly assigned to physiological assessment with FFRangio (FFRangio group; 965 patients) or a pressure-wire-based approach (pressure-wire group; 965 patients). The mean age of the patients was 68.4 years, and 25.0% of the patients were women. At 1 year, a primary end-point event had occurred in 64 patients (Kaplan-Meier estimate, 6.9%) in the FFRangio group and 65 patients (Kaplan-Meier estimate, 7.1%) in the pressure-wire group (hazard ratio, 0.98; 95% confidence interval, 0.70 to 1.39; difference, -0.2 percentage points; upper boundary of the one-sided 97.5% confidence interval, 2.1 percentage points; P<0.001 for noninferiority). There were no apparent differences between the groups with respect to the incidence of bleeding, acute kidney injury, or procedure-related adverse events.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "Among patients with intermediate coronary-artery lesions undergoing physiological assessment in the cardiac catheterization laboratory, an angiography-guided strategy involving FFRangio was noninferior to a pressure-wire-guided strategy with respect to a composite end point of death, myocardial infarction, or unplanned clinically indicated coronary revascularization at 1 year. (Funded by CathWorks; ALL-RISE ClinicalTrials.gov number, NCT05893498.).",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1056/NEJMoa2600949",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41910384/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "41910382",
+      "title": "Angiography-Based Physiology to Guide Coronary Revascularization",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Daemen J, van der Eijk JA, Barbierato M, Byrne RA, Canova P, De Maria GL, Van Belle E, Amat-Santos I, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Current society guidelines recommend physiological assessment of intermediate coronary lesions to guide revascularization. Data regarding revascularization guided by vessel fractional flow reserve (vFFR), derived from three-dimensional quantitative coronary angiography without the need for a pressure wire or hyperemic agent, as compared with pressure-wire-based fractional flow reserve (FFR), are lacking.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "We conducted an international, open-label, randomized, noninferiority trial at 37 sites in Europe. Patients with intermediate coronary-artery lesions (diameter stenosis of 30 to 80%) who presented with chronic or acute coronary syndromes were randomly assigned in a 1:1 ratio to undergo either vFFR-guided or FFR-guided revascularization of the intermediate coronary-artery lesions. The primary end point was a composite of death from any cause, any myocardial infarction, or any revascularization at 1 year. The noninferiority margin was 3.0 percentage points.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "The primary end point was assessed in 1116 patients in the vFFR group and 1095 in the FFR group. The mean age of the patients was 67 years, 24.3% were women, 18.7% presented with an acute coronary syndrome, and 26.6% had diabetes mellitus. At 1 year, a primary end-point event had occurred in 80 patients (Kaplan-Meier estimate, 7.5%) in the vFFR group and in 79 patients (Kaplan-Meier estimate, 7.5%) in the FFR group (risk difference, -0.02 percentage points; 95% confidence interval, -2.25 to 2.21; P = 0.004 for noninferiority). The incidence of serious adverse events appeared to be similar in the two groups.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "Among patients with intermediate coronary lesions, vFFR-guided revascularization was noninferior to FFR-guided revascularization with respect to a composite of death, myocardial infarction, or revascularization at 1 year. (Funded by Pie Medical Imaging and Siemens Healthineers; FAST III ClinicalTrials.gov number, NCT04931771.).",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1056/NEJMoa2601841",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41910382/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42392118",
+      "title": "[177Lu]Lu-edotreotide versus everolimus for gastroenteropancreatic neuroendocrine tumours (COMPETE): a phase 3, multicentre, randomised, open-label, superiority trial",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Walter T, Jann H, Ansquer C, Deshayes E, Garcia-Carbonero R, Teulé A, Baum RP, Verberne HJ, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Peptide receptor radionuclide and targeted therapy are both approved treatment options for patients with metastatic gastroenteropancreatic neuroendocrine tumours (GEP NETs), but clinical evidence for preferred sequencing is scarce. The COMPETE trial evaluated the efficacy and harms of peptide receptor radionuclide therapy ([177Lu]Lu-edotreotide) versus targeted molecular therapy (everolimus) in patients with advanced, progressive, somatostatin receptor-positive GEP NETs.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "This phase 3, open-label, superiority trial included patients aged 18 years or older with treatment-naive or previously treated unresectable or metastatic (or both) grade 1-2 GEP NETs. Patients were enrolled from 49 specialist neuroendocrine tumour treatment centres across 14 countries in Africa, Europe, North America, and Oceania and randomised (2:1) to intravenous [177Lu]Lu-edotreotide (7·5 ± 0·7 GBq every 3 months, maximum four cycles) or oral everolimus (10 mg/day) for up to 30 months. Random assignment was via a central, web-based randomisation system (block size of 6) and stratified by primary tumour origin and previous therapy. The primary endpoint was progression-free survival, assessed via blinded independent central review in all randomly assigned patients at 30 months. Harms were assessed in all enrolled patients who received at least one dose of a study drug. This study was registered with ClinicalTrials.gov (NCT03049189) and is no longer recruiting.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "FINDINGS",
+          "text": "Between April 13, 2017, and June 20, 2022, 324 patients were enrolled and 309 patients (including 168 [54%] male patients and 141 [46%] female patients) were randomly assigned to treatment: 207 to the [177Lu]Lu-edotreotide group and 102 to the everolimus group. The median follow-up for progression-free survival was 27·5 months (IQR 19·6-30·4) for the [177Lu]Lu-edotreotide group and 21·2 months (8·9-29·4) for the everolimus group. Median progression-free survival was significantly longer with [177Lu]Lu-edotreotide versus everolimus (23·9 months [95% CI 18·7-30·0] vs 14·1 months [9·2-20·9]; stratified hazard ratio 0·67 [95% CI 0·48-0·95]; p=0·022). Treatment-related adverse events occurred in 178 (82%) of 217 patients in the [177Lu]Lu-edotreotide group and 96 (97%) of 99 patients in the everolimus group. 40 (18%) patients in the [177Lu]Lu-edotreotide group and 40 (40%) in the everolimus group had at least one treatment-related grade 3-4 adverse event. The most common treatment-related adverse events in the [177Lu]Lu-edotreotide group were diarrhoea and nausea (both 79 [36%] patients) and asthenia (66 [33%] patients), whereas those in the everolimus group were diarrhoea (45 [45%] patients), asthenia (36 [36%] patients), and anaemia (27 [27%] patients). No treatment-related deaths occurred in either study group.",
+          "labelZh": "發現",
+          "textZh": ""
+        },
+        {
+          "label": "INTERPRETATION",
+          "text": "[177Lu]Lu-edotreotide led to statistically significant and clinically meaningful improvements in progression-free survival. Efficacy and harms results support the use of [177Lu]Lu-edotreotide in early lines of therapy in patients with advanced, progressive GEP NETs.",
+          "labelZh": "詮釋",
+          "textZh": ""
+        },
+        {
+          "label": "FUNDING",
+          "text": "ITM Solucin.",
+          "labelZh": "經費來源",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)00604-5",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392118/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42392836",
+      "title": "Learning disability register enrolment in young people in England: Cohort Study, 2015-2023",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Shah R, Horridge K, Saxena S, Hargreaves DS, Petersen I",
+      "abstract": [
+        {
+          "text": "Background Learning disability registers in UK primary care support proactive care, but under-identification remains substantial. The 2019 NHS Long Term Plan introduced targets to increase enrolment. Aim To estimate prevalence and rates of new registration to learning disability registers among young people aged 14-24 years in England and examine changes following the introduction of national targets. Design and setting Population-based open cohort study using routinely collected primary care data from general practices in England contributing to the Clinical Practice Research Datalink (CPRD) Aurum database, 2015-2023. Method Young people aged 14-24 years who had been registered at least 6 months were included. Annual rates of new registration per 10,000 person-years at risk (PYAR) and recorded prevalence were calculated, stratified by age, sex, region, and year. Results Between 2015 and 2023, 11,776 young people were first recorded on a learning disability register. Rates of new registration increased in 2020-2021 across ages and sexes, peaking at 15.8 per 10,000 PYAR in males aged 14-17 years and 8.4 per 10,000 in females before returning to pre-2019 levels by 2023. Recorded prevalence remained low overall (0.03%-0.5%; 3.6-52.7 per 10,000) but increased among those aged 18-24 years, with eight-to-ten-fold rises between 2015 and 2023. Prevalence was higher in males (rate ratios 1.7-1.8, 95% confidence interval 1.6-1.9). Conclusion National targets coincided with a temporary rise in enrolment, but identification remains below expected prevalence. Sustained policy focus and systematic identification and coding by practices are needed to ensure equitable access to preventive care during the transition to adulthood.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.3399/BJGP.2026.0160",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392836/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42392835",
+      "title": "Disparities in the uptake of learning disability (intellectual disability) annual health checks",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Sutherland D, Costello B, Chauhan U, Flynn S, Gray KM, Parsons J, Spencer R, Crawford H",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "People with intellectual disabilities (referred to as learning disabilities in the United Kingdom) face considerable health inequalities. One attempt to address these in England has been through incentivising General Practices to complete annual health checks with people with a learning disability aged 14 or over.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "AIM",
+          "text": "We aimed to examine recent trends in learning disability registers and the uptake of learning disability annual health checks in England.",
+          "labelZh": "目的",
+          "textZh": ""
+        },
+        {
+          "label": "DESIGN AND SETTING",
+          "text": "Secondary analysis of publicly available data.",
+          "labelZh": "DESIGN AND SETTING",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "We compiled and analysed NHS England data on the learning disabilities annual health check scheme from January 2022 to November 2025.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "The number of 14-17year-olds and adults on learning disability registers increased during this period by 30.49% and 14.53%, respectively. The most recent estimates indicate that around 0.588% of patients are on learning disability registers and 0.526% are also aged ≥14-years-old and eligible for annual health checks. The uptake of annual health checks increased slightly from 68.08% to 71.58% among 14-17-year-olds, and from 79.07% to 80.71% among adults. Uptake is lowest in the South-West and East of England, and highest in London, but is similar across deciles of patient deprivation and practice size.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "Ascertainment of people with a learning disability by primary care services appears to be improving but remains between a third and a quarter of prevalence estimates. The uptake of annual health checks among 14-17-year-olds continues to lag behind that of adults.",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.3399/BJGP.2026.0116",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392835/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42392834",
+      "title": "Recording of Pharmacy First consultations in general practice records in England: an observational study of the service's first year using OpenSAFELY",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Kingsley VJ, Wiedemann M, Wood C, Curtis HJ, Green A, Fisher L, Andrews CD, Evans D, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Pharmacy First, a national community pharmacy service, launched in January 2024 to improve access to primary care for patients with minor conditions facing backlogs caused by the COVID-19 pandemic. Pharmacies are required to share details about their consultations with general practices.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "AIM",
+          "text": "To describe how and what clinical activity was recorded in general practice during the first year of the Pharmacy First service.",
+          "labelZh": "目的",
+          "textZh": ""
+        },
+        {
+          "label": "DESIGN AND SETTING",
+          "text": "With the approval of NHS England, we conducted a retrospective cohort study between 31 January 2024 and 30 January 2025 using OpenSAFELY-TPP, a secure platform for analysing pseudonymised GP records from practices using TPP software.",
+          "labelZh": "DESIGN AND SETTING",
+          "textZh": ""
+        },
+        {
+          "label": "METHOD",
+          "text": "We described patient demographics, Pharmacy First consultation trends, and the clinical conditions and medications coded with the consultations.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 402,165 Pharmacy First consultations were recorded for 340,710 patients from a general population of 26,142,380 registered patients in OpenSAFELY-TPP. Acute pharyngitis (28.9%) and uncomplicated urinary tract infection (28%) were the most frequently recorded conditions. By January 2025, 36.3% of recorded Pharmacy First consultations had a clinical condition, medication, or both. Females, younger adults and those living in more deprived areas were observed more often in Pharmacy First records compared to the general population.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "Increasing recording of the Pharmacy First community pharmacy service was observed in general practice records during its first year, particularly among younger and more deprived populations. However, variation in structured recording of consultation details may limit evaluation.",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.3399/BJGP.2025.0678",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392834/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42392833",
+      "title": "\"I have no idea who does the bone thing\" A qualitative exploration of older women and healthcare professionals' experiences to guide improvements in osteoporosis care",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Heaven A, Kime N, Shafiq S, Harrison N, Connor J, Johansson JF, Teale E, Sharp C",
+      "abstract": [
+        {
+          "text": "Background The Older Women's Health Strategy for England highlighted the systemic under-representation of older women in healthcare. Over half of women over 80 are estimated to have osteoporosis, contributing to 180,000 fractures annually in the UK, with substantial personal and economic costs, despite clinically effective treatments and national guidelines being available. Aim To use insights from the experiences of older women and primary healthcare professionals to develop strategies to improve osteoporosis care. Design/Setting A community-based study in England, UK. Method Interviews with 30 community-dwelling older women (aged 70+) diagnosed with osteoporosis, and 31 healthcare professionals including GPs, physiotherapists, pharmacists, practice nurses, a healthcare assistant, and a community matron. We reviewed findings iteratively with our co-production group using a Constructivist Grounded Theory approach. Results Healthcare professionals acknowledged osteoporosis as clinically important but described limited knowledge and understanding. However, older women assumed expertise and proactive engagement from clinicians. Older women normalised symptoms as part of ageing frequently prioritising other co-morbidities. Most were unclear about their diagnosis, prognosis, or treatment plans. Self-management was expected but inadequately supported. There was little routine engagement with the wider primary care team. Digital communication further limited older women's engagement/re-engagement. Conclusion Osteoporosis remains poorly understood and inadequately managed in older women who face barriers, including multimorbidity, digital exclusion, and low self-efficacy. Many older women accept care gaps due to limited awareness and lack of meaningful interaction with healthcare professionals. Improved care navigation and greater involvement of the wider primary care team could enhance engagement and support better self-management.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.3399/BJGP.2026.0003",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392833/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42392832",
+      "title": "Enriching New-onset Diabetes for Pancreatic Cancer (ENDPAC): External validation using English sentinel network",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Price CA, Claridge H, de Lusignan S, Khalaf N, Mold F, Smith NAS, Winn M, Lemanska A",
+      "abstract": [
+        {
+          "text": "Pancreatic cancer has very low survival due to late diagnosis. Symptoms are often non-specific, complicating early detection in primary care. The Enriching New-Onset Diabetes for Pancreatic Cancer (ENDPAC) algorithm uses weight change, glycaemic control, and age at diabetes onset to identify new-onset diabetes (NOD) patients at increased pancreatic cancer risk. It was developed in the USA and has not been validated in the UK. Aim To validate ENDPAC in a UK primary care population and assess its predictive utility. Design and setting Retrospective cohort study using ORCHID, a national primary care sentinel network. Method Adults aged ≥50 with NOD and requisite glycated haemoglobin (HbA1c) and weight data were included. ENDPAC scores were calculated. Model performance was evaluated via discrimination, calibration, sensitivity, specificity, PPV and NPV. The Youden index identified optimal cutoffs. Sensitivity analyses assessed measurement timing, repeat HbA1c testing and multiple values. Results Among 70,050 individuals, 185 (0.26%) developed pancreatic cancer. Cases were older with higher HbA1c and greater weight loss at diagnosis. ENDPAC achieved an area under the curve (AUC) of 0.733. An optimal cutoff of ≥3 classified 27.6% of individuals as high-risk, with 62.6% sensitivity, 72.3% specificity, 0.6% PPV and 99.9% NPV. Sensitivity analyses showed similar performance across measurement windows and handling of multiple values. ENDPAC shows moderate discrimination in UK primary care. Although it has a relatively low PPV (0.6%), integration into routine systems could provide scalable, low-cost automated risk stratification, identifying people with NOD at higher pancreatic cancer risk as part of a sequential diagnostic pathway.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.3399/BJGP.2024.0253",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392832/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42392831",
+      "title": "Qualitative insights into identifying and managing polypharmacy: Patient, pharmacist and GP perspectives",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Jul 02",
+      "sortDate": "2026-07-02",
+      "authors": "Tsang JY, Blakeman T, Sperrin M, Kallis T, Payne RA, Ashcroft D",
+      "abstract": [
+        {
+          "text": "Background Polypharmacy is a global priority due to potential harms, including adverse drug events, hospitalisations and high treatment burden. Overall, these outcomes have shown little improvement despite numerous interventions indicating that current approaches to identify and manage polypharmacy remain insufficient. Aim To understand how polypharmacy is identified and managed in everyday primary care from patient, pharmacist and GP perspectives. Design and Setting Qualitative semi-structured interviews with 12 patients and 12 professionals (7 clinical pharmacists, 5 GPs) across Greater Manchester. Method Reflexive thematic analysis supported by Normalisation Process Theory and Constant Comparison as sensitisation tools. Results Polypharmacy was widely seen as important work but, in practice, inconsistent case-finding and unclear purposes for polypharmacy medication reviews were reported. Patients viewed medications as essential tools to sustain biopsychosocial elements of life, contrasting with practitioners' clinical priorities to mitigate potential harm. Polypharmacy work routinely contained layers of hidden complexity, which was often overwhelming and placed a heavy emotional burden on patients and professionals. Both patients and professionals required training and experience to effectively manage these complexities. Though a protocol-driven approach was sufficient for simple medication issues, only a longer-term approach, predicated on trust, continuity, relationships and open discussions encouraging healthy conflict, appeared to engage with deeper complexities. Conclusion Polypharmacy work is fraught with complexity and uncertainty, lacking standardised case-finding and clear purpose for both patients and professionals. Better models of care are needed to meet this challenge, encouraging a shift beyond a biomedically dominated protocol-driven approach to a more longitudinal and relational approach.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.3399/BJGP.2025.0793",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392831/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42384373",
+      "title": "Neonatal Survival After Serial Amnioinfusions for Anhydramnios Due to Fetal Kidney Failure: The RAFT Clinical Trial",
+      "journal": "JAMA",
+      "category": "四大綜合",
+      "date": "2026 Jul 01",
+      "sortDate": "2026-07-01",
+      "authors": "Miller JL, Baschat AA, Johnson A, Blumenfeld YJ, Schenone MH, Gebb JS, Moldenhauer JS, Zaretsky MV, et al.",
+      "abstract": [
+        {
+          "label": "IMPORTANCE",
+          "text": "Anhydramnios from fetal kidney failure causes lethal pulmonary hypoplasia. Serial amnioinfusions have shown promise in mitigating pulmonary disease from bilateral renal agenesis, but efficacy and safety for other causes of fetal kidney failure are unproven.",
+          "labelZh": "重要性",
+          "textZh": ""
+        },
+        {
+          "label": "OBJECTIVE",
+          "text": "To assess the efficacy of serial amnioinfusions initiated before 26 weeks' gestation to mitigate lethal pulmonary hypoplasia in cases of anhydramnios due to fetal kidney failure.",
+          "labelZh": "目的",
+          "textZh": ""
+        },
+        {
+          "label": "DESIGN, SETTING, AND PARTICIPANTS",
+          "text": "Prospective, nonrandomized clinical trial conducted at 13 US fetal therapy centers from December 2018 to February 2025. Outcomes for maternal-fetal pairs with anhydramnios before 22 weeks' gestation due to fetal kidney failure without bilateral renal agenesis are reported; data collection for surviving infants continued until February 13, 2026.",
+          "labelZh": "DESIGN, SETTING, AND PARTICIPANTS",
+          "textZh": ""
+        },
+        {
+          "label": "EXPOSURE",
+          "text": "Thirty-two participants underwent serial amnioinfusions with isotonic fluid beginning before 26 weeks' gestation.",
+          "labelZh": "EXPOSURE",
+          "textZh": ""
+        },
+        {
+          "label": "MAIN OUTCOMES AND MEASURES",
+          "text": "The primary end point was neonatal survival for 14 days or longer with dialysis access placement. Secondary outcome measures of survival to discharge home and kidney transplant are reported.",
+          "labelZh": "主要結果與測量",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "Twenty-nine of 32 participants (91%) had a live birth, with a median (IQR) gestational age at delivery of 34 weeks 1 day (31 weeks 5 days to 34 weeks 6 days). All participants delivered before 37 weeks' gestation. No unexpected serious maternal adverse events occurred, and the most common maternal complications were preterm prelabor rupture of membranes in 19 participants (56%) and chorioamniotic separation in 10 (29%). The primary outcome occurred in 19 (65.5%) of 29 live-born neonates (95% CI, 45.7%-82.1%). Factors associated with survival to the primary outcome included receiving more amnioinfusions (median [IQR], 14 [9-18] in survivors vs 7 [4-11] in nonsurvivors; P = .01), longer time interval from first amnioinfusion to preterm prelabor rupture of membranes (63.5 [60.5-74.5] days in survivors vs 29.0 [22.0-56.0] days in nonsurvivors; P = .01), gestational age greater than 32 weeks (79% of survivors vs 38% of nonsurvivors; P = .03), and higher birth weight (2029 [1770-2250] g in survivors vs 1635 [1185-1915] g in nonsurvivors; P = .01). Fourteen live-born infants (48%) survived to hospital discharge at a median (IQR) age of 4.7 (3.4-5.7) months. Of the 11 infants surviving to date, 7 (64%) have undergone kidney transplant between ages 2 years to 5 years.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSIONS AND RELEVANCE",
+          "text": "Serial amnioinfusions mitigated lethal pulmonary hypoplasia in neonates with anhydramnios due to fetal kidney failure. Significant neonatal morbidity and mortality independent of early lung function was noted. Factors associated with survival were consistent with the Renal Anhydramnios Fetal Therapy trial's bilateral renal agenesis cohort, suggesting common mechanistic pathways for mitigating pulmonary hypoplasia.",
+          "labelZh": "結論與意義",
+          "textZh": ""
+        },
+        {
+          "label": "TRIAL REGISTRATION",
+          "text": "ClinicalTrials.gov Identifier: NCT03101891.",
+          "labelZh": "試驗註冊",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1001/jama.2026.8568",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42384373/",
+      "titleZh": ""
+    },
     {
       "pmid": "42055579",
       "title": "Using large language models to identify prediagnostic clinical features of ovarian cancer from healthcare records: a population-based case-control study",
@@ -238,663 +880,577 @@
       "titleZh": "概念化診斷閾限：心臟衰竭診斷之旅的定性探索"
     },
     {
-      "pmid": "41730681",
-      "title": "Safety-netting communication during telephone consultations: an observational study using recorded consultations",
-      "journal": "BJGP",
+      "pmid": "42392985",
+      "title": "Characteristics of Children Seeking Care at School-Based Health Centers",
+      "journal": "JABFM",
       "category": "家醫科",
-      "date": "2026 Jul 01",
-      "sortDate": "2026-07-01",
-      "authors": "Edwards PJ, Caddick B, Skeen AR, Lin J, Thornton H, Ridd MJ, Barnes RK, Salisbury C",
+      "date": "2026 Jul",
+      "sortDate": "2026-07-00",
+      "authors": "Trivedi M, Kaufmann J, Pereira H, McGrath BM, Marino M, Spano M, Lucas JA, Broder-Fingert S, et al.",
       "abstract": [
         {
-          "label": "BACKGROUND",
-          "text": "In 2024, one-third of NHS GP consultations in England were conducted by telephone. Although remote consulting can be convenient for patients and GPs, it may increase diagnostic uncertainty. Safety-netting advice (guidance on when, and how, patients should seek further medical help) is a tool used to mitigate clinical risk, but its delivery during telephone consultations has not been studied in detail.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "AIM",
-          "text": "To evaluate the communication, documentation, and patient recall of safety-netting advice in GP telephone consultations.",
+          "label": "PURPOSE",
+          "text": "There has yet to be a comprehensive multi-state study describing the children that use school-based health centers (SBHCs). This study seeks to determine sociodemographics, care utilization patterns, and prevalence of asthma and overweight among children seeking care at SBHCs.",
           "labelZh": "目的",
           "textZh": ""
         },
         {
-          "label": "DESIGN & SETTING",
-          "text": "Observational study using data from seven GP practices in south west England.",
-          "labelZh": "DESIGN & SETTING",
-          "textZh": ""
-        },
-        {
-          "label": "METHOD",
-          "text": "Practices routinely recording telephone consultations were invited to participate. Patients with a recent telephone consultation with a participating clinician were invited to consent to consultation recording retrieval, medical record extraction, and completion of a post-consultation questionnaire. Recordings of 96 telephone consultations were obtained and coded using the validated Safety-Netting Coding Tool. Regression models explored factors associated with safety-netting advice. Patient recall was assessed using post-consultation questionnaires.",
+          "label": "METHODS",
+          "text": "This retrospective cross-sectional analysis examined electronic health record data of children utilizing SBHCs within a large network of community-based clinics, consisting of 180 SBHCs in 14 U.S. states from 2012-2018. Demographics of exclusive SBHC users (SBHC-only group) were compared to utilizers of SBHCs plus non-SBHC community health centers (SBHC+ group).",
           "labelZh": "方法",
           "textZh": ""
         },
         {
           "label": "RESULTS",
-          "text": "There were 93 instances of safety-netting advice, delivered in 60.4% (n = 58) of 96 consultations applying to 43.4% (n = 72) of 166 identified problems. Instances of safety-netting advice were mostly GP initiated (95.7%, n = 89), delivered during treatment planning (66.7%, n = 62), and included specific elements (64.5%, n = 60). Delivered safety-netting advice was documented in 64.2% (n = 34) of 53 consultations with notes that were available. Written advice was rarely used: only four out of 96 consultations contained written advice, which was delivered via text message. Patients correctly recalled the presence of safety-netting advice in two-thirds of consultations when it was given. Safety-netting advice was more likely to be provided by younger GPs (aged <45 years; odds ratio 5.09, P = 0.011).",
+          "text": "Of 179,970 children with ≥1 ambulatory visit at a SBHC, 75.6% received care exclusively at SBHCs. Many SBHC-users reported family income <138% of the federal poverty line (48.9%) and self-identified as Hispanic (45.7%). Among SBHC utilizers, the prevalence of asthma (8%) and overweight (30%) were comparable to national statistics. Overall, 33% of children received well-childcare and 24% received influenza vaccinations exclusively at SBHCs. When comparing the two groups within the study, the SBHC-only group were older, and more lacked insurance (13.4%) compared with SBHC+ children (2.6%). The SBHC-only group had fewer total yearly visits, fewer yearly well-child visits, and fewer influenza vaccinations. In age stratified groups, preschool-aged children received the most well-childcare and influenza vaccinations in SBHCs.",
           "labelZh": "結果",
           "textZh": ""
         },
         {
-          "label": "CONCLUSION",
-          "text": "Safety-netting advice was commonly delivered during GP telephone consultations, but its delivery, documentation, and recall were inconsistent. Opportunities exist to improve the consistency, documentation, and use of written advice to support patient understanding, recall, and safety in remote care.",
+          "label": "CONCLUSIONS",
+          "text": "SBHCs serve a pediatric population that is disproportionately low-income, uninsured, and Hispanic. Children, particularly preschoolers, receive preventive healthcare at SBHCs. Given the population served, SBHCs have strong potential to address pediatric health inequities if adequately resourced, utilized, and integrated with other facilities including community health centers.",
           "labelZh": "結論",
           "textZh": ""
         }
       ],
-      "doi": "10.3399/BJGP.2025.0637",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41730681/",
+      "doi": "10.3122/jabfm.2025.250321R1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392985/",
       "titleZh": ""
     },
     {
-      "pmid": "41592855",
-      "title": "Value of measuring waist circumference in primary care: a mixed-methods study",
-      "journal": "BJGP",
+      "pmid": "42392984",
+      "title": "An Analysis of Common Questions and Concerns of Older Adults with Multiple Chronic Conditions",
+      "journal": "JABFM",
       "category": "家醫科",
-      "date": "2026 Jul 01",
-      "sortDate": "2026-07-01",
-      "authors": "van den Hout WJ, van Peet PG, Numans ME, Boone SC, Raas L, Le Cessie S, Rosendaal FR, Mook-Kanamori DO, et al.",
+      "date": "2026 Jul",
+      "sortDate": "2026-07-00",
+      "authors": "Lal K, Schneider C, Espinoza AM, Hendrix ZN, Young RA, White A, Lopez CM, Xiao Y, et al.",
       "abstract": [
         {
-          "label": "BACKGROUND",
-          "text": "It remains a challenge for GPs to identify all patients at increased risk of cardiovascular disease (CVD) in their practice, as performing cardiovascular risk assessment in every single patient is not feasible in routine practice. There is need for a simple tool to screen who is eligible for cardiovascular risk assessment and identify those at increased CVD risk.",
-          "labelZh": "背景",
-          "textZh": "對於全科醫生來說，在其實踐中識別所有心血管疾病 (CVD) 風險增加的患者仍然是一個挑戰，因為在常規實踐中對每位患者進行心血管風險評估是不可行的。需要一種簡單的工具來篩選誰有資格進行心血管風險評估並識別心血管疾病風險增加的人。"
-        },
-        {
-          "label": "AIM",
-          "text": "To investigate the value of measuring waist circumference in primary care by investigating: current recording practices of GPs; barriers and facilitators; and its contribution as a screening tool in the identification of patients at increased risk of CVD.",
-          "labelZh": "目的",
-          "textZh": "透過調查以下內容來探討測量腰圍在初級保健中的價值： 全科醫生目前的記錄做法；障礙和促進因素；及其作為篩檢工具在識別 CVD 風險增加患者方面的貢獻。"
-        },
-        {
-          "label": "DESIGN AND SETTING",
-          "text": "A mixed-methods study was conducted in Dutch primary care.",
-          "labelZh": "DESIGN AND SETTING",
-          "textZh": "在荷蘭初級保健中進行了一項混合方法研究。"
-        },
-        {
-          "label": "METHOD",
-          "text": "We investigated the following three datasets: routine data from general practices (n = 676 708 health records of adults); qualitative data from six focus groups (n = 21 GPs); data from the Netherlands Epidemiology of Obesity (NEO) study (n = 6671 middle-aged individuals).",
-          "labelZh": "方法",
-          "textZh": "我們調查了以下三個資料集：來自一般實踐的常規資料（n = 676 708 成人健康記錄）；來自六個焦點小組的定性資料（n = 21 GP）；資料來自荷蘭肥胖流行病學 (NEO) 研究（n = 6671 名中年人）。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "Between 2012 and 2023, incidence rates of recorded waist circumference by GPs decreased from 47 to 3 per 1000 person-years. Barriers to GPs measuring waist circumference included discomfort, inability to measure it accurately, lack of measuring tape, and perceived uselessness. Facilitators included knowledge that increased waist circumference is a cardiovascular risk factor. In the NEO study population, after excluding patients already treated for the prevention of CVD (n = 2407), 1731 patients were at increased risk of CVD (n = 1113 intermediate risk, n = 618 high risk). Measuring waist circumference would identify 89% (993/1113) of those at intermediate and 93% (575/618) of those at high predicted cardiovascular risk.",
-          "labelZh": "結果",
-          "textZh": "2012 年至 2023 年間，全科醫師記錄的腰圍發生率從每 1,000 人年 47 例下降到 3 例。全科醫生測量腰圍的障礙包括不適、無法準確測量、缺乏捲尺以及被認為無用。主持人介紹了腰圍增加是心血管危險因子的知識。在 NEO 研究族群中，排除已經接受 CVD 預防治療的患者 (n = 2407) 後，1731 名患者的 CVD 風險增加（n = 1113 名中度風險，n = 618 名高風險）。測量腰圍可以識別出 89% (993/1113) 的中度心血管風險族群和 93% (575/618) 的高預測心血管風險族群。"
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Waist circumference measurement may serve as a valuable screening tool to select patients eligible for cardiovascular risk assessment to identify those at increased risk of CVD in primary care. Since GPs currently rarely measure waist circumference, inclusion in guidelines and addressing identified barriers and facilitators is warranted.",
-          "labelZh": "結論",
-          "textZh": "腰圍測量可作為一種有價值的篩檢工具，用於選擇符合心血管風險評估資格的患者，以識別初級保健中心血管疾病風險增加的患者。由於全科醫生目前很少測量腰圍，因此有必要將其納入指南並解決已確定的障礙和促進因素。"
-        }
-      ],
-      "doi": "10.3399/BJGP.2025.0395",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41592855/",
-      "titleZh": "測量腰圍在初級保健中的價值：一項混合方法研究"
-    },
-    {
-      "pmid": "41494776",
-      "title": "Defining a theoretical framework for a quality referral at the primary-secondary care interface: a systematic scoping review with qualitative content analysis",
-      "journal": "BJGP",
-      "category": "家醫科",
-      "date": "2026 Jul 01",
-      "sortDate": "2026-07-01",
-      "authors": "Osman S, Harrison R, Burton C, Hider SL, Raiyat H, Welsh VK, Faux-Nightingale A",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Referral from primary to secondary care is a crucial component of a GP's role, yet the quality of referrals varies widely. Inadequate referral information can delay patient care, compromise outcomes, and strain healthcare resources. There is currently no universally accepted framework for what constitutes a quality referral.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "AIM",
-          "text": "To define a theoretical framework for high-quality referrals between primary and secondary care, and to identify key components of effective referral practice.",
+          "label": "PURPOSE",
+          "text": "Studies have shown that facilitating patient dialogue through a structured question prompt list (QPL) during patient encounters results in greater patient engagement, improved communication and increased patient understanding. Topics most interesting to patients are unclear, thus limiting how to optimally design and use QPLs. This study identified topics most interesting to patients to discuss with their clinicians in primary care office visits.",
           "labelZh": "目的",
           "textZh": ""
         },
         {
-          "label": "DESIGN AND SETTING",
-          "text": "A systematic scoping review using a systematic search of Embase, CINAHL, and Medline databases was conducted to identify research published between July 1999 and August 2024. A qualitative content analysis describing the quality of GP referrals was conducted following Preferred Reporting Items for Systematic reviews and Meta-Analyses extension for Scoping Review guidelines.",
-          "labelZh": "DESIGN AND SETTING",
-          "textZh": ""
-        },
-        {
-          "label": "METHOD",
-          "text": "Eligible studies included English-language publications with referral quality as a primary outcome, covering referrals from primary to secondary care. Studies were analysed inductively using qualitative content analysis to identify key attributes of effective referrals, which were grouped into overarching themes.",
+          "label": "METHODS",
+          "text": "We collected responses to a 20-item visit guide including questions to ask, concerns to tell, and positive behaviors to report. We focused on the ask and tell sections which involved general questions and concerns patients could choose from. Participants were 50 years or older and taking 5 or more medications at family medicine clinics from a public safety net hospital system (240) and an urban private practice (211).",
           "labelZh": "方法",
           "textZh": ""
         },
         {
           "label": "RESULTS",
-          "text": "The search yielded 3461 studies; 54 were included in analysis. Four themes were identified: patient clinical characteristics (complete medical history, relevant investigations, and physical examination); clinical reasoning (clear referral indication, structured template use, guideline adherence, and appropriate urgency classification); patient factors (patient understanding, patient preference, and flow of information); and referral barriers (time constraints, limited specialty expertise, and educational needs). A quality-improvement checklist based on these findings was developed.",
+          "text": "Of 451 visit guides collected, the selected top topics involved: 1) Diet (20.4%), 2) Taking fewer medications (15.3%), and 3) Understanding their condition (14.6%). The most common medication concerns included: 1) stopping or skipping medications due to cost, side effects, or other reasons (11.1%), 2) medications from multiple doctors (8%), and 3) specific concerns about medications (5.7%).",
           "labelZh": "結果",
           "textZh": ""
         },
         {
-          "label": "CONCLUSION",
-          "text": "Referral letters must balance detail and usability, taking a pragmatic approach to ensure clinical reasoning, relevant history, and patient involvement are communicated clearly, while avoiding unnecessary administrative burden.",
+          "label": "CONCLUSIONS",
+          "text": "Patients reported interest in discussing questions and concerns related to diet, reducing medications, and self-care knowledge on their conditions. The questions and concerns identified in this study provide insight into the communication priorities of older adults managing multiple medications. These findings can further inform the future development of QPLs and therefore potentially reap the benefits of improved clinician-patient communication.",
           "labelZh": "結論",
           "textZh": ""
         }
       ],
-      "doi": "10.3399/BJGP.2025.0304",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41494776/",
+      "doi": "10.3122/jabfm.2025.250240R1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392984/",
       "titleZh": ""
     },
     {
-      "pmid": "41136239",
-      "title": "Nasal sprays and a behavioural intervention for respiratory tract infections in primary care: 12-month follow-up of a randomised open-label trial",
-      "journal": "BJGP",
+      "pmid": "42392983",
+      "title": "Primary HPV Testing for Cervical Cancer Screening Among Family Medicine Educators",
+      "journal": "JABFM",
       "category": "家醫科",
-      "date": "2026 Jul 01",
-      "sortDate": "2026-07-01",
-      "authors": "Little P, Vennik J, Rumsby K, Stuart B, Becque T, Moore M, Francis N, Hay AD, et al.",
+      "date": "2026 Jul",
+      "sortDate": "2026-07-00",
+      "authors": "Young AP, Reyes R, Mgbudem C, Chen D, Sen A, Harper DM",
       "abstract": [
         {
           "label": "BACKGROUND",
-          "text": "The Immune Defence trial documented a short-term impact on respiratory tract infections (RTIs) for nasal sprays and a stress management and physical activity website.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "AIM",
-          "text": "To estimate the impact of sprays and the website after 12 months.",
-          "labelZh": "目的",
-          "textZh": ""
-        },
-        {
-          "label": "DESIGN AND SETTING",
-          "text": "A four-arm parallel randomised controlled trial. Participants with comorbidities and/or ≥3 self-reported recurrent RTIs were recruited.",
-          "labelZh": "DESIGN AND SETTING",
-          "textZh": ""
-        },
-        {
-          "label": "METHOD",
-          "text": "Participants were randomised by online software (stratified by recurrent illness and comorbidities) to a) usual care (n = 3451); b) Vicks First Defence (VFD) spray (n = 3448) (two sprays/nostril, ≤6 times a day; c) isotonic saline spray (n = 3450) (same dosing); or d) a website promoting physical activity and stress management (n = 3450). The primary outcome was respiratory illness days.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "Usual care participants (n = 3052) had on average 21.8 (standard deviation [SD] 35.2) illness days, reduced by VFD (n = 3076; 17.8 [SD 27.9] days, adjusted incidence rate ratio [IRR] 0.84, 99% confidence interval [CI] = 0.79 to 0.90, P<0.0001), and saline (n = 3142; 17.7 [SD 21.1 ] days, IRR 0.83, 99% CI = 0.78 to 0.89, P<0.0001), but not the website (n = 2811; 19.5 [SD 31.2] days, IRR 0.94, 99% CI = 0.88 to 1.01, P = 0.03). The website reduced incident infections (adjusted risk ratio [RR] 0.96, 95% CI = 0.93 to 0.99, P = 0.006). All interventions reduced symptom severity and work days lost, both spray groups reported lower intention to consult and fewer falls, and there were fewer antibiotic courses and practice visits with saline. Among those with recurrent illness, saline had the most impact on both recurrence and symptom days (RR 0.93, 95% CI = 0.87 to 0.99 and RR 0.70, 95% CI = 0.60 to 0.82, respectively). Headaches were higher for VFD and lower for saline (7.8% and 3.4%, respectively; 4.7% usual care).",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Widely available, inexpensive sprays and a website promoting self-care reduce the incidence, duration, and/or severity of RTIs and have an impact on work days lost and healthcare use.",
-          "labelZh": "結論",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.3399/BJGP.2025.0269",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41136239/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42276088",
-      "title": "The impact of Chile's multipronged food labelling and advertising law on early childhood excess weight: a cohort difference-in-differences study",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 27",
-      "sortDate": "2026-06-27",
-      "authors": "Paraje G, Valdés N, Macaya AV, Corvalán C, Popkin B",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "The 2016 Chilean Food Labelling and Advertising Law (FLAL), featuring black octagonal front-of-package warning labels and marketing and school restrictions, was among the first sets of multiple healthy food policies globally. In spite of its relevance, no study has causally linked the FLAL implementation to health outcomes. We aimed to estimate the plausible causal effect of the implementation of phase 1 of the FLAL on the relevance of excess weight among young children.",
+          "text": "Half of the women who develop cervical cancer in the US have never had a cervical cancer screen. Self-sampling is an equivalent technique to the invasive speculum exam. We aim to evaluate the current knowledge, attitudes, and behaviors toward self-sampled primary HPV testing in family medicine.",
           "labelZh": "背景",
           "textZh": ""
         },
         {
           "label": "METHODS",
-          "text": "In this cohort difference-in-differences approach, we assessed the effect of phase 1 of the FLAL on children's BMI when initital thresholds for critical nutrients were subsequently increased and implemented. Our analysis used national administrative data from the Chilean National Board of School Aid and Scholarships covering more than 300 000 school children aged 4-6 years across public and publicly subsidised schools nationwide from 2012 to 2017. We primarily used the Nutritional Map (Mapa Nutricional), available beginning in 2012, complemented with the Vulnerability Survey (Encuesta de Vulnerabilidad), available beginning in 2019. We defined cohorts by the year students entered prekindergarten, and compared unexposed cohorts (2012 and 2013, control group) with cohorts exposed to phase 1 (2014 and 2015, treatment group) during prekindergarten, kindergarten, and first grade. The primary outcome was a binary indicator of excess weight (ie, overweight or obesity) analysed using logit models and reported as marginal effects. We conducted subgroup analyses by children's school type, school area, maternal education and age at childbirth, birthweight, and gender.",
+          "text": "The annual cross-sectional survey of the Council of Academic Family Medicine's general membership included knowledge, attitudes, and beliefs about primary human papillomavirus (HPV) screening using self-sampling. The knowledge questions were based on current guidelines, as defined by the 2024 United States Preventive Services Task Force (USPSTF) 1. The attitude and belief questions were based on the Question-Behavior Theory 2. All surveys were emailed to the membership with up to five weekly reminders to complete.",
           "labelZh": "方法",
           "textZh": ""
         },
         {
-          "label": "FINDINGS",
-          "text": "The final analytical sample included 321 597 students (of cohorts 2012-15) covering the years 2012 to 2017 across prekindergarten, kindergarten, and first grade. Exposure to phase 1 of the FLAL led to significant reductions in the probability of a child having excess weight. Children exposed during both kindergarten and first grade (ie, 18 months of exposure) had the largest effects. Girls had a 2·85% lower probability of excess weight (95% CI -0·0407 to -0·0163), while boys had a 2·40% lower probability (-0·0358 to -0·0122). We also observed significant effects after 6 months of exposure (ie, first grade only): 1·91% lower probability (-0·0315 to -0·0068) for girls and 2·24% (-0·0345 to -0·0104) lower probability for boys.",
-          "labelZh": "發現",
+          "label": "RESULTS",
+          "text": "We had a 62% survey response rate with 744 respondents. Regardless of demographic descriptors, all respondents significantly changed their intended behavior regarding offering self-sampling for cervical cancer screening (p < 0.001). Of those with a baseline attitude of not offering self-sampling, 88% changed their response to offer self-sampling at the end of the survey. Baseline knowledge of the advantages of primary HPV screening was lowest among underrepresented minority Hispanic respondents (52% correct, compared to 80% among Whites, p < 0.001). Women respondents were 2.96 times more likely to intend to offer self-sampling for cervical cancer screening than men (OR 2.96 (95% CI: 1.18, 7.44, p<0.05).",
+          "labelZh": "結果",
           "textZh": ""
         },
         {
-          "label": "INTERPRETATION",
-          "text": "Phase 1 of Chile's comprehensive FLAL plausibly caused a measurable decrease in the prevalence of excess weight among young school children. The results provide crucial, evidence-based support for policy makers worldwide who are considering food environment policies as a scalable, impactful strategy to combat the childhood obesity epidemic.",
-          "labelZh": "詮釋",
-          "textZh": ""
-        },
-        {
-          "label": "FUNDING",
-          "text": "Bloomberg Philanthropies Grant.",
-          "labelZh": "經費來源",
+          "label": "CONCLUSIONS",
+          "text": "Based on the Question-Behavior Theory, over 90% of family medicine educators intend to offer women self-sampling for cervical cancer screening.",
+          "labelZh": "結論",
           "textZh": ""
         }
       ],
-      "doi": "10.1016/S0140-6736(26)00651-3",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42276088/",
+      "doi": "10.3122/jabfm.2025.250328R1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392983/",
       "titleZh": ""
     },
     {
-      "pmid": "42259342",
-      "title": "Interventions for the prevention and management of cardiometabolic multiple long-term conditions",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 27",
-      "sortDate": "2026-06-27",
-      "authors": "Valabhji J, Hope D, Sayed NE, Godia PM, Lawson C, Seidu S, Khunti K",
+      "pmid": "42392982",
+      "title": "\"Hard Fork\" for Family Medicine - Artificial Intelligence Will Change the Way We Experience Practice",
+      "journal": "JABFM",
+      "category": "家醫科",
+      "date": "2026 Jul",
+      "sortDate": "2026-07-00",
+      "authors": "Kallenberg GA, Bennett IM",
       "abstract": [
         {
-          "text": "Multiple long-term conditions (MLTC or multimorbidity) are increasing in global prevalence and represent a growing burden for individuals and health-care systems. Grouping cardiometabolic MLTC can be justified because aetiological antecedents and risk factors are often shared, and similar therapeutic approaches can have positive effects on the prevention, treatment, and delayed progression of many of the constituent conditions. In this Series paper, we focus on interventions for the prevention and management of cardiometabolic MLTC, under the broad headings of population-level, individual-level, and system-level interventions. Population-level public health measures such as educational, fiscal, regulatory, and environmental policies, and population-level screening and early detection can result in improved risk factor identification and control, although evidence that they reduce incidence and progression of cardiometabolic MLTC is more scarce. At an individual level, lifestyle interventions and pharmacotherapeutics can reduce the incidence and progression of cardiometabolic MLTC and provide effective treatment. Together with pharmacotherapeutic strategies, approaches to improve medicines management could help to optimise clinical outcomes in those living with cardiometabolic MLTC. System-level solutions, including integrated models of care and care continuity, provide opportunities to better address the holistic needs of people living with cardiometabolic MLTC. Together, combinations of multilevel approaches are required.",
+          "text": "The increasing advance of artificial intelligence (AI) in medicine will affect the future of Family Medicine in many ways. Some of the effects may be salutary, but others may infringe on the real work of family medicine/primary care. AI will change the way we experience practice. If AI can perform many current physician tasks, what will be left for the practicing human family physician? We believe that there will be several types of patient encounters that will still require the human touch that comes from established long-term continuous healing relationships between family physicians and their patients. As AI applications in primary care become more robust it will assume the function of a new member of the multi-professional healthcare team, and physicians will learn to operate in a new triad: the \"doctor-patient-AI partner relationship\". We explore possible further effects on the practice of family medicine under these new AI-enhanced circumstances and contemplate their impact on the current gap in primary care availability, continuity of care and the attractiveness of primary care careers. As we pass through this potential \"hard fork\" for family medicine we are convinced that family medicine is the most likely component of the healthcare system to survive and prosper with AI.",
           "labelZh": null,
           "textZh": ""
         }
       ],
-      "doi": "10.1016/S0140-6736(26)00608-2",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42259342/",
+      "doi": "10.3122/jabfm.2025.250251R2",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42392982/",
       "titleZh": ""
     },
     {
-      "pmid": "42259341",
-      "title": "Biological and mechanistic pathways of cardiometabolic multiple long-term conditions",
-      "journal": "Lancet",
+      "pmid": "42372279",
+      "title": "Adverse Events After Same-Day COVID-19 and Influenza Vaccination Versus Influenza Vaccination Alone : A Target Trial Emulation",
+      "journal": "Ann Intern Med",
       "category": "四大綜合",
-      "date": "2026 Jun 27",
-      "sortDate": "2026-06-27",
-      "authors": "Lim LL, Jenkins A, Prabhakaran D, Sookoian S, Bannuru RR, Khunti K",
-      "abstract": [
-        {
-          "text": "Cardiometabolic multiple long-term conditions (MLTC) arise from the complex interplay of biological, sociodemographic, environmental, and behavioural factors across the life course. Shared risk factors and mechanisms, including insulin resistance, adiposity, and chronic inflammation, underpin its development. Growing evidence also implicates that even low-level, long-term exposure to fine particulate matter, nitrogen dioxide, and related pollutants can accelerate the trajectory of cardiometabolic MLTC. Early-life exposures, including undernutrition and overnutrition, altered gut microbiome, and endocrine-disrupting chemicals, interact with social determinants of health to aggravate inflammatory and metabolic dysregulation. These mechanisms, together with genetic susceptibility, epigenetic modifications, and multiomics perturbations, shape disease progression, heterogeneity, and the clustering of cardiometabolic MLTC. Yet, fundamental gaps persist, whereby most mechanistic insights are derived from single-disease studies, leaving the temporal hierarchy, causal pathways, and population-level heterogeneity largely unresolved. Addressing these challenges will require life-course research, integrative systems approaches, and translational studies that link mechanistic insights to precision prevention and therapeutic strategies. By bridging discovery with actions, such efforts can enhance care for cardiometabolic MLTC and promote equitable health outcomes globally.",
-          "labelZh": null,
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00607-0",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42259341/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42259340",
-      "title": "Epidemiology of cardiometabolic multiple long-term conditions",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 27",
-      "sortDate": "2026-06-27",
-      "authors": "Khunti K, Zaccardi F, Mehta R, Gregg EW, Misra S",
-      "abstract": [
-        {
-          "text": "Cardiometabolic multiple long-term conditions (MLTC), defined as the coexistence of two or more cardiometabolic diseases such as diabetes, cardiovascular disease, and chronic kidney disease, are increasingly prevalent and represent a growing challenge for health systems worldwide. Despite rising interest, progress in understanding cardiometabolic MLTC has been limited by substantial heterogeneity in definitions, measurements, and analytical approaches, restricting comparability across studies and limiting translation into clinical and public health practice. Reported prevalence estimates vary across populations, largely reflecting differences in study design and conditions included. The prevalence of cardiometabolic MLTC increases with age but is not confined to older populations, with these conditions often emerging in early adulthood, particularly among socioeconomically disadvantaged and minority ethnic populations, for whom these conditions also progress more rapidly. Longitudinal studies demonstrate disease accumulation and accelerating transitions following development of a cardiometabolic condition leading to premature mortality. These trajectories are shaped by interacting genetic, metabolic, behavioural, and psychosocial factors, while deprivation and structural inequities substantially amplify risk and earlier onset. Advancing research and improving care will require harmonised definitions, greater use of longitudinal data, and scalable analytical approaches that explicitly capture disease sequencing and transitions. To improve consistency and comparability, the definition of cardiometabolic MLTC should be standardised.",
-          "labelZh": null,
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00606-9",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42259340/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42218899",
-      "title": "Ivonescimab plus chemotherapy versus tislelizumab plus chemotherapy in advanced squamous non-small-cell lung cancer (HARMONi-6): interim overall survival analysis of a randomised, double-blind, phase 3 trial in China",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 27",
-      "sortDate": "2026-06-27",
-      "authors": "Lu S, Liu B, Luo Y, Sun L, Wu L, Han Z, Fan Y, Zhao Y, et al.",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Xie Y, Choi T, Al-Aly Z",
       "abstract": [
         {
           "label": "BACKGROUND",
-          "text": "Bispecific antibodies targeting programmed death 1 (PD-1) and vascular endothelial growth factor (PD1-VEGF) have shown promising efficacy in non-small-cell lung cancer (NSCLC). In our previous report of the HARMONi-6 study, we aimed to evaluate the efficacy and safety of ivonescimab plus chemotherapy versus tislelizumab plus chemotherapy as a first-line therapy for patients with advanced squamous NSCLC. Ivonescimab combined with chemotherapy significantly prolonged progression-free survival compared with tislelizumab plus chemotherapy. Here we report the prespecified interim overall survival analysis.",
+          "text": "Safety studies of the COVID-19 vaccine have identified some adverse events. Yet newer variant-updated formulations, along with increased hybrid immunity, may change these risks. Early-era safety data may not reflect experience with updated formulations in more immune-experienced populations.",
           "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "METHODS",
-          "text": "HARMONi-6 is a double-blind, randomised, phase 3 trial, which was conducted at 50 hospitals across China. Patients aged 18-75 years with previously untreated, pathologically confirmed, unresectable stage IIIB, IIIC, or stage IV squamous NSCLC and an Eastern Cooperative Oncology Group performance status score of 0 or 1 were eligible for inclusion. Eligible patients were randomly assigned in a 1:1 ratio to receive ivonescimab or tislelizumab, in combination with paclitaxel and carboplatin for four cycles, followed by maintenance ivonescimab or tislelizumab monotherapy. The primary endpoint was progression-free survival assessed by the independent radiographic review committee as per Response Evaluation Criteria in Solid Tumours guidelines (version 1.1) in all randomly assigned patients. Overall survival was a key secondary endpoint; an interim analysis was planned when approximately 225 overall survival events were observed, but it was triggered after 204 overall survival events to meet regulatory deadlines. Safety, defined as adverse events and serious adverse events related to treatment, as well as adverse events related to immunity or VEGF blockade, were analysed in all randomly assigned patients who received at least one dose of the assigned study treatment. This study is registered at ClinicalTrials.gov (NCT05840016), has completed enrolment, and is ongoing for treatment and follow-up.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "FINDINGS",
-          "text": "From Aug 17, 2023, to Jan 21, 2025, 761 patients were assessed for eligibility, and after 229 exclusions a total of 532 patients were randomly allocated (266 per group). 494 (93%) of patients were male and 38 (7%) of patients were female. The median age was 64 years (IQR 59-69). At data cutoff (Feb 27, 2026), 204 deaths had occurred: 84 (32%) patients in the ivonescimab plus chemotherapy group and 120 (45%) in the tislelizumab plus chemotherapy group. With a median follow-up of 21·4 months (95% CI 20·27-21·91), the median overall survival was 27·9 months (95% CI 27·89-not evaluable [NE]) with ivonescimab versus 23·7 months (20·11-NE) with tislelizumab (hazard ratio for death 0·66 [95% CI 0·50-0·87]; pone-sided=0·0017), meeting the prespecified boundary (p<0·0049). The overall survival benefit with ivonescimab plus chemotherapy was consistent across key subgroups. Treatment-related adverse events of grade 3 or higher occurred in 184 (69%) of 266 patients in the ivonescimab group and 156 (59%) of 265 patients in the tislelizumab group. The incidence of grade 3 or higher haemorrhage was seven (3%) of 266 and two (1%) of 265, respectively.",
-          "labelZh": "發現",
-          "textZh": ""
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "Ivonescimab plus chemotherapy demonstrated a statistically significant and clinically meaningful improvement in overall survival compared with tislelizumab plus chemotherapy in previously untreated patients with advanced squamous NSCLC. This regimen could provide a novel treatment option as first-line treatment in this patient group.",
-          "labelZh": "詮釋",
-          "textZh": ""
-        },
-        {
-          "label": "FUNDING",
-          "text": "Akeso Biopharma.",
-          "labelZh": "經費來源",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00966-9",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42218899/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42214392",
-      "title": "Sacituzumab tirumotecan plus pembrolizumab versus pembrolizumab in PD-L1-positive advanced non-small-cell lung cancer (OptiTROP-Lung05): interim analysis of a randomised, open-label, phase 3 trial",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jun 27",
-      "sortDate": "2026-06-27",
-      "authors": "Xiong A, Yao W, Zheng W, Yu Y, Chen P, Zhong H, Ge J, Wang H, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Sacituzumab tirumotecan (sac-TMT), a trophoblast cell-surface antigen 2-targeting antibody-drug conjugate, combined with programmed death 1 (PD-1) or programmed death ligand 1 (PD-L1) inhibitors, has shown promising antitumour activity as first-line therapy for non-small-cell lung cancer (NSCLC) in early-phase studies. Our aim was to evaluate the efficacy and safety of sac-TMT plus pembrolizumab as first-line treatment for patients with PD-L1-positive advanced NSCLC without targetable genomic alterations.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "METHODS",
-          "text": "In this randomised, open-label, phase 3 trial (OptiTROP-Lung05) conducted across 68 hospitals in China, eligible patients had locally advanced or metastatic NSCLC without targetable genomic alterations and a PD-L1 tumour proportion score (TPS) of 1% or greater. Patients were randomly assigned (1:1) to receive sac-TMT (4 mg/kg on days 1, 15, and 29) plus pembrolizumab (400 mg fixed dose on day 1), or pembrolizumab alone, administered intravenously every 6 weeks. The primary endpoint was progression-free survival, as assessed by blinded independent central review in the intention-to-treat population. This trial was registered with ClinicalTrials.gov (NCT06448312). Recruitment is complete, with the trial ongoing and the final analysis to be reported later.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "FINDINGS",
-          "text": "Between June 7, 2024, and March 27, 2025, 741 patients were screened and 413 eligible patients were randomly assigned to receive sac-TMT plus pembrolizumab (n=208) or pembrolizumab alone (n=205). At the prespecified interim analysis, conducted after a median follow-up of 10·5 months (IQR 8·7-12·5), median progression-free survival was significantly longer with sac-TMT plus pembrolizumab than with pembrolizumab alone (not reached vs 5·7 months; stratified hazard ratio [HR] 0·35 [95% CI 0·26-0·47]; p<0·0001). The progression-free survival benefit was broadly consistent across subgroups, including patients with PD-L1 TPS of 1-49% (HR 0·28 [95% CI 0·19-0·41]) and those with PD-L1 TPS of 50% or greater (HR 0·47 [0·29-0·77]). Grade 3 or higher treatment-emergent adverse events occurred in 115 (55%) of 208 patients in the sac-TMT plus pembrolizumab group and 64 (31%) of 204 patients in the pembrolizumab group.",
-          "labelZh": "發現",
-          "textZh": ""
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "Among patients with PD-L1-positive advanced NSCLC without targetable genomic alterations, first-line treatment with sac-TMT plus pembrolizumab significantly prolonged progression-free survival compared with pembrolizumab alone. Therefore, sac-TMT plus pembrolizumab has the potential to redefine first-line treatment for patients with PD-L1-positive advanced NSCLC without targetable genomic alterations.",
-          "labelZh": "詮釋",
-          "textZh": ""
-        },
-        {
-          "label": "FUNDING",
-          "text": "Sichuan Kelun-Biotech Biopharmaceutical.",
-          "labelZh": "經費來源",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)00968-2",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42214392/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42341303",
-      "title": "Prevention and Treatment of Peanut Allergy",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jun 25",
-      "sortDate": "2026-06-25",
-      "authors": "Du Toit G, Lack G",
-      "abstract": [
-        {
-          "text": "Early introduction of peanut protein reduces allergy prevalence by approximately 80%, with efficacy diminishing as introduction is delayed. Appropriate prevention involves ingestion of approximately 2 g of peanut protein weekly for infants at low risk and 4 to 6 g weekly for infants at high risk. Population-level implementation that targets all infants achieves greater reduction in disease burden than approaches that target only high-risk groups, although disparities exist among some ethnic groups and groups with restricted access to care. Peanut immunotherapy initiated in younger children (1 to 3 years of age) shows superior efficacy and higher rates of clinical remission as compared with immunotherapy initiated in older children. The natural history of untreated peanut allergy follows a trajectory of increasing peanut-specific IgE levels and clinical reactivity over time, underscoring the importance of early intervention during this narrow developmental window.",
-          "labelZh": null,
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1056/NEJMcp2314424",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42341303/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42341302",
-      "title": "Ten-Year Outcomes after CAR T-Cell Therapy for B-Cell Lymphomas",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jun 25",
-      "sortDate": "2026-06-25",
-      "authors": "Ruella M, Paruzzo L, Chong ER, Chong EA, Landsburg DJ, Nasta SD, Devi P, Michener P, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Anti-CD19 chimeric antigen receptor (CAR) T-cell therapy is a standard treatment for relapsed or refractory B-cell non-Hodgkin lymphomas. Long-term results and curative potential remain uncertain.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "METHODS",
-          "text": "We evaluated long-term outcomes in 38 patients with relapsed or refractory B-cell non-Hodgkin lymphomas (24 patients with large B-cell lymphoma and 14 with follicular lymphoma) who had been treated with CTL019 (now called tisagenlecleucel) - autologous T cells expressing CD19-directed, 4-1BB-costimulated chimeric receptors. Lymphoma-free survival was defined as the time from the tisagenlecleucel infusion to relapse or lymphoma-related death. The incidence of non-relapse-related death and second primary cancer was estimated with the Aalen-Johansen method. The data-cutoff date was October 1, 2025.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "At a median follow-up of 10.1 years (range, 7.9 to 11.5), no relapses had occurred beyond 5.4 years. The 10-year lymphoma-free survival was 32% (95% confidence interval [CI], 14 to 51) among patients with large B-cell lymphoma and 47% (95% CI, 20 to 71) among those with follicular lymphoma. In an analysis that included deaths from any cause, the 10-year progression-free survival was 17% (95% CI, 5 to 34) among patients with large B-cell lymphoma and 29% (95% CI, 9 to 52) among those with follicular lymphoma; the 10-year overall survival was 17% (95% CI, 5 to 34) and 50% (95% CI, 23 to 72), respectively. Persistent grade 2 or 3 neutropenia occurred in 2 patients (5%); no late anemia or thrombocytopenia was observed. A second primary cancer developed in 9 patients (10-year cumulative incidence, 21%). The 10-year non-relapse-related mortality was 18% (14% when deaths related to coronavirus disease 2019 were excluded). Higher CAR-transgene persistence appeared to be associated with long-term response. B-cell aplasia persisted in 44% of patients with a long-term response.",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "Among patients with heavily pretreated B-cell non-Hodgkin lymphoma, a single infusion of tisagenlecleucel led to decade-long remissions (lymphoma-free survival) in approximately one third of the patients with large B-cell lymphomas and in nearly one half of those with follicular lymphoma. (Funded by the Richard Berman Family Innovations Center in CLL and Lymphomas and others; ClinicalTrials.gov number, NCT02030834.).",
-          "labelZh": "結論",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1056/NEJMoa2518035",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42341302/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42341301",
-      "title": "A Pragmatic Trial of a 6-Month Strategy for Rifampicin-Resistant Tuberculosis",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jun 25",
-      "sortDate": "2026-06-25",
-      "authors": "Conradie F, Badat T, Poswa A, Rajaram S, Kooverjee S, Maartens G, Meintjes G, Hughes J, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Safer, more effective treatment regimens for rifampicin-resistant tuberculosis are needed.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "METHODS",
-          "text": "We conducted a phase 3, open-label, pragmatic, randomized, controlled noninferiority trial in South Africa to assess a 6-month treatment strategy for pulmonary rifampicin-resistant tuberculosis. Participants with pulmonary rifampicin-resistant tuberculosis who were 6 years of age or older were randomly assigned to a regimen consisting of bedaquiline, linezolid, delamanid, and levofloxacin or clofazimine or both for 6 months (trial-strategy group) or the 9-month standard-of-care treatment regimen that was current in South Africa (control group). Persons who were pregnant or breastfeeding and those who had fluoroquinolone-resistant tuberculosis were included in the trial population. Treatment in both groups was adjusted on the basis of results of second-line drug susceptibility testing. The primary efficacy end point was a successful outcome (cure or completion of treatment) at the end of treatment and at 76 weeks after randomization. The noninferiority margin was 10 percentage points. The primary safety end point was an adverse event of grade 3 or higher.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "Among the 432 persons who were screened, 403 underwent randomization; 203 were assigned to the trial-strategy group, and 200 to the control group. A successful outcome was observed in 174 of 202 participants (86.1%) in the trial-strategy group and in 172 of 200 (86.0%) in the control group. The adjusted risk difference was -0.2 percentage points (95% confidence interval [CI], -6.9 to 6.5; P = 0.001 for noninferiority). Adverse events of grade 3 or higher occurred during treatment in 63 of 202 participants (31.2%) in the trial-strategy group and in 74 of 200 (37.0%) in the control group; 10 participants in each group died.",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "Among participants in South Africa with rifampicin-resistant tuberculosis, the 6-month trial strategy was noninferior to the standard-of-care strategy with respect to a successful outcome. The safety profiles of the two strategies were similar. (Funded by the U.S. Agency for International Development and others; BEAT Tuberculosis ClinicalTrials.gov number, NCT04062201.).",
-          "labelZh": "結論",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1056/NEJMoa2503687",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42341301/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42267805",
-      "title": "Hospital Policy of Tranexamic Acid to Reduce Transfusion in Major Noncardiac Surgery",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jun 25",
-      "sortDate": "2026-06-25",
-      "authors": "Houston BL, McIsaac DI, Breau RH, Kanji S, Greenstreet P, Andrews M, Avramescu S, Bagry HS, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Whether a hospital policy of tranexamic acid administration for patients undergoing major noncardiac surgery safely reduces the need for red-cell transfusion is uncertain.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "METHODS",
-          "text": "We conducted a multicenter, double-blind, cluster-randomized, placebo-controlled trial involving patients undergoing noncardiac surgery who were at high risk for red-cell transfusion. Hospitals were randomly assigned at 4-week intervals to a hospital-wide policy of intraoperative tranexamic acid or placebo. The coprimary effectiveness and safety outcomes were transfusion of red cells during the index hospitalization and diagnosis of venous thromboembolism within 90 days, respectively. The safety outcome was assessed for noninferiority, with a prespecified noninferiority margin defined as an upper boundary of 1.46 for the 95% confidence interval of the relative risk. Analyses used mixed-effects models that accounted for the cluster-crossover design.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "A total of 8273 patients enrolled across 10 Canadian hospitals could be evaluated for the coprimary outcomes. Oncologic surgery accounted for 60.5% of the surgical procedures (5002 of 8273). The percentage of patients who received a red-cell transfusion during hospitalization was 7.4% (306 of 4156) in the tranexamic acid group and 9.8% (403 of 4117) in the placebo group (relative risk, 0.73; 95% confidence interval [CI], 0.61 to 0.86; adjusted difference, -2.7 percentage points; 95% CI, -4.2 to -1.4). Venous thromboembolism within 90 days occurred in 2.1% of patients (86 of 4128) in the tranexamic acid group and 2.1% of patients (85 of 4052) in the placebo group (relative risk, 0.96; 95% CI, 0.65 to 1.38; adjusted difference, -0.1 percentage points; 95% CI, -0.9 to 0.7), which met the criterion for noninferiority.",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "Among patients undergoing major noncardiac surgery, a hospital policy of tranexamic acid administration resulted in a lower incidence of red-cell transfusion than placebo administration, and tranexamic acid was noninferior to placebo with regard to diagnosis of venous thromboembolism. (Funded by the Canadian Institutes of Health Research and others; TRACTION ClinicalTrials.gov number, NCT04803747.).",
-          "labelZh": "結論",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1056/NEJMoa2515820",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42267805/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42206582",
-      "title": "Phase 3 Results of Bepirovirsen Treatment for Chronic Hepatitis B Virus Infection",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jun 25",
-      "sortDate": "2026-06-25",
-      "authors": "Hou J, Lim SG, Buti M, Yuen MF, Gane E, Lampertico P, Terrault N, Nguyen H, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Treatment with bepirovirsen, an antisense oligonucleotide targeting hepatitis B virus (HBV) transcripts, has the potential to result in a functional cure, defined by at least 24 weeks of a sustained HBV DNA level below the lower limit of quantification (LLOQ) and hepatitis B surface antigen (HBsAg) loss after fixed-duration therapy.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "METHODS",
-          "text": "In two replicate, double-blind trials (B-Well 1 and B-Well 2), we randomly assigned adults with noncirrhotic chronic HBV infection in a 2:1 ratio to receive subcutaneous bepirovirsen (at a weekly dose of 300 mg) or placebo for 24 weeks. All the patients were receiving stable nucleoside or nucleotide analogue (NA) therapy and had an HBsAg level of more than 100 to 3000 IU per milliliter. Eligible patients discontinued NA therapy at 48 weeks. The primary outcome was a functional cure at week 72.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "The percentage of patients with a functional cure at week 72 was significantly higher with bepirovirsen than with placebo both in the B-Well 1 trial (in 127 of 650 patients [20%] vs. none of 328 patients) and in the B-Well 2 trial (in 106 of 570 patients [19%] vs. none of 286 patients). In a pooled analysis at 72 weeks, adverse events were reported in 91% of the patients in the bepirovirsen groups and in 73% of those in the placebo groups; serious adverse events were reported in 7% and 4% of the patients, respectively. During the treatment period, adverse events of grade 3 or higher were reported in 16% of the patients who received bepirovirsen and in 3% of those who received placebo; increases in the alanine aminotransferase level were the most common grade 3 adverse events with bepirovirsen (in 6% of the patients).",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "In two phase 3 trials involving patients with chronic HBV infection, a functional cure after the discontinuation of NA therapy was reported in significantly more patients treated with bepirovirsen than in those who received placebo. (Funded by GSK; ClinicalTrials.gov numbers, NCT05630807 and NCT05630820.).",
-          "labelZh": "結論",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1056/NEJMoa2515131",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42206582/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42041224",
-      "title": "Pulsed Field Ablation as Initial Therapy for Persistent Atrial Fibrillation",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jun 25",
-      "sortDate": "2026-06-25",
-      "authors": "Wazni OM, Chun KRJ, Nair DG, Anic A, Duytschaever M, Chrispin J, Amin A, Ajijola OA, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Guidelines recommend a trial of antiarrhythmic drugs before catheter ablation for persistent atrial fibrillation. Whether pulsed field ablation (PFA) may be a preferred initial treatment is unclear.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "METHODS",
-          "text": "We conducted an international, randomized trial involving patients with previously untreated persistent atrial fibrillation. The patients were randomly assigned in a 2:1 ratio to receive PFA performed with a pentaspline catheter or to receive antiarrhythmic-drug therapy. An additional group of patients (PFA-assigned) underwent PFA for the analysis of the primary safety end point alone. All the patients received an insertable cardiac monitor. The primary effectiveness end point was the short-term and long-term success of treatment through 12 months. Short-term success was defined as procedural success in the PFA group and the absence of ablation during the blanking period (90 days after treatment initiation) in the antiarrhythmic-drug group. Long-term success was defined as freedom from recurrence of atrial arrhythmias, repeat ablation, or need for antiarrhythmic drugs from 90 days through 12 months (in the PFA group) and freedom from amiodarone use at any time. The primary safety end point was device- and procedure-related serious adverse events.",
-          "labelZh": "方法",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "At 12 months, treatment success was observed in 128 of 207 patients (Kaplan-Meier estimate, 56%; 95% confidence interval [CI], 48 to 63) in the PFA group and in 40 of 103 patients (Kaplan-Meier estimate, 30%; 95% CI, 21 to 40) in the antiarrhythmic-drug group (hazard ratio for composite treatment failure [a lack of short- and long-term success], 0.46; 95% CI, 0.33 to 0.65; P<0.001). A primary safety end-point event occurred in 13 of 257 patients (5.1%) in the combined PFA group (both randomized and PFA-assigned groups). At 12 months, serious adverse events had occurred in 45 patients (25%) in the PFA group and in 20 patients (21%) in the antiarrhythmic-drug group.",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "Among patients with persistent atrial fibrillation, the risk of recurrence of atrial arrhythmia was significantly lower among those who received PFA as first-line treatment than among those who received antiarrhythmic-drug therapy. (Funded by Boston Scientific; AVANT GUARD ClinicalTrials.gov number, NCT06096337.).",
-          "labelZh": "結論",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.1056/NEJMoa2600929",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42041224/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42340733",
-      "title": "Self-Directed vs Clinician-Delivered Cognitive Behavioral Therapy for Chronic Pain: A Randomized Clinical Trial",
-      "journal": "JAMA",
-      "category": "四大綜合",
-      "date": "2026 Jun 24",
-      "sortDate": "2026-06-24",
-      "authors": "Heapy AA, Driscoll MA, Edmond S, LaChappelle KM, Buta E, Halat A, Krein SL, Martino S, et al.",
-      "abstract": [
-        {
-          "label": "IMPORTANCE",
-          "text": "Cognitive behavioral therapy for chronic pain (CBT-CP) is a first-line nonpharmacological treatment, but uptake remains low due to multiple access barriers.",
-          "labelZh": "重要性",
           "textZh": ""
         },
         {
           "label": "OBJECTIVE",
-          "text": "To assess the effectiveness of self-directed CBT-CP with asynchronous, personalized feedback relative to clinician-delivered CBT-CP under usual clinical practice conditions.",
+          "text": "To evaluate 90-day risks for adverse events after coadministration of COVID-19 and influenza vaccines compared with influenza vaccination alone, across bivalent, XBB-adapted, and KP-adapted COVID-19 vaccine periods.",
           "labelZh": "目的",
           "textZh": ""
         },
         {
-          "label": "DESIGN, SETTING, AND PARTICIPANTS",
-          "text": "This randomized, open-label pragmatic superiority trial enrolled 764 patients with chronic musculoskeletal pain from 9 US Veterans Health Administration (VHA) health care systems from December 20, 2019, to February 20, 2024; follow-up was completed in February 2025.",
-          "labelZh": "DESIGN, SETTING, AND PARTICIPANTS",
+          "label": "DESIGN",
+          "text": "Target trial emulation using electronic health care data.",
+          "labelZh": "設計",
           "textZh": ""
         },
         {
-          "label": "INTERVENTIONS",
-          "text": "Participants were allocated 1:1 to self-directed CBT-CP (n = 384) or clinician-delivered CBT-CP (n = 380). The self-directed group included 11 weeks of treatment with weekly personalized audio-recorded feedback provided by coaches. Feedback was based on participants' daily reports of pain coping skill practice, physical activity, and pain-relevant ratings collected by the interactive voice response system. Clinician-delivered CBT-CP included 4 to 11 weekly sessions provided under usual practice conditions.",
+          "label": "SETTING",
+          "text": "U.S. Department of Veterans Affairs.",
+          "labelZh": "場域",
+          "textZh": ""
+        },
+        {
+          "label": "PARTICIPANTS",
+          "text": "Participants receiving both COVID-19 and seasonal influenza vaccines (n = 705 124) and those receiving only an influenza vaccine (n = 1 813 205) between 1 September 2022 and 26 August 2025.",
+          "labelZh": "受試者",
+          "textZh": ""
+        },
+        {
+          "label": "INTERVENTION",
+          "text": "Receipt of both COVID-19 and seasonal influenza vaccines versus receipt of only an influenza vaccine.",
           "labelZh": "介入",
           "textZh": ""
         },
         {
-          "label": "MAIN OUTCOMES AND MEASURES",
-          "text": "The primary outcome was patient-reported pain interference measured by the 7-item Brief Pain Inventory-Interference (BPI-I) subscale at 4 months (score range, 0-10; higher scores indicate worse function; minimum clinically important difference, 1). Secondary outcomes included BPI-I at 6 and 12 months; pain intensity, pain impact, catastrophizing, self-efficacy, sleep, global impression of change, depressive symptoms (all at 4 months); and treatment dose.",
-          "labelZh": "主要結果與測量",
+          "label": "MEASUREMENTS",
+          "text": "90-day risks for 46 prespecified individual adverse events grouped into 3 composite outcomes (tier 1, serious or life-threatening; tier 2, clinically significant; tier 3, less severe or self-limiting), using weighted discrete-time survival models.",
+          "labelZh": "測量",
           "textZh": ""
         },
         {
           "label": "RESULTS",
-          "text": "Of the 764 randomized participants (mean age, 52.8 [SD, 12.3] years; 299 women [39.1%]; 289 Black [39.1%]; 399 White [54.0%]; and 107 Hispanic ethnicity [14.0%] and 186 participants [24%] who resided in a rural area), 583 participants (76%) completed the 4-month assessment and 523 (68%) the 12-month assessment. At 4 months, the self-directed CBT-CP was superior to clinician-delivered CBT-CP for reduction in pain interference (mean score, 5.26 vs 6.23, respectively; mean difference, -0.98; 95% CI, -1.31 to -0.65, P < .001) and maintained superiority at 6 and 12 months. Self-directed CBT-CP was superior to clinician-delivered CBT-CP for all other outcomes at 4 months (P ≤ .001). Participants in the self-directed CBT-CP group completed more expected treatment sessions than patients in the clinician-delivered CBT-CP group.",
+          "text": "For all 3 composite outcomes, risks were similar between groups: tier 1 (risk ratio [RR], 1.03 [95% CI, 0.99 to 1.09]), tier 2 (RR, 0.99 [CI, 0.96 to 1.03]), and tier 3 (RR, 0.99 [CI, 0.96 to 1.02]). Of the 46 individual adverse events, 2 tier-3 risks had nominal statistical significance: syncope (RR, 1.09 [CI, 1.02 to 1.17]) and tinnitus (RR, 0.95 [CI, 0.92 to 0.99]); no risks were statistically significant after correcting for multiple comparisons. For all risks in tier 1 or tier 2, confidence bounds included 1.0 (no effect). In period-stratified analyses, neither composite (tier) nor individual event estimates supported differences in risks between groups.",
           "labelZh": "結果",
           "textZh": ""
         },
         {
-          "label": "CONCLUSIONS AND RELEVANCE",
-          "text": "Self-directed CBT-CP was associated with modest improvements in pain interference at 4 months that were sustained to 12 months, small to moderate improvements in all secondary outcomes at 4 months, and higher session-completion rates, relative to clinician-delivered CBT-CP. Scalable, convenient self-directed CBT may be an effective alternative to clinician-delivered CBT that could increase uptake of CBT-CP.",
-          "labelZh": "結論與意義",
+          "label": "LIMITATION",
+          "text": "Generalizability and potential unmeasured confounding.",
+          "labelZh": "LIMITATION",
           "textZh": ""
         },
         {
-          "label": "TRIAL REGISTRATION",
-          "text": "ClinicalTrials.gov Identifier: NCT03469505.",
-          "labelZh": "試驗註冊",
+          "label": "CONCLUSION",
+          "text": "Same-day coadministration of COVID-19 and influenza vaccines was not associated with an increased risk for adverse events in 3 updated-formulation periods. These findings support the short-term safety of coadministration.",
+          "labelZh": "結論",
+          "textZh": ""
+        },
+        {
+          "label": "PRIMARY FUNDING SOURCE",
+          "text": "U.S. Department of Veterans Affairs.",
+          "labelZh": "PRIMARY FUNDING SOURCE",
           "textZh": ""
         }
       ],
-      "doi": "10.1001/jama.2026.7861",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42340733/",
+      "doi": "10.7326/ANNALS-26-00217",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42372279/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42372278",
+      "title": "Leveraging Real-World Evidence to Inform Regulatory, Clinical, and Coverage Decisions Related to Glucagon-Like Peptide-1-Based Therapies: Synopsis of a National Institute of Diabetes and Digestive and Kidney Diseases Workshop",
+      "journal": "Ann Intern Med",
+      "category": "四大綜合",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Arterburn D, Curtis LH, Toh S, Bradley MC, D'Alessio D, Duchovny N, Hines D, Narain K, et al.",
+      "abstract": [
+        {
+          "text": "Glucagon-like peptide-1 receptor agonists (GLP-1RAs) have transformed obesity and diabetes management, with rapidly expanding indications and use among U.S. adults. Despite their promise, key questions remain about optimal treatment pathways, long-term safety, effectiveness across diverse populations, adherence, and economic impact. Real-world evidence (RWE) derived from electronic health records, claims, and other data sources could address these gaps, but unique challenges complicate its use, such as inconsistent insurance coverage, high discontinuation rates, medication shortages, compounded formulations, and off-label prescribing. To explore these issues, the National Institute of Diabetes and Digestive and Kidney Diseases convened a workshop in May 2025 with experts from regulatory agencies, guideline committees, payers, and academia. Discussions focused on identifying knowledge gaps in GLP-1RA use, evaluating how RWE informs practice, assessing limitations of real-world data, and strategies to reduce bias in RWE. Presentations emphasized RWE's potential to complement randomized trials by capturing rare adverse events, long-term outcomes, and effectiveness in routine care. However, persistent challenges include data reliability, confounding, and incomplete capture of medication use and outcomes, particularly in pediatric and underserved populations. Coverage decisions remain heterogeneous across Medicare, Medicaid, and private payers and across time, underscoring the need for rigorous cost-benefit analyses. The workshop concluded that robust RWE is essential for developing value-based coverage policies and optimizing GLP-1RA use. Continued investment in high-quality data infrastructure and analytic methods will be critical to inform regulatory, clinical, and economic decisions as utilization expands.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.7326/ANNALS-25-05468",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42372278/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42372277",
+      "title": "Methodological Approaches to Real-World Evidence Generation for Glucagon-like Peptide-1-Based Therapies: Synopsis of a National Institute of Diabetes and Digestive and Kidney Diseases Workshop",
+      "journal": "Ann Intern Med",
+      "category": "四大綜合",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Curtis LH, Arterburn D, Toh S, Guo J, Hernán MA, Iturralde E, Jastreboff A, Lewis KH, et al.",
+      "abstract": [
+        {
+          "text": "Glucagon-like peptide-1 receptor agonists (GLP-1RAs) have reshaped the clinical approach to managing obesity and type 2 diabetes. As approved indications have expanded, use of GLP-1RAs has increased rapidly in the United States. Although randomized trials demonstrate strong efficacy, many questions remain about their optimal use in clinical practice. Real-world data (RWD) from electronic health records, registries, insurance claims, and other sources offer a promising avenue to address these questions. However, concerns about data quality, selection bias, and incomplete ascertainment of medication use and outcomes pose significant challenges to the validity of the resulting evidence. In May 2025, the National Institute of Diabetes and Digestive and Kidney Diseases convened experts from regulatory agencies, payer organizations, and academia to explore these challenges. This second of 2 synopsis articles on the workshop summarizes the discussion around the strengths and limitations of various RWD sources and methodological approaches to strengthen causal inference and generalizability. Presenters highlighted pragmatic clinical trials and target trial emulation as strategies to generate stronger real-world evidence (RWE) that is relevant to both clinical practice and policy. The workshop underscored that careful attention to study design, data limitations, and analytic approach is essential to yield RWE that informs clinicians, patients, payers, and policymakers.",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.7326/ANNALS-26-00202",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42372277/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42372276",
+      "title": "Weekly and Biweekly Treatment With Bofanglutide Versus Semaglutide in Chinese Patients With Type 2 Diabetes : A Phase 2b Randomized Clinical Trial",
+      "journal": "Ann Intern Med",
+      "category": "四大綜合",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Liu M, Cheng Z, Lu L, Cai H, Liu J, Liu J, Zheng Y, Wang S, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Bofanglutide is a novel glucagon-like peptide-1 receptor agonist under development for type 2 diabetes mellitus (T2DM) and overweight and obesity.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "OBJECTIVE",
+          "text": "To evaluate the efficacy and safety of bofanglutide compared with semaglutide.",
+          "labelZh": "目的",
+          "textZh": ""
+        },
+        {
+          "label": "DESIGN",
+          "text": "Phase 2b, randomized, open-label, active-controlled trial. (ClinicalTrials.gov: NCT06256549).",
+          "labelZh": "設計",
+          "textZh": ""
+        },
+        {
+          "label": "SETTING",
+          "text": "Multicenter (37 sites in China).",
+          "labelZh": "場域",
+          "textZh": ""
+        },
+        {
+          "label": "PARTICIPANTS",
+          "text": "Adults with T2DM who were drug-naive or receiving stable oral antidiabetic drugs (glycated hemoglobin A1c [HbA1c], 7.0% to 11.0%).",
+          "labelZh": "受試者",
+          "textZh": ""
+        },
+        {
+          "label": "INTERVENTION",
+          "text": "Participants were randomly assigned 1:1:1:1:1 to 1 of 5 treatment groups: bofanglutide titrated to targets of 12, 18, or 24 mg (biweekly [once every 2 weeks; Q2W]); bofanglutide titrated to 24 mg (once weekly [QW]); or semaglutide titrated to 1 mg QW.",
+          "labelZh": "介入",
+          "textZh": ""
+        },
+        {
+          "label": "MEASUREMENTS",
+          "text": "Change in HbA1c level from baseline to week 24 (primary end point), secondary efficacy end points, and safety.",
+          "labelZh": "測量",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "Overall, 272 participants were enrolled, with a mean age of 50.8 years, HbA1c level of 8.35%, and body mass index of 27.9 kg/m2. At week 24, HbA1c level change from baseline was -1.87% (95% CI, -2.11% to -1.63%), -2.28% (CI, -2.54% to -2.03%), and -1.94% (CI, -2.19% to -1.69%) for bofanglutide 12, 18, 24 mg Q2W, respectively; -2.32% (CI, -2.57% to -2.06%) for bofanglutide 24 mg QW; and -1.60% (CI, -1.85% to -1.35%) for 1 mg of semaglutide QW. Corresponding treatment differences versus semaglutide were -0.27% (CI, -0.61% to -0.08%), -0.68% (CI, -1.04% to -0.33%), -0.34% (CI, -0.70% to 0.02%), and -0.72% (CI, -1.08% to -0.36%), respectively. Gastrointestinal adverse events (GIAEs) (mostly grade 1 or 2 in severity) occurred in 81.8% to 87.3% and 51.9% of participants in the bofanglutide and semaglutide groups, respectively. Hypoglycemia occurred in 0% to 3.8% versus 1.9%, with no severe hypoglycemia.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "LIMITATION",
+          "text": "Open-label, short duration, only Chinese participants.",
+          "labelZh": "LIMITATION",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "Meaningful reductions in HbA1c levels were seen with bofanglutide in patients with T2DM; GIAEs were the most common and generally manageable.",
+          "labelZh": "結論",
+          "textZh": ""
+        },
+        {
+          "label": "PRIMARY FUNDING SOURCE",
+          "text": "Gan & Lee Pharmaceuticals.",
+          "labelZh": "PRIMARY FUNDING SOURCE",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.7326/ANNALS-25-04623",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42372276/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42372274",
+      "title": "Reporting Interest-Holder Engagement in Practice Guidelines: The RIGHT-MuSE Checklist",
+      "journal": "Ann Intern Med",
+      "category": "四大綜合",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Yu X, Zeidan L, Khabsa J, Petkovic J, Agoritsas T, Bou Akl I, Al-Ansary LA, Amer YS, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "As part of the development of practice guidelines, developers need to systematically engage relevant interest-holder groups. The Reporting Items for practice Guidelines in HealThcare (RIGHT) checklist for reporting practice guidelines lacks detailed guidance on how to report the engagement process.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "OBJECTIVE",
+          "text": "To develop a standardized checklist for reporting interest-holder engagement in practice guidelines, named the RIGHT-MuSE checklist.",
+          "labelZh": "目的",
+          "textZh": ""
+        },
+        {
+          "label": "DESIGN",
+          "text": "The development process followed the methods recommended by the Enhancing the QUAlity and Transparency Of health Research (EQUATOR) Network, as well as lessons learned from the development of the RIGHT statement and its extensions. Key steps included developing the protocol, registering the project, establishing a working group, conducting background work, generating an initial list of items, conducting a consensus survey, holding panel discussions, and creating the final RIGHT-MuSE checklist and an accompanying explanation and elaboration document.",
+          "labelZh": "設計",
+          "textZh": ""
+        },
+        {
+          "label": "SETTING",
+          "text": "International collaboration.",
+          "labelZh": "場域",
+          "textZh": ""
+        },
+        {
+          "label": "PARTICIPANTS",
+          "text": "25 panelists from various guideline development interest-holder groups.",
+          "labelZh": "受試者",
+          "textZh": ""
+        },
+        {
+          "label": "MEASUREMENTS",
+          "text": "Consensus agreement on checklist items.",
+          "labelZh": "測量",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "The final RIGHT-MuSE checklist consists of 11 items covering the guidance used, methods of engagement, characteristics of interest-holders, evaluation of engagement, and management of conflicts of interest. The checklist is supplemented with a glossary of key terms and detailed explanations for each item to facilitate its use.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "LIMITATION",
+          "text": "The RIGHT-MuSE checklist has not been evaluated in a broader context or widely applied in real-world guideline development processes.",
+          "labelZh": "LIMITATION",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "Guideline developers can use the RIGHT-MuSE checklist to comprehensively report on interest-holder engagement.",
+          "labelZh": "結論",
+          "textZh": ""
+        },
+        {
+          "label": "PRIMARY FUNDING SOURCE",
+          "text": "The Vincent and Lily Woo Foundation.",
+          "labelZh": "PRIMARY FUNDING SOURCE",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.7326/ANNALS-25-05329",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42372274/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42372272",
+      "title": "Performance of Lung Cancer Risk Prediction Models in Different Racial and Ethnic Groups in the United States: Results From the Lung Cancer Cohort Consortium",
+      "journal": "Ann Intern Med",
+      "category": "四大綜合",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Feng X, Guida F, Guenoun A, Alcala K, Aldrich MC, Arslan AA, Cai Q, Zheng W, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Racial and ethnic disparities are a concern in lung cancer screening.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "OBJECTIVE",
+          "text": "To investigate the performance of risk prediction models to define screening eligibility across 4 U.S. racial and ethnic groups.",
+          "labelZh": "目的",
+          "textZh": ""
+        },
+        {
+          "label": "DESIGN",
+          "text": "Cohort study.",
+          "labelZh": "設計",
+          "textZh": ""
+        },
+        {
+          "label": "SETTING",
+          "text": "United States, Lung Cancer Cohort Consortium.",
+          "labelZh": "場域",
+          "textZh": ""
+        },
+        {
+          "label": "PARTICIPANTS",
+          "text": "641 830 participants aged 50 to 80 years with a smoking history from 12 U.S. cohorts, including 6390 Asian, 9781 Hispanic, 39 872 non-Hispanic Black, and 585 787 non-Hispanic White participants.",
+          "labelZh": "受試者",
+          "textZh": ""
+        },
+        {
+          "label": "MEASUREMENTS",
+          "text": "Calibration and discrimination were quantified for 16 lung cancer prediction models. Then, screening-related metrics were calculated after applying model thresholds to select the same number of eligible participants as the 2021 criteria from the U.S. Preventive Services Task Force (USPSTF-2021). These included eligibility, sensitivity, and efficiency measured as estimated number needed to screen (NNS; the ratio between participants and lung cancer cases) for each strategy or prediction model in each racial and ethnic group.",
+          "labelZh": "測量",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "General patterns across the 16 models included substantial underestimation of lung cancer risk in non-Hispanic Black participants (expected-observed ratio < 0.75 for 11 of 16 models), lower discrimination in Asian participants than all other groups (13 of 16 models), and lower discrimination in non-Hispanic Black than non-Hispanic White participants (15 of 16 models). When a same-sized screening-eligible population as USPSTF-2021 (38.0%) was enforced, all risk-based strategies achieved better average estimated screening efficiency and reduced racial and ethnic differences in efficiency compared with USPSTF-2021. The Prostate, Lung, Colorectal, and Ovarian Cancer Screening Trial Model 2012 (PLCOm2012) and Life Years gained From Screening-Computed Tomography model (LYFS-CT) performed best (mean estimated NNS, 36.5 [SD, 8.8] and 40.1 [SD, 8.2], respectively). However, no strategy could simultaneously optimize eligibility, sensitivity, and efficiency while also reducing racial and ethnic differences.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "LIMITATION",
+          "text": "Smaller sample for Asian and Hispanic participants.",
+          "labelZh": "LIMITATION",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "To optimize efficiency and minimize its variation across racial and ethnic groups, risk-based strategies were superior to USPSTF criteria. Further optimization of prediction models for the diverse U.S. population is needed.",
+          "labelZh": "結論",
+          "textZh": ""
+        },
+        {
+          "label": "PRIMARY FUNDING SOURCE",
+          "text": "U.S. National Cancer Institute, Lung Cancer Research Foundation, and Cancer Research UK.",
+          "labelZh": "PRIMARY FUNDING SOURCE",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.7326/ANNALS-25-03816",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42372272/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42379991",
+      "title": "Advancing Family Medicine Through Dyadic Electronic Medical Record Linkage in Dementia Care",
+      "journal": "Ann Fam Med",
+      "category": "家醫科",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Robitaille A, Kokorelias KM, Aubrey-Bassler K, Barber D, Garies S, Garcia L, Grandy M, Harvey K, et al.",
+      "abstract": [
+        {
+          "text": "Family physicians are well-positioned to support both persons living with dementia (PLWD) and their caregivers. However, current electronic medical record (EMR) systems do not capture the relational and interdependent nature of dementia care. Dyadic data, linking the records of persons living with dementia (PLWD) and their caregivers, could support more integrated, proactive, and personalized care. While there is growing interest in leveraging EMRs for this purpose, few systems enable routine dyadic linkage, limiting clinical utility and research capacity.This report describes the current state of dyadic EMR data linkage in Canada, drawing on a pilot study using the Canadian Primary Care Sentinel Surveillance Network (CPCSSN). We examined methods for identifying PLWD-caregiver dyads in primary care settings, including manual identification and algorithmic approaches using shared contact information. Both methods were feasible, but each faced challenges related to EMR compatibility, privacy regulations, and consent processes. The study highlights how CPCSSN infrastructure can be used to create de-identified, longitudinal data sets for research and surveillance, while also identifying critical gaps that limit clinical application.Our findings demonstrate that while EMRs offer a promising platform for linking dyadic data, system-level changes are needed to fully integrate caregiver information into routine care. This includes standardized fields, clearer privacy guidelines, and cross-sector data harmonization. Dyadic EMR linkage has the potential to inform research, improve quality of care, and guide policy development. Future efforts must balance innovation with feasibility and privacy, ensuring caregiver roles are visible and valued within primary care systems.Abstract available in: يبرع (Arabic); Deutsch (German); Español (Spanish); Francais (French); हिन्दी (Hindi); Indonesia (Indonesian); (Chinese); (Japanese); Portugues (Portuguese).",
+          "labelZh": null,
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1370/afm.250494",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42379991/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42379990",
+      "title": "Association of General Practice Continuity With Hospital Admissions and Costs: A Retrospective Study",
+      "journal": "Ann Fam Med",
+      "category": "家醫科",
+      "date": "2026 Jun 30",
+      "sortDate": "2026-06-30",
+      "authors": "Te Winkel MT, Uijen AA, Lissenberg-Witte BI, van Marum RJ, Schers HJ, Slottje P, Bont J, Maarsingh OR",
+      "abstract": [
+        {
+          "label": "PURPOSE",
+          "text": "Continuity of care has been associated with lower health care use and costs. When general practitioners (GPs) serve as gatekeepers to hospital care, having an ongoing relationship with a GP may promote more efficient care and reduce urgent referrals, thereby lowering costs. We examined the association of 2 conceptually distinct measures of continuity in general practice with both urgent hospital admissions and hospital costs.",
+          "labelZh": "目的",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "We conducted a retrospective cohort study using routinely collected health care data from 100,450 adults in 48 Dutch general practices (2013-2018) who were linked to national hospital admission and cost records (2019). Continuity was separately measured by duration of GP-patient relationship (time registered with the practice) and by density of GP contacts (Herfindahl-Hirschman index). We assessed associations with urgent admissions and log-transformed hospital costs using multilevel logistic and linear models, adjusting for sex, age, comorbidity, migration background, and income.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "Compared with individuals registered with their practice for 0 to 5 years, those registered longer had 9% to 21% lower odds of urgent hospital admission, with the lowest odds seen in the group registered 15 to 20 years (adjusted odds ratio = 0.79; 95% CI, 0.70-0.88). No significant association was found between higher density of GP contacts and urgent admissions. All groups registered longer than 5 years had significantly lower hospital costs, with the largest model-based reduction (-39.7%) in the group registered 10 to 15 years. Higher density of GP contacts was also associated with lower costs, with an adjusted relative reduction of 6% to 7% in total hospital costs.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "Long-standing continuity of care in general practice among adult patients is associated with reduced urgent hospital admissions and health care costs in the Netherlands. These findings highlight the potential value of sustained GP-patient relationships in improving hospital outcomes.",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1370/afm.250537",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42379990/",
+      "titleZh": ""
+    },
+    {
+      "pmid": "42370681",
+      "title": "Phase 3 Trial of Oral Infigratinib in Children with Achondroplasia",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Jun 28",
+      "sortDate": "2026-06-28",
+      "authors": "Savarirayan R, Hoover-Fong J, Irving M, Arundel P, de Bergua JM, Campeau PM, Candler T, Cocanougher BT, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Achondroplasia is a genetic skeletal condition caused by FGFR3 pathogenic variants. Infigratinib, an oral FGFR1-3 tyrosine kinase inhibitor, down-regulates key pathways in the pathogenesis of achondroplasia.",
+          "labelZh": "背景",
+          "textZh": ""
+        },
+        {
+          "label": "METHODS",
+          "text": "In this phase 3, multicenter, double-blind, placebo-controlled trial, we randomly assigned children with achondroplasia (3 to 17 years of age) in a 2:1 ratio to receive infigratinib (at a dose of 0.25 mg per kilogram of body weight) or placebo once daily for 52 weeks. The primary end point was the change from baseline in the annualized height velocity in the infigratinib group as compared with the placebo group at week 52. Key secondary end points were the change from baseline in the height z score and in the upper-to-lower body segment ratio at week 52. The primary analysis evaluated the treatment effect at week 52 in the full analysis population, with missing data handled with a prespecified imputation approach.",
+          "labelZh": "方法",
+          "textZh": ""
+        },
+        {
+          "label": "RESULTS",
+          "text": "In all, 114 patients underwent randomization: 75 patients to receive infigratinib (with 1 withdrawal before treatment) and 39 patients to receive placebo. The difference between infigratinib and placebo in the least-squares mean change from baseline to week 52 was 1.74 cm per year (95% confidence interval [CI], 1.31 to 2.17; P<0.001) for the annualized height velocity, 0.32 (96% CI, 0.23 to 0.41; P<0.001) for the height z score, and -0.02 (96% CI, -0.06 to 0.01) for the upper-to-lower body segment ratio. Adverse events occurred in 71 of 74 patients (96%) in the infigratinib group and in 37 of 39 patients (95%) in the placebo group; serious adverse events occurred in 4 of 74 patients (5%) and 1 of 39 patients (3%), respectively. No serious adverse events or adverse events leading to treatment discontinuation were considered by the investigator to be related to infigratinib or placebo.",
+          "labelZh": "結果",
+          "textZh": ""
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "In children with achondroplasia, treatment with once-daily oral infigratinib for 52 weeks resulted in a significantly greater increase from baseline in the annualized height velocity than placebo. (Funded by BridgeBio Pharma; PROPEL 3 ClinicalTrials.gov number, NCT06164951; EudraCT number, 2023-506130-67.).",
+          "labelZh": "結論",
+          "textZh": ""
+        }
+      ],
+      "doi": "10.1056/NEJMoa2604565",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42370681/",
       "titleZh": ""
     },
     {
@@ -1136,56 +1692,6 @@
       "doi": "10.7326/ANNALS-25-04053",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42330497/",
       "titleZh": ""
-    },
-    {
-      "pmid": "41807080",
-      "title": "Eczema, acne, and psoriasis in people with skin of colour: a qualitative UK-based study",
-      "journal": "BJGP",
-      "category": "家醫科",
-      "date": "2026 Jun 18",
-      "sortDate": "2026-06-18",
-      "authors": "Hutchison EJ, Parslow RM, Wainman HE, Ridd MJ",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Inflammatory dermatoses have a varied prevalence and appearance in diverse skin tones. The underrepresentation of people with skin of colour in medical education and clinical trials is widely acknowledged. However, there has been limited research on experiences from a patient perspective.",
-          "labelZh": "背景",
-          "textZh": "炎症性皮膚病在不同的膚色中具有不同的患病率和外觀。在醫學教育和臨牀試驗中，有色人種的代表性不足是廣泛公認的。然而，從患者的角度來看，對經驗的研究有限。"
-        },
-        {
-          "label": "AIM",
-          "text": "To explore the experiences of eczema, acne, and psoriasis in adults with skin of colour in the UK.",
-          "labelZh": "目的",
-          "textZh": "探索英國有色皮膚成人患濕疹、痤瘡和牛皮癬的經驗。"
-        },
-        {
-          "label": "DESIGN AND SETTING",
-          "text": "This was a qualitative study of 20 people in the UK with eczema, acne, and psoriasis and skin of colour, recruited using online methods.",
-          "labelZh": "DESIGN AND SETTING",
-          "textZh": "這是一項針對英國20名患有濕疹、痤瘡、牛皮癬和彩色皮膚的人進行的定性研究，使用線上方法招募。"
-        },
-        {
-          "label": "METHOD",
-          "text": "Participants took part in online, one-to-one, semi-structured interviews. NVivo qualitative data analysis software was used to code and organise the data. Reflexive thematic analysis was used to generate themes using an iterative approach.",
-          "labelZh": "方法",
-          "textZh": "參與者參加了線上、一對一、半結構化的訪談。使用NVivo定性數據分析軟件對數據進行編碼和組織。反身主題分析被用於使用迭代方法產生主題。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "Participants were mostly female (65%, 13/20), Asian/Asian British ethnicity (45%, 9/20), and had eczema (55%, 11/20). We identified eight themes: delayed or missed diagnosis; preferences regarding healthcare professionals; lack of online information and social media use; misunderstanding in cultural communities; concerns about treatment and lack of research in skin of colour; complementary medicine use; experiences and impact of dyspigmentation; and challenges with structural racism.",
-          "labelZh": "結果",
-          "textZh": "參與者多為女性(65% ， 13/20)、亞裔/亞裔英國人(45% ， 9/20) ，並有濕疹(55% ， 11/20)。我們確定了八個主題：延遲或錯過診斷；對醫療保健專業人員的偏好；缺乏線上資訊和社交媒體使用；文化社區中的誤解；對治療的擔憂和缺乏對有色皮膚的研究；補充藥物的使用；色素紊亂的經驗和影響；以及結構性種族主義的挑戰。"
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "The themes generated highlight the unique experiences and challenges faced by UK adults with eczema, acne, and psoriasis. The findings can help guide diagnostic approaches, culturally sensitive communication, and treatment discussions for patients with skin of colour. Further research is needed in this underrepresented group.",
-          "labelZh": "結論",
-          "textZh": "產生的主題突出了英國成年人患有濕疹、痤瘡和牛皮癬的獨特經驗和面臨的挑戰。這些發現可以幫助指導有色皮膚患者的診斷方法、文化敏感的溝通和治療討論。在這個代表性不足的羣體中，還需要進一步的研究。"
-        }
-      ],
-      "doi": "10.3399/BJGP.2025.0720",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41807080/",
-      "titleZh": "有色皮膚患者的濕疹、痤瘡和牛皮癬：一項基於英國的定性研究"
     },
     {
       "pmid": "42296505",
@@ -1482,363 +1988,6 @@
       "doi": "10.7326/ANNALS-25-04689",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42296498/",
       "titleZh": "最近入住熟練護理機構的老年人接種重組帶狀皰疹疫苗後的癡呆風險：目標試驗模擬"
-    },
-    {
-      "pmid": "42296496",
-      "title": "Pharmacologic Treatments With Lifestyle Modifications in Nonpregnant Adults With Overweight or Obesity in Outpatient Settings: A Living Clinical Guideline From the American College of Physicians (April 2026)",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jun 16",
-      "sortDate": "2026-06-16",
-      "authors": "Qaseem A, Cross JT, Harrod CS, Owens DK, Balk EM, Crandall CJ, Clinical Guidelines Committee of the American College of Physicians",
-      "abstract": [
-        {
-          "label": "DESCRIPTION",
-          "text": "The American College of Physicians (ACP) developed this clinical guideline for internal medicine physicians and other clinicians caring in outpatient settings for adults with overweight or obesity.",
-          "labelZh": "DESCRIPTION",
-          "textZh": "美國內科醫師學會 (ACP) 為內科醫生和其他在門診治療超重或肥胖成人的臨床醫生製定了本臨床指南。"
-        },
-        {
-          "label": "METHODS",
-          "text": "This guideline is based on systematic reviews of pharmacologic treatments in adults with overweight or obesity and used the GRADE (Grading of Recommendations Assessment, Development and Evaluation) approach.",
-          "labelZh": "方法",
-          "textZh": "本指引是基於對超重或肥胖成人藥物治療的系統性評價，並使用 GRADE（建議評估、制定和評估分級）方法。"
-        },
-        {
-          "label": "RECOMMENDATION 1",
-          "text": "ACP suggests initiating one of the following pharmacologic treatments with lifestyle modifications for weight management in nonpregnant adults with obesity (body mass index ≥30 kg/m2) in outpatient settings (conditional recommendation): First-line treatments are semaglutide (moderate-certainty evidence) and tirzepatide (moderate-certainty evidence); second-line treatment is phentermine-topiramate (low-certainty evidence); third-line treatment is liraglutide (low-certainty evidence); fourth-line treatment is naltrexone-bupropion (low-certainty evidence). When initiating a recommended medication for weight management or switching to another recommended medication because of an inadequate response, clinicians and patients should discuss benefits, harms, costs, access and availability, clinical comorbidities, weight loss goals, life expectancy, values and preferences, and contraindications and warnings (for example, the requirement for monthly pregnancy tests with use of phentermine-topiramate, the contraindication to phentermine-topiramate in those with cardiovascular disease, and suicidal ideation with naltrexone-bupropion).",
-          "labelZh": "RECOMMENDATION 1",
-          "textZh": "ACP 建議在門診環境中對非妊娠肥胖成人（體重指數≥30 kg/m2）開始以下藥物治療之一併調整生活方式來控制體重（有條件推薦）：一線治療是索馬魯肽（中等質量證據）和替澤帕肽（中等質量證據）；二線治療是芬特明-托吡酯（低質量證據）和替澤帕肽（中等質量證據）；二線治療是芬特明-托吡酯（低質量證據）和替澤帕肽（中等質量證據）；二線治療是芬特明-托吡酯（低質量證據）和替澤帕肽（中等質量證據）；當開始使用建議的體重管理藥物或因反應不足而改用另一種推薦藥物時，臨床醫生和患者應討論益處、危害、成本、可及性和可用性、臨床合併症、減肥目標、預期壽命、價值觀和偏好以及禁忌症和警告（例如，使用芬特明-托吡酯時每月進行妊娠試驗的要求、患有心血管疾病的患者使用芬特酮-托吡酸"
-        },
-        {
-          "label": "RECOMMENDATION 2",
-          "text": "ACP suggests initiating one of the following pharmacologic treatments with lifestyle modifications for weight management in nonpregnant adults with overweight (body mass index ≥27 to 30 kg/m2) and type 2 diabetes, dyslipidemia, hypertension, obstructive sleep apnea, or cardiovascular disease (conditional recommendation): First-line treatments are semaglutide (moderate-certainty evidence) and tirzepatide (moderate-certainty evidence); second-line treatment is liraglutide (low-certainty evidence). When initiating a recommended medication for weight management or switching to another recommended medication because of an inadequate response, clinicians and patients should discuss benefits, harms, costs, access and availability, clinical comorbidities, weight loss goals, life expectancy, values and preferences, and contraindications and warnings (for example, use in pregnancy).",
-          "labelZh": "RECOMMENDATION 2",
-          "textZh": "ACP 建議對超重（體重指數≥27 至 30 kg/m2）和 2 型糖尿病、血脂異常、高血壓、阻塞性睡眠呼吸中止症或心血管疾病（有條件推薦）的非妊娠成人開始以下藥物治療之一，並調整生活方式來控制體重：一線治療是索馬魯肽（質量證據）和替澤帕肽（中等質量證據）；二線治療質量低肽（中等質量證據）和替澤帕肽（中等質量證據）。當開始使用建議的體重管理藥物或因反應不足而改用另一種建議的藥物時，臨床醫生和患者應討論益處、危害、成本、可及性和可用性、臨床合併症、減肥目標、預期壽命、價值觀和偏好以及禁忌症和警告（例如，在懷孕期間使用）。"
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-02714",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42296496/",
-      "titleZh": "對門診超重或肥胖的非妊娠成年人進行生活方式改變的藥物治療：美國醫師學會的即時臨床指南（2026 年 4 月）"
-    },
-    {
-      "pmid": "42258827",
-      "title": "Continuing Glucagon-Like Peptide-1 Receptor Agonists Into the First Trimester of Pregnancy and Pregnancy Outcomes : A Target Trial Emulation Study Using Claims Information",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jun 09",
-      "sortDate": "2026-06-09",
-      "authors": "Brown JP, Huybrechts KF, Straub L, Patorno E, Seely EW, Bateman BT, Hernández-Díaz S",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Glucagon-like peptide-1 receptor agonist (GLP-1RA) use has increased among women of reproductive age, but limited data exist on safety in pregnancy.",
-          "labelZh": "背景",
-          "textZh": "胰高血糖素樣肽-1受體激動劑（ GLP-1RA ）在育齡婦女中的使用有所增加，但關於懷孕安全性的數據有限。"
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To estimate the risk for nonlive birth, abnormal fetal growth, and major congenital malformation (MCM) with GLP-1RA dispensing in early pregnancy.",
-          "labelZh": "目的",
-          "textZh": "估計妊娠早期使用GLP-1RA進行非活產、胎兒異常生長和嚴重先天性畸形(MCM)的風險。"
-        },
-        {
-          "label": "DESIGN",
-          "text": "In an observational cohort of pregnant women aged 16 to 55 years with a GLP-1RA dispensation in the 90 days before the last menstrual period (LMP), a target trial with 2 treatment strategies was emulated: continuation of dispensing into the first trimester (≥1 further dispensation), or noncontinuation.",
-          "labelZh": "設計",
-          "textZh": "在最後一個月經期（ LMP ）前90天內有GLP-1RA分配的16至55歲孕婦的觀察隊列中，模擬了一項有2種治療策略的目標試驗：繼續分配到孕早期（ ≥ 1次進一步分配） ，或不繼續。"
-        },
-        {
-          "label": "SETTING",
-          "text": "Merative MarketScan U.S. insurance claims data (2011 to 2024).",
-          "labelZh": "場域",
-          "textZh": "Merative MarketScan美國保險理賠數據（ 2011年至2024年）。"
-        },
-        {
-          "label": "PARTICIPANTS",
-          "text": "3572 pregnancies (41.1% [n = 1467] among women with type 2 diabetes).",
-          "labelZh": "受試者",
-          "textZh": "3572例妊娠（ 2型糖尿病女性爲41.1% [n = 1467] ）。"
-        },
-        {
-          "label": "MEASUREMENTS",
-          "text": "Risk for nonlive birth was estimated using a weighted Kaplan-Meier estimator. Among live-birth pregnancies linked to infants, the weighted prevalence of MCM, small for gestational age (SGA), and large for gestational age (LGA) was estimated.",
-          "labelZh": "測量",
-          "textZh": "使用加權Kaplan-Meier估計器估計非活產的風險。在與嬰兒有關的活產懷孕中，估計了MCM的加權患病率，小於胎齡（ SGA ） ，大於胎齡（ LGA ）。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "The weighted risk for nonlive birth was 29.7% with continuation and 27.1% with noncontinuation (adjusted risk ratio, 1.09 [95% CI, 0.98 to 1.23]). Among 2529 live-birth pregnancies, 1443 (57.1%) received at least 1 GLP-1RA dispensation after LMP and 1499 (829 continuers) were linked to an infant. Weighted prevalence ratios for continuation versus noncontinuation were 1.29 (CI, 0.82 to 2.06) for SGA, 1.08 (CI, 0.84 to 1.40) for LGA, and 1.21 (CI, 0.83 to 1.82) for MCM.",
-          "labelZh": "結果",
-          "textZh": "繼續非活產的加權平均風險為29.7% ，不繼續非活產的加權平均風險為27.1% （調整後風險比， 1.09 [95% CI ， 0.98至1.23] ）。在2529例活產懷孕中， 1443例（ 57.1 ％ ）在LMP後接受了至少一次GLP-1RA分配， 1499例（ 829名繼續者）與嬰兒有關。繼續與不繼續的加權患病率比率為SGA為1.29 （ CI ， 0.82至2.06 ） ， LGA為1.08 （ CI ， 0.84至1.40 ） ， MCM為1.21 （ CI ， 0.83至1.82 ）。"
-        },
-        {
-          "label": "LIMITATION",
-          "text": "Potential residual confounding by prior glycemic control.",
-          "labelZh": "LIMITATION",
-          "textZh": "既往血糖控制的潛在殘留混淆。"
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Risks for nonlive birth, SGA, LGA, and MCM were not definitively higher with continuation of GLP-1RAs into early pregnancy. However, estimates for MCM and SGA were imprecise and were compatible with both no increased risk and clinically relevant differences in risk.",
-          "labelZh": "結論",
-          "textZh": "非活產、SGA、LGA和MCM的風險在GLP-1RA持續到妊娠早期時並非明確更高。然而，對MCM和SGA的估計是不精確的，並且與沒有增加的風險和臨牀相關的風險差異相容。"
-        },
-        {
-          "label": "PRIMARY FUNDING SOURCE",
-          "text": "National Institutes of Health.",
-          "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": "國立衛生研究院。"
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-04820",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42258827/",
-      "titleZh": "繼續胰高血糖素樣肽-1受體激動劑進入妊娠和妊娠結局的第一個三個月：使用聲明信息的靶向試驗模擬研究"
-    },
-    {
-      "pmid": "42258826",
-      "title": "Estimating the Effect of Hospital Admission on Health Care Outcomes and Spending Among Persons With Dementia : A Quasi-experimental Study",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jun 09",
-      "sortDate": "2026-06-09",
-      "authors": "Ikesu R, Mayeda ER, McGarry K, Nianogo RA, Ramirez CM, Tsugawa Y",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Because transitions in care settings can be confusing for persons with dementia (PWD), hospital admissions can negatively affect their physical and cognitive function. However, the effect of hospital admissions on patient outcomes and health care spending remains largely unknown.",
-          "labelZh": "背景",
-          "textZh": "由於護理環境的轉變可能會讓失智症患者（ PWD ）感到困惑，因此住院可能會對他們的身體和認知功能產生負面影響。然而，住院對患者結果和醫療保健支出的影響在很大程度上仍然未知。"
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To estimate the effects of hospital admissions on health outcomes and health care spending among PWD.",
-          "labelZh": "目的",
-          "textZh": "估計住院對殘疾人健康結果和醫療保健支出的影響。"
-        },
-        {
-          "label": "DESIGN",
-          "text": "Quasi-experimental instrumental variable method, using emergency physicians' admission propensity as the instrument.",
-          "labelZh": "設計",
-          "textZh": "準實驗工具變量法，以急診醫師的入院傾向為工具。"
-        },
-        {
-          "label": "SETTING",
-          "text": "United States.",
-          "labelZh": "場域",
-          "textZh": "美國"
-        },
-        {
-          "label": "PATIENTS",
-          "text": "Medicare fee-for-service beneficiaries aged 66 years or older with dementia who visited an emergency department (ED) in 2017 to 2019.",
-          "labelZh": "病人",
-          "textZh": "年滿66歲或以上患有失智症的Medicare收費服務受益人，於2017年至2019年期間前往急診室（ ED ）。"
-        },
-        {
-          "label": "MEASUREMENTS",
-          "text": "Death, inpatient days (excluding the index hospital admission), and health care spending (excluding the index ED visit and hospital admission) within 30 and 90 days of ED visits.",
-          "labelZh": "測量",
-          "textZh": "ED就診後30天和90天內的死亡、住院天數（不包括指標住院天數）和醫療保健支出（不包括指標ED就診和住院天數）。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "Among 872 085 ED visits (62.9% women; mean age, 83.1 years) included in the analysis, 482 208 (55.3%) resulted in hospital admission. There was no evidence that hospital admission was associated with 30-day mortality rate (adjusted risk difference, -2.6 percentage points [pp] [95% CI, -5.2 to 0.1 pp]) or inpatient days (adjusted difference, 0.1 days [CI, -0.2 to 0.5 days]). Hospital admission was associated with higher 30-day health care spending (adjusted difference, $2547 [CI, $1390 to $3703]). Patterns were similar for 90-day outcomes.",
-          "labelZh": "結果",
-          "textZh": "在分析中包括的872 085次ED就診（ 62.9 ％婦女；平均年齡為83.1歲）中， 482 208 （ 55.3 ％ ）導致住院。沒有證據表明住院與30天死亡率（調整後的風險差異， -2.6個百分點[pp] [95% CI ， -5.2至0.1 pp] ）或住院天數（調整後的差異， 0.1天[CI ， -0.2至0.5天] ）有關。住院與較高的30天醫療保健支出相關（調整後的差異， $ 2547 [CI ， $ 1390至$ 3703] ）。90天結果的模式相似。"
-        },
-        {
-          "label": "LIMITATION",
-          "text": "Residual confounding.",
-          "labelZh": "LIMITATION",
-          "textZh": "剩餘的混淆。"
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Among Medicare beneficiaries with dementia who visited an ED, there was no evidence that hospital admission was associated with mortality rates. Under conventional statistical criteria, an effect of hospital admissions between a 5.2-pp decrease and a 0.1-pp increase in 30-day mortality rates was highly compatible with the data. On the contrary, hospital admission was associated with higher health care spending.",
-          "labelZh": "結論",
-          "textZh": "在訪問ED的Medicare失智症受益人中，沒有證據表明住院與死亡率有關。在傳統統計標準下，住院率在30天死亡率降低5.2pp和增加0.1pp之間的影響與數據高度相容。相反，住院與更高的醫療支出有關。"
-        },
-        {
-          "label": "PRIMARY FUNDING SOURCE",
-          "text": "None.",
-          "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": "無。"
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-03725",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42258826/",
-      "titleZh": "估計入院對失智症患者醫療結果和支出的影響：準實驗研究"
-    },
-    {
-      "pmid": "42301878",
-      "title": "Nausea and Vomiting During Pregnancy",
-      "journal": "Am Fam Physician",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Williamson B, Light KJ, Chapa H",
-      "abstract": [
-        {
-          "text": "Nausea and vomiting are some of the most common symptoms during pregnancy. Severity should be assessed with a tool such as the Pregnancy-Unique Quantification of Emesis and Nausea (PUQE) score. In severe cases, additional medical history should be obtained to rule out possible secondary causes. Treatment depends on the severity of symptoms, beginning with behavioral modification such as trigger avoidance and dietary changes for mild cases. Modification includes meals that are small, frequent, bland, dry, and high in protein. First-line pharmacologic management for mild or moderate cases is vitamin B6 with or without doxylamine. When conservative measures are ineffective or not tolerated, additional pharmacologic options include other antihistamines or dopamine antagonists. Metoclopramide and ondansetron are considered second-line treatments for persistent symptoms. Dehydration and electrolyte abnormalities should be corrected and may necessitate hospitalization if oral intake is not possible. Treatment of refractory or severe symptoms include the consideration of corticosteroids and, in rare cases, supplemental enteral or parenteral nutrition.",
-          "labelZh": null,
-          "textZh": "噁心和嘔吐是懷孕期間最常見的症狀。 應使用妊娠獨特的嘔吐和噁心量化(PUQE)評分等工具評估嚴重程度。 在嚴重情況下，應獲得額外的病史以排除可能的次要原因。 治療取決於症狀的嚴重程度，從行為改變開始，例如輕微病例的觸發回避和飲食改變。 修飾包括少量、頻繁、平淡、乾燥和高蛋白質的餐點。 輕度或中度病例的一線藥理治療是維生素B6加或不加多西拉明。 當保守措施無效或不能耐受時，其他藥理選項包括其他抗組胺藥或多巴胺拮抗劑。 Metoclopramide和ondansetron被認為是持續症狀的第二線治療藥物。 脫水和電解質異常應予以糾正，如果無法口服，可能需要住院治療。 難治性或嚴重症狀的治療包括考慮使用皮質類固醇，在極少數情況下，考慮補充腸內或腸外營養。"
-        }
-      ],
-      "doi": "",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42301878/",
-      "titleZh": "懷孕期間的噁心和嘔吐"
-    },
-    {
-      "pmid": "42301877",
-      "title": "Metabolic Dysfunction-Associated Steatotic Liver Disease: Diagnosis and Management",
-      "journal": "Am Fam Physician",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Ohri S, Waterman E, Quiñones AR",
-      "abstract": [
-        {
-          "text": "Metabolic dysfunction-associated steatotic liver disease (MASLD; formerly nonalcoholic fatty liver disease) is an increasingly common cause of chronic liver disease. It is fatty infiltration of the liver with at least one cardiometabolic risk factor, without a secondary cause and no or low alcohol use. People with MASLD and other risk factors (eg, diabetes, obesity) are at higher risk for long-term adverse outcomes, including cirrhosis and hepatocellular carcinoma. Screening for advanced fibrosis involves two-step sequential noninvasive testing. Clinicians should risk stratify using the Fibrosis-4 index. Secondary risk assessment with vibration-controlled transient elastography or ultrasound-based methods is needed in people with indeterminate or high-risk Fibrosis-4 scores. Monitoring and management of earlier stages of the MASLD spectrum in primary care may reduce the risk of adverse outcomes and maximize care before specialist referral. Patients should be counseled on lifestyle interventions (eg, at least 5% weight loss for people with overweight or obesity, healthy diet, at least 150 minutes of moderate aerobic physical activity per week) to improve steatosis and lower cardiovascular risk. Additional lifestyle recommendations include smoking cessation, limited alcohol intake in people with no or mild fibrosis, and no alcohol for those with more significant fibrosis. Semaglutide and resmetirom are approved by the US Food and Drug Administration for treatment of metabolic dysfunction- associated steatohepatitis in patients with moderate or severe fibrosis.",
-          "labelZh": null,
-          "textZh": "代謝功能障礙相關脂肪性肝病（ MASLD ；以前稱為非酒精性脂肪性肝病）是慢性肝病越來越常見的原因。 這是肝臟的脂肪浸潤，至少有一個心臟代謝危險因素，沒有次要原因，沒有或低酒精使用。 患有MASLD和其他風險因素（如糖尿病、肥胖症）的人，長期不良結果的風險較高，包括肝硬化和肝細胞癌。 晚期纖維化篩查包括兩步驟順序無創檢測。 臨牀醫生應使用Fibrosis-4指數進行風險分層。 對於不確定或高風險纖維化-4評分的人羣，需要使用振動控制的瞬態彈性成像或基於超聲波的方法進行次要風險評估。 在初級保健中監測和管理MASLD譜系的早期階段可以降低不良結果的風險，並在專科轉介之前最大限度地提高護理效果。 應建議患者採取生活方式幹預措施（例如，超重或肥胖、健康飲食、每週至少150分鐘中度有氧身體活動的人至少減重5% ） ，以改善脂肪變性和降低心血管風險。 其他生活方式建議包括戒煙、對沒有或輕度纖維化的人限制飲酒，以及對纖維化較嚴重的人禁止飲酒。 Semaglutide和resmetirom獲得美國食品和藥物管理局批準用於代謝治療"
-        }
-      ],
-      "doi": "",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42301877/",
-      "titleZh": "代謝功能障礙相關脂肪性肝病：診斷與管理"
-    },
-    {
-      "pmid": "42301874",
-      "title": "Type 2 Diabetes: Outpatient Insulin Management",
-      "journal": "Am Fam Physician",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Marrison ST, Bragg S, Tran E",
-      "abstract": [
-        {
-          "text": "More than 29 million adults in the United States are diagnosed with type 2 diabetes, and insulin therapy is estimated to be needed in up to 15% of cases. Insulin should be considered first-line treatment in patients with severe hyperglycemia (eg, A1C greater than 10%, blood glucose 300 mg/dL or higher), symptoms of hyperglycemia, or catabolism. To optimize insulin use in an outpatient setting, family physicians must consider strategies for initiation, titration, and adherence. The preferred starting regimen is basal insulin with stepwise intensification to prandial or premixed insulin. Insulin regimens can be titrated as frequently as every 2 to 3 days until blood glucose targets are reached. Long-acting insulin analogues offer improved duration of action and reduced risk of hypoglycemia compared with intermediate-acting insulin. Continuous glucose monitoring may improve diabetes control and can be considered in patients who need insulin. Weight gain, hypoglycemia, and insulin regimen complexity are key challenges in diabetes management. Family physicians should use individualized targets that consider life expectancy, age, medical comorbidities, and hypoglycemia risk. Insulin treatment remains a significant but complex aspect of managing type 2 diabetes.",
-          "labelZh": null,
-          "textZh": "美國有超過2900萬成年人被診斷出患有2型糖尿病，據估計，高達15%的病例需要胰島素治療。 在患有嚴重高血糖症（例如A1C大於10%、血糖300 mg/dL或更高）、高血糖症狀或分解代謝症的患者中，應考慮使用胰島素作為一線治療。 為了在門診環境中優化胰島素的使用，家庭醫生必須考慮開始、滴定和依從性的策略。 首選的起始方案是基礎胰島素，並逐步強化為餐飲或預混合胰島素。 胰島素方案可以每2至3天滴定一次，直到達到血糖目標。 與中效胰島素相比，長效胰島素類似物可改善作用持續時間並降低低血糖風險。 持續的葡萄糖監測可以改善糖尿病控制，並且可以在需要胰島素的患者中考慮。 體重增加、低血糖和胰島素療法的複雜性是糖尿病管理的主要挑戰。 家庭醫生應使用考慮預期壽命、年齡、合併症和低血糖風險的個性化目標。 胰島素治療仍然是管理2型糖尿病的一個重要但複雜的方面。"
-        }
-      ],
-      "doi": "",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42301874/",
-      "titleZh": "2型糖尿病：門診胰島素管理"
-    },
-    {
-      "pmid": "42301870",
-      "title": "Recurrent UTI in Women: Diagnosis and Management",
-      "journal": "Am Fam Physician",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Zwahlen D, Ball J, Jackson Q",
-      "abstract": [
-        {
-          "text": "Recurrent urinary tract infection (UTI) is defined as two or more UTIs within 6 months or three or more within 1 year. The annual recurrence rate of UTI in women is approximately 14% to 25%. Risk factors for recurrent UTI include antimicrobial exposures, more frequent sexual activity, use of spermicidal agents or diaphragms, peri- or postmenopausal status, personal hygiene practices, urinary stasis from incomplete bladder emptying, pelvic organ prolapse, and voiding dysfunction. When women present with recurrent UTI symptoms, urinalysis and urine culture should be obtained. Management guidelines recommend empiric treatment with a first-line antibiotic based on prior culture results, then changing the antibiotic if the new culture shows resistance, or waiting for culture results before selecting an antibiotic. Longer duration of therapy does not reduce the risk of recurrent UTI. Asymptomatic bacteriuria should not be treated, except in patients who are pregnant or undergoing invasive urologic procedures. Prevention of recurrent UTI begins with behavioral modification and hygienic practices. The next step is prescription of antibiotic prophylaxis with shared decision-making. Nonantibiotic methods are also used to prevent recurrent UTI, and evidence of their effectiveness varies. These methods include use of cranberry products, Lactobacillus probiotics, vaginal estrogen, methenamine supplements.",
-          "labelZh": null,
-          "textZh": "復發性泌尿道感染 (UTI) 定義為 6 個月內發生 2 次或以上泌尿道感染，或 1 年內發生 3 次或以上泌尿道感染。女性泌尿道感染的年復發率約為 14% 至 25%。復發性泌尿道感染的危險因子包括抗菌藥物暴露、更頻繁的性活動、使用殺精劑或隔膜、圍絕經期或停經後狀態、個人衛生習慣、膀胱排空不完全導致的尿瘀、骨盆器官脫垂和排尿功能障礙。當女性出現復發性泌尿道感染症狀時，應進行尿液分析和尿液培養。管理指引建議根據先前的培養結果使用第一線抗生素進行經驗性治療，然後如果新培養物顯示抗藥性則更換抗生素，或等待培養結果再選擇抗生素。較長的治療時間並不能降低復發性泌尿道感染的風險。無症狀菌尿不應接受治療，除非是懷孕或接受侵入性泌尿外科手術的患者。預防復發性泌尿道感染始於行為改變和衛生習慣。下一步是透過共同決策制定抗生素預防處方。非抗生素方法也可用於預防復發性泌尿道感染，其有效性的證據各不相同。這些方法包括使用蔓越莓產品、乳酸菌益生菌、陰道雌激素、烏洛托品補充劑。"
-        }
-      ],
-      "doi": "",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42301870/",
-      "titleZh": "女性復發性泌尿道感染：診斷與治療"
-    },
-    {
-      "pmid": "42301864",
-      "title": "Gambling Disorder: Diagnosis and Treatment",
-      "journal": "Am Fam Physician",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Kaminski DM, Naik H, Weiss DS",
-      "abstract": [
-        {
-          "text": "Pathologic gambling, also known as gambling disorder, is a behavioral addiction. The prevalence of gambling disorder has increased in recent years as gambling has become more accessible. Gambling disorder is often underdiagnosed and may have disabling effects on patients. Although men are more often affected, the rate of gambling disorder has been increasing in women. Risk factors include comorbid substance use disorder, mental health diagnoses, lower socioeconomic status, and participation in other risky behaviors. The US Preventive Services Task Force has not addressed screening for gambling disorders. In the United Kingdom, the National Institute for Health and Care Excellence has developed a guideline for case-finding based on expert opinion; the guideline suggests asking a direct question, such as \"Do you gamble?,\" to assess patients for gambling disorder. The Diagnostic and Statistical Manual of Mental Disorders, 5th ed., text revision criteria should be used to confirm the diagnosis and classify severity. Pharmacologic interventions such as naltrexone or olanzapine may reduce symptom severity in the short-term, although more study is needed. Psychotherapy, including cognitive behavior therapy and motivational interviewing, offers short-term benefits; however, its long-term effectiveness is uncertain. Self-help and family support groups have limited evidence but provide safe places for affected individuals and loved ones to alleviate the stress associated with the financial and emotional consequences of gambling.",
-          "labelZh": null,
-          "textZh": "病理性賭博，也稱為賭博障礙，是一種行為成癮。近年來，隨著賭博變得越來越容易，賭博障礙的盛行率增加。賭博障礙常常未被充分診斷​​，並可能對患者造成殘疾影響。儘管男性更容易受到賭博障礙的影響，但女性賭博障礙的比例卻在增加。危險因子包括共病物質使用疾患、心理健康診斷、較低的社經地位、參與其他危險行為。美國預防服務工作小組尚未解決賭博障礙篩檢問題。在英國，國家健康與照護卓越研究所根據專家意見制定了病例發現指南；該指南建議直接詢問「你賭博嗎？」等問題來評估患者是否患有賭博障礙。應使用《精神疾病診斷與統計手冊》第五版文字修訂標準來確認診斷並對嚴重程度進行分類。儘管還需要更多研究，但納曲酮或奧氮平等藥物幹預措施可能會在短期內減輕症狀嚴重程度。心理治療，包括認知行為治療和動機式訪談，可以提供短期益處；然而，其長期有效性尚不確定。自助和家庭支持團體的證據有限，但為受影響的個人和親人提供安全的場所，以減輕與賭博造成的經濟和情感後果相關的壓力。"
-        }
-      ],
-      "doi": "",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42301864/",
-      "titleZh": "賭博障礙：診斷與治療"
-    },
-    {
-      "pmid": "42301859",
-      "title": "Pacemaker Therapy: Indications and Recommendations",
-      "journal": "Am Fam Physician",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Lanney H, Hu Y, Karnovsky SC",
-      "abstract": [
-        {
-          "text": "Pacemakers are implantable cardiac devices used in the treatment of bradycardia and heart failure. They monitor electrical signals in the heart and deliver electrical stimuli to cause contraction in the targeted heart chamber. Permanent pacemaker therapy is recommended in patients with symptomatic bradycardia or asymptomatic infranodal atrioventricular block to improve symptoms and quality of life. Biventricular pacemakers can also be used in cardiac resynchronization therapy, which corrects dyssynchrony between the ventricles. In patients who have symptomatic heart failure with reduced ejection fraction, left bundle branch block, and prolonged QRS duration, cardiac resynchronization therapy improves outcomes, including mortality. Medical procedures such as electrocautery or magnetic resonance imaging may interfere with a patient's pacemaker; family physicians should coordinate with cardiologists to ensure appropriate care for patients in whom these procedures are indicated.",
-          "labelZh": null,
-          "textZh": "心律調節器是用於治療心搏過緩和心臟衰竭的植入式心臟裝置。它們監測心臟中的電信號並傳遞電刺激以引起目標心室收縮。對於有症狀的心搏過緩或無症狀的結下房室傳導阻滯的患者，建議使用永久性心律調節器治療，以改善症狀和生活品質。雙心室節律器也可用於心臟再同步治療，矯正心室之間的不同步。對於有射血分數降低、左束支傳導阻滯和 QRS 持續時間延長的症狀性心臟衰竭的患者，心臟再同步治療可改善預後，包括死亡率。電燒或磁振造影等醫療程序可能會幹擾患者的心律調節器；家庭醫生應與心臟科醫師協調，確保為需要進行這些手術的患者提供適當的護理。"
-        }
-      ],
-      "doi": "",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42301859/",
-      "titleZh": "心律調節器治療：適應症與建議"
-    },
-    {
-      "pmid": "42276748",
-      "title": "The Importance of Primary Care Subject Matter Experts: Output Quality in Large Language Models Prompt Engineering",
-      "journal": "JABFM",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Liaw W, Hung Bui Q, Adepoju O, Van Nguyen H",
-      "abstract": [
-        {
-          "text": "Large language models (LLMs) offer new opportunities to support primary care by generating documentation, summarizing records, answering messages, and providing education. While LLMs show promise, their effectiveness depends on how well their outputs align with real-world clinical needs. This commentary describes one team's development of Primary Care (PC) Navigator, a multimodal artificial intelligence (AI) tool that combines audio and video from clinical encounters with an LLM to generate behavior change plans. Our pilot study showed that prompt design plays a critical role in shaping output quality. Through collaboration between clinicians and engineers, we created more effective prompts and recommend that others use the CARE framework (Context, Action, Result, Example) to ensure the outputs are accurate, relevant, and actionable. Clinician involvement is essential not just for evaluating the LLM's performance, but also for shaping its development. By participating in prompt engineering, clinicians move from passive users to co-developers. Their input ensures that LLMs in primary care are both technically functional and aligned with patient needs, professional values, and the realities of frontline practice.",
-          "labelZh": null,
-          "textZh": "大語言模型 (LLM) 透過產生文件、總結記錄、回覆訊息和提供教育，為支援初級保健提供了新的機會。雖然法學碩士表現出希望，但其有效性取決於其產出與現實臨床需求的契合程度。這篇評論描述了一個團隊開發的初級保健 (PC) Navigator，這是一種多模式人工智慧 (AI) 工具，它將臨床遇到的音訊和視訊與法學碩士結合起來，以產生行為改變計劃。我們的試點研究表明，即時設計在塑造輸出品質方面發揮關鍵作用。透過臨床醫生和工程師之間的合作，我們創建了更有效的提示，並建議其他人使用 CARE 框架（上下文、行動、結果、範例），以確保輸出準確、相關且可操作。臨床醫師的參與不僅對於評估法學碩士的表現至關重要，而且對於塑造其發展也至關重要。透過參與即時工程，臨床醫生從被動用戶轉變為共同開發者。他們的意見確保初級保健領域的法學碩士既具有技術功能，又符合患者需求、專業價值觀和第一線實踐的現實。"
-        }
-      ],
-      "doi": "10.3122/jabfm.2025.250326R1",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42276748/",
-      "titleZh": "初級保健主題專家的重要性：大型語言模型的輸出品質提示工程"
-    },
-    {
-      "pmid": "42276747",
-      "title": "Daily Nutrient Intake and Inflammation Among US Adults",
-      "journal": "JABFM",
-      "category": "家醫科",
-      "date": "2026 Jun",
-      "sortDate": "2026-06-00",
-      "authors": "Mainous AG, Yin L, Orlando FA, Saguil AA",
-      "abstract": [
-        {
-          "label": "INTRODUCTION",
-          "text": "Systemic inflammation has long been associated with chronic disease and mortality. Dietary interventions have been a proposed mechanism to decrease inflammation. Using high-sensitivity C-reactive protein (hs-CRP) as a marker of inflammation, we investigated whether daily intake of nutrients purported to be anti-inflammatory had an association with current inflammation.",
-          "labelZh": "INTRODUCTION",
-          "textZh": "長期以來，全身性發炎一直與慢性疾病和死亡有關。飲食幹預已被提議為減少發炎的機制。我們使用高敏感 C 反應蛋白 (hs-CRP) 作為發炎標記物，研究了每日攝取的抗發炎營養素是否與目前發炎有關。"
-        },
-        {
-          "label": "METHODS",
-          "text": "We used the National Health and Nutrition Examination Survey 2021-2023 to conduct a population level analysis of US adults. Individual diets were translated into daily nutrient intakes. hs-CRP was measured in close temporal proximity to dietary assessment. For each nutrient, intake was categorized as low, moderate (includes recommended intake), or high. hs-CRP and dietary nutrient intake were examined with parametric and non-parametric statistics.",
-          "labelZh": "方法",
-          "textZh": "我們利用 2021-2023 年國家健康和營養檢查調查對美國成年人進行了人口層面分析。個人飲食被轉化為每日營養攝取量。 hs-CRP 的測量時間與飲食評估非常接近。對於每種營養素，攝取量分為低、中（包括建議攝取量）或高。透過參數和非參數統計檢查 hs-CRP 和膳食營養素攝取量。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "High intake of certain nutrients was significantly associated with lower levels of hs-CRP when compared to low intake of these nutrients (dietary fiber: 2.7 vs. 3.9, p=0.001; folate: 3.3 vs. 4.1, p=0.002; magnesium: 2.8 vs. 4.0, p=0.001; vitamin B6: 3.4 vs. 4.0, p=0.01; vitamin C: 3.4 vs. 4.0, p=0.04; vitamin D: 1.3 vs. 3.8, p=0.03; vitamin K: 3.1 vs. 4.1, p=0.0001). For dietary fiber and magnesium, the significant association was also demonstrated when comparing low to moderate intake. Not all hypothesized nutrients showed significant associations with inflammation.",
-          "labelZh": "結果",
-          "textZh": "與低攝取量相比，某些營養素的高攝取量與較低的 hs-CRP 水平顯著相關（膳食纖維：2.7 vs. 3.9，p=0.001；葉酸：3.3 vs. 4.1，p=0.002；鎂：2.8 vs. 4.0，p=0.001； 4.0，p=0.04；維生素 D：1.3 與 3.8，p=0.03；維生素 K：3.1 與 4.1，p=0.0001）。對於膳食纖維和鎂，在比較低攝取量和中等攝取量時也證明了顯著關聯。並非所有假設的營養素都與發炎有顯著相關。"
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Usual dietary intake of dietary fiber and magnesium indicate that they are anti-inflammatory. Folate, and vitamins B6, C, D, and K appear to confer greater anti-inflammatory benefit only above recommended dietary levels. Dietary strategies emphasizing these nutrients may help individuals lower hs-CRP and potentially mitigate inflammation-related health risks.",
-          "labelZh": "結論",
-          "textZh": "日常飲食中攝取的膳食纖維和鎂表明它們具有抗發炎作用。葉酸和維生素 B6、C、D 和 K 似乎僅在高於建議的膳食水平時才具有更大的抗炎功效。強調這些營養素的飲食策略可能有助於個體降低 hs-CRP，並有可能減輕與發炎相關的健康風險。"
-        }
-      ],
-      "doi": "10.3122/jabfm.2025.250393R1",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42276747/",
-      "titleZh": "美國成年人的每日營養攝取量和炎症"
     }
   ]
 }
