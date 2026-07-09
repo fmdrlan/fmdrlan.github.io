@@ -3,6 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # bot 用 GITHUB_TOKEN push 不會觸發上面的 push 事件（GitHub 防遞迴），
+  # 因此改由「資料更新 workflow 跑完」來觸發重新部署。
+  workflow_run:
+    workflows: ["每週更新頂尖期刊速覽", "每週自動更新藥品給付規定"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +21,8 @@ concurrency:
 
 jobs:
   build:
+    # 由資料更新 workflow 觸發時，只在它成功時才部署
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
