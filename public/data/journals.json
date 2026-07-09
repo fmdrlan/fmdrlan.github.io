@@ -50,36 +50,36 @@
           "label": "BACKGROUND",
           "text": "Current surgical treatments for terminal bladder dysfunction include intestinal-based reconstructive approaches that carry substantial morbidity, particularly in immunosuppressed patients. These limitations prompted investigation into vascularised composite bladder allograft transplantation as a novel reconstructive alternative.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "目前針對末期膀胱功能障礙的手術治療包括基於腸道的重建方法，其發生率很高，特別是在免疫抑制患者身上。這些限制促使人們對帶血管複合膀胱同種異體移植作為一種新的重建替代方案進行研究。"
         },
         {
           "label": "METHODS",
           "text": "This is an ongoing phase 0 feasibility trial of decreased-donor bladder or combined bladder-kidney transplantation at two academic medical centres in the USA. Eligible bladder transplant recipients are adults aged 18-70 years with non-functional, poorly compliant bladders. Ideal candidates for this trial include patients with pre-existing or concurrent immunosuppression requirements. The primary endpoints are technical feasibility, defined as completion of the operation with restoration of urinary continuity with graft perfusion, and patient safety, reported through adverse events. Here, we report on the safety, feasibility, and immunological and functional outcomes from the first-in-human kidney and bladder transplant as part of the study. This study was registered with ClinicalTrials.gov, NCT06337942 and NCT05462561, and is ongoing.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "這是美國兩個學術醫療中心正在進行的減少捐贈膀胱或合併膀胱腎移植的 0 期可行性試驗。符合資格的膀胱移植受者是年齡在 18-70 歲、膀胱無功能、順應性差的成年人。該試驗的理想候選者包括先前存在或同時存在免疫抑制需求的患者。主要終點是技術可行性，定義為手術完成並透過移植物灌注恢復泌尿連續性，以及透過不良事件報告的患者安全。在這裡，作為研究的一部分，我們報告了首次人體腎臟和膀胱移植的安全性、可行性以及免疫學和功能結果。這項研究已在 ClinicalTrials.gov 註冊，NCT06337942 和 NCT05462561，並且正在進行中。"
         },
         {
           "label": "FINDINGS",
           "text": "The surgery was carried out in May, 2025. The patient was a 41-year-old anephric male with a terminal bladder and end-stage kidney disease from hypertension who had been on peritoneal dialysis for 7 years. Kidney and bladder were recovered from an ABO compatible 35-year-old female donor with terminal anoxic brain injury. The 8 h surgery was successful, with both organs having excellent perfusion and no intraoperative complications. On postoperative day 25, the patient developed a urine leak from the suprapubic tube tract and wound breakdown (Clavien-Dindo 4), which was managed surgically with good recovery. More than 6 months post-transplantation, the patient maintained appropriate renal (estimation glomerular filtration rate 52-55 mL/min per 1·73 m2) and bladder allograft function, with intact sensation and appropriate urge, bladder capacity of 600 mL, complete continence, spontaneous voiding with maximum flow rate 17 mL/s, and complete emptying with negligible post-void residual urine. The patient is maintained on triple therapy immunosuppression with tacrolimus, mycophenolate mofetil, and prednisone. Serial bladder biopsies have remained negative for cell-mediated or antibody-mediated rejection.",
           "labelZh": "發現",
-          "textZh": ""
+          "textZh": "手術於2025年5月進行。患者為男性，41歲，無腎臟病，膀胱末期，高血壓末期腎臟病，腹膜透析7年。腎臟和膀胱取自一位 ABO 血型相容的 35 歲女性捐贈者，患有末期缺氧性腦損傷。 8小時手術非常成功，雙臟器灌注良好，無術中併發症。術後第 25 天，患者出現恥骨上管漏尿和傷口破裂 (Clavien-Dindo 4)，經手術治療後恢復良好。移植後6個多月，患者保持適當的腎（估計腎小球濾過率52-55 mL/min/1·73 m2）和膀胱同種異體功能，感覺完整，衝動適當，膀胱容量600 mL，完全節制，自主排尿，最大流速17 mL/s，完全排空，排尿後殘餘尿可忽略不計。患者繼續接受他克莫司、嗎替麥考酚酯和潑尼松三聯免疫抑制療法。連續膀胱活檢對於細胞介導或抗體介導的排斥反應仍然呈現陰性。"
         },
         {
           "label": "INTERPRETATION",
           "text": "The first-in-human combined bladder-kidney transplantation demonstrates the technical feasibility of vascularised composite bladder allograft transplantation, with sustained bladder allograft function, sensation, continence, and voiding parameters, and no evidence of rejection beyond 6 months. These findings suggest bladder transplantation might represent a viable option for select patients with terminal bladder dysfunction, particularly those already requiring immunosuppression.",
           "labelZh": "詮釋",
-          "textZh": ""
+          "textZh": "首例人體膀胱-腎臟聯合移植證明了帶血管複合同種異體膀胱移植移植的技術可行性，具有持續的同種異體膀胱移植功能、感覺、節制和排尿參數，並且沒有超過 6 個月的排斥反應證據。這些發現表明，膀胱移植可能是某些患有晚期膀胱功能障礙的患者的可行選擇，特別是那些已經需要免疫抑制的患者。"
         },
         {
           "label": "FUNDING",
           "text": "American Urological Association's Research Scholar Award, the National Kidney Registry, OneLegacy, and University of California Los Angeles Department of Urology.",
           "labelZh": "經費來源",
-          "textZh": ""
+          "textZh": "美國泌尿外科協會研究學者獎、國家腎臟登記處、OneLegacy 和加州大學洛杉磯分校泌尿科。"
         }
       ],
       "doi": "10.1016/S0140-6736(26)00718-X",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42335920/",
-      "titleZh": ""
+      "titleZh": "膀胱腎臟聯合移植：首次人體可行性試驗"
     },
     {
       "pmid": "42309116",
@@ -94,36 +94,36 @@
           "label": "BACKGROUND",
           "text": "There is conflicting evidence regarding the merits of patellar resurfacing during total knee replacement (TKR), as previous randomised controlled trials (RCTs) have been under-powered and with follow-up of ten years or less.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "關於全膝關節置換術 (TKR) 期間髕骨表面置換的優點，存在相互矛盾的證據，因為先前的隨機對照試驗 (RCT) 效力不足，且追蹤時間為十年或更短。"
         },
         {
           "label": "METHODS",
           "text": "A pragmatic, multicentre, open-label RCT was initiated in 1999 in the UK. Within a partial-factorial design, participants were randomly allocated to receive or not receive patellar resurfacing during primary TKR and were followed up for 20 years. Adult (aged ≥18 years) patients due to have a primary TKR under the care of a collaborating surgeon were eligible. Participants were allocated (1:1) using an automated telephone service stratified by surgeon, with minimisation according to the patients' age (<60 years, 60-79 years, ≥80 years), sex, and location of d isease. The primary outcome measure was the Oxford Knee Score (OKS), analysed using repeated measures mixed-effects linear regression analysis with marginal differences reported. Secondary measures included the 12-Item Short Form Health Survey (SF-12), the European Quality of Life 5-Dimensions 3-Levels (EQ-5D-3L), costs, cost-effectiveness, and subsequent knee surgery. This trial is registered with ISRCTN Registry, ISRCTN45837371.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "一項務實、多中心、開放標籤的隨機對照試驗於 1999 年在英國啟動。在部分因素設計中，參與者在初次 TKR 期間被隨機分配接受或不接受髕骨表面置換術，並追蹤 20 年。在合作外科醫生的護理下進行初次 TKR 的成年（年齡≥18 歲）患者符合資格。參與者透過外科醫師分層的自動電話服務進行分配（1:1），並根據患者的年齡（<60 歲、60-79 歲、≥80 歲）、性別和疾病部位進行最小化分配。主要結果指標為牛津膝評分 (OKS)，使用重複測量混合效應線性迴歸分析進行分析，並報告邊際差異。次要指標包括 12 項簡短健康調查 (SF-12)、歐洲生活品質 5 維 3 級 (EQ-5D-3L)、費用、成本效益以及隨後的膝關節手術。本試驗已在 ISRCTN 註冊中心註冊，ISRCTN45837371。"
         },
         {
           "label": "FINDINGS",
           "text": "Between April 8, 1999, and Jan 13, 2003, 1715 participants (955 female and 760 male; mean age 70 years [SD 8], mean BMI 29·7 kg/m2) were randomly assigned: 861 to patellar resurfacing and 854 to no resurfacing. At the 20-year follow-up, 132 participants in the patellar resurfacing group and 110 participants in the non-resurfacing group provided outcome data, although marginal differences included earlier data for participants who died or had missing 20-year data. The marginal difference in OKS over the whole 20-year follow-up was 0·76 (95% CI -0·08 to 1·59; p=0·076) in favour of patellar resurfacing. During the 20-year follow-up period, although not significant, differences in OKS, SF-12, and EQ-5D-3L, readmissions, minor or intermediate operations, patella-related operations, major operations, and complications all favoured patellar resurfacing. At 20 years, the resurfaced group accrued significantly more quality-adjusted life-years (QALYs) than the non-resurfaced group (7·295 vs 6·884; difference 0·380, 95% CI 0·061 to 0·700; p=0·020). However, QALY differences were smaller in a sensitivity analysis assuming no difference in mortality (7·209 vs 6·964; difference 0·183, 95% CI -0·034 to 0·400; p=0·10). The cost of readmissions was non-significantly lower in the resurfaced group and offset the higher cost of primary TKR; therefore, overall 20-year health-care costs per participant were similar (£10 825 vs £10 889; difference -£6, 95% CI -£721 to £708; p=0·99).",
           "labelZh": "發現",
-          "textZh": ""
+          "textZh": "1999年4月8日至2003年1月13日期間，1715名參與者（955名女性和760名男性；平均年齡70歲[SD 8]，平均BMI 29·7 kg/m2）被隨機分配：861名接受髕骨表面置換，854名不接受表面重修。在 20 年的追蹤中，髕骨表面置換組的 132 名參與者和非表面置換組的 110 名參與者提供了結果數據，儘管邊際差異包括死亡或缺失 20 年數據的參與者的早期數據。整個 20 年追蹤期間 OKS 的邊際差異為 0·76（95% CI -0·08 至 1·59；p=0·076），有利於髕骨表面置換。在 20 年的追蹤期間，雖然不顯著，但 OKS、SF-12 和 EQ-5D-3L、再入院、小中或中級手術、髕骨相關手術、大手術和併發症的差異均有利於髕骨表面置換。 20 年時，重新表面治療組比未重新表面治療組獲得了顯著更多的調整後生命年 (QALY)（7·295 vs 6·884；差異 0·380，95% CI 0·061 至 0·700；p=0·020）。然而，假設死亡率沒有差異，敏感性分析的 QALY 差異較小（7·209 vs 6·964；差異 0·183，95% CI -0·034 至 0·400；p=0·10）。重新出現組別的再入院費用並沒有顯著降低，抵消了初級 TKR 的較高費用；因此，每位參與者的 20 年總體醫療保健費用相似（10 825 英鎊與 10 889 英鎊；差異 - 6 英鎊，95% CI - 721 英鎊至 708 英鎊；p=0·99）。"
         },
         {
           "label": "INTERPRETATION",
           "text": "There was no significant difference in primary outcome (OKS) or other clinical endpoints. However, as clinical differences tend to support patellar resurfacing, the resurfacing group had significantly higher QALYs. There was no difference in costs over the 20-year period, and patellar resurfacing had a 99% probability of being cost-effective at any threshold above £10 000 per QALY gained. The evidence is therefore weighted towards resurfacing being the approach of first choice.",
           "labelZh": "詮釋",
-          "textZh": ""
+          "textZh": "主要結局（OKS）或其他臨床終點沒有顯著差異。然而，由於臨床差異往往支持髕骨表面置換，因此表面置換組的 QALY 顯著較高。 20 年期間的成本沒有差異，在每 QALY 收益超過 10 000 英鎊的任何閾值下，髕骨表面置換術具有成本效益的可能性為 99%。因此，證據傾向於將表面重鋪作為首選方法。"
         },
         {
           "label": "FUNDING",
           "text": "UK National Institute for Health and Care Research Health Technology Assessment Programme.",
           "labelZh": "經費來源",
-          "textZh": ""
+          "textZh": "英國國家健康與護理研究所健康技術評估計劃。"
         }
       ],
       "doi": "10.1016/S0140-6736(26)00652-5",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42309116/",
-      "titleZh": ""
+      "titleZh": "全膝關節置換術中的髕骨表面置換：英國一項大型多中心隨機對照試驗的 20 年臨床和經濟結果"
     },
     {
       "pmid": "42285120",
@@ -137,12 +137,12 @@
         {
           "text": "Postpartum haemorrhage (PPH) is common, affecting an estimated 13% of women having vaginal birth and 31% of women having caesarean birth. Successful management of PPH requires early and accurate diagnosis and effective treatment. A systematic review found that subjective visual estimation of blood loss misses 52% of PPH diagnoses at vaginal birth (pooled sensitivity 48%, 95% CI 44-53), and probably more at caesarean birth. The WHO-International Federation of Gynecology and Obstetrics-International Confederation of Midwives consolidated guidelines on PPH therefore recommend objective quantification of blood loss with products such as a calibrated blood collection drape. When supported by a robust implementation strategy and a first-response treatment bundle, objective measurement of blood loss and monitoring of vital signs has been shown to diagnose PPH accurately and early, and improve clinical outcomes. Refractory PPH can progress to life-threatening PPH, which should be managed by a multidisciplinary team providing aggressive resuscitation and targeted treatment. Saving the life of a woman with excessive postpartum bleeding is a race against time. The six delays to avoid are: (1) in the diagnosis (by use of objective cumulative blood loss measurement and early trigger criteria), (2) in the first-response treatment (by authorising midwives to administer all components of a standardised bundle of interventions), (3) in the escalation (by use of explicit escalation criteria and red flags), (4) in the use of temporising measures (eg, non-pneumatic anti-shock garment), (5) in the identification and targeted management of any specific causes of bleeding, and (6) in the provision of blood and blood products. Quick actions to avoid these delays can mean the difference between life and death for a woman with PPH.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "產後出血 (PPH) 很常見，估計影響 13% 的自然產婦女和 31% 的剖腹產女性。 PPH 的成功治療需要早期、準確的診斷和有效的治療。一項系統性回顧發現，陰道分娩時主觀視覺估計失血量漏掉了 52% 的 PPH 診斷（匯總敏感性為 48%，95% CI 44-53），而剖腹產時的漏診率可能更高。因此，世界衛生組織、國際婦產科聯合會和國際助產士聯合會綜合了 PPH 指南，建議使用校準採血棉等產品對失血量進行客觀量化。在強有力的實施策略和第一反應治療方案的支持下，客觀測量失血量和監測生命徵像已被證明可以準確、早期地診斷 PPH，並改善臨床結果。難治性 PPH 可發展為危及生命的 PPH，應由多學科團隊進行管理，提供積極的復甦和有針對性的治療。挽救產後失血過多婦女的生命是一場與時間的賽跑。要避免的六種延誤是：（1）診斷（透過使用客觀累積失血量測量和早期觸發標準），（2）第一反應治療（透過授權助產士實施標準化幹預措施的所有組成部分），（3）升級（透過使用明確的升級標準和危險信號），（4）使用臨時措施（例如，非氣動抗休克服），（5）識別血液和有針對性對於患有 PPH 的女性來說，迅速採取行動避免這些延誤可能意味著生與死的差異。"
         }
       ],
       "doi": "10.1016/S0140-6736(26)01031-7",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42285120/",
-      "titleZh": ""
+      "titleZh": "產後出血的診治：與時間賽跑"
     },
     {
       "pmid": "42285119",
@@ -156,12 +156,12 @@
         {
           "text": "Excessive bleeding after childbirth, known as postpartum haemorrhage (PPH), can turn an uncomplicated birth into a catastrophe. Each year, PPH occurs in an estimated 27 million women worldwide-17 million after vaginal birth and 10 million during or after caesarean birth. An estimated 43 000 women die from PPH annually, translating to a death every 12 min. The pooled prevalence of PPH at vaginal birth is 12·6% (95% CI 10·1-15·2) and at caesarean birth 30·9% (95% credible interval 24·9-37·6), based on the conventional definition of PPH. Common causes of PPH are uterine atony, genital tract trauma, retained placenta, abnormal placentation, and coagulopathy. Risk factors include caesarean birth, multiple pregnancy, anaemia, high maternal BMI, previous PPH, female genital mutilation, sepsis, pre-eclampsia, macrosomia, and inadequate antenatal care. In addition to being the leading cause of maternal mortality worldwide, the consequences of PPH include serious morbidities such as severe anaemia, hysterectomy, organ failure, and long-term psychological trauma. The global economic burden of PPH is estimated at US$10·4 billion (95% credible interval $9·8-13·2 billion) annually, consisting of $3·6 billion ($3·2-6·2 billion) for health systems and $6·8 billion ($6·2-7·5 billion) for societies. Based on a rigorous review of the evidence, WHO has recently redefined PPH as objectively measured blood loss of at least 300 mL plus an abnormal haemodynamic sign, or objectively measured blood loss of at least 500 mL, whichever occurs first. This new definition prioritises early PPH diagnosis and treatment to avert life-threatening maternal outcomes. Comprehensive efforts to address missed opportunities in the prevention, diagnosis, and treatment of PPH are needed to improve outcomes. These efforts include addressing the unmet need for contraception, mitigating modifiable risks such as anaemia, avoiding caesarean sections that are not medically indicated, using effective single uterotonic prophylaxis for all births and combination prophylaxis for women at high risk of PPH, ensuring accurate and objective measurement of blood loss for early PPH diagnosis, and promptly implementing treatment with an evidence-based bundle. The PPH Roadmap (2023-30) provides a global framework for action.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "分娩後過度出血，稱為產後出血 (PPH)，可能會將原本不複雜的分娩變成一場災難。每年，全球估計有 2,700 萬名女性發生產後出血，其中 1,700 萬人是陰道分娩後，1,000 萬人是剖腹產期間或剖腹產後。據估計，每年有 43,000 名女性死於 PPH，即每 12 分鐘就有一人死亡。根據 PPH 的傳統定義，陰道分娩時 PPH 的總盛行率為 12·6%（95% CI 10·1-15·2），剖腹產時為 30·9%（95% 可信區間 24·9-37·6）。 PPH 的常見原因是子宮收縮無力、生殖道創傷、胎盤滯留、胎盤異常和凝血障礙。危險因子包括剖腹產、多胎妊娠、貧血、母親體重指數高、先前 PPH、女性生殖器切割、敗血症、子癇前症、巨大兒和產前護理不足。除了是全世界孕產婦死亡的主要原因之外，產後出血的後果還包括嚴重的發生率，例如嚴重貧血、子宮切除術、器官衰竭和長期心理創傷。 PPH 每年造成的全球經濟負擔估計為 10·40 億美元（95% 可信區間為 9·8-13·20 億美元），其中衛生系統 3·60 億美元（3·2-6·20 億美元），社會 6·80 億美元（6·2-7·50 億美元）。基於對證據的嚴格審查，世界衛生組織最近將 PPH 重新定義為客觀測量的失血量至少 300 mL 加異常血流動力學體徵，或客觀測量的失血量至少 500 mL，以先發生者為準。這項新定義優先考慮早期 PPH 診斷和治療，以避免危及生命的孕產婦結局。需要綜合努力解決 PPH 預防、診斷和治療方面錯失的機會，以改善結果。這些努力包括解決未滿足的避孕需求、減輕貧血等可改變的風險、避免無醫學指徵的剖腹產、對所有分娩使用有效的單次宮縮預防以及對產後出血高風險婦女進行聯合預防、確保準確、客觀地測量失血量以進行早期產後出血診斷，以及及時實施基於證據的捆綁治療。 PPH 路線圖 (2023-30) 提供了全球行動架構。"
         }
       ],
       "doi": "10.1016/S0140-6736(26)00902-5",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42285119/",
-      "titleZh": ""
+      "titleZh": "產後出血：流行病學、後果和錯失的機會"
     },
     {
       "pmid": "42285117",
@@ -175,12 +175,12 @@
         {
           "text": "Postpartum haemorrhage (PPH) is a leading cause of maternal death. Preventing PPH can spare women from experiencing the trauma and risks of PPH, reduce the strain on overstretched health systems, and probably produce better outcomes than a strategy solely focused on PPH treatment. Prevention of PPH is often interpreted as provision of uterotonic drugs to contract the uterus at the time of childbirth. Although uterotonics are a central strategy for PPH prevention, several other approaches can prevent PPH or ameliorate its severity. These approaches include addressing the unmet need for contraception, remedying anaemia and other modifiable risk factors for PPH, optimising medical conditions that predispose to PPH, and tackling the rise in caesarean births in many countries. Effective delivery of preventive care requires early and regular antenatal care and planned birth at appropriately resourced health facilities. Social and behavioural change interventions for improving contraceptive provision and uptake, targeting adolescents, postpartum women, geographically remote communities, and families on low income, are a priority. Effective interventions to tackle anaemia include the management of heavy menstrual bleeding, pre-pregnancy or antenatal haemoglobin testing and oral or intravenous iron treatment, dietary improvements, and-on rare occasions-blood transfusion. Risk factors for PPH that need attention include high BMI, multiple pregnancy, gestational diabetes, pre-eclampsia, macrosomia, and several medical conditions. Caesarean births are associated with a substantial increase in PPH risk and should therefore only be done when medically indicated. A Cochrane network meta-analysis of 122 trials, with 121 931 women, found that the combinations of oxytocin plus misoprostol, or oxytocin plus ergometrine, were the most effective prophylaxis for PPH when given at the time of childbirth; however, these combinations had a higher risk of side-effects compared with single-drug prophylaxis. Oxytocin and carbetocin were the most effective single drugs for PPH prophylaxis, with minimal side-effects. Single uterotonic prophylaxis with either oxytocin or carbetocin is, therefore, recommended for routine prophylaxis. However, if oxytocin or carbetocin is not accessible, misoprostol is an alternative. Combination prophylaxis with oxytocin plus misoprostol can be considered for women at high risk of PPH. Ergometrine alone and oxytocin plus ergometrine combination are no longer recommended due to hypertension-related safety concerns. A robust implementation approach that engages various stakeholders to promote change, ensures the supply of quality-assured medicines and devices, provides training and support, and secures ongoing political and financial commitment is necessary to translate evidence into global impact.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "產後出血（PPH）是孕產婦死亡的主要原因。預防 PPH 可以使女性免受 PPH 帶來的創傷和風險，減輕過度緊張的衛生系統的壓力，並且可能比僅專注於 PPH 治療的策略產生更好的結果。預防產後出血通常被解釋為在分娩時提供子宮收縮藥物來收縮子宮。儘管子宮收縮劑是預防產後出血的核心策略，但其他幾種方法可以預防產後出血或減輕其嚴重程度。這些方法包括解決未滿足的避孕需求、治療貧血和其他可改變的產後出血風險因素、優化易患產後出血的醫療條件，以及解決許多國家剖腹產率上升的問題。有效提供預防性護理需要儘早、定期進行產前護理，並在資訊適當的衛生機構進行計劃生育。當務之急是針對青少年、產後婦女、偏遠社區和低收入家庭，採取社會和行為改變幹預措施，改善避孕藥具的提供和使用。解決貧血的有效幹預措施包括治療大量月經出血、孕前或產前血紅蛋白檢測、口服或靜脈注射補鐵治療、改善飲食以及在極少數情況下輸血。需要注意的 PPH 危險因子包括高 BMI、多胎妊娠、妊娠糖尿病、子癇前症、巨大兒和多種健康狀況。剖腹產與 PPH 風險大幅增加有關，因此只有在有醫學指徵時才應進行。 Cochrane 網路對 122 項試驗（涉及 121 931 名女性）進行的薈萃分析發現，在分娩時給予催產素加米索前列醇或催產素加麥角新鹼的組合是預防 PPH 最有效的方法；然而，與單一藥物預防相比，這些組合產生副作用的風險更高。催產素和卡貝縮宮素是預防 PPH 最有效的單一藥物，且副作用最小。因此，建議常規預防使用催產素或卡貝縮宮素進行單次宮縮預防。然而，如果無法獲得催產素或卡貝縮宮素，米索前列醇是一種替代選擇。對於 PPH 高風險女性，可以考慮使用催產素加米索前列醇合併預防。由於高血壓相關的安全問題，不再建議單獨使用麥角新鹼和催產素加麥角新鹼組合。需要採取強有力的實施方法，讓各利益相關者參與促進變革，確保供應有品質保證的藥品和設備，提供培訓和支持，並確保持續的政治和財政承諾，這對於將證據轉化為全球影響力至關重要。"
         }
       ],
       "doi": "10.1016/S0140-6736(26)00903-7",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42285117/",
-      "titleZh": ""
+      "titleZh": "預防產後出血：從證據到大規模實施"
     },
     {
       "pmid": "42251856",
@@ -195,36 +195,36 @@
           "label": "BACKGROUND",
           "text": "Basal insulin treatment for type 2 diabetes often results in inadequate glycaemic control and is associated with weight gain and increased risk of hypoglycaemia. We aimed to compare the efficacy and safety of a once per week combination of cagrilintide with semaglutide (CagriSema) versus placebo as an add-on to basal insulin in individuals with type 2 diabetes.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "2 型糖尿病的基礎胰島素治療通常會導致血糖控制不足，並與體重增加和低血糖風險增加有關。我們的目的是比較每週一次的卡格林肽與司馬魯肽 (CagriSema) 組合與安慰劑作為基礎胰島素的補充治療 2 型糖尿病患者的療效和安全性。"
         },
         {
           "label": "METHODS",
           "text": "This double-blind, parallel-group, randomised, controlled, phase 3a study (REIMAGINE 3) was done at 46 centres (university hospitals, health-care centres, research centres, and other clinical trial sites) in six countries (the USA, China, Japan, Serbia, Slovakia, and South Africa). Adults with type 2 diabetes (glycated haemoglobin [HbA1c] 7·0-10·5%) receiving stable once per day basal insulin with or without metformin were randomly assigned (2:2:1:1) to once per week subcutaneous cagrilintide 2·4 mg plus semaglutide 2·4 mg (hereafter cagrilintide-semaglutide [2·4 mg each]) or cagrilintide 1·0 mg plus semaglutide 1·0 mg (hereafter cagrilintide-semaglutide [1·0 mg each]) or dose-matched placebo (2·4 mg plus 2·4 mg or 1·0 mg plus 1·0 mg) for 40 weeks. Randomisation was stratified by HbA1c of less than 8·5% at screening (yes or no) and country (Japan; yes or no). Participants, care providers, investigators, and outcome assessors were masked within each dose level to treatment allocation, with active treatments visually identical to placebo. The primary endpoint was mean HbA1c change (percentage points) from baseline to week 40 in all participants randomly assigned to treatment; secondary endpoints included change in bodyweight and safety, including hypoglycaemia. This trial was registered with ClinicalTrials.gov (NCT06323161) and is complete.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "這項雙盲、平行組、隨機、對照 3a 期研究 (REIMAGINE 3) 在 6 個國家（美國、中國、日本、塞爾維亞、斯洛伐克和南非）的 46 個中心（大學醫院、醫療保健中心、研究中心和其他臨床試驗地點）進行。患有第 2 型糖尿病的成年人（糖化血紅蛋白 [HbA1c] 7·0-10·5%）每天接受一次穩定的基礎胰島素聯合或不聯合二甲雙胍，被隨機分配（2:2:1:1）每週一次皮下注射卡格林肽 2·4 mg 加索馬魯肽 2·4 mg（以下稱格林肽 10-10 mg）加索馬魯肽 1·0 mg（以下稱為卡格林肽-索馬魯肽[各 1·0 mg]）或劑量匹配安慰劑（2·4 mg 加 2·4 mg 或 1·0 mg 加 1·0 mg），持續 40 週。隨機分組根據篩選時 HbA1c 低於 8·5%（是或否）和國家（日本；是或否）進行分層。參與者、護理提供者、研究人員和結果評估人員在治療分配的每個劑量水平中都被隱藏，積極治療在視覺上與安慰劑相同。主要終點是隨機分配接受治療的所有參與者從基線到第 40 週的平均 HbA1c 變化（百分點）；次要終點包括體重變化和安全性，包括低血糖。該試驗已在 ClinicalTrials.gov (NCT06323161) 註冊並已完成。"
         },
         {
           "label": "FINDINGS",
           "text": "Between March 26 and Nov 29, 2024, we screened 340 individuals and 274 were included and randomly assigned to cagrilintide-semaglutide (2·4 mg each; n=90), cagrilintide-semaglutide (1·0 mg each; n=93), or placebo (pooled; n=91). Mean baseline HbA1c was 8·8% (SD 1·0), 159 (58%) participants were male, and 115 (42%) were female. Mean HbA1c reductions were significantly greater with cagrilintide-semaglutide (2·4 mg each -2·33% [SE 0·08] and 1·0 mg each -2·10% [0·08]) versus placebo (-0·66% [0·11]) at week 40, using the efficacy estimand (estimated treatment difference for cagrilintide-semaglutide [2·4 mg each] vs placebo -1·68 percentage points [95% CI -1·95 to -1·41], p<0·0001; for cagrilintide-semaglutide [1·0 mg each] vs placebo -1·44 percentage points [95% CI -1·71 to -1·17], p<0·0001). Cagrilintide-semaglutide provided bodyweight reductions of 10-12%. Adverse events were reported by 72 (80%) of 90 participants receiving cagrilintide-semaglutide (2·4 mg each), 66 (71%) of 93 receiving cagrilintide-semaglutide (1·0 mg each), and 65 (71%) of 91 receiving placebo, and were mostly mild or moderate gastrointestinal disorders. No severe hypoglycaemia was reported. There was one death in the cagrilintide-semaglutide (1·0 mg each) group not related to treatment (due to malignancy).",
           "labelZh": "發現",
-          "textZh": ""
+          "textZh": "2024 年 3 月 26 日至 11 月 29 日期間，我們篩選了 340 名受試者，其中 274 名受試者被隨機分配至卡格林肽-司馬魯肽組（每組 2·4 mg；n=90）、卡格林肽-司馬魯肽組（每組 1·0 mg；n=90）、卡格林肽-司馬魯肽組（每組 1·0 mg；n=93）或安慰劑。平均基線 HbA1c 為 8·8% (SD 1·0)，159 名參與者 (58%) 為男性，115 名參與者 (42%) 為女性。使用療效估計值（卡格林肽-索馬魯肽[每種 2·4 mg]的估計治療差異），第 40 週時卡格林肽-索馬魯肽（每種 2·4 mg -2·33% [SE 0·08] 和每種 1·0 mg -2·10% [0·08]）的平均值高於 HbA1c 1·6-6與安慰劑 -1·68 個百分點 [95% CI -1·95 至 -1·41]，p<0·0001；卡格林肽-索馬魯肽 [各 1·0 mg] 與安慰劑 -1·44 個百分點 [95% CI -1·71 至 -1·17]，p<0·0001）。卡格里林肽-索馬魯肽使體重減輕了 10-12%。接受卡格林肽-索馬魯肽（每次 2·4 mg）的 90 名參與者中有 72 名（80%）報告了不良事件，接受卡格林肽-索馬魯肽（每次 1·0 mg）的 93 名參與者中有 66 名（71%）報告了不良事件，接受安慰劑的 91 名參與者中有 66 名（71%）報告了不良事件，接受安慰劑的 91 名參與者中有 65%）。沒有嚴重低血糖的報告。卡格林肽-索馬魯肽（各 1·0 mg）組中有 1 例與治療無關的死亡（由於惡性腫瘤）。"
         },
         {
           "label": "INTERPRETATION",
           "text": "Cagrilintide-semaglutide at doses of 2·4 mg each and 1·0 mg each met the primary endpoint, with statistically significant and clinically relevant HbA1c reductions versus placebo when added to basal insulin-treated type 2 diabetes. These reductions were accompanied by robust bodyweight reduction and no additional risk of hypoglycaemia. The safety profile was consistent with that of the GLP-1 receptor agonist class and previous safety data for cagrilintide. Findings support the use of cagrilintide-semaglutide as an add-on to once per day basal insulin to significantly improve glycaemic control.",
           "labelZh": "詮釋",
-          "textZh": ""
+          "textZh": "卡格林肽-司馬魯肽劑量分別為 2·4 mg 和 1·0 mg 達到主要終點，與安慰劑相比，當添加到基礎胰島素治療的 2 型糖尿病中時，具有統計學意義和臨床相關的 HbA1c 降低。這些減少伴隨著體重的大幅減少，並且沒有額外的低血糖風險。安全性與 GLP-1 受體激動劑類的安全性以及卡格林肽先前的安全性數據一致。研究結果支持使用卡格林肽-司馬魯肽作為每日一次基礎胰島素的附加藥物，可顯著改善血糖控制。"
         },
         {
           "label": "FUNDING",
           "text": "Novo Nordisk.",
           "labelZh": "經費來源",
-          "textZh": ""
+          "textZh": "諾和諾德。"
         }
       ],
       "doi": "10.1016/S0140-6736(26)01022-6",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42251856/",
-      "titleZh": ""
+      "titleZh": "卡格林肽索馬魯肽 (CagriSema) 作為基礎胰島素的補充治療成人 2 型糖尿病 (REIMAGINE 3)：一項隨機、雙盲、安慰劑對照、多中心 3 期研究"
     },
     {
       "pmid": "42384871",
@@ -238,12 +238,12 @@
         {
           "text": "Multiple sclerosis is a chronic autoimmune disorder that affects the central nervous system, causing episodes of neurologic dysfunction and often gradual disease progression. The immune system primarily targets myelin, the protective covering of nerve fibers, leading to inflammation and damage, and secondary neurodegeneration is a major cause of long-term disability. Common symptoms include vision problems, sensory disturbances, muscle weakness, balance difficulties, and bladder dysfunction. Important advances in treatment have improved outcomes in patients with relapsing forms of multiple sclerosis, particularly through highly effective immune-modifying therapies such as CD20-targeting monoclonal antibodies. However, treatment options for progressive forms remain limited, which highlights the need for therapies that can prevent progression and promote myelin repair. Comprehensive symptom management and lifestyle support are also essential to maintaining quality of life and reducing disability.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "多發性硬化症是一種慢性自體免疫疾病，會影響中樞神經系統，導致神經功能障礙發作，通常會導致疾病逐漸進展。免疫系統主要針對髓鞘（神經纖維的保護層），導致發炎和損傷，繼發性神經退化是長期殘疾的主要原因。常見症狀包括視力問題、感覺障礙、肌肉無力、平衡困難和膀胱功能障礙。治療方面的重要進展改善了復發型多發性硬化症患者的預後，特別是透過高效的免疫修飾療法，例如針對 CD20 的單株抗體。然而，進展型形式的治療選擇仍然有限，這凸顯了對能夠預防進展和促進髓鞘修復的療法的需求。全面的症狀管理和生活方式支持對於維持生活品質和減少殘疾也至關重要。"
         }
       ],
       "doi": "10.1056/NEJMra2501195",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42384871/",
-      "titleZh": ""
+      "titleZh": "多發性硬化症的進展"
     },
     {
       "pmid": "42384870",
@@ -258,30 +258,30 @@
           "label": "BACKGROUND",
           "text": "Anti-CD20 monoclonal antibodies are effective for relapsing multiple sclerosis. However, data from head-to-head trials are lacking.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "抗CD20單株抗體可有效治療復發性多發性硬化症。然而，缺乏頭對頭試驗的數據。"
         },
         {
           "label": "METHODS",
           "text": "In this phase 3, multicenter, double-blind, noninferiority trial, we randomly assigned adults with newly diagnosed relapsing multiple sclerosis and recent disease activity in a 3:2 ratio to receive rituximab or ocrelizumab every 6 months for 24 months. The primary end point was the absence of new or enlarging lesions on T2-weighted magnetic resonance imaging (MRI) from month 6 to month 24. Noninferiority was defined as a lower limit of the 95% confidence interval for the risk difference (rituximab minus ocrelizumab) of greater than or equal to -10 percentage points. Secondary end points included efficacy and safety.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "在這項 3 期、多中心、雙盲、非劣效性試驗中，我們以 3:2 的比例隨機分配新診斷的複發性多發性硬化症和近期疾病活動的成人，每 6 個月接受利妥昔單抗或 ocrelizumab 治療，持續 24 個月。主要終點是從第 6 個月到第 24 個月，T2 加權磁振造影 (MRI) 沒有出現新的或擴大的病灶。非劣效性定義為風險差異（利妥昔單抗減去奧瑞珠單抗）的 95% 信賴區間下限大於或等於 -10 個百分點。次要終點包括療效和安全性。"
         },
         {
           "label": "RESULTS",
           "text": "A total of 218 participants underwent randomization; 216 received treatment (132 assigned to the rituximab group and 84 assigned to the ocrelizumab group). Between months 6 and 24, the estimated probability of having no new or enlarging lesions detected on T2-weighted MRI was 92.2% with rituximab and 94.8% with ocrelizumab, corresponding to a risk difference of -2.6 percentage points (95% confidence interval, -9.4 to 4.3), which met the prespecified noninferiority criterion. Relapse rates, disability outcomes, and cognitive-performance profiles appeared to be similar in the two groups. Infections were more common in the rituximab group than in the ocrelizumab group (in 82% vs. 69% of participants), although the percentage of participants with serious adverse events was similar in the two groups (8% and 7%, respectively).",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "共有 218 名參與者接受了隨機分組； 216 人接受了治療（132 人分配到利妥昔單抗組，84 人分配到奧瑞珠單抗組）。第 6 個月至 24 個月期間，T2 加權 MRI 未檢測到新病灶或擴大病灶的估計概率，利妥昔單抗組為 92.2%，奧瑞珠單抗組為 94.8%，相當於 -2.6 個百分點的風險差異（95% 置信區間，-9.4 至 4.3），符合預先指定的非劣效性標準。兩組的復發率、殘障結果和認知表現似乎相似。利妥昔單抗組的感染比奧瑞珠單抗組更常見（參與者分別為 82% 和 69%），儘管兩組中出現嚴重不良事件的參與者比例相似（分別為 8% 和 7%）。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "In participants with newly diagnosed relapsing multiple sclerosis and recent disease activity, rituximab was noninferior to ocrelizumab in suppressing disease activity as detected by MRI from 6 to 24 months, with a similar incidence of serious adverse events. (Funded by the Research Council of Norway and others; OVERLORD-MS ClinicalTrials.gov number, NCT04578639; EudraCT number, 2020-001205-23; EU Clinical Trials Register number, 2024-510716-71-00.).",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "在新診斷的複發性多發性硬化症和近期疾病活動的參與者中，根據 6 至 24 個月的 MRI 檢測，利妥昔單抗在抑制疾病活動方面不遜色於 ocrelizumab，且嚴重不良事件的發生率相似。 （由挪威研究委員會和其他機構資助；OVERLORD-MS ClinicalTrials.gov 編號，NCT04578639；EudraCT 編號，2020-001205-23；歐盟臨床試驗註冊編號，2024-510716-71-00。）。"
         }
       ],
       "doi": "10.1056/NEJMoa2600993",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42384870/",
-      "titleZh": ""
+      "titleZh": "利妥昔單抗與 Ocrelizumab 治療新診斷的複發性多發性硬化症"
     },
     {
       "pmid": "42384869",
@@ -296,30 +296,30 @@
           "label": "BACKGROUND",
           "text": "Adjuvant pembrolizumab improves disease-free and overall survival among patients with resected clear-cell renal-cell carcinoma. The hypoxia-inducible factor 2α inhibitor belzutifan has activity in advanced disease. Adjuvant pembrolizumab with belzutifan may further improve outcomes in patients with clear-cell renal-cell carcinoma at increased risk for recurrence.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "輔助帕博利珠單抗可改善切除的透明細胞腎細胞癌患者的無疾病存活率和總存活率。缺氧誘導因子 2α 抑制劑 belzutifan 對晚期疾病具有活性。派姆單抗合併 Belzutifan 輔助治療可能會進一步改善復發風險增加的透明細胞腎細胞癌患者的預後。"
         },
         {
           "label": "METHODS",
           "text": "In this phase 3, double-blind trial, we randomly assigned participants in a 1:1 ratio to receive intravenous pembrolizumab at a dose of 400 mg every 6 weeks (≤9 doses) and either daily oral belzutifan at a dose of 120 mg (pembrolizumab-belzutifan) or placebo (pembrolizumab-placebo) for up to 1 year. The primary end point was disease-free survival as assessed by the investigator; secondary end points included overall survival and safety.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "在這項3期雙盲試驗中，我們以1:1的比例隨機分配參與者接受靜脈注射pembrolizumab，劑量為每6週400 mg（≤9劑量），並每日口服belzutifan，劑量為120 mg（pembrolizumab-belzutifan）或安慰劑（pembrolizumab-placebo），持續長達1年。主要終點是研究者評估的無疾病存活期；次要終點包括總體存活率和安全性。"
         },
         {
           "label": "RESULTS",
           "text": "A total of 921 participants were assigned to receive pembrolizumab-belzutifan and 920 were assigned to receive pembrolizumab-placebo. The median time from randomization to the data-cutoff date (August 23, 2025) was 28.4 months (range, 15.0 to 40.1). Disease-free survival was significantly higher with pembrolizumab-belzutifan than with pembrolizumab-placebo (hazard ratio for disease recurrence or death, 0.72; 95% confidence interval [CI], 0.59 to 0.87; two-sided P<0.001); the estimated 24-month disease-free survival was 80.7% and 73.7%, respectively. At this interim analysis with 29% of the final-analysis events observed, overall survival did not differ significantly between the groups (hazard ratio for death, 0.78; 95% CI, 0.51 to 1.19; two-sided P = 0.24); the estimated 24-month overall survival was 96.2% with pembrolizumab-belzutifan and 95.7% with pembrolizumab-placebo. Adverse events of grade 3 or higher occurred in 52.1% of the participants who received pembrolizumab-belzutifan and in 30.2% of those who received pembrolizumab-placebo.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "共有 921 名參與者被分配接受派姆單抗-belzutifan 治療，920 名參與者被分配接受派姆單抗-安慰劑治療。從隨機化到資料截止日期（2025 年 8 月 23 日）的中位數時間為 28.4 個月（範圍：15.0 至 40.1）。派姆單抗-belzutifan 組的無疾病存活率顯著高於派姆單抗-安慰劑組（疾病復發或死亡的風險比，0.72；95% 信賴區間 [CI]，0.59 至 0.87；雙側 P<0.001）；估計的 24 個月無疾病存活率分別為 80.7%。在這次中期分析中，觀察到 29% 的最終分析事件，各組之間的總生存率沒有顯著差異（死亡風險比，0.78；95% CI，0.51 至 1.19；雙邊 P = 0.24）；派姆單抗-belzutifan 組的總生存率為 296%，總生存率為 2% 個月的總存活率為 294 個月存活率為 294% 9%。 95.7%。接受 pembrolizumab-belzutifan 治療的參與者中有 52.1% 發生了 3 級或以上的不良事件，而接受 pembrolizumab-placebo 治療的參與者中有 30.2% 發生了 3 級或以上的不良事件。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "Treatment with pembrolizumab-belzutifan led to significantly higher disease-free survival, with a greater risk of grade 3 or higher toxic effects, than treatment with pembrolizumab monotherapy after nephrectomy in participants with clear-cell renal-cell carcinoma at increased risk for recurrence. (Funded by Merck Sharp and Dohme, a subsidiary of Merck [Rahway, NJ]; LITESPARK-022 ClinicalTrials.gov number, NCT05239728.).",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "對於復發風險增加的透明細胞腎細胞癌患者，與腎切除術後使用派姆單抗單藥治療相比，使用派姆單抗-belzutifan 治療可顯著提高無病生存率，但發生 3 級或更高毒性反應的風險更大。 （由 Merck Sharp 和 Dohme（新澤西州拉威市默克子公司）資助；LITESPARK-022 ClinicalTrials.gov 編號，NCT05239728。）"
         }
       ],
       "doi": "10.1056/NEJMoa2518245",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42384869/",
-      "titleZh": ""
+      "titleZh": "派姆單抗合併貝爾祖替芬輔助治療腎細胞癌"
     },
     {
       "pmid": "41910384",
@@ -334,30 +334,30 @@
           "label": "BACKGROUND",
           "text": "Assessing intermediate coronary lesions with an intracoronary pressure wire improves clinical outcomes in patients undergoing cardiac catheterization and percutaneous coronary intervention (PCI). However, clinical use of pressure-wire-based physiological assessment remains low. Measurement of fractional flow reserve (FFR) derived from coronary angiographic images alone correlates well with pressure-wire-based FFR measurements and may simplify procedures, but its effect on clinical outcomes is unknown.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "使用冠狀動脈內壓力絲評估中間冠狀動脈病變可改善接受心導管插入術和經皮冠狀動脈介入治療 (PCI) 的患者的臨床結果。然而，基於壓力線的生理評估的臨床使用仍然很少。僅從冠狀動脈造影影像得出的血流儲備分數 (FFR) 測量與基於壓力線的 FFR 測量具有良好的相關性，並且可以簡化程序，但其對臨床結果的影響尚不清楚。"
         },
         {
           "label": "METHODS",
           "text": "In this international noninferiority trial, we randomly assigned patients undergoing coronary angiography who were found to have at least one intermediate coronary stenosis to physiological assessment with measurements derived from angiographic images (FFRangio) or with pressure-wire-based measurements. The primary end point was a composite of death, myocardial infarction, or unplanned, clinically indicated coronary revascularization at 1 year. The noninferiority margin was 3.5 percentage points.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "在這項國際非劣效性試驗中，我們隨機分配接受冠狀動脈造影的患者，這些患者被發現至少有一個中間冠狀動脈狹窄，以通過血管造影圖像（FFRangio）或基於壓力線的測量進行生理評估。主要終點是 1 年時死亡、心肌梗塞或計劃外、臨床指示的冠狀動脈血運重建的複合終點。非劣效幅度為 3.5 個百分點。"
         },
         {
           "label": "RESULTS",
           "text": "A total of 1930 patients were randomly assigned to physiological assessment with FFRangio (FFRangio group; 965 patients) or a pressure-wire-based approach (pressure-wire group; 965 patients). The mean age of the patients was 68.4 years, and 25.0% of the patients were women. At 1 year, a primary end-point event had occurred in 64 patients (Kaplan-Meier estimate, 6.9%) in the FFRangio group and 65 patients (Kaplan-Meier estimate, 7.1%) in the pressure-wire group (hazard ratio, 0.98; 95% confidence interval, 0.70 to 1.39; difference, -0.2 percentage points; upper boundary of the one-sided 97.5% confidence interval, 2.1 percentage points; P<0.001 for noninferiority). There were no apparent differences between the groups with respect to the incidence of bleeding, acute kidney injury, or procedure-related adverse events.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "共有 1930 名患者被隨機分配接受 FFRangio 生理評估（FFRangio 組；965 名患者）或基於壓力線的方法（壓力線組；965 名患者）。患者的平均年齡為68.4歲，其中25.0%的患者為女性。第 1 年時，FFRangio 組有 64 名患者（Kaplan-Meier 估計，6.9%）和壓線組有 65 名患者（Kaplan-Meier 估計，7.1%）發生主要終點事件（風險比，0.98；95% 置信區間，0.70 至 1.39；個百分點；P<0.001 為非劣效性）。各組在出血、急性腎損傷或手術相關不良事件的發生率方面沒有明顯差異。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "Among patients with intermediate coronary-artery lesions undergoing physiological assessment in the cardiac catheterization laboratory, an angiography-guided strategy involving FFRangio was noninferior to a pressure-wire-guided strategy with respect to a composite end point of death, myocardial infarction, or unplanned clinically indicated coronary revascularization at 1 year. (Funded by CathWorks; ALL-RISE ClinicalTrials.gov number, NCT05893498.).",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "在心導管實驗室接受生理學評估的中間冠狀動脈病變患者中，涉及 FFRangio 的血管造影引導策略在 1 年時死亡、心肌梗塞或非計劃臨床指示冠狀動脈血運重建的複合終點方面不劣於壓力導絲引導策略。 （由 CathWorks 資助；ALL-RISE ClinicalTrials.gov 編號，NCT05893498。）。"
         }
       ],
       "doi": "10.1056/NEJMoa2600949",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41910384/",
-      "titleZh": ""
+      "titleZh": "血管攝影衍生的血流儲備分數用於指導 PCI"
     },
     {
       "pmid": "41910382",
@@ -372,30 +372,30 @@
           "label": "BACKGROUND",
           "text": "Current society guidelines recommend physiological assessment of intermediate coronary lesions to guide revascularization. Data regarding revascularization guided by vessel fractional flow reserve (vFFR), derived from three-dimensional quantitative coronary angiography without the need for a pressure wire or hyperemic agent, as compared with pressure-wire-based fractional flow reserve (FFR), are lacking.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "目前的學會指南建議對中間冠狀動脈病變進行生理評估以指導血管重建。與基於壓力線的血流儲備分數（FFR）相比，缺乏關於由血管血流儲備分數（vFFR）引導的血運重建的數據，該血運重建源自三維定量冠狀動脈造影，無需壓力線或充血劑。"
         },
         {
           "label": "METHODS",
           "text": "We conducted an international, open-label, randomized, noninferiority trial at 37 sites in Europe. Patients with intermediate coronary-artery lesions (diameter stenosis of 30 to 80%) who presented with chronic or acute coronary syndromes were randomly assigned in a 1:1 ratio to undergo either vFFR-guided or FFR-guided revascularization of the intermediate coronary-artery lesions. The primary end point was a composite of death from any cause, any myocardial infarction, or any revascularization at 1 year. The noninferiority margin was 3.0 percentage points.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "我們在歐洲 37 個地點進行了一項國際性、開放標籤、隨機、非劣效性試驗。患有慢性或急性冠狀動脈症候群的中間冠狀動脈病變（直徑狹窄30%至80%）的患者以1:1的比例隨機分配，接受vFFR引導或FFR引導的中間冠狀動脈病變血運重建。主要終點是一年內全因死亡、任何心肌梗塞或任何血管重建的複合終點。非劣效幅度為 3.0 個百分點。"
         },
         {
           "label": "RESULTS",
           "text": "The primary end point was assessed in 1116 patients in the vFFR group and 1095 in the FFR group. The mean age of the patients was 67 years, 24.3% were women, 18.7% presented with an acute coronary syndrome, and 26.6% had diabetes mellitus. At 1 year, a primary end-point event had occurred in 80 patients (Kaplan-Meier estimate, 7.5%) in the vFFR group and in 79 patients (Kaplan-Meier estimate, 7.5%) in the FFR group (risk difference, -0.02 percentage points; 95% confidence interval, -2.25 to 2.21; P = 0.004 for noninferiority). The incidence of serious adverse events appeared to be similar in the two groups.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "主要終點在 vFFR 組的 1116 名患者和 FFR 組的 1095 名患者中進行了評估。患者的平均年齡為 67 歲，24.3% 為女性，18.7% 患有急性冠狀動脈綜合徵，26.6% 患有糖尿病。在第 1 年時，vFFR 組有 80 名患者（Kaplan-Meier 估計，7.5%）和 FFR 組有 79 名患者（Kaplan-Meier 估計，7.5%）發生主要終點事件（風險差異，-0.02 個百分點；95% 置信區間，-2.25 至 2.21140.211433；兩組中嚴重不良事件的發生率似乎相似。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "Among patients with intermediate coronary lesions, vFFR-guided revascularization was noninferior to FFR-guided revascularization with respect to a composite of death, myocardial infarction, or revascularization at 1 year. (Funded by Pie Medical Imaging and Siemens Healthineers; FAST III ClinicalTrials.gov number, NCT04931771.).",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "在患有中度冠狀動脈病變的患者中，就 1 年時死亡、心肌梗塞或血管重建的綜合情況而言，vFFR 引導的血管重建並不劣於 FFR 引導的血運重建。 （由 Pie Medical Imaging 和西門子 Healthineers 資助；FAST III ClinicalTrials.gov 編號，NCT04931771。）。"
         }
       ],
       "doi": "10.1056/NEJMoa2601841",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41910382/",
-      "titleZh": ""
+      "titleZh": "基於血管攝影的生理學指導冠狀動脈血運重建"
     },
     {
       "pmid": "42392118",
@@ -410,36 +410,36 @@
           "label": "BACKGROUND",
           "text": "Peptide receptor radionuclide and targeted therapy are both approved treatment options for patients with metastatic gastroenteropancreatic neuroendocrine tumours (GEP NETs), but clinical evidence for preferred sequencing is scarce. The COMPETE trial evaluated the efficacy and harms of peptide receptor radionuclide therapy ([177Lu]Lu-edotreotide) versus targeted molecular therapy (everolimus) in patients with advanced, progressive, somatostatin receptor-positive GEP NETs.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "勝肽受體放射性核素和標靶治療都是已核准的轉移性胃腸胰神經內分泌腫瘤（GEP NET）患者的治療選擇，但首選定序的臨床證據很少。 COMPETE 試驗評估了勝肽受體放射性核素治療（[177Lu]Lu-edotreotide）與標靶分子治療（依維莫司）對晚期、進行性生長抑素受體陽性 GEP NET 患者的療效和危害。"
         },
         {
           "label": "METHODS",
           "text": "This phase 3, open-label, superiority trial included patients aged 18 years or older with treatment-naive or previously treated unresectable or metastatic (or both) grade 1-2 GEP NETs. Patients were enrolled from 49 specialist neuroendocrine tumour treatment centres across 14 countries in Africa, Europe, North America, and Oceania and randomised (2:1) to intravenous [177Lu]Lu-edotreotide (7·5 ± 0·7 GBq every 3 months, maximum four cycles) or oral everolimus (10 mg/day) for up to 30 months. Random assignment was via a central, web-based randomisation system (block size of 6) and stratified by primary tumour origin and previous therapy. The primary endpoint was progression-free survival, assessed via blinded independent central review in all randomly assigned patients at 30 months. Harms were assessed in all enrolled patients who received at least one dose of a study drug. This study was registered with ClinicalTrials.gov (NCT03049189) and is no longer recruiting.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "這項 3 期開放標籤優效性試驗納入了年齡在 18 歲或以上且未接受過治療或既往接受過不可切除或轉移性（或兩者兼有）1-2 級 GEP NET 治療的患者。患者來自非洲、歐洲、北美和大洋洲 14 個國家的 49 個神經內分泌腫瘤專科治療中心，並隨機 (2:1) 接受靜脈注射 [177Lu]Lu-edotreotide（每 3 個月 7·5 ± 0·7 GBq，最多四個週期）或口服依維莫天司（10 mg/VL）治療，療程長達 30 mg 10 mg/309）。隨機分配是透過基於網路的中央隨機分配系統（區塊大小為 6）進行的，並按原發腫瘤起源和先前治療進行分層。主要終點是無惡化存活期，在 30 個月時透過盲法獨立集中審查對所有隨機分配的患者進行評估。對所有接受至少一劑研究藥物的入組患者進行危害評估。該研究已在 ClinicalTrials.gov (NCT03049189) 註冊，並且不再招募。"
         },
         {
           "label": "FINDINGS",
           "text": "Between April 13, 2017, and June 20, 2022, 324 patients were enrolled and 309 patients (including 168 [54%] male patients and 141 [46%] female patients) were randomly assigned to treatment: 207 to the [177Lu]Lu-edotreotide group and 102 to the everolimus group. The median follow-up for progression-free survival was 27·5 months (IQR 19·6-30·4) for the [177Lu]Lu-edotreotide group and 21·2 months (8·9-29·4) for the everolimus group. Median progression-free survival was significantly longer with [177Lu]Lu-edotreotide versus everolimus (23·9 months [95% CI 18·7-30·0] vs 14·1 months [9·2-20·9]; stratified hazard ratio 0·67 [95% CI 0·48-0·95]; p=0·022). Treatment-related adverse events occurred in 178 (82%) of 217 patients in the [177Lu]Lu-edotreotide group and 96 (97%) of 99 patients in the everolimus group. 40 (18%) patients in the [177Lu]Lu-edotreotide group and 40 (40%) in the everolimus group had at least one treatment-related grade 3-4 adverse event. The most common treatment-related adverse events in the [177Lu]Lu-edotreotide group were diarrhoea and nausea (both 79 [36%] patients) and asthenia (66 [33%] patients), whereas those in the everolimus group were diarrhoea (45 [45%] patients), asthenia (36 [36%] patients), and anaemia (27 [27%] patients). No treatment-related deaths occurred in either study group.",
           "labelZh": "發現",
-          "textZh": ""
+          "textZh": "107年4月13日至2022年6月20日期間， [177Lu]Lu-edotreotide 組的中位無惡化存活期追蹤為 27·5 個月 (IQR 19·6-30·4)，依維莫司組為 21·2 個月 (8·9-29·4)。 [177Lu]Lu-edotreotide 與依維莫司相比，中位無惡化存活期顯著延長（23·9 個月 [95% CI 18·7-30·0] vs 14·1 個月 [9·2-20·9]；分層風險比 0·67 [95% CI 0·20-20·9]； [177Lu]Lu-edotreotide 組 217 例患者中有 178 例 (82%) 發生治療相關不良事件，依維莫司組 99 例患者中有 96 例 (97%) 發生治療相關不良事件。 [177Lu]Lu-edotreotide 組中有 40 名患者 (18%) 和依維莫司組有 40 名患者 (40%) 發生至少一項與治療相關的 3-4 級不良事件。 [177Lu]Lu-edotreotide組最常見的治療相關不良事件是腹瀉和噁心（均為79例[36%]患者）和乏力（66[33%]例患者），而依維莫司組則為腹瀉（45例[45%]例患者）、乏力（36例[36%]27%。兩個研究組均未發生與治療相關的死亡。"
         },
         {
           "label": "INTERPRETATION",
           "text": "[177Lu]Lu-edotreotide led to statistically significant and clinically meaningful improvements in progression-free survival. Efficacy and harms results support the use of [177Lu]Lu-edotreotide in early lines of therapy in patients with advanced, progressive GEP NETs.",
           "labelZh": "詮釋",
-          "textZh": ""
+          "textZh": "[177Lu]Lu-edotreotide 導致無惡化存活期具有統計學意義和臨床意義的改善。功效和危害結果支持在晚期進展性 GEP NET 患者的早期治療中使用 [177Lu]Lu-edotreotide。"
         },
         {
           "label": "FUNDING",
           "text": "ITM Solucin.",
           "labelZh": "經費來源",
-          "textZh": ""
+          "textZh": "ITM 解決方案。"
         }
       ],
       "doi": "10.1016/S0140-6736(26)00604-5",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392118/",
-      "titleZh": ""
+      "titleZh": "[177Lu]Lu-edotreotide 與依維莫司治療胃腸胰神經內分泌腫瘤 (COMPETE)：3 期、多中心、隨機、開放標籤、優效性試驗"
     },
     {
       "pmid": "42392836",
@@ -453,12 +453,12 @@
         {
           "text": "Background Learning disability registers in UK primary care support proactive care, but under-identification remains substantial. The 2019 NHS Long Term Plan introduced targets to increase enrolment. Aim To estimate prevalence and rates of new registration to learning disability registers among young people aged 14-24 years in England and examine changes following the introduction of national targets. Design and setting Population-based open cohort study using routinely collected primary care data from general practices in England contributing to the Clinical Practice Research Datalink (CPRD) Aurum database, 2015-2023. Method Young people aged 14-24 years who had been registered at least 6 months were included. Annual rates of new registration per 10,000 person-years at risk (PYAR) and recorded prevalence were calculated, stratified by age, sex, region, and year. Results Between 2015 and 2023, 11,776 young people were first recorded on a learning disability register. Rates of new registration increased in 2020-2021 across ages and sexes, peaking at 15.8 per 10,000 PYAR in males aged 14-17 years and 8.4 per 10,000 in females before returning to pre-2019 levels by 2023. Recorded prevalence remained low overall (0.03%-0.5%; 3.6-52.7 per 10,000) but increased among those aged 18-24 years, with eight-to-ten-fold rises between 2015 and 2023. Prevalence was higher in males (rate ratios 1.7-1.8, 95% confidence interval 1.6-1.9). Conclusion National targets coincided with a temporary rise in enrolment, but identification remains below expected prevalence. Sustained policy focus and systematic identification and coding by practices are needed to ensure equitable access to preventive care during the transition to adulthood.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "背景 英國初級保健中登記的學習障礙支持主動護理，但識別不足的情況仍然嚴重。 2019 年 NHS 長期計劃引入了增加入學率的目標。目的 估計英格蘭 14-24 歲年輕人新登記學習障礙登記的盛行率和比率，並檢視引入國家目標後的變化。設計和設置基於人群的開放隊列研究，使用從英格蘭一般實踐中定期收集的初級保健數據，這些數據有助於臨床實踐研究數據鏈（CPRD）Aurum數據庫，2015-2023年。方法 納入登記時間不少於6個月的14-24歲青少年。按年齡、性別、地區和年份分層，計算每 10,000 人年風險 (PYAR) 的年新登記率和記錄的盛行率。結果 2015 年至 2023 年間，有 11,776 名年輕人首次被記錄在學習障礙登記冊上。 2020 年至 2021 年，不同年齡和性別的新登記率有所增加，14-17 歲男性的峰值為每 10,000 人每年 15.8 人，女性為每 10,000 人 8.4 人，然後到 2023 年恢復到 2019 年之前的水平。整體記錄的盛行率仍然較低（0.03%-0.5%；每 10,000 歲女性 3.6-52.7 人）。 10,000），但在 18-24 歲人群中有所增加，2015 年至 2023 年間增加了 8 至 10 倍。男性的盛行率較高（比率為 1.7-1.8，95% 信賴區間為 1.6-1.9）。結論 國家目標與入學率暫時上升相吻合，但識別率仍低於預期盛行率。需要持續的政策重點以及實踐的系統識別和編碼，以確保在向成年過渡期間公平獲得預防性護理。"
         }
       ],
       "doi": "10.3399/BJGP.2026.0160",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392836/",
-      "titleZh": ""
+      "titleZh": "英格蘭年輕人學習障礙登錄註冊：隊列研究，2015-2023 年"
     },
     {
       "pmid": "42392835",
@@ -473,42 +473,42 @@
           "label": "BACKGROUND",
           "text": "People with intellectual disabilities (referred to as learning disabilities in the United Kingdom) face considerable health inequalities. One attempt to address these in England has been through incentivising General Practices to complete annual health checks with people with a learning disability aged 14 or over.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "智障者（在英國稱為學習障礙）面臨相當大的健康不平等。在英格蘭，解決這些問題的一項嘗試是透過激勵全科醫生對 14 歲或以上有學習障礙的人完成年度健康檢查。"
         },
         {
           "label": "AIM",
           "text": "We aimed to examine recent trends in learning disability registers and the uptake of learning disability annual health checks in England.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "我們的目的是研究英格蘭學習障礙登記冊和學習障礙年度健康檢查的最新趨勢。"
         },
         {
           "label": "DESIGN AND SETTING",
           "text": "Secondary analysis of publicly available data.",
           "labelZh": "DESIGN AND SETTING",
-          "textZh": ""
+          "textZh": "對公開資料的二次分析。"
         },
         {
           "label": "METHODS",
           "text": "We compiled and analysed NHS England data on the learning disabilities annual health check scheme from January 2022 to November 2025.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "我們整理並分析了 2022 年 1 月至 2025 年 11 月英國 NHS 有關學習障礙年度健康檢查計劃的數據。"
         },
         {
           "label": "RESULTS",
           "text": "The number of 14-17year-olds and adults on learning disability registers increased during this period by 30.49% and 14.53%, respectively. The most recent estimates indicate that around 0.588% of patients are on learning disability registers and 0.526% are also aged ≥14-years-old and eligible for annual health checks. The uptake of annual health checks increased slightly from 68.08% to 71.58% among 14-17-year-olds, and from 79.07% to 80.71% among adults. Uptake is lowest in the South-West and East of England, and highest in London, but is similar across deciles of patient deprivation and practice size.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "在此期間，學習障礙登記的14-17歲青少年和成人人數分別增加了30.49%和14.53%。最新估計表明，大約 0.588% 的患者被登記在冊，0.526% 的患者年齡≥14 歲，有資格接受年度健康檢查。 14-17歲青少年年度健康檢查比例從68.08%小幅上升至71.58%，成人年度健康檢查比例從79.07%小幅上升至80.71%。英格蘭西南部和東部地區的採用率最低，倫敦最高，但在患者剝奪程度和診所規模方面的情況相似。"
         },
         {
           "label": "CONCLUSION",
           "text": "Ascertainment of people with a learning disability by primary care services appears to be improving but remains between a third and a quarter of prevalence estimates. The uptake of annual health checks among 14-17-year-olds continues to lag behind that of adults.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "初級保健服務對有學習障礙的人的發現似乎正在改善，但患病率仍處於估計值的三分之一到四分之一之間。 14-17 歲青少年每年進行健康檢查的比例仍落後於成年人。"
         }
       ],
       "doi": "10.3399/BJGP.2026.0116",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392835/",
-      "titleZh": ""
+      "titleZh": "學習障礙（智障）年度健康檢查的接受率差異"
     },
     {
       "pmid": "42392834",
@@ -523,42 +523,42 @@
           "label": "BACKGROUND",
           "text": "Pharmacy First, a national community pharmacy service, launched in January 2024 to improve access to primary care for patients with minor conditions facing backlogs caused by the COVID-19 pandemic. Pharmacies are required to share details about their consultations with general practices.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "Pharmacy First 是一項全國社區藥局服務，於 2024 年 1 月啟動，旨在改善因 COVID-19 大流行而面臨積壓的輕症患者獲得初級保健的機會。藥局必須分享其與全科診所諮詢的詳細資訊。"
         },
         {
           "label": "AIM",
           "text": "To describe how and what clinical activity was recorded in general practice during the first year of the Pharmacy First service.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "描述在 Pharmacy First 服務的第一年期間，在一般實踐中記錄的臨床活動的方式和內容。"
         },
         {
           "label": "DESIGN AND SETTING",
           "text": "With the approval of NHS England, we conducted a retrospective cohort study between 31 January 2024 and 30 January 2025 using OpenSAFELY-TPP, a secure platform for analysing pseudonymised GP records from practices using TPP software.",
           "labelZh": "DESIGN AND SETTING",
-          "textZh": ""
+          "textZh": "經英國 NHS 批准，我們在 2024 年 1 月 31 日至 2025 年 1 月 30 日期間使用 OpenSAFELY-TPP 進行了一項回顧性隊列研究，OpenSAFELY-TPP 是一個安全平台，用於分析使用 TPP 軟體的診所的假名全科醫生記錄。"
         },
         {
           "label": "METHOD",
           "text": "We described patient demographics, Pharmacy First consultation trends, and the clinical conditions and medications coded with the consultations.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "我們描述了患者人口統計、Pharmacy First 諮詢趨勢以及諮詢中編碼的臨床狀況和藥物。"
         },
         {
           "label": "RESULTS",
           "text": "A total of 402,165 Pharmacy First consultations were recorded for 340,710 patients from a general population of 26,142,380 registered patients in OpenSAFELY-TPP. Acute pharyngitis (28.9%) and uncomplicated urinary tract infection (28%) were the most frequently recorded conditions. By January 2025, 36.3% of recorded Pharmacy First consultations had a clinical condition, medication, or both. Females, younger adults and those living in more deprived areas were observed more often in Pharmacy First records compared to the general population.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "在 OpenSAFELY-TPP 的 26,142,380 名註冊患者中，共記錄了 340,710 名患者的 402,165 次藥房首次諮詢。急性咽炎（28.9%）和單純性泌尿道感染（28%）是最常見的情況。到 2025 年 1 月，記錄的 Pharmacy First 諮詢中有 36.3% 涉及臨床狀況、藥物或兩者兼而有之。與一般人群相比，女性、年輕人和生活在較貧困地區的人在 Pharmacy First 記錄中出現的頻率更高。"
         },
         {
           "label": "CONCLUSION",
           "text": "Increasing recording of the Pharmacy First community pharmacy service was observed in general practice records during its first year, particularly among younger and more deprived populations. However, variation in structured recording of consultation details may limit evaluation.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "在第一年的全科醫療記錄中觀察到「藥局第一」社區藥局服務的記錄不斷增加，特別是在年輕和貧困人群中。然而，諮詢細節的結構化記錄的變化可能會限制評估。"
         }
       ],
       "doi": "10.3399/BJGP.2025.0678",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392834/",
-      "titleZh": ""
+      "titleZh": "英格蘭全科醫療記錄中的藥房首次諮詢記錄：使用 OpenSAFELY 對該服務第一年的觀察性研究"
     },
     {
       "pmid": "42392833",
@@ -572,12 +572,12 @@
         {
           "text": "Background The Older Women's Health Strategy for England highlighted the systemic under-representation of older women in healthcare. Over half of women over 80 are estimated to have osteoporosis, contributing to 180,000 fractures annually in the UK, with substantial personal and economic costs, despite clinically effective treatments and national guidelines being available. Aim To use insights from the experiences of older women and primary healthcare professionals to develop strategies to improve osteoporosis care. Design/Setting A community-based study in England, UK. Method Interviews with 30 community-dwelling older women (aged 70+) diagnosed with osteoporosis, and 31 healthcare professionals including GPs, physiotherapists, pharmacists, practice nurses, a healthcare assistant, and a community matron. We reviewed findings iteratively with our co-production group using a Constructivist Grounded Theory approach. Results Healthcare professionals acknowledged osteoporosis as clinically important but described limited knowledge and understanding. However, older women assumed expertise and proactive engagement from clinicians. Older women normalised symptoms as part of ageing frequently prioritising other co-morbidities. Most were unclear about their diagnosis, prognosis, or treatment plans. Self-management was expected but inadequately supported. There was little routine engagement with the wider primary care team. Digital communication further limited older women's engagement/re-engagement. Conclusion Osteoporosis remains poorly understood and inadequately managed in older women who face barriers, including multimorbidity, digital exclusion, and low self-efficacy. Many older women accept care gaps due to limited awareness and lack of meaningful interaction with healthcare professionals. Improved care navigation and greater involvement of the wider primary care team could enhance engagement and support better self-management.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "背景 英國老年婦女健康策略強調了老年婦女在醫療保健領域的系統性代表性不足。據估計，超過一半的 80 歲以上女性患有骨質疏鬆症，儘管有臨床有效的治療方法和國家指南，但英國每年會導致 18 萬例骨折，造成巨大的個人和經濟損失。目標 利用老年婦女和初級保健專業人員的經驗見解來制定改善骨質疏鬆症照護的策略。設計/設置 英國英格蘭的一項基於社區的研究。方法 訪問了 30 名被診斷患有骨質疏鬆症的社區老年婦女（70 歲以上）和 31 名醫療保健專業人員，包括全科醫生、物理治療師、藥劑師、執業護士、一名醫療助理和一名社區護士長。我們使用建構主義紮根理論方法與我們的共同製作小組反覆檢視研究結果。結果 醫療保健專業人士承認骨質疏鬆症具有臨床重要性，但他們的知識和理解有限。然而，老年女性接受了臨床醫生的專業知識和積極參與。作為老化的一部分，老年女性通常會優先考慮其他合併症，使症狀正常化。大多數人不清楚他們的診斷、預後或治療計劃。自我管理是人們所期望的，但卻沒有得到充分支持。與更廣泛的初級保健團隊的例行接觸很少。數位通訊進一步限制了老年女性的參與/重新參與。結論 對於面臨多種障礙（包括多種疾病、數位排斥和自我效能低下）的老年女性來說，骨質疏鬆症仍然知之甚少且管理不充分。由於認識有限以及缺乏與醫療保健專業人員的有意義的互動，許多老年婦女接受護理差距。改善護理導航和更廣泛的初級護理團隊的更多參與可以提高參與度並支持更好的自我管理。"
         }
       ],
       "doi": "10.3399/BJGP.2026.0003",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392833/",
-      "titleZh": ""
+      "titleZh": "「我不知道誰做了骨頭的事情」對老年婦女和醫療保健專業人員的經驗進行定性探索，以指導骨質疏鬆症護理的改進"
     },
     {
       "pmid": "42392832",
@@ -591,12 +591,12 @@
         {
           "text": "Pancreatic cancer has very low survival due to late diagnosis. Symptoms are often non-specific, complicating early detection in primary care. The Enriching New-Onset Diabetes for Pancreatic Cancer (ENDPAC) algorithm uses weight change, glycaemic control, and age at diabetes onset to identify new-onset diabetes (NOD) patients at increased pancreatic cancer risk. It was developed in the USA and has not been validated in the UK. Aim To validate ENDPAC in a UK primary care population and assess its predictive utility. Design and setting Retrospective cohort study using ORCHID, a national primary care sentinel network. Method Adults aged ≥50 with NOD and requisite glycated haemoglobin (HbA1c) and weight data were included. ENDPAC scores were calculated. Model performance was evaluated via discrimination, calibration, sensitivity, specificity, PPV and NPV. The Youden index identified optimal cutoffs. Sensitivity analyses assessed measurement timing, repeat HbA1c testing and multiple values. Results Among 70,050 individuals, 185 (0.26%) developed pancreatic cancer. Cases were older with higher HbA1c and greater weight loss at diagnosis. ENDPAC achieved an area under the curve (AUC) of 0.733. An optimal cutoff of ≥3 classified 27.6% of individuals as high-risk, with 62.6% sensitivity, 72.3% specificity, 0.6% PPV and 99.9% NPV. Sensitivity analyses showed similar performance across measurement windows and handling of multiple values. ENDPAC shows moderate discrimination in UK primary care. Although it has a relatively low PPV (0.6%), integration into routine systems could provide scalable, low-cost automated risk stratification, identifying people with NOD at higher pancreatic cancer risk as part of a sequential diagnostic pathway.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "由於診斷較晚，胰臟癌的存活率非常低。症狀通常不具有特異性，這使得初級保健的早期發現變得複雜。豐富新發糖尿病治療胰臟癌 (ENDPAC) 演算法利用體重變化、血糖控制和糖尿病發病年齡來識別胰臟癌風險增加的新發糖尿病 (NOD) 患者。它是在美國開發的，尚未在英國得到驗證。目的 在英國初級保健人口中驗證 ENDPAC 並評估其預測效用。使用國家初級保健哨點網路 ORCHID 設計和設置回顧性隊列研究。方法 納入年齡≥50 歲且患有 NOD 和必需糖化血紅蛋白 (HbA1c) 的成年人以及體重數據。計算 ENDPAC 分數。模型性能透過辨別力、校準、敏感性、特異性、PPV 和 NPV 進行評估。約登指數確定了最佳截止點。敏感度分析評估了測量時間、重複 HbA1c 測試和多個值。結果 在 70,050 人中，185 人 (0.26%) 患有胰臟癌。診斷時病例年齡較大，糖化血紅素 (HbA1c) 較高，體重減輕較多。 ENDPAC 的曲線下面積 (AUC) 為 0.733。 ≥3 的最佳臨界值將 27.6% 的個體歸類為高風險，敏感性為 62.6%，特異性為 72.3%，PPV 為 0.6%，NPV 為 99.9%。敏感度分析顯示，跨測量視窗和處理多個值的表現相似。 ENDPAC 在英國初級保健中顯示出中等程度的歧視。儘管它的 PPV 相對較低 (0.6%)，但整合到常規系統中可以提供可擴展的、低成本的自動風險分層，作為序貫診斷途徑的一部分，識別具有較高胰腺癌風險的 NOD 患者。"
         }
       ],
       "doi": "10.3399/BJGP.2024.0253",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392832/",
-      "titleZh": ""
+      "titleZh": "豐富新發糖尿病治療胰臟癌 (ENDPAC)：使用英國前哨網路進行外部驗證"
     },
     {
       "pmid": "42392831",
@@ -610,12 +610,12 @@
         {
           "text": "Background Polypharmacy is a global priority due to potential harms, including adverse drug events, hospitalisations and high treatment burden. Overall, these outcomes have shown little improvement despite numerous interventions indicating that current approaches to identify and manage polypharmacy remain insufficient. Aim To understand how polypharmacy is identified and managed in everyday primary care from patient, pharmacist and GP perspectives. Design and Setting Qualitative semi-structured interviews with 12 patients and 12 professionals (7 clinical pharmacists, 5 GPs) across Greater Manchester. Method Reflexive thematic analysis supported by Normalisation Process Theory and Constant Comparison as sensitisation tools. Results Polypharmacy was widely seen as important work but, in practice, inconsistent case-finding and unclear purposes for polypharmacy medication reviews were reported. Patients viewed medications as essential tools to sustain biopsychosocial elements of life, contrasting with practitioners' clinical priorities to mitigate potential harm. Polypharmacy work routinely contained layers of hidden complexity, which was often overwhelming and placed a heavy emotional burden on patients and professionals. Both patients and professionals required training and experience to effectively manage these complexities. Though a protocol-driven approach was sufficient for simple medication issues, only a longer-term approach, predicated on trust, continuity, relationships and open discussions encouraging healthy conflict, appeared to engage with deeper complexities. Conclusion Polypharmacy work is fraught with complexity and uncertainty, lacking standardised case-finding and clear purpose for both patients and professionals. Better models of care are needed to meet this challenge, encouraging a shift beyond a biomedically dominated protocol-driven approach to a more longitudinal and relational approach.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "背景 由於潛在的危害，包括藥物不良事件、住院治療和高治療負擔，多重用藥成為全球優先考慮的問題。總體而言，儘管大量幹預措施表明目前識別和管理多藥物治療的方法仍然不足，但這些結果幾乎沒有改善。目的 從病人、藥劑師和全科醫生的角度了解如何在日常初級保健中識別和管理多重用藥。設計和設置對大曼徹斯特地區 12 名患者和 12 名專業人員（7 名臨床藥劑師，5 名全科醫生）進行定性半結構化訪談。方法 以標準化過程理論和常數比較為敏化工具支援的反思性主題分析。結果 多重用藥被廣泛認為是一項重要工作，但在實踐中，據報告存在病例發現不一致和多重用藥藥物審查目的不明確的情況。患者將藥物視為維持生活生物心理社會要素的重要工具，這與從業者減輕潛在危險的臨床優先事項形成鮮明對比。複方藥物工作通常包含多層隱藏的複雜性，這往往令人難以承受，對患者和專業人員造成沉重的情感負擔。患者和專業人員都需要培訓和經驗來有效管理這些複雜性。雖然協議驅動的方法足以解決簡單的藥物問題，但只有基於信任、連續性、關係和鼓勵健康衝突的公開討論的長期方法似乎才能解決更深層次的複雜性。結論 多重用藥工作充滿複雜性和不確定性，缺乏標準化的病例發現以及患者和專業人員的明確目的。需要更好的護理模式來應對這一挑戰，鼓勵從生物醫學主導的協議驅動方法轉向更縱向和相關的方法。"
         }
       ],
       "doi": "10.3399/BJGP.2025.0793",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392831/",
-      "titleZh": ""
+      "titleZh": "識別和管理多種藥物的定性見解：病人、藥劑師和全科醫生的觀點"
     },
     {
       "pmid": "42384373",
@@ -630,54 +630,54 @@
           "label": "IMPORTANCE",
           "text": "Anhydramnios from fetal kidney failure causes lethal pulmonary hypoplasia. Serial amnioinfusions have shown promise in mitigating pulmonary disease from bilateral renal agenesis, but efficacy and safety for other causes of fetal kidney failure are unproven.",
           "labelZh": "重要性",
-          "textZh": ""
+          "textZh": "胎兒腎衰竭引起的羊水不足會導致致命的肺部發育不全。連續羊膜腔輸注已顯示出緩解雙側腎發育不全引起的肺部疾病的希望，但其對胎兒腎衰竭的其他原因的有效性和安全性尚未得到證實。"
         },
         {
           "label": "OBJECTIVE",
           "text": "To assess the efficacy of serial amnioinfusions initiated before 26 weeks' gestation to mitigate lethal pulmonary hypoplasia in cases of anhydramnios due to fetal kidney failure.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "旨在評估妊娠 26 週前開始的連續羊膜腔輸注對於減輕因胎兒腎衰竭導致羊水不足的情況下致死性肺發育不全的療效。"
         },
         {
           "label": "DESIGN, SETTING, AND PARTICIPANTS",
           "text": "Prospective, nonrandomized clinical trial conducted at 13 US fetal therapy centers from December 2018 to February 2025. Outcomes for maternal-fetal pairs with anhydramnios before 22 weeks' gestation due to fetal kidney failure without bilateral renal agenesis are reported; data collection for surviving infants continued until February 13, 2026.",
           "labelZh": "DESIGN, SETTING, AND PARTICIPANTS",
-          "textZh": ""
+          "textZh": "2018 年 12 月至 2025 年 2 月在美國 13 個胎兒治療中心進行的前瞻性、非隨機臨床試驗。報告了妊娠 22 週前因胎兒腎衰竭而無雙側腎發育不全而導致羊水不足的母胎對的結果；倖存嬰兒的數據收集一直持續到 2026 年 2 月 13 日。"
         },
         {
           "label": "EXPOSURE",
           "text": "Thirty-two participants underwent serial amnioinfusions with isotonic fluid beginning before 26 weeks' gestation.",
           "labelZh": "EXPOSURE",
-          "textZh": ""
+          "textZh": "32 位參與者在懷孕 26 週前開始接受連續羊膜腔輸注等滲液。"
         },
         {
           "label": "MAIN OUTCOMES AND MEASURES",
           "text": "The primary end point was neonatal survival for 14 days or longer with dialysis access placement. Secondary outcome measures of survival to discharge home and kidney transplant are reported.",
           "labelZh": "主要結果與測量",
-          "textZh": ""
+          "textZh": "主要終點是放置透析通路後新生兒存活 14 天或更長。報告了出院存活率和腎臟移植的次要結果指標。"
         },
         {
           "label": "RESULTS",
           "text": "Twenty-nine of 32 participants (91%) had a live birth, with a median (IQR) gestational age at delivery of 34 weeks 1 day (31 weeks 5 days to 34 weeks 6 days). All participants delivered before 37 weeks' gestation. No unexpected serious maternal adverse events occurred, and the most common maternal complications were preterm prelabor rupture of membranes in 19 participants (56%) and chorioamniotic separation in 10 (29%). The primary outcome occurred in 19 (65.5%) of 29 live-born neonates (95% CI, 45.7%-82.1%). Factors associated with survival to the primary outcome included receiving more amnioinfusions (median [IQR], 14 [9-18] in survivors vs 7 [4-11] in nonsurvivors; P = .01), longer time interval from first amnioinfusion to preterm prelabor rupture of membranes (63.5 [60.5-74.5] days in survivors vs 29.0 [22.0-56.0] days in nonsurvivors; P = .01), gestational age greater than 32 weeks (79% of survivors vs 38% of nonsurvivors; P = .03), and higher birth weight (2029 [1770-2250] g in survivors vs 1635 [1185-1915] g in nonsurvivors; P = .01). Fourteen live-born infants (48%) survived to hospital discharge at a median (IQR) age of 4.7 (3.4-5.7) months. Of the 11 infants surviving to date, 7 (64%) have undergone kidney transplant between ages 2 years to 5 years.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "32 名參與者中有 29 名 (91%) 活產，分娩時的中位數胎齡 (IQR) 為 34 週 1 天（31 週 5 天至 34 週 6 天）。所有參與者均在妊娠 37 週前分娩。沒有發生意外的嚴重產婦不良事件，最常見的產婦併發症是 19 名參與者（56%）的早產胎膜破裂和 10 名參與者（29%）的絨毛膜羊膜分離。主要結局發生在 29 名活產新生兒中的 19 名（65.5%）（95% CI，45.7%-82.1%）。與主要結局的存活率相關的因素包括接受更多的羊膜腔輸注（倖存者中位數[IQR]為14[9-18]，而非倖存者為7[4-11]；P = .01），從第一次羊膜腔輸注到胎膜早破的時間間隔較長（而非倖存者為63.5[60.5-74.9494.94）的倖存者為非倖存者為非.74. [22.0-56.0] 天；P = .01），胎齡大於 32 週（倖存者為 79%，非倖存者為 38%；P = .03），出生體重較高（倖存者為 2029 [1770-2250] g，倖存者為 1633195-1950] g，倖存者 [116335195-19195 g）非倖存者；P = .01)。 14 名活產嬰兒 (48%) 存活至出院，中位數 (IQR) 年齡為 4.7 (3.4-5.7) 個月。迄今為止倖存的 11 名嬰兒中，有 7 名（64%）在 2 歲至 5 歲之間接受過腎臟移植。"
         },
         {
           "label": "CONCLUSIONS AND RELEVANCE",
           "text": "Serial amnioinfusions mitigated lethal pulmonary hypoplasia in neonates with anhydramnios due to fetal kidney failure. Significant neonatal morbidity and mortality independent of early lung function was noted. Factors associated with survival were consistent with the Renal Anhydramnios Fetal Therapy trial's bilateral renal agenesis cohort, suggesting common mechanistic pathways for mitigating pulmonary hypoplasia.",
           "labelZh": "結論與意義",
-          "textZh": ""
+          "textZh": "連續羊膜腔輸注可減輕因胎兒腎衰竭而導致羊水不足的新生兒的致死性肺部發育不全。值得注意的是，新生兒發病率和死亡率與早期肺功能無關。與存活相關的因素與腎羊水不足胎兒治療試驗的雙側腎發育不全隊列一致，顯示緩解肺發育不全的共同機制途徑。"
         },
         {
           "label": "TRIAL REGISTRATION",
           "text": "ClinicalTrials.gov Identifier: NCT03101891.",
           "labelZh": "試驗註冊",
-          "textZh": ""
+          "textZh": "ClinicalTrials.gov 識別碼：NCT03101891。"
         }
       ],
       "doi": "10.1001/jama.2026.8568",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42384373/",
-      "titleZh": ""
+      "titleZh": "連續羊膜腔輸注治療胎兒腎衰竭引起的羊水不足後新生兒的存活率：RAFT 臨床試驗"
     },
     {
       "pmid": "42055579",
@@ -742,42 +742,42 @@
           "label": "BACKGROUND",
           "text": "Prescribing patterns in primary care could demonstrate early clinical features of cancer and windows of opportunity for timely investigation.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "初級保健的處方模式可以顯示癌症的早期臨床特徵和及時調查的機會之窗。"
         },
         {
           "label": "AIM",
           "text": "To analyse primary care prescription patterns before a pancreatic cancer diagnosis.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "分析胰臟癌診斷前的初級保健處方模式。"
         },
         {
           "label": "DESIGN AND SETTING",
           "text": "Retrospective cohort study using linked primary care and cancer registry data from patients diagnosed with pancreatic cancer in England between 2011 and 2018.",
           "labelZh": "DESIGN AND SETTING",
-          "textZh": ""
+          "textZh": "回顧性隊列研究使用 2011 年至 2018 年英國診斷為胰腺癌的患者的初級保健和癌症登記數據。"
         },
         {
           "label": "METHOD",
           "text": "Prescription records registered in the Clinical Practice Research Datalink were analysed in the 5 years prediagnosis. Eight categories of prescriptions that may be used to treat clinical features of pancreatic cancer were included (anti-emetics, anti-reflux medications, insulin, other hypoglycaemic agents, opioids, non-opioid analgesics, neuropathic analgesics, and non-steroidal anti-inflammatories). Poisson regression was used to estimate the inflection points for increased prescribing above baseline.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "在臨床實踐研究資料鏈中註冊的處方記錄在 5 年的診斷前進行了分析。包括八類可用於治療胰臟癌臨床特徵的處方（止吐藥、抗逆流藥物、胰島素、其他降血糖藥、鴉片類藥物、非鴉片類止痛藥、神經性止痛藥和非類固醇抗發炎藥）。泊松回歸用於估計處方增加高於基線的拐點。"
         },
         {
           "label": "RESULTS",
           "text": "Among 12 990 patients, 669 287 prescriptions were analysed. Insulin was the least common prescription (6.9% [n = 892/12 990] of patients), anti-reflux the most common (52.6% [n = 6833/12 990] of patients). Insulin prescribing increased 19 months prediagnosis (95% confidence interval [CI] = 14.2 to 23.8), rising earlier in female patients (25 months; 95% CI = 17.4 to 32.5) than male patients (11 months; 95% CI = 5.8 to 16.2). Prescriptions for other hypoglycaemic agents increased 13 months (95% CI = 7.7 to 18.5), anti-reflux and opioid analgesic prescribing 7 months (95% CI = 5.4 to 8.6 and 4.4 to 9.6, respectively), and anti-emetics and non-opioid analgesics 5 months (95% CI = 2.9 to 7.1 and 3.2 to 6.8, respectively) before diagnosis.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "在 12 990 名患者中，分析了 669 287 份處方。胰島素是最不常見的處方（6.9% [n = 892/12 990] 的病人），抗逆流藥物是最常見的（52.6% [n = 6833/12 990] 的病人）。診斷前胰島素處方增加 19 個月（95% 信賴區間 [CI] = 14.2 至 23.8），女性患者（25 個月；95% CI = 17.4 至 32.5）的增加早於男性患者（11 個月；95% CI = 5.8 至 16.2）。其他降血糖藥處方增加 13 個月（95% CI = 7.7 至 18.5），抗反流和阿片類鎮痛藥處方增加 7 個月（95% CI = 5.4 至 8.6 和 4.4 至 9.6），止吐藥和非阿片類鎮痛藥處方增加 5 個月（9% CI = 295% CI.至7.1和3.2至6.8，分別）診斷前。"
         },
         {
           "label": "CONCLUSION",
           "text": "The early increase in insulin prescribing suggests tumour-induced type 3c diabetes, highlighting an opportunity for earlier diagnosis in a small proportion of patients. Opportunities for earlier diagnosis through investigation and referral also exist in patients prescribed anti-emetic, anti-reflux, and analgesic medications in primary care.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "胰島素處方的早期增加表明腫瘤誘發的 3c 型糖尿病，強調了對一小部分患者進行早期診斷的機會。在初級保健中服用止吐、抗逆流和鎮痛藥物的患者也有機會透過調查和轉診進行早期診斷。"
         }
       ],
       "doi": "10.3399/BJGP.2025.0780",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41991223/",
-      "titleZh": ""
+      "titleZh": "胰臟癌的診斷前處方模式：一項回顧性初級保健隊列研究"
     },
     {
       "pmid": "41912230",
@@ -792,42 +792,42 @@
           "label": "BACKGROUND",
           "text": "Functional abdominal pain (FAP) and irritable bowel syndrome (IBS) are associated with anxiety, depression, school absenteeism, and reduced quality of life in children. In secondary care, hypnotherapy is often available.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "功能性腹痛 (FAP) 和腸躁症 (IBS) 與兒童焦慮、憂鬱、缺課和生活品質下降有關。在二級護理中，通常可以使用催眠療法。"
         },
         {
           "label": "AIM",
           "text": "To determine the effectiveness of home-based guided hypnotherapy for children with FAP or IBS in primary care.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "確定家庭引導催眠治療對初級保健中患有 FAP 或 IBS 的兒童的有效性。"
         },
         {
           "label": "DESIGN AND SETTING",
           "text": "This was a pragmatic randomised controlled trial in Dutch primary care with a follow-up of 12 months.",
           "labelZh": "DESIGN AND SETTING",
-          "textZh": ""
+          "textZh": "這是荷蘭初級保健領域的實用隨機對照試驗，追蹤期為 12 個月。"
         },
         {
           "label": "METHOD",
           "text": "Children aged 7-17 years with FAP or IBS diagnosed by a GP were included. The intervention group received home-based guided hypnotherapy via a website for 3 months in addition to care as usual. The control group received care as usual only. The primary outcome was adequate relief of abdominal pain and/or discomfort at 12 months. Adjusted odds ratios (aORs) and 90% confidence intervals (90% CIs) are reported.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "經全科醫生診斷患有 FAP 或 IBS 的 7-17 歲兒童也被納入其中。介入組除照常照護外，也透過網站接受為期3個月的居家導引催眠治療。對照組僅接受照常護理。主要結局是 12 個月時腹痛和/或不適得到充分緩解。報告調整後的比值比 (aOR) 和 90% 信賴區間 (90% CI)。"
         },
         {
           "label": "RESULTS",
           "text": "In total, 152 children were included. No significant differences were observed in adequate relief at 12 months, 79.5% in the intervention group (58/73 children) versus 74.3% in the control group (52/70 children); aOR 1.47 (90% CI = 0.74 to 2.93), but more children in the intervention group had adequate relief compared with the control group at 3 months (aOR 2.74, 90% CI = 1.22 to 6.13) and 6 months (aOR 4.26, 90% CI = 1.81 to 10.04). The intervention group also showed reductions in abdominal pain severity, intensity, frequency, and threat, and higher proportions of fast sleep onset.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "總共有 152 名兒童。 12 個月時，在充分緩解方面沒有觀察到顯著差異，幹預組（58/73 名兒童）為 79.5%，而對照組（52/70 名兒童）為 74.3%； aOR 1.47（90% CI = 0.74 至 2.93），但對照組與兒童幹預， 199990% CI = 209993），但對照組與兒童幹預， 1999993（2092% CI至 6.13）和 6 個月（aOR 4.26，90% CI = 1.81 至 10.04）時獲得充分緩解。幹預組也表現出腹痛嚴重程度、強度、頻率和威脅的降低，以及快速入睡的比例更高。"
         },
         {
           "label": "CONCLUSION",
           "text": "Although adequate relief after 12 months is high in both groups, adding hypnotherapy to care as usual may help achieve earlier relief and reduce pain.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "儘管兩組患者在 12 個月後得到充分緩解的情況都很高，但照常在護理中加入催眠療法可能有助於更早緩解疼痛並減輕疼痛。"
         }
       ],
       "doi": "10.3399/BJGP.2025.0459",
       "url": "https://pubmed.ncbi.nlm.nih.gov/41912230/",
-      "titleZh": ""
+      "titleZh": "初級保健中催眠療法對小兒腹痛的有效性：一項隨機對照試驗"
     },
     {
       "pmid": "41912229",
@@ -892,30 +892,30 @@
           "label": "PURPOSE",
           "text": "There has yet to be a comprehensive multi-state study describing the children that use school-based health centers (SBHCs). This study seeks to determine sociodemographics, care utilization patterns, and prevalence of asthma and overweight among children seeking care at SBHCs.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "目前還沒有一項全面的多州研究來描述使用學校健康中心 (SBHC) 的兒童。本研究旨在確定在 SBHC 尋求護理的兒童中的社會人口統計特徵、護理利用模式以及氣喘和超重的盛行率。"
         },
         {
           "label": "METHODS",
           "text": "This retrospective cross-sectional analysis examined electronic health record data of children utilizing SBHCs within a large network of community-based clinics, consisting of 180 SBHCs in 14 U.S. states from 2012-2018. Demographics of exclusive SBHC users (SBHC-only group) were compared to utilizers of SBHCs plus non-SBHC community health centers (SBHC+ group).",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "這項回顧性橫斷面分析檢視了大型社區診所網路中使用 SBHC 的兒童的電子健康記錄數據，該網路由 2012 年至 2018 年美國 14 個州的 180 個 SBHC 組成。將獨家 SBHC 使用者（僅限 SBHC 組）的人口統計資料與 SBHC 加非 SBHC 社區健康中心的使用者（SBHC+ 組）進行比較。"
         },
         {
           "label": "RESULTS",
           "text": "Of 179,970 children with ≥1 ambulatory visit at a SBHC, 75.6% received care exclusively at SBHCs. Many SBHC-users reported family income <138% of the federal poverty line (48.9%) and self-identified as Hispanic (45.7%). Among SBHC utilizers, the prevalence of asthma (8%) and overweight (30%) were comparable to national statistics. Overall, 33% of children received well-childcare and 24% received influenza vaccinations exclusively at SBHCs. When comparing the two groups within the study, the SBHC-only group were older, and more lacked insurance (13.4%) compared with SBHC+ children (2.6%). The SBHC-only group had fewer total yearly visits, fewer yearly well-child visits, and fewer influenza vaccinations. In age stratified groups, preschool-aged children received the most well-childcare and influenza vaccinations in SBHCs.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "在 SBHC 門診就診次數≥1 次的 179,970 名兒童中，75.6% 只在 SBHC 接受護理。許多 SBHC 使用者報告家庭收入<聯邦貧窮線的 138% (48.9%)，並自我認定為西班牙裔 (45.7%)。在 SBHC 使用者中，氣喘 (8%) 和超重 (30%) 的盛行率與國家統計數據相當。總體而言，33% 的兒童接受了良好的托兒服務，24% 的兒童僅在 SBHC 接受了流感疫苗接種。在比較研究中的兩組時，與 SBHC+ 兒童 (2.6%) 相比，僅 SBHC 組年齡較大，且較多缺乏保險 (13.4%)。僅 SBHC 組的每年總就診次數、每年健康兒童就診次數和流感疫苗接種次數均較少。在按年齡分層的群體中，學齡前兒童在 SBHC 中獲得了最好的托兒服務和流感疫苗接種。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "SBHCs serve a pediatric population that is disproportionately low-income, uninsured, and Hispanic. Children, particularly preschoolers, receive preventive healthcare at SBHCs. Given the population served, SBHCs have strong potential to address pediatric health inequities if adequately resourced, utilized, and integrated with other facilities including community health centers.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "SBHC 為低收入、無保險和西班牙裔的兒科族群提供服務。兒童，特別是學齡前兒童，在 SBHC 接受預防性醫療保健。鑑於所服務的人口，如果有足夠的資源、利用並與包括社區健康中心在內的其他設施整合，SBHC 具有解決兒科健康不平等問題的巨大潛力。"
         }
       ],
       "doi": "10.3122/jabfm.2025.250321R1",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392985/",
-      "titleZh": ""
+      "titleZh": "在校內健康中心尋求照護的兒童的特點"
     },
     {
       "pmid": "42392984",
@@ -930,30 +930,30 @@
           "label": "PURPOSE",
           "text": "Studies have shown that facilitating patient dialogue through a structured question prompt list (QPL) during patient encounters results in greater patient engagement, improved communication and increased patient understanding. Topics most interesting to patients are unclear, thus limiting how to optimally design and use QPLs. This study identified topics most interesting to patients to discuss with their clinicians in primary care office visits.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "研究表明，在與患者會面時透過結構化問題提示清單 (QPL) 促進患者對話可以提高患者參與度、改善溝通並增進患者理解。患者最感興趣的主題尚不清楚，因此限制瞭如何優化設計和使用 QPL。這項研究確定了患者在初級保健辦公室就診時與臨床醫生討論最感興趣的話題。"
         },
         {
           "label": "METHODS",
           "text": "We collected responses to a 20-item visit guide including questions to ask, concerns to tell, and positive behaviors to report. We focused on the ask and tell sections which involved general questions and concerns patients could choose from. Participants were 50 years or older and taking 5 or more medications at family medicine clinics from a public safety net hospital system (240) and an urban private practice (211).",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "我們收集了對包含 20 項訪問指南的回复，包括要提出的問題、要講述的疑慮以及要報告的積極行為。我們專注於詢問和講述部分，其中涉及患者可以選擇的一般問題和疑慮。參與者年齡在 50 歲或以上，在公共安全網路醫院系統 (240) 和城市私人診所 (211) 的家庭醫學診所服用 5 種或以上藥物。"
         },
         {
           "label": "RESULTS",
           "text": "Of 451 visit guides collected, the selected top topics involved: 1) Diet (20.4%), 2) Taking fewer medications (15.3%), and 3) Understanding their condition (14.6%). The most common medication concerns included: 1) stopping or skipping medications due to cost, side effects, or other reasons (11.1%), 2) medications from multiple doctors (8%), and 3) specific concerns about medications (5.7%).",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "在收集的 451 份就診指南中，選定的熱門主題涉及：1）飲食（20.4％），2）減少服藥（15.3％），以及 3）了解自己的病情（14.6％）。最常見的用藥擔憂包括：1）由於費用、副作用或其他原因而停止或跳過用藥（11.1％），2）來自多個醫生的藥物（8％），以及3）對藥物的具體擔憂（5.7％）。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "Patients reported interest in discussing questions and concerns related to diet, reducing medications, and self-care knowledge on their conditions. The questions and concerns identified in this study provide insight into the communication priorities of older adults managing multiple medications. These findings can further inform the future development of QPLs and therefore potentially reap the benefits of improved clinician-patient communication.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "患者表示有興趣討論與飲食、減少用藥以及有關其病情的自我護理知識相關的問題和擔憂。本研究中確定的問題和擔憂提供了對管理多種藥物的老年人的溝通優先事項的深入了解。這些發現可以進一步為 QPL 的未來發展提供訊息，從而有可能從改善臨床醫病溝通中獲益。"
         }
       ],
       "doi": "10.3122/jabfm.2025.250240R1",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392984/",
-      "titleZh": ""
+      "titleZh": "患有多種慢性病的老年人的常見問題和擔憂分析"
     },
     {
       "pmid": "42392983",
@@ -968,30 +968,30 @@
           "label": "BACKGROUND",
           "text": "Half of the women who develop cervical cancer in the US have never had a cervical cancer screen. Self-sampling is an equivalent technique to the invasive speculum exam. We aim to evaluate the current knowledge, attitudes, and behaviors toward self-sampled primary HPV testing in family medicine.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "在美國，一半患有子宮頸癌的女性從未接受過子宮頸癌篩檢。自採樣是與侵入性窺器檢查等效的技術。我們的目的是評估家庭醫學中目前對自我採樣初級 HPV 檢測的知識、態度和行為。"
         },
         {
           "label": "METHODS",
           "text": "The annual cross-sectional survey of the Council of Academic Family Medicine's general membership included knowledge, attitudes, and beliefs about primary human papillomavirus (HPV) screening using self-sampling. The knowledge questions were based on current guidelines, as defined by the 2024 United States Preventive Services Task Force (USPSTF) 1. The attitude and belief questions were based on the Question-Behavior Theory 2. All surveys were emailed to the membership with up to five weekly reminders to complete.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "家庭醫學學術委員會的年度橫斷面調查包括對使用自我取樣進行初級人類乳突病毒 (HPV) 篩檢的知識、態度和信念。知識問題是基於 2024 年美國預防服務工作小組 (USPSTF) 1 定義的現行指引。態度和信念問題是基於問題行為理論 2。所有調查均透過電子郵件發送給會員，並每週最多提醒五次完成。"
         },
         {
           "label": "RESULTS",
           "text": "We had a 62% survey response rate with 744 respondents. Regardless of demographic descriptors, all respondents significantly changed their intended behavior regarding offering self-sampling for cervical cancer screening (p < 0.001). Of those with a baseline attitude of not offering self-sampling, 88% changed their response to offer self-sampling at the end of the survey. Baseline knowledge of the advantages of primary HPV screening was lowest among underrepresented minority Hispanic respondents (52% correct, compared to 80% among Whites, p < 0.001). Women respondents were 2.96 times more likely to intend to offer self-sampling for cervical cancer screening than men (OR 2.96 (95% CI: 1.18, 7.44, p<0.05).",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "我們對 744 位受訪者的調查回覆率為 62%。無論人口統計特徵如何，所有受訪者都顯著改變了他們在為子宮頸癌篩檢提供自我採樣方面的預期行為（p < 0.001）。在原本持不提供自我抽樣態度的人中，88% 的人在調查結束時改變了態度，轉而提供自我抽樣。代表性不足的少數族裔西班牙裔受訪者對初級 HPV 篩檢優勢的基線了解最低（正確率為 52%，而白人為 80%，p < 0.001）。女性受訪者願意自我採樣進行子宮頸癌篩檢的可能性是男性的 2.96 倍（OR 2.96 (95% CI: 1.18, 7.44, p<0.05)。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "Based on the Question-Behavior Theory, over 90% of family medicine educators intend to offer women self-sampling for cervical cancer screening.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "根據問題行為理論，超過 90% 的家庭醫學教育者打算為女性提供自我採樣以進行子宮頸癌篩檢。"
         }
       ],
       "doi": "10.3122/jabfm.2025.250328R1",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392983/",
-      "titleZh": ""
+      "titleZh": "家庭醫學教育工作者中用於子宮頸癌篩檢的初級 HPV 檢測"
     },
     {
       "pmid": "42392982",
@@ -1005,12 +1005,12 @@
         {
           "text": "The increasing advance of artificial intelligence (AI) in medicine will affect the future of Family Medicine in many ways. Some of the effects may be salutary, but others may infringe on the real work of family medicine/primary care. AI will change the way we experience practice. If AI can perform many current physician tasks, what will be left for the practicing human family physician? We believe that there will be several types of patient encounters that will still require the human touch that comes from established long-term continuous healing relationships between family physicians and their patients. As AI applications in primary care become more robust it will assume the function of a new member of the multi-professional healthcare team, and physicians will learn to operate in a new triad: the \"doctor-patient-AI partner relationship\". We explore possible further effects on the practice of family medicine under these new AI-enhanced circumstances and contemplate their impact on the current gap in primary care availability, continuity of care and the attractiveness of primary care careers. As we pass through this potential \"hard fork\" for family medicine we are convinced that family medicine is the most likely component of the healthcare system to survive and prosper with AI.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "人工智慧（AI）在醫學領域的日益進步將從多方面影響家庭醫學的未來。其中一些影響可能是有益的，但其他影響可能會損害家庭醫學/初級保健的實際工作。人工智慧將改變我們體驗練習的方式。如果人工智慧可以執行許多當前的醫生任務，那麼對於執業的人類家庭醫生來說還剩下什麼？我們相信，有幾種類型的患者接觸仍然需要家庭醫生與其患者之間建立的長期持續治療關係所帶來的人情味。隨著人工智慧在初級保健中的應用變得更加強大，它將承擔起多專業醫療團隊新成員的功能，醫生將學習如何在新的三元組中運作：「醫生-患者-人工智慧合作夥伴關係」。我們探討了在人工智慧增強的新環境下對家庭醫學實踐可能產生的進一步影響，並思考它們對當前初級保健可用性、護理連續性和初級保健職業吸引力方面差距的影響。當我們經歷家庭醫學的潛在「硬分叉」時，我們相信家庭醫學是醫療保健系統中最有可能在人工智慧的幫助下生存和繁榮的組成部分。"
         }
       ],
       "doi": "10.3122/jabfm.2025.250251R2",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42392982/",
-      "titleZh": ""
+      "titleZh": "家庭醫學「硬分叉」—人工智慧將改變我們體驗實踐的方式"
     },
     {
       "pmid": "42372279",
@@ -1025,72 +1025,72 @@
           "label": "BACKGROUND",
           "text": "Safety studies of the COVID-19 vaccine have identified some adverse events. Yet newer variant-updated formulations, along with increased hybrid immunity, may change these risks. Early-era safety data may not reflect experience with updated formulations in more immune-experienced populations.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "COVID-19 疫苗的安全性研究發現了一些不良事件。然而，新的變異更新配方以及增強的混合免疫力可能會改變這些風險。早期的安全性數據可能無法反映在免疫經驗較多的人群中使用更新配方的經驗。"
         },
         {
           "label": "OBJECTIVE",
           "text": "To evaluate 90-day risks for adverse events after coadministration of COVID-19 and influenza vaccines compared with influenza vaccination alone, across bivalent, XBB-adapted, and KP-adapted COVID-19 vaccine periods.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "評估在雙價、XBB 適應和 KP 適應的 COVID-19 疫苗接種期間，與單獨接種流感疫苗相比，同時接種 COVID-19 和流感疫苗後 90 天不良事件的風險。"
         },
         {
           "label": "DESIGN",
           "text": "Target trial emulation using electronic health care data.",
           "labelZh": "設計",
-          "textZh": ""
+          "textZh": "使用電子醫療保健數據進行目標試驗模擬。"
         },
         {
           "label": "SETTING",
           "text": "U.S. Department of Veterans Affairs.",
           "labelZh": "場域",
-          "textZh": ""
+          "textZh": "美國退伍軍人事務部。"
         },
         {
           "label": "PARTICIPANTS",
           "text": "Participants receiving both COVID-19 and seasonal influenza vaccines (n = 705 124) and those receiving only an influenza vaccine (n = 1 813 205) between 1 September 2022 and 26 August 2025.",
           "labelZh": "受試者",
-          "textZh": ""
+          "textZh": "在2022年9月1日至2025年8月26日期間同時接種COVID-19和季節性流感疫苗的參與者（ n = 705 124 ）和僅接種流感疫苗的參與者（ n = 1 813 205 ）。"
         },
         {
           "label": "INTERVENTION",
           "text": "Receipt of both COVID-19 and seasonal influenza vaccines versus receipt of only an influenza vaccine.",
           "labelZh": "介入",
-          "textZh": ""
+          "textZh": "新冠肺炎疫苗和季節性流感疫苗的接種與僅接種流感疫苗的接種。"
         },
         {
           "label": "MEASUREMENTS",
           "text": "90-day risks for 46 prespecified individual adverse events grouped into 3 composite outcomes (tier 1, serious or life-threatening; tier 2, clinically significant; tier 3, less severe or self-limiting), using weighted discrete-time survival models.",
           "labelZh": "測量",
-          "textZh": ""
+          "textZh": "使用加權離散時間生存模型，將46個預先指定的個體不良事件的90天風險分組為3個複合結果（第1級，嚴重或威脅生命；第2級，臨牀顯著性；第3級，不太嚴重或自我限制）。"
         },
         {
           "label": "RESULTS",
           "text": "For all 3 composite outcomes, risks were similar between groups: tier 1 (risk ratio [RR], 1.03 [95% CI, 0.99 to 1.09]), tier 2 (RR, 0.99 [CI, 0.96 to 1.03]), and tier 3 (RR, 0.99 [CI, 0.96 to 1.02]). Of the 46 individual adverse events, 2 tier-3 risks had nominal statistical significance: syncope (RR, 1.09 [CI, 1.02 to 1.17]) and tinnitus (RR, 0.95 [CI, 0.92 to 0.99]); no risks were statistically significant after correcting for multiple comparisons. For all risks in tier 1 or tier 2, confidence bounds included 1.0 (no effect). In period-stratified analyses, neither composite (tier) nor individual event estimates supported differences in risks between groups.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "對於所有3個綜合結果，組別之間的風險相似： 1級（風險比率[RR] ， 1.03 [95% CI ， 0.99至1.09] ）、2級（ RR ， 0.99 [CI ， 0.96至1.03] ）和3級（ RR ， 0.99 [CI ， 0.96至1.02] ）。在46例個體不良事件中， 2例3級風險具有名義統計學顯著性：暈厥（ RR ， 1.09 [CI ， 1.02至1.17] ）和耳鳴（ RR ， 0.95 [CI ， 0.92至0.99] ） ；在校正多次比較後，風險無統計學顯著性。對於第1級或第2級的所有風險，置信界限包括1.0 （無影響）。在期間分層分析中，無論是綜合（層級）還是單個事件估計都不支持羣組之間的風險差異。"
         },
         {
           "label": "LIMITATION",
           "text": "Generalizability and potential unmeasured confounding.",
           "labelZh": "LIMITATION",
-          "textZh": ""
+          "textZh": "普遍性和潛在的未測量混淆。"
         },
         {
           "label": "CONCLUSION",
           "text": "Same-day coadministration of COVID-19 and influenza vaccines was not associated with an increased risk for adverse events in 3 updated-formulation periods. These findings support the short-term safety of coadministration.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "在3個更新的配方期內， COVID-19疫苗和流感疫苗的當日合用與不良事件風險增加無關。這些發現支持短期合併用藥的安全性。"
         },
         {
           "label": "PRIMARY FUNDING SOURCE",
           "text": "U.S. Department of Veterans Affairs.",
           "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": ""
+          "textZh": "美國退伍軍人事務部。"
         }
       ],
       "doi": "10.7326/ANNALS-26-00217",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42372279/",
-      "titleZh": ""
+      "titleZh": "同日接種 COVID-19 和流感疫苗與單獨接種流感疫苗後的不良事件：目標試驗模擬"
     },
     {
       "pmid": "42372278",
@@ -1104,12 +1104,12 @@
         {
           "text": "Glucagon-like peptide-1 receptor agonists (GLP-1RAs) have transformed obesity and diabetes management, with rapidly expanding indications and use among U.S. adults. Despite their promise, key questions remain about optimal treatment pathways, long-term safety, effectiveness across diverse populations, adherence, and economic impact. Real-world evidence (RWE) derived from electronic health records, claims, and other data sources could address these gaps, but unique challenges complicate its use, such as inconsistent insurance coverage, high discontinuation rates, medication shortages, compounded formulations, and off-label prescribing. To explore these issues, the National Institute of Diabetes and Digestive and Kidney Diseases convened a workshop in May 2025 with experts from regulatory agencies, guideline committees, payers, and academia. Discussions focused on identifying knowledge gaps in GLP-1RA use, evaluating how RWE informs practice, assessing limitations of real-world data, and strategies to reduce bias in RWE. Presentations emphasized RWE's potential to complement randomized trials by capturing rare adverse events, long-term outcomes, and effectiveness in routine care. However, persistent challenges include data reliability, confounding, and incomplete capture of medication use and outcomes, particularly in pediatric and underserved populations. Coverage decisions remain heterogeneous across Medicare, Medicaid, and private payers and across time, underscoring the need for rigorous cost-benefit analyses. The workshop concluded that robust RWE is essential for developing value-based coverage policies and optimizing GLP-1RA use. Continued investment in high-quality data infrastructure and analytic methods will be critical to inform regulatory, clinical, and economic decisions as utilization expands.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "胰高血糖素樣肽-1受體激動劑（ GLP-1RAs ）已經改變了肥胖和糖尿病管理，在美國成年人中的適應症和使用迅速擴大。 儘管他們的承諾，關鍵問題仍然是關於最佳治療途徑、長期安全性、對不同人羣的有效性、依從性和經濟影響。 來自電子健康記錄、索賠和其他數據來源的真實世界證據（ RWE ）可以解決這些差距，但獨特的挑戰使其使用複雜化，例如保險範圍不一致、停藥率高、藥物短缺、複方製劑和標籤外處方。 為了探討這些問題，國家糖尿病、消化和腎臟疾病研究所於2025年5月召開了一次研討會，來自監管機構、指南委員會、付款人和學術界的專家參加了研討會。 討論的重點是找出GLP-1RA使用方面的知識差距，評估RWE如何為實踐提供信息，評估現實世界數據的局限性，以及減少RWE偏見的策略。 演示文稿強調了RWE通過捕捉罕見的不良事件、長期結果和常規護理的有效性來補充隨機試驗的潛力。 然而，持續存在的挑戰包括藥物使用和結果的數據可靠性、混淆和不完整的捕獲，特別是在兒科和服務不足的人羣中。 醫療保險、醫療補助和私人支付者之間以及隨著時間的推移，承保決策仍然各不相同，這突顯了"
         }
       ],
       "doi": "10.7326/ANNALS-25-05468",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42372278/",
-      "titleZh": ""
+      "titleZh": "利用真實世界的證據來告知與胰高血糖素樣肽-1基療法相關的監管、臨牀和覆蓋決策：國家糖尿病和消化及腎臟疾病研究所研討會概要"
     },
     {
       "pmid": "42372277",
@@ -1123,12 +1123,12 @@
         {
           "text": "Glucagon-like peptide-1 receptor agonists (GLP-1RAs) have reshaped the clinical approach to managing obesity and type 2 diabetes. As approved indications have expanded, use of GLP-1RAs has increased rapidly in the United States. Although randomized trials demonstrate strong efficacy, many questions remain about their optimal use in clinical practice. Real-world data (RWD) from electronic health records, registries, insurance claims, and other sources offer a promising avenue to address these questions. However, concerns about data quality, selection bias, and incomplete ascertainment of medication use and outcomes pose significant challenges to the validity of the resulting evidence. In May 2025, the National Institute of Diabetes and Digestive and Kidney Diseases convened experts from regulatory agencies, payer organizations, and academia to explore these challenges. This second of 2 synopsis articles on the workshop summarizes the discussion around the strengths and limitations of various RWD sources and methodological approaches to strengthen causal inference and generalizability. Presenters highlighted pragmatic clinical trials and target trial emulation as strategies to generate stronger real-world evidence (RWE) that is relevant to both clinical practice and policy. The workshop underscored that careful attention to study design, data limitations, and analytic approach is essential to yield RWE that informs clinicians, patients, payers, and policymakers.",
           "labelZh": null,
-          "textZh": ""
+          "textZh": "胰高血糖素樣肽-1受體激動劑（ GLP-1RAs ）重塑了管理肥胖和2型糖尿病的臨牀方法。 隨著批準適應症的擴大， GLP-1RA在美國的使用迅速增加。 雖然隨機試驗顯示出強大的療效，但仍有許多關於其在臨牀實踐中的最佳使用的問題。 來自電子健康記錄、登記處、保險索償和其他來源的真實世界數據（ RWD ）為解決這些問題提供了一個有希望的途徑。 然而，對數據質量、選擇偏差以及藥物使用和結果的不完全確定性的擔憂對結果證據的有效性構成了重大挑戰。 2025年5月，國家糖尿病、消化和腎臟疾病研究所召集來自監管機構、付款人組織和學術界的專家，探討這些挑戰。 這兩篇關於研討會的摘要文章中的第二篇總結了各種RWD來源的優勢和局限性以及加強因果推斷和概括性的方法論方法的討論。 演講者強調務實的臨牀試驗和目標試驗模擬是產生與臨牀實踐和政策相關的更強實際證據（ RWE ）的策略。 研討會強調，認真關注研究設計、數據限制和分析方法對於產生RWE至關重要， RWE將告知臨牀醫生、患者、付款人和政策制定者。"
         }
       ],
       "doi": "10.7326/ANNALS-26-00202",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42372277/",
-      "titleZh": ""
+      "titleZh": "胰高血糖素樣肽-1基療法真實世界證據生成的方法論方法：國家糖尿病、消化和腎臟疾病研究所研討會概要"
     },
     {
       "pmid": "42372276",
@@ -1143,72 +1143,72 @@
           "label": "BACKGROUND",
           "text": "Bofanglutide is a novel glucagon-like peptide-1 receptor agonist under development for type 2 diabetes mellitus (T2DM) and overweight and obesity.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "Bofanglutide是一種正在開發的新型胰高血糖素樣肽-1受體激動劑，用於2型糖尿病（ T2DM ）以及超重和肥胖。"
         },
         {
           "label": "OBJECTIVE",
           "text": "To evaluate the efficacy and safety of bofanglutide compared with semaglutide.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "評估bofanglutide與semaglutide的療效和安全性。"
         },
         {
           "label": "DESIGN",
           "text": "Phase 2b, randomized, open-label, active-controlled trial. (ClinicalTrials.gov: NCT06256549).",
           "labelZh": "設計",
-          "textZh": ""
+          "textZh": "2b期、隨機、開放標籤、活性對照試驗。（ ClinicalTrials.gov ： NCT06256549 ）。"
         },
         {
           "label": "SETTING",
           "text": "Multicenter (37 sites in China).",
           "labelZh": "場域",
-          "textZh": ""
+          "textZh": "多中心（中國37個據點）。"
         },
         {
           "label": "PARTICIPANTS",
           "text": "Adults with T2DM who were drug-naive or receiving stable oral antidiabetic drugs (glycated hemoglobin A1c [HbA1c], 7.0% to 11.0%).",
           "labelZh": "受試者",
-          "textZh": ""
+          "textZh": "初治或接受穩定口服抗糖尿病藥物（糖化血紅蛋白A1c [HbA1c] ， 7.0%至11.0% ）的T2DM成人。"
         },
         {
           "label": "INTERVENTION",
           "text": "Participants were randomly assigned 1:1:1:1:1 to 1 of 5 treatment groups: bofanglutide titrated to targets of 12, 18, or 24 mg (biweekly [once every 2 weeks; Q2W]); bofanglutide titrated to 24 mg (once weekly [QW]); or semaglutide titrated to 1 mg QW.",
           "labelZh": "介入",
-          "textZh": ""
+          "textZh": "參與者被隨機分配1: 1: 1: 1: 1至5個治療組中的1個：以12、18或24mg的目標劑量滴定bofanglutide （雙週一次[每2週一次； Q2W] ） ；以24mg劑量滴定bofanglutide （每週一次[QW] ） ；或以1mg QW劑量劑量劑量劑量濃度濃度的semaglutide。"
         },
         {
           "label": "MEASUREMENTS",
           "text": "Change in HbA1c level from baseline to week 24 (primary end point), secondary efficacy end points, and safety.",
           "labelZh": "測量",
-          "textZh": ""
+          "textZh": "從基線到第24週的HbA1c水準變化（主要終點）、次要療效終點和安全性。"
         },
         {
           "label": "RESULTS",
           "text": "Overall, 272 participants were enrolled, with a mean age of 50.8 years, HbA1c level of 8.35%, and body mass index of 27.9 kg/m2. At week 24, HbA1c level change from baseline was -1.87% (95% CI, -2.11% to -1.63%), -2.28% (CI, -2.54% to -2.03%), and -1.94% (CI, -2.19% to -1.69%) for bofanglutide 12, 18, 24 mg Q2W, respectively; -2.32% (CI, -2.57% to -2.06%) for bofanglutide 24 mg QW; and -1.60% (CI, -1.85% to -1.35%) for 1 mg of semaglutide QW. Corresponding treatment differences versus semaglutide were -0.27% (CI, -0.61% to -0.08%), -0.68% (CI, -1.04% to -0.33%), -0.34% (CI, -0.70% to 0.02%), and -0.72% (CI, -1.08% to -0.36%), respectively. Gastrointestinal adverse events (GIAEs) (mostly grade 1 or 2 in severity) occurred in 81.8% to 87.3% and 51.9% of participants in the bofanglutide and semaglutide groups, respectively. Hypoglycemia occurred in 0% to 3.8% versus 1.9%, with no severe hypoglycemia.",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "總體而言，招募了272名參與者，平均年齡為50.8歲， HbA1c水平為8.35% ，體重指數為27.9 kg/m2。在第24週， bofanglutide 12、18、24 mg Q2W與基線相比的HbA1c水準變化分別為-1.87% (95% CI ， -2.11%至-1.63%)、-2.28% (CI ， -2.54%至-2.03%)和-1.94% (CI ， -2.19%至-1.69%) ； bofanglutide 24 mg QW為-2.32% (CI ， -2.57%至-2.06%) ； 1 mg semaglutide QW為-1.60% (CI ， -1.85%至-1.35%)。相應的治療與semaglutide的差異分別為-0.27% (CI ， -0.61%至-0.08%)、-0.68% (CI ， -1.04%至-0.33%)、-0.34% (CI ， -0.70%至0.02%)和-0.72% (CI ， -1.08%至-0.36%)。bofanglutide和semaglutide組分別有81.8%至87.3%和51.9%的參與者發生胃腸道不良事件(GIAE) (主要為1級或2級嚴重程度)。低血糖發生率為0 ％至3.8 ％ ，而非1.9 ％ ，沒有嚴重的低血糖。"
         },
         {
           "label": "LIMITATION",
           "text": "Open-label, short duration, only Chinese participants.",
           "labelZh": "LIMITATION",
-          "textZh": ""
+          "textZh": "標籤開放，持續時間短，僅限中國參與者。"
         },
         {
           "label": "CONCLUSION",
           "text": "Meaningful reductions in HbA1c levels were seen with bofanglutide in patients with T2DM; GIAEs were the most common and generally manageable.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "在T2DM患者中，使用bofanglutide可顯著降低HbA1c水平； GIAE是最常見且通常可控制的。"
         },
         {
           "label": "PRIMARY FUNDING SOURCE",
           "text": "Gan & Lee Pharmaceuticals.",
           "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": ""
+          "textZh": "Gan & Lee Pharmaceuticals。"
         }
       ],
       "doi": "10.7326/ANNALS-25-04623",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42372276/",
-      "titleZh": ""
+      "titleZh": "中國2型糖尿病患者使用Bofanglutide對比Semaglutide的每週和每兩週一次治療： 2b期隨機臨牀試驗"
     },
     {
       "pmid": "42372274",
@@ -1223,25 +1223,25 @@
           "label": "BACKGROUND",
           "text": "As part of the development of practice guidelines, developers need to systematically engage relevant interest-holder groups. The Reporting Items for practice Guidelines in HealThcare (RIGHT) checklist for reporting practice guidelines lacks detailed guidance on how to report the engagement process.",
           "labelZh": "背景",
-          "textZh": ""
+          "textZh": "作為實踐準則開發的一部分，開發人員需要系統地與相關利益相關者團體進行接觸。HealThcare實踐指南的報告項目（右）報告實踐指南的檢查清單缺乏有關如何報告參與過程的詳細指導。"
         },
         {
           "label": "OBJECTIVE",
           "text": "To develop a standardized checklist for reporting interest-holder engagement in practice guidelines, named the RIGHT-MuSE checklist.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "制定報告利益相關者參與實踐準則的標準化檢查清單，名為RIGHT-MuSE檢查清單。"
         },
         {
           "label": "DESIGN",
           "text": "The development process followed the methods recommended by the Enhancing the QUAlity and Transparency Of health Research (EQUATOR) Network, as well as lessons learned from the development of the RIGHT statement and its extensions. Key steps included developing the protocol, registering the project, establishing a working group, conducting background work, generating an initial list of items, conducting a consensus survey, holding panel discussions, and creating the final RIGHT-MuSE checklist and an accompanying explanation and elaboration document.",
           "labelZh": "設計",
-          "textZh": ""
+          "textZh": "開發過程遵循了加強健康研究（ EQUATOR ）網絡的QUAlity和透明度推薦的方法，以及從制定正確的聲明及其擴展中吸取的教訓。關鍵步驟包括開發計畫書、註冊專案、建立工作小組、進行背景工作、產生初步項目清單、進行共識調查、舉行小組討論，以及建立最終的RIGHT-MuSE檢查清單以及附帶的解釋和詳細說明文件。"
         },
         {
           "label": "SETTING",
           "text": "International collaboration.",
           "labelZh": "場域",
-          "textZh": ""
+          "textZh": "國際合作"
         },
         {
           "label": "PARTICIPANTS",
@@ -1282,7 +1282,7 @@
       ],
       "doi": "10.7326/ANNALS-25-05329",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42372274/",
-      "titleZh": ""
+      "titleZh": "報告利益相關者參與實踐準則： RIGHT-MuSE檢查清單"
     },
     {
       "pmid": "42372272",
