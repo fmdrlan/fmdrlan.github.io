@@ -37,11 +37,6 @@ jobs:
             echo "updated=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: 抓取健保用藥品項 API
-        id: fetch_items
-        run: python scripts/fetch_drug_items.py
-        continue-on-error: true   # API 掛掉也不要連 PDF 一起拖累
-
       - name: Commit 更新（有新版本）
         if: steps.check.outputs.updated == 'true'
         run: |
@@ -49,8 +44,6 @@ jobs:
           git config user.name "NHI Update Bot"
           git config user.email "bot@nhi-drug-search"
           git add public/data/drugs.json public/data/changelog.json public/data/last_version.txt public/data/last_check.txt
-          # drug_items.json 是 API 補充資料，可能不存在，缺檔不要讓 commit 失敗
-          git add public/data/drug_items.json 2>/dev/null || true
           git diff --staged --quiet || git commit -m "🤖 自動更新：藥品給付規定 ${VERSION}"
           git push
 
@@ -59,10 +52,8 @@ jobs:
         run: |
           git config user.name "NHI Update Bot"
           git config user.email "bot@nhi-drug-search"
-          # 即使沒新版本、drug_items.json 也可能更新（每月）
           git add public/data/last_check.txt
-          git add public/data/drug_items.json 2>/dev/null || true
-          git diff --staged --quiet || git commit -m "🤖 自動檢查（PDF 無新版本、藥品項目可能更新）"
+          git diff --staged --quiet || git commit -m "🤖 自動檢查（PDF 無新版本）"
           git push
 
       - name: 完成通知

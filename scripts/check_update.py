@@ -72,12 +72,12 @@ def make_session():
     return s
 
 
-def fetch_with_retry(session, url, *, referer=None, timeout=30, tries=4):
+def fetch_with_retry(session, url, *, referer=None, timeout=30, tries=6):
     """帶重試的 GET，第二次起補上 Referer。被臨時限流(403)時拉長等待，
     並加隨機抖動，給對方防火牆時間解除冷凍。"""
     last_err = None
     # 每次重試的基礎等待秒數（越後面等越久）
-    backoff = [20, 45, 90, 120]
+    backoff = [20, 45, 90, 120, 150, 180]
     for i in range(tries):
         extra = {}
         if referer or i > 0:
@@ -242,8 +242,12 @@ def main():
     try:
         pdf_url, new_version = get_latest_pdf_info()
     except Exception as e:
-        print(f"❌ 無法取得健保署頁面：{e}")
-        sys.exit(1)
+        # 健保署常對雲端(GitHub Actions) IP 段間歇性回 403。多次重試仍連不上時，
+        # 視為「本週無法檢查」軟性略過（不讓 workflow 紅燈），下週換 runner IP 再試。
+        print(f"⚠️  無法取得健保署頁面（多次重試後仍失敗）：{e}")
+        print("   本週略過檢查（多半是健保署對雲端 IP 的間歇性封鎖），下次排程會再試。")
+        Path(Path.home() / "no_update").touch()
+        sys.exit(0)
 
     if not pdf_url or not new_version:
         print("❌ 找不到 PDF 連結，請手動確認健保署網頁格式是否改變")
