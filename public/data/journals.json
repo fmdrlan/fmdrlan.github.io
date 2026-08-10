@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03",
+  "generatedAt": "2026-08-10",
   "windowDays": 30,
   "journals": [
     {
@@ -38,224 +38,656 @@
   "count": 45,
   "articles": [
     {
-      "pmid": "42456692",
-      "title": "1-month versus 12-month dual antithrombotic therapy after percutaneous coronary intervention in patients with atrial fibrillation (OPTIMA-AF): a multicentre, open-label, hybrid non-inferiority and superiority, randomised, controlled trial",
+      "pmid": "42520828",
+      "title": "Ralinepag for the treatment of pulmonary arterial hypertension (ADVANCE OUTCOMES): a randomised, double-blind, placebo-controlled phase 3 study",
       "journal": "Lancet",
       "category": "四大綜合",
-      "date": "2026 Aug 01",
-      "sortDate": "2026-08-01",
-      "authors": "Sotomi Y, Kozuma K, Higuchi Y, Nakazawa G, Morino Y, Ando K, Ako J, Tanabe K, et al.",
+      "date": "2026 Aug 08",
+      "sortDate": "2026-08-08",
+      "authors": "McLaughlin VV, Solum D, Lachant D, Ataya A, Barberà JA, Meyer GB, Chang SA, Channick R, et al.",
       "abstract": [
         {
           "label": "BACKGROUND",
-          "text": "The optimal duration of dual antithrombotic therapy after percutaneous coronary intervention (PCI) in patients with atrial fibrillation remains uncertain. We aimed to compare the efficacy and safety of 1-month versus 12-month dual antithrombotic therapy in this population.",
+          "text": "Pulmonary arterial hypertension (PAH) is a rare, progressive disease characterised by elevated pulmonary vascular resistance that can lead to right ventricular failure and premature death. Ralinepag is an oral, once-daily, selective prostacyclin IP receptor agonist developed to treat PAH. We aimed to evaluate the efficacy and safety of ralinepag in patients with PAH.",
           "labelZh": "背景",
-          "textZh": "心房顫動患者經皮冠狀動脈介入治療(PCI)後雙重抗血栓治療的最佳持續時間仍然不確定。我們的目標是比較1個月與12個月雙重抗血栓治療在這一人羣中的有效性和安全性。"
+          "textZh": "肺動脈高壓（ PAH ）是一種罕見的進行性疾病，其特徵是肺血管阻力升高，可能導致右心室衰竭和過早死亡。Ralinepag是一種每日一次的口服選擇性前列環素IP受體激動劑，開發用於治療PAH。我們的目的是評估ralinepag在PAH患者中的有效性和安全性。"
         },
         {
           "label": "METHODS",
-          "text": "OPTIMA-AF was an active-control, randomised, hybrid non-inferiority and superiority trial in which patients with atrial fibrillation undergoing PCI with intravascular imaging guidance were randomly assigned (1:1) to receive 1-month dual antithrombotic therapy (direct oral anticoagulant [DOAC] plus P2Y12 inhibitor) followed by DOAC monotherapy or 12-month dual therapy followed by DOAC monotherapy, across 75 sites in Japan. Eligible patients were aged 20 years or older with non-valvular atrial fibrillation, a CHADS2 score of 1 or higher, undergoing PCI for native coronary lesions for chronic coronary syndrome or unstable angina, with planned post-PCI treatment with a DOAC. Randomisation used web-based central allocation stratified by trial centre. Investigators and patients were unmasked; clinical events were adjudicated by an independent committee masked to treatment. The primary efficacy endpoint was a composite of all-cause death or thromboembolic events at 12 months; the primary safety endpoint was major or clinically relevant non-major bleeding at 12 months. The trial used a fixed-sequence testing strategy of non-inferiority for efficacy, superiority for safety, and superiority for efficacy. Analyses used the full analysis set including all patients who underwent PCI, were randomly assigned to treatment, received at least one dose of study drugs, and met prespecified analysis-set criteria. This trial is registered with the Japan Registry of Clinical Trials (jRCTs051190053), and is complete.",
+          "text": "ADVANCE OUTCOMES was a randomised, double-blind, placebo-controlled, event-driven, phase 3 trial of ralinepag in patients with PAH. Eligible patients were aged 18 years or older and PAH was diagnosed on the basis of the 2022 European Society of Cardiology and European Respiratory Society guidelines (mean pulmonary artery pressure >20 mm Hg, pulmonary artery wedge pressure ≤15 mm Hg, and pulmonary vascular resistance of >2 Wood units). Patients were randomly assigned (1:1) to ralinepag or placebo, initiated at a dose of 50 μg once daily and titrated weekly until the highest tolerated individualised dose was reached. Randomisation was stratified by baseline 6-minute walk distance (6MWD), PAH aetiology, and oral background therapy. A block size of four was used within each combination of stratification factors. The sponsor, patients, and all personnel directly involved with the conduct of the study were masked to study drug identity and randomisation assignments. The primary outcome was time to first clinical worsening event, a composite of death from any cause, admission to hospital due to worsening PAH or right heart failure, initiation of parenteral or inhaled prostacyclin-pathway therapy, disease progression, or unsatisfactory long-term clinical response. Efficacy analyses were done in the full analysis set and safety analyses in the safety set; both sets comprised 687 patients after exclusion of 41 randomly assigned and treated patients from sites in China (exclusions due to regulatory challenges and data integrity concerns). This study is registered with ClinicalTrials.gov (NCT03626688) and euclinicaltrials.eu (2023-509304-16-00) and is complete.",
           "labelZh": "方法",
-          "textZh": "OPTIMA-AF是一項主動對照、隨機、混合非劣效性和優效性試驗，其中心房顫動患者在血管內造影指導下接受PCI ，隨機分配（ 1 ： 1 ）接受1個月的雙重抗血栓治療（直接口服抗凝劑[DOAC]加P2Y12抑制劑） ，然後接受DOAC單一治療或12個月的雙重治療，然後接受DOAC單一治療，在日本75個研究中心進行。 符合資格的患者年齡為20歲或以上，患有非瓣膜性心房顫動， CHADS2評分為1或更高，因慢性冠狀動脈綜合徵或不穩定性心絞痛的原發性冠狀動脈病變進行PCI ，並計劃在PCI後使用DOAC進行治療。 隨機分組使用根據試驗中心分層的基於網絡的集中分配。 研究者和患者被揭露；臨牀事件由一個隱藏治療的獨立委員會裁定。 主要療效終點是12個月全因死亡或血栓栓塞事件的綜合結果；主要安全性終點是12個月重大或臨牀相關的非重大出血。 該試驗使用了有效性非劣效性、安全性優勢和有效性優勢的固定序列測試策略。 分析使用完整的分析集，包括所有接受PCI的患者，隨機分配到治療組，接受至少一劑研究藥物，並符合預先指定的分析集標準。 本試驗已在日本臨牀試驗登記處註冊"
+          "textZh": "進展結果是一項ralinepag在PAH患者中的隨機、雙盲、安慰劑對照、事件驅動的3期試驗。 符合資格的患者年齡為18歲或以上，並根據2022年歐洲心臟病學會和歐洲呼吸學會指南（平均肺動脈壓> 20 mm Hg、肺動脈楔壓≤ 15 mm Hg和肺血管阻力> 2 Wood單位）診斷PAH。 患者被隨機(1: 1)分配到ralinepag或安慰劑，以50 μg的劑量每日一次開始，並每週滴定，直到達到最高耐受個體化劑量。 隨機分組依據基線6分鐘步行距離(6MWD)、PAH病因學和口服背景療法進行分層。 在每個分層因子的組合中使用4個區塊大小。 掩蓋申辦者、患者和所有直接參與研究進行的人員的研究藥物識別和隨機分配。 主要結果是首次發生臨牀惡化事件的時間、任何原因導致的死亡、因PAH惡化或右心衰入院、開始腸外或吸入前列環素途徑治療、疾病進展或長期臨牀反應不理想。 在全部分析集中進行有效性分析，在安全性分析集中進行安全性分析；兩組均包括從中國研究中心排除41名隨機分配和治療的患者後的687名患者（排除"
         },
         {
           "label": "FINDINGS",
-          "text": "From Oct 7, 2019, to Sept 3, 2024, 1101 patients were assessed for eligibility; 1088 were randomly assigned to treatment and 1079 were included in the full analysis set (1-month dual therapy n=542; 12-month dual therapy n=537). Median age was 76 years (IQR 70-81). 225 (21%) of 1079 patients were female and 854 (79%) were male. Median CHADS2 score was 2 (IQR 2-3). Median follow-up was 540 days (IQR 517-559). The primary efficacy endpoint occurred in 29 patients in the 1-month dual therapy group and 23 patients in the 12-month dual therapy group (Kaplan-Meier estimate 5·4% vs 4·3%; absolute difference 1·1 percentage points [95% CI -1·5 to 3·6]; hazard ratio [HR] 1·25 [95% CI 0·73-2·17]). The primary safety endpoint occurred in 24 patients versus 47 patients (Kaplan-Meier estimate 4·5% vs 8·8%; absolute difference -4·4 percentage points [95% CI -7·3 to -1·4]; HR 0·50 [95% CI 0·30-0·81]; p=0·0041 for superiority).",
+          "text": "Patients were enrolled between Jan 24, 2019, and June 20, 2025. Of 1037 patients screened for eligibility, 728 were randomly assigned and received at least one dose of ralinepag or placebo; 687 were included in the full analysis and safety sets, of whom 350 received ralinepag and 337 received placebo. Median follow-up from randomisation to clinical worsening event, censoring, or study closure was 85·0 weeks (IQR 27·6-160·9) in the ralinepag group and 78·4 weeks (34·6-137) in the placebo group. At baseline, patients had a mean 6MWD of 438·9 m (SD 104·8) and 548 (80%) of 687 patients were receiving dual background PAH therapy. Overall, 64 (18%) of 350 patients in the ralinepag group and 121 (36%) of 337 patients in the placebo group had a first clinical worsening event (hazard ratio 0·45 [95% CI 0·33-0·62]; p<0·0001). The largest numerical between-group differences in components of the composite outcome were observed for disease progression, initiation of parenteral or inhaled prostacyclin-pathway therapy, and unsatisfactory long-term clinical response. Adverse event was the primary reason for treatment discontinuation in 65 (19%) of 350 patients in the ralinepag group and ten (3%) of 337 patients in the placebo group. Serious adverse events occurred in 98 (28%) patients in the ralinepag group and 104 (31%) patients in the placebo group. Adverse events leading to death occurred in 15 (4%) and 14 (4%) patients, respectively.",
           "labelZh": "發現",
-          "textZh": "從2019年10月7日至2024年9月3日，評估了1101名患者的資格； 1088名患者被隨機分配到治療組， 1079名患者被納入全分析集（ 1個月雙重治療n = 542 ； 12個月雙重治療n = 537 ）。中位年齡為76歲（ IQR 70-81 ）。1079名患者中有225名（ 21 ％ ）為女性， 854名（ 79 ％ ）為男性。CHADS2得分中位數爲2 （ IQR 2-3 ）。中位隨訪時間為540天(IQR 517-559)。主要療效終點發生在1個月雙重治療組的29名患者和12個月雙重治療組的23名患者中（ Kaplan-Meier估計為5.4 ％對4.3 ％ ；絕對差異1.1個百分點[95 ％ CI -1.5至3.6] ；風險比[HR] 1.25 [95 ％ CI 0.73-2.17] ）。主要安全性終點發生在24名患者與47名患者之間（ Kaplan-Meier估計為4.5 ％對8.8 ％ ；絕對差異-4.4個百分點[95 ％ CI -7.3至-1.4] ； HR 0.50 [95 ％ CI 0.30-0.81] ；優越性p = 0.0041 ）。"
+          "textZh": "患者在2019年1月24日至2025年6月20日期間入組。 在篩選合格性的1037名患者中， 728名被隨機分配並接受至少一劑ralinepag或安慰劑； 687名被納入完整的分析和安全性組，其中350名接受ralinepag ， 337名接受安慰劑。 從隨機分組到臨牀惡化事件、刪失或研究結束的中位隨訪時間， ralinepag組為85 · 0週（ IQR 27 · 6-160 · 9 ） ，安慰劑組為78 · 4週（ 34 · 6-137 ）。 在基線時，患者的平均6MWD為438 · 9 m (SD 104 · 8) ， 687名患者中有548名(80%)正在接受雙重背景PAH治療。 總體而言， ralinepag組350名患者中的64名（ 18% ）和安慰劑組337名患者中的121名（ 36% ）發生了首次臨牀惡化事件（風險比0 · 45 [95% CI 0 · 33-0 · 62] ； p < 0 · 0001 ）。 在疾病進展、開始腸胃外或吸入前列環素途徑治療，以及長期臨牀反應不理想的情況下，觀察到綜合結果成分中最大的組間數值差異。 不良事件是ralinepag組350名患者中65名（ 19% ）和安慰劑組337名患者中10名（ 3% ）停止治療的主要原因。 Ralinepag組有98名(28%)患者發生嚴重不良事件，安慰劑組有104名(31%)患者發生嚴重不良事件。 導致死亡的不良事件分別發生在15名(4%)和14名(4%)患者身上。"
         },
         {
           "label": "INTERPRETATION",
-          "text": "Among patients with atrial fibrillation and predominantly chronic coronary syndrome undergoing PCI with intravascular imaging guidance, 1-month dual antithrombotic therapy followed by DOAC monotherapy was non-inferior to 12-month therapy for death or thromboembolic events and reduced major or clinically relevant non-major bleeding at 12 months, suggesting an overall favourable net clinical profile. Efficacy findings should be interpreted with appropriate caution in light of the lower-than-anticipated event rates and fixed absolute non-inferiority margin.",
+          "text": "In patients with PAH receiving contemporary background therapy, ralinepag significantly reduced the risk of first clinical worsening compared with placebo, but was associated with more adverse-event-related treatment discontinuations. These results support the use of ralinepag as an oral, once-daily prostacyclin-pathway treatment option for PAH.",
           "labelZh": "詮釋",
-          "textZh": "在接受帶有血管內造影指導的PCI的心房顫動和主要是慢性冠狀動脈綜合症患者中， 1個月雙重抗血栓治療隨後DOAC單一治療對死亡或血栓栓塞事件的12個月治療並不劣於12個月治療，並且在12個月時減少了重大或臨牀相關的非重大出血，這表明整體良好的淨臨牀特徵。根據低於預期的事件發生率和固定的絕對非劣效性範圍，應以適當的謹慎解釋有效性結果。"
+          "textZh": "在接受當代背景治療的PAH患者中，與安慰劑相比， ralinepag顯著降低了首次臨牀惡化的風險，但與更多不良事件相關的治療停止相關。這些結果支持使用ralinepag作為PAH的口服、每日一次前列環素途徑治療選擇。"
         },
         {
           "label": "FUNDING",
-          "text": "Abbott Medical Japan.",
+          "text": "United Therapeutics Corporation.",
           "labelZh": "經費來源",
-          "textZh": "Abbott Medical Japan。"
-        },
-        {
-          "label": "TRANSLATIONS",
-          "text": "For the Japanese translation of the abstract see Supplementary Materials section.",
-          "labelZh": "TRANSLATIONS",
-          "textZh": "有關摘要的日文翻譯，請參閱補充材料部分。"
+          "textZh": "United Therapeutics Corporation。"
         }
       ],
-      "doi": "10.1016/S0140-6736(26)00665-3",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42456692/",
-      "titleZh": "房顫患者經皮冠狀動脈介入治療(OPTIMA-AF)後的1個月與12個月雙重抗血栓治療：一項多中心、開放標籤、混合非劣效性和優效性、隨機、對照試驗"
+      "doi": "10.1016/S0140-6736(26)01011-1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42520828/",
+      "titleZh": "用於治療肺動脈高壓的Ralinepag （進展結果） ：一項隨機、雙盲、安慰劑對照的第3期研究"
     },
     {
-      "pmid": "42442374",
-      "title": "Multidomain lifestyle intervention for the prevention of cognitive decline in at-risk older adults in Latin America (LatAm-FINGERS): a single-blind, multicentre, randomised controlled trial",
+      "pmid": "42492562",
+      "title": "Oral step-down, optimal drug, and total duration of antibiotic treatment in African children hospitalised with severe community-acquired pneumonia (PediCAP): a factorial randomised controlled trial",
       "journal": "Lancet",
       "category": "四大綜合",
-      "date": "2026 Aug 01",
-      "sortDate": "2026-08-01",
-      "authors": "Crivelli L, Suemoto CK, Sosa AL, Lopera F, Aguillón D, Allegri RF, Nitrini R, Calandri IL, et al.",
+      "date": "2026 Aug 08",
+      "sortDate": "2026-08-08",
+      "authors": "Bielicki JA, Clements M, Musiime V, Moore DP, Sidat M, Mulenga V, Mutata C, Nalwanga D, et al.",
       "abstract": [
         {
           "label": "BACKGROUND",
-          "text": "Latin America faces a high dementia burden, with increased prevalence of factors associated with cognitive decline. Multidomain lifestyle interventions might delay cognitive decline, but populations from Latin America remain under-represented in dementia prevention trials. We aimed to investigate the feasibility of a culturally adapted, multidomain, systematic lifestyle intervention and investigate its effects on global cognitive function in at-risk older adults (aged 60-77 years).",
+          "text": "WHO recommends 5 days of intravenous antibiotics for children hospitalised with severe community-acquired pneumonia (CAP). We aimed to investigate the safety of a step-down to different oral antibiotics and the shortest effective duration.",
           "labelZh": "背景",
-          "textZh": "拉丁美洲面臨很高的失智症負擔，與認知能力下降相關的因素患病率增加。多領域生活方式幹預措施可能會延緩認知能力下降，但來自拉丁美洲的人羣在失智症預防試驗中的代表性仍然不足。我們旨在調查文化適應、多領域、系統化的生活方式幹預的可行性，並調查其對高風險老年人（ 60-77歲）的全球認知功能的影響。"
+          "textZh": "世衛組織建議患有嚴重社區性肺炎（ CAP ）的兒童靜脈注射抗生素5天。我們的目標是研究使用不同口服抗生素的安全性和最短有效期。"
         },
         {
           "label": "METHODS",
-          "text": "The LatAm-FINGERS Initiative for Cognitive Change (hereafter referred to as LatAm-FINGERS) was a single-blind, multicentre, randomised clinical trial conducted in 11 Latin American countries (Argentina, Bolivia, Brazil, Chile, Colombia, Costa Rica, Dominican Republic, Ecuador, Mexico, Peru, and Uruguay). Individuals aged 60-77 years with high risk of dementia (cardiovascular risk factors, ageing, and dementia risk score ≥6), and suboptimal cognitive performance were randomly assigned (1:1) to receive either a 2-year systematic lifestyle intervention (SLI group) or a flexible lifestyle intervention (FLI group). Randomisation was stratified by the study centre to ensure balance and implemented using permuted blocks of eight. Participants and intervention staff were not masked to group assignment, but individuals who assessed outcomes were masked throughout the trial. The SLI provided structured multidomain lifestyle interventions with supervised support and monitoring; FLI offered health advice. Primary outcomes were trial feasibility (evaluated using selected RE-AIM measures: Reach, Implementation, and Maintenance) and the intervention's effects on global cognitive composite trajectories over 2 years (change in the global cognitive composite score over 2 years). This trial is registered at ClinicalTrials.gov (NCT06492967) and has been completed.",
+          "text": "PediCAP was an open-label, parallel group, 2 × 5 factorial randomised controlled trial of children aged 2 months to 6 years hospitalised with severe CAP without complicating factors in 13 hospitals across five sub-Saharan African countries. Children weighing 3-30 kg and with point-of-care C-reactive protein of more than 10 mg/L were randomly assigned (5:5:1) to either a step-down from intravenous antibiotics to oral amoxicillin (250 mg) or amoxicillin-clavulanate (co-amoxiclav; 200 mg amoxicillin to 28·5 mg clavulanate) via dispersible tablets twice daily (superiority comparison) for five total (intravenous plus oral) durations (4-8 days; non-inferiority comparison), or a 5-day, fixed-duration, intravenous-only treatment (non-inferiority comparison). Children were stepped down when clinically improved and able to take oral antibiotics. Clinicians could change antibiotics if clinically indicated. The primary outcome was the proportion of readmission or death at day 28 (non-inferiority margin vs intravenous only: +10%). The study was registered with the ISRCTN registry (ISRCTN63115131) and is complete.",
           "labelZh": "方法",
-          "textZh": "LatAm-FingERS認知改變倡議（以下簡稱LatAm-FingERS ）是在11個拉丁美洲國家（阿根廷、玻利維亞、巴西、智利、哥倫比亞、哥斯大黎加、多明尼加共和國、厄瓜多爾、墨西哥、祕魯和烏拉圭）進行的單盲、多中心、隨機臨牀試驗。 60-77歲高癡呆風險（心血管危險因素、衰老和癡呆風險評分≥ 6 ）且認知表現欠佳的個體被隨機分配（ 1 ： 1 ）接受2年系統性生活方式幹預（ SLI組）或靈活生活方式幹預（ FLI組）。 隨機分組由研究中心進行分層，以確保平衡，並使用八個置換區塊實施。 在整個試驗期間，參與者和幹預人員沒有被分組分配遮罩，但評估結果的個體被遮罩。 SLI提供結構化的多領域生活方式幹預措施，並提供監督支持和監測； FLI提供健康建議。 主要結果為試驗可行性（使用選定的RE-AIM測量： REACH、實施和維護評估）和幹預對2年內全球認知綜合軌跡的影響（ 2年內全球認知綜合評分的變化）。 本試驗已在ClinicalTrials.gov （ NCT06492967 ）註冊並已完成。"
+          "textZh": "PediCAP是一項開放標籤、平行組、2 × 5階乘隨機對照試驗，在撒哈拉以南非洲五個國家的13家醫院中，對2個月至6歲的兒童進行嚴重CAP無複雜因素的住院治療。 將體重3-30公斤且即時照護C反應蛋白超過10毫克/升的兒童隨機分配(5: 5: 1)至從靜脈注射抗生素降至口服阿莫西林(250毫克)或克拉維酸阿莫西林(共阿莫西拉夫； 200毫克阿莫西林降至28.5毫克克拉維酸) ，透過分散片每天兩次(優效性比較) ，總共5次(靜脈注射+口服)持續時間(4-8天；非劣效性比較) ，或5天、固定持續時間、僅靜脈注射治療(非劣效性比較)。 兒童在臨牀改善並能夠服用口服抗生素時下臺。 如果有臨牀指徵，臨牀醫生可以更換抗生素。 主要結果是第28天再入院或死亡的比例（非劣效性邊界與僅靜脈注射： +10% ）。 本研究已在ISRCTN註冊處（ ISRCTN63115131 ）註冊並已完成。"
         },
         {
           "label": "FINDINGS",
-          "text": "Participants were enrolled between Oct 27, 2021, and July 7, 2023; the last participant completed follow-up on Nov 7, 2025. Among 1719 assessed, 1065 participants included in the analytic sample were randomly assigned to the SLI group (n=539) or the FLI group (n=526). Mean age was 67·5 years (SD 4·7), 795 (75%) of 1065 participants were women, and 270 (25%) were men. Self-reported race and ethnicity were: 624 (59%) Mestizo, 288 (27%) White, 72 (7%) Mulatto, 25 (2%) Mixed or other, 18 (2%) Black, 14 (1%) Indigenous, and 24 (2%) did not report race or ethnicity. 877 (82·3%) of 1065 completed the 2-year follow-up. Recruitment effectiveness (Reach) was 62·0%; mean adherence to the SLI group (Implementation) was 71·6% over the entire trial; and frequencies of complete cognitive outcomes data (Maintenance) were 87·9% at 6 months, 85·3% at 12 months, 81·4% at 18 months, and 84·8% at 24 months in the SLI group compared with 86·3% at 6 months, 78·9% at 12 months, 73·4% at 18 months, and 79·8% at 24 months in the FLI group. Dropouts were higher in the FLI group than in the SLI group (20·2% vs 15·2%; p=0·042). Global cognitive composite scores increased over time in both groups, with a mean annual change of 0·31 SD (95% CI 0·28-0·34) per year in the SLI group and 0·20 SD (0·17-0·23) per year in the FLI group (mean between-group difference of 0·11 SD per year [0·06-0·15; p<0·0001]). Overall, 478 adverse events were reported (412 in the SLI group and 66 in the FLI group). The most common adverse events were musculoskeletal symptoms (113 [21%] in the SLI group, 13 [2%] in the FLI group), upper respiratory infections (50 [9%] in the SLI group, one [<1%] in the FLI group), and COVID-19 infection (31 [6%] events in the SLI group). Serious adverse events occurred in 50 (9%) participants in the SLI group and 24 (5%) participants in the FLI group; none were related to the intervention. There were eight deaths (three in the SLI group and five in the FLI group), and none were related to the intervention.",
+          "text": "Between Dec 7, 2020, and Aug 14, 2023, 2248 children were screened for eligibility and 1101 were randomly allocated (480 [43·6%] girls and 621 [56·4%] boys). The primary outcome was available in 1055 (95·8%) children. For children in the step-down groups, the mean total antibiotic exposure was 6·0 days (SD 3·5) in the 4-day group, 6·8 days (4·2) in the 5-day group, 7·4 (3·6) in the 6-day group, 8·3 days (3·4) in the 7-day group, and 9·2 days (2·9) in the 8-day group (p<0·0001), with 140 (68·6%) of 204, 151 (76·3%) of 198, 167 (85·2%) of 196, 179 (89·5%) of 200, and 186 (91·6%) of 203, respectively, stepping down within their randomised duration (p<0·0001). Primary outcomes occurred in 33 (6·9%) of 475 in the co-amoxiclav group, 27 (5·6%) of 484 in the amoxicillin group, and six (6·3%) of 96 in the intravenous-only group, with both oral step-down strategies non-inferior to the intravenous-only strategy (upper 95% CIs of 6·0 for co-amoxiclav and 5·7 for amoxicillin) and no evidence of superiority for co-amoxiclav over amoxicillin (adjusted risk difference 1·3% [95% CI -1·8 to 4·4]; p=0·40). Primary outcomes occurred in eight (4·1%) of 194 in the 4-day group, ten (5·3%) of 190 in the 5-day group, 16 (8·5%) of 188 in the 6-day group, 16 (8·3%) of 193 in the 7-day group, and ten (5·2%) of 194 in the 8-day group; all durations were non-inferior to the 8-day group (all upper 95% CIs ≤6·0%). There was no evidence of consistent differences in adverse events for oral antibiotic or duration comparisons. For antibiotic-related or serious adverse events, there was one (1·0%) in the intravenous-only group and 12 (2·5%) in the amoxicillin group (adjusted risk difference -2·3% [95% CI -4·2 to -0·3]; p=0·025), and 16 (3·4%) in the co-amoxiclav group (+0·8% [-1·2 to 2·8]; p=0·42); rates increased with randomised duration (slope estimate +0·9% [0·1 to 1·7]; p=0·032).",
           "labelZh": "發現",
-          "textZh": "參與者於2021年10月27日至2023年7月7日期間入組；最後一位參與者於2025年11月7日完成追蹤。 在評估的1719名參與者中，包含在分析樣本中的1065名參與者被隨機分配到SLI組（ n = 539 ）或FLI組（ n = 526 ）。 平均年齡為67 · 5歲（ SD 4 · 7 ） ， 1065名參與者中有795名（ 75 ％ ）為女性， 270名（ 25 ％ ）為男性。 自我報告的種族和族裔分別為： 624 （ 59 ％ ） Mestizo、288 （ 27 ％ ） White、72 （ 7 ％ ） Mulatto、25 （ 2 ％ ） Mixed或其他、18 （ 2 ％ ） Black、14 （ 1 ％ ） Indigenous和24 （ 2 ％ ）沒有報告種族或族裔。1065人中有877 （ 82.3 ％ ）完成了2年的隨訪。 在整個試驗中， SLI組（實施）的平均依從性為62.0% ； SLI組（實施）的平均依從性為71.6% ； SLI組的完整認知結果數據（維持）頻率在6個月時為87.9% ，在12個月時為85.3% ，在18個月時為81.4% ，在24個月時為84.8% ，相比之下， FLI組在6個月時為86.3% ，在12個月時為78.9% ，在18個月時為73.4% ，在24個月時為79.8%。 FLI組的輟學率高於SLI組（ 20.2%對15.2% ； p = 0.042 ）。 兩組的全球認知綜合評分隨著時間的推移而增加， SLI組的平均年度變化為每年0 · 31 SD （ 95 ％ CI 0 · 28-0 · 34 ） ， FLI組的平均年度變化為每年0 · 20 SD （ 0 · 17-0 · 23 ） （組間平均差異為每年0 · 11 SD [0 · 06-0 · 15; p < 0 · 0001] ）。 總體而言，報告了478例不良事件（ SLI組為412例， SLI組為66例"
+          "textZh": "在2020年12月7日至2023年8月14日期間，篩選了2248名兒童的資格，並隨機分配了1101名兒童（ 480名[43.6 ％]女孩和621名[56.4 ％]男孩）。 主要結果可用於1055 (95 · 8%)名兒童。 對於降級組的兒童， 4天組的平均總抗生素暴露量為6 · 0天（ SD 3 · 5 ） ， 5天組為6 · 8天（ 4 · 2 ） ， 6天組為7 · 4 （ 3 · 6 ） ， 7天組為8 · 3天（ 3 · 4 ） ， 8天組為9 · 2天（ 2 · 9 ） （ p < 0 · 0001 ） ，其中140 （ 68 · 6 ％ ）的204 ， 151 （ 76 · 3 ％ ）的198 ， 167 （ 85 · 2 ％ ）的196 ， 179 （ 89 · 5 ％ ）的200和186 （ 91 · 6 ％ ）的203 ，分別在其隨機持續時間內降級（ p < 0 · 0001 ）。 主要結果發生在共阿莫西拉夫組的475例中的33例(6 · 9%)、阿莫西林組的484例中的27例(5 · 6%)和單靜脈注射組的96例中的6例(6 · 3%) ，兩者的口服降壓策略均不劣於單靜脈注射策略(共阿莫西拉夫組的95% CI上限為6 · 0 ，阿莫西林組的95% CI上限為5 · 7) ，且沒有證據顯示共阿莫西拉夫優於阿莫西林(調整後的風險差異為1 · 3% [95% CI -1 · 8至4 · 4] ； p = 0 · 40)。 主要結果發生在4天組194例中的8例（ 4.1% ）、5天組190例中的10例（ 5.3% ）、6天組188例中的16例（ 8.5% ）、7天組193例中的16例（ 8.3% ）和8天組194例中的10例（ 5.2% ） ；所有持續時間均不劣於8天組（所有上限95% CI ≤ 6.0% ）。 沒有證據表明在"
         },
         {
           "label": "INTERPRETATION",
-          "text": "A culturally adapted multidomain lifestyle intervention was feasible across Latin America and resulted in greater cognitive improvements than a flexible health-advice intervention in older adults at risk of cognitive decline. These findings extend the evidence base for multidomain lifestyle interventions to populations historically under-represented in dementia research, supporting their feasibility and scalability as strategies to reduce cognitive decline risk amid the rapidly growing burden of dementia in low-income and middle-income countries.",
+          "text": "For sub-Saharan African children hospitalised with severe CAP without complicating factors, a strategy of stepping down upon clinical improvement to oral amoxicillin after initial intravenous antibiotics, with a total treatment duration of 4-5 days, is non-inferior to WHO-recommended 5-day intravenous treatment.",
           "labelZh": "詮釋",
-          "textZh": "在拉丁美洲，適應文化的多領域生活方式幹預是可行的，並且在有認知衰退風險的老年人中，比靈活的健康建議幹預有更大的認知改善。這些發現將多領域生活方式幹預措施的證據基礎擴展到過去在失智症研究中代表性不足的人羣，支持其可行性和可擴展性，作為在低收入和中等收入國家失智症負擔迅速增加的情況下降低認知能力下降風險的策略。"
+          "textZh": "對於沒有複雜因素的嚴重CAP的撒哈拉以南非洲兒童，在首次靜脈注射抗生素後停止口服阿莫西林的臨牀改善的策略，總治療持續時間為4-5天，並不劣於世衛組織推薦的5天靜脈注射治療。"
         },
         {
           "label": "FUNDING",
-          "text": "Alzheimer's Association.",
+          "text": "The Second European and Developing Countries Clinical Trials Partnership (EDCTP2).",
           "labelZh": "經費來源",
-          "textZh": "阿茲海默症協會。"
-        },
-        {
-          "label": "TRANSLATIONS",
-          "text": "For the Spanish and Portuguese translations of the abstract see Supplementary Materials section.",
-          "labelZh": "TRANSLATIONS",
-          "textZh": "有關摘要的西班牙文和葡萄牙文翻譯，請參閱補充材料部分。"
+          "textZh": "第二次歐洲和發展中國家臨牀試驗合作夥伴關係（ EDCTP2 ）。"
         }
       ],
-      "doi": "10.1016/S0140-6736(26)01278-X",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42442374/",
-      "titleZh": "拉丁美洲高危老年人預防認知衰退的多領域生活方式幹預（ LatAm-FINGERS ） ：一項單盲、多中心、隨機對照試驗"
+      "doi": "10.1016/S0140-6736(26)00879-2",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42492562/",
+      "titleZh": "嚴重社區獲得性肺炎（ PediCAP ）住院非洲兒童的口服減量、最佳藥物和抗生素治療總持續時間：一項因子隨機對照試驗"
     },
     {
-      "pmid": "42425122",
-      "title": "Temocillin versus carbapenems for bacteraemia due to third-generation cephalosporin-resistant Enterobacterales in Spain (ASTARTÉ): a multicentre, phase 3, open-label, non-inferiority, randomised clinical trial",
+      "pmid": "42486133",
+      "title": "High-dose chemotherapy followed by autologous stem-cell transplantation versus non-myeloablative consolidation in primary CNS lymphoma (MATRix/IELSG43): a randomised phase 3 trial",
       "journal": "Lancet",
       "category": "四大綜合",
-      "date": "2026 Aug 01",
-      "sortDate": "2026-08-01",
-      "authors": "Dezza FC, Pulido LB, Borreguero IB, Pérez FD, Jiménez VP, de la Rosa Riestra S, Bravo-Ferrer JM, Palacios-Baena ZR, et al.",
+      "date": "2026 Aug 08",
+      "sortDate": "2026-08-08",
+      "authors": "Illerhaus G, Ferreri AJM, Wendler J, Binder M, Borchmann P, Hasenkamp J, Stilgenbauer S, Röth A, et al.",
       "abstract": [
         {
           "label": "BACKGROUND",
-          "text": "Alternatives to carbapenems for the treatment of third-generation cephalosporin-resistant Enterobacterales (3GCR-E) are urgently needed to reduce the selection pressure posed by these drugs. Temocillin is a neglected narrow-spectrum β-lactam. The aim of the trial was to investigate if temocillin is non-inferior to carbapenems for the targeted treatment of bacteraemia due to 3GCR-E.",
+          "text": "Consolidation therapy for primary CNS lymphoma (PCNSL) includes high-dose chemotherapy with autologous stem-cell transplantation (HCT-ASCT), yet its efficacy compared with non-myeloablative chemoimmunotherapy remains uncertain. This study aimed to provide randomised comparative evidence on the efficacy and safety of thiotepa-based HCT-ASCT versus non-myeloablative R-DeVIC consolidation after uniform MATRix induction in newly diagnosed PCNSL.",
           "labelZh": "背景",
-          "textZh": "迫切需要碳青黴烯類的替代品來治療第三代頭孢菌素耐藥腸杆菌（ 3GCR-E ） ，以減少這些藥物帶來的選擇壓力。替莫西林是一種被忽視的狹窄光譜β-內酰胺。該試驗的目的是調查替莫西林在靶向治療由3GCR-E引起的細菌血症方面是否不劣於碳青黴烯類。"
+          "textZh": "原發性中樞神經系統淋巴瘤（ PCNSL ）的鞏固療法包括大劑量化療加自體幹細胞移植（ HCT-ASCT ） ，但與非清髓性化學免疫療法相比，其療效仍不確定。本研究旨在提供關於在新診斷的PCNSL中進行均勻MATRix誘導後，基於硫替帕的HCT-ASCT與非清髓性R-DeVIC鞏固的有效性和安全性的隨機比較證據。"
         },
         {
           "label": "METHODS",
-          "text": "This multicentre, phase 3, open-label, non-inferiority, randomised, pragmatic, investigator-initiated clinical trial was conducted in 29 Spanish hospitals. We randomly assigned patients with bacteraemia caused by 3GCR-E to receive intravenous temocillin (2 g every 8 h) or meropenem (1 g every 8 h; or ertapenem [1 g per day] if appropriate). Patients aged 18 years or older were eligible if they had monomicrobial bacteraemia due to any 3GCR-E that was susceptible to meropenem and temocillin and treatment for at least 4 days with an active intravenous drug was considered necessary. Randomisation (1:1) was stratified according to previous active drug and to source of infection; no blocks were used. The primary endpoint was clinical success (clinical cure, no need to stop or change the study drug because of adverse event or clinical failure, absence of recurrence, and survival by day 28) in all randomly assigned patients who received at least one dose of a study drug (modified intention-to-treat population [mITT]). Adverse events were assessed in the mITT population. No missing data were reported. A 10% non-inferiority margin was established. The trial was registered in ClinicalTrials.gov (NCT04478721) and is complete and closed to new participants.",
+          "text": "This open-label, randomised, phase 3 trial was conducted across 56 university and academic non-university hospitals with established transplantation facilities in five European countries. Eligible for inclusion were untreated, immunocompetent patients with B-cell PCNSL, aged 18-65 years regardless of Eastern Cooperative Oncology Group (ECOG) performance status, or 66-70 years with ECOG performance status 0-2. Pretreatment corticosteroids were permitted. Exclusion criteria included lymphoma manifestation outside the CNS, and congenital or acquired immunodeficiency. Patients received four cycles of MATRix induction (comprising rituximab, high-dose cytarabine, and thiotepa, in addition to high-dose methotrexate). Patients reaching at least partial response were randomly assigned (1:1) to two cycles of R-DeVIC (rituximab plus dexamethasone, etoposide, ifosfamide, and carboplatin) or HCT-ASCT with carmustine and thiotepa. The primary endpoint was progression-free survival, assessed in the full analysis set (excluding patients with major violations of entry criteria). The safety analysis set contained all randomised patients who initiated therapy. This study is registered with ClinicalTrials.gov (NCT02531841) and the EU Clinical Trials Register (EudraCT number 2012-000620-17). The study is completed.",
           "labelZh": "方法",
-          "textZh": "這項多中心、3期、開放標籤、非劣效性、隨機、務實、研究者發起的臨牀試驗在29家西班牙醫院進行。 我們隨機分配由3GCR-E引起的細菌血症患者接受靜脈注射替莫西林（每8小時2g ）或美羅培南（每8小時1g ；或厄他培南[每天1g] ，如適用）。 18歲或以上的患者，如果由於任何易受美羅培南和替莫西林影響的3GCR-E引起的單微生物細菌血症，則符合資格，並且認為有必要使用活性靜脈注射藥物治療至少4天。 隨機分組（ 1 ： 1 ）根據先前的活性藥物和感染源進行分層；未使用塊。 主要終點是接受至少一劑研究藥物的所有隨機分配患者的臨牀成功率（臨牀治癒、無需因不良事件或臨牀失敗而停止或更改研究藥物、無復發，以及第28天的存活率） （改良的意向治療人羣[mITT] ）。 在mITT人羣中評估不良事件。 未報告遺漏資料。 建立了10%的非劣效性界限。 該試驗已在ClinicalTrials.gov （ NCT04478721 ）中註冊，已完成並對新參與者關閉。"
+          "textZh": "這項開放標籤的隨機3期試驗在56家大學和非大學學術醫院進行，這些醫院在五個歐洲國家建立了移植設施。 符合納入資格的是未治療的免疫適能B細胞PCNSL患者，年齡為18-65歲，無論東部腫瘤合作組（ ECOG ）體能狀態如何，或66-70歲， ECOG體能狀態為0-2。 允許使用預治療皮質類固醇。 排除標準包括中樞神經系統外的淋巴瘤表現，以及先天性或後天性免疫缺陷。 患者接受四個週期的MATRix誘導（包括利妥昔單抗、大劑量阿糖胞苷和硫替帕，以及大劑量甲氨喋呤）。 將達到至少部分緩解的患者隨機(1: 1)分配到兩個週期的R-DeVIC (利妥昔單抗加地塞米鬆、依託泊苷、異環磷酰胺和卡鉑)或HCT-ASCT加卡莫司汀和硫替帕。 主要終點是在完整分析集中評估的無惡化存活期（不包括嚴重違反入組標準的患者）。 安全性分析集包含所有開始治療的隨機分組患者。 本研究已在ClinicalTrials.gov （ NCT02531841 ）和歐盟臨牀試驗註冊處（ EudraCT編號2012-000620-17 ）註冊。 研究已完成。"
         },
         {
           "label": "FINDINGS",
-          "text": "334 eligible patients were enrolled between Dec 15, 2020, and Nov 29, 2024, of whom 328 were included in the mITT population (163 assigned temocillin and 165 assigned carbapenems). In 328 participants, the median age was 72 years (IQR 65-80), 106 (32%) were female, 222 (68%) were male, and the median Charlson Comorbidity Index was 2 (IQR 0-4). In the mITT population, clinical success occurred in 120 (74%) of 163 patients assigned temocillin and 121 (73%) of 165 patients assigned carbapenems (difference 0·3% [95% CI -7·7 to ∞]; non-inferiority p=0·017). Serious adverse events were reported in 31 (19%) of 163 patients assigned temocillin and 35 (24%) of 165 patients assigned carbapenems.",
+          "text": "Between July 16, 2014, and Aug 31, 2019, 368 patients were enrolled. 346 (94%) patients started induction treatment, and 230 were randomly assigned; 229 patients were analysed (R-DeVIC group, n=115; HCT-ASCT group, n=114). After a median follow-up of 45·3 months, 3-year progression-free survival was significantly superior in the HCT-ASCT group (hazard ratio 0·43 [95% CI 0·27-0·68]; p=0·0003). The 3-year progression-free survival was 78% (95% CI 69-85) in the HCT-ASCT group compared with 51% (41-60) in the R-DeVIC group. The mean number of adverse events per patient was 9·3 (SD 4·4) in the R-DeVIC group and 14·6 (5·8) in the HCT-ASCT group. Fatal serious adverse events following consolidation treatment occurred in two patients in the R-DeVIC group (both acute myeloid leukaemia) and in five patients in the HCT-ASCT group (infections and infestations [n=4], pulmonary embolism [n=1]); all of these events apart from the pulmonary embolism were judged to be possibly related to treatment.",
           "labelZh": "發現",
-          "textZh": "在2020年12月15日至2024年11月29日期間招募了334名符合資格的患者，其中328名被納入mITT人羣（ 163名分配的替莫西林和165名分配的碳青黴烯類藥物）。在328名參與者中，中位年齡為72歲（ IQR 65-80 ） ， 106名（ 32 ％ ）為女性， 222名（ 68 ％ ）為男性，而Charlson合併症指數中位數為2 （ IQR 0-4 ）。在mITT族羣中，分配給替莫西林的163名患者中有120名(74%)發生臨牀成功，分配給碳青黴烯類的165名患者中有121名(73%)發生臨牀成功(差異為0 · 3% [95% CI -7 · 7至∞] ；非劣效性p = 0 · 017)。分配給替莫西林的163名患者中有31名(19%)報告了嚴重不良事件，分配給碳青黴烯類的165名患者中有35名(24%)報告了嚴重不良事件。"
+          "textZh": "在2014年7月16日至2019年8月31日期間，招募了368名患者。346名（ 94 ％ ）患者開始進行誘導治療，並隨機分配230名;分析了229名患者（ R-DeVIC組， n = 115; HCT-ASCT組， n = 114 ）。中位隨訪45 · 3個月後， HCT-ASCT組的3年無惡化存活率顯著優於對照組（風險比0 · 43 [95% CI 0 · 27-0 · 68] ； p = 0 · 0003 ）。HCT-ASCT組的3年無惡化存活率為78% （ 95% CI 69-85 ） ，而R-DeVIC組為51% （ 41-60 ）。每位患者的不良事件平均數量在R-DeVIC組為9 · 3 (SD 4 · 4) ，在HCT-ASCT組為14 · 6 (5 · 8)。鞏固治療後的致命嚴重不良事件發生在R-DeVIC組的兩名患者（均為急性骨髓性白血病）和HCT-ASCT組的五名患者（感染和侵襲[n = 4] ，肺栓塞[n = 1] ） ；除肺栓塞外，所有這些事件都被判斷可能與治療有關。"
         },
         {
           "label": "INTERPRETATION",
-          "text": "In patients with bacteraemia caused by 3GCR-E, temocillin was non-inferior to carbapenems as targeted treatment. These findings support the use of temocillin as an effective and safe alternative to carbapenems in this setting.",
+          "text": "In the largest randomised trial in untreated PCNSL to date, HCT-ASCT significantly improved progression-free and overall survival compared with non-myeloablative consolidation in patients who had completed induction treatment, establishing it as the preferred consolidation strategy in fit patients.",
           "labelZh": "詮釋",
-          "textZh": "在由3GCR-E引起的細菌血症患者中，替莫西林作為靶向治療不劣於碳青黴烯類。這些發現支持在這種情況下使用替莫西林作為碳青黴烯類的有效和安全的替代品。"
+          "textZh": "在迄今為止最大規模的未治療PCNSL隨機試驗中，與非清髓性鞏固相比， HCT-ASCT在已完成誘導治療的患者中顯著改善無惡化和總生存期，確立其為合適患者的首選鞏固策略。"
         },
         {
           "label": "FUNDING",
-          "text": "Instituto de Salud Carlos III.",
+          "text": "German Federal Ministry of Research, Technology and Space; Swiss Cancer Research Foundation; and Riemser Pharma.",
           "labelZh": "經費來源",
-          "textZh": "Instituto de Salud Carlos III."
+          "textZh": "德國聯邦研究、技術和太空部；瑞士癌症研究基金會；以及Riemser Pharma。"
         }
       ],
-      "doi": "10.1016/S0140-6736(26)00760-9",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42425122/",
-      "titleZh": "替莫西林與碳青黴烯類比較西班牙第三代耐頭孢菌素腸杆菌（ ASTARTÉ ）引起的細菌血症：一項多中心、3期、開放標籤、非劣效性、隨機臨牀試驗"
+      "doi": "10.1016/S0140-6736(26)00917-7",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42486133/",
+      "titleZh": "原發性中樞神經系統淋巴瘤大劑量化療後自體幹細胞移植對比非清髓性鞏固（ MATRix/IELSG43 ） ：一項隨機3期試驗"
     },
     {
-      "pmid": "42425121",
-      "title": "Fixed-duration pirtobrutinib plus venetoclax-rituximab versus venetoclax-rituximab for patients with previously treated chronic lymphocytic leukaemia or small lymphocytic lymphoma (BRUIN CLL-322): an open-label, multicentre, randomised, controlled, phase 3 trial",
+      "pmid": "42431219",
+      "title": "Advancing the relevance of clinical trials for older patients",
       "journal": "Lancet",
       "category": "四大綜合",
-      "date": "2026 Aug 01",
-      "sortDate": "2026-08-01",
-      "authors": "Davids MS, Eyre TA, Woyach JA, Roeker LE, Ferrajoli A, Wang Y, Tam CS, Jurczak W, et al.",
+      "date": "2026 Aug 08",
+      "sortDate": "2026-08-08",
+      "authors": "Wildiers H, Hamaker M, Mooijaart S, Mohile S, Canoui-Poitrine F, Guasti L, de Glas N",
       "abstract": [
         {
-          "label": "BACKGROUND",
-          "text": "Venetoclax-rituximab (VR) following covalent Bruton tyrosine kinase (BTK) inhibitor therapy is the fixed-duration standard of care for patients with chronic lymphocytic leukaemia (including small lymphocytic lymphoma). Pirtobrutinib, a non-covalent BTK inhibitor, is approved for use after treatment with a covalent BTK inhibitor as a continuous therapy option. We aimed to evaluate the addition of pirtobrutinib to VR as a fixed-duration regimen in patients with relapsed or refractory chronic lymphocytic leukaemia.",
-          "labelZh": "背景",
-          "textZh": "共價Bruton酪氨酸激酶（ BTK ）抑制劑治療後的Venetoclax-rituximab （ VR ）是慢性淋巴細胞白血病（包括小淋巴細胞淋巴瘤）患者的固定療程標準。Pirtobrutinib是一種非共價BTK抑制劑，被批準在使用共價BTK抑制劑作為連續治療選擇後使用。我們的目標是評估在復發或難治性慢性淋巴細胞白血病患者中，在VR中添加pirtobrutinib作為固定持續時間的治療方案。"
-        },
-        {
-          "label": "METHODS",
-          "text": "This open-label, multicentre, randomised, controlled, phase 3 trial was conducted at 152 sites (comprising community hospitals and academic centres) across 22 countries. Eligible patients were aged 18 years or older, had a confirmed diagnosis of chronic lymphocytic leukaemia (including small lymphocytic lymphoma), and had previously been treated with at least one line of therapy that could include a covalent BTK inhibitor. Patients who had previously received a non-covalent BTK inhibitor, venetoclax, or another BCL2 inhibitor were not eligible. Enrolled patients were randomly assigned (1:1) using an interactive web-based randomisation system, stratified by del(17p) status and previous exposure to covalent BTK inhibitors, and assigned to receive either pirtobrutinib plus VR (PVR) or VR. Both groups received oral venetoclax (25 cycles) and intravenous rituximab (six cycles); the PVR group also received oral pirtobrutinib for 28 cycles, with a three-cycle pirtobrutinib-rituximab lead-in before venetoclax initiation. For this prespecified interim analysis, the primary endpoint was progression-free survival in the intention-to-treat population, assessed by a masked independent review committee (IRC) as per 2018 International Workshop on Chronic Lymphocytic Leukemia guidelines. Safety analyses were conducted in the safety population, defined as all randomly assigned patients who took at least one dose of any study treatment. All analyses were based on a data cutoff date of Feb 2, 2026. The trial is registered at ClinicalTrials.gov, NCT04965493, and is ongoing but no longer recruiting.",
-          "labelZh": "方法",
-          "textZh": "這項開放標籤、多中心、隨機、對照、3期試驗在22個國家的152個研究中心（包括社區醫院和學術中心）進行。 符合資格的患者年齡為18歲或以上，確診為慢性淋巴細胞白血病（包括小淋巴細胞淋巴瘤） ，且曾接受過至少一種可能包括共價BTK抑制劑的治療。 先前接受過非共價BTK抑制劑、venetoclax或其他BCL2抑制劑的患者不符合資格。 入組患者使用互動式網頁隨機分配系統隨機分配(1: 1) ，依據del (17p)狀態和既往共價BTK抑製劑暴露分層，並分配接受pirtobrutinib加VR (PVR)或VR。 兩組均接受口服venetoclax （ 25個週期）和靜脈注射利妥昔單抗（ 6個週期） ； PVR組還接受口服pirtobrutinib 28個週期，在venetoclax開始之前使用3個週期pirtobrutinib-rituximab導入。 對於這項預先指定的中期分析，主要終點是意向治療族羣的無惡化生存期，根據2018年慢性淋巴細胞白血病國際研討會指南，由蒙面獨立審查委員會(IRC)進行評估。 安全性分析在安全性族羣中進行，定義為所有隨機分配的患者至少服用一劑任何研究治療藥物。 所有分析均基於2月2日的數據截止日期，"
-        },
-        {
-          "label": "FINDINGS",
-          "text": "Between Oct 13, 2021, and Oct 28, 2024, 784 patients were screened, of whom 639 were randomly assigned: 321 to the PVR group and 318 to the VR group. The median age of patients was 68·0 years (IQR 60·0-74·0), of whom 439 (69%) were male and 200 (31%) were female. The median number of previous therapies was 2 (IQR 1-3); 510 (80%) of 639 patients had previous exposure to covalent BTK inhibitors, of whom 362 (71%) discontinued their most recent drug of this class owing to progressive disease. At a median follow-up of 27·3 months (IQR 19·5-38·7), PVR showed a significant improvement in IRC-assessed progression-free survival compared with VR (hazard ratio 0·547 [95% CI 0·400-0·748]; p=0·0001). The median 24-month progression-free survival rate was 87% (95% CI 82·3-90·4) in the PVR group versus 72% (65·7-77·0) in the VR group, and the median progression-free survival was not reached (IQR 31·7-not estimable) in the PVR group versus 39·7 months (21·5-50·0) in the VR group. This benefit was consistent across prespecified subgroups, including patients with previous exposure to covalent BTK inhibitors. The most frequent treatment-emergent adverse event of any grade in both groups was diarrhoea, reported in 106 (34%) of 316 patients in the PVR group and 110 (35%) of 311 patients in the VR group. The frequency of treatment-emergent adverse events of grade 3 or higher was similar in both groups (249 [79%] of 316 patients in the PVR group vs 227 [73%] of 311 patients in the VR group); the rate of tumour lysis syndrome of grade 3 or higher was lower in the PVR group (1%; three of 316) than in the VR group (4%; 12 of 311). Rates of atrial fibrillation or flutter of any grade were low (11 [3%] of 316 patients in the PVR group vs eight [3%] of 311 patients in the VR group). Rates of treatment discontinuation owing to treatment-emergent adverse events deemed as related to any of the study drugs were similar: 5% (17 of 316 patients) in the PVR group versus 5% (16 of 311 patients) in the VR group. There were five treatment-related deaths: one in the PVR group and four in the VR group.",
-          "labelZh": "發現",
-          "textZh": "在2021年10月13日至2024年10月28日期間，篩選了784名患者，其中639名患者被隨機分配： 321名分配到PVR組， 318名分配到VR組。 患者的中位年齡為68 · 0歲（ IQR 60 · 0-74 · 0 ） ，其中439人（ 69 ％ ）為男性， 200人（ 31 ％ ）為女性。 既往治療的中位數為2 (IQR 1-3) ； 639名患者中有510名(80%)既往接觸過共價BTK抑製劑，其中362名(71%)因疾病進展而停止使用此類最新藥物。 在中位隨訪27 · 3個月（ IQR 19 · 5-38 · 7 ）時，與VR相比， PVR顯示IRC評估的無惡化生存期顯著改善（風險比0 · 547 [95% CI 0 · 400-0 · 748] ； p = 0 · 0001 ）。 PVR組的中位24個月無惡化存活率為87% (95% CI 82 · 3-90 · 4) ， VR組為72% (65 · 7-77 · 0) ， PVR組未達到中位無惡化存活率(IQR 31 · 7-不可估計) ， VR組為39 · 7個月(21 · 5-50 · 0)。 這種益處在預先指定的次組中是一致的，包括以前曾接觸過共價BTK抑制劑的患者。 兩組中最常見的任何等級的治療中出現的不良事件是腹瀉，在PVR組的316名患者中有106名（ 34 ％ ）報告，在VR組的311名患者中有110名（ 35 ％ ）報告。 兩組中第3級或以上的治療中出現不良事件的頻率相似（ PVR組中316名患者中有249名[79 ％] ，而311名患者中有227名[73 ％]"
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "In patients with previously treated chronic lymphocytic leukaemia, PVR showed significant improvement in progression-free survival compared with VR, with consistent results in patients who had previously received covalent BTK inhibitors and no new safety signals. To our knowledge, these results represent the first randomised phase 3 evidence comparing a novel fixed-duration regimen to the current standard of VR in relapsed or refractory chronic lymphocytic leukaemia, supporting PVR as a potential new standard of care.",
-          "labelZh": "詮釋",
-          "textZh": "在先前治療的慢性淋巴細胞白血病患者中，與VR相比， PVR顯示無惡化生存期顯著改善，在先前接受共價BTK抑制劑的患者中結果一致，沒有新的安全性信號。據我們所知，這些結果是第一個隨機3期證據，將一種新的固定持續時間療法與當前復發或難治性慢性淋巴細胞白血病的VR標準進行比較，支持PVR作為一種潛在的新治療標準。"
-        },
-        {
-          "label": "FUNDING",
-          "text": "Eli Lilly and Company.",
-          "labelZh": "經費來源",
-          "textZh": "Eli Lilly and Company。"
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)01204-3",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42425121/",
-      "titleZh": "對於先前治療的慢性淋巴細胞白血病或小淋巴細胞淋巴瘤（ BRUIN CLL-322 ）患者，固定期間的pirtobrutinib加venetoclax-rituximab與venetoclax-rituximab ：一項開放標籤、多中心、隨機、對照、3期試驗"
-    },
-    {
-      "pmid": "42419329",
-      "title": "Systemic light chain and transthyretin amyloidosis-treatment advancements and future directions",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Aug 01",
-      "sortDate": "2026-08-01",
-      "authors": "Bianchi G, Sanchorawala V, Wechalekar A, Grogan M, Cuddy SAM, Merlini G",
-      "abstract": [
-        {
-          "text": "Once rapidly fatal, neglected, and orphan diseases without approved therapeutic options, systemic amyloidoses are now highly treatable. Basic scientific discoveries regarding the molecular mechanisms of transthyretin misfolding and aggregation have driven the development of drugs for the treatment of transthyretin (ATTR) amyloidosis, with six novel therapies approved since 2018. The combination of daratumumab, cyclophosphamide, bortezomib, and dexamethasone was approved for the treatment of light chain (AL) amyloidosis in 2021. Since then, highly effective immunotherapies, such as bispecific T-cell engagers, have been tested in clinical trials in patients with relapsed AL amyloidosis, with unprecedented efficacy. Thus, suspicion of systemic amyloidosis should be raised early in individuals with a suggestive clinical presentation, followed by rapid tissue diagnosis, with appropriate protein typing and prompt commencement of active therapy. These rapid and exciting therapeutic advancements set the stage for this Review on the epidemiology, pathophysiology, and diagnosis of systemic amyloidosis. Through the lens of the molecular mechanisms underlying amyloidosis pathogenesis, we will focus on approved and investigational therapies. We also discuss future directions and challenges concerning a cure for patients with AL or ATTR amyloidosis.",
+          "text": "Older patients represent the fastest growing patient group in clinical care. They are a heterogeneous group, for whom evidence for making treatment decisions is often scarce. Important domains for advancing the relevance of clinical trials for older patients are selection and inclusion of representative patients, choosing appropriate therapeutic interventions, and studying relevant outcomes. In the last decade, a myriad of publications has recommended multiple solutions that improve the relevance of trials for older people. Although uptake of these recommendations has been slow, there are now some excellent and successful implementation approaches that show that it is possible to design and execute trials that are inclusive of older patients, address relevant outcomes, and allow for real-world comparisons of intervention effectiveness. Observational studies based on different data sources add useful complementary information. This narrative review aims to synthesise best practices and successful strategies to improve the relevance of clinical trials for older patients.",
           "labelZh": null,
-          "textZh": "全身性澱粉樣蛋白病曾經迅速致命，被忽視，並且是沒有經過批準的治療選擇的孤兒疾病，現在可以高度治療。 關於轉甲狀腺素錯誤折疊和聚集的分子機制的基礎科學發現推動了治療轉甲狀腺素（ ATTR ）澱粉樣變性的藥物的開發，自2018年以來批準了六種新療法。 2021年，達雷木單抗、環磷酰胺、硼替佐米和地塞米鬆的組合被批準用於治療輕鏈(AL)澱粉樣變性。 從那時起，在復發性AL澱粉樣變性患者的臨牀試驗中測試了高度有效的免疫療法，例如雙特異性T細胞接合劑，具有前所未有的功效。 因此，在臨牀表現具有提示性的個體中，應及早提出對全身性澱粉樣變性的懷疑，然後進行快速組織診斷，並進行適當的蛋白質分型並迅速開始主動治療。 這些快速而令人興奮的治療進步為本綜述全身性澱粉樣變性的流行病學、病理生理學和診斷奠定了基礎。 透過澱粉樣變性發病機制背後的分子機制，我們將專注於已批準和研究的療法。 我們還討論了有關治療AL或ATTR澱粉樣變性患者的未來方向和挑戰。"
+          "textZh": "老年患者是臨牀護理中增長最快的患者羣體。 他們是一個異質的羣體，對他們來說，做出治療決定的證據往往很少。 推進老年患者臨牀試驗相關性的重要領域是選擇和納入代表性患者、選擇適當的治療幹預措施以及研究相關結果。 在過去十年中，無數的出版物推薦了多種解決方案，以提高試驗對老年人的相關性。 雖然對這些建議的採用一直很慢，但現在有一些出色且成功的實施方法表明，可以設計和執行包含老年患者的試驗，解決相關結果，並允許實際比較幹預有效性。 基於不同數據來源的觀察性研究增加了有用的補充信息。 本敘述性回顧旨在綜合最佳實踐和成功策略，以提高臨牀試驗對老年患者的相關性。"
         }
       ],
-      "doi": "10.1016/S0140-6736(26)00302-8",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42419329/",
-      "titleZh": "全身性輕鏈和轉甲狀腺素澱粉樣變性治療的進展和未來方向"
+      "doi": "10.1016/S0140-6736(26)00905-0",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42431219/",
+      "titleZh": "提升老年患者臨牀試驗的相關性"
     },
     {
-      "pmid": "42034117",
-      "title": "Hepatitis A prevention in the USA depends on routine universal childhood vaccination",
+      "pmid": "42263727",
+      "title": "Global advances in health artificial intelligence: a workforce imperative",
       "journal": "Lancet",
       "category": "四大綜合",
-      "date": "2026 Aug 01",
-      "sortDate": "2026-08-01",
-      "authors": "Nelson NP, Ward JW",
-      "abstract": [],
-      "doi": "10.1016/S0140-6736(26)00510-6",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42034117/",
-      "titleZh": "美國的甲型肝炎預防依賴於常規的兒童全民疫苗接種"
+      "date": "2026 Aug 08",
+      "sortDate": "2026-08-08",
+      "authors": "Dai T, McDonald KM, Baumgart DC",
+      "abstract": [
+        {
+          "text": "The global health workforce is approaching a breaking point, driven by administrative overload, inefficient workflows, burnout, and accelerating retirements, with a projected global shortfall of 11 million health professionals by 2030. This urgency coincides with the rapid emergence of clinical artificial intelligence (AI) tools, especially generative systems now embedded in documentation, triage, and workflow support. Therefore, AI should be framed less as a substitute for clinicians than as a retention strategy that preserves careers, expertise, and the human core of care. High-impact uses include ambient documentation, coding support, scheduling and demand prediction, claims and billing support, and inbox triage-tools that can reduce clerical burden and return time to caring, teaching, and leadership. Workforce shortages also create an ethical and geopolitical dilemma; reliance on international recruitment can deepen global inequities, whereas responsible AI deployment might ease competition for scarce talent and expand capacity in lower-resource settings. Yet, AI will not fix dysfunctional systems by default; poorly designed implementation can shift burdens, erode confidence, and widen gaps in health-care quality, access, and clinician wellbeing. Practice must remain clinician-led, patient-centred, and grounded in shared decision making. The policy priority is expertise amplification, not workforce replacement.",
+          "labelZh": null,
+          "textZh": "由於行政負擔過重、工作流程效率低下、職業倦怠和加速退休，全球衛生人員正接近臨界點，預計到2030年全球將缺少1,100萬名衛生專業人員。 這種緊迫性與臨牀人工智慧（ AI ）工具的迅速出現相吻合，特別是現在嵌入在文件、分流和工作流程支持中的生成系統。 因此，人工智慧不應被視為臨牀醫生的替代品，而應被視為保留職業、專業知識和人類核心護理的保留策略。 高影響力的用途包括環境文件、編碼支援、排程和需求預測、索賠和帳單支援，以及收件箱分流工具，可以減輕文書負擔，並將時間歸還給照顧、教學和領導層。 勞動力短缺也造成了道德和地緣政治困境；依賴國際招聘可能會加深全球不平等，而負責任的人工智慧部署可能會緩解對稀缺人才的競爭，並擴大低資源環境的產能。 然而， AI預設不會修復功能失調的系統；設計不當的實施可能會轉移負擔、侵蝕信心，並擴大醫療保健質量、可及性和臨牀醫生福祉方面的差距。 實踐必須始終以臨牀醫生為主導，以患者為中心，並以共同決策為基礎。 政策優先是擴大專業知識，而不是更換勞動力。"
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)00693-8",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42263727/",
+      "titleZh": "全球健康人工智能的進步：勞動力勢在必行"
+    },
+    {
+      "pmid": "42567691",
+      "title": "General practice closures or mergers: a survival analysis of contributing practice",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Aug 07",
+      "sortDate": "2026-08-07",
+      "authors": "Hutchinson J, Anderson M, Santos R, Kontopantelis E, Sutton M",
+      "abstract": [
+        {
+          "text": "Background 20% of general practices in the England have closed or merged since 2013. Little is known about factors that are associated with these closures, despite evidence on their negative impacts. Understanding these risks is important for recovering general practice. Aim Describe how differences in the patient mix, practice location, workforce, funding and quality are associated with the future risk of closure Design and Setting Multilevel survival analysis of all general practices in England. Method All practices open on 1st April 2019 were followed until 1st April 2025 or closure. We gathered data on practice population characteristics, workforce, funding and quality. Cox proportional hazards models were used to analyse how these measures were associated with time to closure. Results Practice contract type and geographic location (region and rurality) were key factors associated with closures or mergers. For example, rates ranged from 3.7% to 19.7% by geographic region. Greater risk was associated with smaller practices, with a practice at the 10th percentile (3,032 patients) having 253% (95% CrI: 200%, 312%) higher risk of closure or merger than the median (7,256 patients). Greater risk of closure or merger was associated with losing or failing to gain patients (hazard ratio v medium increase 1.68 (95%CrI: 1.44, 1.96), lower baseline funding, poorer clinical quality, higher socioeconomic deprivation and certain contract types, but not the supply of general practitioners or nurses. Conclusion The practice contract, relevant region, practice list size, funding and quality are key hazards for the subsequent closure or merger of general practices.",
+          "labelZh": null,
+          "textZh": "背景自2013年以來，英格蘭20 ％的一般實踐已經關閉或合併。 儘管有證據表明這些關閉會產生負面影響，但與這些關閉相關的因素知之甚少。 了解這些風險對於恢復一般診所非常重要。 目的描述患者組合、執業地點、勞動力、資金和質量的差異如何與未來關閉風險相關設計和設置英國所有一般執業的多層次生存分析。 方法2019年4月1日開放的所有實踐一直持續到2025年4月1日或關閉。 我們收集了有關實踐人口特徵、勞動力、資金和質量的數據。 使用Cox比例風險模型來分析這些措施如何與關閉時間相關聯。 結果執業合約類型和地理位置（地區和鄉村）是與關閉或合併相關的關鍵因素。 例如，按地理區域劃分的利率從3.7%到19.7%不等。 較高的風險與較小的實踐相關，在第10個百分點的實踐（ 3,032名患者）中，關閉或合併的風險比中位數（ 7,256名患者）高253 ％ （ 95 ％ CrI ： 200 ％ ， 312 ％ ）。 關閉或合併的風險較高與失去或未能獲得患者有關（風險比v中度增加1.68 （ 95 ％ CrI ： 1.44,1.96 ） ，基線資金較低，臨牀質量較差，社會經濟剝奪程度較高和某些合同類型，但不是一般"
+        }
+      ],
+      "doi": "10.3399/BJGP.2026.0126",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42567691/",
+      "titleZh": "一般實踐關閉或合併：貢獻實踐的生存分析"
+    },
+    {
+      "pmid": "42567690",
+      "title": "Talking about online activity and mental health with young people in primary care: A qualitative interview study",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Aug 07",
+      "sortDate": "2026-08-07",
+      "authors": "Archer C, Linton MJ, Kessler D, Wiles N, Biddle L",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Young people - aged 16-24 - are high users of digital technology. Online activity can be both beneficial for mental health and harmful. Appointments in general practice (GP) or primary care talking therapy provide opportunities to discuss online activity and its impact on mental health with young people. Such conversations could have preventive value by increasing awareness of problematic behaviours, identifying risk and suggest safer use strategies. However, little is known about whether such conversations are currently delivered in primary care.",
+          "labelZh": "背景",
+          "textZh": "年輕人（ 16-24歲）是數位技術的高使用者。線上活動既有益於心理健康，也有害於心理健康。一般診所（ GP ）或初級護理談話治療的預約提供了與年輕人討論線上活動及其對心理健康影響的機會。這樣的對話可以通過提高對問題行為的認識、識別風險和建議更安全的使用策略來具有預防價值。然而，目前對初級保健中是否提供此類對話知之甚少。"
+        },
+        {
+          "label": "AIM",
+          "text": "To explore practitioners views on discussing online activity and its role in the mental health of young people in primary care.",
+          "labelZh": "目的",
+          "textZh": "探索從業人員對討論線上活動及其在初級保健年輕人心理健康中的作用的看法。"
+        },
+        {
+          "label": "DESIGN AND SETTING",
+          "text": "Qualitative study with practitioners in GP and Talking Therapy Method: Semi-structured interviews with 24 practitioners, analysed using reflexive thematic analysis.",
+          "labelZh": "DESIGN AND SETTING",
+          "textZh": "與GP和談話治療方法的從業人員進行定性研究：與24名從業人員進行半結構化訪談，使用反射性主題分析進行分析。"
+        },
+        {
+          "label": "RESULTS",
+          "text": "Practitioners recognise helpful and harmful aspects to online activity, but there is variation in whether practitioners currently ask about online activity and whether they consider conversations appropriate for primary care. Several factors may shape confidence and decision making: practitioners own understanding of the online world; unable to change the impact on mental health or signpost to services; limitations in time, confidence or topic awareness. Practitioners identified a need for guidance and training to inform conversations about online activity.",
+          "labelZh": "結果",
+          "textZh": "從業人員認識到線上活動的有益和有害方面，但從業人員目前是否詢問線上活動以及他們是否認為對話適合初級保健存在差異。有幾個因素可能會影響信心和決策：從業者自己對網絡世界的理解；無法改變對心理健康的影響或服務的路標；時間、信心或主題意識的限制。從業人員認為有必要提供指導和培訓，以告知有關線上活動的對話。"
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "There is variation in whether conversations about online activity with young people are happening in primary care. The development of best-practice resources is required to ensure conversations are acceptable to young people and effective at changing problematic online activity to improve mental health.",
+          "labelZh": "結論",
+          "textZh": "與年輕人有關線上活動的對話是否發生在初級保健中，存在差異。需要開發最佳實踐資源，以確保對話為年輕人所接受，並有效地改變有問題的在線活動，以改善心理健康。"
+        }
+      ],
+      "doi": "10.3399/BJGP.2026.0076",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42567690/",
+      "titleZh": "與初級護理中的年輕人談論線上活動和心理健康：定性訪談研究"
+    },
+    {
+      "pmid": "42567689",
+      "title": "Why Primary Care Clinicians use Advice and Guidance: A qualitative study",
+      "journal": "BJGP",
+      "category": "家醫科",
+      "date": "2026 Aug 07",
+      "sortDate": "2026-08-07",
+      "authors": "Faux-Nightingale A, Harrison R, Burton C, Bajpai R, Clarson L, Hadley-Barrows T, Haines J, Helliwell T, et al.",
+      "abstract": [
+        {
+          "text": "Background Where available, Advice and Guidance (A&G) can enable primary care clinicians to seek specialist input, supporting decision making and avoiding unnecessary referrals. The use of A&G has significantly expanded, accelerated by COVID19 and contractual changes. While A&G is intended to streamline elective care, concerns persist regarding workload shift, variable responsiveness, and system usability. Despite growing policy emphasis, little is known about why clinicians choose to use A&G. Aim Explore the current use of A&G within primary care, focusing on decision making processes which underpin PCCs' (primary care clinicians') decision to use A&G. Design and Setting Qualitative study set in English Primary Care Method Twenty semi structured video interviews were conducted with primary care clinicians purposively sampled for maximum variation. Data were analysed using reflexive thematic analysis within an interpretive description framework, with themes developed collaboratively and refined through discussion with researchers and PPIE contributors. Ethical approval was obtained (REC 333799). Results Four overarching themes encapsulate clinicians' decisions to use A&G: clinical presentation (acuity and complexity), navigating healthcare pathways, previous experiences of A&G, and using A&G to validate clinical decision making. Barriers included delayed responses and uncertainty about inequitable workload distribution. These factors shape how effectively A&G could be integrated into routine practice. Conclusion Primary care clinicians use A&G to support patient care and aid decision-making, but its effectiveness depends on timely, clinically helpful responses. Ensuring responses remain appropriate to primary care remit and capacity will be essential if A&G becomes the main route into elective care.",
+          "labelZh": null,
+          "textZh": "背景在可用的情況下，建議和指導（ A ＆ G ）可以使初級保健臨牀醫生尋求專家意見，支持決策並避免不必要的轉介。 在新冠肺炎疫情和合同變更的加速下， A&G的使用顯著擴大。 雖然A&G旨在簡化選擇性護理，但對工作量轉移、可變回應性和系統可用性的擔憂仍然存在。 儘管政策重點越來越強調，但對臨牀醫生選擇使用A&G的原因知之甚少。目標探索目前在初級保健中使用A&G的情況，著重於支撐PCC （初級保健臨牀醫生）決定使用A&G的決策過程。設計和設置英語初級保健方法中的定性研究設置20次半結構化視頻訪談與初級保健臨牀醫生進行了有目的的採樣，以獲得最大變化。 數據在解釋性描述框架內使用自反主題分析進行分析，主題通過與研究人員和PPIE貢獻者的討論共同開發和完善。 已獲得倫理批準（ REC 333799 ）。 結果四大主題概括了臨牀醫生使用A&G的決策：臨牀呈現（敏銳度和複雜度）、導航醫療保健路徑、A&G的過往經驗，以及使用A&G來驗證臨牀決策。 障礙包括回應延遲以及工作量分配不公平的不確定性。 這些因素決定了A&G的成效"
+        }
+      ],
+      "doi": "10.3399/BJGP.2026.0217",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42567689/",
+      "titleZh": "初級護理臨牀醫生為何使用建議和指導：定性研究"
+    },
+    {
+      "pmid": "42555934",
+      "title": "Syncope",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Aug 06",
+      "sortDate": "2026-08-06",
+      "authors": "Kenny RA",
+      "abstract": [
+        {
+          "text": "Syncope is a common clinical problem caused by transient cerebral hypoperfusion and encompasses reflex, orthostatic, and cardiac mechanisms. Accurate diagnosis relies on careful history taking and physical examination, as well as targeted testing guided by risk stratification. Management of syncope is determined on the basis of the underlying mechanism and focuses on reducing recurrence and injury risk. In older patients, syncope may manifest as unexplained falls. Early identification of high-risk features is critical to prevent adverse cardiovascular outcomes.",
+          "labelZh": null,
+          "textZh": "暈厥是由短暫性腦灌注不足引起的常見臨牀問題，包括反射、直立和心臟機制。準確的診斷依賴於仔細的病史記錄和身體檢查，以及根據風險分層進行的針對性測試。暈厥的管理是根據潛在的機制確定的，重點是減少復發和傷害風險。在老年患者中，暈厥可能表現為不明原因的跌倒。及早識別高風險特徵對於預防不良心血管疾病結果至關重要。"
+        }
+      ],
+      "doi": "10.1056/NEJMcp2517255",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42555934/",
+      "titleZh": "暈厥"
+    },
+    {
+      "pmid": "42267831",
+      "title": "Conservative Oxygen for Unresponsive Patients after Cardiac Arrest",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Aug 06",
+      "sortDate": "2026-08-06",
+      "authors": "LOGICAL Investigators and the Australian and New Zealand Intensive Care Society Clinical Trials Group, Hodgson CL, Mackle D, Mather AM, Bailey M, Beasley R, Beehre N, Bernard S, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "In patients who are unresponsive after resuscitation from cardiac arrest, limiting oxygen exposure to that necessary to achieve acceptable oxygenation may increase the likelihood of survival with a favorable functional outcome.",
+          "labelZh": "背景",
+          "textZh": "在心臟驟停復甦後無反應的患者中，將氧氣暴露限制在實現可接受的氧合所必需的範圍內，可能會增加生存的可能性，並獲得良好的功能結果。"
+        },
+        {
+          "label": "METHODS",
+          "text": "We randomly assigned unresponsive adults receiving mechanical ventilation in the intensive care unit (ICU) after cardiac arrest to conservative or liberal oxygen therapy. In the two groups, the default lower limit of arterial oxygen saturation as measured by pulse oximetry (Spo2) was 90%. In the conservative-oxygen group, the alarm for the upper limit of the Spo2 was set at 95%, and the fraction of inspired oxygen (Fio2) was decreased to 0.21 provided that the Spo2 was above the lower limit. In the liberal-oxygen group, there were no measures limiting the upper Spo2, but the minimum Fio2 permitted during mechanical ventilation was 0.3. The primary outcome was survival with a favorable functional outcome at 180 days, assessed with the Extended Glasgow Outcome Scale (GOS-E). Levels on the GOS-E range from 1 (death) to 8 (\"upper good recovery\"). We defined survival with a favorable functional outcome as a GOS-E level of 5 (\"lower moderate disability\") or higher.",
+          "labelZh": "方法",
+          "textZh": "我們將心臟驟停後在重症監護病房（ ICU ）接受機械通氣的無反應成年人隨機分配到保守或自由的氧氣治療。在兩組中，脈搏血氧飽和度(Spo2)測量的預設動脈血氧飽和度下限為90%。在保守-氧氣組中， Spo2上限的警報設定為95% ，並且在Spo2高於下限的情況下，吸入氧氣（ Fio2 ）的比例降低至0.21。在自由氧組中，沒有限制Spo2上限的措施，但在機械通氣期間允許的最小Fio2為0.3。主要結果為180天生存期，功能性結果良好，使用格拉斯哥結果延伸量表（ GOS-E ）進行評估。GOS-E的水平從1 （死亡）到8 （ “恢復良好” ）。我們將功能結局良好的生存期定義為GOS-E水平為5 （「較低的中度殘疾」）或更高。"
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 1840 patients were recruited from 53 ICUs in Australia, New Zealand, and Ireland, with 882 assigned to conservative oxygen therapy and 958 assigned to liberal oxygen therapy. A favorable functional outcome at 180 days was observed for 313 of 819 patients (38.2%) in the conservative-oxygen group and 353 of 890 patients (39.7%) in the liberal-oxygen group (relative risk, 0.97; 95% confidence interval, 0.87 to 1.09; P = 0.65). No adverse events were reported.",
+          "labelZh": "結果",
+          "textZh": "從澳大利亞、紐西蘭和愛爾蘭的53個ICU共招募了1840名患者，其中882名被分配到保守的氧氣治療， 958名被分配到自由的氧氣治療。在180天時，保守-氧氣組的819名患者中有313名（ 38.2% ） ，自由-氧氣組的890名患者中有353名（ 39.7% ）觀察到良好的功能結果（相對風險， 0.97 ； 95%置信區間， 0.87至1.09 ； P = 0.65 ）。未報告不良事件。"
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "Among unresponsive adults undergoing mechanical ventilation in the ICU after a cardiac arrest, the percentage who survived with a favorable functional outcome was not higher with conservative oxygen therapy than with liberal oxygen therapy. (Funded by the Health Research Council of New Zealand and others; LOGICAL Australian New Zealand Clinical Trials Registry number, ACTRN12621000518864.).",
+          "labelZh": "結論",
+          "textZh": "在心臟驟停後在ICU進行機械通氣的無反應成年人中，保守性氧氣治療的生存率並不高於自由氧氣治療。（由紐西蘭健康研究委員會等資助；邏輯澳大利亞紐西蘭臨牀試驗註冊號， ACTRN12621000518864。）。"
+        }
+      ],
+      "doi": "10.1056/NEJMoa2513814",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42267831/",
+      "titleZh": "心臟驟停後無反應患者的保守氧氣"
+    },
+    {
+      "pmid": "42246672",
+      "title": "Finerenone in Persons with Chronic Kidney Disease without Diabetes",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Aug 06",
+      "sortDate": "2026-08-06",
+      "authors": "Heerspink HJL, Neuen BL, Agarwal R, Cherney DZI, Lam CSP, Tuttle KR, Wanner C, Sarafidis P, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "In randomized trials, finerenone, a nonsteroidal mineralocorticoid receptor antagonist, improved kidney and cardiovascular outcomes in patients with type 2 diabetes and chronic kidney disease (CKD). Whether finerenone has similar effects in patients without diabetes who have CKD is unknown.",
+          "labelZh": "背景",
+          "textZh": "在隨機試驗中，非甾體礦皮質激素受體拮抗劑finerenone改善了2型糖尿病和慢性腎病(CKD)患者的腎臟和心血管結局。finerenone對非糖尿病CKD患者是否具有類似的影響尚不清楚。"
+        },
+        {
+          "label": "METHODS",
+          "text": "We randomly assigned adults without diabetes who had CKD (estimated glomerular filtration rate [eGFR], 25 to <90 ml per minute per 1.73 m2 of body-surface area) and albuminuria (urinary albumin-to-creatinine ratio, 200 to ≤3500, with albumin in milligrams and creatinine in grams) and were using a renin-angiotensin system inhibitor to receive finerenone (10 or 20 mg daily) or placebo. The primary outcome was the total eGFR slope (mean annual rate of change in the eGFR from baseline to month 32), assessed with a two-slope linear spline mixed-effects model. Secondary outcomes included a composite of kidney or cardiovascular events (reduction from baseline of at least 57% in the eGFR, kidney failure, hospitalization for heart failure, or death from cardiovascular causes), a composite of the two kidney events, and a composite of the two cardiovascular events.",
+          "labelZh": "方法",
+          "textZh": "我們隨機分配患有CKD （估計腎小球過濾率[eGFR] ，每1.73 m2身體表面積每分鐘25至< 90 ml ）和蛋白尿（尿白蛋白與肌酸酐比率， 200至≤ 3500 ，白蛋白以毫克為單位，肌酸酐以克為單位）並使用腎素-血管緊張素系統抑制劑接受finerenone （每日10或20 mg ）或安慰劑的非糖尿病成人。主要結果為總eGFR斜率（ eGFR從基線到第32個月的平均年變化率） ，使用雙斜率線性樣條混合效應模型進行評估。次要結果包括腎臟或心血管事件的綜合（ eGFR、腎功能衰竭、心力衰竭住院或心血管原因死亡相較於基線至少減少57% ）、兩種腎臟事件的綜合，以及兩種心血管事件的綜合。"
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 1584 participants underwent randomization - 793 were assigned to the finerenone group, and 791 to the placebo group. The mean (±SD) baseline eGFR was 46.8±16.2 ml per minute per 1.73 m2 with finerenone and 46.6±16.0 ml per minute per 1.73 m2 with placebo. The mean annual rate of change in the eGFR from baseline to month 32 was -3.3 ml per minute per 1.73 m2 (95% confidence interval [CI], -3.6 to -3.1) with finerenone and -4.0 ml per minute per 1.73 m2 (95% CI, -4.3 to -3.8) with placebo (difference, 0.7; 95% CI, 0.3 to 1.1; P<0.001). Prespecified hierarchical testing showed that the risk of a composite kidney or cardiovascular outcome event was lower with finerenone than with placebo (hazard ratio, 0.77; 95% CI, 0.60 to 0.99; P = 0.04); the hazard ratio was 0.78 (95% CI, 0.60 to 1.01) for the composite of the two kidney events and 0.60 (95% CI, 0.27 to 1.33) for the composite of the two cardiovascular events. The most common adverse event was hyperkalemia (135 participants [17.0%] with finerenone and 105 [13.3%] with placebo); hyperkalemia events led to discontinuation of the trial regimen in 12 participants (1.5%) and 1 participant (0.1%), respectively, and to hospitalization in 7 (0.9%) and 5 (0.6%).",
+          "labelZh": "結果",
+          "textZh": "總共有1584名參與者接受了隨機分組，其中793名被分配到finerenone組， 791名被分配到安慰劑組。 使用finerenone時的平均(± SD)基線eGFR為每1.73 m2每分鐘46.8 ± 16.2 ml ，使用安慰劑時為每1.73 m2每分鐘46.6 ± 16.0 ml。 EGFR從基線到第32個月的平均年變化率為每1.73 m2每分鐘-3.3 ml (95%置信區間[CI] ， -3.6至-3.1) ，使用finerenone時為每分鐘-4.0 ml (95% CI ， -4.3至-3.8) ，使用安慰劑時為每1.73 m2每分鐘(差異， 0.7 ； 95% CI ， 0.3至1.1 ； P < 0.001)。 預先指定的分層測試顯示， finerenone的複合腎臟或心血管結局事件的風險低於安慰劑（風險比， 0.77 ； 95% CI ， 0.60至0.99 ； P = 0.04 ） ；兩種腎臟事件的複合風險比為0.78 （ 95% CI ， 0.60至1.01 ） ，兩種心血管事件的複合風險比為0.60 （ 95% CI ， 0.27至1.33 ）。 最常見的不良事件是高鉀血症（使用finerenone的135名受試者[17.0%]和安慰劑的105名受試者[13.3%] ） ；高鉀血症事件分別導致12名受試者（ 1.5% ）和1名受試者（ 0.1% ）停止試驗方案， 7名受試者（ 0.9% ）和5名受試者（ 0.6% ）住院。"
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "Among adults with CKD who did not have diabetes, finerenone led to a slower decrease in the eGFR than placebo over 32 months. (Funded by Bayer; FIND-CKD ClinicalTrials.gov number, NCT05047263.).",
+          "labelZh": "結論",
+          "textZh": "在沒有糖尿病的CKD成人中， finerenone在32個月內導致eGFR的下降速度慢於安慰劑。（由Bayer資助； FIND-CKD ClinicalTrials.gov編號， NCT05047263。）。"
+        }
+      ],
+      "doi": "10.1056/NEJMoa2604625",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42246672/",
+      "titleZh": "非糖尿病慢性腎病患者的Finerenone"
+    },
+    {
+      "pmid": "42223077",
+      "title": "Perioperative Apalutamide in High-Risk Localized Prostate Cancer",
+      "journal": "NEJM",
+      "category": "四大綜合",
+      "date": "2026 Aug 06",
+      "sortDate": "2026-08-06",
+      "authors": "Taplin ME, Gleave M, Shore ND, Lopez-Gitlitz A, Kretschmer A, Efstathiou E, Nguyen PL, Damião R, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "Radical prostatectomy is potentially curative in patients with high-risk localized or locally advanced prostate cancer; however, relapse occurs within 5 years in up to 50% of patients.",
+          "labelZh": "背景",
+          "textZh": "根治性前列腺切除術可能治癒高風險局部或局部晚期前列腺癌患者；然而，高達50%的患者在5年內復發。"
+        },
+        {
+          "label": "METHODS",
+          "text": "We conducted a phase 3, double-blind, placebo-controlled trial in which patients with newly diagnosed high-risk localized or locally advanced prostate cancer were randomly assigned in a 1:1 ratio to receive androgen-deprivation therapy (ADT) plus apalutamide (240 mg per day) or ADT plus placebo for 6 cycles (28 days each) before and after radical prostatectomy with pelvic lymph-node dissection. The dual primary end points were a composite of pathological complete response or minimal residual disease (defined as a pathological stage of ypT2 or lower, with a tumor size of ≤5 mm in the greatest dimension) and metastasis-free survival, as assessed with conventional imaging or prostate-specific membrane antigen positron-emission tomography. Secondary end points included event-free survival, first subsequent treatment, and distant metastasis (assessed in time-to-event analyses), as well as safety.",
+          "labelZh": "方法",
+          "textZh": "我們進行了一項3期、雙盲、安慰劑對照試驗，其中新診斷的高風險局部或局部晚期前列腺癌患者以1: 1的比例隨機分配接受雄激素剝奪療法(ADT)加上阿巴魯胺(240毫克/天)或ADT加上安慰劑，在盆腔淋巴結切除的根治性前列腺切除術前後進行6個週期(每次28天)。雙重主要終點是病理完全反應或最小殘留疾病（定義為ypT2或更低的病理分期，最大尺寸的腫瘤大小≤ 5 mm ）和無轉移存活率的綜合結果，使用傳統影像學或前列腺特異性膜抗原正電子發射斷層掃描評估。次要終點包括無事件生存期、首次後續治療和遠端轉移（在至事件的時間分析中評估） ，以及安全性。"
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 2109 patients underwent randomization: 1057 were assigned to receive ADT plus apalutamide, and 1052 to receive ADT plus placebo. The median follow-up was 61.7 months. The percentage of patients with a pathological complete response or minimal residual disease was significantly higher in the apalutamide group than in the placebo group (8.9% vs. 1.0%; odds ratio, 10.17; 95% confidence interval [CI], 5.27 to 19.64; P<0.001), as was the percentage of patients with metastasis-free survival (probability of metastasis-free survival at 5 years, 78.2% vs. 73.5%; hazard ratio for distant metastasis or death, 0.80; 95% CI, 0.67 to 0.96; P = 0.02). Event-free survival, time to the first subsequent treatment, and time to distant metastasis significantly favored ADT plus apalutamide over ADT plus placebo (P<0.001 for all between-group comparisons). Grade 3 or 4 adverse events occurred in 39.6% of the patients in the apalutamide group and in 31.0% of those in the placebo group, with the difference between the groups driven primarily by a higher incidence of rash in the apalutamide group.",
+          "labelZh": "結果",
+          "textZh": "共有2109名患者接受了隨機分組： 1057名患者被分配接受ADT +阿巴魯胺， 1052名患者接受ADT +安慰劑。 中位隨訪時間為61.7個月。 阿帕魯胺組中病理完全緩解或最小殘留疾病的患者百分比顯著高於安慰劑組（ 8.9%對1.0% ；比值比為10.17 ； 95%可信區間[CI] ， 5.27至19.64 ； P < 0.001 ） ，無轉移生存的患者百分比也顯著高於安慰劑組（ 5年時無轉移生存概率為78.2%對73.5% ；遠端轉移或死亡風險比為0.80 ； 95% CI ， 0.67至0.96 ； P = 0.02 ）。 與ADT +安慰劑相比，無事件生存期、至第一次後續治療的時間和至遠處轉移的時間顯著有利於ADT +阿巴魯胺（所有組間比較的P < 0.001 ）。 3或4級不良事件發生在39.6%的apalutamide組患者和31.0%的安慰劑組患者中，兩組之間的差異主要是由於apalutamide組的皮疹發生率較高。"
+        },
+        {
+          "label": "CONCLUSIONS",
+          "text": "Perioperative treatment with ADT plus apalutamide was associated with better oncologic outcomes of radical prostatectomy in patients with high-risk localized or locally advanced prostate cancer than treatment with ADT plus placebo. Adverse events were more common in the apalutamide group than in the placebo group. (Funded by Johnson & Johnson; PROTEUS ClinicalTrials.gov number, NCT03767244.).",
+          "labelZh": "結論",
+          "textZh": "與ADT加安慰劑治療相比，在高風險局部或局部晚期前列腺癌患者中， ADT加阿帕魯胺的圍手術期治療與根治性前列腺切除術的腫瘤結果更好相關。不良事件在apalutamide組中比在安慰劑組中更常見。（由Johnson & Johnson資助； PROTEUS ClinicalTrials.gov編號： NCT03767244 ）。"
+        }
+      ],
+      "doi": "10.1056/NEJMoa2603878",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42223077/",
+      "titleZh": "高危局限性前列腺癌的圍手術期阿帕魯胺"
+    },
+    {
+      "pmid": "42561994",
+      "title": "[177Lu]Lu-PSMA-617 in patients with PSMA-positive metastatic androgen pathway modulator-naive/sensitive prostate cancer (PSMAddition): a phase 3 randomised, controlled trial",
+      "journal": "Lancet",
+      "category": "四大綜合",
+      "date": "2026 Aug 06",
+      "sortDate": "2026-08-06",
+      "authors": "Tagawa ST, Sartor O, Piulats JM, Saad F, Fizazi K, Reid A, Beltran H, Kramer G, et al.",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "A contemporary standard of care for patients with metastatic androgen pathway modulator-naive/sensitive (APMN/S) prostate cancer (also known as metastatic hormone-sensitive prostate cancer) is androgen deprivation therapy (ADT) plus an androgen receptor pathway inhibitor (ARPI) until progression. PSMAddition aimed to evaluate the efficacy and safety of [177Lu]Lu-PSMA-617 (177Lu-PSMA-617) combined with ADT plus ARPI in prostate-specific membrane antigen (PSMA)-positive metastatic APMN/S prostate cancer.",
+          "labelZh": "背景",
+          "textZh": "患有轉移性雄激素途徑調節劑/敏感（ APMN/S ）前列腺癌（也稱為轉移性激素敏感性前列腺癌）患者的當代標準護理是雄激素剝奪療法（ ADT ）加上雄激素受體途徑抑制劑（ ARPI ） ，直到疾病惡化。PSMAddition旨在評估[177Lu] Lu-PSMA-617 (177Lu-PSMA-617)聯合ADT加ARPI在前列腺特異性膜抗原(PSMA)陽性轉移性APMN/S前列腺癌中的療效和安全性。"
+        },
+        {
+          "label": "METHODS",
+          "text": "PSMAddition is an ongoing, randomised, controlled, phase 3 superiority trial conducted at 169 sites across 20 countries, including hospitals, medical centres, and specialist cancer centres. Eligible male patients had treatment-naive or minimally treated metastatic APMN/S prostate cancer diagnosed by CT, MRI, or bone scan and one or more PSMA-positive metastatic lesion on centrally read baseline [68Ga]Ga-PSMA-11 PET. Patients were randomly assigned 1:1 to open-label, intravenous 177Lu-PSMA-617 (7·4 GBq [200 mCi] ±10% every 6 weeks for up to six cycles) with ADT plus ARPI (177Lu-PSMA-617 arm) or ADT plus ARPI (control arm). ADT and ARPI were investigator-chosen according to local authorisation and administered per local product labelling. Control arm patients with centrally confirmed radiographic progression could cross over to 177Lu-PSMA-617. The primary endpoint was radiographic progression-free survival (centrally assessed per Prostate Cancer Clinical Trials Working Group 3-modified RECIST 1.1 or death); secondary endpoints included safety and tolerability. We report the second interim analysis of radiographic progression-free survival in the intention-to-treat population (all randomly assigned participants; data cutoff Jan 13, 2025). Safety was assessed in all patients who received at least one dose of study treatment. This study is registered with ClinicalTrials.gov, NCT04720157, and is ongoing.",
+          "labelZh": "方法",
+          "textZh": "PSMAddition是一項正在進行的隨機、對照、3期優勢試驗，在20個國家的169個研究中心進行，包括醫院、醫療中心和專科癌症中心。 符合資格的男性患者在集中讀取的基線期[68Ga] Ga-PSMA-11 PET上，有透過CT、MRI或骨骼掃描診斷出治療初治或治療最少的轉移性APMN/S前列腺癌和一個或多個PSMA陽性轉移性病竈。 患者被隨機1: 1分配至開放標籤、靜脈注射177Lu-PSMA-617 （ 7.4 GBq [200 mCi]每6週± 10% ，最多6個週期） ，使用ADT加ARPI （ 177Lu-PSMA-617組）或ADT加ARPI （對照組）。 研究者根據當地授權選擇ADT和ARPI ，並根據當地產品標籤進行管理。 具有中央確認的放射學進展的對照組患者可以交叉至177Lu-PSMA-617。 主要評估指標是放射線檢查無惡化存活期（根據前列腺癌臨牀試驗工作組3修改的RECIST 1.1或死亡集中評估） ；次要評估指標包括安全性和耐受性。 我們報告了意向性治療人羣（所有隨機分配的參與者；數據截止日期為2025年1月13日）中放射學無惡化生存期的第二次中期分析。 在接受至少一劑研究治療的所有患者中評估安全性。 本研究已在ClinicalTrials.gov （ NCT04720157 ）註冊，並且正在進行中。"
+        },
+        {
+          "label": "FINDINGS",
+          "text": "From June 15, 2021, to July 25, 2023, 1529 patients were screened and 1144 were randomly assigned (n=572 per arm; 1144 [100%] male, 572 [50%] with de novo metastatic APMN/S prostate cancer, 779 [68%] with high-volume disease; median age 68·0 years [IQR 62·0-73·0]). Baseline characteristics were balanced between arms. At second interim analysis for radiographic progression-free survival (median time from randomisation to data cutoff 23·6 months [IQR 20·3-29·2]; median radiographic progression-free survival follow-up time 19·6 months [IQR 14·0-24·1]), 139 (24%) of 572 participants in the 177Lu-PSMA-617 arm and 172 (30%) of 572 participants in the control arm had radiographic disease progression or death. Radiographic progression-free survival was significantly improved in the 177Lu-PSMA-617 arm versus the control arm, with a 28% reduction in the relative risk of radiographic progression or death (HR 0·72 [95% CI 0·58-0·90]; p=0·0021; median radiographic progression-free survival not reached in either arm). The primary endpoint was thus met. Grade 3 or worse adverse events occurred in 286 (51%) of 564 patients in the 177Lu-PSMA-617 arm and 243 (43%) of 565 patients in the control arm. Serious adverse events occurred in 180 (32%) of 564 patients in the 177Lu-PSMA-617 arm and 162 (29%) of 565 in the control arm; of which 17 (3%) in the 177Lu-PSMA-617 arm were 177Lu-PSMA-617-related. The most common adverse event was dry mouth, in 258 (46%) patients in the 177Lu-PSMA-617 arm and 21 (4%) patients in the control arm; all were grade 1 or 2 and none were serious. Other common adverse events with higher incidence in the 177Lu-PSMA-617 arm included cytopenias and gastrointestinal disturbances.",
+          "labelZh": "發現",
+          "textZh": "從2021年6月15日至2023年7月25日，篩選了1529名患者，並隨機分配了1144名患者（每組n = 572 ； 1144 [100%]名男性， 572 [50%]名新發轉移性APMN/S前列腺癌， 779 [68%]名高容量疾病；中位年齡68 · 0歲[IQR 62 · 0-73 · 0] ）。 在兩組之間平衡了基線期特徵。 在第二次影像學無惡化生存期中期分析時（從隨機化到資料截止的中位時間為23 · 6個月[IQR 20 · 3-29 · 2] ；影像學無惡化生存期中位數為19 · 6個月[IQR 14 · 0-24 · 1] ） ， 177Lu-PSMA-617組的572名參與者中有139名（ 24% ） ，對照組的572名參與者中有172名（ 30% ）有影像學疾病惡化或死亡。 與對照組相比， 177Lu-PSMA-617組的放射學無惡化存活期顯著改善，放射學惡化或死亡的相對風險降低了28% （ HR 0 · 72 [95% CI 0 · 58-0 · 90] ； p = 0 · 0021 ；兩組均未達到中位放射學無惡化存活期）。 因此達到了主要終點。 177Lu-PSMA-617組的564名患者中有286名（ 51% ）發生3級或更嚴重的不良事件，對照組的565名患者中有243名（ 43% ）發生3級或更嚴重的不良事件。 177Lu-PSMA-617組的564名患者中有180名（ 32% ）發生嚴重不良事件，對照組的565名患者中有162名（ 29% ）發生嚴重不良事件；其中177Lu-PSMA-617組的17名（ 3% ）與177Lu-PSMA-617有關。 最常見的不良事件是口幹，"
+        },
+        {
+          "label": "INTERPRETATION",
+          "text": "Combining 177Lu-PSMA-617 with ADT plus ARPI prolonged radiographic progression-free survival in patients with PSMA-positive metastatic APMN/S prostate cancer. Although adverse events were more frequent, there were no unexpected safety findings associated with the drug combination. Therefore, combining 177Lu-PSMA-617 with ADT plus ARPI might be a new treatment option in metastatic APMN/S prostate cancer.",
+          "labelZh": "詮釋",
+          "textZh": "在PSMA陽性轉移性APMN/S前列腺癌患者中，將177Lu-PSMA-617與ADT加上ARPI合併可延長放射線檢查無惡化生存期。雖然不良事件較為頻繁，但沒有與藥物組合相關的意外安全性發現。因此，將177Lu-PSMA-617與ADT加ARPI合併可能是轉移性APMN/S前列腺癌的新治療選擇。"
+        },
+        {
+          "label": "FUNDING",
+          "text": "Novartis.",
+          "labelZh": "經費來源",
+          "textZh": "資源"
+        }
+      ],
+      "doi": "10.1016/S0140-6736(26)01092-5",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42561994/",
+      "titleZh": "[177Lu] Lu-PSMA-617用於PSMA陽性轉移性雄激素途徑調節劑初治/敏感前列腺癌(PSMAddition)患者：一項3期隨機對照試驗"
+    },
+    {
+      "pmid": "42560689",
+      "title": "Iron or Multiple Micronutrient Powder Supplements With Malaria Chemoprevention in Rural Malawian Children: The IRMA Randomized Clinical Trial",
+      "journal": "JAMA",
+      "category": "四大綜合",
+      "date": "2026 Aug 06",
+      "sortDate": "2026-08-06",
+      "authors": "Phiri KS, Mzembe G, Vokhiwa M, McLean ARD, Ngwira C, Moya E, Mtambo OPL, Hamadani J, et al.",
+      "abstract": [
+        {
+          "label": "IMPORTANCE",
+          "text": "The World Health Organization recommends universal preventive iron interventions for young children in anemia-prevalent areas to alleviate the effects of anemia on child neurodevelopment and other outcomes. However, the functional benefits have not been confirmed in randomized clinical trials and there are concerns that iron interventions may increase infection risk.",
+          "labelZh": "重要性",
+          "textZh": "世界衛生組織建議對貧血流行地區的幼兒採取普遍的預防性鐵質幹預措施，以減輕貧血對兒童神經發育和其他結果的影響。然而，在隨機臨牀試驗中尚未確認其功能益處，並且有人擔心鐵介入可能會增加感染風險。"
+        },
+        {
+          "label": "OBJECTIVE",
+          "text": "To determine whether universal iron interventions administered with malaria chemoprevention improve child functional outcomes and are safe regarding infection risk.",
+          "labelZh": "目的",
+          "textZh": "確定與瘧疾化學預防一起施用的通用鐵介入是否改善了兒童的功能結果，並且對感染風險是安全的。"
+        },
+        {
+          "label": "DESIGN, SETTING, AND PARTICIPANTS",
+          "text": "This randomized clinical trial enrolled 6-month-old infants at 4 centers in southern Malawi, which is a rural, malaria-endemic setting. Enrollment occurred between April 2020 and October 2021. The final assessment was completed in October 2022.",
+          "labelZh": "DESIGN, SETTING, AND PARTICIPANTS",
+          "textZh": "這項隨機臨牀試驗在馬拉威南部的4個中心招募了6個月大的嬰兒，這是一個農村的瘧疾流行環境。註冊發生在2020年4月至2021年10月之間。最終評估已於2022年10月完成。"
+        },
+        {
+          "label": "INTERVENTIONS",
+          "text": "Six months of (1) iron syrup and malaria chemoprevention (n = 542), (2) iron-containing micronutrient powders and malaria chemoprevention (n = 543), (3) malaria chemoprevention alone (n = 541), or (4) placebo alone (n = 542). Children were assessed after the 6-month intervention period and after 6-month follow-up.",
+          "labelZh": "介入",
+          "textZh": "六個月的（ 1 ）鐵糖漿和瘧疾化學預防（ n = 542 ） ， （ 2 ）含鐵微量營養素粉末和瘧疾化學預防（ n = 543 ） ， （ 3 ）單獨的瘧疾化學預防（ n = 541 ） ，或（ 4 ）單獨的安慰劑（ n = 542 ）。在6個月幹預期和6個月隨訪後評估兒童。"
+        },
+        {
+          "label": "MAIN OUTCOMES AND MEASURES",
+          "text": "The primary outcome was the Cognitive Scale composite score at the end of the intervention period using the Bayley Scales of Infant and Toddler Development-Third Edition (Bayley-III). The secondary outcomes included Bayley-III Language Scale and Motor Scale composite scores, anemia prevalence, and concentrations of hemoglobin and ferritin. The primary and secondary outcomes were measured when children were 1 year of age and when they were 18 months of age. The safety outcomes included incidence of infection (including malaria).",
+          "labelZh": "主要結果與測量",
+          "textZh": "主要結果是介入期結束時的認知量表綜合評分，使用Bayley嬰幼兒發展量表-第三版（ Bayley-III ）。次要結果包括Bayley-III語言量表和運動量表綜合評分、貧血患病率以及血紅蛋白和鐵蛋白濃度。在兒童1歲和18個月大時測量主要和次要結果。安全性結果包括感染（包括瘧疾）的發生率。"
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 2168 infants (mean age, 5.7 months; 49% were female; and 71% had anemia) were recruited to participate. Compared with malaria chemoprevention alone, there was no between-group difference in the Bayley-III Cognitive Scale composite score for iron syrup and malaria chemoprevention (mean difference [MD], -0.52 [95% CI, -2.52 to 1.48]). Compared with malaria chemoprevention alone, there was no between-group difference in the Bayley-III Cognitive Scale composite score for iron-containing micronutrient powders and malaria chemoprevention (MD, -0.85 [95% CI, -2.80 to 1.09]). Compared with placebo alone, there was no between-group difference in the Bayley-III Cognitive Scale composite score for malaria chemoprevention alone (MD, 1.62 [95% CI, -0.31 to 3.55]). Although the 2 iron interventions increased ferritin concentration, neither reduced anemia prevalence compared with malaria chemoprevention alone. Compared with malaria chemoprevention alone, neither iron syrup and malaria chemoprevention nor iron-containing micronutrient powders and malaria chemoprevention increased malaria risk. Compared with placebo alone, malaria chemoprevention alone reduced the incidence of malaria.",
+          "labelZh": "結果",
+          "textZh": "共招募了2168名嬰兒（平均年齡為5.7個月； 49%為女性； 71%患有貧血）參與研究。 與單獨的瘧疾化學預防相比，鐵糖漿和瘧疾化學預防的Bayley-III認知量表綜合評分沒有組間差異（平均差異[MD] ， -0.52 [95% CI ， -2.52至1.48] ）。 與單獨的瘧疾化學預防相比，含鐵微量營養素粉末的Bayley-III認知量表綜合評分和瘧疾化學預防沒有組間差異（ MD ， -0.85 [95 ％ CI ， -2.80至1.09] ）。 與單獨使用安慰劑相比，單獨使用瘧疾化學預防的Bayley-III認知量表綜合評分沒有組間差異（ MD ， 1.62 [95% CI ， -0.31至3.55] ）。 雖然這2種鐵介入增加了鐵蛋白濃度，但與單獨的瘧疾化學預防相比，既沒有降低貧血患病率。 與單獨的瘧疾化學預防相比，鐵糖漿和瘧疾化學預防以及含鐵微量營養素粉末和瘧疾化學預防都不會增加瘧疾風險。 與單獨的安慰劑相比，單獨的瘧疾化學預防降低了瘧疾的發病率。"
+        },
+        {
+          "label": "CONCLUSIONS AND RELEVANCE",
+          "text": "Two universal, 6-month iron interventions with malaria chemoprevention did not improve cognitive outcomes among children in Malawi.",
+          "labelZh": "結論與意義",
+          "textZh": "兩項為期6個月的普遍性鐵質幹預措施加上瘧疾化學預防並未改善馬拉威兒童的認知結果。"
+        },
+        {
+          "label": "TRIAL REGISTRATION",
+          "text": "anzctr.org.au Identifier: ACTRN12620000386932.",
+          "labelZh": "試驗註冊",
+          "textZh": "anzctr.org.au識別碼： ACTRN12620000386932。"
+        }
+      ],
+      "doi": "10.1001/jama.2026.12242",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42560689/",
+      "titleZh": "馬拉威農村兒童瘧疾化學預防鐵或多種微量營養素粉末補充劑： IRMA隨機臨牀試驗"
+    },
+    {
+      "pmid": "42554995",
+      "title": "Duration of Therapeutic Hypothermia After Out-of-Hospital Cardiac Arrest: The ICECAP Randomized Clinical Trial",
+      "journal": "JAMA",
+      "category": "四大綜合",
+      "date": "2026 Aug 05",
+      "sortDate": "2026-08-05",
+      "authors": "Meurer WJ, Yeatts SD, Geocadin RG, Roy A, Callaway CW, Ramakrishnan V, Berry SM, Caveney AF, et al.",
+      "abstract": [
+        {
+          "label": "IMPORTANCE",
+          "text": "Therapeutic hypothermia is widely used for neuroprotection following cardiac arrest, but clinical trials have not consistently demonstrated improved neurological outcomes, and the optimal duration of cooling remains uncertain.",
+          "labelZh": "重要性",
+          "textZh": "治療性低溫被廣泛用於心臟驟停後的神經保護，但臨牀試驗並未一致證明神經結果得到改善，冷卻的最佳持續時間仍不確定。"
+        },
+        {
+          "label": "OBJECTIVE",
+          "text": "To determine the duration of therapeutic hypothermia that maximizes neurological recovery in comatose survivors of out-of-hospital cardiac arrest.",
+          "labelZh": "目的",
+          "textZh": "確定院外心臟驟停昏迷倖存者的治療性低溫持續時間，使神經恢復最大化。"
+        },
+        {
+          "label": "DESIGN, SETTING, AND PARTICIPANTS",
+          "text": "Multicenter, randomized, adaptive-allocation clinical trial conducted at 71 hospitals in the US. Adults with out-of-hospital cardiac arrest who remained unconscious, achieved a target temperature less than 34 °C within 4 hours of cardiac arrest, and had a definitive temperature control device started were eligible. Patients were enrolled between June 2020 and June 2025.",
+          "labelZh": "DESIGN, SETTING, AND PARTICIPANTS",
+          "textZh": "在美國71家醫院進行的多中心、隨機、適應性分配臨牀試驗。患有院外心臟驟停的成年人，如果仍然昏迷，在心臟驟停後4小時內達到目標溫度低於34°C ，並啟動了確定的溫度控制裝置，則符合資格。患者於2020年6月至2025年6月期間入組。"
+        },
+        {
+          "label": "INTERVENTIONS",
+          "text": "Therapeutic hypothermia at 33 °C with adaptive randomized allocation to cooling durations of 6, 12, 18, 24, 30, 36, 42, 48, 60, and 72 hours. The first 200 patients were randomized to 12-, 24-, and 48-hour durations in a 1:1:1 ratio. Subsequently, a response-adaptive randomization algorithm allocated preferentially to the groups most likely to be optimal and to best inform the duration-response curve separately within each rhythm type.",
+          "labelZh": "介入",
+          "textZh": "33°C的治療性低溫，適應性隨機分配冷卻時間為6、12、18、24、30、36、42、48、60和72小時。前200名患者以1: 1: 1的比例隨機分配至12小時、24小時和48小時的持續時間。隨後，反應自適應隨機化演算法優先分配給最有可能是最佳的組，並在每種節律類型中分別最佳地通知持續時間-反應曲線。"
+        },
+        {
+          "label": "MAIN OUTCOMES AND MEASURES",
+          "text": "The primary outcome was neurological function at 90 days, measured using a weighted modified Rankin Scale score, analyzed using a bayesian duration-response model. The primary analysis estimated the posterior probability that each duration was optimal, wherein optimal indicates the shortest duration consistent with the best outcome observed at any duration.",
+          "labelZh": "主要結果與測量",
+          "textZh": "主要結果是90天時的神經功能，使用加權修正Rankin量表評分測量，並使用貝葉斯持續時間-反應模型進行分析。主要療效分析估計了每個持續時間最理想的後驗概率，其中最理想表示與在任何持續時間觀察到的最佳結果一致的最短持續時間。"
+        },
+        {
+          "label": "RESULTS",
+          "text": "A total of 1158 patients were randomized (883 with nonshockable rhythms and 275 with shockable rhythms). Participants had a median age of 61 (IQR, 50-70) years and 39.6% were female. The trial met a prespecified stopping rule at the interim analysis. For the nonshockable rhythm cohort, the posterior probability that 6 hours was the shortest duration achieving the maximal mean weighted modified Rankin Scale score was 0.51. Results were similar in the shockable rhythm cohort. No differences were observed in secondary outcomes or mortality across cooling durations.",
+          "labelZh": "結果",
+          "textZh": "共有1158名患者被隨機分組（ 883名具有非電擊節律， 275名具有可電擊節律）。參與者的年齡中位數為61 （ IQR ， 50-70 ）歲， 39.6%為女性。試驗在期中分析時符合預先規定的停止規則。對於不可電擊的節律隊列， 6小時是達到最大平均加權修正Rankin量表分數的最短持續時間的後設概率為0.51。可電擊節律羣組的結果相似。在冷卻持續時間內，次要結果或死亡率沒有觀察到差異。"
+        },
+        {
+          "label": "CONCLUSIONS AND RELEVANCE",
+          "text": "Among comatose survivors of out-of-hospital cardiac arrest treated with therapeutic hypothermia at 33 °C, increasing cooling duration did not improve neurological outcomes.",
+          "labelZh": "結論與意義",
+          "textZh": "在33°C治療性低溫治療的院外心臟驟停昏迷倖存者中，增加冷卻時間並未改善神經學結果。"
+        },
+        {
+          "label": "TRIAL REGISTRATION",
+          "text": "ClinicalTrials.gov Identifier: NCT04217551.",
+          "labelZh": "試驗註冊",
+          "textZh": "ClinicalTrials.gov識別碼： NCT04217551。"
+        }
+      ],
+      "doi": "10.1001/jama.2026.10247",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42554995/",
+      "titleZh": "院外心臟驟停後的治療性低溫持續時間： ICECAP隨機臨牀試驗"
+    },
+    {
+      "pmid": "42546304",
+      "title": "Public Policy Approaches to Addressing Adult Obesity: A Position Paper From the American College of Physicians",
+      "journal": "Ann Intern Med",
+      "category": "四大綜合",
+      "date": "2026 Aug 04",
+      "sortDate": "2026-08-04",
+      "authors": "Crowley R, Beachy M, Carr P, Health and Public Policy Committee of the American College of Physicians",
+      "abstract": [
+        {
+          "text": "Forty percent of U.S. adults have obesity, a complex condition determined by genetics, behavior, environment, and other modifiable and nonmodifiable factors. Obesity is associated with certain comorbid conditions, including type 2 diabetes, high cholesterol, heart disease, and some cancer types, and may increase the severity of communicable illnesses, such as influenza. Treatments of obesity include behavioral modification, pharmacotherapy, and surgical procedures, but high cost and coverage restrictions are a substantial barrier for many patients. In this position paper, the American College of Physicians (ACP) offers recommendations on how policymakers can increase the affordability and accessibility of obesity treatment for adults and address modifiable factors that contribute to obesity, like diet and physical activity. ACP also includes recommendations on reducing stigma associated with obesity, improving understanding of obesity among physicians, increasing access to healthy food, and curbing the proliferation of unhealthy, highly processed fare. Population health strategies for addressing obesity are also discussed.",
+          "labelZh": null,
+          "textZh": "40%的美國成年人患有肥胖症，這是一種複雜的狀況，由遺傳、行為、環境和其他可改變和不可改變的因素決定。 肥胖與某些共病有關，包括2型糖尿病、高膽固醇、心臟病和某些癌症類型，並可能增加流感等傳染病的嚴重程度。 肥胖症的治療包括行為矯正、藥物治療和外科手術，但高成本和覆蓋範圍限制是許多患者的重大障礙。 在這份立場文件中，美國醫師學會（ ACP ）就政策制定者如何提高成人肥胖治療的可負擔性和可獲得性，並解決導致肥胖的可改變因素（如飲食和體力活動）提出了建議。 ACP還包括以下方面的建議：減少與肥胖相關的恥辱感，提高醫生對肥胖的了解，增加獲得健康食品的機會，以及遏制不健康、高度加工食品的擴散。 也討論了解決肥胖問題的人口健康策略。"
+        }
+      ],
+      "doi": "10.7326/ANNALS-26-00864",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42546304/",
+      "titleZh": "解決成人肥胖的公共政策方法：美國醫師學會的立場書"
+    },
+    {
+      "pmid": "42546299",
+      "title": "Economic Impact of the 2025 New Mexico Measles Outbreak: Highlighting the Cost of Efforts to Prevent Future Outbreaks",
+      "journal": "Ann Intern Med",
+      "category": "四大綜合",
+      "date": "2026 Aug 04",
+      "sortDate": "2026-08-04",
+      "authors": "Pike J, Holzinger N, Xiao HT, Stanislawski E, Leung J, Romero A, Smelser C",
+      "abstract": [
+        {
+          "label": "BACKGROUND",
+          "text": "In 2025, the United States experienced its highest measles case count since 1992. In New Mexico, 100 confirmed measles cases (99 outbreak-related cases), including 1 death, occurred across 9 counties from February through September 2025.",
+          "labelZh": "背景",
+          "textZh": "2025年，美國經歷了自1992年以來最高的麻疹病例數。在新墨西哥州，從2025年2月到9月， 9個縣發生了100例麻疹確診病例（ 99例與疫情相關的病例） ，其中包括1例死亡病例。"
+        },
+        {
+          "label": "OBJECTIVE",
+          "text": "To estimate the societal economic burden of this outbreak while highlighting public health expenditures for vaccination-related activities that supported outbreak control and prevention of future outbreaks.",
+          "labelZh": "目的",
+          "textZh": "估計此次疫情的社會經濟負擔，同時強調支持疫情控制和預防未來疫情的疫苗接種相關活動的公共衛生支出。"
+        },
+        {
+          "label": "DESIGN",
+          "text": "Cost analysis from a societal perspective to estimate 3 types of costs: public health response costs, direct medical costs, and productivity losses.",
+          "labelZh": "設計",
+          "textZh": "從社會角度進行成本分析，以估計3種類型的成本：公共衛生響應成本、直接醫療成本和生產力損失。"
+        },
+        {
+          "label": "SETTING",
+          "text": "Nine counties in New Mexico during February to September 2025.",
+          "labelZh": "場域",
+          "textZh": "2025年2月至9月，新墨西哥州有9個縣。"
+        },
+        {
+          "label": "PARTICIPANTS",
+          "text": "133 public health responders, 100 patients with confirmed measles, and 205 exposed contacts.",
+          "labelZh": "受試者",
+          "textZh": "133名公共衛生應變人員、100名確診麻疹患者和205名接觸者。"
+        },
+        {
+          "label": "INTERVENTION",
+          "text": "Public health response activities, including vaccination campaigns, case management, and contact tracing.",
+          "labelZh": "介入",
+          "textZh": "公共衛生應變活動，包括疫苗接種活動、病例管理和接觸者追蹤。"
+        },
+        {
+          "label": "MEASUREMENTS",
+          "text": "Costs were categorized as response costs (labor, materials, travel), direct medical costs (third-party), or productivity losses (illness, isolation, quarantine, caregiving).",
+          "labelZh": "測量",
+          "textZh": "費用分為回應費用（勞動力、材料、差旅）、直接醫療費用（第三方）或生產力損失（疾病、隔離、隔離、護理）。"
+        },
+        {
+          "label": "RESULTS",
+          "text": "The overall societal cost was estimated at $5.4 million ($53 522 per case, or $1817 per contact). The largest component of the public health response to the outbreak (about $3.2 million) was costs from vaccination-related activities (about $2.1 million).",
+          "labelZh": "結果",
+          "textZh": "整體社會成本估計為$ 540萬（每個案例$ 53,522 ，或每個聯絡人$ 1817 ）。公共衛生應對疫情的最大組成部分（約320萬$ ）是疫苗接種相關活動的成本（約210萬$ ）。"
+        },
+        {
+          "label": "LIMITATIONS",
+          "text": "Costs may be overestimated or underestimated due to incomplete reporting; insurance data were used rather than actual medical costs; certain direct medical costs were excluded; and assumptions were made for productivity losses.",
+          "labelZh": "LIMITATIONS",
+          "textZh": "由於報告不完整，成本可能被高估或低估；使用了保險數據而不是實際的醫療費用；排除了某些直接的醫療費用；並對生產力損失進行了假設。"
+        },
+        {
+          "label": "CONCLUSION",
+          "text": "These estimates offer important insights for decision making by policymakers and public health stakeholders regarding budgets for and expansion of vaccination coverage during an outbreak and strengthening outbreak preparedness. This study also highlights the societal value of protecting communities from vaccine-preventable diseases like measles, which can be effectively prevented through high vaccination coverage.",
+          "labelZh": "結論",
+          "textZh": "這些估計為政策制定者和公共衛生利益相關者在疫情爆發期間預算和擴大疫苗接種覆蓋範圍以及加強疫情準備方面的決策提供了重要見解。這項研究還強調了保護社區免受麻疹等疫苗可預防疾病的社會價值，這些疾病可以通過高疫苗接種覆蓋率得到有效預防。"
+        },
+        {
+          "label": "PRIMARY FUNDING SOURCE",
+          "text": "None.",
+          "labelZh": "PRIMARY FUNDING SOURCE",
+          "textZh": "無。"
+        }
+      ],
+      "doi": "10.7326/ANNALS-26-00718",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42546299/",
+      "titleZh": "2025年新墨西哥州麻疹疫情的經濟影響：強調預防未來疫情的工作成本"
     },
     {
       "pmid": "42242878",
@@ -508,431 +940,137 @@
       "titleZh": "結構化藥物審查對英國初級保健處方的影響：一項回顧性觀察隊列研究"
     },
     {
-      "pmid": "42537680",
-      "title": "Multivessel coronary artery bypass grafting via small thoracotomy versus sternotomy (MIST): an investigator-initiated, international, open-label, randomised controlled trial",
-      "journal": "Lancet",
-      "category": "四大綜合",
-      "date": "2026 Jul 31",
-      "sortDate": "2026-07-31",
-      "authors": "Ruel M, Nambala S, Guo MH, Verevkin A, Rabindranauth P, Kikuchi K, Davierwala PM, Lemma M, et al.",
+      "pmid": "42562656",
+      "title": "The Future of Patient Panel Size in Primary Care",
+      "journal": "JABFM",
+      "category": "家醫科",
+      "date": "2026 Aug",
+      "sortDate": "2026-08-00",
+      "authors": "Strayer SM, Hoff T",
       "abstract": [
         {
-          "label": "BACKGROUND",
-          "text": "Coronary artery bypass grafting (CABG) is a common but invasive operation traditionally performed through a median sternotomy. Minimally invasive cardiac surgery (MICS) CABG via small thoracotomy might improve postoperative recovery, but randomised evidence has been scarce. We aimed to compare patient-reported recovery after MICS CABG versus sternotomy CABG in patients with multivessel coronary artery disease and to describe clinical and safety outcomes.",
-          "labelZh": "背景",
-          "textZh": "冠狀動脈旁路移植（ CABG ）是傳統上通過正中胸骨切開術進行的常見但侵入性手術。通過小開胸微創心臟手術（ MICS ） CABG可能會改善術後恢復，但隨機證據很少。我們旨在比較多支冠狀動脈疾病患者MICS CABG與胸骨切開CABG後患者報告的恢復情況，並描述臨牀和安全性結果。"
-        },
-        {
-          "label": "METHODS",
-          "text": "MIST was an investigator-initiated, international, open-label, randomised controlled trial done at seven centres (four academic hospitals and three community hospitals) in Canada, India, China, Germany, the USA, and Japan. Patients referred to participating surgeons for CABG were eligible if they were aged 18 years or older; had angiographically confirmed multivessel coronary artery disease, defined as lesions of at least 70% stenosis in at least two major epicardial vessels and at least two separate coronary artery territories (left anterior descending artery, left circumflex artery, or right coronary artery) or left main coronary stenosis of 50% or more; and were suitable for coronary surgery both with sternotomy CABG and MICS CABG. Patients who were haemodynamically compromised, had contraindications to either approach, had had previous cardiac surgery, or required concomitant procedures were excluded. Eligible patients were randomly assigned (1:1) to MICS CABG or sternotomy CABG by a central, web-based system, stratified by centre, with block sizes of four and six. The primary endpoint was patient-reported physical recovery at 1 month, assessed by the 36-item Short Form Health Survey Physical Component Summary (SF-36 PCS) score. The primary analysis was by intention to treat; safety analyses were done according to treatment received. Missing 1-month questionnaire data were handled by multiple imputation. The trial was registered with ClinicalTrials.gov (NCT03447938), and is closed to recruitment.",
-          "labelZh": "方法",
-          "textZh": "MIST是一項由研究者發起的國際、開放標籤、隨機對照試驗，在加拿大、印度、中國、德國、美國和日本的七個中心（四家學術醫院和三家社區醫院）進行。 如果參與CABG的外科醫生年齡在18歲或以上；具有血管造影確認的多血管冠狀動脈疾病，定義為至少兩個主要心外膜血管和至少兩個獨立冠狀動脈區域（左前降動脈、左回旋動脈或右冠狀動脈）至少70%狹窄的病竈，或左主要冠狀動脈狹窄50%或以上；並且適合胸骨切開CABG和MICS CABG的冠狀動脈手術。 排除了血液動力學受損、對任一方法有禁忌症、既往接受過心臟手術或需要伴隨手術的患者。 符合資格的患者通過中央網絡系統隨機（ 1 ： 1 ）分配到MICS CABG或胸骨切開CABG ，按中心分層，塊大小為4和6。 主要終點是1個月時患者報告的身體恢復，評估依據是36項簡短健康調查物理成分摘要(SF-36 PCS)評分。 主要療效分析是出於治療目的；安全性分析是根據所接受的治療進行的。 缺失的1個月問卷數據由多個估算處理。 該試驗已在ClinicalTrials.gov （ NCT03447938 ）註冊，並且"
-        },
-        {
-          "label": "FINDINGS",
-          "text": "Between Aug 24, 2018, and Nov 26, 2024, 176 patients were enrolled, 170 of whom were randomly assigned to MICS CABG (n=86) or sternotomy CABG (n=84). The median age of patients was 67·0 years (IQR 61·0-72·0), 154 (91%) patients were male, and 16 (9%) were female. At 1 month after surgery, SF-36 PCS scores were significantly higher in the MICS CABG group than in the sternotomy CABG group (mean 45·1 [SD 8·0] vs 42·2 [9·1]; mean difference 2·9 [95% CI 0·3-5·5]; p=0·031). Clinical and safety follow-up at 1 month was complete in all patients; 12-month clinical and safety follow-up was complete in all except three patients in the sternotomy CABG group. Up to 12 months after surgery, there were no deaths or strokes in either group; one major adverse cardiac or cerebrovascular event occurred in the MICS CABG group before 1 month and none in the sternotomy CABG group.",
-          "labelZh": "發現",
-          "textZh": "在2018年8月24日至2024年11月26日期間，招募了176名患者，其中170名患者被隨機分配到MICS CABG （ n = 86 ）或胸骨切開CABG （ n = 84 ）。患者的中位年齡為67.0歲（ IQR 61.0-72.0 ） ， 154名（ 91 ％ ）患者為男性， 16名（ 9 ％ ）為女性。術後1個月， MICS CABG組的SF-36 PCS評分明顯高於胸骨切開CABG組（平均45 · 1 [SD 8 · 0]對42 · 2 [9 · 1] ；平均差異2 · 9 [95% CI 0 · 3-5 · 5] ； p = 0 · 031 ）。所有患者都完成了1個月的臨牀和安全性追蹤；除了胸骨切開CABG組中的3名患者外，所有患者都完成了12個月的臨牀和安全性追蹤。手術後最多12個月，兩組均未發生死亡或中風； MICS CABG組在1個月前發生一次重大心臟或腦血管不良事件，胸骨切開CABG組則未發生任何不良事件。"
-        },
-        {
-          "label": "INTERPRETATION",
-          "text": "For selected patients with multivessel coronary artery disease, MICS CABG performed by experienced teams improved patient-reported physical recovery at 1 month compared with sternotomy CABG, with no apparent safety penalty through to 12 months. These findings support consideration of MICS CABG in appropriately selected patients treated by experienced teams, and further studies of implementation, recovery pathways, and long-term outcomes.",
-          "labelZh": "詮釋",
-          "textZh": "對於選擇的多支冠狀動脈疾病患者，由經驗豐富的團隊進行的MICS CABG與胸骨切開術CABG相比，改善了患者報告的1個月身體恢復，直到12個月都沒有明顯的安全性懲罰。這些發現支持在經過經驗豐富的團隊治療的適當選擇患者中考慮MICS CABG ，以及對實施、恢復途徑和長期結果的進一步研究。"
-        },
-        {
-          "label": "FUNDING",
-          "text": "Medtronic.",
-          "labelZh": "經費來源",
-          "textZh": "美敦力。"
-        }
-      ],
-      "doi": "10.1016/S0140-6736(26)01288-2",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42537680/",
-      "titleZh": "通過小開胸術與胸骨切開術（ MIST ）進行多血管冠狀動脈旁路移植：一項由研究者發起的國際、開放標籤、隨機對照試驗"
-    },
-    {
-      "pmid": "42536019",
-      "title": "Initial HIV Therapy for Adults and Treatment-Associated Weight Gain: The Opti-DOR Randomized Clinical Trial",
-      "journal": "JAMA",
-      "category": "四大綜合",
-      "date": "2026 Jul 31",
-      "sortDate": "2026-07-31",
-      "authors": "Woods J, Lebina L, Möller K, Venter WDF, Akpomiemie G, Manentsa N, Taukobong I, Macholo P, et al.",
-      "abstract": [
-        {
-          "label": "IMPORTANCE",
-          "text": "Antiretroviral therapy (ART), particularly regimens containing tenofovir alafenamide with dolutegravir or bictegravir, is associated with substantial weight gain, potentially exacerbating cardiometabolic risk in people with HIV.",
-          "labelZh": "重要性",
-          "textZh": "抗逆轉錄病毒治療（ ART ） ，特別是含有替諾福韋與dolutegravir或bictegravir的治療方案，與體重增加相關，可能加劇HIV患者的心臟代謝風險。"
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To determine whether a regimen with doravirine, lamivudine, and tenofovir disoproxil fumarate results in less weight gain than a regimen with dolutegravir, emtricitabine, and tenofovir alafenamide while maintaining noninferior viral suppression.",
-          "labelZh": "目的",
-          "textZh": "為了確定使用doravirine、lamivudine和tenofovir disoproxil fumarate的方案是否比使用dolutegravir、emtricitabine和tenofovir alafenamide的方案在維持非劣效病毒抑制的同時導致較少的體重增加。"
-        },
-        {
-          "label": "DESIGN, SETTING, AND PARTICIPANTS",
-          "text": "Open-label, noninferiority randomized clinical trial including ART-naive adults (≥18 years of age) with an HIV RNA level greater than 500 copies/mL and no detectable baseline, high-level doravirine resistance. The study was conducted at 2 South African sites and individuals were recruited between October 2023 and March 2025. The final participant visit occurred in February 2026.",
-          "labelZh": "DESIGN, SETTING, AND PARTICIPANTS",
-          "textZh": "開放標籤、非劣效性隨機臨牀試驗，包括ART初治成人（ ≥ 18歲） ， HIV RNA濃度大於500拷貝/mL且無可檢測基線期、高水平地拉維林抗性。該研究在2個南非研究中心進行，並在2023年10月至2025年3月期間招募了個人。最後一次參與者回診發生在2026年2月。"
-        },
-        {
-          "label": "INTERVENTIONS",
-          "text": "A once-daily regimen with 100 mg of doravirine, 300 mg of lamivudine, and 300 mg of tenofovir disoproxil fumarate (n = 299) or 50 mg of dolutegravir, 200 mg of emtricitabine, and 25 mg of tenofovir alafenamide (n = 301).",
-          "labelZh": "介入",
-          "textZh": "每日一次的療程，包括100毫克多拉維林、300毫克拉米夫定和300毫克富馬酸替諾福韋二哌嗪（ n = 299 ）或50毫克多魯替格拉韋、200毫克恩曲他濱和25毫克替諾福韋阿拉芬酰胺（ n = 301 ）。"
-        },
-        {
-          "label": "MAIN OUTCOMES AND MEASURES",
-          "text": "The primary outcome was viral suppression (HIV RNA level <50 copies/mL) at week 48 (prespecified noninferiority margin of -10 percentage points). The key secondary outcomes included changes in body weight, treatment-associated effects on body composition, and safety and adverse events.",
-          "labelZh": "主要結果與測量",
-          "textZh": "主要結果是第48週的病毒抑制（ HIV RNA水平< 50拷貝/mL ） （預先指定的非劣效性邊際為-10個百分點）。關鍵次要結果包括體重變化、治療對身體組成的影響，以及安全性和不良事件。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "Among 600 participants, 597 (99.5%) were Black African, 413 (68.8%) were assigned female at birth, and the median age was 34 years (IQR, 28-41). At week 48, 266 participants (89.0%) in the doravirine, lamivudine, and tenofovir disoproxil fumarate group achieved viral suppression (HIV RNA level <50 copies/mL) vs 273 participants (90.7%) in the dolutegravir, emtricitabine, and tenofovir alafenamide group (between-group difference, -1.7 percentage points [95% CI, -6.6 to 3.1], meeting the prespecified noninferiority margin of -10 percentage points). The median weight gain was 3.0 kg in the doravirine, lamivudine, and tenofovir disoproxil fumarate group vs 5.0 kg in the dolutegravir, emtricitabine, and tenofovir alafenamide group (between-group difference, -2.0 kg [95% CI, -3.0 to -1.0 kg]; P < .001). Among participants in the doravirine, lamivudine, and tenofovir disoproxil fumarate group, the median change in hip bone mineral density (BMD) was -2.1% (IQR, -4.1% to -0.5%) and was -3.2% (IQR, -5.4% to -0.8%) for spine BMD vs -0.5% (IQR, -1.9% to 1.2%) for hip BMD and -1.3% (IQR, -3.2% to 0.8%) for spine BMD with dolutegravir, emtricitabine, and tenofovir alafenamide (P < .001 for each between-group comparison). Resistance to doravirine emerged among 7 of 9 participants experiencing virologic failure in the doravirine, lamivudine, and tenofovir disoproxil fumarate group. Of these 7 participants, 5 of 6 achieved viral suppression after switching to dolutegravir-based therapy and 1 was lost to follow-up. Serious adverse events and deaths (n = 2) were infrequent and not considered treatment-related.",
-          "labelZh": "結果",
-          "textZh": "在600名參與者中， 597名（ 99.5 ％ ）為非洲黑人， 413名（ 68.8 ％ ）為女性出生，中位年齡為34歲（ IQR ， 28-41 ）。 在第48週， doravirine、lamivudine和tenofovir disoproxil fumarate組的266名參與者（ 89.0% ）實現了病毒抑制（ HIV RNA水平< 50拷貝/mL ） ，而dolutegravir、emtricitabine和tenofovir alafenamide組的273名參與者（ 90.7% ）實現了病毒抑制（組間差異為-1.7個百分點[95% CI ， -6.6至3.1] ，符合預先指定的-10個百分點的非劣效性界限）。 Doravirine、lamivudine和tenofovir disoproxil fumarate組的體重增加中位數為3.0 kg ，而dolutegravir、emtricitabine和tenofovir alafenamide組的體重增加中位數為5.0 kg （組間差異為-2.0 kg [95% CI ， -3.0至-1.0 kg] ； P < 0.001 ）。 在doravirine、lamivudine和tenofovir disoproxil fumarate組的參與者中，臀部骨密度(BMD)的中位數變化為-2.1% (IQR ， -4.1%至-0.5%) ，脊椎BMD為-3.2% (IQR ， -5.4%至-0.8%) ，而臀部BMD為-0.5% (IQR ， -1.9%至1.2%) ，使用dolutegravir、emtricitabine和tenofovir alafenamide的脊椎BMD為-1.3% (IQR ， -3.2%至0.8%) (每個組間比較的P < 0.001)。 在doravirine、lamivudine和tenofovir disoproxil fumarate組中出現病毒學失敗的9名參與者中有7名出現對doravirine的耐藥性。 在這7名參與者中， 6名中有5名在切換到基於dolutegravir的"
-        },
-        {
-          "label": "CONCLUSIONS AND RELEVANCE",
-          "text": "Among predominantly Black African adults initiating ART, a regimen with doravirine, lamivudine, and tenofovir disoproxil fumarate was noninferior to a regimen with dolutegravir, emtricitabine, and tenofovir alafenamide for 48-week viral suppression and was associated with less weight gain.",
-          "labelZh": "結論與意義",
-          "textZh": "在開始ART的主要是非洲黑人成年人中，使用doravirine、lamivudine和tenofovir disoproxil fumarate的方案不劣於使用dolutegravir、emtricitabine和tenofovir alafenamide的方案，用於48週的病毒抑制，並且與較少的體重增加相關。"
-        },
-        {
-          "label": "TRIAL REGISTRATION",
-          "text": "ClinicalTrials.gov Identifier: NCT05924438.",
-          "labelZh": "試驗註冊",
-          "textZh": "ClinicalTrials.gov識別碼： NCT05924438。"
-        }
-      ],
-      "doi": "10.1001/jama.2026.14762",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42536019/",
-      "titleZh": "成人初始HIV治療和治療相關的體重增加： Opti-DOR隨機臨牀試驗"
-    },
-    {
-      "pmid": "42526026",
-      "title": "Phase 2b Trial of a NaV1.8 Inhibitor for Acute Pain",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jul 30",
-      "sortDate": "2026-07-30",
-      "authors": "Singla N, Katz NP, Vaughn B, Rogier T, Bertoch T, Minkowitz H, Loflin M",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Nav1.8, a voltage-gated sodium channel expressed in the peripheral nervous system, has a critical role in pain signaling. Previous trials of NaV1.8 inhibitors have shown effectiveness in reducing postoperative pain.",
-          "labelZh": "背景",
-          "textZh": "Nav1.8是一種在周圍神經系統中表達的電壓門控鈉通道，在疼痛信號中起著關鍵作用。以前的NaV1.8抑制劑試驗已顯示出減輕術後疼痛的有效性。"
-        },
-        {
-          "label": "METHODS",
-          "text": "We conducted a phase 2b, double-blind, randomized, placebo-controlled trial to evaluate LTG-001, a selective Nav1.8 inhibitor, in patients with moderate-to-severe pain after abdominoplasty. Patients were randomly assigned in a 1:1:1:1 ratio to receive a 300-mg loading dose of LTG-001, followed by 150 mg every 12 hours (low-dose group); a 450-mg loading dose of LTG-001, followed by 300 mg every 12 hours (high-dose group); hydrocodone bitartrate-acetaminophen (5 mg of hydrocodone bitartrate and 325 mg of acetaminophen) every 6 hours; or placebo every 6 hours. All doses were administered orally over a 48-hour period. The primary end point was the time-weighted sum of the pain-intensity difference (SPID) over the 48-hour treatment period (SPID48), based on scores on the Numeric Pain Rating Scale (range, 0 to 10, with higher values indicating more severe pain; higher SPID48 values indicate greater pain reduction). Secondary end points included the amount of opioid rescue medication consumed in morphine milligram equivalents (MME) and no receipt of opioid rescue medication.",
-          "labelZh": "方法",
-          "textZh": "我們進行了一項2b期、雙盲、隨機、安慰劑對照試驗，以評估選擇性Nav1.8抑制劑LTG-001在腹部成形術後中度至重度疼痛患者中的作用。 以1: 1: 1: 1的比例隨機分配患者接受300mg負載劑量的LTG-001 ，然後每12小時150mg （低劑量組） ； 450mg負載劑量的LTG-001 ，然後每12小時300mg （高劑量組） ；酒石酸氫可酮-醋氨酚（酒石酸氫可酮5mg和醋氨酚325mg ）每6小時；或安慰劑每6小時一次。 所有劑量均在48小時內口服給藥。 主要終點是48小時治療期間疼痛強度差異（ SPID ）的時間加權總和（ SPID48 ） ，基於數值疼痛評定量表上的分數（範圍為0至10 ，數值越高表示疼痛越嚴重； SPID48數值越高表示疼痛減輕越大）。 次要終點包括以嗎啡毫克當量（ MME ）消耗的類鴉片急救藥物量，以及未收到類鴉片急救藥物。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "A total of 343 patients underwent randomization. The least-squares mean SPID48 was 161.05 (95% confidence interval [CI], 142.93 to 179.16) in the low-dose group, 185.30 (95% CI, 167.26 to 203.34) in the high-dose group, 164.08 (95% CI, 146.02 to 182.14) in the hydrocodone bitartrate-acetaminophen group, and 123.22 (95% CI, 105.23 to 141.21) in the placebo group. The least-squares mean difference in the SPID48 between LTG-001 and placebo was significant for each dose (low dose: 37.82 [P = 0.003]; high dose: 62.08 [P<0.001]), and that between hydrocodone bitartrate-acetaminophen and placebo was 40.86. High-dose LTG-001, but not low-dose LTG-001, was associated with significantly lower opioid use than placebo (11.00 MME vs. 18.35 MME, P = 0.01), as well as a significantly higher percentage of patients who received no opioid rescue medication (52% vs. 22%, P<0.001). High-dose LTG-001 was associated with a higher incidence of pyrexia than placebo (7% vs. 2%) and a higher incidence of presyncope (6% vs. 1%).",
-          "labelZh": "結果",
-          "textZh": "共有343名患者接受了隨機分組。 最小二乘平均SPID48在低劑量組中為161.05 （ 95%置信區間[CI] ， 142.93至179.16 ） ，在高劑量組中為185.30 （ 95% CI ， 167.26至203.34 ） ，在酒石酸氫可酮-醋氨酚組中為164.08 （ 95% CI ， 146.02至182.14 ） ，在安慰劑組中為123.22 （ 95% CI ， 105.23至141.21 ）。 LTG-001和安慰劑之間SPID48的最小平方平均值差異在每個劑量下都顯著（低劑量： 37.82 [P = 0.003] ；高劑量： 62.08 [P < 0.001] ） ，而酒石酸氫可酮-醋氨酚和安慰劑之間的最小平方平均值差異為40.86。 大劑量LTG-001 ，但不是低劑量LTG-001 ，與鴉片類藥物使用率顯著低於安慰劑（ 11.00 MME對18.35 MME ， P = 0.01 ） ，以及未接受鴉片類藥物救援藥物的患者百分比顯著較高（ 52%對22% ， P < 0.001 ）。 與安慰劑相比，大劑量LTG-001與更高的發熱發生率（ 7%對2% ）和更高的暈厥前期發生率（ 6%對1% ）有關。"
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "LTG-001 led to significantly greater reductions in pain scores than placebo over the course of 48 hours after abdominoplasty. (Funded by Latigo Biotherapeutics; LTG-001-010 ClinicalTrials.gov number, NCT07102459.).",
-          "labelZh": "結論",
-          "textZh": "在腹部成形術後48小時內， LTG-001導致疼痛評分顯著大於安慰劑。（由Latigo Biotherapeutics資助； LTG-001-010 ClinicalTrials.gov編號： NCT07102459 ）。"
-        }
-      ],
-      "doi": "10.1056/NEJMoa2602910",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42526026/",
-      "titleZh": "2b期NaV1.8急性疼痛抑制劑試驗"
-    },
-    {
-      "pmid": "42441431",
-      "title": "Platelet-Activating Anti-Platelet Factor 4 Disorders",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jul 30",
-      "sortDate": "2026-07-30",
-      "authors": "Warkentin TE, Greinacher A",
-      "abstract": [
-        {
-          "text": "Platelet-activating antibodies against platelet factor 4 (PF4) cause highly prothrombotic disorders with reduced platelet counts. In heparin-induced thrombocytopenia (HIT), these antibodies bind PF4-heparin complexes, causing heparin-dependent platelet activation. Less common autoimmune and spontaneous HIT variants that are triggered by heparin and nonpharmacologic polyanions, respectively, have atypical clinical features and antibodies with additional heparin-independent platelet-activating properties. Vaccine-induced immune thrombocytopenia and thrombosis (VITT) antibodies directly target PF4. Initially, VITT was linked to adenoviral vector-based coronavirus disease 2019 vaccines, but in rare cases, an immune thrombocytopenia and thrombosis disorder that is clinically nearly identical to VITT can be caused by infection resulting from natural exposure to viruses, especially adenovirus. In persons with the IGLV3-21*02/*03 gene, anti-adenovirus protein VII antibody specificity shifts to PF4 by way of a specific somatic hypermutation (K31E) that creates VITT antibodies. In VITT-like monoclonal gammopathy of thrombotic significance, monoclonal anti-PF4 antibodies cause chronic prothrombotic conditions. Accurate diagnosis relies on distinct assays for HIT and VITT antibodies. Beyond anticoagulation, inhibition of FcγIIa receptor-mediated platelet activation may be needed for anti-PF4 disorders with heparin-independent reactivity (e.g., high-dose immune globulin in acute disease manifestations and Bruton's tyrosine kinase inhibitors in chronic manifestations).",
+          "text": "Britz et al present an important contribution to the understanding of primary care capacity by identifying all Primary Care Physicians (PCPs) in one state and quantifying their patient panel sizes. Their findings, showing median panels between 1196 and 1290 patients, provide critical insight into how many individuals each PCP can realistically serve amid a national primary care shortage. This commentary explores emerging trends that may reshape how ideal panel size is defined in the future, particularly the increasing integration of non-physician providers, digital health platforms, and artificial intelligence (AI) tools. Technologies such as ambient dictation, automated order entry, and AI-driven patient messaging can reclaim valuable clinician time and help mitigate burnout, potentially allowing physicians to manage larger panels. Likewise, wearable sensors, virtual visits, and non-traditional care outlets such as retail clinics and urgent care centers offer additional opportunities to expand system-wide capacity. However, these efficiencies must be balanced against current capacity issues in primary care, including potential added monitoring workload, increasing complexity of patients, as well as currently over-burdened primary care practices due to administrative burden and high volumes of patient messaging. Future studies are needed to determine whether these innovations truly expand capacity or simply redistribute effort within the evolving ecosystem of primary care.",
           "labelZh": null,
-          "textZh": "針對血小板因子4 （ PF4 ）的血小板活化抗體會導致血小板計數減少的高度血栓前期疾病。 在肝素誘導的血小板減少症（ HIT ）中，這些抗體與PF4-肝素複合物結合，導致肝素依賴性血小板活化。 由肝素和非藥物聚陰離子分別觸發的不太常見的自身免疫和自發性命中變異體具有非典型臨牀特徵和抗體，具有額外的肝素獨立血小板活化特性。 疫苗誘導的免疫性血小板減少和血栓形成（ VITT ）抗體直接靶向PF4。 最初， VITT與基於腺病毒載體的2019年冠狀病毒病疫苗有關，但在極少數情況下，免疫性血小板減少症和臨牀上與VITT幾乎相同的血栓症可能是由自然暴露於病毒（特別是腺病毒）引起的感染引起的。 在具有IGLV3-21 * 02/* 03基因的人羣中，抗腺病毒蛋白VII抗體的特異性通過產生VITT抗體的特異性體細胞超突變（ K31E ）轉移到PF4。 在具有血栓顯著性的VITT樣單株免疫球蛋白病中，單株抗PF4抗體會導致慢性原血栓性疾病。 準確的診斷依賴於HIT和VITT抗體的不同測定。 除了抗凝之外， FcγIIa受體介導的血小板活化可能需要抑制具有肝素獨立反應性的抗PF4病症（例如，急性疾病中的高劑量免疫球蛋白"
+          "textZh": "Britz等人通過確定一個州的所有初級保健醫生（ PCP ）並量化其患者面板大小，為理解初級保健能力做出了重要貢獻。 他們的研究結果顯示了1196至1290名患者的中位數，為在國家初級保健短缺的情況下，每個PCP可以實際服務多少人提供了關鍵的見解。 本評論探討可能重塑未來理想面板尺寸定義的新興趨勢，特別是非醫師提供者、數位健康平臺和人工智能（ AI ）工具的整合日益增加。 環境聽寫、自動訂單輸入和AI驅動的患者消息傳遞等技術可以回收寶貴的臨牀醫生時間，並有助於減輕過勞，從而可能允許醫生管理更大的面板。 同樣，可穿戴式感測器、虛擬就診以及零售診所和緊急護理中心等非傳統護理網點也為擴大全系統容量提供了額外的機會。 然而，這些效率必須與初級護理目前的容量問題相平衡，包括潛在的監測工作量增加、患者日益複雜，以及由於行政負擔和患者訊息量大，目前初級護理實踐負擔過重。 未來的研究需要確定這些創新是否真正擴大了容量，或者只是在不斷發展的初級保健生態系統中重新分配工作。"
         }
       ],
-      "doi": "10.1056/NEJMra2502459",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42441431/",
-      "titleZh": "血小板活化抗血小板因子4疾病"
+      "doi": "10.3122/jabfm.2025.250403R1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42562656/",
+      "titleZh": "初級護理中患者面板規模的未來"
     },
     {
-      "pmid": "42223064",
-      "title": "PARP and Androgen-Signaling Inhibition plus ADT in Metastatic Prostate Cancer",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jul 30",
-      "sortDate": "2026-07-30",
-      "authors": "Agarwal N, Matsubara N, Azad AA, Saad F, Mateo J, Jiang S, Ye D, Voog E, et al.",
+      "pmid": "42562655",
+      "title": "Association of Asynchronous Virtual Scribe Services: Patient Experience in Primary Care",
+      "journal": "JABFM",
+      "category": "家醫科",
+      "date": "2026 Aug",
+      "sortDate": "2026-08-00",
+      "authors": "Stephens J, Biery N, Kieber-Emmons A, Hamadani R, Allen N, Greenberg G",
       "abstract": [
         {
           "label": "BACKGROUND",
-          "text": "A previous trial involving patients with metastatic prostate cancer that was resistant to androgen pathway modulation (formerly referred to as castration-resistant) showed that adding talazoparib to enzalutamide significantly improved imaging-based progression-free survival and overall survival, with the greatest benefit observed in the cohort with alterations in homologous recombination repair genes.",
+          "text": "Virtual scribe services are increasingly utilized to reduce documentation burden and mitigate clinician burnout. While evidence supports their positive impact on clinician wellness and productivity, the effect on patient experience has not received as much attention. We hypothesized that clinicians using virtual scribes would demonstrate improved patient satisfaction scores due to enhanced face-to-face interaction during visits.",
           "labelZh": "背景",
-          "textZh": "先前一項涉及對雄激素途徑調節有抵抗力的轉移性前列腺癌患者（以前稱為去勢抵抗性）的試驗顯示，在恩扎魯胺中添加talazoparib顯著改善了基於影像的無惡化生存期和總生存期，在同源重組修復基因改變的隊列中觀察到的最大益處。"
+          "textZh": "越來越多地使用虛擬抄寫員服務來減輕文件負擔並減輕臨牀醫生過勞。雖然有證據支持它們對臨牀醫生的健康和生產力的積極影響，但對患者體驗的影響卻沒有受到那麼多的關注。我們假設使用虛擬抄寫員的臨牀醫生會在訪問期間通過增強面對面互動來提高患者滿意度分數。"
         },
         {
           "label": "METHODS",
-          "text": "In this ongoing, phase 3, double-blind trial assessing talazoparib in patients with metastatic androgen pathway modulation-sensitive [APMS] prostate cancer harboring alterations in homologous recombination repair genes, we randomly assigned patients in a 1:1 ratio to receive talazoparib at a dose of 0.5 mg plus enzalutamide at a dose of 160 mg once daily (talazoparib group) or placebo plus enzalutamide at a dose of 160 mg once daily (control group). Randomization was stratified according to disease status (new or relapsed), disease volume (high or low), and BRCA (vs. non-BRCA) mutation status. The primary end point was investigator-assessed imaging-based progression-free survival. The key secondary end point was overall survival.",
+          "text": "Using a pre-post design, we analyzed patient satisfaction data for 81 primary care clinicians utilizing asynchronous virtual scribe services (two different vendor programs) within a large integrated health network in Eastern Pennsylvania. Patient satisfaction was measured using four vendor-administered questions assessing overall rating of care, likelihood to recommend, clinician listening, and trust. Pre-implementation scores (6 months prior to scribe utilization) were compared to post-implementation scores (months 3-9 with a scribe service) using related-samples Wilcoxon signed-rank tests.",
           "labelZh": "方法",
-          "textZh": "在這項正在進行的評估轉移性雄激素途徑調節敏感性[APMS]前列腺癌患者中talazoparib的同源重組修復基因改變的3期雙盲試驗中，我們以1: 1的比例隨機分配患者接受talazoparib 0.5毫克劑量加恩扎魯胺160毫克劑量每日一次（ talazoparib組）或安慰劑加恩扎魯胺160毫克劑量每日一次（對照組）。根據疾病狀態（新發或復發）、疾病體積（高或低）和BRCA （與非BRCA ）突變狀態進行隨機分層。主要終點是研究者評估的基於影像學的無惡化生存期。次要關鍵終點是總生存期。"
+          "textZh": "我們使用事前設計，在賓夕法尼亞州東部的大型綜合健康網絡中，利用異步虛擬抄寫服務（兩個不同的供應商計劃）分析了81名初級保健臨牀醫生的患者滿意度數據。使用四個供應商管理的問題來衡量患者滿意度，評估整體護理評分、推薦的可能性、臨牀醫生聆聽和信任。使用相關樣本Wilcoxon簽署等級測試，將實施前評分（抄寫員使用前6個月）與實施後評分（使用抄寫員服務的3-9個月）進行比較。"
         },
         {
           "label": "RESULTS",
-          "text": "A total of 300 patients were assigned to the talazoparib group and 299 to the control group. At 3 years, progression-free survival was 77% in the talazoparib group and 56% in the control group (hazard ratio for disease progression or death, 0.48; 95% confidence interval [CI], 0.36 to 0.65; P<0.001). In this interim analysis, overall survival at 3 years was 78% in the talazoparib group and 72% in the control group (hazard ratio for death, 0.77; 95% CI, 0.56 to 1.04). Serious adverse events were reported in 42% and 32% of the patients in the talazoparib group and the control group, respectively. In the talazoparib group, the most common adverse events were anemia, fatigue, and decreased neutrophil count, and the most common event of grade 3 or higher was anemia, reported in 51% of the patients; two treatment-related deaths occurred.",
+          "text": "Statistically significant improvements in patient-reported satisfaction metrics were observed in overall rating of the visit (P < .001) and trust (P = .012). Likelihood to recommend and listening showed positive trends but did not reach statistical significance (P = .086 and P = .705, respectively).",
           "labelZh": "結果",
-          "textZh": "共有300名患者被分配到talazoparib組， 299名患者被分配到對照組。在3年時， talazoparib組的無惡化存活率為77% ，對照組為56% （疾病惡化或死亡的風險比為0.48 ； 95%可信區間[CI]為0.36至0.65 ； P < 0.001 ）。在此期中分析中， talazoparib組和對照組的3年總生存率分別為78%和72% （死亡風險比為0.77 ； 95% CI為0.56至1.04 ）。在talazoparib組和對照組中，分別有42%和32%的患者報告了嚴重不良事件。在talazoparib組中，最常見的不良事件是貧血、疲勞和嗜中性白血球計數下降，最常見的3級或更高級別的事件是貧血，在51%的患者中報告；發生了兩例與治療相關的死亡。"
+          "textZh": "在回診（ P < 0.001 ）和信任（ P = 0.012 ）的整體評分中，觀察到患者報告滿意度指標的統計學顯著改善。推薦和聆聽的可能性顯示出積極的趨勢，但未達到統計顯著性（分別為P = 0.086和P = 0.705 ）。"
         },
         {
-          "label": "CONCLUSIONS",
-          "text": "Talazoparib added to enzalutamide led to significantly better imaging-based progression-free survival than placebo plus enzalutamide among patients with metastatic APMS prostate cancer harboring alterations in homologous recombination repair genes. Serious adverse events were more common with talazoparib plus enzalutamide than with placebo plus enzalutamide. (Funded by Pfizer; TALAPRO-3 ClinicalTrials.gov number, NCT04821622.).",
+          "label": "CONCLUSION",
+          "text": "Virtual scribe implementation was associated with significant improvements in patient-reported overall experience and trust in their clinicians. These findings suggest that reducing documentation burden may enhance the patient-clinician relationship, providing additional justification for scribe investment beyond clinician wellness.",
           "labelZh": "結論",
-          "textZh": "在患有同源重組修復基因發生改變的轉移性APMS前列腺癌患者中，加入恩扎魯胺的Talazoparib導致顯著優於安慰劑加恩扎魯胺的基於影像的無惡化生存期。使用talazoparib加enzalutamide的嚴重不良事件比使用安慰劑加enzalutamide的嚴重不良事件更常見。（由輝瑞資助； TALAPRO-3 ClinicalTrials.gov編號， NCT04821622。）。"
+          "textZh": "實施虛擬抄寫員與患者報告的整體經驗和對臨牀醫生的信任顯著改善有關。這些發現表明，減少文件負擔可能會加強患者與臨牀醫師的關係，為臨牀醫師健康以外的抄寫員投資提供額外的理由。"
         }
       ],
-      "doi": "10.1056/NEJMoa2604126",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42223064/",
-      "titleZh": "轉移性前列腺癌中的PARP和雄激素信號抑制加ADT"
+      "doi": "10.3122/jabfm.2026.260173R0",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42562655/",
+      "titleZh": "非同步虛擬抄寫員服務協會：初級護理中的患者體驗"
     },
     {
-      "pmid": "42212933",
-      "title": "Teclistamab in Multiple Myeloma with One to Three Previous Lines of Therapy",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jul 30",
-      "sortDate": "2026-07-30",
-      "authors": "Touzeau C, Mina R, Quach H, Hungria V, Bhutani D, Chen W, Kumar S, Chaulagain C, et al.",
+      "pmid": "42562653",
+      "title": "Billing Medicaid for Community Health Worker Services: The Promise, Pitfalls, and Path Forward",
+      "journal": "JABFM",
+      "category": "家醫科",
+      "date": "2026 Aug",
+      "sortDate": "2026-08-00",
+      "authors": "Sanders MR, Fiscella K",
       "abstract": [
         {
-          "label": "BACKGROUND",
-          "text": "The efficacy of teclistamab, a bispecific antibody targeting B-cell maturation antigen and CD3, as early-line monotherapy in relapsed or refractory multiple myeloma is unclear.",
-          "labelZh": "背景",
-          "textZh": "靶向B細胞成熟抗原和CD3的雙特異性抗體teclistamab作為復發或難治性多發性骨髓瘤的早期單一療法的功效尚不清楚。"
-        },
-        {
-          "label": "METHODS",
-          "text": "We randomly assigned patients with relapsed or refractory multiple myeloma who had previously received one, two, or three lines of therapy, including an anti-CD38 monoclonal antibody and lenalidomide, to receive teclistamab or the investigator's choice of pomalidomide, bortezomib, and dexamethasone (PVd) or carfilzomib and dexamethasone (Kd). Antimicrobial prophylaxis and immune globulin replacement were recommended. The primary end point was progression-free survival as assessed by an independent review committee.",
-          "labelZh": "方法",
-          "textZh": "我們隨機分配先前接受過一、兩或三線治療（包括抗CD38單株抗體和來那度胺）的復發或難治性多發性骨髓瘤患者接受teclistamab或研究者選擇的泊馬度胺、硼替佐米和地塞米鬆（ PVd ）或卡非佐米和地塞米鬆（ Kd ）。建議進行抗菌預防和免疫球蛋白替代。主要終點為由獨立審查委員會評估的無惡化生存期。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "A total of 296 patients were assigned to teclistamab and 297 to PVd or Kd. At the interim analysis (median follow-up, 17.3 months), teclistamab significantly improved progression-free survival as compared with PVd or Kd (estimated 18-month progression-free survival, 69.8% vs. 26.9%; hazard ratio for disease progression or death, 0.29; 95% confidence interval [CI], 0.23 to 0.38; P<0.001). The percentage of patients with a complete response or better was higher with teclistamab than with PVd or Kd (65.9% vs. 16.8%, P<0.001). Overall survival was improved with teclistamab as compared with PVd or Kd (estimated 18-month overall survival, 79.2% vs. 68.6%; hazard ratio for death, 0.60; 95% CI, 0.43 to 0.83; P = 0.002). Adverse events of grade 3 or 4 occurred in 84.9% of teclistamab recipients and in 76.3% of PVd or Kd recipients, with grade 5 adverse events in 6.5% and 3.5%, respectively. Cytokine release syndrome, mostly of grade 1 or 2, occurred in 66.0% of teclistamab recipients, and immune effector cell-associated neurotoxicity syndrome occurred in 4.1%. Grade 3 or 4 infection occurred in 41.6% of teclistamab recipients and in 29.0% of PVd or Kd recipients.",
-          "labelZh": "結果",
-          "textZh": "共有296名患者被分配到teclistamab ， 297名患者被分配到PVd或Kd。 在中期分析（中位隨訪， 17.3個月）中，與PVd或Kd相比， teclistamab顯著改善無惡化生存期（估計18個月無惡化生存期， 69.8%對26.9% ；疾病惡化或死亡風險比， 0.29 ； 95%可信區間[CI] ， 0.23至0.38 ； P < 0.001 ）。 Teclistamab完全緩解或更好的患者百分比高於PVd或Kd （ 65.9%對16.8% ， P < 0.001 ）。 與PVd或Kd相比， teclistamab的整體存活率有所改善（估計18個月整體存活率為79.2%對68.6% ；死亡風險比為0.60 ； 95% CI為0.43至0.83 ； P = 0.002 ）。 3級或4級不良事件發生在84.9%的teclistamab受試者和76.3%的PVd或Kd受試者中， 5級不良事件發生率分別為6.5%和3.5%。 大多為1級或2級的細胞因子釋放綜合徵發生在66.0%的teclistamab受者身上，而免疫效應細胞相關的神經毒性綜合徵發生在4.1%。 3或4級感染發生在41.6%的teclistamab受試者和29.0%的PVd或Kd受試者中。"
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "Among patients with multiple myeloma and one to three previous lines of therapy, teclistamab significantly improved progression-free and overall survival as compared with PVd or Kd. Infections of grade 3 or 4 were common. (Funded by Johnson & Johnson; MajesTEC-9 ClinicalTrials.gov number, NCT05572515.).",
-          "labelZh": "結論",
-          "textZh": "在多發性骨髓瘤患者和一至三條既往治療線中，與PVd或Kd相比， teclistamab顯著改善無惡化和總生存期。3或4級的感染很常見。（由Johnson & Johnson資助； MajesTEC-9 ClinicalTrials.gov編號： NCT05572515。）"
+          "text": "This commentary examines the implications of the Community Health Worker (CHW) Access Act introduced by Congress. If passed, primary care practices would be able to receive reimbursement for CHW services. CHWs are lay members of the community that help people address the social determinants of health, understand their health, and get the health care they need, especially in communities where resources are scarce. They have been shown to improve health outcomes, yet many serve in unpaid positions and their services have not been readily reimbursable in the healthcare system. We highlight the potential of the Bill to facilitate the uptake of CHWs in primary care. This is particularly important at a time when the provision of primary care is scarce. We examine the potential and pitfalls of the Bill and recommend implementation strategies to support the uptake of CHWs into primary care. This commentary aims to inform stakeholders about the Bill's broader impact on primary care and future CHW sustainability.",
+          "labelZh": null,
+          "textZh": "本評論審查了國會提出的《社區衛生工作者（ CHW ）準入法》的含義。 如果通過，初級保健實踐將能夠獲得CHW服務的報銷。 CHW是社區的平民成員，幫助人們解決健康的社會決定因素，了解他們的健康狀況，並獲得所需的醫療保健，特別是在資源稀缺的社區。 它們已被證明可以改善健康結果，但許多人擔任無薪職位，他們的服務在醫療保健系統中並不容易獲得報銷。 我們強調該法案在促進初級保健領域吸收CHW方面的潛力。 在初級護理很少的時候，這一點尤其重要。 我們研究該法案的潛力和陷阱，並建議實施策略，以支持CHW進入初級保健。 本評論旨在告知利益相關者該法案對初級保健和未來CHW可持續性的更廣泛影響。"
         }
       ],
-      "doi": "10.1056/NEJMoa2603870",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42212933/",
-      "titleZh": "Teclistamab治療多發性骨髓瘤伴一至三條既往治療線路"
+      "doi": "10.3122/jabfm.2025.250301R1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42562653/",
+      "titleZh": "為社區衛生工作者服務計費醫療補助：承諾、陷阱和前進道路"
     },
     {
-      "pmid": "41910396",
-      "title": "Iptacopan in IgA Nephropathy - Final 24-Month Data",
-      "journal": "NEJM",
-      "category": "四大綜合",
-      "date": "2026 Jul 30",
-      "sortDate": "2026-07-30",
-      "authors": "Barratt J, Eren N, Kashihara N, Maes B, Rizk DV, Rovin B, Trimarchi H, Zhang H, et al.",
+      "pmid": "42562651",
+      "title": "The Association Between Continuity of Care and Emergency Department Utilization Among Canadian Senior Adults",
+      "journal": "JABFM",
+      "category": "家醫科",
+      "date": "2026 Aug",
+      "sortDate": "2026-08-00",
+      "authors": "Tiagi R",
       "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Overactivation of the alternative complement pathway contributes to IgA nephropathy and glomerular inflammation. In the 9-month interim analysis of this phase 3 trial, iptacopan, a complement factor B inhibitor, led to a significant reduction of 38.3% in the 24-hour urinary protein-to-creatinine ratio as compared with placebo and had an acceptable safety profile.",
-          "labelZh": "背景",
-          "textZh": "替代補體途徑過度活化導致IgA腎病和腎小球炎症。在這項3期試驗的9個月期中分析中，補體因子B抑製劑iptacopan與安慰劑相比，導致24小時尿蛋白與肌酸酐比率顯著降低38.3% ，並且具有可接受的安全性。"
-        },
-        {
-          "label": "METHODS",
-          "text": "In this phase 3 trial, we enrolled adults who had IgA nephropathy, an estimated glomerular filtration rate (eGFR) of at least 30 ml per minute per 1.73 m2 of body-surface area, and a 24-hour urinary protein-to-creatinine ratio of 1 or higher (with protein and creatinine both measured in grams) despite supportive care. Patients were randomly assigned, in a 1:1 ratio, to receive oral iptacopan (200 mg) or placebo twice daily. The primary end point for the final analysis was the annualized total eGFR slope as estimated over a 24-month period. Secondary end points included a composite kidney-failure end point (i.e., a sustained decline in eGFR of ≥30%, a sustained eGFR of <15 ml per minute per 1.73 m2, the initiation of maintenance dialysis, receipt of kidney transplant, or death from kidney failure), assessed in a time-to-event analysis. Safety was also assessed.",
-          "labelZh": "方法",
-          "textZh": "在這項3期試驗中，我們招募了患有IgA腎病的成人，估計腎小球濾過率（ eGFR ）為每分鐘至少30毫升/每1.73平方米的身體表面積，以及24小時尿蛋白與肌酸酐比率為1或更高（蛋白和肌酸酐均以克為單位） ，儘管有支持性護理。患者以1 ： 1的比例被隨機分配接受口服iptacopan （ 200毫克）或安慰劑，每日兩次。最終分析的主要終點是24個月期間估計的年化總eGFR斜率。次要終點包括複合腎臟衰竭終點（即eGFR持續下降≥ 30%、每1.73 m2持續eGFR < 15 ml/分鐘、開始維持透析、接受腎臟移植或腎臟衰竭死亡） ，在事件發生時間分析中進行評估。也評估了安全性。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "Among 477 patients included in the final analysis, 238 had been randomly assigned to iptacopan and 239 to placebo. The annualized total eGFR slope was -3.10 ml per minute per 1.73 m2 per year with iptacopan, as compared with -6.12 ml per minute per 1.73 m2 per year with placebo (difference, 3.02 ml per minute per 1.73 m2 per year; 95% confidence interval [CI], 2.02 to 4.01; adjusted P<0.001). A composite kidney-failure end-point event occurred in 21.4% of the patients in the iptacopan group, as compared with 33.5% of those in the placebo group (hazard ratio, 0.57; 95% CI, 0.40 to 0.81; adjusted P = 0.003). The incidence of adverse events was 87.0% in the iptacopan group and 89.1% in the placebo group. Serious adverse events occurred in 12.2% of the patients who received iptacopan and in 11.7% of those who received placebo, and serious infections in 6.7% and 2.1%, respectively. No deaths occurred.",
-          "labelZh": "結果",
-          "textZh": "在最終分析中納入的477名患者中， 238名被隨機分配到iptacopan ， 239名被分配到安慰劑。使用iptacopan的年化總eGFR斜率為每1.73 m2每分鐘-3.10 ml ，而使用安慰劑的年化總eGFR斜率為每1.73 m2每分鐘-6.12 ml （差異為每1.73 m2每分鐘3.02 ml ； 95%置信區間[CI] ， 2.02至4.01 ；調整後P < 0.001 ）。與安慰劑組33.5%的患者相比， iptacopan組21.4%的患者出現複合腎功能衰竭終點事件（風險比， 0.57 ； 95% CI ， 0.40至0.81 ；調整後P = 0.003 ）。iptacopan組的不良事件發生率為87.0% ，安慰劑組的不良事件發生率為89.1%。接受iptacopan的患者中發生了12.2 ％的嚴重不良事件，接受安慰劑的患者中發生了11.7 ％的嚴重不良事件，嚴重感染發生率分別為6.7 ％和2.1 ％。未發生死亡。"
-        },
-        {
-          "label": "CONCLUSIONS",
-          "text": "Iptacopan therapy led to a significantly slower decline in kidney function than placebo. (Funded by Novartis; APPLAUSE-IgAN ClinicalTrials.gov number, NCT04578834.).",
-          "labelZh": "結論",
-          "textZh": "Iptacopan治療導致腎功能下降的速度明顯慢於安慰劑。（由諾華提供資金； APPLAUSE-IgAN ClinicalTrials.gov編號： NCT04578834。）"
-        }
-      ],
-      "doi": "10.1056/NEJMoa2600743",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41910396/",
-      "titleZh": "IgA腎病中的Iptacopan -最終24個月資料"
-    },
-    {
-      "pmid": "42530910",
-      "title": "Dapagliflozin and Acute Kidney Injury Following Cardiac Surgery: A Randomized Clinical Trial",
-      "journal": "JAMA",
-      "category": "四大綜合",
-      "date": "2026 Jul 30",
-      "sortDate": "2026-07-30",
-      "authors": "Oosterom-Eijmael MJP, Hulst AH, de Oliveira NPM, Niesten ED, Wietsma NE, Gerritse BM, Scohy TV, Rettig TCD, et al.",
-      "abstract": [
-        {
-          "label": "IMPORTANCE",
-          "text": "Two percent to 50% of patients undergoing elective cardiac surgery experience acute kidney injury (AKI) postoperatively. Medications to prevent AKI after elective cardiac surgery have not been identified.",
-          "labelZh": "重要性",
-          "textZh": "2%至50%接受選擇性心臟手術的患者在術後會經歷急性腎損傷(AKI)。選擇性心臟手術後預防AKI的藥物尚未確定。"
-        },
         {
           "label": "OBJECTIVE",
-          "text": "In patients undergoing elective cardiac surgery, to evaluate whether initiating dapagliflozin 1 day prior to surgery reduces the incidence of AKI at 7 days after cardiac surgery, compared with placebo.",
+          "text": "Continuity of care with a primary care physician is critical for appropriate healthcare utilization, particularly among seniors with complex health needs. This study examines the association between the length of care continuity and the usual place of care for minor health problems, focusing on emergency department (ED) use.",
           "labelZh": "目的",
-          "textZh": "在接受選擇性心臟手術的患者中，與安慰劑相比，評估在手術前1天開始達格列津是否降低心臟手術後7天AKI的發生率。"
+          "textZh": "初級保健醫生的持續護理對於適當的醫療保健利用至關重要，特別是在具有複雜健康需求的老年人中。本研究檢查了護理持續時間與輕微健康問題的通常護理地點之間的關聯，重點是急診科（ ED ）的使用。"
         },
         {
-          "label": "DESIGN, SETTING, AND PARTICIPANTS",
-          "text": "Multicenter, double-blind, placebo-controlled randomized clinical trial conducted at 2 academic medical centers and 5 nonacademic hospitals in the Netherlands. Eligible participants were adults undergoing elective cardiac surgery. Enrollment occurred between June 8, 2023, and January 27, 2025. Final follow-up occurred May 16, 2025.",
-          "labelZh": "DESIGN, SETTING, AND PARTICIPANTS",
-          "textZh": "在荷蘭的2個學術醫療中心和5家非學術醫院進行的多中心、雙盲、安慰劑對照隨機臨牀試驗。符合資格的參與者是接受選擇性心臟手術的成年人。註冊發生在2023年6月8日至2025年1月27日期間。最終追蹤日期為2025年5月16日。"
-        },
-        {
-          "label": "INTERVENTION",
-          "text": "Patients were randomized 1:1 to receive either dapagliflozin (10 mg orally; n = 392) or placebo once daily (n = 392), beginning on the day before surgery and continuing through the second postoperative day (total of 4 doses).",
-          "labelZh": "介入",
-          "textZh": "患者以1: 1的比例隨機接受達格列嗪（ 10毫克口服； n = 392 ）或安慰劑，每日一次（ n = 392 ） ，從手術前一天開始，持續至術後第二天（共4劑）。"
-        },
-        {
-          "label": "MAIN OUTCOME AND MEASURE",
-          "text": "The primary outcome was the between-group difference in AKI (defined as an increase in serum creatinine level by at least 0.3 mg/dL [26.5 µmol/L] within 48 hours after surgery, a 1.5-fold creatinine increase within 7 days of surgery, or urine output less than 0.5 mL/kg/h for 6 to 12 hours according to Kidney Disease: Improving Global Outcomes criteria) during the first 7 postoperative days.",
-          "labelZh": "MAIN OUTCOME AND MEASURE",
-          "textZh": "主要結果是術後前7天的AKI組間差異（定義為手術後48小時內血清肌酐水平至少增加0.3 mg/dL [26.5 µmol/L] ，手術後7天內肌酐增加1.5倍，或根據腎病：改善全球結局標準，尿量在6至12小時內低於0.5 mL/kg/h ）。"
+          "label": "METHODS",
+          "text": "Data were drawn from the 2019-2020 Canadian Health Survey on Seniors (CHSS), a nationally representative 15-minute supplement to the Canadian Community Health Survey (CCHS) for Canadians aged 65 years and older. Of 245,639 selected households, 100,797 individuals responded to the CCHS (41.0%), and 41,635 of 45,863 eligible respondents completed the CHSS (90.8%). Minor health problems or nonurgent conditions were defined as self-reported difficulties accessing immediate care for issues such as fever, vomiting, headaches, sprains, minor burns, cuts, rashes, or other nonlife-threatening conditions. A multinomial logistic regression model examined the association between continuity of care (< 1 year, 1-< 2 years, ≥ 2 years, or no regular provider) and usual place of care, adjusting for demographic, socioeconomic, health, access, and provincial factors.",
+          "labelZh": "方法",
+          "textZh": "數據來自2019-2020年加拿大老年人健康調查（ CHSS ） ，這是對65歲及以上加拿大人加拿大社區健康調查（ CCHS ）的15分鐘全國代表性補充。在245,639個選定的家庭中， 100,797人回應了CCHS （ 41.0 ％ ） ， 45,863名符合條件的受訪者中有41,635人完成了CHSS （ 90.8 ％ ）。輕微的健康問題或非緊急狀況被定義為因發燒、嘔吐、頭痛、扭傷、輕微燒傷、割傷、皮疹或其他非危及生命的狀況而獲得即時護理的自我報告困難。多項邏輯回歸模型檢查了護理持續性（ < 1年、1- < 2年、≥ 2年或沒有常規提供者）和常規護理地點之間的關聯，調整了人口統計、社會經濟、健康、可及性和省級因素。"
         },
         {
           "label": "RESULTS",
-          "text": "Of 784 participants enrolled, 778 (99%) completed follow-up testing (median age, 68 [61-74] years; 76% male; 97% White; median body mass index, 27 [IQR, 25-30]; and median estimated glomerular filtration rate, 80 [IQR, 67-89] mL/min/1.73 m2). Compared with placebo, dapagliflozin reduced the incidence of AKI (28% vs 52%; relative risk, 0.54 [95% CI, 0.45-0.65]; P < .001) over 7-day follow-up after surgery. Atrial fibrillation and reoperation were the most frequent adverse events. The incidence of atrial fibrillation was 45% (176/392) in the dapagliflozin group vs 45% (176/392) in the placebo group, and the incidence of reoperation was 11% (43/392) vs 10% (39/392), respectively.",
+          "text": "Among 41,060 seniors, most reported having continuity of care with a primary care physician for two years or more. Males and those reporting poorer health were more likely to use the ED for minor problems, whereas individuals with higher income or education more often sought care at a doctor's office. Longer continuity of care was associated with lower odds of ED use for minor problems, with consistent effects in both unadjusted (coef. = -0.251, P < 0.001) and adjusted models (coef. = -0.086, P = 0.083). Other determinants, including income, access to care, and province, also influenced care location.",
           "labelZh": "結果",
-          "textZh": "在入組的784名參與者中， 778名（ 99 ％ ）完成了隨訪測試（中位年齡， 68 [61-74]歲； 76 ％為男性； 97 ％為白人；中位身體質量指數， 27 [IQR ， 25-30] ；中位估計腎小球濾過率， 80 [IQR ， 67-89] mL/min/1.73 m2 ）。與安慰劑相比，達格列淨在術後7天隨訪期間降低了AKI的發生率（ 28%對52% ；相對風險， 0.54 [95% CI ， 0.45-0.65] ； P < 0.001 ）。心房顫動和再手術是最常見的不良事件。達格列嗪組的心房顫動發生率為45% (176/392) ，而安慰劑組為45% (176/392) ，再手術發生率分別為11% (43/392)和10% (39/392)。"
+          "textZh": "在41,060名老年人中，大多數人報告與初級護理醫生有兩年或更長時間的持續護理。男性和那些報告健康狀況較差的人更有可能將ED用於輕微的問題，而收入或受教育程度較高的人則經常在醫生辦公室尋求護理。照護持續時間越長，針對輕微問題使用ED的機率越低，未調整模型(coef. = -0.251 ， P < 0.001)和調整模型(coef. = -0.086 ， P = 0.083)的影響一致。其他決定因素，包括收入、獲得照護的機會和省份，也影響了照護地點。"
         },
         {
-          "label": "CONCLUSIONS AND RELEVANCE",
-          "text": "In patients undergoing elective cardiac surgery, 4 doses of dapagliflozin, beginning the day before surgery, reduced the incidence of AKI during the 7-day postoperative period.",
-          "labelZh": "結論與意義",
-          "textZh": "在進行選擇性心臟手術的患者中，從手術前一天開始的4劑達格列淨在術後7天期間降低了AKI的發生率。"
-        },
-        {
-          "label": "TRIAL REGISTRATION",
-          "text": "ClinicalTrials.gov Identifier: NCT05590143.",
-          "labelZh": "試驗註冊",
-          "textZh": "ClinicalTrials.gov識別碼： NCT05590143。"
+          "label": "CONCLUSION",
+          "text": "Longer continuity with a primary care physician is associated with reduced ED use for minor health problems among seniors. These findings highlight the value of sustained patient-provider relationships in promoting appropriate care utilization and alleviating pressures on emergency departments.",
+          "labelZh": "結論",
+          "textZh": "與初級護理醫生保持更長的連續性與減少老年人使用ED治療輕微健康問題有關。這些發現強調了持續的患者-提供者關係在促進適當的護理利用和緩解急診部門壓力方面的價值。"
         }
       ],
-      "doi": "10.1001/jama.2026.9268",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42530910/",
-      "titleZh": "心臟手術後的Dapagliflozin和急性腎臟損傷：隨機臨牀試驗"
+      "doi": "10.3122/jabfm.2025.250211R1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42562651/",
+      "titleZh": "加拿大老年人中護理持續性與急診部門使用率之間的關聯"
     },
     {
-      "pmid": "42530900",
-      "title": "Nicotine E-Cigarettes for Cigarette Smoking Cessation: Recommendations to US-Based Clinicians",
-      "journal": "JAMA",
-      "category": "四大綜合",
-      "date": "2026 Jul 30",
-      "sortDate": "2026-07-30",
-      "authors": "Leavens ELS, Pebley K, Smith TT, Ahluwalia JS, Bello MS, Bold KW, Cantrell J, Carpenter MJ, et al.",
+      "pmid": "42562650",
+      "title": "Should Family Medicine Embrace Community Involvement and Engagement?",
+      "journal": "JABFM",
+      "category": "家醫科",
+      "date": "2026 Aug",
+      "sortDate": "2026-08-00",
+      "authors": "Fogarty CT, Misra S, Kessler BA",
       "abstract": [
         {
-          "label": "IMPORTANCE",
-          "text": "Cigarette smoking, maintained predominantly by nicotine dependence, is a long-term and relapsing behavior that continues to be a leading cause of preventable death and disease worldwide. E-cigarettes with nicotine are less harmful than cigarettes and have been shown to be more effective for smoking cessation than US Food and Drug Administration-approved nicotine replacement therapies. However, misperceptions of the harms of e-cigarettes are common, even among clinicians. This Special Communication is a position manuscript developed by a working group within the Treatment Research Network of the international Society for Research on Nicotine and Tobacco. The aims of the manuscript were to summarize the evidence on the use of e-cigarettes for smoking cessation and to provide recommendations for clinicians on how to engage in conversations with adult patients who currently smoke cigarettes. Specifically, advice is provided on (1) integration of e-cigarettes into patient-centered shared decision-making conversations on the risks and benefits of various pharmacologic smoking cessation treatments; and (2) practical guidance on the use of e-cigarettes for smoking cessation.",
-          "labelZh": "重要性",
-          "textZh": "吸煙主要由尼古丁依賴維持，是一種長期復發的行為，繼續成為全球可預防死亡和疾病的主要原因。 含有尼古丁的電子煙的危害性小於香煙，並且已被證明比美國食品和藥物管理局批準的尼古丁替代療法更有效地戒煙。 然而，即使在臨牀醫生中，對電子煙危害的誤解也很常見。 這份特別通訊是由國際尼古丁和煙草研究學會治療研究網絡內的一個工作小組開發的一份職位手稿。 手稿的目的是總結使用電子煙戒煙的證據，並為臨牀醫生提供如何與目前吸煙的成年患者進行對話的建議。 具體而言，就以下方面提供建議： (1)將電子煙整合到以患者為中心的共同決策對話中，討論各種藥理戒煙治療的風險和益處；以及(2)使用電子煙戒煙的實用指南。"
-        },
-        {
-          "label": "OBSERVATIONS",
-          "text": "This Special Communication includes one overarching recommendation: integrate e-cigarettes into conversations on the risks and benefits of all evidence-based pharmacologic treatments for smoking cessation. In support of this recommendation, specific guidance is provided regarding how to discuss potential misperceptions and suggests questions to guide patient conversations. Finally, evidence-based best practices are provided for using e-cigarettes to quit smoking, which can be shared with patients.",
-          "labelZh": "OBSERVATIONS",
-          "textZh": "本特別通訊包括一項總體建議：將電子煙整合到關於戒煙的所有循證藥物治療的風險和益處的對話中。為了支持這項建議，就如何討論潛在的誤解提供了具體的指導，並提出了引導患者對話的問題。最後，提供了使用電子煙戒煙的循證最佳做法，可以與患者分享。"
-        },
-        {
-          "label": "CONCLUSIONS AND RELEVANCE",
-          "text": "The significant burden of cigarette smoking, coupled with scientific evidence supporting e-cigarettes for smoking cessation, clearly indicates that it is appropriate to include e-cigarettes in discussions of evidence-based pharmacologic treatment for smoking cessation to reduce the harms of cigarette smoking. These recommendations are intended to provide evidence-informed guidance to clinicians regarding use of e-cigarettes for smoking cessation.",
-          "labelZh": "結論與意義",
-          "textZh": "吸煙的重大負擔，加上支持電子煙戒煙的科學證據，清楚地表明，將電子煙納入戒煙循證藥理治療的討論是合適的，以減少吸煙的危害。這些建議旨在為臨牀醫生提供有關使用電子煙戒煙的循證指導。"
+          "text": "Family medicine takes a whole-person, contextual approach to patient care, and understanding community context is important. The Centers for Disease Control and Prevention (CDC) definition of community, \"a group of people with diverse characteristics who are linked by social ties, shared common perspectives and identity, and engagement in joint action,\" provides a broad conceptual framework. While community service doesn't have a standard definition, many physicians and residency training programs incorporate such activity into practice and training. Community engagement consists of ten key principles framing public health and programmatic involvement in improving the health of a community. Despite the importance of understanding the community in practice, true community engagement for contemporary family physicians, given panel size, visit volume, and documentation burden, is unrealistic as a core part of the work of most practicing family physicians.",
+          "labelZh": null,
+          "textZh": "家庭醫學對患者護理採取全人、情境方法，了解社區情境非常重要。疾病控制和預防中心（ CDC ）對社區的定義是「一羣具有多種特徵的人，他們通過社會聯繫，共享共同的觀點和身份以及參與聯合行動而聯繫在一起」，提供了一個廣泛的概念框架。雖然社區服務沒有標準的定義，但許多醫生和住院醫師培訓計劃將此類活動納入實踐和培訓。社區參與包括十項關鍵原則，包括公共衛生和計劃參與改善社區健康。儘管在實踐中了解社區的重要性，但考慮到小組規模、就診量和文件負擔，當代家庭醫生真正的社區參與作為大多數執業家庭醫生工作的核心部分是不切實際的。"
         }
       ],
-      "doi": "10.1001/jama.2026.13087",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42530900/",
-      "titleZh": "尼古丁電子煙戒煙：給美國臨牀醫生的建議"
-    },
-    {
-      "pmid": "42525403",
-      "title": "Global Burden of Elevated LDL-C: Findings From the Global Burden of Disease Study 2023",
-      "journal": "JAMA",
-      "category": "四大綜合",
-      "date": "2026 Jul 29",
-      "sortDate": "2026-07-29",
-      "authors": "GBD 2023 LDL Cholesterol Collaborators, Razo C, DeCleene NK, Johnson CO, Stark BA, LeGrand K, Aalruz H, Abaraogu UO, et al.",
-      "abstract": [
-        {
-          "label": "IMPORTANCE",
-          "text": "Elevated low-density lipoprotein cholesterol (LDL-C) is a modifiable risk factor for cardiovascular disease, the leading cause of premature death worldwide. Assessing the LDL-C-related burden is critical for guiding prevention and treatment strategies.",
-          "labelZh": "重要性",
-          "textZh": "低密度脂蛋白膽固醇（ LDL-C ）升高是心血管疾病的可調整風險因素，心血管疾病是全球過早死亡的主要原因。評估LDL-C相關負擔對於指導預防和治療策略至關重要。"
-        },
-        {
-          "label": "OBJECTIVES",
-          "text": "To estimate the global, regional, and national burden of ischemic heart disease and ischemic stroke attributable to elevated LDL-C (relative to 35-54 mg/dL) from 1990 to 2023 and to quantify the contributions of population growth, aging, risk-deleted burden, and exposure changes to burden trends.",
-          "labelZh": "目的",
-          "textZh": "估計1990年至2023年由於LDL-C升高（相對於35-54 mg/dL ）引起的缺血性心臟病和缺血性中風的全球、區域和國家負擔，並量化人口增長、老齡化、風險刪除負擔和暴露變化對負擔趨勢的貢獻。"
-        },
-        {
-          "label": "DESIGN, SETTING, AND POPULATION",
-          "text": "This comparative risk assessment, part of the Global Burden of Disease Study 2023, estimated population-level LDL-C exposure and associated health loss in 204 countries and territories. Mean LDL-C levels were estimated using spatiotemporal gaussian process regression based on 806 studies across 161 countries. Relative risks were derived from meta-analyses of 38 randomized clinical trials. Population-attributable fractions for deaths and disability-adjusted life-years (DALYs) were estimated by age and sex for adults aged 25 years or older from 1990 to 2023, with 95% uncertainty intervals.",
-          "labelZh": "DESIGN, SETTING, AND POPULATION",
-          "textZh": "這項比較風險評估是2023年全球疾病負擔研究的一部分，估計了204個國家和地區的人羣LDL-C暴露和相關的健康損失。根據161個國家的806項研究，使用時空高斯過程回歸估算平均LDL-C水平。相對風險來自38項隨機臨牀試驗的薈萃分析。1990年至2023年， 25歲或以上成人的死亡和殘疾調整壽命年（ DALY ）按年齡和性別估計，不確定性間隔為95%。"
-        },
-        {
-          "label": "EXPOSURE",
-          "text": "Population-level LDL-C concentrations.",
-          "labelZh": "EXPOSURE",
-          "textZh": "人羣LDL-C濃度。"
-        },
-        {
-          "label": "MAIN OUTCOMES AND MEASURES",
-          "text": "Population-attributable fractions, counts, and rates (all ages and age standardized per 100 000) of LDL-C-attributable deaths and DALYs from ischemic heart disease and ischemic stroke, with uncertainty intervals.",
-          "labelZh": "主要結果與測量",
-          "textZh": "缺血性心臟病和缺血性中風的LDL-C歸因死亡和DALY的人羣歸因分數、計數和比率（每10萬人標準化所有年齡和年齡） ，具有不確定性間隔。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "In 2023, elevated LDL-C accounted for 3.6 million deaths (95% uncertainty interval, 2.2-5.4 million; 6.0% of global mortality) and 90.7 million DALYs (95% uncertainty interval, 58.9-123.3 million; 3.2% of DALYs). Although global all-ages rates remained stable, age-standardized death and DALY rates decreased by 45.6% and 39.5%, respectively, since 1990. In 2023, age-standardized LDL-C-attributable DALY rates were highest in Eastern Europe and lowest in high-income Asia-Pacific. One-third of the global LDL-C burden occurred in India and China. Population growth and aging drove the increasing burden, with notable regional disparities in LDL-C exposure and risk-deleted DALY rates shifting toward middle-sociodemographic settings.",
-          "labelZh": "結果",
-          "textZh": "2023年， LDL-C升高佔360萬例死亡（ 95%不確定區間， 220-540萬；佔全球死亡率的6.0% ）和9070萬例DALY （ 95%不確定區間， 58.9-123.3百萬；佔DALY的3.2% ）。儘管全球所有年齡段的死亡率保持穩定，但自1990年以來，年齡標準化死亡率和DALY率分別下降了45.6%和39.5%。2023年，年齡標準化LDL-C歸因DALY率在東歐最高，在高收入亞太地區最低。全球LDL-C負擔的三分之一發生在印度和中國。人口增長和老齡化推動了負擔的增加， LDL-C暴露的顯著地區差異和風險刪除的DALY率轉向中等社會人口環境。"
-        },
-        {
-          "label": "CONCLUSIONS AND RELEVANCE",
-          "text": "Despite declining age-standardized rates, the absolute LDL-C burden has increased since 1990 due to demographic changes and has shifted toward middle-sociodemographic countries. Measurement and surveillance gaps persist. Strengthened prevention, diagnosis, and treatment access strategies are essential to mitigate the health burden of LDL-C.",
-          "labelZh": "結論與意義",
-          "textZh": "儘管年齡標準化比率下降，但自1990年以來，由於人口變化，絕對LDL-C負擔增加，並已轉向中等社會人口國家。測量和監測差距仍然存在。加強預防、診斷和治療策略對於減輕LDL-C的健康負擔至關重要。"
-        }
-      ],
-      "doi": "10.1001/jama.2026.8628",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42525403/",
-      "titleZh": "LDL-C升高的全球負擔： 2023年全球疾病負擔研究的結果"
+      "doi": "10.3122/jabfm.2026.260096R0",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42562650/",
+      "titleZh": "家庭醫學是否應該接受社區參與和參與？"
     },
     {
       "pmid": "42508016",
@@ -966,30 +1104,30 @@
           "label": "PURPOSE",
           "text": "Widespread change toward transactional and technological health care is contrary to the generalist philosophy and is challenging the ability of family medicine physicians to enact its values and meet patient needs. This research seeks to build understanding of generalism by asking international generalist physicians to reflect on the often tacit features of generalism that provide much of its value.",
           "labelZh": "目的",
-          "textZh": ""
+          "textZh": "向交易和技術醫療保健的廣泛變化與通才理念背道而馳，並且正在挑戰家庭醫學醫生制定其價值觀和滿足患者需求的能力。本研究旨在通過要求國際多面手醫生反思多面手經常隱含的特徵來建立對多面手的理解，這些特徵提供了其大部分價值。"
         },
         {
           "label": "METHODS",
           "text": "Researchers conducted a 2-phase qualitative study. Phase 1 consisted of Zoom (Zoom Video Communications, Inc) individual interviews with 13 international generalist physicians and researchers. Phase 2 included personal reflections to prompts via an app and handwritten reflections after small group conversations among 89 generalist physicians and primary care researchers at an international family physician conference. Combining data from both phases 1 and 2, we discerned themes in an iterative, reflexive analysis.",
           "labelZh": "方法",
-          "textZh": ""
+          "textZh": "研究人員進行了兩階段的定性研究。第一階段包括Zoom （ Zoom Video Communications, Inc ）對13位國際通才醫生和研究人員的個別訪談。第2階段包括通過應用程序對提示進行個人反思，以及在89名通才醫生和初級保健研究人員在國際家庭醫生會議上進行小組對話後進行手寫反思。結合第1階段和第2階段的數據，我們在疊代反射分析中辨識出主題。"
         },
         {
           "label": "RESULTS",
           "text": "Analyses identified 3 themes: (1) \"The Way\" of being of the generalist; with subthemes of \"anything and everything,\" \"putting all the pieces back together,\" \"walking the journey together,\" and \"widening my small world\"; (2) \"The Privilege\" of emotional connection and gratefulness toward patients for meaningful work, with subthemes of \"privilege that touches you\" and \"privilege of holistic care\"; and (3) \"The Indescribable Whole\" of the valuable, but often invisible and misunderstood essence of generalism, with subthemes of \"a great big huge idea,\" \"deep care,\" and \"invisible when done well.\"",
           "labelZh": "結果",
-          "textZh": ""
+          "textZh": "分析確定了3個主題： （ 1 ）成為多面手的“方式”;與“任何事物和一切”的子主題， “將所有碎片拼湊在一起” ， “一起走路”和“擴大我的小世界”; （ 2 ）情感聯繫和感激患者有意義的工作的“特權” ，具有“感動你的特權”和“整體護理的特權”的子主題; （ 3 ）有價值的“難以形容的整體” ，但往往是看不見和誤解的多面手主義的本質，具有“一個偉大的大而巨大的想法” ， “深度護理”和“做得好時看不見”的子主題。"
         },
         {
           "label": "CONCLUSIONS",
           "text": "These findings bring to light the integrative, relational, wholistic work of the generalist physician. Understanding, valuing, and supporting these aspects of generalist care could serve as an antidote to health care systems that are increasingly fragmented, impersonal, and ineffective.",
           "labelZh": "結論",
-          "textZh": ""
+          "textZh": "這些發現揭示了通才醫生的綜合性、關聯性、整體性的工作。了解、重視和支持多面手護理的這些方面，可以作為醫療保健系統的解藥，這些系統越來越支離破碎、客觀和無效。"
         }
       ],
       "doi": "10.1370/afm.250468",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42509182/",
-      "titleZh": ""
+      "titleZh": "國際多面手醫生對多面手的概念： “道路” ， “特權”和“難以形容的整體”"
     },
     {
       "pmid": "42509179",
@@ -1537,407 +1675,6 @@
       "doi": "10.7326/ANNALS-25-00860",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42441967/",
       "titleZh": "胰高血糖素樣肽-1受體激動劑和缺血性視神經病變的風險：靶向試驗模擬"
-    },
-    {
-      "pmid": "42441966",
-      "title": "Modernizing the Regulatory Framework for Dietary Supplements: A Position Paper From the American College of Physicians",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jul 14",
-      "sortDate": "2026-07-14",
-      "authors": "Cline K, Beachy MW, Carr PW, Health and Public Policy Committee of the American College of Physicians",
-      "abstract": [
-        {
-          "text": "In the United States, dietary supplements are regulated as a subcategory of food and therefore are not required to undergo review and approval by the U.S. Food and Drug Administration (FDA). This inadequate regulatory framework has allowed adulterated and mislabeled products to repeatedly enter the market and poses a health threat to the public. In this position paper, the American College of Physicians offers policy recommendations to bolster the FDA's pre- and postmarket regulatory authority for dietary supplements, standardize dietary supplement terminology and data sharing, and implement changes within the health care system to improve care for patients using dietary supplements.",
-          "labelZh": null,
-          "textZh": "在美國，膳食補充劑作為食品的一個子類別受到監管，因此不需要經過美國食品和藥物管理局（ FDA ）的審查和批準。這種不充分的監管框架允許摻假和錯誤標籤的產品反覆進入市場，並對公眾構成健康威脅。在這份立場文件中，美國醫師學會提供政策建議，以加強FDA對膳食補充劑的上市前和上市後監管機構，標準化膳食補充劑術語和數據共享，並在醫療保健系統內實施變革，以改善對使用膳食補充劑的患者的護理。"
-        }
-      ],
-      "doi": "10.7326/ANNALS-26-01119",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42441966/",
-      "titleZh": "現代化膳食補充劑的法規框架：美國醫師學會的立場文件"
-    },
-    {
-      "pmid": "42441965",
-      "title": "Comparative Effectiveness of Glucagon-like Peptide-1 Receptor Agonists Versus Oral Agents for Insulin Discontinuation in Type 2 Diabetes : A Target Trial Emulation",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jul 14",
-      "sortDate": "2026-07-14",
-      "authors": "Lipska KJ, Zawack K, Yan L, Mutalik P, Li J, Gulanski B, Ioannou GN, Aslan M",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Addition of glucagon-like peptide-1 receptor agonists (GLP-1RAs) to basal insulin can decrease insulin requirements, but whether it permits insulin discontinuation is unclear.",
-          "labelZh": "背景",
-          "textZh": "在基礎胰島素中添加胰高血糖素樣肽-1受體激動劑（ GLP-1RAs ）可以降低胰島素需求，但它是否允許胰島素停藥尚不清楚。"
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To compare rates of insulin discontinuation among patients with type 2 diabetes (T2D) receiving basal insulin who initiated treatment with a GLP-1RA, sodium-glucose cotransporter-2 inhibitor (SGLT-2i), or dipeptidyl peptidase-4 inhibitor (DPP-4i) between 2020 and 2022.",
-          "labelZh": "目的",
-          "textZh": "比較2020年至2022年間接受基礎胰島素治療的2型糖尿病（ T2D ）患者的胰島素停藥率，這些患者開始使用GLP-1RA、鈉葡萄糖共轉運蛋白-2抑制劑（ SGLT-2i ）或二肽基肽酶-4抑制劑（ DPP-4i ）進行治療。"
-        },
-        {
-          "label": "DESIGN",
-          "text": "Target trial emulation.",
-          "labelZh": "設計",
-          "textZh": "目標試用模擬。"
-        },
-        {
-          "label": "SETTING",
-          "text": "U.S. Veterans Health Administration electronic health record (EHR) data.",
-          "labelZh": "場域",
-          "textZh": "美國退伍軍人健康管理局電子健康記錄（ EHR ）數據。"
-        },
-        {
-          "label": "PARTICIPANTS",
-          "text": "Veterans with T2D receiving basal insulin.",
-          "labelZh": "受試者",
-          "textZh": "接受基礎胰島素的T2D退伍軍人。"
-        },
-        {
-          "label": "MEASUREMENTS",
-          "text": "Insulin discontinuation, defined as the first gap in insulin prescription fills of 12 months or more over 3 years of follow-up.",
-          "labelZh": "測量",
-          "textZh": "胰島素停藥，定義為3年隨訪期間胰島素處方填充12個月或更長時間的第一個間隙。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "Among 8869 matched sets of GLP-1RA (76.6% semaglutide, 15.2% dulaglutide, 7.9% liraglutide, and 0.3% exenatide), SGLT-2i (99.7% empagliflozin), and DPP-4i (95.9% alogliptin) initiators, 63% were 65 years or older, 93% were male, 70% were White, and 48% had a hemoglobin A1c (HbA1c) level of 9% or more. Over 3 years of follow-up, 1480 (16.7%) GLP-1RA initiators compared with 1585 (17.9%) SGLT-2i initiators and 1517 (17.1%) DPP-4i initiators discontinued insulin therapy in the intention-to-treat analysis (risk ratio, 0.93 [95% CI, 0.86 to 1.01] and 0.98 [CI, 0.87 to 1.09] for the GLP-1RA arm compared with the SGLT-2i and DPP-4i arms, respectively). Results were not substantively different in a modified per protocol analysis. None of the subgroups showed a comparative advantage of GLP-1RAs with respect to insulin discontinuation over SGLT-2is or DPP-4is.",
-          "labelZh": "結果",
-          "textZh": "在8869組匹配的GLP-1RA （ 76.6% semaglutide、15.2% dulaglutide、7.9% liraglutide和0.3% exenatide ）、SGLT-2i （ 99.7% empagliflozin ）和DPP-4i （ 95.9% alogliptin ）引發劑中， 63%為65歲或以上， 93%為男性， 70%為白人， 48%的血紅蛋白A1c （ HbA1c ）水平為9%或以上。在3年的追蹤中， 1480 （ 16.7 ％ ）個GLP-1RA啟動劑與1585 （ 17.9 ％ ）個SGLT-2i啟動劑和1517 （ 17.1 ％ ）個DPP-4i啟動劑在意向治療分析中停止了胰島素治療（ GLP-1RA組與SGLT-2i和DPP-4i組的風險比率分別為0.93 [95 ％ CI ， 0.86至1.01]和0.98 [CI ， 0.87至1.09] ）。修改後的每個計畫書分析結果並無實質差異。與SGLT-2is或DPP-4is相比，沒有任何次組顯示出GLP-1RA在胰島素停藥方面的比較優勢。"
-        },
-        {
-          "label": "LIMITATION",
-          "text": "Possible residual confounding; misclassification of exposure and outcome using EHRs may bias associations toward the null.",
-          "labelZh": "LIMITATION",
-          "textZh": "可能的殘留混淆；使用EHR對暴露和結果進行錯誤分類可能會使關聯偏向空值。"
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Among veterans with T2D receiving basal insulin therapy, addition of GLP-1RA did not increase the chances of stopping insulin therapy compared with SGLT-2i or DPP-4i therapy.",
-          "labelZh": "結論",
-          "textZh": "在接受基礎胰島素治療的T2D退伍軍人中，與SGLT-2i或DPP-4i治療相比，加入GLP-1RA並未增加停止胰島素治療的機會。"
-        },
-        {
-          "label": "PRIMARY FUNDING SOURCE",
-          "text": "U.S. Department of Veterans Affairs.",
-          "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": "美國退伍軍人事務部。"
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-05216",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42441965/",
-      "titleZh": "胰高血糖素樣肽-1受體激動劑與口服藥物在2型糖尿病中胰島素停藥的比較有效性：靶向試驗模擬"
-    },
-    {
-      "pmid": "42441962",
-      "title": "Glucagon-like Peptide-1 Receptor Agonists and Risk for Anterior Ischemic Optic Neuropathy : A Nationwide Cohort Study",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jul 14",
-      "sortDate": "2026-07-14",
-      "authors": "Ueda P, Svanström H, Söderling J, Pazzagli L, Wintzell V, Eliasson B, Hviid A, Pasternak B",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "There are concerns about a possible link between glucagon-like peptide-1 receptor agonists (GLP-1RAs) and nonarteritic anterior ischemic optic neuropathy (NAION).",
-          "labelZh": "背景",
-          "textZh": "人們擔心胰高血糖素樣肽-1受體激動劑（ GLP-1RAs ）和非動脈炎性前部缺血性視神經病變（ NAION ）之間可能存在聯繫。"
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To examine whether use of GLP-1RAs increases risk for AION, which predominantly comprises NAION.",
-          "labelZh": "目的",
-          "textZh": "檢查GLP-1RAs的使用是否會增加AION的風險， AION主要由NAION組成。"
-        },
-        {
-          "label": "DESIGN",
-          "text": "Nationwide, register-based, cohort study.",
-          "labelZh": "設計",
-          "textZh": "全國性、以登記為基礎的隊列研究。"
-        },
-        {
-          "label": "SETTING",
-          "text": "Sweden, 2013 to 2024.",
-          "labelZh": "場域",
-          "textZh": "瑞典， 2013年至2024年。"
-        },
-        {
-          "label": "PATIENTS",
-          "text": "Initiators of GLP-1RAs compared with initiators of sodium-glucose cotransporter-2 (SGLT-2) inhibitors.",
-          "labelZh": "病人",
-          "textZh": "與鈉葡萄糖共轉運蛋白-2 （ SGLT-2 ）抑制劑的起始物相比， GLP-1RA的起始物。"
-        },
-        {
-          "label": "MEASUREMENTS",
-          "text": "Anterior ischemic optic neuropathy in the national patient register. Adjusted risk differences (RDs) and risk ratios (RRs) were estimated using propensity score weighting.",
-          "labelZh": "測量",
-          "textZh": "全國患者登記冊中的前部缺血性視神經病變。使用傾向評分加權估算調整後的風險差異(RD)和風險比率(RR)。"
-        },
-        {
-          "label": "RESULTS",
-          "text": "Median follow-up was 1.6 years (IQR, 0.7 to 3.1 years) for GLP-1RA users and 1.5 years (IQR, 0.7 to 2.9 years) for SGLT-2 inhibitor users. Sixty-two of 107 518 GLP-1RA users and 64 of 185 898 SGLT-2 inhibitor users experienced AION. Risks were 0.04% versus 0.02% (RD, 0.02% [95% CI, 0.00% to 0.03%]; RR, 1.93 [CI, 1.00 to 3.73]) at 1 year and 0.12% versus 0.07% (RD, 0.05% [CI, 0.00% to 0.10%]; RR, 1.69 [CI, 0.95 to 3.01]) at 5 years. The differences were substantially attenuated in analyses restricted to patients receiving metformin at baseline (1 year: RD, 0.01% [CI, -0.01% to 0.02%]; RR, 1.40 [CI, 0.64 to 3.05]; 3 years: RD, 0.01% [CI, -0.02% to 0.04%]; RR, 1.24 [CI, 0.68 to 2.26]; 5 years: RD, 0.02% [CI, -0.04% to 0.08%]; RR, 1.23 [CI, 0.65 to 2.33]).",
-          "labelZh": "結果",
-          "textZh": "GLP-1RA使用者的中位隨訪時間為1.6年（ IQR ， 0.7至3.1年） ， SGLT-2抑制劑使用者的中位隨訪時間為1.5年（ IQR ， 0.7至2.9年）。107 518名GLP-1RA用戶中的62名和185 898名SGLT-2抑制劑用戶中的64名患有AION。第1年的風險為0.04%對0.02% （ RD ， 0.02% [95% CI ， 0.00%至0.03%] ； RR ， 1.93 [CI ， 1.00至3.73] ） ，第5年的風險為0.12%對0.07% （ RD ， 0.05% [CI ， 0.00%至0.10%] ； RR ， 1.69 [CI ， 0.95至3.01] ）。在基線時僅限於接受二甲雙胍的患者的分析中，差異顯著減弱（ 1年： RD ， 0.01% [CI ， -0.01%至0.02%] ； RR ， 1.40 [CI ， 0.64至3.05] ； 3年： RD ， 0.01% [CI ， -0.02%至0.04%] ； RR ， 1.24 [CI ， 0.68至2.26] ； 5年： RD ， 0.02% [CI ， -0.04%至0.08%] ； RR ， 1.23 [CI ， 0.65至2.33] ）。"
-        },
-        {
-          "label": "LIMITATION",
-          "text": "Few outcome events, unmeasured confounding, and limited generalizability to GLP-1RA users without diabetes.",
-          "labelZh": "LIMITATION",
-          "textZh": "對於沒有糖尿病的GLP-1RA用戶，結局事件很少、無法測量的混淆，且可泛化性有限。"
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "The relative risk for AION was higher with GLP-1RA use compared with SGLT-2 inhibitor use in type 2 diabetes. However, absolute risks were small, and the RDs were substantially reduced in analyses restricted to patients receiving metformin to better account for confounding by diabetes severity, suggesting observed increases in risk may reflect residual confounding.",
-          "labelZh": "結論",
-          "textZh": "與在2型糖尿病中使用SGLT-2抑制劑相比，使用GLP-1RA時AION的相對風險更高。然而，絕對風險很小，在僅限於接受二甲雙胍的患者的分析中， RD大幅降低，以更好地解釋糖尿病嚴重程度的混淆，這表明觀察到的風險增加可能反映了剩餘的混淆。"
-        },
-        {
-          "label": "PRIMARY FUNDING SOURCE",
-          "text": "Karolinska Institutet, Swedish Society of Medicine, Swedish Research Council, and Region Stockholm.",
-          "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": "Karolinska Institutet、瑞典醫學學會、瑞典研究委員會和斯德哥爾摩地區。"
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-02096",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42441962/",
-      "titleZh": "胰高血糖素樣肽-1受體激動劑和前部缺血性視神經病變的風險：一項全國性隊列研究"
-    },
-    {
-      "pmid": "42407080",
-      "title": "Prolonged Short Sleep and Its Effect on Body Weight and Composition : A Pooled Analysis of Randomized Trials",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jul 07",
-      "sortDate": "2026-07-07",
-      "authors": "Zuraikat FM, Scaccia SE, Cochran JA, Cheng B, Diaz KM, Creasy SA, Melanson EL, Shen W, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Insufficient sleep is associated with obesity. However, the causal effect on weight status of chronic, mildly insufficient sleep and its potential variability by gender and menopausal status remain unknown.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To explore the effect of 6 weeks of sleep restriction (SR) of 1.5 hours per night on energy balance and body weight regulation.",
-          "labelZh": "目的",
-          "textZh": ""
-        },
-        {
-          "label": "DESIGN",
-          "text": "Pooled analysis of 2 randomized crossover trials. (ClinicalTrials.gov: NCT02960776 and NCT02835261).",
-          "labelZh": "設計",
-          "textZh": ""
-        },
-        {
-          "label": "SETTING",
-          "text": "Outpatient intervention with inpatient and outpatient assessments.",
-          "labelZh": "場域",
-          "textZh": ""
-        },
-        {
-          "label": "PARTICIPANTS",
-          "text": "Adults (n = 95) aged 20 years or older at elevated cardiometabolic risk with habitual sleep of 7 or more hours per night.",
-          "labelZh": "受試者",
-          "textZh": ""
-        },
-        {
-          "label": "INTERVENTION",
-          "text": "Six weeks of sustained adequate sleep (AS) and SR of 1.5 hours per night separated by a multiweek washout.",
-          "labelZh": "介入",
-          "textZh": ""
-        },
-        {
-          "label": "MEASUREMENTS",
-          "text": "Outcome measures included adiposity (assessed using magnetic resonance imaging), body weight, waist circumference, and energy balance behaviors and biomarkers.",
-          "labelZh": "測量",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "Sleep duration was reduced by 78.4 minutes (95% CI, -83.5 to -73.3 minutes) per night with SR versus AS. Body weight (0.45 kg [CI, 0.33 to 0.57 kg]), waist circumference (0.52 cm [CI, 0.25 to 0.79 cm]), and whole-body volume (0.56 L [CI, 0.19 to 0.93 L]) were increased with SR relative to AS. Leptin levels were elevated with SR versus AS (2.03 ng/mL [CI, 0.38 to 3.68 ng/mL]). Sedentary time was increased by 17.2 minutes (CI, 11.7 to 22.7 minutes) per day with SR versus AS.",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "LIMITATIONS",
-          "text": "The intervention duration may have been too short to identify changes in body composition, power to evaluate individual differences was limited, and effect sizes were modest.",
-          "labelZh": "LIMITATIONS",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Prolonged exposure to moderately short sleep may lead to weight gain, suggesting that weight management and cardiometabolic disease prevention programs should consider incorporating sleep strategies to promote AS.",
-          "labelZh": "結論",
-          "textZh": ""
-        },
-        {
-          "label": "PRIMARY FUNDING SOURCE",
-          "text": "National Institutes of Health and American Heart Association.",
-          "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-01660",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42407080/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42407075",
-      "title": "Patient-Centered Prescription Opioid Tapering Methods : A Randomized Clinical Trial",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jul 07",
-      "sortDate": "2026-07-07",
-      "authors": "Darnall BD, Perez L, Kao MC, Lorig K, Mardian AS, Flood P, Pun T, Hanson ER, et al.",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "Evidence is needed on tapering long-term prescription opioids in outpatient settings.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To determine and compare the effectiveness of 3 opioid tapering and pain control strategies (July 2018 to November 2023).",
-          "labelZh": "目的",
-          "textZh": ""
-        },
-        {
-          "label": "DESIGN",
-          "text": "Randomized controlled trial. (ClinicalTrials.gov: NCT03445988).",
-          "labelZh": "設計",
-          "textZh": ""
-        },
-        {
-          "label": "SETTING",
-          "text": "11 U.S. sites.",
-          "labelZh": "場域",
-          "textZh": ""
-        },
-        {
-          "label": "PARTICIPANTS",
-          "text": "Adults with pain for at least 6 months receiving a morphine equivalent daily dose (MEDD) of 10 or higher for at least 3 months without moderate or severe opioid use disorder.",
-          "labelZh": "受試者",
-          "textZh": ""
-        },
-        {
-          "label": "INTERVENTION",
-          "text": "Patient-centered opioid tapering with close monitoring and electronic supports was administered as taper only, taper plus cognitive behavioral therapy for chronic pain (pain-CBT), or taper plus a chronic pain self-management program (CPSMP).",
-          "labelZh": "介入",
-          "textZh": ""
-        },
-        {
-          "label": "MEASUREMENTS",
-          "text": "Taper success (primary outcome) was either an MEDD decrease of at least 50% with no increased pain or no MEDD increase with decreased pain intensity.",
-          "labelZh": "測量",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "A total of 562 participants were randomly assigned (191 taper only, 203 taper plus pain-CBT, 168 taper plus CPSMP). The taper success rate was 50.9% (95% CI, 42.9% to 58.9%) for taper only, 48.6% (CI, 41.0% to 56.2%) for taper plus pain-CBT, and 44.5% (CI, 36.0% to 53.3%) for taper plus CPSMP. Tapering with pain-CBT or CPSMP provided no benefit in taper success over taper only (taper plus pain-CBT vs. taper only, -2.4 percentage points [CI, -11.9 to 7.2 percentage points]; taper plus CPSMP vs. taper only, -5.2 percentage points [CI, -15.3 to 4.8 percentage points]). Study-related adverse event risk (including opioid withdrawal symptoms) was highest in the taper only group (126 of 191 [66%]) compared with taper plus pain-CBT (109 of 203 [54%]) and taper plus CPSMP (108 of 168 [64%]).",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "LIMITATION",
-          "text": "Challenges related to COVID-19 reduced the sample size and made treatment groups imbalanced; low behavioral treatment attendance and losses to follow-up could have limited effectiveness.",
-          "labelZh": "LIMITATION",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Adding CBT or self-management to patient-centered opioid tapering did not improve taper success at 12 months, although CBT may reduce adverse effects (including opioid withdrawal symptoms).",
-          "labelZh": "結論",
-          "textZh": ""
-        },
-        {
-          "label": "PRIMARY FUNDING SOURCE",
-          "text": "Patient-Centered Outcomes Research Institute.",
-          "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": ""
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-04784",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42407075/",
-      "titleZh": ""
-    },
-    {
-      "pmid": "42407069",
-      "title": "The Comparative Effectiveness of Carvedilol Versus Other Nonselective β-Blockers in Cirrhosis",
-      "journal": "Ann Intern Med",
-      "category": "四大綜合",
-      "date": "2026 Jul 07",
-      "sortDate": "2026-07-07",
-      "authors": "Simon TG, Zhang Y, Kehoe A, Chung RT, Lin KJ",
-      "abstract": [
-        {
-          "label": "BACKGROUND",
-          "text": "In cirrhosis, nonselective β-blockers (NSBBs; carvedilol, nadolol, and propranolol) reduce hepatic portal pressure and have demonstrated benefit versus placebo for preventing decompensation. Although carvedilol has emerged as the preferred NSBB, direct evidence remains limited about its effectiveness for preventing decompensation and death versus other NSBBs.",
-          "labelZh": "背景",
-          "textZh": ""
-        },
-        {
-          "label": "OBJECTIVE",
-          "text": "To compare the effectiveness of carvedilol versus nadolol versus propranolol in cirrhosis.",
-          "labelZh": "目的",
-          "textZh": ""
-        },
-        {
-          "label": "DESIGN",
-          "text": "Database cohort study.",
-          "labelZh": "設計",
-          "textZh": ""
-        },
-        {
-          "label": "SETTING",
-          "text": "A U.S. administrative claims database, Optum Clinformatics Data Mart (2013 to 2025).",
-          "labelZh": "場域",
-          "textZh": ""
-        },
-        {
-          "label": "PARTICIPANTS",
-          "text": "Adults with cirrhosis initiating carvedilol, nadolol, or propranolol.",
-          "labelZh": "受試者",
-          "textZh": ""
-        },
-        {
-          "label": "MEASUREMENTS",
-          "text": "The primary outcome was a composite of hospitalization for major decompensation (ascites, spontaneous bacterial peritonitis [SBP], hepatorenal syndrome [HRS], hepatic encephalopathy, or variceal hemorrhage). Absolute risk differences (RDs) and risk ratios (RRs) at 6 months of follow-up were estimated using inverse probability of treatment weighting accounting for 129 preexposure covariates.",
-          "labelZh": "測量",
-          "textZh": ""
-        },
-        {
-          "label": "RESULTS",
-          "text": "Carvedilol initiators had meaningfully lower 6-month risk for major decompensation events compared with nadolol (RD, -3.69 percentage points [95% CI, -5.33 to -2.09 percentage points]; RR, 0.80 [CI, 0.72 to 0.88]) or propranolol (RD, -2.88 percentage points [CI, -4.29 to -1.49 percentage points]; RR, 0.83 [CI, 0.76 to 0.90]). This included substantially lower 6-month risk for specific decompensation events with carvedilol compared with nadolol or propranolol, including reduced risk for variceal hemorrhage (RDs, -3.51 percentage points [CI, -4.79 to -2.20 percentage points] and -1.65 percentage points [CI, -2.71 to -0.59 percentage points], respectively) and ascites, SBP, or HRS (RDs, -3.05 percentage points [CI, -4.52 to -1.75 percentage points] and -1.58 percentage points [CI, -2.77 to -0.44 percentage points], respectively).",
-          "labelZh": "結果",
-          "textZh": ""
-        },
-        {
-          "label": "LIMITATION",
-          "text": "Nonrandomized treatment selection.",
-          "labelZh": "LIMITATION",
-          "textZh": ""
-        },
-        {
-          "label": "CONCLUSION",
-          "text": "Among U.S. patients with cirrhosis, carvedilol initiation-as opposed to nadolol or propranolol-was associated with meaningfully lower rates of major decompensation events.",
-          "labelZh": "結論",
-          "textZh": ""
-        },
-        {
-          "label": "PRIMARY FUNDING SOURCE",
-          "text": "National Institutes of Health.",
-          "labelZh": "PRIMARY FUNDING SOURCE",
-          "textZh": "國立衛生研究院。"
-        }
-      ],
-      "doi": "10.7326/ANNALS-25-04010",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42407069/",
-      "titleZh": ""
     }
   ]
 }
