@@ -7,6 +7,7 @@ import {
   Scale,
   Weight,
   BookOpen,
+  Bone,
 } from 'lucide-react'
 import { WarningBox } from '../components/WarningBox'
 import { ToolCard } from '../components/ToolCard'
@@ -70,9 +71,15 @@ function Landing() {
           <ToolCard
             href="/obesity"
             icon={Weight}
-            name="門診問診工具"
-            desc="結構化問診表，自動生成病歷文字及症狀導向 order 提示。僅支援肥胖議題"
+            name="減重問診工具"
+            desc="結構化問診表，自動生成病歷文字及症狀導向 order 提示"
             badge={<Badge variant="wip">建造中</Badge>}
+          />
+          <ToolCard
+            href="/osteoporosis"
+            icon={Bone}
+            name="骨質疏鬆"
+            desc="整合成大藥品基本檔的藥物比較、結構式問診、病人衛教單張與運動海報"
           />
           <ToolCard
             href="/journals"

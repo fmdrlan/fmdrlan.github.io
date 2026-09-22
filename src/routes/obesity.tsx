@@ -401,27 +401,10 @@ function ObesityPage() {
 
       <div className="mx-auto max-w-[1100px] px-6 pt-8 pb-10 max-md:px-4 max-md:pt-5">
         <div className="mb-5 min-w-0">
-          <h1 className="text-[22px] font-bold leading-tight text-text">門診結構化問診</h1>
+          <h1 className="text-[22px] font-bold leading-tight text-text">減重結構化問診</h1>
           <p className="mt-1.5 max-w-[640px] text-[13px] leading-relaxed text-text-muted">
             看診時邊問邊勾選，自動生成可貼進病歷的英文結構化文字 + 症狀導向 order 提示。
           </p>
-        </div>
-
-        <div className="mb-[18px] flex flex-wrap items-center gap-2" aria-label="問診議題">
-          <span className="mr-1 font-mono text-[11px] uppercase tracking-[0.08em] text-text-muted">議題</span>
-          <button className="cursor-pointer rounded-md border border-accent/40 bg-accent-dim px-3.5 py-1.5 text-[13px] text-accent">
-            肥胖
-          </button>
-          {['DM 控制', '高血壓', '戒菸諮詢'].map((t) => (
-            <button
-              key={t}
-              disabled
-              title="待加入"
-              className="cursor-not-allowed rounded-md border border-border bg-surface px-3.5 py-1.5 text-[13px] text-text-muted opacity-40"
-            >
-              {t}
-            </button>
-          ))}
         </div>
 
         <div className="mb-[18px] flex items-start gap-2.5 rounded-lg border border-yellow/25 bg-yellow/[0.06] px-3.5 py-2.5 text-[12.5px] leading-[1.7] text-[#d8c08a] [&_strong]:text-[#e8d8a8] [&>svg]:mt-0.5 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:shrink-0 [&>svg]:text-yellow [&>svg]:[stroke-width:1.8]">

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaccineRouteImport } from './routes/vaccine'
+import { Route as OsteoporosisRouteImport } from './routes/osteoporosis'
 import { Route as ObesityRouteImport } from './routes/obesity'
 import { Route as LipidRouteImport } from './routes/lipid'
 import { Route as LabRouteImport } from './routes/lab'
@@ -21,6 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const VaccineRoute = VaccineRouteImport.update({
   id: '/vaccine',
   path: '/vaccine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OsteoporosisRoute = OsteoporosisRouteImport.update({
+  id: '/osteoporosis',
+  path: '/osteoporosis',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ObesityRoute = ObesityRouteImport.update({
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/lab': typeof LabRoute
   '/lipid': typeof LipidRoute
   '/obesity': typeof ObesityRoute
+  '/osteoporosis': typeof OsteoporosisRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/lab': typeof LabRoute
   '/lipid': typeof LipidRoute
   '/obesity': typeof ObesityRoute
+  '/osteoporosis': typeof OsteoporosisRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/lab': typeof LabRoute
   '/lipid': typeof LipidRoute
   '/obesity': typeof ObesityRoute
+  '/osteoporosis': typeof OsteoporosisRoute
   '/vaccine': typeof VaccineRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/lab'
     | '/lipid'
     | '/obesity'
+    | '/osteoporosis'
     | '/vaccine'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/lab'
     | '/lipid'
     | '/obesity'
+    | '/osteoporosis'
     | '/vaccine'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/lab'
     | '/lipid'
     | '/obesity'
+    | '/osteoporosis'
     | '/vaccine'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   LabRoute: typeof LabRoute
   LipidRoute: typeof LipidRoute
   ObesityRoute: typeof ObesityRoute
+  OsteoporosisRoute: typeof OsteoporosisRoute
   VaccineRoute: typeof VaccineRoute
 }
 
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/vaccine'
       fullPath: '/vaccine'
       preLoaderRoute: typeof VaccineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/osteoporosis': {
+      id: '/osteoporosis'
+      path: '/osteoporosis'
+      fullPath: '/osteoporosis'
+      preLoaderRoute: typeof OsteoporosisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/obesity': {
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   LabRoute: LabRoute,
   LipidRoute: LipidRoute,
   ObesityRoute: ObesityRoute,
+  OsteoporosisRoute: OsteoporosisRoute,
   VaccineRoute: VaccineRoute,
 }
 export const routeTree = rootRouteImport
