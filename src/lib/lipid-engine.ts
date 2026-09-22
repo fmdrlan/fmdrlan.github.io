@@ -779,127 +779,269 @@ export function calcAHA(p: LipidInput): string {
 // ─────────────────────────────────────────────────────────────
 //  NHI reimbursement (full version)
 // ─────────────────────────────────────────────────────────────
-export function calcNHI(p: LipidInput): string {
-  const { ldl, tc, hdl, tg, ascvd, ascvdTypes, dm, htn, smoking, statin, statinDose, eze, age, sex } = p
-  let html = ''
+// ─────────────────────────────────────────────────────────────
+//  表二（舊制）：115/9/1 後仍有一批品項不適用表一，只能依表二判斷。
+//  條文內容與 108/2/1 版相同（附件2 對照表中表二標示「以下略」＝未修訂）。
+// ─────────────────────────────────────────────────────────────
+export interface Table2Input {
+  ldl: number | null
+  tc: number | null
+  hdl: number | null
+  age: number | null
+  sex: Sex
+  acsPciCabg: boolean // 急性冠心症、PCI 或 CABG 病史 → 第一類
+  cvDisease: boolean // 其他心血管疾病
+  dm: boolean
+  htn: boolean
+  smoking: boolean
+  fhcad: boolean
+}
 
+export interface Table2Result {
+  category: string
+  covered: boolean
+  ldlThreshold: number
+  tcThreshold: number | null
+  needLifestyle: boolean // 需先 3–6 個月非藥物治療
+  rfItems: string[]
+  reasons: string[]
+  followUp: string
+}
+
+export function calcStatinTable2(p: Table2Input): Table2Result {
+  const { ldl, tc, hdl, age, sex, acsPciCabg, cvDisease, dm, htn, smoking, fhcad } = p
   const isMale = sex === 'M'
 
-  const hasCV = ascvd
-  const hasAcuteOrRevascularization = ascvd && ascvdTypes.some((t) => ['ACS', 'MI_1yr', 'MI_multi', 'PCI', 'CABG'].includes(t))
-
+  // 表二的危險因子只有 5 項，且 HDL-C 門檻不分性別（與表一的 6 項定義不同）
   const rfItems: string[] = []
   if (htn) rfItems.push('高血壓')
   if (age && ((isMale && age >= 45) || (!isMale && age >= 55))) rfItems.push(`年齡（${age}歲）`)
-  if (p.fhcad) rfItems.push('早發冠心病家族史')
+  if (fhcad) rfItems.push('早發冠心病家族史')
   if (smoking) rfItems.push('吸菸')
   if (hdl && hdl < 40) rfItems.push(`HDL-C ${hdl} mg/dL <40`)
   const rfCount = rfItems.length
+
+  let category: string
+  let ldlThreshold: number
+  let tcThreshold: number | null = null
+  let needLifestyle = false
+  let followUp = ''
+
+  if (acsPciCabg) {
+    category = '第一類（急性冠心症／PCI／CABG）'
+    ldlThreshold = 70
+    followUp = '追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月'
+  } else if (cvDisease || dm) {
+    category = '第二類（心血管疾病或糖尿病）'
+    ldlThreshold = 100
+    tcThreshold = 160
+    followUp = '可與藥物治療並行（不需非藥物治療期）'
+  } else if (rfCount >= 2) {
+    category = `第三類（≥2 個危險因子：${rfItems.join('、')}）`
+    ldlThreshold = 130
+    tcThreshold = 200
+    needLifestyle = true
+  } else if (rfCount === 1) {
+    category = `第四類（1 個危險因子：${rfItems.join('、')}）`
+    ldlThreshold = 160
+    tcThreshold = 240
+    needLifestyle = true
+  } else {
+    category = '第五類（0 個危險因子）'
+    ldlThreshold = 190
+    needLifestyle = true
+  }
+
+  const reasons: string[] = []
+  const ldlOK = ldl !== null && ldl >= ldlThreshold
+  const tcOK = tcThreshold !== null && tc !== null && tc >= tcThreshold
+  const covered = ldlOK || tcOK
+
+  if (covered) {
+    const triggers: string[] = []
+    if (tcOK) triggers.push(`TC ${tc} mg/dL ≥${tcThreshold}`)
+    if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥${ldlThreshold}`)
+    reasons.push(`${triggers.join(' 或 ')} → 符合給付`)
+  } else if (ldl !== null || tc !== null) {
+    const vals: string[] = []
+    if (tcThreshold !== null && tc !== null) vals.push(`TC ${tc} mg/dL <${tcThreshold}`)
+    if (ldl !== null) vals.push(`LDL-C ${ldl} mg/dL <${ldlThreshold}`)
+    reasons.push(`${vals.join('、')}，未達起始給付條件`)
+  } else {
+    reasons.push('TC / LDL-C 未填，無法判斷')
+  }
+
+  reasons.push(
+    tcThreshold !== null
+      ? `目標：TC <${tcThreshold} mg/dL 或 LDL-C <${ldlThreshold} mg/dL`
+      : `目標：LDL-C <${ldlThreshold} mg/dL`,
+  )
+  if (needLifestyle) reasons.push('需先有 3–6 個月非藥物治療')
+  if (followUp) reasons.push(followUp)
+
+  return { category, covered, ldlThreshold, tcThreshold, needLifestyle, rfItems, reasons, followUp }
+}
+
+export function calcNHI(p: LipidInput): string {
+  // 115/9/1 起適用「全民健康保險降膽固醇藥物給付規定表一」
+  // （健保審字第1150671962號）：依 ASCVD 風險分級、以 LDL-C 單一門檻起始，
+  // non-HDL-C 為次要目標；TC 門檻不再使用。分級定義與台灣 2025 TSLA 指引一致。
+  const {
+    ldl, tc, hdl, tg, tgmed, ascvd, ascvdTypes, imaging_stenosis, dm, htn, smoking,
+    statin, statinDose, eze, age, sex, egfr, uacr, cac, waist, sbp, dbp, bpMed, fpg, dmMed,
+  } = p
+  let html = ''
+
+  const isMale = sex === 'M'
+  const nonhdl = tc && hdl ? tc - hdl : null
+
+  // ── 風險分級（表一）──
+  const metSyn = (() => {
+    let count = 0
+    const items: string[] = []
+    if (waist && ((isMale && waist >= 90) || (!isMale && waist >= 80))) { count++; items.push(`腹部肥胖（腰圍 ${waist}cm）`) }
+    if (bpMed || (sbp && sbp >= 130) || (dbp && dbp >= 85)) { count++; items.push(bpMed ? '血壓用藥' : `血壓偏高（${sbp || '?'}/${dbp || '?'}）`) }
+    if (dmMed || (fpg && fpg >= 100)) { count++; items.push(dmMed ? '血糖用藥' : `空腹血糖 ${fpg}`) }
+    if (tgmed || (tg && tg >= 150)) { count++; items.push(tgmed ? 'TG 用藥' : `TG ${tg}`) }
+    if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50))) { count++; items.push(`HDL-C ${hdl} 偏低`) }
+    return { count, items, positive: count >= 3 }
+  })()
+
+  const hasCKD = (egfr && egfr < 60) || (uacr && uacr >= 30)
+  const ckdDesc: string[] = []
+  if (egfr && egfr < 60) ckdDesc.push(`eGFR ${egfr}`)
+  if (uacr && uacr >= 30) ckdDesc.push(`UACR ${uacr} mg/g`)
+
+  const rfItems: string[] = []
+  if (htn) rfItems.push('高血壓')
+  if (age && ((isMale && age >= 45) || (!isMale && age >= 55))) rfItems.push(`年齡（${age}歲，${isMale ? '男≥45' : '女≥55'}）`)
+  if (p.fhcad) rfItems.push('早發冠心病家族史')
+  if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50))) rfItems.push(`HDL-C ${hdl} mg/dL（男<40/女<50）`)
+  if (smoking) rfItems.push('抽菸')
+  if (metSyn.positive) rfItems.push(`代謝症候群（${metSyn.count}/5 項）`)
+  const rfCount = rfItems.length
+
+  const hasCAD = ascvd && ascvdTypes.some((t) => ['ACS', 'MI_1yr', 'MI_multi', 'PCI', 'CABG', 'multivessel'].includes(t))
+  const hasPAD = ascvd && ascvdTypes.includes('PAD')
+  const hasCarotid = ascvd && ascvdTypes.includes('carotid')
+
+  const extremeConditions: string[] = []
+  if (hasCAD) {
+    if (ascvdTypes.includes('MI_1yr')) extremeConditions.push('一年內心肌梗塞')
+    if (ascvdTypes.includes('MI_multi')) extremeConditions.push('≥2次心肌梗塞病史')
+    if (ascvdTypes.includes('multivessel')) extremeConditions.push('多支冠狀動脈阻塞')
+    if (ascvdTypes.includes('ACS_DM') || (ascvdTypes.includes('ACS') && dm)) extremeConditions.push('急性冠心症合併糖尿病')
+    if (hasPAD) extremeConditions.push('合併周邊動脈疾病')
+    if (hasCarotid) extremeConditions.push('合併頸動脈狹窄')
+  }
+  const polyvascExtreme = hasPAD && (hasCAD || hasCarotid)
+
+  let riskLabel = ''
+  let ldlStart: number
+  let statinLDLTarget: number
+  let nonhdlTarget: number | null = null
+  let preDrugLifestyle = false // 給藥前需 3–6 個月生活型態改變
+  const riskReasons: string[] = []
+
+  if (extremeConditions.length > 0 || polyvascExtreme) {
+    riskLabel = '極高風險'
+    ldlStart = 55; statinLDLTarget = 55; nonhdlTarget = 85
+    if (extremeConditions.length > 0) riskReasons.push(`冠狀動脈疾病合併：${extremeConditions.join('、')}`)
+    else riskReasons.push(`周邊動脈疾病合併${hasCAD ? '冠狀動脈疾病' : '頸動脈狹窄'}`)
+  } else if (ascvd || imaging_stenosis) {
+    riskLabel = '非常高風險'
+    ldlStart = 70; statinLDLTarget = 70; nonhdlTarget = 100
+    if (ascvd) riskReasons.push(`臨床確診 ASCVD（${ascvdTypes.length ? ascvdTypes.join('、') : '已記錄'}）`)
+    if (imaging_stenosis) riskReasons.push('影像確認 ≥50% 直徑狹窄')
+  } else if (dm || hasCKD || (ldl && ldl >= 190) || (cac !== null && cac >= 400)) {
+    riskLabel = '高風險'
+    ldlStart = 100; statinLDLTarget = 100; nonhdlTarget = 130
+    if (dm) riskReasons.push('糖尿病')
+    if (hasCKD) riskReasons.push(`慢性腎臟病（${ckdDesc.join('、')}，需持續 ≥3 個月）`)
+    if (ldl && ldl >= 190) riskReasons.push(`LDL-C ${ldl} mg/dL ≥190（建議 FH 家族篩檢）`)
+    if (cac !== null && cac >= 400) riskReasons.push(`冠狀動脈鈣化分數 CAC ${cac} ≥400`)
+  } else if (rfCount >= 2) {
+    riskLabel = '中風險'
+    ldlStart = 115; statinLDLTarget = 115; nonhdlTarget = 145
+    preDrugLifestyle = true
+    riskReasons.push(`≥2 項心血管風險因子（${rfItems.join('、')}）`)
+  } else if (rfCount === 1) {
+    riskLabel = '低風險'
+    ldlStart = 130; statinLDLTarget = 130; nonhdlTarget = 160
+    preDrugLifestyle = true
+    riskReasons.push(`1 項心血管風險因子（${rfItems.join('、')}）`)
+  } else {
+    riskLabel = '0 項心血管風險因子'
+    ldlStart = 160; statinLDLTarget = 160
+    preDrugLifestyle = true
+    riskReasons.push('無心血管風險因子')
+  }
 
   // 一、Statin
   html += `<div class="nhi-section"><div class="nhi-section-title">降膽固醇藥物（Statin）</div>`
 
   let statinCovered = false
-  let statinCategory = ''
-  let statinLDLTarget: number | null = null
-  let statinTCTarget: number | null = null
+  const statinCategory = `${riskLabel}（表一）`
   const statinReasons: string[] = []
 
-  if (hasAcuteOrRevascularization) {
-    statinCategory = '第一類（急性冠心症/PCI/CABG）'
-    statinLDLTarget = 70
-    if (ldl && ldl >= 70) {
-      statinCovered = true
-      statinReasons.push(`LDL-C ${ldl} mg/dL ≥70 → 符合給付`)
-    } else if (ldl) {
-      statinReasons.push(`LDL-C ${ldl} mg/dL <70，目前已達目標值，暫不符合起始給付條件`)
-    } else {
-      statinCovered = true
-      statinReasons.push('急性冠心症/PCI/CABG 病史，建議檢測 LDL-C 確認')
-    }
-    statinReasons.push('目標：LDL-C <70 mg/dL')
-    statinReasons.push('追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月')
-  } else if (hasCV || dm) {
-    statinCategory = '第二類（心血管疾病或糖尿病）'
-    statinLDLTarget = 100
-    statinTCTarget = 160
-    const ldlOK = ldl && ldl >= 100
-    const tcOK = tc && tc >= 160
-    if (ldlOK || tcOK) {
-      statinCovered = true
-      const triggers: string[] = []
-      if (tcOK) triggers.push(`TC ${tc} mg/dL ≥160`)
-      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥100`)
-      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`)
-    } else {
-      const vals: string[] = []
-      if (tc) vals.push(`TC ${tc} mg/dL <160`)
-      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <100`)
-      statinReasons.push(`${vals.join('、')}，未達起始給付條件`)
-    }
-    statinReasons.push('目標：TC <160 mg/dL 或 LDL-C <100 mg/dL')
-    statinReasons.push('可與藥物治療並行（不需非藥物治療期）')
-  } else if (rfCount >= 2) {
-    statinCategory = `第三類（≥2個危險因子：${rfItems.join('、')}）`
-    statinLDLTarget = 130
-    statinTCTarget = 200
-    const ldlOK = ldl && ldl >= 130
-    const tcOK = tc && tc >= 200
-    if (ldlOK || tcOK) {
-      statinCovered = true
-      const triggers: string[] = []
-      if (tcOK) triggers.push(`TC ${tc} mg/dL ≥200`)
-      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥130`)
-      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`)
-    } else {
-      const vals: string[] = []
-      if (tc) vals.push(`TC ${tc} mg/dL <200`)
-      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <130`)
-      statinReasons.push(`${vals.join('、')}，未達起始給付條件`)
-    }
-    statinReasons.push('目標：TC <200 mg/dL 或 LDL-C <130 mg/dL')
-    statinReasons.push('需先有 3–6 個月非藥物治療')
-  } else if (rfCount === 1) {
-    statinCategory = `第四類（1個危險因子：${rfItems.join('、')}）`
-    statinLDLTarget = 160
-    statinTCTarget = 240
-    const ldlOK = ldl && ldl >= 160
-    const tcOK = tc && tc >= 240
-    if (ldlOK || tcOK) {
-      statinCovered = true
-      const triggers: string[] = []
-      if (tcOK) triggers.push(`TC ${tc} mg/dL ≥240`)
-      if (ldlOK) triggers.push(`LDL-C ${ldl} mg/dL ≥160`)
-      statinReasons.push(`${triggers.join(' 或 ')} → 符合給付`)
-    } else {
-      const vals: string[] = []
-      if (tc) vals.push(`TC ${tc} mg/dL <240`)
-      if (ldl) vals.push(`LDL-C ${ldl} mg/dL <160`)
-      statinReasons.push(`${vals.join('、')}，未達起始給付條件`)
-    }
-    statinReasons.push('目標：TC <240 mg/dL 或 LDL-C <160 mg/dL')
-    statinReasons.push('需先有 3–6 個月非藥物治療')
+  riskReasons.forEach((r) => statinReasons.push(`${r} → ${riskLabel}`))
+
+  if (ldl && ldl >= ldlStart) {
+    statinCovered = true
+    statinReasons.push(`LDL-C ${ldl} mg/dL ≥${ldlStart} → 符合起始治療條件`)
+  } else if (ldl) {
+    statinReasons.push(`LDL-C ${ldl} mg/dL <${ldlStart}，未達起始治療血脂值`)
   } else {
-    statinCategory = '第五類（0個危險因子）'
-    statinLDLTarget = 190
-    if (ldl && ldl >= 190) {
-      statinCovered = true
-      statinReasons.push(`LDL-C ${ldl} mg/dL ≥190 → 符合給付`)
-    } else {
-      statinReasons.push(`LDL-C ${ldl ? ldl + ' mg/dL <190' : '未填'}，未達起始給付條件`)
-    }
-    statinReasons.push('目標：LDL-C <190 mg/dL')
-    statinReasons.push('需先有 3–6 個月非藥物治療')
+    statinReasons.push('LDL-C 未填，無法判斷（請先檢測完整血脂）')
   }
 
-  if (rfCount > 0) statinReasons.push(`健保危險因子（${rfCount}/5）：${rfItems.join('、')}`)
+  statinReasons.push(`目標：LDL-C <${statinLDLTarget} mg/dL${nonhdlTarget ? `（次要目標 non-HDL-C <${nonhdlTarget} mg/dL${nonhdl ? `，目前 ${nonhdl}` : ''}）` : ''}`)
+
+  if (preDrugLifestyle) {
+    statinReasons.push('給藥前應有 3–6 個月生活型態改變；未達標再給中強度 statin')
+    statinReasons.push('中強度 statin 治療 6–8 週未達標 → 高強度/最大耐受劑量，或合併 non-statin 治療')
+    statinReasons.push('達標後每 6–12 個月追蹤血脂')
+  } else {
+    statinReasons.push('起始治療：中至高強度 statin 或合併 ezetimibe（與風險因子處置並行）')
+    statinReasons.push('起始 6–8 週後追蹤；未達標 → 高強度/最大耐受 statin ± non-statin（ezetimibe、PCSK9 單抗、siRNA、ATP citrate lyase 抑制劑）')
+    statinReasons.push('更動治療 1–3 個月內追蹤；達標後每 6 個月追蹤血脂')
+  }
+
+  if (rfCount > 0) statinReasons.push(`心血管風險因子（${rfCount}/6）：${rfItems.join('、')}`)
 
   html += `<div class="coverage-item ${statinCovered ? 'covered' : 'not-covered'}">
     <span class="coverage-icon">${statinCovered ? '✅' : '❌'}</span>
     <span class="coverage-text">
-      <strong>Statin｜${statinCategory}</strong><br>
+      <strong>表一（新制）｜${statinCategory}</strong><br>
       ${statinReasons.map((r) => `• ${r}`).join('<br>')}
     </span>
+  </div>`
+
+  // 表二（舊制）：新舊制並行，不適用表一的品項改依表二判斷
+  const t2 = calcStatinTable2({
+    ldl, tc, hdl, age, sex,
+    acsPciCabg: !!(ascvd && ascvdTypes.some((t) => ['ACS', 'MI_1yr', 'MI_multi', 'PCI', 'CABG'].includes(t))),
+    cvDisease: !!ascvd,
+    dm: !!dm,
+    htn: !!htn,
+    smoking: !!smoking,
+    fhcad: !!p.fhcad,
+  })
+
+  html += `<div class="coverage-item ${t2.covered ? 'covered' : 'not-covered'}">
+    <span class="coverage-icon">${t2.covered ? '✅' : '❌'}</span>
+    <span class="coverage-text">
+      <strong>表二（舊制）｜${t2.category}</strong><br>
+      ${t2.reasons.map((r) => `• ${r}`).join('<br>')}
+      ${t2.rfItems.length ? `<br>• 表二危險因子（${t2.rfItems.length}/5）：${t2.rfItems.join('、')}` : ''}
+    </span>
+  </div>`
+
+  // 成大院內品項 × 新舊制對照（核對自健保審字第1150671962號附件2 表二品項清單）
+  html += `<div class="nhi-note">
+    115/9/1 起<b>新舊制並行</b>：多數品項適用表一，附件2 清單所列品項仍只適用表二，開藥前先確認品項落在哪一張表。<br>
+    成大院內品項：<b>表一（新制）</b>Lipitor 40mg（atorvastatin）、Rosuvastatin 10mg、Dehypotin 40mg（pravastatin）、Zulitor 4mg（pitavastatin）、Linicor 20/500（lovastatin+niacin）；含 ezetimibe 者 Ezetrol 10mg、Tonvasca 2/10、Vytorin 20/10（皆 6–8 週制）
+    ｜<b>表二（舊制）</b>Crestor 20mg、Lescol XL 80mg（fluvastatin）、Livalo 2mg、Caduet 5/20 與 5/10（BC24392100／BC24391100）
   </div>`
 
   if (statinCovered) {
@@ -924,7 +1066,7 @@ export function calcNHI(p: LipidInput): string {
   const tcHdlRatio = tc && hdl && hdl > 0 ? tc / hdl : null
   const hdlLow = hdl && hdl < 40
 
-  if (hasCV || dm) {
+  if (ascvd || dm) {
     if (tg && tg >= 500) {
       tgCovered = true
       tgReasons.push(`TG ${tg} mg/dL ≥500 → 符合給付（可與藥物治療並行）`)
@@ -992,31 +1134,27 @@ export function calcNHI(p: LipidInput): string {
   </div>`
   html += `</div>`
 
-  // 三、Ezetimibe
+  // 三、Ezetimibe（2.6.2，115/9/1 修訂）
   html += `<div class="nhi-section"><div class="nhi-section-title">Ezetimibe（如 Ezetrol）</div>`
   let ezeCovered = false
   const ezeReasons: string[] = []
 
-  if (!statinCovered) {
-    ezeReasons.push('Statin 本身不符合給付條件，Ezetimibe 亦不予給付')
-  } else {
+  {
     const onStatin = statin !== ''
     if (!onStatin) {
       ezeCovered = true
-      ezeReasons.push('未使用 Statin（Statin 不耐受）→ 可單獨申請 Ezetimibe 給付')
-      ezeReasons.push('條件：Severe myalgia 或 Myositis')
+      ezeReasons.push('未使用 Statin（Statin 不耐受）→ 可單獨使用 Ezetimibe')
+      ezeReasons.push('條件：對 statin 發生無法耐受之藥物不良反應（如 Severe myalgia、Myositis）')
     } else {
-      if (statinLDLTarget && ldl && ldl >= statinLDLTarget) {
+      if (ldl && ldl >= statinLDLTarget) {
         ezeCovered = true
-        ezeReasons.push(`使用 Statin ≥3 個月後 LDL-C ${ldl} mg/dL 仍 ≥ 目標值 ${statinLDLTarget} mg/dL → 可合併 Ezetimibe`)
-      } else if (statinTCTarget && tc && tc >= statinTCTarget) {
-        ezeCovered = true
-        ezeReasons.push(`使用 Statin ≥3 個月後 TC ${tc} mg/dL 仍 ≥ 目標值 ${statinTCTarget} mg/dL → 可合併 Ezetimibe`)
+        ezeReasons.push(`使用 Statin 單一治療 6–8 週後 LDL-C ${ldl} mg/dL 仍 ≥ 目標值 ${statinLDLTarget} mg/dL → 可合併 Ezetimibe`)
       } else {
-        ezeReasons.push(`使用 Statin 後血脂已達目標（LDL-C <${statinLDLTarget}${statinTCTarget ? ' 且 TC <' + statinTCTarget : ''} mg/dL）→ 暫不符合 Ezetimibe 給付`)
+        ezeReasons.push(`使用 Statin 後血脂已達目標（LDL-C <${statinLDLTarget} mg/dL）→ 暫不符合 Ezetimibe 給付`)
       }
     }
     ezeReasons.push('適用診斷：原發性高膽固醇血症、HoFH、植物脂醇血症')
+    ezeReasons.push('成大品項 Ezetrol 10mg、複方 Vytorin 20/10、Tonvasca 2/10 皆適用 6–8 週新制（特定學名藥品項才需 3 個月）')
   }
 
   html += `<div class="coverage-item ${ezeCovered ? 'covered' : statinCovered ? 'conditional' : 'not-covered'}">
@@ -1119,19 +1257,61 @@ export function calcNHI(p: LipidInput): string {
 // ─────────────────────────────────────────────────────────────
 //  Simplified statin NHI judgment (lipid_nhi)
 // ─────────────────────────────────────────────────────────────
+// 表一「極高風險」的合併條件（附件2：冠狀動脈疾病或周邊動脈疾病再合併下列狀況）
+// 血管疾病的「單一事實」項目：使用者只勾事實，極高/非常高風險的合併條件由程式判斷
+export const CV_ITEMS: { val: string; label: string; tip?: string; parent?: string }[] = [
+  { val: 'cad', label: '冠狀動脈疾病 CAD' },
+  { val: 'imagingCad', label: '影像 ≥50% 狹窄', parent: 'cad', tip: '冠狀動脈血管攝影或電腦斷層確認 ≥50% 直徑狹窄率 → 非常高風險' },
+  { val: 'mi', label: '心肌梗塞病史', tip: 'STEMI／NSTEMI 本身即屬急性冠心症；供需失衡造成的 type 2 MI 請勿勾選', parent: 'cad' },
+  { val: 'mi1y', label: '一年內', parent: 'mi' },
+  { val: 'miMulti', label: '≥2 次', parent: 'mi' },
+  { val: 'multivessel', label: '多支冠狀動脈阻塞', parent: 'cad' },
+  { val: 'acs', label: '急性冠心症 ACS', tip: '含不穩定心絞痛；合併糖尿病即為極高風險', parent: 'cad' },
+  { val: 'revasc', label: '血管再通術 PCI／CABG', parent: 'cad' },
+  { val: 'pad', label: '周邊動脈疾病 PAD（≥50% 狹窄）', tip: '曾接受血管再通術、有肢體缺血相關症狀或截肢，或周邊血管影像確認 ≥50% 直徑狹窄率' },
+  { val: 'carotid', label: '頸動脈狹窄（≥50%）', tip: '頸動脈超音波或電腦斷層確認 ≥50% 直徑狹窄率 → 非常高風險' },
+  { val: 'stroke', label: '缺血性中風／TIA', tip: '合併動脈硬化相關疾病或病史' },
+]
+
 export interface NhiSimpleInput {
   age: number | null
   sex: Sex
-  menopause: number | null
   tc: number | null
   ldl: number | null
   ldlSource: 'measured' | 'calculated' | null
   hdl: number | null
-  ascvd: number | null
+  tg: number | null
+  cvItems: string[] // 見 CV_ITEMS，只記錄臨床事實
   dm: number | null
+  egfr: number | null
+  uacr: number | null
+  cacOver400: number | null
   htn: number | null
   fhcad: number | null
   smoking: number | null
+  // 代謝症候群的 5 個組成（腰圍與 TG/HDL 由數值判定，其餘用勾選）
+  waist: number | null
+  bpHigh: number | null
+  fpgHigh: number | null
+  tgMed: number | null
+}
+
+// 成大院內適用表一（新制）的品項（Caduet 依健保公告仍屬表二，故不列入）
+export const NCKU_TABLE1_DRUGS: { brand: string; dose: string; generic: string }[] = [
+  { brand: 'Lipitor', dose: '40 mg', generic: 'atorvastatin' },
+  { brand: 'Rosuvastatin', dose: '10 mg', generic: 'rosuvastatin' },
+  { brand: 'Dehypotin', dose: '40 mg', generic: 'pravastatin' },
+  { brand: 'Zulitor', dose: '4 mg', generic: 'pitavastatin' },
+  { brand: 'Linicor', dose: '20/500 mg', generic: 'lovastatin + niacin' },
+  { brand: 'Ezetrol', dose: '10 mg', generic: 'ezetimibe' },
+  { brand: 'Tonvasca', dose: '2/10 mg', generic: 'pitavastatin + ezetimibe' },
+  { brand: 'Vytorin', dose: '20/10 mg', generic: 'simvastatin + ezetimibe' },
+]
+
+export interface MetSynItem {
+  label: string
+  met: boolean
+  note?: string
 }
 
 export interface NhiSimpleResult {
@@ -1140,103 +1320,198 @@ export interface NhiSimpleResult {
   category: string
   condition: string
   ldlThreshold: number
-  tcThreshold: number | null
+  nonhdlTarget: number | null
   needLifestyle: boolean
   rfItems: string[]
   rfCount: number
+  metSynItems: MetSynItem[]
+  metSynCount: number
+  metSynPositive: boolean
   reasons: string[]
+  schedule: string[]
+  severityNotes: string[]
+  table2: Table2Result
   ldl: number | null
   tc: number | null
   ldlSource: 'measured' | 'calculated' | null
 }
 
 export function calcStatinNHISimple(p: NhiSimpleInput): NhiSimpleResult {
-  const { age, sex, menopause, tc, ldl, ldlSource, hdl, ascvd, dm, htn, fhcad, smoking } = p
+  // 115/9/1 給付規定表一：依 ASCVD 風險分級 + LDL-C 單一門檻（TC 門檻不再使用）
+  const {
+    age, sex, tc, ldl, ldlSource, hdl, tg, cvItems, dm, egfr, uacr, cacOver400,
+    htn, fhcad, smoking, waist, bpHigh, fpgHigh, tgMed,
+  } = p
   const isMale = sex === 'M'
+  const has = (v: string) => cvItems.includes(v)
+
+  // 冠狀動脈疾病可由 MI／多支阻塞／ACS／再通術 任一推得
+  const cadPresent = has('cad') || has('mi') || has('multivessel') || has('acs') || has('revasc')
+  // STEMI／NSTEMI 本身就是急性冠心症，勾心肌梗塞即視為有 ACS 病史
+  // （type 2 MI 等非 ACS 的梗塞，使用者可改勾冠狀動脈疾病而不勾心肌梗塞）
+  const acsPresent = has('acs') || has('mi')
+  const padPresent = has('pad')
+  const carotid = has('carotid')
+  const clinicalAscvd = acsPresent || has('revasc') || has('stroke') || padPresent || cadPresent
+  // 頸動脈狹窄本身即代表影像 ≥50%，屬非常高風險的影像認定路徑
+  const hasAscvd = clinicalAscvd || carotid || has('imagingCad')
+
+  // 代謝症候群 5 項（符合 ≥3 項成立）
+  const waistCut = isMale ? 90 : 80
+  const hdlCut = isMale ? 40 : 50
+  const metSynItems: MetSynItem[] = [
+    {
+      label: `腹部肥胖（腰圍 ${isMale ? '男 ≥90' : '女 ≥80'}cm）`,
+      met: waist !== null && waist >= waistCut,
+      note: waist !== null ? `腰圍 ${waist} cm` : '腰圍未填',
+    },
+    { label: '血壓 ≥130/85 mmHg 或使用高血壓藥物', met: !!bpHigh || !!htn, note: htn && !bpHigh ? '由高血壓病史認定' : undefined },
+    { label: '空腹血糖 ≥100 mg/dL 或使用糖尿病藥物', met: !!fpgHigh || !!dm, note: dm && !fpgHigh ? '由糖尿病認定' : undefined },
+    {
+      label: 'TG ≥150 mg/dL 或使用降 TG 藥物',
+      met: (tg !== null && tg >= 150) || !!tgMed,
+      note: tg !== null ? `TG ${tg} mg/dL` : undefined,
+    },
+    {
+      label: `HDL-C 偏低（${isMale ? '男 <40' : '女 <50'} mg/dL）`,
+      met: hdl !== null && hdl < hdlCut,
+      note: hdl !== null ? `HDL-C ${hdl} mg/dL` : 'HDL-C 未填',
+    },
+  ]
+  const metSynCount = metSynItems.filter((i) => i.met).length
+  const metSynPositive = metSynCount >= 3
+
+  const hasCKD = (egfr && egfr < 60) || (uacr && uacr >= 30)
+  const ckdDesc: string[] = []
+  if (egfr && egfr < 60) ckdDesc.push(`eGFR ${egfr} <60`)
+  if (uacr && uacr >= 30) ckdDesc.push(`UACR ${uacr} ≥30 mg/g`)
 
   const rfItems: string[] = []
   if (htn) rfItems.push('高血壓')
-  if (age) {
-    if (isMale && age >= 45) {
-      rfItems.push(`年齡 ${age} 歲（男 ≥ 45）`)
-    } else if (!isMale && age >= 55) {
-      rfItems.push(`年齡 ${age} 歲（女 ≥ 55）`)
-    } else if (!isMale && menopause) {
-      rfItems.push(`已停經（女性年齡 < 55 仍計入）`)
-    }
-  } else if (!isMale && menopause) {
-    rfItems.push('已停經')
+  if (age && ((isMale && age >= 45) || (!isMale && age >= 55))) {
+    rfItems.push(`年齡 ${age} 歲（${isMale ? '男 ≥45' : '女 ≥55'}）`)
   }
   if (fhcad) rfItems.push('早發 CAD 家族史')
+  if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50))) rfItems.push(`HDL-C ${hdl}（${isMale ? '男 <40' : '女 <50'}）`)
   if (smoking) rfItems.push('吸菸')
-  if (hdl && hdl < 40) rfItems.push(`HDL-C ${hdl} < 40`)
+  if (metSynPositive) rfItems.push(`代謝症候群（${metSynCount}/5 項）`)
   const rfCount = rfItems.length
 
-  let category: string, ldlThreshold: number, tcThreshold: number | null, needLifestyle: boolean
-  let condition: string
+  let category: string, ldlThreshold: number, nonhdlTarget: number | null, needLifestyle: boolean
+  const condition = '2.6.1 表一'
 
-  if (ascvd) {
-    condition = '2.6.6'
-    category = '心血管疾病（次發性預防）'
-    ldlThreshold = 100
-    tcThreshold = 160
+  // 極高風險：冠狀動脈疾病或周邊動脈疾病，再合併條文所列狀況
+  const extremeHits: string[] = []
+  if (cadPresent) {
+    if (has('mi') && has('mi1y')) extremeHits.push('冠狀動脈疾病合併一年內心肌梗塞')
+    if (has('mi') && has('miMulti')) extremeHits.push('冠狀動脈疾病合併 ≥2 次心肌梗塞病史')
+    if (has('multivessel')) extremeHits.push('多支冠狀動脈阻塞')
+    if (acsPresent && dm) extremeHits.push(`急性冠心症合併糖尿病${has('acs') ? '' : '（心肌梗塞屬急性冠心症）'}`)
+  }
+  if (cadPresent && padPresent) extremeHits.push('冠狀動脈疾病合併周邊動脈疾病')
+  if (cadPresent && carotid) extremeHits.push('冠狀動脈疾病合併頸動脈狹窄')
+  if (padPresent && carotid) extremeHits.push('周邊動脈疾病合併頸動脈狹窄')
+
+  if (extremeHits.length > 0) {
+    category = `極高風險（${extremeHits.join('；')}）`
+    ldlThreshold = 55
+    nonhdlTarget = 85
     needLifestyle = false
-  } else if (dm) {
-    condition = '2.6.5'
-    category = '糖尿病'
+  } else if (hasAscvd) {
+    const why: string[] = []
+    if (acsPresent) why.push(has('acs') ? '急性冠心症病史' : '心肌梗塞病史（屬急性冠心症）')
+    if (has('revasc')) why.push('血管再通術')
+    if (has('stroke')) why.push('缺血性中風／TIA')
+    if (padPresent) why.push('周邊動脈疾病')
+    if (cadPresent && !acsPresent && !has('revasc')) why.push('冠狀動脈疾病')
+    if (carotid) why.push('頸動脈狹窄 ≥50%')
+    if (has('imagingCad')) why.push('冠狀動脈影像 ≥50% 狹窄')
+    category = `非常高風險（${why.join('、')}）`
+    ldlThreshold = 70
+    nonhdlTarget = 100
+    needLifestyle = false
+  } else if (dm || hasCKD || (ldl && ldl >= 190) || cacOver400) {
+    const why: string[] = []
+    if (dm) why.push('糖尿病')
+    if (hasCKD) why.push(`CKD（${ckdDesc.join('、')}）`)
+    if (ldl && ldl >= 190) why.push(`LDL-C ≥190`)
+    if (cacOver400) why.push('CAC ≥400')
+    category = `高風險（${why.join('、')}）`
     ldlThreshold = 100
-    tcThreshold = 160
+    nonhdlTarget = 130
     needLifestyle = false
   } else if (rfCount >= 2) {
-    condition = '2.6.1'
-    category = `一般民眾（≥ 2 項危險因子）`
-    ldlThreshold = 130
-    tcThreshold = 200
+    category = '中風險（≥2 項風險因子）'
+    ldlThreshold = 115
+    nonhdlTarget = 145
     needLifestyle = true
   } else if (rfCount === 1) {
-    condition = '2.6.1'
-    category = `一般民眾（1 項危險因子）`
-    ldlThreshold = 160
-    tcThreshold = 240
+    category = '低風險（1 項風險因子）'
+    ldlThreshold = 130
+    nonhdlTarget = 160
     needLifestyle = true
   } else {
-    condition = '2.6.1'
-    category = '一般民眾（0 項危險因子）'
-    ldlThreshold = 190
-    tcThreshold = null
+    category = '0 項心血管風險因子'
+    ldlThreshold = 160
+    nonhdlTarget = null
     needLifestyle = true
   }
 
   let covered = false
   let alreadyAtGoal = false
-  const triggers: string[] = []
   const reasons: string[] = []
 
   if (ldl && ldl >= ldlThreshold) {
     covered = true
-    triggers.push(`LDL-C ${ldl} mg/dL ≥ ${ldlThreshold}`)
-  }
-  if (tc && tcThreshold && tc >= tcThreshold) {
-    covered = true
-    triggers.push(`TC ${tc} mg/dL ≥ ${tcThreshold}`)
-  }
-
-  if (!covered) {
-    if (ldl && ldl < ldlThreshold) {
-      alreadyAtGoal = true
-      reasons.push(`LDL-C ${ldl} mg/dL < ${ldlThreshold} → 未達起始給付閾值${ldlSource === 'calculated' ? '（推算值）' : ''}`)
-    }
-    if (tc && tcThreshold && tc < tcThreshold) {
-      reasons.push(`TC ${tc} mg/dL < ${tcThreshold} → 未達起始給付閾值`)
-    }
-    if (!ldl && !tc) {
-      reasons.push('TC 或 LDL-C 未填，無法判斷')
-    }
+    reasons.push(`LDL-C ${ldl} mg/dL ≥ ${ldlThreshold}${ldlSource === 'calculated' ? '（推算值）' : ''} → <strong style="color:var(--color-green);">符合起始治療條件</strong>`)
+  } else if (ldl) {
+    alreadyAtGoal = true
+    reasons.push(`LDL-C ${ldl} mg/dL < ${ldlThreshold} → 未達起始治療血脂值${ldlSource === 'calculated' ? '（推算值）' : ''}`)
   } else {
-    reasons.push(triggers.join(' 或 ') + ' → <strong style="color:var(--color-green);">符合起始給付</strong>')
+    reasons.push('LDL-C 未填（也未能由 TC/HDL/TG 推算），無法判斷')
   }
 
-  return { covered, alreadyAtGoal, category, condition, ldlThreshold, tcThreshold, needLifestyle, rfItems, rfCount, reasons, ldl, tc, ldlSource }
+  if (hasCKD && !dm && !hasAscvd) reasons.push(`檢驗顯示 ${ckdDesc.join('、')} → 以 CKD 歸類高風險（需持續 ≥3 個月）`)
+
+  // 表一處方規定的時程（極高/非常高/高風險 vs 中/低風險兩套）
+  const schedule = needLifestyle
+    ? [
+        '起始：先做 3–6 個月生活型態改變並處置心血管風險因子',
+        '3–6 個月後未達標 → 給中強度 statin',
+        '中強度 statin 6–8 週後追蹤；未達標 → 高強度或最大耐受劑量，或合併 non-statin',
+        '達標後每 6–12 個月追蹤血脂',
+      ]
+    : [
+        '起始：中至高強度 statin 或合併 ezetimibe（與生活型態改變／風險因子處置並行）',
+        '起始 6–8 週後追蹤；未達標 → 高強度或最大耐受 statin ± non-statin（ezetimibe、PCSK9 單抗、siRNA、ATP citrate lyase 抑制劑）',
+        '更動治療後 1–3 個月內追蹤是否達標',
+        '達標後每 6 個月追蹤血脂',
+      ]
+
+  const severityNotes: string[] = []
+  if (category.startsWith('極高風險') || category.startsWith('非常高風險')) {
+    severityNotes.push('初始評估應檢測完整血脂；急性病人須於入院後 24 小時內完成血脂檢驗')
+  }
+  if (category.startsWith('高風險')) {
+    severityNotes.push('若有嚴重高膽固醇血症、肌腱黃色瘤、早發心血管疾病或家族病史 → 依台灣家族性高膽固醇血症診斷標準做家族篩檢')
+  }
+  if (ldl && ldl >= 190) severityNotes.push(`LDL-C ${ldl} ≥190 mg/dL，屬嚴重高膽固醇血症範圍`)
+
+  const table2 = calcStatinTable2({
+    ldl, tc, hdl, age, sex,
+    acsPciCabg: acsPresent || has('revasc'),
+    cvDisease: hasAscvd,
+    dm: !!dm,
+    htn: !!htn,
+    smoking: !!smoking,
+    fhcad: !!fhcad,
+  })
+
+  return {
+    covered, alreadyAtGoal, category, condition, ldlThreshold, nonhdlTarget, needLifestyle,
+    rfItems, rfCount, metSynItems, metSynCount, metSynPositive,
+    reasons, schedule, severityNotes, table2, ldl, tc, ldlSource,
+  }
 }
 
 // ─────────────────────────────────────────────────────────────

@@ -10,6 +10,8 @@ import {
   calcNHI,
   calcStatinNHISimple,
   computeEffectiveLDL,
+  CV_ITEMS,
+  NCKU_TABLE1_DRUGS,
   parseLisPaste,
   type LipidInput,
   type NhiSimpleInput,
@@ -53,7 +55,7 @@ function LipidPage() {
         </Tabs>
 
         <footer className="mt-8 text-center text-xs leading-[1.9] text-text-light">
-          資料來源：台灣脂質暨動脈硬化學會 2025 ｜ ESC CVD Prevention 2024 ｜ AHA 2026 PREVENT ｜ 健保藥品給付規定第 2.6 節
+          資料來源：台灣脂質暨動脈硬化學會 2025 ｜ ESC CVD Prevention 2024 ｜ AHA 2026 PREVENT ｜ 健保藥品給付規定第 2.6 節（115/9/1 修訂，健保審字第1150671962號）
           <br />
           ⚠️ 本工具僅供醫護人員臨床參考，不取代個別病人評估與醫師判斷。
         </footer>
@@ -361,26 +363,51 @@ function FullVersion() {
 interface SimpleForm {
   age: string
   sex: Sex
-  menopause: number
   tc: string
   ldl: string
   hdl: string
   tg: string
-  ascvd: number
+  egfr: string
+  uacr: string
+  cvItems: string[]
   dm: number
+  cacOver400: number
   htn: number
   fhcad: number
   smoking: number
+  waist: string
+  bpHigh: number
+  fpgHigh: number
+  tgMed: number
 }
 const SIMPLE_DEFAULTS: SimpleForm = {
-  age: '', sex: 'M', menopause: 0, tc: '', ldl: '', hdl: '', tg: '',
-  ascvd: 0, dm: 0, htn: 0, fhcad: 0, smoking: 0,
+  age: '', sex: 'M', tc: '', ldl: '', hdl: '', tg: '', egfr: '', uacr: '',
+  cvItems: [], dm: 0, cacOver400: 0, htn: 0, fhcad: 0, smoking: 0,
+  waist: '', bpHigh: 0, fpgHigh: 0, tgMed: 0,
 }
 
 function SimpleVersion() {
   const [f, setF] = useState<SimpleForm>(SIMPLE_DEFAULTS)
   const [lisOpen, setLisOpen] = useState(false)
   const set = <K extends keyof SimpleForm>(k: K, v: SimpleForm[K]) => setF((p) => ({ ...p, [k]: v }))
+
+  // 勾選血管疾病項目；取消時一併清掉其子項，避免留下「一年內」卻沒有心肌梗塞
+  const setCv = (val: string, on: number) =>
+    setF((p) => {
+      if (on) return { ...p, cvItems: p.cvItems.includes(val) ? p.cvItems : [...p.cvItems, val] }
+      const descendants = new Set([val])
+      let grew = true
+      while (grew) {
+        grew = false
+        for (const item of CV_ITEMS) {
+          if (item.parent && descendants.has(item.parent) && !descendants.has(item.val)) {
+            descendants.add(item.val)
+            grew = true
+          }
+        }
+      }
+      return { ...p, cvItems: p.cvItems.filter((t) => !descendants.has(t)) }
+    })
 
   const tc = num(f.tc), hdl = num(f.hdl), tg = num(f.tg)
   const eff = computeEffectiveLDL(tc, hdl, tg, num(f.ldl))
@@ -389,8 +416,11 @@ function SimpleVersion() {
   const result = useMemo(() => {
     if (!num(f.age)) return null
     const input: NhiSimpleInput = {
-      age: num(f.age), sex: f.sex, menopause: f.menopause, tc, ldl: eff.value, ldlSource: eff.source, hdl,
-      ascvd: f.ascvd, dm: f.dm, htn: f.htn, fhcad: f.fhcad, smoking: f.smoking,
+      age: num(f.age), sex: f.sex, tc, ldl: eff.value, ldlSource: eff.source, hdl,
+      egfr: num(f.egfr), uacr: num(f.uacr),
+      tg, cvItems: f.cvItems, dm: f.dm, cacOver400: f.cacOver400,
+      htn: f.htn, fhcad: f.fhcad, smoking: f.smoking,
+      waist: num(f.waist), bpHigh: f.bpHigh, fpgHigh: f.fpgHigh, tgMed: f.tgMed,
     }
     return calcStatinNHISimple(input)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -398,7 +428,7 @@ function SimpleVersion() {
 
   const applyLis = (fields: Record<string, { value: number | string }>) => {
     const patch: Partial<SimpleForm> = {}
-    for (const id of ['age', 'tc', 'hdl', 'ldl', 'tg'] as const) {
+    for (const id of ['age', 'tc', 'hdl', 'ldl', 'tg', 'egfr', 'uacr'] as const) {
       if (fields[id]) patch[id] = String(fields[id].value)
     }
     if (fields.sex) patch.sex = fields.sex.value as Sex
@@ -417,13 +447,14 @@ function SimpleVersion() {
           <SectionLabel>基本資料</SectionLabel>
           <NumField label="年齡" unit="歲" value={f.age} onChange={(v) => set('age', v)} placeholder="例：65" />
           <Toggle label="性別" value={f.sex} onChange={(v) => set('sex', v as Sex)} options={[{ v: 'M', l: '男' }, { v: 'F', l: '女' }]} />
-          {f.sex === 'F' && <Toggle label="已停經" hint="（女性）" value={f.menopause} onChange={(v) => set('menopause', v as number)} options={YN} />}
 
-          <SectionLabel>血脂檢驗 <span className="font-normal text-text-light">(mg/dL)</span></SectionLabel>
+          <SectionLabel>檢驗值 <span className="font-normal text-text-light">（可從 LIS 貼上自動填入）</span></SectionLabel>
           <NumField label="TC" unit="mg/dL" value={f.tc} onChange={(v) => set('tc', v)} placeholder="總膽固醇" />
           <NumField label="LDL-C" unit="mg/dL" value={f.ldl} onChange={(v) => set('ldl', v)} placeholder="壞膽固醇" />
           <NumField label="HDL-C" unit="mg/dL" value={f.hdl} onChange={(v) => set('hdl', v)} placeholder="好膽固醇" />
           <NumField label="TG" unit="mg/dL" value={f.tg} onChange={(v) => set('tg', v)} placeholder="三酸甘油酯" />
+          <NumField label="eGFR" unit="mL/min/1.73m²" tip="eGFR <60 或 UACR ≥30 mg/g 持續 ≥3 個月 → CKD，歸類高風險（起始 LDL-C ≥100）" value={f.egfr} onChange={(v) => set('egfr', v)} placeholder="估算腎絲球過濾率" />
+          <NumField label="UACR" unit="mg/g" value={f.uacr} onChange={(v) => set('uacr', v)} placeholder="尿白蛋白/肌酸酐" />
           {showCalcLdl && (
             <Computed
               label="Calculated LDL"
@@ -434,14 +465,70 @@ function SimpleVersion() {
             />
           )}
 
-          <SectionLabel>心血管病史與糖尿病</SectionLabel>
-          <Toggle label="ASCVD 病史" hint="（CAD/stroke/PAD）" value={f.ascvd} onChange={(v) => set('ascvd', v as number)} options={YN} />
+          <SectionLabel>心血管病史（勾選臨床事實，風險分級由系統判定）</SectionLabel>
+          <div className="col-span-full grid gap-2.5 md:grid-cols-2">
+            {CV_ITEMS.filter((o) => !o.parent).map((top) => {
+              const kids = CV_ITEMS.filter((c) => c.parent === top.val)
+              return (
+                <div key={top.val} className="rounded-lg border border-border bg-bg2/40 p-2.5">
+                  <Toggle
+                    label={top.label}
+                    tip={top.tip}
+                    value={f.cvItems.includes(top.val) ? 1 : 0}
+                    onChange={(v) => setCv(top.val, v as number)}
+                    options={YN}
+                  />
+                  {f.cvItems.includes(top.val) && kids.length > 0 && (
+                    <div className="mt-2.5 grid gap-2.5 border-l-2 border-border pl-2.5 sm:grid-cols-2">
+                      {kids.map((kid) => {
+                        const grandKids = CV_ITEMS.filter((g) => g.parent === kid.val)
+                        return (
+                          <div key={kid.val} className={grandKids.length ? 'sm:col-span-2' : undefined}>
+                            <Toggle
+                              label={kid.label}
+                              tip={kid.tip}
+                              value={f.cvItems.includes(kid.val) ? 1 : 0}
+                              onChange={(v) => setCv(kid.val, v as number)}
+                              options={YN}
+                            />
+                            {f.cvItems.includes(kid.val) && grandKids.length > 0 && (
+                              <div className="mt-2.5 grid gap-2.5 border-l-2 border-border pl-2.5 sm:grid-cols-2">
+                                {grandKids.map((g) => (
+                                  <Toggle
+                                    key={g.val}
+                                    label={g.label}
+                                    tip={g.tip}
+                                    value={f.cvItems.includes(g.val) ? 1 : 0}
+                                    onChange={(v) => setCv(g.val, v as number)}
+                                    options={YN}
+                                  />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+            <div className="text-[11px] leading-relaxed text-text-light md:col-span-2">
+              極高風險＝冠狀動脈疾病或周邊動脈疾病，再合併「一年內 MI／≥2 次 MI／多支阻塞／ACS＋糖尿病／另一血管床」；未合併者為非常高風險。
+            </div>
+          </div>
           <Toggle label="糖尿病" value={f.dm} onChange={(v) => set('dm', v as number)} options={YN} />
+          <Toggle label="CAC ≥400" tip="冠狀動脈鈣化分數 ≥400 → 高風險（起始 LDL-C ≥100）" value={f.cacOver400} onChange={(v) => set('cacOver400', v as number)} options={YN} />
 
-          <SectionLabel>健保危險因子（5 項）</SectionLabel>
+          <SectionLabel>心血管風險因子（6 項）</SectionLabel>
           <Toggle label="高血壓" value={f.htn} onChange={(v) => set('htn', v as number)} options={YN} />
           <Toggle label="早發 CAD 家族史" tip="男性 ≦ 55 歲、女性 ≦ 65 歲一等親有冠心病" value={f.fhcad} onChange={(v) => set('fhcad', v as number)} options={YN} />
           <Toggle label="吸菸" value={f.smoking} onChange={(v) => set('smoking', v as number)} options={YN} />
+          <SectionLabel>代謝症候群組成（符合 ≥3 項即計為 1 個風險因子）</SectionLabel>
+          <NumField label="腰圍" unit="cm" value={f.waist} onChange={(v) => set('waist', v)} placeholder={f.sex === 'M' ? '男 ≥90' : '女 ≥80'} />
+          <Toggle label="血壓 ≥130/85" tip="血壓 ≥130/85 mmHg 或正在使用高血壓藥物；已勾高血壓者自動計入" value={f.bpHigh} onChange={(v) => set('bpHigh', v as number)} options={YN} />
+          <Toggle label="空腹血糖 ≥100" tip="空腹血糖 ≥100 mg/dL 或正在使用糖尿病藥物；已勾糖尿病者自動計入" value={f.fpgHigh} onChange={(v) => set('fpgHigh', v as number)} options={YN} />
+          <Toggle label="降 TG 藥物" tip="正在使用降三酸甘油酯藥物；TG ≥150 mg/dL 會由上方 TG 欄位自動判定" value={f.tgMed} onChange={(v) => set('tgMed', v as number)} options={YN} />
 
           <div className="col-span-full mt-2 flex justify-end">
             <button type="button" onClick={() => setF(SIMPLE_DEFAULTS)} className="rounded-lg border border-border bg-surface2 px-3.5 py-1.5 text-sm text-text-muted transition-colors hover:text-text">
@@ -460,48 +547,116 @@ function SimpleVersion() {
   )
 }
 
-function SimpleResultCard({ r }: { r: ReturnType<typeof calcStatinNHISimple> }) {
-  const tone = r.covered ? 'green' : r.alreadyAtGoal ? 'green' : 'muted'
-  const title = r.covered ? '符合健保 statin 起始給付' : r.alreadyAtGoal ? '未達起始給付閾值（目前 LDL 已低於門檻）' : '資料不足或未達起始給付'
+const YN = [{ v: 0, l: '否' }, { v: 1, l: '是' }]
+
+function RuleCard({
+  title, sub, covered, start, target, nonhdl,
+}: {
+  title: string
+  sub: string
+  covered: boolean
+  start: string
+  target: string
+  nonhdl?: string
+}) {
   return (
-    <div className="rounded-xl border border-border bg-surface p-4">
-      <div className="mb-3 flex items-center gap-3">
-        <div className={`flex h-9 w-9 items-center justify-center rounded-full text-lg font-bold ${tone === 'green' ? 'bg-green/15 text-green' : 'bg-surface2 text-text-muted'}`}>
-          {r.covered || r.alreadyAtGoal ? '✓' : '–'}
-        </div>
-        <div>
-          <div className={`text-sm font-semibold ${tone === 'green' ? 'text-green' : 'text-text'}`}>{title}</div>
-          <div className="text-xs text-text-muted">適用條文：{r.condition}　·　{r.category}</div>
-        </div>
+    <div className={`rounded-xl border p-4 ${covered ? 'border-green/40 bg-green/[0.05]' : 'border-border bg-surface'}`}>
+      <div className="mb-2 flex items-center gap-2">
+        <span className="text-sm font-semibold text-text">{title}</span>
+        <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${covered ? 'bg-green/15 text-green' : 'bg-surface2 text-text-muted'}`}>
+          {covered ? '符合' : '不符合'}
+        </span>
       </div>
-
-      <div className="mb-3 grid grid-cols-2 gap-2">
-        <Metric label="起始 LDL-C 閾值" value={`≥ ${r.ldlThreshold} mg/dL`} tone="accent" />
-        {r.tcThreshold && <Metric label="起始 TC 閾值" value={`≥ ${r.tcThreshold} mg/dL`} tone="accent" />}
-        {r.ldl && <Metric label={`目前 LDL-C${r.ldlSource === 'calculated' ? '（推算）' : ''}`} value={`${r.ldl} mg/dL`} tone={r.ldl >= r.ldlThreshold ? 'green' : 'yellow'} />}
-      </div>
-
-      <div className="rounded-lg bg-bg2 px-3 py-2.5 text-[13px] leading-relaxed text-text-muted">
-        <div className="mb-1 font-semibold text-text">判斷依據</div>
-        {r.reasons.map((t, i) => (
-          <div key={i} dangerouslySetInnerHTML={{ __html: `• ${t}` }} />
-        ))}
-        {r.rfCount > 0 ? (
-          <div>• 危險因子（{r.rfCount}/5）：{r.rfItems.join('、')}</div>
-        ) : !r.covered && !['2.6.5', '2.6.6'].includes(r.condition) ? (
-          <div>• 危險因子（0/5）— LDL-C 需 ≥ 190 mg/dL 才達起始給付</div>
-        ) : null}
-        {r.needLifestyle && r.covered && <div className="text-text-light">• 需先 3–6 個月非藥物治療後仍未達標，方得起始 statin</div>}
-        {!r.needLifestyle && r.covered && <div className="text-text-light">• 可與藥物治療並行（不需非藥物治療期）</div>}
+      <div className="mb-2.5 text-[12.5px] leading-relaxed text-text-muted">{sub}</div>
+      <div className="space-y-1 text-[13px]">
+        <div className="flex justify-between gap-3">
+          <span className="text-text-muted">起始治療</span>
+          <span className="font-medium text-text">{start}</span>
+        </div>
+        <div className="flex justify-between gap-3">
+          <span className="text-text-muted">治療目標</span>
+          <span className="font-medium text-accent">{target}</span>
+        </div>
+        {nonhdl && (
+          <div className="flex justify-between gap-3">
+            <span className="text-text-muted">次要目標</span>
+            <span className="font-medium text-accent">{nonhdl}</span>
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
-// ════════════════════════════════════════════════════════════
-//  Shared pieces
-// ════════════════════════════════════════════════════════════
-const YN = [{ v: 0, l: '否' }, { v: 1, l: '是' }]
+function SimpleResultCard({ r }: { r: ReturnType<typeof calcStatinNHISimple> }) {
+  const t2 = r.table2
+  return (
+    <div className="space-y-3">
+      <div className="grid gap-3 md:grid-cols-2">
+        <RuleCard
+          title="表一（新制）"
+          sub={r.category}
+          covered={r.covered}
+          start={`LDL-C ≥ ${r.ldlThreshold} mg/dL`}
+          target={`LDL-C < ${r.ldlThreshold} mg/dL`}
+          nonhdl={r.nonhdlTarget ? `non-HDL-C < ${r.nonhdlTarget} mg/dL` : undefined}
+        />
+        <RuleCard
+          title="表二（舊制）"
+          sub={t2.category}
+          covered={t2.covered}
+          start={t2.tcThreshold ? `LDL-C ≥ ${t2.ldlThreshold} 或 TC ≥ ${t2.tcThreshold} mg/dL` : `LDL-C ≥ ${t2.ldlThreshold} mg/dL`}
+          target={t2.tcThreshold ? `LDL-C < ${t2.ldlThreshold} 或 TC < ${t2.tcThreshold} mg/dL` : `LDL-C < ${t2.ldlThreshold} mg/dL`}
+        />
+      </div>
+
+      <div className="rounded-xl border border-border bg-surface p-4">
+        <div className="mb-2 text-sm font-semibold text-text">成大院內適用新制（表一）品項</div>
+        <div className="grid gap-x-4 gap-y-1 text-[13px] sm:grid-cols-2">
+          {NCKU_TABLE1_DRUGS.map((d) => (
+            <div key={d.brand} className="flex items-baseline gap-1.5">
+              <span className="text-text">{d.brand} {d.dose}</span>
+              <span className="text-[12px] text-text-light">{d.generic}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <details className="rounded-xl border border-border bg-surface px-4 py-3">
+        <summary className="cursor-pointer text-[13px] font-medium text-text-muted hover:text-text">詳細判斷依據</summary>
+        <div className="mt-2.5 space-y-2 text-[12.5px] leading-relaxed text-text-muted">
+          <div>
+            {r.reasons.map((t, i) => (
+              <div key={i} dangerouslySetInnerHTML={{ __html: `• ${t}` }} />
+            ))}
+            {r.rfCount > 0 && <div>• 心血管風險因子（{r.rfCount}/6）：{r.rfItems.join('、')}</div>}
+            {r.severityNotes.map((t, i) => (
+              <div key={`s${i}`} className="text-yellow">• {t}</div>
+            ))}
+          </div>
+          <div className="border-t border-border pt-2">
+            <div className="mb-0.5 text-text">
+              代謝症候群 {r.metSynCount}/5 項 → {r.metSynPositive ? '成立，計為 1 個風險因子' : '不成立（需 ≥3 項）'}
+            </div>
+            {r.metSynItems.map((m, i) => (
+              <div key={i} className="pl-3">
+                <span className={m.met ? 'text-green' : 'text-text-light'}>{m.met ? '✓' : '○'}</span>{' '}
+                <span className={m.met ? '' : 'text-text-light'}>{m.label}</span>
+                {m.note && <span className="ml-1 text-text-light">（{m.note}）</span>}
+              </div>
+            ))}
+          </div>
+          <div className="border-t border-border pt-2">
+            <div className="mb-0.5 text-text">表一處方規定與追蹤時程{r.needLifestyle ? '（中／低風險）' : '（高風險以上）'}</div>
+            {r.schedule.map((t, i) => (
+              <div key={i} className="pl-3">{i + 1}. {t}</div>
+            ))}
+          </div>
+        </div>
+      </details>
+    </div>
+  )
+}
 
 function InfoTip({ tip }: { tip: string }) {
   return (
@@ -601,16 +756,6 @@ function SelectField({ label, value, onChange, options }: { label: string; value
         ))}
       </select>
     </label>
-  )
-}
-
-function Metric({ label, value, tone }: { label: string; value: string; tone: 'accent' | 'green' | 'yellow' }) {
-  const c = tone === 'green' ? 'text-green' : tone === 'yellow' ? 'text-yellow' : 'text-accent'
-  return (
-    <div className="rounded-lg bg-bg2 px-3 py-2">
-      <div className="text-[11px] text-text-muted">{label}</div>
-      <div className={`text-sm font-semibold ${c}`}>{value}</div>
-    </div>
   )
 }
 
