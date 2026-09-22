@@ -38,6 +38,13 @@ export const PE: [string, string][] = [
   ['spineTender', '脊椎壓痛'],
 ]
 
+// 病歷文字為英文，理學檢查所見以英文輸出
+const PE_EN: Record<string, string> = {
+  kyphosis: 'kyphosis',
+  scoliosis: 'scoliosis',
+  spineTender: 'spinal tenderness',
+}
+
 export const INTAKE_DRUGLIST: [string, string][] = [
   ['alen', 'Alendronate'], ['rise', 'Risedronate'], ['zole', 'Zoledronic acid'],
   ['ralo', 'Raloxifene'], ['deno', 'Denosumab'], ['teri', 'Teriparatide'], ['romo', 'Romosozumab'],
@@ -552,7 +559,7 @@ export function buildChartText(f: IntakeForm, checks: Set<string>): string {
   if (num(f.wod) !== null) L.push(`WOD = ${num(f.wod)} cm`)
   if (num(f.rpd) !== null) L.push(`RPD = ${num(f.rpd)} fingers`)
   if (num(f.tug) !== null) L.push(`TUG = ${num(f.tug)} sec`)
-  const pe = PE.filter(([k]) => chk(k)).map(([, t]) => t)
+  const pe = PE.filter(([k]) => chk(k)).map(([k]) => PE_EN[k] ?? k)
   if (pe.length) L.push('PE: ' + pe.join(', '))
 
   const labs: string[] = []
@@ -590,6 +597,27 @@ export function buildChartText(f: IntakeForm, checks: Set<string>): string {
   if (contra.length) {
     L.push('', '[Assessment]')
     L.push('Contraindicated / not recommended: ' + contra.join(' / '))
+  }
+
+  // 尚未輸入的檢查＝尚未完成，列入計畫提醒
+  const missingLabs = ([
+    ['egfr', 'eGFR'], ['ca', 'Ca'], ['ph', 'P'], ['vitd', '25(OH)D'],
+    ['alp', 'ALP'], ['pth', 'iPTH'], ['oc', 'Osteocalcin'],
+  ] as [keyof IntakeForm, string][])
+    .filter(([id]) => num(f[id] as string) === null)
+    .map(([, lbl]) => lbl)
+
+  const noDxa = ['lsBmd', 'lsT', 'fnBmd', 'fnT', 'hpBmd', 'hpT']
+    .every((id) => num(f[id as keyof IntakeForm] as string) === null)
+
+  const missingImaging: string[] = []
+  if (noDxa) missingImaging.push('DXA')
+  if (!v(f.spineImg)) missingImaging.push('TL spine film (or VFA)')
+
+  if (missingLabs.length || missingImaging.length) {
+    L.push('', '[Plan]')
+    if (missingLabs.length) L.push('Labs not yet checked: ' + missingLabs.join(', '))
+    if (missingImaging.length) L.push('Imaging not yet done: ' + missingImaging.join(', '))
   }
 
   return L.join('\n')

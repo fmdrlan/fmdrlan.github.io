@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Copy, RotateCcw, ClipboardPaste, X } from 'lucide-react'
+import { Copy, RotateCcw, ClipboardPaste, X, ExternalLink } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   SEC,
@@ -513,6 +513,16 @@ export function IntakeTab() {
               雙側 DXA 以 T-score 較低（較差）的一側為準；T 相同時取 BMD 較低者。從 LIS 貼上時會自動挑側並標註。
             </p>
             {dCalc.text && <div className={cn(CALC, dCalc.warn && CALC_WARN)}>{dCalc.text}</div>}
+
+            <a
+              href="https://www.fraxplus.org/zh-Hant/calculation-tool"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2.5 inline-flex items-center gap-1.5 rounded-md border border-border bg-bg2 px-3 py-1.5 text-[13px] text-text-muted no-underline transition-colors hover:border-accent/40 hover:text-accent"
+            >
+              <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.8} />
+              FRAX 骨折風險計算
+            </a>
 
             <h4 className={H4}>脊椎影像（選填）</h4>
             <TextArea
