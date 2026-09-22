@@ -39,8 +39,8 @@ export const PE: [string, string][] = [
 ]
 
 export const INTAKE_DRUGLIST: [string, string][] = [
-  ['alen', '福善美保骨'], ['rise', '瑞骨卓'], ['zole', '骨力強'],
-  ['ralo', '鈣穩'], ['deno', '保骼麗'], ['teri', '骨穩／艾歐骨得'], ['romo', '益穩挺'],
+  ['alen', 'Alendronate'], ['rise', 'Risedronate'], ['zole', 'Zoledronic acid'],
+  ['ralo', 'Raloxifene'], ['deno', 'Denosumab'], ['teri', 'Teriparatide'], ['romo', 'Romosozumab'],
 ]
 
 export interface IntakeForm {
@@ -316,9 +316,9 @@ const LIS_ANALYTES: {
   unit: string
   label: string
 }[] = [
-  { id: 'egfr', names: ['EGFR(CKD-EPI)', 'EGFR(MDRD)', 'EGFR'], min: 1, max: 200, unit: '', label: 'eGFR' },
-  { id: 'ca', names: ['CA', 'CA(MG/DL)', 'CALCIUM', 'CA,TOTAL'], min: 4, max: 16, unit: 'mg/dL', label: '血鈣 Ca' },
-  { id: 'ph', names: ['P', 'P(MG/DL)', 'PHOSPHORUS', 'PHOSPHATE', 'INORGANICP'], min: 0.5, max: 15, unit: 'mg/dL', label: '磷 P' },
+  { id: 'egfr', names: ['EGFR(CKD-EPI)', 'EGFR(MDRD)', 'EGFR'], min: 1, max: 200, unit: 'mL/min/1.73m²', label: 'eGFR' },
+  { id: 'ca', names: ['CA', 'CA(MG/DL)', 'CALCIUM', 'CA,TOTAL'], min: 4, max: 16, unit: 'mg/dL', label: 'Ca' },
+  { id: 'ph', names: ['P', 'P(MG/DL)', 'PHOSPHORUS', 'PHOSPHATE', 'INORGANICP'], min: 0.5, max: 15, unit: 'mg/dL', label: 'P' },
   { id: 'vitd', names: ['VITD(25-OH)', 'VITD(25OH)', '25-OH-VITD', '25(OH)D', 'VITAMIND', 'VITD'], min: 1, max: 200, unit: 'ng/mL', label: '25(OH)D' },
   { id: 'alp', names: ['ALP', 'ALK-P', 'ALKALINEPHOSPHATASE'], min: 10, max: 3000, unit: 'U/L', label: 'ALP' },
   { id: 'pth', names: ['PTH', 'I-PTH', 'IPTH', 'INTACTPTH'], min: 1, max: 3000, unit: 'pg/mL', label: 'iPTH' },
@@ -364,6 +364,42 @@ function parseHipBlock(lines: string[], header: RegExp): DxaSideRow[] {
 }
 
 export const SIDE_LABEL: Record<Exclude<HipSide, ''>, string> = { L: '左', R: '右' }
+
+// 從整頁報告中抽出胸腰椎 X 光的判讀與日期。報告以「報告結果 - 」分段，
+// 只取 X 光／放射線那一段，且內文要提到脊椎，避免抓到核醫的 DXA 段落。
+function parseSpineXray(text: string): { value: string; date: string } | null {
+  for (const block of text.split('報告結果 - ').slice(1)) {
+    const header = block.split('\n')[0] ?? ''
+    if (!/[ＸX]\s*光|放射線/.test(header)) continue
+
+    const body = block.split('\n').slice(1)
+    const titleLine = body.find((l) => /thoracolumbar|t-?l\s*spine|lumbar\s*spine|spine/i.test(l) && !/Bone Density/i.test(l))
+    if (!titleLine) continue
+
+    const dateMatch = block.match(/執行\s+(\d{4}-\d{2}-\d{2})/) || block.match(/報告\s+(\d{4}-\d{2}-\d{2})/)
+    const date = dateMatch ? dateMatch[1] : ''
+
+    const impIdx = body.findIndex((l) => /^\s*IMP\s*[:：]/i.test(l))
+    const findingLines: string[] = []
+    if (impIdx >= 0) {
+      for (const line of body.slice(impIdx + 1)) {
+        const t = line.trim()
+        if (!t) {
+          if (findingLines.length) break
+          continue
+        }
+        if (/醫師|放診專|核專/.test(t)) break
+        findingLines.push(t.replace(/^\d+\)\s*/, '').replace(/[。.]$/, ''))
+      }
+    }
+
+    const title = titleLine.trim().replace(/[:：]\s*$/, '')
+    const findings = findingLines.join('; ')
+    if (!findings) continue
+    return { value: `${title}${date ? ` (${date})` : ''}: ${findings}`, date }
+  }
+  return null
+}
 
 export function parseLisIntake(raw: string): LisIntakeResult | null {
   if (!raw || !raw.trim()) return null
@@ -436,6 +472,17 @@ export function parseLisIntake(raw: string): LisIntakeResult | null {
     }
   }
 
+  // 胸腰椎 X 光判讀
+  const spine = parseSpineXray(text)
+  if (spine) {
+    result.fields.spineImg = {
+      value: spine.value,
+      label: '脊椎影像',
+      unit: '',
+      display: spine.date ? `${spine.date} 報告` : '已讀到報告',
+    }
+  }
+
   // DXA 檢查日期：取 Bone Density 報告段落之前最後出現的日期
   const bdIdx = text.search(/Bone Density/i)
   if (bdIdx > 0) {
@@ -450,7 +497,7 @@ export function parseLisIntake(raw: string): LisIntakeResult | null {
 }
 
 // ── 病歷文字 ──
-export function buildChartText(f: IntakeForm, checks: Set<string>, format: 'short' | 'his'): string {
+export function buildChartText(f: IntakeForm, checks: Set<string>): string {
   const L: string[] = []
   const v = (s: string) => trimmed(s)
   const chk = (k: string) => checks.has(k)
@@ -545,11 +592,5 @@ export function buildChartText(f: IntakeForm, checks: Set<string>, format: 'shor
     L.push('Contraindicated / not recommended: ' + contra.join(' / '))
   }
 
-  let out = L.join('\n')
-  if (format === 'his') {
-    out = out
-      .replace(/^\[Subjective\]$/m, '[Subjective]\n─────────────')
-      .replace(/^\[Objective\]$/m, '[Objective]\n─────────────')
-  }
-  return out
+  return L.join('\n')
 }

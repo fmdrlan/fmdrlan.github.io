@@ -282,7 +282,6 @@ const DRUG_PILL: Record<'red' | 'amb' | 'ok', string> = {
 export function IntakeTab() {
   const [form, setForm] = useState<IntakeForm>(() => ({ ...INTAKE_DEFAULTS, visitDate: localISO(new Date()) }))
   const [checks, setChecks] = useState<Set<string>>(new Set())
-  const [format, setFormat] = useState<'short' | 'his'>('short')
   const [copied, setCopied] = useState(false)
 
   const set = <K extends keyof IntakeForm>(key: K, value: IntakeForm[K]) =>
@@ -307,7 +306,7 @@ export function IntakeTab() {
   const dCalc = useMemo(() => dxaCalc(form), [form])
   const notes = useMemo(() => buildNotes(form), [form])
   const drugs = useMemo(() => drugStatus(form, checks), [form, checks])
-  const chartText = useMemo(() => buildChartText(form, checks, format), [form, checks, format])
+  const chartText = useMemo(() => buildChartText(form, checks), [form, checks])
 
   const copyAll = async () => {
     try {
@@ -329,7 +328,7 @@ export function IntakeTab() {
       const next = { ...p }
       const textIds = [
         'egfr', 'ca', 'ph', 'vitd', 'alp', 'pth', 'oc', 'age',
-        'lsBmd', 'lsT', 'fnBmd', 'fnT', 'hpBmd', 'hpT', 'dxaDate',
+        'lsBmd', 'lsT', 'fnBmd', 'fnT', 'hpBmd', 'hpT', 'dxaDate', 'spineImg',
       ] as const
       for (const id of textIds) {
         if (fields[id]) next[id] = String(fields[id].value)
@@ -479,15 +478,15 @@ export function IntakeTab() {
             <h2 className={H2}>檢驗與影像</h2>
             <LisPastePanel onApply={applyLis} />
             <div className={ROW}>
-              <NumField label="eGFR" value={form.egfr} onChange={(v) => set('egfr', v)} width="w-[90px]" />
-              <NumField label="血鈣 Ca" unit="mg/dL" value={form.ca} onChange={(v) => set('ca', v)} step="0.1" />
-              <NumField label="磷 P" value={form.ph} onChange={(v) => set('ph', v)} step="0.1" width="w-[90px]" />
+              <NumField label="eGFR" unit="mL/min/1.73m²" value={form.egfr} onChange={(v) => set('egfr', v)} width="w-[90px]" />
+              <NumField label="Ca" unit="mg/dL" value={form.ca} onChange={(v) => set('ca', v)} step="0.1" />
+              <NumField label="P" unit="mg/dL" value={form.ph} onChange={(v) => set('ph', v)} step="0.1" width="w-[90px]" />
               <NumField label="25(OH)D" unit="ng/mL" value={form.vitd} onChange={(v) => set('vitd', v)} step="0.1" />
             </div>
             <div className={ROW}>
-              <NumField label="ALP" value={form.alp} onChange={(v) => set('alp', v)} width="w-[90px]" />
-              <NumField label="iPTH" value={form.pth} onChange={(v) => set('pth', v)} step="0.1" />
-              <NumField label="Osteocalcin" value={form.oc} onChange={(v) => set('oc', v)} step="0.01" />
+              <NumField label="ALP" unit="U/L" value={form.alp} onChange={(v) => set('alp', v)} width="w-[90px]" />
+              <NumField label="iPTH" unit="pg/mL" value={form.pth} onChange={(v) => set('pth', v)} step="0.1" />
+              <NumField label="Osteocalcin" unit="ng/mL" value={form.oc} onChange={(v) => set('oc', v)} step="0.01" />
             </div>
             {lCalc.text && <div className={cn(CALC, lCalc.warn && CALC_WARN)}>{lCalc.text}</div>}
 
@@ -497,16 +496,16 @@ export function IntakeTab() {
               <TextField label="機型" value={form.dxaMachine} onChange={(v) => set('dxaMachine', v)} width="w-[88px]" />
             </div>
             <div className={ROW}>
-              <NumField label="L1-4 BMD" value={form.lsBmd} onChange={(v) => set('lsBmd', v)} step="0.001" />
+              <NumField label="L1-4 BMD" unit="g/cm²" value={form.lsBmd} onChange={(v) => set('lsBmd', v)} step="0.001" />
               <NumField label="L1-4 T" value={form.lsT} onChange={(v) => set('lsT', v)} step="0.1" />
             </div>
             <div className={ROW}>
-              <NumField label="Hip neck BMD" value={form.fnBmd} onChange={(v) => set('fnBmd', v)} step="0.001" />
+              <NumField label="Hip neck BMD" unit="g/cm²" value={form.fnBmd} onChange={(v) => set('fnBmd', v)} step="0.001" />
               <NumField label="Hip neck T" value={form.fnT} onChange={(v) => set('fnT', v)} step="0.1" />
               <SideField label="Hip neck 取側" value={form.fnSide} onChange={(v) => set('fnSide', v)} />
             </div>
             <div className={ROW}>
-              <NumField label="Total hip BMD" value={form.hpBmd} onChange={(v) => set('hpBmd', v)} step="0.001" />
+              <NumField label="Total hip BMD" unit="g/cm²" value={form.hpBmd} onChange={(v) => set('hpBmd', v)} step="0.001" />
               <NumField label="Total hip T" value={form.hpT} onChange={(v) => set('hpT', v)} step="0.1" />
               <SideField label="Total hip 取側" value={form.hpSide} onChange={(v) => set('hpSide', v)} />
             </div>
@@ -526,21 +525,6 @@ export function IntakeTab() {
           <div className={CARD}>
             <h2 className={H2}>病歷文字</h2>
             <div className="mb-2.5 flex flex-wrap items-center gap-2">
-              <div className="inline-flex overflow-hidden rounded-md border border-border">
-                {(['short', 'his'] as const).map((f) => (
-                  <button
-                    key={f}
-                    type="button"
-                    onClick={() => setFormat(f)}
-                    className={cn(
-                      'border-r border-border px-3 py-1.5 text-[13.5px] last:border-r-0',
-                      format === f ? 'bg-text text-bg' : 'bg-bg2 text-text-muted hover:text-text',
-                    )}
-                  >
-                    {f === 'short' ? '簡寫式' : 'HIS 完整式'}
-                  </button>
-                ))}
-              </div>
               <button
                 type="button"
                 onClick={copyAll}
