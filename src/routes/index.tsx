@@ -8,6 +8,7 @@ import {
   Weight,
   BookOpen,
   Bone,
+  Pill,
 } from 'lucide-react'
 import { WarningBox } from '../components/WarningBox'
 import { ToolCard } from '../components/ToolCard'
@@ -80,6 +81,13 @@ function Landing() {
             icon={Bone}
             name="骨質疏鬆"
             desc="整合成大藥品基本檔的藥物比較、結構式問診、病人衛教單張與運動海報"
+          />
+          <ToolCard
+            href="/meds"
+            icon={Pill}
+            name="用藥整理"
+            desc="貼上 HIS 藥品醫囑，精簡成一行一藥並依藥理分類分組，標示高齡潛在不適當用藥"
+            badge={<Badge variant="new">NEW</Badge>}
           />
           <ToolCard
             href="/journals"

@@ -1,4 +1,4 @@
-import { Home, Search, FlaskConical, TrendingUp, Syringe, Scale, Weight, BookOpen, Bone } from 'lucide-react'
+import { Home, Search, FlaskConical, TrendingUp, Syringe, Scale, Weight, BookOpen, Bone, Pill } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
@@ -13,6 +13,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: '/compare', label: '藥物類別比較', icon: Scale },
   { href: '/obesity', label: '減重', icon: Weight },
   { href: '/osteoporosis', label: '骨質疏鬆', icon: Bone },
+  { href: '/meds', label: '用藥整理', icon: Pill },
   { href: '/journals', label: '期刊速覽', icon: BookOpen },
 ]
 
