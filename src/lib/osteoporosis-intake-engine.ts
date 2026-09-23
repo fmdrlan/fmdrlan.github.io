@@ -18,6 +18,23 @@ export const SEC: [string, string][] = [
   ['etoh', '飲酒 ≥3 單位/日'],
 ]
 
+// 病歷文字全部以英文輸出，勾選項另備英文對照
+const SEC_EN: Record<string, string> = {
+  steroid: 'long-term corticosteroid (>5mg/day for >3 months)',
+  ra: 'rheumatoid arthritis',
+  dmIns: 'insulin-treated diabetes',
+  hyperthy: 'hyperthyroidism',
+  hyperpara: 'hyperparathyroidism',
+  hypogonad: 'hypogonadism',
+  malabs: 'malabsorption or gastrectomy',
+  ckd: 'chronic kidney disease',
+  aed: 'long-term antiepileptic drugs',
+  ppi: 'long-term PPI',
+  ai: 'aromatase inhibitor or ADT',
+  smoke: 'smoking',
+  etoh: 'alcohol >=3 units/day',
+}
+
 export const RISK: [string, string][] = [
   ['lowCa', '血鈣過低尚未矯正'],
   ['mi1y', '一年內心肌梗塞或中風'],
@@ -227,7 +244,13 @@ export function buildNotes(f: IntakeForm): NoteItem[] {
 
 // ── 藥物檢核 ──
 export type DrugFlagLevel = 'red' | 'amb' | 'gry'
-export type DrugStatusMap = Record<string, [DrugFlagLevel, string][]>
+// zh 供畫面上的檢核欄使用，en 供英文病歷文字使用
+export interface DrugFlag {
+  level: DrugFlagLevel
+  zh: string
+  en: string
+}
+export type DrugStatusMap = Record<string, DrugFlag[]>
 
 export function drugStatus(f: IntakeForm, checks: Set<string>): DrugStatusMap {
   const egfr = num(f.egfr)
@@ -235,60 +258,60 @@ export function drugStatus(f: IntakeForm, checks: Set<string>): DrugStatusMap {
   const hd = checks.has('dialysis')
   const lowCa = checks.has('lowCa')
   const r: DrugStatusMap = {}
-  const put = (k: string, lv: DrugFlagLevel, msg: string) => {
+  const put = (k: string, level: DrugFlagLevel, zh: string, en: string) => {
     if (!r[k]) r[k] = []
-    r[k].push([lv, msg])
+    r[k].push({ level, zh, en })
   }
 
   for (const [k] of INTAKE_DRUGLIST) r[k] = []
 
   // 低血鈣：全抗吸收與 romosozumab 禁忌
-  if (lowCa) (['alen', 'rise', 'zole', 'deno', 'romo'] as const).forEach((k) => put(k, 'red', '低血鈣未矯正，禁忌'))
+  if (lowCa) (['alen', 'rise', 'zole', 'deno', 'romo'] as const).forEach((k) => put(k, 'red', '低血鈣未矯正，禁忌', 'uncorrected hypocalcemia, contraindicated'))
 
   // 腎功能
   if (egfr !== null) {
-    if (egfr < 35) put('alen', 'red', `eGFR ${egfr}，<35 不建議使用`)
-    if (egfr < 15) put('rise', 'red', `eGFR ${egfr}，<15 避免使用`)
-    else if (egfr < 30) put('rise', 'amb', `eGFR ${egfr}，15–30 一般不建議`)
-    if (egfr < 35) put('zole', 'red', `eGFR ${egfr}，<35 為非腫瘤適應症禁忌`)
-    if (egfr < 30) put('deno', 'amb', `eGFR ${egfr}，屬黑框嚴重低血鈣族群。治療前矯正血鈣並評估 CKD-MBD，首月每週驗血鈣、之後每月一次`)
-    if (egfr < 30) put('romo', 'amb', `eGFR ${egfr}，重度腎病低血鈣風險上升`)
+    if (egfr < 35) put('alen', 'red', `eGFR ${egfr}，<35 不建議使用`, `eGFR ${egfr}, not recommended when <35`)
+    if (egfr < 15) put('rise', 'red', `eGFR ${egfr}，<15 避免使用`, `eGFR ${egfr}, avoid when <15`)
+    else if (egfr < 30) put('rise', 'amb', `eGFR ${egfr}，15–30 一般不建議`, `eGFR ${egfr}, generally not recommended (15-30)`)
+    if (egfr < 35) put('zole', 'red', `eGFR ${egfr}，<35 為非腫瘤適應症禁忌`, `eGFR ${egfr}, contraindicated when <35 for non-oncologic indication`)
+    if (egfr < 30) put('deno', 'amb', `eGFR ${egfr}，屬黑框嚴重低血鈣族群。治療前矯正血鈣並評估 CKD-MBD，首月每週驗血鈣、之後每月一次`, `eGFR ${egfr}, boxed-warning population for severe hypocalcemia; correct calcium and assess CKD-MBD before use, weekly calcium for the first month then monthly`)
+    if (egfr < 30) put('romo', 'amb', `eGFR ${egfr}，重度腎病低血鈣風險上升`, `eGFR ${egfr}, increased hypocalcemia risk in severe renal impairment`)
   }
   if (hd) {
-    put('zole', 'red', '透析中，非腫瘤適應症禁忌')
-    put('rise', 'red', '透析中，避免使用')
-    put('deno', 'red', '透析中，屬黑框警語族群，須由具 CKD-MBD 專業者共同評估')
+    put('zole', 'red', '透析中，非腫瘤適應症禁忌', 'on dialysis, contraindicated for non-oncologic indication')
+    put('rise', 'red', '透析中，避免使用', 'on dialysis, avoid')
+    put('deno', 'red', '透析中，屬黑框警語族群，須由具 CKD-MBD 專業者共同評估', 'on dialysis, boxed-warning population; co-manage with a CKD-MBD specialist')
   }
-  if (checks.has('calcimimetic')) put('deno', 'amb', '併用擬鈣藥物會加重低血鈣，須嚴密監測')
+  if (checks.has('calcimimetic')) put('deno', 'amb', '併用擬鈣藥物會加重低血鈣，須嚴密監測', 'concomitant calcimimetics worsen hypocalcemia; monitor closely')
 
   // 上消化道
   if (checks.has('giUpper')) {
-    put('alen', 'red', '食道疾病或無法直立 30 分鐘，禁忌')
-    put('rise', 'red', '食道疾病或無法直立 30 分鐘，禁忌')
+    put('alen', 'red', '食道疾病或無法直立 30 分鐘，禁忌', 'esophageal disorder or unable to remain upright for 30 min, contraindicated')
+    put('rise', 'red', '食道疾病或無法直立 30 分鐘，禁忌', 'esophageal disorder or unable to remain upright for 30 min, contraindicated')
   }
 
   // 血栓與性別
-  if (checks.has('vte')) put('ralo', 'red', '靜脈血栓史或即將長期臥床，禁忌')
-  if (sex === 'M') put('ralo', 'red', '僅適用於停經後女性')
-  else if (sex === 'F' && !trimmed(f.menoAge)) put('ralo', 'amb', '需確認已停經，不適用於停經前婦女')
+  if (checks.has('vte')) put('ralo', 'red', '靜脈血栓史或即將長期臥床，禁忌', 'history of VTE or upcoming prolonged immobilization, contraindicated')
+  if (sex === 'M') put('ralo', 'red', '僅適用於停經後女性', 'indicated only for postmenopausal women')
+  else if (sex === 'F' && !trimmed(f.menoAge)) put('ralo', 'amb', '需確認已停經，不適用於停經前婦女', 'confirm menopausal status; not for premenopausal women')
   if (checks.has('pregnancy')) {
-    put('ralo', 'red', '可能懷孕，禁忌')
-    put('deno', 'red', '可能懷孕，使用前應驗孕，懷孕與哺乳期間勿用')
-    put('romo', 'amb', '可能懷孕，需先確認')
+    put('ralo', 'red', '可能懷孕，禁忌', 'possible pregnancy, contraindicated')
+    put('deno', 'red', '可能懷孕，使用前應驗孕，懷孕與哺乳期間勿用', 'possible pregnancy; pregnancy test before use, avoid during pregnancy and lactation')
+    put('romo', 'amb', '可能懷孕，需先確認', 'possible pregnancy, confirm first')
   }
 
   // 心血管
-  if (checks.has('mi1y')) put('romo', 'red', '一年內心肌梗塞或中風，不建議使用')
-  else if (checks.has('cvRisk')) put('romo', 'amb', '有未控制的心血管危險因子，須權衡效益與風險並記錄評估')
+  if (checks.has('mi1y')) put('romo', 'red', '一年內心肌梗塞或中風，不建議使用', 'MI or stroke within the past year, not recommended')
+  else if (checks.has('cvRisk')) put('romo', 'amb', '有未控制的心血管危險因子，須權衡效益與風險並記錄評估', 'uncontrolled cardiovascular risk factors; weigh benefit against risk and document the assessment')
 
   // teriparatide
-  if (checks.has('osteosarc')) put('teri', 'red', '骨肉瘤高風險，禁忌')
-  if (checks.has('boneMalig')) put('teri', 'red', '骨骼惡性腫瘤、骨轉移或高血鈣，禁忌')
+  if (checks.has('osteosarc')) put('teri', 'red', '骨肉瘤高風險，禁忌', 'high risk of osteosarcoma, contraindicated')
+  if (checks.has('boneMalig')) put('teri', 'red', '骨骼惡性腫瘤、骨轉移或高血鈣，禁忌', 'skeletal malignancy, bone metastasis or hypercalcemia, contraindicated')
 
   // 牙科
   if (checks.has('dental')) {
     (['alen', 'rise', 'zole', 'deno', 'romo'] as const).forEach((k) =>
-      put(k, 'gry', '有侵入性牙科計畫，建議先完成牙科處置再起始，或與牙科協調時程'))
+      put(k, 'gry', '有侵入性牙科計畫，建議先完成牙科處置再起始，或與牙科協調時程', 'invasive dental work planned; complete dental treatment first or coordinate timing with dentistry'))
   }
 
   return r
@@ -534,7 +557,7 @@ export function buildChartText(f: IntakeForm, checks: Set<string>): string {
     )
   }
 
-  const sec = SEC.filter(([k]) => chk(k) && !['steroid', 'ra', 'smoke', 'etoh'].includes(k)).map(([, t]) => t)
+  const sec = SEC.filter(([k]) => chk(k) && !['steroid', 'ra', 'smoke', 'etoh'].includes(k)).map(([k]) => SEC_EN[k] ?? k)
   L.push('Secondary cause screen: ' + (sec.length ? sec.join(', ') : 'none identified'))
 
   if (v(f.pastRx)) L.push('Prior osteoporosis Rx:\n' + v(f.pastRx))
@@ -549,7 +572,7 @@ export function buildChartText(f: IntakeForm, checks: Set<string>): string {
   if (bh && bw) bits.push(`BMI:${(bw / (bh / 100) ** 2).toFixed(1)}kg/㎡`)
   if (num(f.sbp) && num(f.dbp)) bits.push(`BP:${num(f.sbp)}/${num(f.dbp)}mmHg`)
   if (num(f.pulse)) bits.push(`P:${num(f.pulse)} times/min`)
-  if (v(f.age)) bits.push(`${v(f.age)}歲`)
+  if (v(f.age)) bits.push(`${v(f.age)} y/o`)
   if (bits.length) L.push(bits.join(', ') + (v(f.visitDate) ? ` (${twDate(v(f.visitDate))})` : ''))
 
   if (bh !== null && bhy !== null) {
@@ -591,8 +614,8 @@ export function buildChartText(f: IntakeForm, checks: Set<string>): string {
 
   // 檢核摘要
   const r = drugStatus(f, checks)
-  const contra = INTAKE_DRUGLIST.filter(([k]) => (r[k] || []).some((x) => x[0] === 'red')).map(
-    ([k, nm]) => `${nm} (${(r[k] || []).filter((x) => x[0] === 'red').map((x) => x[1]).join('; ')})`,
+  const contra = INTAKE_DRUGLIST.filter(([k]) => (r[k] || []).some((x) => x.level === 'red')).map(
+    ([k, nm]) => `${nm} (${(r[k] || []).filter((x) => x.level === 'red').map((x) => x.en).join('; ')})`,
   )
   if (contra.length) {
     L.push('', '[Assessment]')

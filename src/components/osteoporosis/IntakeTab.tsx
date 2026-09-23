@@ -586,17 +586,17 @@ export function IntakeTab() {
             <div className="divide-y divide-border/60">
               {INTAKE_DRUGLIST.map(([k, nm]) => {
                 const items = drugs[k] ?? []
-                const red = items.filter((x) => x[0] === 'red')
-                const amb = items.filter((x) => x[0] === 'amb')
-                const gry = items.filter((x) => x[0] === 'gry')
+                const red = items.filter((x) => x.level === 'red')
+                const amb = items.filter((x) => x.level === 'amb')
+                const gry = items.filter((x) => x.level === 'gry')
                 const level: 'red' | 'amb' | 'ok' = red.length ? 'red' : amb.length ? 'amb' : 'ok'
                 const label = red.length ? '禁忌' : amb.length ? '慎用' : '無禁忌'
                 let text = red.length
-                  ? red.map((x) => x[1]).join('；')
+                  ? red.map((x) => x.zh).join('；')
                   : amb.length
-                    ? amb.map((x) => x[1]).join('；')
+                    ? amb.map((x) => x.zh).join('；')
                     : '依目前輸入未觸發禁忌'
-                if (gry.length) text += '。' + gry.map((x) => x[1]).join('；')
+                if (gry.length) text += '。' + gry.map((x) => x.zh).join('；')
                 return (
                   <div key={k} className="flex gap-2 py-2 text-[13.5px]">
                     <span className="w-[92px] shrink-0 font-semibold text-text">{nm}</span>
