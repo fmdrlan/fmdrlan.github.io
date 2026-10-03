@@ -13,7 +13,6 @@ export const Route = createFileRoute('/meds')({
 interface Row {
   order: MedOrder
   group: DrugGroup
-  classes: string[]
   beers: { label: string; reason: string }[]
 }
 
@@ -24,10 +23,11 @@ function MedsPage() {
   const [copied, setCopied] = useState(false)
 
   const rows: Row[] = useMemo(() => {
-    return parseMedOrders(text).map((order) => {
-      const { group, classes } = classify(order.generic)
-      return { order, group, classes, beers: beersFlags(order.generic) }
-    })
+    return parseMedOrders(text).map((order) => ({
+      order,
+      group: classify(order.generic).group,
+      beers: beersFlags(order.generic),
+    }))
   }, [text])
 
   // 依藥理分類把同類排在一起，組內維持原處方順序；不顯示分類標題
@@ -181,9 +181,6 @@ function MedLine({ row, useBrand }: { row: Row; useBrand: boolean }) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-2">
       <span>{formatOrder(row.order, useBrand)}</span>
-      {row.classes.length > 0 && (
-        <span className="font-sans text-[11px] text-text-light">{row.classes.join('／')}</span>
-      )}
       {row.beers.length > 0 && (
         <span className="font-sans text-[11px] text-yellow" title={row.beers.map((b) => b.reason).join('；')}>
           ⚠ Beers
