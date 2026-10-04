@@ -384,17 +384,16 @@ function AdultDetail({ vaccine: v }: { vaccine: AdultVaccine }) {
           {v.notes.map((n, i) => (
             <li
               key={i}
-              className="relative py-1 pl-3.5 text-sm text-text before:absolute before:left-0 before:text-accent before:content-['·']"
-            >
-              {n}
-            </li>
+              className="relative py-1 pl-3.5 text-sm text-text before:absolute before:left-0 before:text-accent before:content-['·'] [&_strong]:font-semibold [&_strong]:text-accent"
+              dangerouslySetInnerHTML={{ __html: n }}
+            />
           ))}
         </ul>
       </DetailSection>
 
       <DetailSection title="接種禁忌">
-        <div className="rounded-r-md border-l-[3px] border-yellow bg-surface px-3.5 py-2.5 text-[13px] leading-relaxed text-text-muted">
-          ⚠️ {v.contraindication}
+        <div className="rounded-r-md border-l-[3px] border-yellow bg-surface px-3.5 py-2.5 text-[13px] leading-relaxed text-text-muted [&_strong]:font-semibold [&_strong]:text-yellow">
+          ⚠️ <span dangerouslySetInnerHTML={{ __html: v.contraindication }} />
         </div>
       </DetailSection>
 
