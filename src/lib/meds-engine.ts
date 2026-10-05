@@ -124,8 +124,16 @@ export function qtyLabel(o: MedOrder): string {
   return u === 'tab' || u === 'cap' ? `${o.qty}#` : `${o.qty} ${o.qtyUnit}`
 }
 
+// HIS 常以 tall-man lettering 標示易混淆藥名（dexTROmethorphan），統一成首字大寫。
+// 只處理 4 個字以上的純字母詞：短詞與含數字者（MgO、A+B、B12）保留原樣。
+export function normalizeName(name: string): string {
+  return name.replace(/[^\s/+]+/g, (tok) =>
+    /^[A-Za-z]{5,}$/.test(tok) ? tok[0].toUpperCase() + tok.slice(1).toLowerCase() : tok,
+  )
+}
+
 export function formatOrder(o: MedOrder, useBrand: boolean, withDispense = false): string {
-  const name = useBrand ? o.brand : o.generic
+  const name = normalizeName(useBrand ? o.brand : o.generic)
   const dose = doseLabel(o)
   const head = dose ? `${name}(${dose})` : name
   const parts = [head, qtyLabel(o), o.freq, o.route].filter(Boolean)
