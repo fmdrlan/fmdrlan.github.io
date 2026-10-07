@@ -4,6 +4,10 @@ import { BookOpen, ExternalLink, ChevronDown } from 'lucide-react'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Footer } from '@/components/Footer'
 
+// 這些資料檔由排程更新，且 GitHub Pages 只給 10 分鐘 max-age。
+// 用 no-cache 強制向伺服器驗證 ETag：內容沒變回 304，不會多下載。
+const NO_CACHE: RequestInit = { cache: 'no-cache' }
+
 export const Route = createFileRoute('/journals')({
   component: JournalsPage,
 })
@@ -39,7 +43,7 @@ function JournalsPage() {
 
   useEffect(() => {
     let cancelled = false
-    fetch('/data/journals.json')
+    fetch('/data/journals.json', NO_CACHE)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((d: Feed) => !cancelled && setFeed(d))
       .catch(() => !cancelled && setError(true))

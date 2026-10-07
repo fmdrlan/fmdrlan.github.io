@@ -20,6 +20,10 @@ import {
   type Sex,
 } from '@/lib/lab-engine'
 
+// 這些資料檔由排程更新，且 GitHub Pages 只給 10 分鐘 max-age。
+// 用 no-cache 強制向伺服器驗證 ETag：內容沒變回 304，不會多下載。
+const NO_CACHE: RequestInit = { cache: 'no-cache' }
+
 export const Route = createFileRoute('/lab')({
   component: LabPage,
 })
@@ -53,8 +57,8 @@ function LabPage() {
     ;(async () => {
       try {
         const [dictR, rulesR] = await Promise.all([
-          fetch('/data/lab_dict.json'),
-          fetch('/data/dx_rules.json'),
+          fetch('/data/lab_dict.json', NO_CACHE),
+          fetch('/data/dx_rules.json', NO_CACHE),
         ])
         if (!dictR.ok) throw new Error(`lab_dict.json: ${dictR.status}`)
         if (!rulesR.ok) throw new Error(`dx_rules.json: ${rulesR.status}`)

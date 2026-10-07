@@ -21,6 +21,10 @@ const FEEDBACK_URL =
 
 type SearchParams = { q?: string }
 
+// 這些資料檔由排程更新，且 GitHub Pages 只給 10 分鐘 max-age。
+// 用 no-cache 強制向伺服器驗證 ETag：內容沒變回 304，不會多下載。
+const NO_CACHE: RequestInit = { cache: 'no-cache' }
+
 export const Route = createFileRoute('/drugs')({
   validateSearch: (search): SearchParams => ({
     q: typeof search.q === 'string' ? search.q : undefined,
@@ -48,7 +52,7 @@ function DrugsPage() {
 
     async function fetchJson<T>(url: string): Promise<T | null> {
       try {
-        const r = await fetch(url)
+        const r = await fetch(url, NO_CACHE)
         if (!r.ok) return null
         const ct = r.headers.get('content-type') ?? ''
         if (!ct.includes('json')) return null
@@ -59,7 +63,7 @@ function DrugsPage() {
     }
     async function fetchText(url: string): Promise<string | null> {
       try {
-        const r = await fetch(url)
+        const r = await fetch(url, NO_CACHE)
         if (!r.ok) return null
         return await r.text()
       } catch {
@@ -70,7 +74,7 @@ function DrugsPage() {
     ;(async () => {
       // drugs.json is the only required fetch
       try {
-        const r = await fetch('/data/drugs.json')
+        const r = await fetch('/data/drugs.json', NO_CACHE)
         if (!r.ok) throw new Error(`drugs.json: ${r.status}`)
         const data = await r.json()
         if (!cancelled) setAllDrugs(data)
