@@ -1,0 +1,582 @@
+[
+  {
+    "ingredient": "simvastatin",
+    "code": "AC46402100",
+    "name": "Simvatin film coating tablets 20mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AB47348100",
+    "name": "Vatatin F.C. tablets 20mg \"STANDARD\""
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "BC24339100",
+    "name": "Simvahexal film-coated tablets 40mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC49672100",
+    "name": "Simatin F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC49841100",
+    "name": "Simpotin F.C. tablets 20 mg \"Weidar\""
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC47924100",
+    "name": "Zostatin F.C. tablets 20 mg \"S.C.\""
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "BC23970100",
+    "name": "Simvahexal film-coated tablets 20mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC49360100",
+    "name": "Bezostatin F.C. tablets 40 mg \"S.C.\""
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC48813100",
+    "name": "Simvatenin F.C. tablets 20mg (simvastatin)"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC56804100",
+    "name": "Simvastatin F.C. tablets 20mg \"CYH\""
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC49699100",
+    "name": "Simatin F.C. tablets 10mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC47907100",
+    "name": "Sinty F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC48926100",
+    "name": "Simva F.C. tablets 20 mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC49190100",
+    "name": "Sivasin film coated tablets 40mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC58207100",
+    "name": "Simvatin film coating tablets 40mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC48608100",
+    "name": "Simva F.C. tablets 20mg \"Union\""
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC49997100",
+    "name": "Simatin F.C. tablets 40 mg"
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "A055967100",
+    "name": "Simva F.C. tablets 40mg \"Union\""
+  },
+  {
+    "ingredient": "simvastatin",
+    "code": "AC56806100",
+    "name": "Sinty F.C. tablets 40mg"
+  },
+  {
+    "ingredient": "lovastatin",
+    "code": "AC39403100",
+    "name": "Lozutin tablets 20mg (lovastatin)"
+  },
+  {
+    "ingredient": "lovastatin",
+    "code": "AC39307100",
+    "name": "Delipic tablets 20mg \"Standard\" (lovastatin)"
+  },
+  {
+    "ingredient": "lovastatin",
+    "code": "A042389100",
+    "name": "Lovatin tablets 20mg \"PANBIOTIC\""
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "BC23596100",
+    "name": "Mevalotin protect 40mg tablets"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AC52581100",
+    "name": "Joinlo tablets 40mg “EVEREST”"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AB49454100",
+    "name": "Pratin tablets 40 mg (pravastatin sodium)"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AB48586100",
+    "name": "Pavatin protect tablets 20mg \"Standard\" (pravastatin sodium)"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AB48681100",
+    "name": "U-Chu Pavadin tablets 20 mg"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AB46029100",
+    "name": "Pratin tablets 10mg (pravastatin sodium)"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AB48644100",
+    "name": "Mechol tablets 20mg \"Yung Shin\""
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AB49021100",
+    "name": "Pratin tablets 20 mg"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "BC23597100",
+    "name": "Mevalotin protect 20mg tablets"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AC57126100",
+    "name": "Pavatin protect tablets 40mg \"Standard\" (pravastatin sodium)"
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AC48469100",
+    "name": "Mechol tablets 10mg \"Yung Shin\""
+  },
+  {
+    "ingredient": "pravastatin",
+    "code": "AC57741100",
+    "name": "Joinlo tablet 20mg EVEREST"
+  },
+  {
+    "ingredient": "fluvastatin",
+    "code": "BC23556100",
+    "name": "Lescol XL film-coated tablets 80mg"
+  },
+  {
+    "ingredient": "fluvastatin",
+    "code": "BC26147100",
+    "name": "Fluvastatin XL film-coated tablets 80mg"
+  },
+  {
+    "ingredient": "fluvastatin",
+    "code": "AC56629100",
+    "name": "Lecitol XL film-coated Tablets 80mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC55272100",
+    "name": "Atorva film-coated tablets 10mg \"Standard\" (atorvastatin)"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "BA25337100",
+    "name": "Tulip 20mg film coated tablets"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "BA25200100",
+    "name": "Tulip 10mg film coated tablets"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC48879100",
+    "name": "Anxolipo F.C. tablet 10 mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC57267100",
+    "name": "Atotin F.C. tablets 10mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC51598100",
+    "name": "Atoty F.C. tablets 10 mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC58211100",
+    "name": "Atotin F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC49226100",
+    "name": "Anxolightor F.C. tablets 20 mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC58517100",
+    "name": "Atoroty F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC57805100",
+    "name": "Atorva F.C. tab. 20mg \"Standard\" (atorvastatin)"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AA49543100",
+    "name": "Atorin F.C. tablet 10mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "BA25201100",
+    "name": "Tulip 40mg film coated tablets"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AA57774100",
+    "name": "Atover F.C. Tab. 10mg P.L."
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC52530100",
+    "name": "Atorin F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC55583100",
+    "name": "Atorcal F.C. tablets 20mg \"S.C.\""
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC55895100",
+    "name": "Atorcal F.C. tablets 10mg \"S.C.\""
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AA57950100",
+    "name": "Atover F.C. tablets 20mg P.L."
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC55268100",
+    "name": "Atorva film-coated tablets 40mg \"Standard\"(atorvastatin)"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC55952100",
+    "name": "Atoty F.C. tablets 20 mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AA56739100",
+    "name": "Anxolipo F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC55956100",
+    "name": "Lipiminus F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AB54967100",
+    "name": "Atover F.C. tablets 40 mg \"P.L.\""
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AA49288100",
+    "name": "Anxolipo F.C. tablets 40mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC56319100",
+    "name": "Lipiminus F.C.tablets 10mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC57133100",
+    "name": "Atotin F.C. tablets 40mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC52301100",
+    "name": "Lipiminus F.C tablets 40mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC57930100",
+    "name": "Atova F.C. tablets 10mg \"Yu Sheng\""
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC56682100",
+    "name": "Atoroty F.C. tablets 10mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC50086100",
+    "name": "Atorcal F.C. tablets 40 mg \"S.C.\""
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AB57967100",
+    "name": "Atorstin film coated tablets 10mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC58041100",
+    "name": "Atoty F.C. tablets 40mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AB57772100",
+    "name": "Atorstin film coated tablets 40mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AB58049100",
+    "name": "Atorstin film coated tablets 20mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AB51732100",
+    "name": "Atorin F.C. tablets 40mg"
+  },
+  {
+    "ingredient": "atorvastatin",
+    "code": "AC58262100",
+    "name": "Atoroty F.C. tablets 40mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AA57802100",
+    "name": "Roty F.C. tablets 10mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AA57843100",
+    "name": "Roty F.C. tablets 5mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "BC24597100",
+    "name": "Crestor 5mg film-coated tablets"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC57803100",
+    "name": "Roty F.C. tablets 20mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "BC24129100",
+    "name": "Crestor 20mg film-coated tablets"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AB57940100",
+    "name": "Rosulator F.C. tablets 10mg \"S.C.\""
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "BC26543100",
+    "name": "Alvostat film coated tablets 10mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC59266100",
+    "name": "Rostatin F.C. tablets 5mg \"Standard\""
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC58282100",
+    "name": "Rostatin F.C. tablets 10mg \"Standard\""
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC58384100",
+    "name": "Rosu F.C. tablets 10mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC57130100",
+    "name": "Rotlip film-coated tablets 10mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC59652100",
+    "name": "Rosulator F.C. tablets 5mg \"S.C.\""
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC57809100",
+    "name": "Rolipostatin 10mg F.C. tablets \"Macro\""
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "BC26900100",
+    "name": "Zyrova 20 (rosuvastatin tablets 20mg)"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "BC27782100",
+    "name": "Zyrova 5 (rosuvastatin tablets 5mg)"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC58969100",
+    "name": "Aladdin F.C. tablets 10mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "BC27781100",
+    "name": "Zyrova 10 (rosuvastatin tablets 10mg)"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC58067100",
+    "name": "Rosutor film-coated tablets 10mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "BC26544100",
+    "name": "Alvostat film coated tablets 20mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC60114100",
+    "name": "Rosutor film-coated tablets 5mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC59649100",
+    "name": "Rosulip F.C. tablets 5mg C.H."
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC58270100",
+    "name": "Crosuty F.C. tablets 10mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC58622100",
+    "name": "Rotlip film-coated tablets 5mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC58098100",
+    "name": "Crosuty F.C. tablets 5mg"
+  },
+  {
+    "ingredient": "rosuvastatin",
+    "code": "AC60197100",
+    "name": "Rosutor film-coated tablets 20mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "BC25350100",
+    "name": "Livalo tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AA58648100",
+    "name": "Pitarty F.C. tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "BC27002100",
+    "name": "Livalo OD tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC58526100",
+    "name": "Pitastatin F.C. tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC58633100",
+    "name": "Pitarty F.C. tablets 4mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC58525100",
+    "name": "Pitastatin F.C. tablets 4mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC59398100",
+    "name": "Pivas F.C. tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC59192100",
+    "name": "Pitanxo F.C. tablets 4mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC60561100",
+    "name": "\"EVEREST\" Huiton F.C. tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC61795100",
+    "name": "Pistatin F.C. tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC58078100",
+    "name": "Pitavol F.C.tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC60174100",
+    "name": "Pitavastatin F.C. tablets 2mg \"CYH\""
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC59193100",
+    "name": "Pitanxo F.C. tablets 2mg"
+  },
+  {
+    "ingredient": "pitavastatin",
+    "code": "AC60290100",
+    "name": "Lavitol film coated tablets 4mg"
+  },
+  {
+    "ingredient": "pravastatin及fenofibrate複方",
+    "code": "BC26169100",
+    "name": "Pravafen 40mg/160mg hard capsules"
+  },
+  {
+    "ingredient": "atorvastatin及amlodipine複方",
+    "code": "BC24392100",
+    "name": "Caduet 5mg/20mg tablet"
+  },
+  {
+    "ingredient": "atorvastatin及amlodipine複方",
+    "code": "BC24391100",
+    "name": "Caduet 5mg/10mg tablet"
+  },
+  {
+    "ingredient": "atorvastatin及amlodipine複方",
+    "code": "AC59887100",
+    "name": "Dualpress F.C. tablets 5mg/10mg"
+  },
+  {
+    "ingredient": "atorvastatin及amlodipine複方",
+    "code": "AC60836100",
+    "name": "Dualpress F.C. tablets 5mg/20mg"
+  }
+]

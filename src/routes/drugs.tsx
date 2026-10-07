@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import Fuse from 'fuse.js'
 import { Search, X, Copy, Check, Link2, MessageSquare, ChevronDown } from 'lucide-react'
 import { SiteNav } from '@/components/SiteNav'
+import { Section261, type Table2Item } from '@/components/drugs/Section261'
 import { Input } from '@/components/ui/input'
 import { TIPS, type Drug, type DrugItem, type DrugBlock } from '@/data/drugs-data'
 import {
@@ -38,10 +39,12 @@ function DrugsPage() {
 
   const [allDrugs, setAllDrugs] = useState<Drug[]>([])
   const [drugItems, setDrugItems] = useState<DrugItem[]>([])
+  const [table2Items, setTable2Items] = useState<Table2Item[]>([])
   const [query, setQuery] = useState(urlQuery ?? '')
   const [debouncedQuery, setDebouncedQuery] = useState(urlQuery ?? '')
   const [expanded, setExpanded] = useState<Set<Drug['id']>>(new Set())
   const [version, setVersion] = useState('—')
+  const [versionRaw, setVersionRaw] = useState('')
   const [lastCheck, setLastCheck] = useState('—')
   const [loadError, setLoadError] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -83,17 +86,20 @@ function DrugsPage() {
         return
       }
 
-      const [items, ver, chk] = await Promise.all([
+      const [items, t2, ver, chk] = await Promise.all([
         fetchJson<DrugItem[]>('/data/drug_items.json'),
+        fetchJson<Table2Item[]>('/data/lipid_table2_items.json'),
         fetchText('/data/last_version.txt'),
         fetchText('/data/last_check.txt'),
       ])
       if (cancelled) return
 
       if (items) setDrugItems(items)
+      if (t2) setTable2Items(t2)
       if (ver) {
         const v = ver.trim()
         if (v.length === 7) {
+          setVersionRaw(v)
           const rocY = parseInt(v.slice(0, 3), 10)
           const m = v.slice(3, 5)
           const d = v.slice(5, 7)
@@ -310,6 +316,8 @@ function DrugsPage() {
                 onToggle={() => toggleExpanded(drug.id)}
                 allDrugs={allDrugs}
                 itemsBySection={itemsBySection}
+                table2Items={table2Items}
+                dataVersion={versionRaw}
                 onRelatedClick={jumpToDrug}
               />
             ))}
@@ -436,6 +444,8 @@ function DrugCard({
   onToggle,
   allDrugs,
   itemsBySection,
+  table2Items,
+  dataVersion,
   onRelatedClick,
 }: {
   drug: Drug
@@ -444,11 +454,12 @@ function DrugCard({
   onToggle: () => void
   allDrugs: Drug[]
   itemsBySection: Map<string, DrugItem[]>
+  table2Items: Table2Item[]
+  dataVersion: string
   onRelatedClick: (id: Drug['id']) => void
 }) {
   const sec = getSectionFromTitle(drug.title)
   const preview = ((drug.content ?? '').slice(0, 130).replace(/\n/g, ' ') + '…').trim()
-  const is261 = sec === '2.6.1'
 
   return (
     <div
@@ -490,8 +501,8 @@ function DrugCard({
 
       {expanded && (
         <div className="border-t border-border px-4 pb-4">
-          {is261 ? (
-            <Body261 />
+          {getSectionFromTitle(drug.title) === '2.6.1' ? (
+            <Section261 table2Items={table2Items} dataVersion={dataVersion} />
           ) : drug.is_appendix ? (
             <AppendixNotice />
           ) : (
@@ -567,103 +578,6 @@ function AppendixNotice() {
   )
 }
 
-function Body261() {
-  return (
-    <div className="my-2 overflow-x-auto">
-      <div className="mb-2 text-sm font-bold text-text">全民健康保險降膽固醇藥物給付規定表</div>
-      <table className="w-full border-collapse text-[13px]">
-        <thead>
-          <tr>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text"></th>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">非藥物治療</th>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">起始藥物治療血脂值</th>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">血脂目標值</th>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">處方規定</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="bg-accent/[0.07]">
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">1. 有急性冠狀動脈症候群病史<br />2. 曾接受心導管介入治療或外科冠動脈搭橋手術之冠狀動脈粥狀硬化患者</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">與藥物治療可並行</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">LDL-C ≥70 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">LDL-C &lt;70 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">第一年應每 3–6 個月抽血檢查一次，第二年以後應至少每 6–12 個月抽血檢查一次，同時請注意副作用之產生如肝功能異常，橫紋肌溶解症。</td>
-          </tr>
-          <tr>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">心血管疾病或糖尿病患者</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">與藥物治療可並行</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TC ≥160 mg/dL 或 LDL-C ≥100 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TC &lt;160 mg/dL 或 LDL-C &lt;100 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text"></td>
-          </tr>
-          <tr>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">2 個危險因子或以上</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">給藥前應有 3–6 個月非藥物治療</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TC ≥200 mg/dL 或 LDL-C ≥130 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TC &lt;200 mg/dL 或 LDL-C &lt;130 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text"></td>
-          </tr>
-          <tr>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">1 個危險因子</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">給藥前應有 3–6 個月非藥物治療</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TC ≥240 mg/dL 或 LDL-C ≥160 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TC &lt;240 mg/dL 或 LDL-C &lt;160 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text"></td>
-          </tr>
-          <tr>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">0 個危險因子</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">給藥前應有 3–6 個月非藥物治療</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">LDL-C ≥190 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">LDL-C &lt;190 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text"></td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="mt-1.5 rounded-md bg-surface2 px-2.5 py-1.5 text-xs text-text">
-        <strong>心血管疾病定義：</strong>
-        （一）冠狀動脈粥狀硬化患者包含：心絞痛病人，有心導管證實或缺氧性心電圖變化或負荷性試驗陽性反應者（附檢查報告）
-        （二）缺血型腦血管疾病病人包含：腦梗塞、暫時性腦缺血患者（TIA，診斷須由神經科醫師確立）、有症狀之頸動脈狹窄（診斷須由神經科醫師確立）
-        <br />
-        <strong>危險因子定義（共5項）：</strong>
-        1. 高血壓 &nbsp; 2. 男性≥45歲，女性≥55歲或停經者 &nbsp; 3. 有早發性冠心病家族史（男性≤55歲，女性≤65歲） &nbsp; 4. HDL-C &lt;40 mg/dL &nbsp; 5. 吸菸（因吸菸而符合起步治療準則之個案，若未戒菸而要求藥物治療，應以自費治療）
-      </div>
-      <div className="mt-4 mb-2 text-sm font-bold text-text">全民健康保險降三酸甘油酯藥物給付規定表</div>
-      <table className="w-full border-collapse text-[13px]">
-        <thead>
-          <tr>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">病人族群</th>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">非藥物治療</th>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">起始條件</th>
-            <th className="border border-border bg-surface2 px-2.5 py-2 text-center font-semibold text-text">目標值</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">心血管疾病或糖尿病病人</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">與藥物治療可並行</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TG ≥200 mg/dL 且（TC/HDL-C &gt;5 或 HDL-C &lt;40 mg/dL）</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TG &lt;200 mg/dL</td>
-          </tr>
-          <tr>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">無心血管疾病病人</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">給藥前 3–6 個月非藥物治療</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TG ≥200 mg/dL 且（TC/HDL-C &gt;5 或 HDL-C &lt;40 mg/dL）</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TG &lt;200 mg/dL</td>
-          </tr>
-          <tr className="bg-accent/[0.07]">
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">無心血管疾病病人（嚴重）</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">與藥物治療可並行</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TG ≥500 mg/dL</td>
-            <td className="border border-border px-2.5 py-2 align-top leading-[1.5] text-text">TG &lt;500 mg/dL</td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="mt-1.5 rounded-md bg-surface2 px-2.5 py-1.5 text-xs text-text">
-        追蹤：第一年每 3–6 個月，第二年後至少每 6–12 個月抽血一次
-      </div>
-    </div>
-  )
-}
 
 function CopyButton({ drug }: { drug: Drug }) {
   const [copied, setCopied] = useState(false)

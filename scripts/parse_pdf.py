@@ -266,6 +266,52 @@ def write_changelog(new_entries: list[dict], from_version: str = None, to_versio
     print(f"💾 已儲存：{out}")
 
 
+# ── 2.6.1 表二適用品項：用表格擷取取代純文字 ──────────────
+# 條文的品項清單在 PDF 是三欄表格（成分名稱／健保代碼／藥品名稱），
+# extract_text() 會把合併儲存格的成分名稱打散並與品名互相穿插，
+# 因此改用 extract_tables() 取得正確列，另存成獨立資料檔供前端渲染。
+TABLE2_CODE_RE = re.compile(r'[A-Z]{1,2}\d{8,9}')
+
+
+def extract_table2_items(pdf_path: str) -> list[dict]:
+    """抽出 2.6.1「僅適用表二」的品項清單。
+
+    清單起點為條文中的宣告句，終點為表一的表格標題（含全形冒號，
+    用以和宣告句裡的「…給付規定表一。」區別）。
+    """
+    items: list[dict] = []
+    current_ing = None
+    started = False
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text = page.extract_text() or ''
+            if not started:
+                if '僅適用全民健康保險降膽固醇藥物給付規定表二' not in text:
+                    continue
+                started = True
+            elif '給付規定表一：' in text:
+                break
+
+            for table in page.extract_tables():
+                for row in table:
+                    cells = [(c or '').replace('\n', ' ').strip() for c in row]
+                    if len(cells) < 3:
+                        continue
+                    ing, code, name = cells[0], cells[1], cells[2]
+                    if ing == '成分名稱' or code == '健保代碼':
+                        continue
+                    if not TABLE2_CODE_RE.fullmatch(code):
+                        continue
+                    if ing:
+                        current_ing = re.sub(r'\s+', '', ing)
+                    items.append({
+                        'ingredient': current_ing or '',
+                        'code': code,
+                        'name': re.sub(r'\s+', ' ', name),
+                    })
+    return items
+
+
 def main():
     if len(sys.argv) > 1:
         pdf_path = sys.argv[1]
@@ -299,6 +345,28 @@ def main():
     out.parent.mkdir(exist_ok=True)
     with open(out, 'w', encoding='utf-8') as f:
         json.dump(entries, f, ensure_ascii=False, indent=2)
+
+    # 2.6.1 表二適用品項（獨立檔，前端以表格呈現）
+    t2 = extract_table2_items(pdf_path)
+    t2_out = Path('public/data/lipid_table2_items.json')
+    prev_n = 0
+    if t2_out.exists():
+        try:
+            prev_n = len(json.loads(t2_out.read_text(encoding='utf-8')))
+        except (json.JSONDecodeError, OSError):
+            prev_n = 0
+
+    # 擷取依賴 PDF 的表格結構與段落標記，改版時可能失效；
+    # 數量歸零或劇烈變動時出聲警告，而不是安靜地寫出壞資料。
+    if not t2:
+        print("⚠️  2.6.1 表二品項擷取為 0 筆——條文標記或表格結構可能已變動，"
+              f"保留原有 {prev_n} 筆不覆寫，請人工確認。")
+    else:
+        if prev_n and abs(len(t2) - prev_n) > max(10, prev_n * 0.2):
+            print(f"⚠️  2.6.1 表二品項由 {prev_n} 筆變為 {len(t2)} 筆，變動幅度較大，請確認是否為真實異動。")
+        with open(t2_out, 'w', encoding='utf-8') as f:
+            json.dump(t2, f, ensure_ascii=False, indent=2)
+        print(f"💾 已儲存：{t2_out}（{len(t2)} 筆品項）")
 
     print(f"💾 已儲存：{out}（{out.stat().st_size // 1024} KB）")
 
