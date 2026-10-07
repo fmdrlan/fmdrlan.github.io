@@ -161,8 +161,10 @@ def parse_drug_sections(pdf_path: str) -> list[dict]:
             )
             if bleed and bleed.start() > 50:
                 body = body[:bleed.start()].rstrip()
-            blocks = parse_content_to_blocks(body[:4000])
-            content_text = body[:4000]
+            # 不截斷：給付規定（如 2.6.1 降血脂）常含整份風險分級表與品項清單，
+            # 截斷會從表格中間切掉，使條文與健保署原文不一致。
+            blocks = parse_content_to_blocks(body)
+            content_text = body
 
         entries.append({
             "id": i,
