@@ -1310,8 +1310,16 @@ export const NCKU_TABLE1_DRUGS: { brand: string; dose: string; generic: string }
 
 export interface MetSynItem {
   label: string
+  labelEn: string
   met: boolean
   note?: string
+}
+
+// 心血管風險因子：病歷文字需逐項列出正負，故保留全部 6 項而非只留命中者
+export interface RiskFactorItem {
+  label: string
+  labelEn: string
+  met: boolean
 }
 
 export interface NhiSimpleResult {
@@ -1323,7 +1331,9 @@ export interface NhiSimpleResult {
   nonhdlTarget: number | null
   needLifestyle: boolean
   rfItems: string[]
+  rfAll: RiskFactorItem[]
   rfCount: number
+  categoryEn: string
   metSynItems: MetSynItem[]
   metSynCount: number
   metSynPositive: boolean
@@ -1362,18 +1372,21 @@ export function calcStatinNHISimple(p: NhiSimpleInput): NhiSimpleResult {
   const metSynItems: MetSynItem[] = [
     {
       label: `腹部肥胖（腰圍 ${isMale ? '男 ≥90' : '女 ≥80'}cm）`,
+      labelEn: 'Waist (M>=90, F>=80 cm)',
       met: waist !== null && waist >= waistCut,
       note: waist !== null ? `腰圍 ${waist} cm` : '腰圍未填',
     },
-    { label: '血壓 ≥130/85 mmHg 或使用高血壓藥物', met: !!bpHigh || !!htn, note: htn && !bpHigh ? '由高血壓病史認定' : undefined },
-    { label: '空腹血糖 ≥100 mg/dL 或使用糖尿病藥物', met: !!fpgHigh || !!dm, note: dm && !fpgHigh ? '由糖尿病認定' : undefined },
+    { label: '血壓 ≥130/85 mmHg 或使用高血壓藥物', labelEn: 'SBP>=130mmHg or DBP>=85mmHg', met: !!bpHigh || !!htn, note: htn && !bpHigh ? '由高血壓病史認定' : undefined },
+    { label: '空腹血糖 ≥100 mg/dL 或使用糖尿病藥物', labelEn: 'AC sugar >=100 mg/dL', met: !!fpgHigh || !!dm, note: dm && !fpgHigh ? '由糖尿病認定' : undefined },
     {
       label: 'TG ≥150 mg/dL 或使用降 TG 藥物',
+      labelEn: 'TG >=150 mg/dL',
       met: (tg !== null && tg >= 150) || !!tgMed,
       note: tg !== null ? `TG ${tg} mg/dL` : undefined,
     },
     {
       label: `HDL-C 偏低（${isMale ? '男 <40' : '女 <50'} mg/dL）`,
+      labelEn: 'HDL-C (M<40, F<50 mg/dL)',
       met: hdl !== null && hdl < hdlCut,
       note: hdl !== null ? `HDL-C ${hdl} mg/dL` : 'HDL-C 未填',
     },
@@ -1386,34 +1399,44 @@ export function calcStatinNHISimple(p: NhiSimpleInput): NhiSimpleResult {
   if (egfr && egfr < 60) ckdDesc.push(`eGFR ${egfr} <60`)
   if (uacr && uacr >= 30) ckdDesc.push(`UACR ${uacr} ≥30 mg/g`)
 
-  const rfItems: string[] = []
-  if (htn) rfItems.push('高血壓')
-  if (age && ((isMale && age >= 45) || (!isMale && age >= 55))) {
-    rfItems.push(`年齡 ${age} 歲（${isMale ? '男 ≥45' : '女 ≥55'}）`)
-  }
-  if (fhcad) rfItems.push('早發 CAD 家族史')
-  if (hdl && ((isMale && hdl < 40) || (!isMale && hdl < 50))) rfItems.push(`HDL-C ${hdl}（${isMale ? '男 <40' : '女 <50'}）`)
-  if (smoking) rfItems.push('吸菸')
-  if (metSynPositive) rfItems.push(`代謝症候群（${metSynCount}/5 項）`)
+  const ageMet = !!age && ((isMale && age >= 45) || (!isMale && age >= 55))
+  const hdlMet = hdl !== null && ((isMale && hdl < 40) || (!isMale && hdl < 50))
+  const rfAll: RiskFactorItem[] = [
+    { label: '高血壓', labelEn: 'Hypertension', met: !!htn },
+    { label: `年齡${age ? ` ${age} 歲` : ''}（${isMale ? '男 ≥45' : '女 ≥55'}）`, labelEn: 'Age (M>=45, F>=55)', met: ageMet },
+    { label: '早發 CAD 家族史', labelEn: 'Family history of premature CAD (M<=55, F<=65)', met: !!fhcad },
+    { label: `HDL-C${hdl !== null ? ` ${hdl}` : ''}（${isMale ? '男 <40' : '女 <50'}）`, labelEn: 'HDL-C (M<40, F<50 mg/dL)', met: hdlMet },
+    { label: '吸菸', labelEn: 'Smoking', met: !!smoking },
+    { label: `代謝症候群（${metSynCount}/5 項）`, labelEn: 'Metabolic syndrome', met: metSynPositive },
+  ]
+  const rfItems = rfAll.filter((r) => r.met).map((r) => r.label)
   const rfCount = rfItems.length
 
-  let category: string, ldlThreshold: number, nonhdlTarget: number | null, needLifestyle: boolean
+  let category: string, categoryEn: string, ldlThreshold: number, nonhdlTarget: number | null, needLifestyle: boolean
   const condition = '2.6.1 表一'
 
   // 極高風險：冠狀動脈疾病或周邊動脈疾病，再合併條文所列狀況
   const extremeHits: string[] = []
-  if (cadPresent) {
-    if (has('mi') && has('mi1y')) extremeHits.push('冠狀動脈疾病合併一年內心肌梗塞')
-    if (has('mi') && has('miMulti')) extremeHits.push('冠狀動脈疾病合併 ≥2 次心肌梗塞病史')
-    if (has('multivessel')) extremeHits.push('多支冠狀動脈阻塞')
-    if (acsPresent && dm) extremeHits.push(`急性冠心症合併糖尿病${has('acs') ? '' : '（心肌梗塞屬急性冠心症）'}`)
+  const extremeHitsEn: string[] = []
+  const addExtreme = (zh: string, en: string) => {
+    extremeHits.push(zh)
+    extremeHitsEn.push(en)
   }
-  if (cadPresent && padPresent) extremeHits.push('冠狀動脈疾病合併周邊動脈疾病')
-  if (cadPresent && carotid) extremeHits.push('冠狀動脈疾病合併頸動脈狹窄')
-  if (padPresent && carotid) extremeHits.push('周邊動脈疾病合併頸動脈狹窄')
+  if (cadPresent) {
+    if (has('mi') && has('mi1y')) addExtreme('冠狀動脈疾病合併一年內心肌梗塞', 'CAD with MI within 1 year')
+    if (has('mi') && has('miMulti')) addExtreme('冠狀動脈疾病合併 ≥2 次心肌梗塞病史', 'CAD with >=2 prior MI')
+    if (has('multivessel')) addExtreme('多支冠狀動脈阻塞', 'multivessel coronary disease')
+    if (acsPresent && dm) {
+      addExtreme(`急性冠心症合併糖尿病${has('acs') ? '' : '（心肌梗塞屬急性冠心症）'}`, 'ACS with diabetes mellitus')
+    }
+  }
+  if (cadPresent && padPresent) addExtreme('冠狀動脈疾病合併周邊動脈疾病', 'CAD with peripheral artery disease')
+  if (cadPresent && carotid) addExtreme('冠狀動脈疾病合併頸動脈狹窄', 'CAD with carotid stenosis')
+  if (padPresent && carotid) addExtreme('周邊動脈疾病合併頸動脈狹窄', 'PAD with carotid stenosis')
 
   if (extremeHits.length > 0) {
     category = `極高風險（${extremeHits.join('；')}）`
+    categoryEn = `Extreme high risk (${extremeHitsEn.join('; ')})`
     ldlThreshold = 55
     nonhdlTarget = 85
     needLifestyle = false
@@ -1426,7 +1449,16 @@ export function calcStatinNHISimple(p: NhiSimpleInput): NhiSimpleResult {
     if (cadPresent && !acsPresent && !has('revasc')) why.push('冠狀動脈疾病')
     if (carotid) why.push('頸動脈狹窄 ≥50%')
     if (has('imagingCad')) why.push('冠狀動脈影像 ≥50% 狹窄')
+    const whyEn: string[] = []
+    if (acsPresent) whyEn.push(has('acs') ? 'prior ACS' : 'prior MI (an ACS)')
+    if (has('revasc')) whyEn.push('coronary revascularization')
+    if (has('stroke')) whyEn.push('ischemic stroke/TIA')
+    if (padPresent) whyEn.push('peripheral artery disease')
+    if (cadPresent && !acsPresent && !has('revasc')) whyEn.push('coronary artery disease')
+    if (carotid) whyEn.push('carotid stenosis >=50%')
+    if (has('imagingCad')) whyEn.push('coronary imaging stenosis >=50%')
     category = `非常高風險（${why.join('、')}）`
+    categoryEn = `Very high risk (${whyEn.join(', ')})`
     ldlThreshold = 70
     nonhdlTarget = 100
     needLifestyle = false
@@ -1436,22 +1468,31 @@ export function calcStatinNHISimple(p: NhiSimpleInput): NhiSimpleResult {
     if (hasCKD) why.push(`CKD（${ckdDesc.join('、')}）`)
     if (ldl && ldl >= 190) why.push(`LDL-C ≥190`)
     if (cacOver400) why.push('CAC ≥400')
+    const whyEn: string[] = []
+    if (dm) whyEn.push('DM')
+    if (hasCKD) whyEn.push('CKD')
+    if (ldl && ldl >= 190) whyEn.push('LDL-C >=190 mg/dL')
+    if (cacOver400) whyEn.push('CAC >=400')
     category = `高風險（${why.join('、')}）`
+    categoryEn = `High risk (${whyEn.join(', ')})`
     ldlThreshold = 100
     nonhdlTarget = 130
     needLifestyle = false
   } else if (rfCount >= 2) {
     category = '中風險（≥2 項風險因子）'
+    categoryEn = 'Moderate risk (>=2 CV risk factors)'
     ldlThreshold = 115
     nonhdlTarget = 145
     needLifestyle = true
   } else if (rfCount === 1) {
     category = '低風險（1 項風險因子）'
+    categoryEn = 'Low risk (1 CV risk factor)'
     ldlThreshold = 130
     nonhdlTarget = 160
     needLifestyle = true
   } else {
     category = '0 項心血管風險因子'
+    categoryEn = 'No CV risk factor'
     ldlThreshold = 160
     nonhdlTarget = null
     needLifestyle = true
@@ -1509,7 +1550,7 @@ export function calcStatinNHISimple(p: NhiSimpleInput): NhiSimpleResult {
 
   return {
     covered, alreadyAtGoal, category, condition, ldlThreshold, nonhdlTarget, needLifestyle,
-    rfItems, rfCount, metSynItems, metSynCount, metSynPositive,
+    rfItems, rfAll, rfCount, categoryEn, metSynItems, metSynCount, metSynPositive,
     reasons, schedule, severityNotes, table2, ldl, tc, ldlSource,
   }
 }
@@ -1622,4 +1663,21 @@ export function parseLisPaste(raw: string): LisParseResult | null {
   }
 
   return result
+}
+
+// 簡化版（健保）病歷文字：英文，格式對齊院內既有範本。
+// 高風險以上由 ASCVD 條件決定分級，不看風險因子數，故略過因子清單。
+export function buildNhiChartText(r: NhiSimpleResult): string {
+  const L: string[] = ['# Dyslipidemia']
+  L.push(`Target: LDL-C < ${r.ldlThreshold} mg/dL`)
+  L.push(`Risk category: ${r.categoryEn}`)
+
+  const byRiskFactorCount = /^(Moderate|Low|No CV)/.test(r.categoryEn)
+  if (byRiskFactorCount) {
+    L.push('', `CV risk factors: ${r.rfCount}/6`)
+    for (const f of r.rfAll) L.push(`(${f.met ? '+' : '-'}) ${f.labelEn}`)
+    L.push('', `Metabolic syndrome: ${r.metSynCount}/5 -> ${r.metSynPositive ? 'positive' : 'negative'}`)
+    for (const m of r.metSynItems) L.push(`(${m.met ? '+' : '-'}) ${m.labelEn}`)
+  }
+  return L.join('\n')
 }

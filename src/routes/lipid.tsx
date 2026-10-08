@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { ClipboardPaste, X } from 'lucide-react'
+import { ClipboardPaste, X, Copy } from 'lucide-react'
 import { SiteNav } from '@/components/SiteNav'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import {
@@ -9,6 +9,7 @@ import {
   calcAHA,
   calcNHI,
   calcStatinNHISimple,
+  buildNhiChartText,
   computeEffectiveLDL,
   CV_ITEMS,
   NCKU_TABLE1_DRUGS,
@@ -588,6 +589,38 @@ function RuleCard({
   )
 }
 
+function ChartText({ r }: { r: ReturnType<typeof calcStatinNHISimple> }) {
+  const [copied, setCopied] = useState(false)
+  const text = buildNhiChartText(r)
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+    } catch {
+      // 無剪貼簿權限時使用者仍可自行選取
+    }
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+  return (
+    <div className="rounded-xl border border-border bg-surface p-4">
+      <div className="mb-2 flex items-center gap-2">
+        <span className="text-sm font-semibold text-text">病歷文字</span>
+        <button
+          type="button"
+          onClick={copy}
+          className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-border bg-bg2 px-2.5 py-1 text-[12.5px] text-text transition-colors hover:border-border-strong"
+        >
+          <Copy className="h-3.5 w-3.5" strokeWidth={1.8} />
+          {copied ? '已複製' : '複製'}
+        </button>
+      </div>
+      <pre className="overflow-x-auto rounded-lg border border-border bg-bg2 px-3.5 py-3 font-mono text-[12.5px] leading-[1.75] whitespace-pre-wrap text-text">
+        {text}
+      </pre>
+    </div>
+  )
+}
+
 function SimpleResultCard({ r }: { r: ReturnType<typeof calcStatinNHISimple> }) {
   const t2 = r.table2
   return (
@@ -621,6 +654,8 @@ function SimpleResultCard({ r }: { r: ReturnType<typeof calcStatinNHISimple> }) 
           ))}
         </div>
       </div>
+
+      <ChartText r={r} />
 
       <details className="rounded-xl border border-border bg-surface px-4 py-3">
         <summary className="cursor-pointer text-[13px] font-medium text-text-muted hover:text-text">詳細判斷依據</summary>
