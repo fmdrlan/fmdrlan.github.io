@@ -56,7 +56,7 @@ const CLASSES: ClassDef[] = [
   { group: '腸胃', cls: '止瀉與腸道', keys: ['loperamide', 'diosmectite', 'racecadotril', 'mesalazine', 'rifaximin'] },
   { group: '腸胃', cls: '促蠕動與制吐', keys: ['mosapride', 'domperidone', 'metoclopramide', 'itopride', 'ondansetron'] },
   { group: '腸胃', cls: '解痙', keys: ['hyoscine', 'hyoscyamine', 'dicyclomine', 'mebeverine', 'pinaverium', 'trimebutine'] },
-  { group: '腸胃', cls: '消脹氣與消化酵素', keys: ['simethicone', 'pancreatin', 'ursodeoxycholic', 'silymarin'] },
+  { group: '腸胃', cls: '消脹氣與消化酵素', keys: ['simethicone', 'dimethicone', 'dimeticone', 'pancreatin', 'ursodeoxycholic', 'silymarin'] },
 
   // ── 神經與精神 ──
   { group: '神經與精神', cls: 'Benzodiazepine', keys: ['alprazolam', 'lorazepam', 'diazepam', 'clonazepam', 'estazolam', 'bromazepam', 'midazolam', 'flunitrazepam', 'triazolam', 'oxazepam', 'nitrazepam', 'fludiazepam'] },
