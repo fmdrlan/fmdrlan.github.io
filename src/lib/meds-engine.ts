@@ -23,20 +23,26 @@ export interface MedOrder {
 
 const ROUTES = new Set([
   'PO', 'SC', 'IM', 'IV', 'IVD', 'IVF', 'PR', 'SL', 'TOP', 'INH', 'NEB',
-  'OD', 'OS', 'OU', 'AD', 'AS', 'AU', 'NS', 'TD', 'VAG', 'EXT',
+  'OD', 'OS', 'OU', 'AD', 'AS', 'AU', 'NS', 'TD', 'VAG', 'EXT', 'NA', 'SUBL', 'BUCC',
 ])
 
 // 劑量與劑型：40mg/tab、5/80 mg/tab、500mcg/cap、12.5mg/tab
-const STRENGTH_RE = /([\d.]+(?:\s*\/\s*[\d.]+)*)\s*(mg|mcg|ug|g|IU|iu|%|ml|mL)?\s*\/\s*(tab|cap|amp|vial|btl|syrg|pen|ml|mL|g|patch|supp|bag|pc)\b/i
+const STRENGTH_RE = /([\d.]+(?:\s*\/\s*[\d.]+)*)\s*(mg|mcg|ug|g|IU|iu|%|ml|mL)?\s*\/\s*(dose|spray|puff|act|tab|cap|amp|vial|btl|syrg|pen|ml|mL|g|patch|supp|bag|pc)\b/i
 // 住院醫囑為 [學名(商品名)_劑量/劑型]，與門診的 [商品名 劑量/劑型(學名)] 相反。
 // 以「右括號後接底線再接劑量」辨識住院格式。
 const INPATIENT_SPEC_RE = /^(.+?)\(([^()]*)\)\s*_\s*(.+)$/
+// 另一種門診匯出格式無中括號，以日期括號與冒號分隔：
+//   Xyzal 5mg/tab(Levocetirizine)(2026/10/19) : 1.00 tab QDPC PO X 28.00天 = 28.00 tab
+const COLON_LINE_RE = /^(.+?)\s*\((\d{4}[/-]\d{1,2}[/-]\d{1,2})\)\s*[:：]\s*([\d.]+)\s+(\S+)\s*(.*)$/
+
 // 醫囑前後的狀態標記：【Change】【New】…、[ADC]、[註：…]、(警)、(已執行續用) 等
 const LEAD_MARK_RE = /^(?:\s*【[^】]*】)+/
 const TRAIL_MARK_RE = /(?:\s*\[[^\]]*\]|\s*（[^）]*）|\s*\((?:警|已執行續用|停|自備|暫停)\))+\s*$/
 
 // 劑型字尾，用來把 "Folic Acid tab" 修成 "Folic Acid"
-const TRAILING_FORM_RE = /\s+(tab|tablet|tablets|cap|capsule|capsules|inj|injection|syrup|susp|soln|sol|cream|oint|gel|patch|supp|powder|f\.?c\.?)\.?$/i
+const TRAILING_FORM_RE = /\s+(nasal\s+spray|spray|inhaler|inhalation|tab|tablet|tablets|cap|capsule|capsules|inj|injection|syrup|susp|soln|sol|cream|oint|gel|patch|supp|powder|f\.?c\.?)\.?$/i
+
+const trimNum = (v: string) => (v.includes('.') ? v.replace(/0+$/, '').replace(/\.$/, '') : v)
 
 function splitLastParen(s: string): { before: string; inside: string } | null {
   const close = s.lastIndexOf(')')
@@ -71,11 +77,24 @@ export function parseMedOrders(raw: string): MedOrder[] {
     // 住院醫囑可能以【Change】等狀態標記開頭
     t = t.replace(LEAD_MARK_RE, '').trim()
 
-    // 藥品行：[……] 數量 單位 其餘
-    const m = t.match(/^\[(.+?)\]\s+([\d.]+)\s+(\S+)\s*(.*)$/)
-    if (!m) continue
+    // 藥品行有三種格式：
+    //   [商品名 劑量/劑型(學名)] 數量 單位 用法…      （門診）
+    //   [學名(商品名)_劑量/劑型] 數量 單位 用法…      （住院）
+    //   商品名 劑量/劑型(學名)(日期) : 數量 單位 用法… （門診另一種匯出）
+    let spec: string
+    let qty: string
+    let qtyUnit: string
+    let rawTail: string
 
-    const [, spec, qty, qtyUnit, rawTail] = m
+    const bracket = t.match(/^\[(.+?)\]\s+([\d.]+)\s+(\S+)\s*(.*)$/)
+    const colon = bracket ? null : t.match(COLON_LINE_RE)
+    if (bracket) {
+      ;[, spec, qty, qtyUnit, rawTail] = bracket
+    } else if (colon) {
+      ;[, spec, , qty, qtyUnit, rawTail] = colon
+    } else {
+      continue
+    }
 
     let brand: string
     let generic: string
@@ -145,13 +164,13 @@ export function parseMedOrders(raw: string): MedOrder[] {
       strength,
       unit,
       form,
-      qty,
+      qty: trimNum(qty),
       qtyUnit,
       freq,
       prn,
       route,
-      days: dispense?.[1] ?? '',
-      repeats: dispense?.[2] ?? '',
+      days: dispense?.[1] ? trimNum(dispense[1]) : '',
+      repeats: dispense?.[2] ? trimNum(dispense[2]) : '',
       section,
     })
   }
