@@ -34,10 +34,28 @@ type Feed = {
   articles: Article[]
 }
 
-const CATEGORIES = ['全部', '四大綜合', '家醫科'] as const
+type CdcItem = {
+  title: string
+  date: string
+  sortDate: string
+  url: string
+  excerpt: string
+  body: string
+}
+type CdcFeed = {
+  generatedAt: string
+  windowDays: number
+  source: string
+  sourceUrl: string
+  count: number
+  items: CdcItem[]
+}
+
+const CATEGORIES = ['全部', '四大綜合', '家醫科', '疾管署'] as const
 
 function JournalsPage() {
   const [feed, setFeed] = useState<Feed | null>(null)
+  const [cdc, setCdc] = useState<CdcFeed | null>(null)
   const [error, setError] = useState(false)
   const [cat, setCat] = useState<string>('全部')
 
@@ -47,17 +65,31 @@ function JournalsPage() {
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((d: Feed) => !cancelled && setFeed(d))
       .catch(() => !cancelled && setError(true))
+    // 疾管署為獨立來源，抓取失敗不影響期刊顯示
+    fetch('/data/cdc_news.json', NO_CACHE)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d: CdcFeed) => !cancelled && setCdc(d))
+      .catch(() => {})
     return () => {
       cancelled = true
     }
   }, [])
 
-  const shown = useMemo(() => {
-    if (!feed) return []
-    return cat === '全部'
-      ? feed.articles
-      : feed.articles.filter((a) => a.category === cat)
-  }, [feed, cat])
+  // 「全部」把兩個來源依日期混排，否則疾管署會被壓在 50 餘篇期刊之後看不到
+  type Row =
+    | { kind: 'article'; sortDate: string; article: Article }
+    | { kind: 'cdc'; sortDate: string; item: CdcItem }
+
+  const shown = useMemo<Row[]>(() => {
+    const arts: Row[] = (feed?.articles ?? [])
+      .filter((a) => cat === '全部' || a.category === cat)
+      .map((a) => ({ kind: 'article', sortDate: a.sortDate, article: a }))
+    const news: Row[] =
+      cat === '全部' || cat === '疾管署'
+        ? (cdc?.items ?? []).map((n) => ({ kind: 'cdc', sortDate: n.sortDate, item: n }))
+        : []
+    return [...arts, ...news].sort((x, y) => (x.sortDate < y.sortDate ? 1 : -1))
+  }, [feed, cdc, cat])
 
   const namesOf = (c: string) =>
     (feed?.journals ?? []).filter((j) => j.category === c).map((j) => j.name).join('、')
@@ -82,11 +114,12 @@ function JournalsPage() {
           <p className="mt-1.5 max-w-[640px] text-[13px] leading-relaxed text-text-muted">
             四大綜合醫學期刊{bigFour && `（${bigFour}）`}與家醫科期刊
             {famMed && `（${famMed}）`}近 {feed?.windowDays ?? 30} 天的研究與回顧文章，
-            僅顯示標題與摘要，點擊可連至 PubMed 原文。每週一自動更新。
-            中文為機器翻譯，僅供參考，請以原文為準。
+            僅顯示標題與摘要，點擊可連至 PubMed 原文。期刊中文為機器翻譯，僅供參考，請以原文為準。
+            另收錄疾管署新聞稿近 {cdc?.windowDays ?? 60} 天內容。每週一自動更新。
             {feed && (
               <span className="text-text-dim">
-                {' '}· 更新於 {feed.generatedAt} · 共 {feed.count} 篇
+                {' '}· 更新於 {feed.generatedAt} · 期刊 {feed.count} 篇
+                {cdc && ` · 疾管署 ${cdc.count} 則`}
               </span>
             )}
           </p>
@@ -113,13 +146,20 @@ function JournalsPage() {
         )}
 
         <div className="flex flex-col gap-3">
-          {shown.map((a) => (
-            <ArticleCard key={a.pmid} article={a} />
-          ))}
+          {shown.map((r) =>
+            r.kind === 'article' ? (
+              <ArticleCard key={r.article.pmid} article={r.article} />
+            ) : (
+              <CdcCard key={r.item.url} item={r.item} />
+            ),
+          )}
         </div>
 
-        {feed && shown.length === 0 && (
-          <p className="px-1 py-6 text-sm text-text-muted">此分類近期沒有文章。</p>
+        {cat === '疾管署' && !cdc && (
+          <p className="px-1 py-6 text-sm text-text-muted">目前無法載入疾管署新聞稿。</p>
+        )}
+        {feed && shown.length === 0 && !(cat === '疾管署' && !cdc) && (
+          <p className="px-1 py-6 text-sm text-text-muted">此分類近期沒有內容。</p>
         )}
 
         <div className="mt-12">
@@ -127,6 +167,60 @@ function JournalsPage() {
         </div>
       </div>
     </>
+  )
+}
+
+function CdcCard({ item: n }: { item: CdcItem }) {
+  const [open, setOpen] = useState(false)
+  const hasMore = !!n.body && n.body.length > n.excerpt.length
+
+  return (
+    <article className="rounded-[10px] border border-border bg-surface px-5 py-4 max-md:px-4">
+      <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[12px]">
+        <span className="rounded-md border border-green/30 bg-green/[0.12] px-2 py-0.5 font-medium text-green">
+          疾管署
+        </span>
+        <span className="text-text-dim">新聞稿</span>
+        <span className="ml-auto text-text-dim">{n.date}</span>
+      </div>
+
+      <a
+        href={n.url}
+        target="_blank"
+        rel="noopener"
+        className="group block text-[15px] font-semibold leading-snug text-text no-underline transition-colors hover:text-accent"
+      >
+        <span className="inline-flex items-start gap-1">
+          {n.title}
+          <ExternalLink
+            className="mt-1 h-3.5 w-3.5 flex-shrink-0 text-text-dim transition-colors group-hover:text-accent"
+            strokeWidth={1.8}
+          />
+        </span>
+      </a>
+
+      {n.excerpt && !open && (
+        <p className="mt-2 text-[13px] leading-relaxed text-text-muted">{n.excerpt}</p>
+      )}
+
+      {open && (
+        <p className="mt-2 text-[13px] leading-relaxed whitespace-pre-line text-text-muted">{n.body}</p>
+      )}
+
+      {hasMore && (
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="mt-2 inline-flex items-center gap-1 text-[12.5px] text-accent/80 transition-colors hover:text-accent"
+        >
+          <ChevronDown
+            className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`}
+            strokeWidth={2}
+          />
+          {open ? '收合全文' : '展開全文'}
+        </button>
+      )}
+    </article>
   )
 }
 

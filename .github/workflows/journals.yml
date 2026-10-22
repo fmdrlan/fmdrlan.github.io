@@ -1,4 +1,4 @@
-name: 每週更新頂尖期刊速覽
+name: 每週更新期刊速覽與疾管署新聞稿
 
 on:
   schedule:
@@ -28,10 +28,15 @@ jobs:
           # 在 Settings → Secrets and variables → Actions → Variables 新增 MYMEMORY_EMAIL。
           MYMEMORY_EMAIL: ${{ vars.MYMEMORY_EMAIL }}
 
+      # 獨立來源：抓取失敗時腳本會保留既有檔案，不影響期刊更新
+      - name: 抓取疾管署新聞稿
+        run: python scripts/fetch_cdc_news.py
+        continue-on-error: true
+
       - name: Commit 更新（有變動才推）
         run: |
           git config user.name "Journals Bot"
           git config user.email "bot@journals"
-          git add public/data/journals.json
-          git diff --staged --quiet || git commit -m "🤖 自動更新：頂尖期刊速覽 $(date -u +%Y-%m-%d)"
+          git add public/data/journals.json public/data/cdc_news.json
+          git diff --staged --quiet || git commit -m "🤖 自動更新：期刊速覽與疾管署新聞稿 $(date -u +%Y-%m-%d)"
           git push
